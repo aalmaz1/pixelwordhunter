@@ -1021,17 +1021,33 @@ if (typeof initApp === "function") {
     initApp();
 }
 
-// ФИНАЛЬНЫЙ АККОРД: Объявляем showCategories явно, чтобы кнопка HUNT её увидела
+  return 50;
+} 
+// --- ЗАКРЫВАЕМ ВСЕ ВИСЯЧИЕ БЛОКИ ВЫШЕ ---
+} catch(e) {} } catch(e) {} 
+// ----------------------------------------
+
+// Явное создание функции для кнопки HUNT (теперь она точно не будет undefined)
 window.showCategories = function() {
     console.log("Кнопка HUNT нажата!");
     const menu = document.getElementById("menu-screen");
     const catScreen = document.getElementById("category-screen");
+    
     if (menu) menu.classList.add("hidden");
     if (catScreen) catScreen.classList.remove("hidden");
-    if (typeof renderCategoryMenu === "function") renderCategoryMenu();
+    
+    // Пытаемся вызвать отрисовку меню
+    if (typeof renderCategoryMenu === "function") {
+        renderCategoryMenu();
+    } else {
+        console.warn("renderCategoryMenu еще не готова");
+    }
 };
 
-console.log("🏁 Файл app.js успешно прочитан до конца!"); 
+// Запуск инициализации
+if (typeof initApp === "function") {
+    initApp();
 }
-}
+
+console.log("🏁 МАРАФОН ОКОНЧЕН: Файл прочитан полностью!");
 
