@@ -917,8 +917,7 @@ function renderCategoryMenu() {
       }
     });
   });
-}
-    );
+};
   });
 }
 
