@@ -1033,7 +1033,8 @@ window.showCategories = function() {
 
 // Простой запуск
 if (typeof initApp === "function") {
-    initApp();
+    
 }
+initApp();
 
 console.log("🏁 МАРАФОН ЗАВЕРШЕН: Скрипт загружен полностью!");
