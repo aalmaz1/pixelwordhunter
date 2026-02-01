@@ -171,7 +171,7 @@ if (typeof window.GAME_DATA === "undefined" || !window.GAME_DATA) {
 }
 
 // 2. Игровые переменные
-let allWordsFlat = window.GAME_DATA
+ allWordsFlat = window.GAME_DATA
   ? Object.values(window.GAME_DATA).flat()
   : [];
 let xp = parseInt(localStorage.getItem("pixelWordHunter_xp")) || 0;
