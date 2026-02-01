@@ -913,13 +913,9 @@ function renderCategoryMenu() {
             <div style="color:#f87171">NOT STUDIED: ${s.ns}</div>
             <div style="color:#fbbf24">STILL LEARNING: ${s.sl}</div>
             <div style="color:#4ade80">MASTERED: ${s.ms}</div>
-        `;
-      }
-    });
-  });
-};
-  });
-}
+        `;}); // закрывает cards.forEach
+  }); // закрывает categories.forEach
+} // закрывает саму функцию renderCategoryMenu
 
 function calculateStats(arr) {
   if (!arr) return { ns: 0, sl: 0, ms: 0 };
