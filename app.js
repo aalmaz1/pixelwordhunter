@@ -1021,7 +1021,7 @@ function getWordWeight(word) {
     return 50;
 } 
 
-// ПРЯМОЕ ОБЪЯВЛЕНИЕ (Чтобы никакие ошибки выше не убили функцию кнопки)
+// Объявляем функцию для кнопки напрямую (без оберток)
 window.showCategories = function() {
     console.log("Кнопка HUNT нажата!");
     const menu = document.getElementById("menu-screen");
@@ -1031,11 +1031,9 @@ window.showCategories = function() {
     if (typeof renderCategoryMenu === "function") renderCategoryMenu();
 };
 
-// БЕЗОПАСНЫЙ ЗАПУСК
-setTimeout(() => {
-    console.log("🚀 Попытка отложенного запуска...");
-    if (typeof initApp === "function") initApp();
-    else console.warn("initApp не найдена, но кнопка HUNT должна работать!");
-}, 100);
+// Простой запуск
+if (typeof initApp === "function") {
+    initApp();
+}
 
-console.log("🏁 Файл загружен до конца. Магия 300-й попытки!");
+console.log("🏁 МАРАФОН ЗАВЕРШЕН: Скрипт загружен полностью!");
