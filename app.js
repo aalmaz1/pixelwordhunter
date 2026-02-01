@@ -882,19 +882,27 @@ function renderCategoryMenu() {
 }
 
 function calculateStats(arr) {
-  if (!arr) return { ns: 0, sl: 0, ms: 0 };
-  let sl = 0,
-    ms = 0;
-  arr.forEach((w) => {
-    if (w.mastery >= 3) ms++;
-    else if (w.mastery > 0) sl++;
-  });
-  return {
-    ns: arr.length - sl - ms,
-    sl: sl,
-    ms: ms,
-  };
+    // Создаем пустой отчет
+    const stats = { ns: 0, sl: 0, ms: 0 };
+    
+    // Если нам подсунули не массив, превращаем это в массив значений
+    const data = Array.isArray(arr) ? arr : (arr ? Object.values(arr).flat() : []);
+
+    // Теперь спокойно перебираем
+    data.forEach((w) => {
+        // Проверяем mastery (поддерживаем и массивы [,,,mastery], и объекты {mastery: X})
+        const m = Array.isArray(w) ? (w[4] || 0) : (w.mastery || 0);
+        
+        if (m === 0) stats.ns++;
+        else if (m < 3) stats.sl++;
+        else stats.ms++;
+    });
+
+    return stats;
 }
+
+
+  
 function renderCategoryCards() {
   const categories = Object.keys(window.GAME_DATA);
   const allCards = document.querySelectorAll(
