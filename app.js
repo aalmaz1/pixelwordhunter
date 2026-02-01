@@ -90,57 +90,7 @@ function initProgress() {
   console.log("📊 Статистика инициализирована");
 }
 
-function saveProgress(word, isCorrect) {
-  console.log("--- ЗАПУСК СОХРАНЕНИЯ ---");
-  if (!word) return;
 
-  const searchKey = word.toString().toLowerCase().trim();
-
-  // Умный поиск: ищем и по английскому, и по русскому значению
-  const wordObj = window.GAME_DATA.find((w) => {
-    const engMatch = w.eng && w.eng.toString().toLowerCase().trim() === searchKey;
-    const rusMatch = w.rus && w.rus.toString().toLowerCase().trim() === searchKey;
-    return engMatch || rusMatch;
-  });
-
-  if (!wordObj) {
-    console.error(`❌ Слово "${searchKey}" не найдено в базе!`);
-    return;
-  }
-
-  // Обновляем mastery (прогресс изучения)
-  wordObj.mastery = isCorrect ? Math.min((wordObj.mastery || 0) + 1, 3) : 1;
-
-  // Сохранение всего прогресса в LocalStorage
-  try {
-    const saveObj = {};
-    window.GAME_DATA.forEach((w) => {
-      if (w.mastery > 0) {
-        // Сохраняем по английскому ключу, если его нет — по русскому
-        const key = w.eng || w.rus;
-        if (key) saveObj[key] = w.mastery;
-      }
-    });
-    localStorage.setItem("pixelWordHunter_save", JSON.stringify(saveObj));
-    console.log(`✅ СОХРАНЕНО: ${searchKey} | Mastery: ${wordObj.mastery}`);
-  } catch (e) {
-    console.error("Ошибка записи в LocalStorage:", e);
-  }
-
-  // Обновляем UI, если функции существуют
-  if (typeof updateMenuStats === "function") updateMenuStats();
-  if (typeof updateHeaderStats === "function") updateHeaderStats();
-}
-
-// Вызови эту функцию сразу после того, как GAME_DATA загрузится из JSON!
-// Например:
-// fetch('words.json').then(res => res.json()).then(data => {
-//    GAME_DATA = data;
-//    initProgress();
-// });
-
-// 1. Сначала база данных прогресса
-let wordProgress = JSON.parse(localStorage.getItem("toeic_progress")) || {};
 
 function saveProgress(word, isCorrect) {
   console.log("--- ЗАПУСК СОХРАНЕНИЯ ---");
