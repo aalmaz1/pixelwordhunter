@@ -134,3 +134,36 @@ body::before {
   overflow-y: auto;
   padding: 10px;
 }
+
+.start-btn {
+  /* Цвета из твоего локалхоста */
+  background-color: #fbbf24 !important; /* Тот самый желтый */
+  color: #000000 !important;             /* Черный текст */
+  
+  /* Рамка и форма */
+  border: 4px solid #ffffff !important;  /* Белая толстая рамка */
+  border-radius: 0 !important;           /* Убираем скругления, если они есть */
+  
+  /* Размеры и отступы */
+  padding: 12px 30px !important;
+  font-family: 'Press Start 2P', cursive !important;
+  font-size: 16px !important;
+  
+  /* Тень (эффект объема) */
+  box-shadow: 6px 6px 0px #000000 !important; /* Жесткая черная тень */
+  
+  /* Позиционирование */
+  cursor: pointer !important;
+  margin-top: 20px !important;
+  display: inline-block !important;
+  text-transform: uppercase !important;
+  
+  /* Анимация нажатия */
+  transition: transform 0.05s;
+}
+
+.start-btn:active {
+  /* Эффект нажатия: кнопка уходит вглубь */
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0px #000000 !important;
+}
