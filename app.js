@@ -1016,23 +1016,26 @@ function getWordWeight(word) {
   // Если слово требует закрепления
  return 50;
 } 
-// Оставили только одну пару заглушек
-} catch(e) {} 
 
+// Конец функции getWordWeight
+    return 50;
+} 
+
+// ПРЯМОЕ ОБЪЯВЛЕНИЕ (Чтобы никакие ошибки выше не убили функцию кнопки)
 window.showCategories = function() {
     console.log("Кнопка HUNT нажата!");
     const menu = document.getElementById("menu-screen");
     const catScreen = document.getElementById("category-screen");
-    
     if (menu) menu.classList.add("hidden");
     if (catScreen) catScreen.classList.remove("hidden");
-    
-    if (typeof renderCategoryMenu === "function") {
-        renderCategoryMenu();
-    }
+    if (typeof renderCategoryMenu === "function") renderCategoryMenu();
 };
 
-if (typeof initApp === "function") initApp();
+// БЕЗОПАСНЫЙ ЗАПУСК
+setTimeout(() => {
+    console.log("🚀 Попытка отложенного запуска...");
+    if (typeof initApp === "function") initApp();
+    else console.warn("initApp не найдена, но кнопка HUNT должна работать!");
+}, 100);
 
-console.log("🏁 ФИНАЛЬНЫЙ ОТСЧЕТ: Скрипт готов!");
-
+console.log("🏁 Файл загружен до конца. Магия 300-й попытки!");
