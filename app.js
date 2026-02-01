@@ -1015,39 +1015,39 @@ function getWordWeight(word) {
 
   // Если слово требует закрепления
   return 50;
-} // Закрываем getWordWeight
+} // getWordWeight ЗАКРЫТ
 
-if (typeof initApp === "function") {
-    initApp();
-}
+// Явное создание функции для кнопки HUNT (чтобы не было undefined)
+window.showCategories = function () {
+  console.log("Кнопка HUNT нажата!");
+  const menu = document.getElementById("menu-screen");
+  const catScreen = document.getElementById("category-screen");
 
-  return 50;
-} 
-// --- ЗАКРЫВАЕМ ВСЕ ВИСЯЧИЕ БЛОКИ ВЫШЕ ---
-} catch(e) {} } catch(e) {} 
-// ----------------------------------------
+  if (menu) menu.classList.add("hidden");
+  if (catScreen) catScreen.classList.remove("hidden");
 
-// Явное создание функции для кнопки HUNT (теперь она точно не будет undefined)
-window.showCategories = function() {
-    console.log("Кнопка HUNT нажата!");
-    const menu = document.getElementById("menu-screen");
-    const catScreen = document.getElementById("category-screen");
-    
-    if (menu) menu.classList.add("hidden");
-    if (catScreen) catScreen.classList.remove("hidden");
-    
-    // Пытаемся вызвать отрисовку меню
-    if (typeof renderCategoryMenu === "function") {
-        renderCategoryMenu();
-    } else {
-        console.warn("renderCategoryMenu еще не готова");
-    }
+  // Пытаемся вызвать отрисовку меню категорий
+  if (typeof renderCategoryMenu === "function") {
+    renderCategoryMenu();
+  } else if (typeof renderCategoryButtons === "function") {
+    // если у тебя нет renderCategoryMenu, но есть renderCategoryButtons
+    renderCategoryButtons();
+  } else {
+    console.warn("Функция отрисовки категорий еще не готова");
+  }
 };
 
-// Запуск инициализации
-if (typeof initApp === "function") {
+// --- ФИНАЛЬНЫЙ ЗАПУСК ПРИЛОЖЕНИЯ ---
+try {
+  if (typeof initApp === "function") {
     initApp();
+  } else {
+    console.warn("initApp еще не определена");
+  }
+} catch (e) {
+  console.error("Ошибка инициализации:", e);
 }
 
 console.log("🏁 МАРАФОН ОКОНЧЕН: Файл прочитан полностью!");
+
 
