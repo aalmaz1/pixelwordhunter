@@ -1031,4 +1031,6 @@ window.showCategories = function() {
     if (typeof renderCategoryMenu === "function") renderCategoryMenu();
 };
 
-console.log("🏁 Файл app.js успешно прочитан до конца!");
+console.log("🏁 Файл app.js успешно прочитан до конца!"); 
+
+}}}}}}}}}}
