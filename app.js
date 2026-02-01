@@ -1014,40 +1014,25 @@ function getWordWeight(word) {
   if (stats.score >= 3 && minsSince < 60) return 5;
 
   // Если слово требует закрепления
-  return 50;
-} // getWordWeight ЗАКРЫТ
+ return 50;
+} 
+// Оставили только одну пару заглушек
+} catch(e) {} 
 
-// Явное создание функции для кнопки HUNT (чтобы не было undefined)
-window.showCategories = function () {
-  console.log("Кнопка HUNT нажата!");
-  const menu = document.getElementById("menu-screen");
-  const catScreen = document.getElementById("category-screen");
-
-  if (menu) menu.classList.add("hidden");
-  if (catScreen) catScreen.classList.remove("hidden");
-
-  // Пытаемся вызвать отрисовку меню категорий
-  if (typeof renderCategoryMenu === "function") {
-    renderCategoryMenu();
-  } else if (typeof renderCategoryButtons === "function") {
-    // если у тебя нет renderCategoryMenu, но есть renderCategoryButtons
-    renderCategoryButtons();
-  } else {
-    console.warn("Функция отрисовки категорий еще не готова");
-  }
+window.showCategories = function() {
+    console.log("Кнопка HUNT нажата!");
+    const menu = document.getElementById("menu-screen");
+    const catScreen = document.getElementById("category-screen");
+    
+    if (menu) menu.classList.add("hidden");
+    if (catScreen) catScreen.classList.remove("hidden");
+    
+    if (typeof renderCategoryMenu === "function") {
+        renderCategoryMenu();
+    }
 };
 
-// --- ФИНАЛЬНЫЙ ЗАПУСК ПРИЛОЖЕНИЯ ---
-try {
-  if (typeof initApp === "function") {
-    initApp();
-  } else {
-    console.warn("initApp еще не определена");
-  }
-} catch (e) {
-  console.error("Ошибка инициализации:", e);
-}
+if (typeof initApp === "function") initApp();
 
-console.log("🏁 МАРАФОН ОКОНЧЕН: Файл прочитан полностью!");
-
+console.log("🏁 ФИНАЛЬНЫЙ ОТСЧЕТ: Скрипт готов!");
 
