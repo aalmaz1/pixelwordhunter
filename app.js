@@ -129,7 +129,6 @@ function saveProgress(word, isCorrect) {
 
   localStorage.setItem("pixelWordHunter_save", JSON.stringify(saveObj));
   console.log(`✅ Прогресс по "${searchKey}" сохранен!`);
-}
 
   // Обновляем интерфейс
   if (typeof updateMenuStats === "function") updateMenuStats();
