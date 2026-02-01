@@ -920,6 +920,7 @@ function renderCategoryMenu() {
         `;}; // закрывает cards.forEach
   }); // закрывает categories.forEach
 }); // закрывает саму функцию renderCategoryMenu
+}
 
 function calculateStats(arr) {
   if (!arr) return { ns: 0, sl: 0, ms: 0 };
