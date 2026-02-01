@@ -915,7 +915,7 @@ function renderCategoryMenu() {
             <div style="color:#4ade80">MASTERED: ${s.ms}</div>
         `;}; // закрывает cards.forEach
   }); // закрывает categories.forEach
-} // закрывает саму функцию renderCategoryMenu
+}); // закрывает саму функцию renderCategoryMenu
 
 function calculateStats(arr) {
   if (!arr) return { ns: 0, sl: 0, ms: 0 };
