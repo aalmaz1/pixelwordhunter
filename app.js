@@ -1,3 +1,5 @@
+console.log("Я ТУТ, ЭТО НОВЫЙ ФАЙЛ!");
+
 // Мы берем данные из окна и переименовываем их в 'GAME_DATA',
 // чтобы у Brave не было шанса спутать это с необъявленной GAME_DATA
 var GAME_DATA = window.GAME_DATA || {};
@@ -163,28 +165,22 @@ function saveProgress(word, isCorrect) {
   if (typeof updateMenuStats === "function") updateMenuStats();
 }
 
-// 1. Проверка данных (самая первая строка)
-if (typeof window.GAME_DATA === "undefined") {
-  console.error(
-    "Критическая ошибка: Файл со словами не загружен! Проверьте индекс.хтмл",
-  );
+// 1. Проверка данных
+if (typeof window.GAME_DATA === "undefined" || !window.GAME_DATA) {
+  console.error("Критическая ошибка: Файл words_optimized.js не загружен!");
 }
 
-// 2. Создаем переменную для работы со всеми словами сразу
-allWordsFlat = window.GAME_DATA ? Object.values(window.GAME_DATA).flat() : [];
-
-// 3. Твои игровые переменные (currentRound, currentQ и другие)
-
-var GAME_DATA = (window.GAME_DATA = []);
-currentRound = [];
-currentQ = 0;
-
-// Загружаем XP из памяти сразу, чтобы ранг сохранялся
-
+// 2. Игровые переменные
+let allWordsFlat = window.GAME_DATA
+  ? Object.values(window.GAME_DATA).flat()
+  : [];
 let xp = parseInt(localStorage.getItem("pixelWordHunter_xp")) || 0;
-let words;
 let selectedCategory = "All";
-let wordStartTime = 0; // для алгоритма Echo-Pulse"
+let wordStartTime = 0; // Твой алгоритм Echo-Pulse ожил!
+
+// 3. Прогресс (важно для Эхо Пульса)
+let progress =
+  JSON.parse(localStorage.getItem("pixelWordHunter_progress")) || {};
 
 function initUI() {
   ui = {
@@ -986,6 +982,29 @@ function initApp() {
   renderCategoryButtons();
 
   console.log("✅ Все системы в норме. UI готов.");
+}
+
+function getWordWeight(word) {
+  // Достаем данные из нашего прогресса
+  const stats = progress[word] || { score: 0, lastSeen: 0 };
+  const now = Date.now();
+
+  // --- АЛГОРИТМ ЭХО ПУЛЬСА ---
+
+  // 1. Новые слова (score 0) - приоритет высокий
+  if (stats.score === 0) return 100;
+
+  // 2. Ошибки (score < 0) - "Пульс" частит, возвращаем немедленно
+  if (stats.score < 0) return 200;
+
+  // 3. Интервальное повторение
+  const minsSince = (now - stats.lastSeen) / (1000 * 60);
+
+  // Если слово уже почти выучено (score > 3), не показываем его слишком часто
+  if (stats.score >= 3 && minsSince < 60) return 5;
+
+  // Если слово требует закрепления
+  return 50;
 }
 
 // Запускаем приложение
