@@ -1017,19 +1017,18 @@ function getWordWeight(word) {
   return 50;
 } // Закрываем getWordWeight
 
-// Конец логики Echo-Pulse
-  return 50;
-} 
-
-// --- ЗАПУСК ПРИЛОЖЕНИЯ ---
-try {
-  console.log("🚀 Попытка запуска initApp...");
-  if (typeof initApp === "function") {
+if (typeof initApp === "function") {
     initApp();
-  }
-} catch (e) {
-  console.error("Критическая ошибка при инициализации:", e);
 }
 
-// Проверка загрузки для отладки
-console.log("🏁 Файл app.js прочитан до конца!");
+// ФИНАЛЬНЫЙ АККОРД: Объявляем showCategories явно, чтобы кнопка HUNT её увидела
+window.showCategories = function() {
+    console.log("Кнопка HUNT нажата!");
+    const menu = document.getElementById("menu-screen");
+    const catScreen = document.getElementById("category-screen");
+    if (menu) menu.classList.add("hidden");
+    if (catScreen) catScreen.classList.remove("hidden");
+    if (typeof renderCategoryMenu === "function") renderCategoryMenu();
+};
+
+console.log("🏁 Файл app.js успешно прочитан до конца!");
