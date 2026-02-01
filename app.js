@@ -98,42 +98,41 @@ function saveProgress(word, isCorrect) {
 
   const searchKey = word.toString().toLowerCase().trim();
 
-  // Поиск слова
-  const wordObj = window.GAME_DATA.find(
-    (w) => w.eng && w.eng.toString().toLowerCase().trim() === searchKey,
-  );
+  // Ищем объект слова в массиве GAME_DATA
+  const wordObj = window.GAME_DATA.find((w) => {
+    // Проверяем все возможные варианты названий полей (eng, word, rus, text)
+    const options = [w.eng, w.word, w.rus, w.translation, w.text];
+    return options.some(opt => opt && opt.toString().toLowerCase().trim() === searchKey);
+  });
 
   if (!wordObj) {
-    console.error(`❌ Слово "${searchKey}" не найдено в базе!`);
+    console.error(`❌ Слово "${searchKey}" не найдено в GAME_DATA!`, { databaseSample: window.GAME_DATA[0] });
     return;
   }
 
-  // Обновляем mastery
-  if (isCorrect) {
-    wordObj.mastery = Math.min((wordObj.mastery || 0) + 1, 3);
-  } else {
-    wordObj.mastery = 1;
-  }
+  // Обновляем прогресс (mastery)
+  // Если правильно: +1 (макс 3), если неправильно: сброс на 1
+  wordObj.mastery = isCorrect ? Math.min((wordObj.mastery || 0) + 1, 3) : 1;
 
-  // Сохранение в LocalStorage
+  // Сохраняем весь прогресс в LocalStorage
   try {
     const saveObj = {};
     window.GAME_DATA.forEach((w) => {
-      if (w.mastery > 0) saveObj[w.eng] = w.mastery;
+      if (w.mastery > 0) {
+        // Ключом сохранения берем английское слово или то, что есть
+        const key = w.eng || w.word || w.text || "unknown";
+        saveObj[key] = w.mastery;
+      }
     });
     localStorage.setItem("pixelWordHunter_save", JSON.stringify(saveObj));
-    console.log(
-      "✅ УСПЕШНО СОХРАНЕНО:",
-      searchKey,
-      "Mastery:",
-      wordObj.mastery,
-    );
+    console.log(`✅ СОХРАНЕНО: ${searchKey} | Mastery: ${wordObj.mastery}`);
   } catch (e) {
-    console.error("Ошибка записи в LocalStorage:", e);
+    console.error("Ошибка сохранения:", e);
   }
 
-  // Обновляем экран
+  // Обновляем интерфейс
   if (typeof updateMenuStats === "function") updateMenuStats();
+  if (typeof updateHeaderStats === "function") updateHeaderStats();
 }
 
 // 1. Проверка данных
