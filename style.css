@@ -5,7 +5,69 @@
   --red: #ff3366;      /* Неоновый розовый/красный */
   --yellow: #fbbf24;
 }
+:root {
+  --bg: #0a0a0c;
+  --text: #e0f7ff;
+  --green: #00ff88;
+  --red: #ff3366;
+  --yellow: #fbbf24;
+}
 
+/* Базовый сброс */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Press Start 2P', cursive;
+}
+
+body {
+  height: 100dvh;
+  width: 100vw;
+  background: 
+    radial-gradient(circle at 20% 15%, rgba(0, 204, 255, 0.1), transparent 55%),
+    radial-gradient(circle at 80% 85%, rgba(255, 51, 102, 0.08), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  overflow: hidden; /* Запрет скролла всего сайта */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Скрытие экранов */
+.hidden {
+  display: none !important;
+}
+
+/* Контейнеры экранов */
+.game-container {
+  width: 100%;
+  max-width: 600px; /* Чтобы на компе не растягивалось слишком сильно */
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Оверлей CRT (поверх всего) */
+.crt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+  background:
+    linear-gradient(90deg, transparent 49%, rgba(0, 255, 136, 0.02) 50%, transparent 51%),
+    linear-gradient(rgba(255, 51, 102, 0.05) 50%, rgba(0, 0, 0, 0.3) 50%);
+  background-size: 100% 2px, 100% 4px;
+}
 html,
 body {
   margin: 0;
