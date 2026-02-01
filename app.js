@@ -702,34 +702,38 @@ function showCategories() {
 
 // 2. БЕЗОПАСНАЯ ОТРИСОВКА КАТЕГОРИЙ
 function renderCategoryMenu() {
-    const container = document.getElementById("category-list");
-    if (!container) return;
+  const container = document.getElementById("category-screen");
+  if (!container) return;
 
-    container.innerHTML = "";
+  // 1. Собираем уникальные категории
+  const categories = [...new Set(allWordsFlat.map(w => w.category).filter(Boolean))];
 
-    // Получаем категории и убираем пустые
-    const categories = [...new Set(allWordsFlat.map(w => w.category).filter(Boolean))];
+  // 2. Ищем сетку для кнопок
+  const listContainer = document.querySelector(".category-grid") || container;
 
-    categories.forEach(cat => {
-        const catWords = allWordsFlat.filter(w => w.category === cat);
-        const s = calculateStats(catWords);
-        const upperCat = cat.toUpperCase();
+  // 3. Проходим по категориям
+  categories.forEach((cat) => {
+    if (!cat) return;
 
-        const btn = document.createElement("button");
-        btn.className = "category-btn";
-        btn.onclick = () => startCategoryGame(cat);
-        
-        btn.innerHTML = `
-            <div class="category-name" style="font-weight: bold; margin-bottom: 8px;">${upperCat}</div>
-            <div style="font-size: 8px; line-height: 1.4;">
-                <div style="color: #4ade80">MASTERED: ${s.ms}</div>
-                <div style="color: #fbbf24">LEARNING: ${s.sl}</div>
-                <div style="color: #f87171">NEW: ${s.ns}</div>
-            </div>
+    const catWords = window.GAME_DATA.filter(w => w.category === cat);
+    const s = calculateStats(catWords);
+    const upperCat = cat.toUpperCase();
+
+    // 4. Ищем и обновляем кнопки
+    const cards = document.querySelectorAll(".category-card, button");
+    cards.forEach((card) => {
+      if (card.textContent && card.textContent.toUpperCase().includes(upperCat)) {
+        const statsDiv = card.querySelector(".category-stats-grid") || card;
+        statsDiv.innerHTML = `
+            <div class="category-name">${upperCat}</div>
+            <div style="color:#f87171">NOT STUDIED: ${s.ns}</div>
+            <div style="color:#fbbf24">STILL LEARNING: ${s.sl}</div>
+            <div style="color:#4ade80">MASTERED: ${s.ms}</div>
         `;
-        container.appendChild(btn);
-    });
-}
+      }
+    }); // Конец cards.forEach
+  }); // Конец categories.forEach
+} // Конец функции renderCategoryMenu
 
 function updateTotalStatsDisplay() {
   // 1. Получаем статистику (убедись, что передаешь правильный массив слов)
