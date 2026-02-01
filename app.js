@@ -681,9 +681,50 @@ function renderCategoryButtons() {
 // Функция showCategories теперь просто переключает экраны
 // Кнопки уже будут отрисованы при старте
 function showCategories() {
+  // 1. Прячем меню, показываем категории
   document.getElementById("menu-screen").classList.add("hidden");
   document.getElementById("category-screen").classList.remove("hidden");
-  updateTotalStatsDisplay(); // Обновляем общие цифры
+  
+  // 2. Обновляем общую статистику (твоя функция)
+  if (typeof updateTotalStatsDisplay === "function") {
+    updateTotalStatsDisplay();
+  }
+
+  // 3. Генерируем кнопки категорий прямо сейчас
+  renderCategoryMenu(); 
+}
+
+function renderCategoryMenu() {
+  const container = document.getElementById("category-list");
+  if (!container) return;
+
+  // Очищаем старые кнопки, чтобы они не дублировались
+  container.innerHTML = "";
+
+  // Берем уникальные категории из загруженных слов
+  const categories = [...new Set(allWordsFlat.map(w => w.category).filter(Boolean))];
+
+  categories.forEach(cat => {
+    // Считаем прогресс для конкретной папки
+    const catWords = allWordsFlat.filter(w => w.category === cat);
+    const s = calculateStats(catWords);
+    const upperCat = cat.toUpperCase();
+
+    // Создаем кнопку-папку
+    const btn = document.createElement("button");
+    btn.className = "category-btn"; // Стили возьмутся из твоего CSS
+    btn.onclick = () => startCategoryGame(cat);
+    
+    btn.innerHTML = `
+      <div class="category-name" style="font-weight: bold; margin-bottom: 8px;">${upperCat}</div>
+      <div style="font-size: 8px; line-height: 1.4;">
+        <div style="color: #4ade80">MASTERED: ${s.ms}</div>
+        <div style="color: #fbbf24">LEARNING: ${s.sl}</div>
+        <div style="color: #f87171">NEW: ${s.ns}</div>
+      </div>
+    `;
+    container.appendChild(btn);
+  });
 }
 
 function updateTotalStatsDisplay() {
