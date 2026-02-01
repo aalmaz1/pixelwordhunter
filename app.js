@@ -90,26 +90,46 @@ function initProgress() {
   console.log("📊 Статистика инициализирована");
 }
 
-function saveProgress(wordArray, isCorrect) {
-  if (!wordArray) return;
+function saveProgress(word, isCorrect) {
+  console.log("--- ЗАПУСК СОХРАНЕНИЯ ---");
+  if (!word) return;
 
-  let currentMastery = wordArray[4] || 0;
-  if (isCorrect) {
-    wordArray[4] = Math.min(currentMastery + 1, 3);
-  } else {
-    wordArray[4] = 1;
-  }
+  const searchKey = word.toString().toLowerCase().trim();
 
-  const saveObj = {};
-  // Собираем прогресс со всех слов во всех категориях
-  Object.keys(window.GAME_DATA).forEach((cat) => {
-    window.GAME_DATA[cat].forEach((w) => {
-      if (w[4] > 0) saveObj[w[0]] = w[4];
-    });
+  // Умный поиск: ищем и по английскому, и по русскому значению
+  const wordObj = window.GAME_DATA.find((w) => {
+    const engMatch = w.eng && w.eng.toString().toLowerCase().trim() === searchKey;
+    const rusMatch = w.rus && w.rus.toString().toLowerCase().trim() === searchKey;
+    return engMatch || rusMatch;
   });
 
-  localStorage.setItem("pixelWordHunter_save", JSON.stringify(saveObj));
+  if (!wordObj) {
+    console.error(`❌ Слово "${searchKey}" не найдено в базе!`);
+    return;
+  }
+
+  // Обновляем mastery (прогресс изучения)
+  wordObj.mastery = isCorrect ? Math.min((wordObj.mastery || 0) + 1, 3) : 1;
+
+  // Сохранение всего прогресса в LocalStorage
+  try {
+    const saveObj = {};
+    window.GAME_DATA.forEach((w) => {
+      if (w.mastery > 0) {
+        // Сохраняем по английскому ключу, если его нет — по русскому
+        const key = w.eng || w.rus;
+        if (key) saveObj[key] = w.mastery;
+      }
+    });
+    localStorage.setItem("pixelWordHunter_save", JSON.stringify(saveObj));
+    console.log(`✅ СОХРАНЕНО: ${searchKey} | Mastery: ${wordObj.mastery}`);
+  } catch (e) {
+    console.error("Ошибка записи в LocalStorage:", e);
+  }
+
+  // Обновляем UI, если функции существуют
   if (typeof updateMenuStats === "function") updateMenuStats();
+  if (typeof updateHeaderStats === "function") updateHeaderStats();
 }
 
 // Вызови эту функцию сразу после того, как GAME_DATA загрузится из JSON!
@@ -210,15 +230,6 @@ function loadProgress() {
     ...word,
     mastery: parsedSave[word.eng] || 0,
   }));
-}
-
-function saveProgress() {
-  const saveObj = {};
-  window.GAME_DATA.forEach((w) => {
-    if (w.mastery > 0) saveObj[w.eng] = w.mastery;
-  });
-  localStorage.setItem("pixelWordHunter_save", JSON.stringify(saveObj));
-  updateMenuStats();
 }
 
 function updateMenuStats() {
