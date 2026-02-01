@@ -1020,6 +1020,8 @@ function getWordWeight(word) {
     } catch (e) { console.error("Ошибка инициализации:", e); }
 } 
 // Добавь еще две, если ошибка не исчезнет
+}
+}
 
 // Запускаем приложение
 initApp();
