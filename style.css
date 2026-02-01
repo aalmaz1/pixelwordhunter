@@ -6,7 +6,11 @@
   --red: #ff3366;
   --yellow: #fbbf24;
 }
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box !important;
+}
 /* 2. ГЛОБАЛЬНЫЙ СБРОС */
 * {
   margin: 0;
