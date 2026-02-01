@@ -134,7 +134,6 @@ function saveProgress(word, isCorrect) {
   // Обновляем интерфейс
   if (typeof updateMenuStats === "function") updateMenuStats();
   if (typeof updateHeaderStats === "function") updateHeaderStats();
-}
 
 // 1. Проверка данных
 if (typeof window.GAME_DATA === "undefined" || !window.GAME_DATA) {
