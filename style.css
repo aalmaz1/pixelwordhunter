@@ -8,7 +8,6 @@ body {
   overscroll-behavior-y: none; /* Отключаем системные жесты (тянуть для обновления и т.д.) */
   user-select: none; /* Чтобы нельзя было случайно выделить текст (это же игра) */
   -webkit-user-select: none;
-  position: fixed; /* Фиксируем всё тело, чтобы не дергалось */
 }
 
 body {
