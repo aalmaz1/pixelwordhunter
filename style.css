@@ -1,91 +1,136 @@
-/* 1. ПРИНУДИТЕЛЬНЫЕ ЦВЕТА */
+/* 1. ОБЯЗАТЕЛЬНЫЕ ПЕРЕМЕННЫЕ */
 :root {
-  --bg: #0a0a0c !important;
-  --text: #e0f7ff !important;
-  --green: #00ff88 !important;
-  --red: #ff3366 !important;
-  --yellow: #fbbf24 !important;
+  --bg: #0a0a0c;
+  --text: #e0f7ff;
+  --green: #4ade80;
+  --yellow: #fbbf24;
+  --red: #f87171;
 }
 
-/* 2. ГЛОБАЛЬНЫЙ СБРОС (Убираем "кашу" и наслоения) */
+/* 2. СБРОС И БАЗА */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box !important;
+  font-family: 'Press Start 2P', cursive;
 }
 
 html, body {
-  background-color: #0a0a0c !important; /* Жесткий фон, если переменная не подгрузится */
-  color: #e0f7ff !important;
-  font-family: 'Press Start 2P', cursive !important;
-  height: 100vh !important;
+  height: 100dvh !important;
   width: 100vw !important;
+  background-color: var(--bg) !important;
   overflow: hidden !important;
   display: flex !important;
-  flex-direction: column !important;
   justify-content: center !important;
   align-items: center !important;
+  position: fixed;
 }
 
-/* 3. ТИТУЛ С НЕОНОМ (Как на локалке) */
+/* Фоновое свечение */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(0, 204, 255, 0.15), transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(248, 113, 113, 0.1), transparent 45%);
+  z-index: -1;
+}
+
+/* 3. ОСНОВНОЙ КОНТЕЙНЕР (Центрирует всё меню) */
+.game-container {
+  width: 100%;
+  max-width: 500px;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 20px;
+  z-index: 10;
+}
+
+/* 4. ЗАГОЛОВОК (Тот самый неон) */
 .game-title {
-  font-size: clamp(24px, 8vw, 48px) !important;
-  text-align: center !important;
-  margin-bottom: 30px !important;
-  line-height: 1.4 !important;
-  /* Добавляем то самое свечение вручную */
+  font-size: clamp(26px, 8vw, 44px) !important;
+  line-height: 1.3 !important;
+  margin-bottom: 20px !important;
   text-shadow: 
-    0 0 10px rgba(0, 255, 136, 0.8), 
-    0 0 20px rgba(255, 51, 102, 0.6), 
+    0 0 10px rgba(251, 191, 36, 0.4),
+    0 0 20px rgba(248, 113, 113, 0.3),
     4px 4px 0px #000 !important;
-  animation: float 3s ease-in-out infinite !important;
+  animation: float 3s ease-in-out infinite;
 }
 
-/* 4. КНОПКА HUNT (Исправляем наложение) */
-.start-btn, #start-btn {
-  background: #fbbf24 !important; /* Желтый как на скриншоте */
+/* 5. КНОПКА HUNT (Из твоего скриншота) */
+.start-btn {
+  background: var(--yellow) !important;
   color: #000 !important;
-  padding: 15px 40px !important;
+  padding: 18px 40px !important;
   border: 4px solid #fff !important;
-  font-family: 'Press Start 2P', cursive !important;
-  font-size: 18px !important;
+  font-size: 16px !important;
+  margin-top: 20px !important;
   cursor: pointer !important;
-  margin: 20px 0 !important;
-  box-shadow: 4px 4px 0px #000 !important;
-  display: block !important;
+  box-shadow: 6px 6px 0px #000 !important;
+  text-transform: uppercase;
 }
 
-/* 5. ИНФОРМАЦИОННЫЙ ТЕКСТ (Mastered, Press Hunt) */
-.status-text, .edition-badge, .press-hunt-text {
-  margin: 10px 0 !important;
-  font-size: 12px !important;
-  text-transform: uppercase !important;
-  letter-spacing: 1px !important;
-  display: block !important;
-  text-align: center !important;
+.start-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0px #000 !important;
 }
 
-.press-hunt-text {
-  color: #00ff88 !important; /* Зеленый неон */
-  text-shadow: 0 0 5px #00ff88 !important;
+/* 6. ТЕКСТОВЫЕ ЭФФЕКТЫ */
+.blink {
+  font-size: 14px;
+  color: var(--green);
+  margin-top: 15px;
+  animation: blinker 1.5s linear infinite;
 }
 
-/* 6. CRT-ЭФФЕКТ (Делаем прозрачнее, чтобы не темнило) */
+.edition-badge {
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  opacity: 0.9;
+}
+
+.credits {
+  margin-top: 40px;
+  font-size: 9px;
+  opacity: 0.4;
+}
+
+/* 7. ТЕХНИЧЕСКИЕ КЛАССЫ */
+.hidden { display: none !important; }
+
 .crt-overlay {
   position: fixed !important;
   top: 0; left: 0; width: 100%; height: 100%;
   pointer-events: none !important;
-  z-index: 9999 !important;
-  background: 
-    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
-    linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02)) !important;
-  background-size: 100% 3px, 3px 100% !important;
+  z-index: 9999;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+              linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+  background-size: 100% 3px, 3px 100%;
 }
 
-/* Анимация полета */
+/* АНИМАЦИИ */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
 
-.hidden { display: none !important; }
+@keyframes blinker {
+  50% { opacity: 0; }
+}
+
+/* СЕТКА КАТЕГОРИЙ (Чтобы не ломалась) */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  width: 100%;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 10px;
+}
