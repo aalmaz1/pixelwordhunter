@@ -850,31 +850,37 @@ function calculateStats(sourceArray) {
   };
 }
 function renderCategoryMenu() {
-  const container = document.getElementById("category-screen"); // или там, где лежат папки
-  const categories = [...new Set(allWordsFlat.map((w) => w.category))];
+  const container = document.getElementById("category-screen");
+  
+  // Добавляем фильтр .filter(Boolean), чтобы убрать undefined категории
+  const categories = [...new Set(allWordsFlat.map((w) => w.category).filter(Boolean))];
 
-  // Находим контейнер, где лежат папки. В HTML он обычно внутри <div id="category-screen">
-  // Если у тебя там есть специальный div для списка (например, id="categories-container"), используй его.
   const listContainer = document.querySelector(".category-grid") || container;
 
-  // Очищаем и рисуем заново (или обновляем существующие)
-  // Чтобы не переписывать весь твой HTML, давай просто обновим цифры в существующих папках
   categories.forEach((cat) => {
+    // На всякий случай проверяем cat еще раз перед использованием
+    if (!cat) return;
+
     const catWords = window.GAME_DATA.filter((w) => w.category === cat);
     const s = calculateStats(catWords);
 
-    // Ищем блок конкретной категории (по тексту названия)
     const cards = document.querySelectorAll(".category-card, button");
     cards.forEach((card) => {
-      if (card.textContent.includes(cat.toUpperCase())) {
+      // Используем опциональную цепочку ?. и проверку cat
+      const upperCat = cat.toUpperCase(); 
+      
+      if (card.textContent && card.textContent.toUpperCase().includes(upperCat)) {
         const statsDiv = card.querySelector(".category-stats-grid") || card;
         statsDiv.innerHTML = `
-                    <div class="category-name">${cat.toUpperCase()}</div>
-                    <div style="color:#f87171">NOT STUDIED: ${s.ns}</div>
-                    <div style="color:#fbbf24">STILL LEARNING: ${s.sl}</div>
-                    <div style="color:#4ade80">MASTERED: ${s.ms}</div>
-                `;
+            <div class="category-name">${upperCat}</div>
+            <div style="color:#f87171">NOT STUDIED: ${s.ns}</div>
+            <div style="color:#fbbf24">STILL LEARNING: ${s.sl}</div>
+            <div style="color:#4ade80">MASTERED: ${s.ms}</div>
+        `;
       }
+    });
+  });
+}
     });
   });
 }
