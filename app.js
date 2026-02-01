@@ -680,51 +680,54 @@ function renderCategoryButtons() {
 
 // Функция showCategories теперь просто переключает экраны
 // Кнопки уже будут отрисованы при старте
+// 1. ГЛАВНАЯ ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ (Строка 47 в HTML вызывает именно её)
 function showCategories() {
-  // 1. Прячем меню, показываем категории
-  document.getElementById("menu-screen").classList.add("hidden");
-  document.getElementById("category-screen").classList.remove("hidden");
-  
-  // 2. Обновляем общую статистику (твоя функция)
-  if (typeof updateTotalStatsDisplay === "function") {
-    updateTotalStatsDisplay();
-  }
-
-  // 3. Генерируем кнопки категорий прямо сейчас
-  renderCategoryMenu(); 
+    const menu = document.getElementById("menu-screen");
+    const catScreen = document.getElementById("category-screen");
+    
+    if (menu && catScreen) {
+        menu.classList.add("hidden");
+        catScreen.classList.remove("hidden");
+        
+        // Запускаем отрисовку папок
+        renderCategoryMenu();
+        
+        // Обновляем общую статистику
+        if (typeof updateTotalStatsDisplay === "function") {
+            updateTotalStatsDisplay();
+        }
+    }
 }
 
+// 2. БЕЗОПАСНАЯ ОТРИСОВКА КАТЕГОРИЙ
 function renderCategoryMenu() {
-  const container = document.getElementById("category-list");
-  if (!container) return;
+    const container = document.getElementById("category-list");
+    if (!container) return;
 
-  // Очищаем старые кнопки, чтобы они не дублировались
-  container.innerHTML = "";
+    container.innerHTML = "";
 
-  // Берем уникальные категории из загруженных слов
-  const categories = [...new Set(allWordsFlat.map(w => w.category).filter(Boolean))];
+    // Получаем категории и убираем пустые
+    const categories = [...new Set(allWordsFlat.map(w => w.category).filter(Boolean))];
 
-  categories.forEach(cat => {
-    // Считаем прогресс для конкретной папки
-    const catWords = allWordsFlat.filter(w => w.category === cat);
-    const s = calculateStats(catWords);
-    const upperCat = cat.toUpperCase();
+    categories.forEach(cat => {
+        const catWords = allWordsFlat.filter(w => w.category === cat);
+        const s = calculateStats(catWords);
+        const upperCat = cat.toUpperCase();
 
-    // Создаем кнопку-папку
-    const btn = document.createElement("button");
-    btn.className = "category-btn"; // Стили возьмутся из твоего CSS
-    btn.onclick = () => startCategoryGame(cat);
-    
-    btn.innerHTML = `
-      <div class="category-name" style="font-weight: bold; margin-bottom: 8px;">${upperCat}</div>
-      <div style="font-size: 8px; line-height: 1.4;">
-        <div style="color: #4ade80">MASTERED: ${s.ms}</div>
-        <div style="color: #fbbf24">LEARNING: ${s.sl}</div>
-        <div style="color: #f87171">NEW: ${s.ns}</div>
-      </div>
-    `;
-    container.appendChild(btn);
-  });
+        const btn = document.createElement("button");
+        btn.className = "category-btn";
+        btn.onclick = () => startCategoryGame(cat);
+        
+        btn.innerHTML = `
+            <div class="category-name" style="font-weight: bold; margin-bottom: 8px;">${upperCat}</div>
+            <div style="font-size: 8px; line-height: 1.4;">
+                <div style="color: #4ade80">MASTERED: ${s.ms}</div>
+                <div style="color: #fbbf24">LEARNING: ${s.sl}</div>
+                <div style="color: #f87171">NEW: ${s.ns}</div>
+            </div>
+        `;
+        container.appendChild(btn);
+    });
 }
 
 function updateTotalStatsDisplay() {
