@@ -93,42 +93,43 @@ function initProgress() {
 
 
 function saveProgress(word, isCorrect) {
-  console.log("--- ЗАПУСК СОХРАНЕНИЯ ---");
   if (!word) return;
-
   const searchKey = word.toString().toLowerCase().trim();
-
-  // Ищем объект слова в массиве GAME_DATA
+  
+  // Ищем слово, даже если оно спрятано глубоко в массиве или объекте
   const wordObj = window.GAME_DATA.find((w) => {
-    // Проверяем все возможные варианты названий полей (eng, word, rus, text)
+    // Проверяем, если w - это массив (типа ["word", "translation", ...])
+    if (Array.isArray(w)) {
+        return w.some(item => item && item.toString().toLowerCase().trim() === searchKey);
+    }
+    // Проверяем, если w - это объект
     const options = [w.eng, w.word, w.rus, w.translation, w.text];
     return options.some(opt => opt && opt.toString().toLowerCase().trim() === searchKey);
   });
 
   if (!wordObj) {
-    console.error(`❌ Слово "${searchKey}" не найдено в GAME_DATA!`, { databaseSample: window.GAME_DATA[0] });
+    console.warn(`⚠️ SaveProgress: Слово "${searchKey}" не найдено в GAME_DATA.`);
     return;
   }
 
-  // Обновляем прогресс (mastery)
-  // Если правильно: +1 (макс 3), если неправильно: сброс на 1
-  wordObj.mastery = isCorrect ? Math.min((wordObj.mastery || 0) + 1, 3) : 1;
-
-  // Сохраняем весь прогресс в LocalStorage
-  try {
-    const saveObj = {};
-    window.GAME_DATA.forEach((w) => {
-      if (w.mastery > 0) {
-        // Ключом сохранения берем английское слово или то, что есть
-        const key = w.eng || w.word || w.text || "unknown";
-        saveObj[key] = w.mastery;
-      }
-    });
-    localStorage.setItem("pixelWordHunter_save", JSON.stringify(saveObj));
-    console.log(`✅ СОХРАНЕНО: ${searchKey} | Mastery: ${wordObj.mastery}`);
-  } catch (e) {
-    console.error("Ошибка сохранения:", e);
+  // Обновляем мастерство (mastery может быть свойством объекта или индексом в массиве)
+  if (Array.isArray(wordObj)) {
+      wordObj[4] = isCorrect ? Math.min((wordObj[4] || 0) + 1, 3) : 1;
+  } else {
+      wordObj.mastery = isCorrect ? Math.min((wordObj.mastery || 0) + 1, 3) : 1;
   }
+
+  // Сохраняем в память браузера
+  const saveObj = {};
+  window.GAME_DATA.forEach((w) => {
+    const key = Array.isArray(w) ? w[0] : (w.eng || w.word);
+    const val = Array.isArray(w) ? w[4] : w.mastery;
+    if (val > 0) saveObj[key] = val;
+  });
+
+  localStorage.setItem("pixelWordHunter_save", JSON.stringify(saveObj));
+  console.log(`✅ Прогресс по "${searchKey}" сохранен!`);
+}
 
   // Обновляем интерфейс
   if (typeof updateMenuStats === "function") updateMenuStats();
