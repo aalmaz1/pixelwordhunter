@@ -717,40 +717,32 @@ function updateTotalStatsDisplay() {
 }
 
 function renderCategoryMenu() {
-  const container = document.getElementById("category-list");
+  const container = document.getElementById("category-list"); // Убедись, что ID совпадает с HTML
   if (!container) return;
+
+  // 1. Берем только уникальные и существующие категории
+  const categories = [...new Set(allWordsFlat.map(w => w.category).filter(Boolean))];
+  
+  // 2. Очищаем контейнер перед отрисовкой, чтобы не дублировать кнопки
   container.innerHTML = "";
 
-  const categories = [...new Set(allWordsFlat.map((w) => w.category))];
+  // 3. Создаем кнопки с нуля (так надежнее, чем искать старые)
+  categories.forEach(cat => {
+    const catWords = allWordsFlat.filter(w => w.category === cat);
+    const s = calculateStats(catWords);
+    const upperCat = cat.toUpperCase();
 
-  categories.forEach((cat) => {
     const btn = document.createElement("button");
     btn.className = "category-btn";
-
-    const catWords = allWordsFlat.filter((w) => w.category === cat);
-    const s = calculateStats(catWords);
-    const icon = typeof icons !== "undefined" && icons[cat] ? icons[cat] : "📁";
-
+    btn.onclick = () => startCategoryGame(cat);
     btn.innerHTML = `
-            <div style="font-size: 20px; margin-bottom: 5px;">${icon}</div>
-            <div style="font-weight: bold; margin-bottom: 8px; font-size: 10px;">${cat.toUpperCase()}</div>
-            <div class="stats-block">
-                <div class="stat-line ns">
-                    <span class="full-text">NOT STUDIED:</span>
-                    <span class="short-text">NS:</span> ${s.ns}
-                </div>
-                <div class="stat-line sl">
-                    <span class="full-text">STILL LEARNING:</span>
-                    <span class="short-text">SL:</span> ${s.sl}
-                </div>
-                <div class="stat-line ms">
-                    <span class="full-text">MASTERED:</span>
-                    <span class="short-text">MS:</span> ${s.ms}
-                </div>
-            </div>
-        `;
-
-    btn.onclick = () => startGame(cat);
+      <div class="category-name">${upperCat}</div>
+      <div style="font-size:8px; margin-top:5px;">
+        <span style="color:#f87171">NS: ${s.ns}</span> | 
+        <span style="color:#fbbf24">SL: ${s.sl}</span> | 
+        <span style="color:#4ade80">MS: ${s.ms}</span>
+      </div>
+    `;
     container.appendChild(btn);
   });
 }
