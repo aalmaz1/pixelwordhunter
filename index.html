@@ -15,15 +15,7 @@
     <link rel="stylesheet" href="./style.css?v=PROD_1.0">
     <link rel="manifest" href="manifest.json" />
 
-    <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker
-            .register("sw.js")
-            .catch((err) => console.log("SW error:", err));
-        });
-      }
-    </script>
+    
   </head>
   <body>
     <div class="crt-overlay"></div>
