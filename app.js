@@ -1208,4 +1208,38 @@ if (document.readyState === "loading") {
     initApp();
 }
 
+// Функция полного сброса прогресса
+function resetProgress() {
+  // 1. Спрашиваем подтверждение (чтобы случайно не стерли)
+  if (!confirm("Are you sure you want to reset all progress? This cannot be undone.")) {
+    return;
+  }
+
+  console.log("⚠️ Сброс прогресса...");
+
+  // 2. Очищаем localStorage
+  localStorage.removeItem("pixelHunterProgress");
+  
+  // 3. Обнуляем переменную прогресса в памяти
+  window.progress = {};
+  
+  // 4. Обновляем статистику в меню (нули)
+  if (typeof updateMenuStats === "function") {
+    updateMenuStats();
+  }
+  
+  // 5. Перерисовываем кнопки категорий (если мы на экране категорий)
+  if (typeof renderCategoryButtons === "function") {
+    renderCategoryButtons();
+  } else if (typeof renderCategoryCards === "function") {
+    renderCategoryCards();
+  }
+
+  alert("Progress has been reset.");
+}
+
+// Делаем её глобальной, чтобы кнопка в HTML её видела
+window.resetProgress = resetProgress;
+
+
 console.log("🏁 FULL SYSTEM READY");
