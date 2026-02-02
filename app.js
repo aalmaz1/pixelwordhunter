@@ -1021,49 +1021,95 @@ function getWordWeight(word) {
     return 50;
 } 
 
-// --- 1. ФУНКЦИЯ ИНИЦИАЛИЗАЦИИ ---
-function initApp() {
-    console.log("🚀 Запуск инициализации UI...");
-    window.ui = {
-        menu: document.getElementById("menu-screen"),
-        categoryScreen: document.getElementById("category-screen"),
-        game: document.getElementById("game-screen"),
-        xp: document.getElementById("xp"),
-        masteredCount: document.getElementById("mastered-count"),
-        totalCount: document.getElementById("total-count")
-    };
+// ==========================================
+// ФИНАЛЬНЫЙ БЛОК (Вставь это в конец app.js)
+// ==========================================
 
-    // Обновляем счетчики на главном экране
-    if (typeof updateMenuStats === "function") {
-        updateMenuStats();
+// 1. Восстанавливаем потерянную функцию отрисовки карточек
+window.renderCategoryCards = function() {
+    console.log("🎨 Строим список категорий...");
+    const container = document.getElementById("category-list");
+    
+    if (!container) {
+        console.error("Элемент #category-list не найден в HTML!");
+        return;
     }
-    console.log("✅ UI готов к работе!");
-}
 
-// --- 2. ФУНКЦИЯ ДЛЯ КНОПКИ HUNT ---
-window.showCategories = function() {
-    console.log("Кнопка HUNT нажата!");
-    
-    // Прячем меню, показываем категории
-    const menu = document.getElementById("menu-screen");
-    const catScreen = document.getElementById("category-screen");
-    
-    if (menu) menu.classList.add("hidden");
-    if (catScreen) catScreen.classList.remove("hidden");
-    
-    // Запускаем отрисовку карточек, если функция есть
-    if (typeof renderCategoryCards === "function") {
-        renderCategoryCards();
-    } else {
-        console.error("Ошибка: renderCategoryCards не найдена!");
+    container.innerHTML = ""; // Очищаем список перед отрисовкой
+
+    // Проверяем, есть ли данные
+    const data = window.GAME_DATA || {};
+    const categories = Object.keys(data);
+
+    if (categories.length === 0) {
+        container.innerHTML = "<div style='color:white'>Нет данных (GAME_DATA empty)</div>";
+        return;
     }
+
+    // Создаем кнопки для каждой категории
+    categories.forEach(cat => {
+        const btn = document.createElement("div");
+        // Простые стили, чтобы точно было видно
+        btn.className = "category-card"; 
+        btn.style.border = "2px solid #fbbf24";
+        btn.style.margin = "10px 0";
+        btn.style.padding = "15px";
+        btn.style.cursor = "pointer";
+        btn.style.textAlign = "center";
+        btn.style.backgroundColor = "#222";
+
+        const wordCount = data[cat] ? data[cat].length : 0;
+        
+        btn.innerHTML = `
+            <h3 style="color:#fbbf24; margin:0 0 5px 0;">${cat}</h3>
+            <span style="color:#888; font-size: 10px;">${wordCount} WORDS</span>
+        `;
+
+        // Логика клика по категории
+        btn.onclick = function() {
+            console.log("Выбрана категория:", cat);
+            // Пытаемся запустить игру
+            if (typeof startQuiz === "function") {
+                startQuiz(cat);
+            } else {
+                // Если startQuiz потерялась, запускаем "аварийный режим"
+                console.warn("startQuiz не найдена, ручной запуск...");
+                document.getElementById("category-screen").classList.add("hidden");
+                document.getElementById("game-screen").classList.remove("hidden");
+                document.getElementById("category").innerText = cat;
+                if(typeof nextQuestion === "function") nextQuestion();
+            }
+        };
+        
+        container.appendChild(btn);
+    });
+    console.log(`✅ Отрисовано ${categories.length} категорий.`);
 };
 
-// --- 3. БЕЗОПАСНЫЙ ЗАПУСК ---
+// 2. Функция кнопки HUNT
+window.showCategories = function() {
+    console.log("🖱 Кнопка HUNT нажата!");
+    const menu = document.getElementById("menu-screen");
+    const catScreen = document.getElementById("category-screen");
+
+    if (menu) menu.classList.add("hidden");
+    if (catScreen) catScreen.classList.remove("hidden");
+
+    // Вызываем функцию, которую создали выше
+    window.renderCategoryCards();
+};
+
+// 3. Инициализация (чтобы обновить статистику в меню)
+function initApp() {
+    console.log("🚀 Приложение запущено");
+    if(typeof updateMenuStats === "function") updateMenuStats();
+}
+
+// Запуск
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initApp);
 } else {
     initApp();
 }
 
-console.log("🏁 МАРАФОН ЗАВЕРШЕН: Скрипт загружен полностью!");
+console.log("🏁 ФИНАЛ: Функции восстановлены (v353)");
