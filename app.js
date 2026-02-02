@@ -1021,95 +1021,174 @@ function getWordWeight(word) {
     return 50;
 } 
 
-// ==========================================
-// ФИНАЛЬНЫЙ БЛОК (Вставь это в конец app.js)
-// ==========================================
+// ================================================================
+// 🎮 ДВИЖОК ИГРЫ (GAME ENGINE)
+// Вставляем это, чтобы работали вопросы, ответы и кнопка выхода
+// ================================================================
 
-// 1. Восстанавливаем потерянную функцию отрисовки карточек
-window.renderCategoryCards = function() {
-    console.log("🎨 Строим список категорий...");
-    const container = document.getElementById("category-list");
+let currentCategory = "ALL";
+let currentWordObj = null;
+let isAnswering = false;
+
+// 1. ЗАПУСК ВИКТОРИНЫ
+window.startQuiz = function(category) {
+    console.log("🎲 Запуск игры. Категория:", category);
+    currentCategory = category;
     
-    if (!container) {
-        console.error("Элемент #category-list не найден в HTML!");
-        return;
-    }
-
-    container.innerHTML = ""; // Очищаем список перед отрисовкой
-
-    // Проверяем, есть ли данные
-    const data = window.GAME_DATA || {};
-    const categories = Object.keys(data);
-
-    if (categories.length === 0) {
-        container.innerHTML = "<div style='color:white'>Нет данных (GAME_DATA empty)</div>";
-        return;
-    }
-
-    // Создаем кнопки для каждой категории
-    categories.forEach(cat => {
-        const btn = document.createElement("div");
-        // Простые стили, чтобы точно было видно
-        btn.className = "category-card"; 
-        btn.style.border = "2px solid #fbbf24";
-        btn.style.margin = "10px 0";
-        btn.style.padding = "15px";
-        btn.style.cursor = "pointer";
-        btn.style.textAlign = "center";
-        btn.style.backgroundColor = "#222";
-
-        const wordCount = data[cat] ? data[cat].length : 0;
-        
-        btn.innerHTML = `
-            <h3 style="color:#fbbf24; margin:0 0 5px 0;">${cat}</h3>
-            <span style="color:#888; font-size: 10px;">${wordCount} WORDS</span>
-        `;
-
-        // Логика клика по категории
-        btn.onclick = function() {
-            console.log("Выбрана категория:", cat);
-            // Пытаемся запустить игру
-            if (typeof startQuiz === "function") {
-                startQuiz(cat);
-            } else {
-                // Если startQuiz потерялась, запускаем "аварийный режим"
-                console.warn("startQuiz не найдена, ручной запуск...");
-                document.getElementById("category-screen").classList.add("hidden");
-                document.getElementById("game-screen").classList.remove("hidden");
-                document.getElementById("category").innerText = cat;
-                if(typeof nextQuestion === "function") nextQuestion();
-            }
-        };
-        
-        container.appendChild(btn);
-    });
-    console.log(`✅ Отрисовано ${categories.length} категорий.`);
+    // Переключаем экраны
+    document.getElementById("category-screen").classList.add("hidden");
+    document.getElementById("game-screen").classList.remove("hidden");
+    
+    // Обновляем заголовок
+    document.getElementById("category").innerText = category;
+    
+    // Запускаем первый вопрос
+    nextQuestion();
 };
 
-// 2. Функция кнопки HUNT
+// 2. ВЫХОД ИЗ ИГРЫ (Крестик)
+window.exitGame = function() {
+    console.log("🔙 Выход в меню");
+    document.getElementById("game-screen").classList.add("hidden");
+    document.getElementById("menu-screen").classList.remove("hidden");
+    
+    // Обновляем статистику при выходе
+    if(typeof updateMenuStats === "function") updateMenuStats();
+};
+
+// 3. СЛЕДУЮЩИЙ ВОПРОС
+window.nextQuestion = function() {
+    const quizBox = document.getElementById("options");
+    const wordDisplay = document.getElementById("word");
+    const feedback = document.getElementById("feedback");
+    
+    // Сброс стилей
+    feedback.classList.add("hidden");
+    isAnswering = false;
+    quizBox.innerHTML = "";
+
+    // Получаем слова
+    const data = window.GAME_DATA;
+    let wordsList = [];
+    
+    if (currentCategory === "ALL" || !data[currentCategory]) {
+        // Собираем все слова, если категория ALL
+        Object.values(data).forEach(arr => wordsList.push(...arr));
+    } else {
+        wordsList = data[currentCategory];
+    }
+
+    if (!wordsList || wordsList.length < 4) {
+        console.error("Мало слов для игры!");
+        wordDisplay.innerText = "NOT ENOUGH WORDS";
+        return;
+    }
+
+    // Выбираем случайное слово
+    const targetIndex = Math.floor(Math.random() * wordsList.length);
+    currentWordObj = wordsList[targetIndex];
+    
+    // Отображаем слово (Английский)
+    wordDisplay.innerText = currentWordObj.word;
+
+    // Генерируем варианты ответов (1 правильный + 3 неверных)
+    let options = [currentWordObj];
+    while (options.length < 4) {
+        const randomWord = wordsList[Math.floor(Math.random() * wordsList.length)];
+        if (!options.includes(randomWord)) {
+            options.push(randomWord);
+        }
+    }
+
+    // Перемешиваем варианты
+    options.sort(() => Math.random() - 0.5);
+
+    // Рисуем кнопки
+    options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        // Показываем перевод
+        btn.innerText = opt.translation; 
+        
+        btn.onclick = () => checkAnswer(opt, btn);
+        quizBox.appendChild(btn);
+    });
+};
+
+// 4. ПРОВЕРКА ОТВЕТА
+function checkAnswer(selectedOption, btnElement) {
+    if (isAnswering) return;
+    isAnswering = true;
+
+    const isCorrect = selectedOption.word === currentWordObj.word;
+    const feedback = document.getElementById("feedback");
+
+    if (isCorrect) {
+        btnElement.style.background = "#4ade80"; // Зеленый
+        btnElement.style.color = "#000";
+        feedback.innerText = "CORRECT!";
+        feedback.style.color = "#4ade80";
+        
+        // Тут можно добавить логику XP (опыт)
+        let xp = parseInt(document.getElementById("xp").innerText) || 0;
+        document.getElementById("xp").innerText = xp + 10;
+        
+    } else {
+        btnElement.style.background = "#f87171"; // Красный
+        feedback.innerText = "WRONG!";
+        feedback.style.color = "#f87171";
+    }
+
+    feedback.classList.remove("hidden");
+
+    // Ждем 1 секунду и даем следующий вопрос
+    setTimeout(() => {
+        nextQuestion();
+    }, 1000);
+}
+
+// ================================================================
+// 🖥️ UI И СИСТЕМА (То, что мы уже починили)
+// ================================================================
+
+window.renderCategoryCards = function() {
+    const container = document.getElementById("category-list");
+    if (!container) return;
+    container.innerHTML = "";
+    
+    const categories = Object.keys(window.GAME_DATA || {});
+
+    categories.forEach(cat => {
+        const btn = document.createElement("div");
+        btn.className = "category-card"; 
+        // Стиль карточки
+        btn.innerHTML = `
+            <div style="color:#fbbf24; font-weight:bold;">${cat}</div>
+            <div style="color:#666; font-size:10px;">${window.GAME_DATA[cat].length} words</div>
+        `;
+        
+        btn.onclick = () => window.startQuiz(cat);
+        container.appendChild(btn);
+    });
+};
+
 window.showCategories = function() {
     console.log("🖱 Кнопка HUNT нажата!");
-    const menu = document.getElementById("menu-screen");
-    const catScreen = document.getElementById("category-screen");
-
-    if (menu) menu.classList.add("hidden");
-    if (catScreen) catScreen.classList.remove("hidden");
-
-    // Вызываем функцию, которую создали выше
+    document.getElementById("menu-screen").classList.add("hidden");
+    document.getElementById("category-screen").classList.remove("hidden");
     window.renderCategoryCards();
 };
 
-// 3. Инициализация (чтобы обновить статистику в меню)
 function initApp() {
-    console.log("🚀 Приложение запущено");
+    console.log("🚀 START APP v353");
+    // Пытаемся обновить статистику в меню
     if(typeof updateMenuStats === "function") updateMenuStats();
 }
 
-// Запуск
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initApp);
 } else {
     initApp();
 }
 
-console.log("🏁 ФИНАЛ: Функции восстановлены (v353)");
+console.log("🏁 FULL SYSTEM READY");
