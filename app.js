@@ -1021,20 +1021,51 @@ function getWordWeight(word) {
     return 50;
 } 
 
-// Объявляем функцию для кнопки напрямую (без оберток)
+// --- 1. ФУНКЦИЯ ИНИЦИАЛИЗАЦИИ ---
+function initApp() {
+    console.log("🚀 Запуск инициализации UI...");
+    window.ui = {
+        menu: document.getElementById("menu-screen"),
+        categoryScreen: document.getElementById("category-screen"),
+        game: document.getElementById("game-screen"),
+        xp: document.getElementById("xp"),
+        masteredCount: document.getElementById("mastered-count"),
+        totalCount: document.getElementById("total-count")
+    };
+
+    // Обновляем счетчики на главном экране
+    if (typeof updateMenuStats === "function") {
+        updateMenuStats();
+    }
+    console.log("✅ UI готов к работе!");
+}
+
+// --- 2. ФУНКЦИЯ ДЛЯ КНОПКИ HUNT ---
 window.showCategories = function() {
     console.log("Кнопка HUNT нажата!");
+    
+    // Прячем меню, показываем категории
     const menu = document.getElementById("menu-screen");
     const catScreen = document.getElementById("category-screen");
+    
     if (menu) menu.classList.add("hidden");
     if (catScreen) catScreen.classList.remove("hidden");
-    if (typeof renderCategoryMenu === "function") renderCategoryMenu();
+    
+    // Запускаем отрисовку карточек, если функция есть
+    if (typeof renderCategoryCards === "function") {
+        renderCategoryCards();
+    } else {
+        console.error("Ошибка: renderCategoryCards не найдена!");
+    }
 };
 
-// Простой запуск
-if (typeof initApp === "function") {
-    
+// --- 3. БЕЗОПАСНЫЙ ЗАПУСК ---
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initApp);
+} else {
+    initApp();
 }
-initApp();
+
+console.log("🏁 МАРАФОН ЗАВЕРШЕН: Скрипт загружен полностью!");
 
 console.log("🏁 МАРАФОН ЗАВЕРШЕН: Скрипт загружен полностью!");
