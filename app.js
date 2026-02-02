@@ -1057,64 +1057,81 @@ window.exitGame = function() {
 };
 
 // 3. СЛЕДУЮЩИЙ ВОПРОС
+// ЗАМЕНИ ФУНКЦИЮ window.nextQuestion НА ЭТУ:
+
 window.nextQuestion = function() {
     const quizBox = document.getElementById("options");
     const wordDisplay = document.getElementById("word");
     const feedback = document.getElementById("feedback");
     
-    // Сброс стилей
-    feedback.classList.add("hidden");
+    // Сброс
+    if(feedback) feedback.classList.add("hidden");
     isAnswering = false;
-    quizBox.innerHTML = "";
+    if(quizBox) quizBox.innerHTML = "";
 
-    // Получаем слова
+    // Достаем базу
     const data = window.GAME_DATA;
     let wordsList = [];
     
     if (currentCategory === "ALL" || !data[currentCategory]) {
-        // Собираем все слова, если категория ALL
         Object.values(data).forEach(arr => wordsList.push(...arr));
     } else {
         wordsList = data[currentCategory];
     }
 
     if (!wordsList || wordsList.length < 4) {
-        console.error("Мало слов для игры!");
-        wordDisplay.innerText = "NOT ENOUGH WORDS";
+        wordDisplay.innerText = "Error: No words";
         return;
     }
 
-    // Выбираем случайное слово
+    // Выбираем слово
     const targetIndex = Math.floor(Math.random() * wordsList.length);
     currentWordObj = wordsList[targetIndex];
     
-    // Отображаем слово (Английский)
-    wordDisplay.innerText = currentWordObj.word;
+    // --- 🔍 ДИАГНОСТИКА (Смотри консоль!) ---
+    console.log("🔍 СТРУКТУРА СЛОВА:", currentWordObj);
 
-    // Генерируем варианты ответов (1 правильный + 3 неверных)
+    // Пытаемся угадать название поля с английским словом
+    // (Добавь свои варианты сюда, если они другие)
+    const questionText = currentWordObj.word 
+                      || currentWordObj.term 
+                      || currentWordObj.english 
+                      || currentWordObj.question 
+                      || currentWordObj[0] // Если это массив
+                      || "NO TEXT FOUND";
+
+    wordDisplay.innerText = questionText;
+
+    // Генерируем варианты
     let options = [currentWordObj];
     while (options.length < 4) {
-        const randomWord = wordsList[Math.floor(Math.random() * wordsList.length)];
-        if (!options.includes(randomWord)) {
-            options.push(randomWord);
-        }
+        const rnd = wordsList[Math.floor(Math.random() * wordsList.length)];
+        if (!options.includes(rnd)) options.push(rnd);
     }
-
-    // Перемешиваем варианты
     options.sort(() => Math.random() - 0.5);
 
     // Рисуем кнопки
     options.forEach(opt => {
         const btn = document.createElement("button");
         btn.className = "option-btn";
-        // Показываем перевод
-        btn.innerText = opt.translation; 
         
+        // Пытаемся угадать поле с переводом
+        const answerText = opt.translation 
+                        || opt.russian 
+                        || opt.definition 
+                        || opt.meaning 
+                        || opt[1] // Если это массив
+                        || "NO TRANS FOUND";
+                        
+        btn.innerText = answerText;
+        
+        // Передаем правильные поля в проверку
+        // Важно: checkAnswer тоже надо научить понимать эти поля, 
+        // но пока проверим отображение.
         btn.onclick = () => checkAnswer(opt, btn);
         quizBox.appendChild(btn);
     });
 };
-
 // 4. ПРОВЕРКА ОТВЕТА
 function checkAnswer(selectedOption, btnElement) {
     if (isAnswering) return;
