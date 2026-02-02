@@ -12,18 +12,107 @@
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
+    <!-- Оставляем твой style.css для общих вещей, но важные стили перебьем ниже -->
     <link rel="stylesheet" href="./style.css?v=999_final_fiа">
     <link rel="manifest" href="manifest.json" />
-<!--- <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker
-            .register("sw.js")
-            .catch((err) => console.log("SW error:", err));
-        });
+
+    <!-- ВСТРОЕННЫЕ СТИЛИ ДЛЯ ИДЕАЛЬНОГО ОТОБРАЖЕНИЯ МЕНЮ -->
+    <style>
+      /* --- СЕТКА КАТЕГОРИЙ (TRON STYLE) --- */
+      #category-list {
+        display: grid !important;
+        /* Ровно 2 колонки на мобильных, растягиваются поровну */
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
+        width: 95% !important;
+        max-width: 600px !important;
+        margin: 10px auto !important;
+        padding: 5px !important;
+        box-sizing: border-box !important;
+        /* Высота и скролл */
+        max-height: 65vh !important;
+        overflow-y: auto !important;
+        /* Кастомный скроллбар */
+        scrollbar-width: thin;
+        scrollbar-color: #ffd700 #001f3f;
       }
-    </script> --->
-    
+
+      /* Скроллбар для WebKit (Chrome, Safari) */
+      #category-list::-webkit-scrollbar {
+        width: 6px;
+      }
+      #category-list::-webkit-scrollbar-track {
+        background: #001f3f;
+      }
+      #category-list::-webkit-scrollbar-thumb {
+        background-color: #ffd700;
+        border-radius: 4px;
+      }
+
+      /* --- КАРТОЧКА --- */
+      .category-card {
+        background-color: rgba(0, 31, 63, 0.9) !important; /* Темно-синий полупрозрачный */
+        border: 2px solid #fff !important; /* Четкая белая рамка */
+        box-shadow: 0 0 5px rgba(255,255,255,0.2) !important;
+        color: #fff !important;
+        padding: 12px 4px !important;
+        
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        
+        min-height: 90px !important; /* Фиксированная минимальная высота */
+        cursor: pointer !important;
+        transition: transform 0.1s !important;
+      }
+
+      .category-card:active {
+        transform: scale(0.96) !important;
+        background-color: rgba(255,255,255,0.1) !important;
+      }
+
+      /* --- ТЕКСТ ВНУТРИ --- */
+      .category-name {
+        font-family: 'Press Start 2P', monospace !important; /* Твой пиксельный шрифт */
+        font-size: 10px !important; /* Оптимальный размер для длинных слов */
+        line-height: 1.4 !important;
+        margin-bottom: 8px !important;
+        text-transform: uppercase !important;
+        word-break: break-word !important; /* Перенос длинных слов типа CORRESPONDENCE */
+        color: #fff !important;
+        text-shadow: 2px 2px 0 #000 !important;
+      }
+
+      .cat-stat {
+        font-family: 'Courier New', monospace !important;
+        font-size: 9px !important;
+        font-weight: bold !important;
+        line-height: 1.3 !important;
+        letter-spacing: 0.5px !important;
+      }
+
+      /* Цвета */
+      .stat-ns { color: #ff6b6b !important; } /* Красный */
+      .stat-sl { color: #fbbf24 !important; } /* Желтый */
+      .stat-ms { color: #4ade80 !important; } /* Зеленый */
+
+      /* --- КНОПКА BACK ВНИЗУ --- */
+      #back-btn-container button, .pixel-btn-back, #category-screen .exit-btn {
+        width: 90% !important;
+        max-width: 600px !important;
+        display: block !important;
+        margin: 15px auto !important;
+        padding: 15px !important;
+        background: transparent !important;
+        border: 2px solid #fff !important;
+        color: #fff !important;
+        font-family: 'Press Start 2P', monospace !important;
+        text-transform: uppercase !important;
+        font-size: 12px !important;
+      }
+    </style>
   </head>
   <body>
     <div class="crt-overlay"></div>
@@ -44,6 +133,7 @@
 
       <p class="blink">PRESS HUNT!</p>
 
+      <!-- Исправленная кнопка -->
       <button type="button" class="start-btn" onclick="showCategories(); return false;">▶ HUNT</button>
 
       <div
@@ -62,35 +152,31 @@
       <div class="credits">© 2026 ALMAZ CORP</div>
     </div>
 
+    <!-- ЭКРАН КАТЕГОРИЙ -->
     <div id="category-screen" class="game-container hidden">
-      <h2
-        style="
-          color: #fbbf24;
-          margin-bottom: 30px;
-          font-size: clamp(16px, 4vw, 20px);
-        "
-      >
+      <h2 style="color: #fbbf24; margin: 15px 0 10px; font-size: 16px; font-family: 'Press Start 2P'; text-align: center;">
         SELECT CATEGORY
       </h2>
 
+      <!-- Блок общей статистики категорий -->
       <div
         id="total-stats"
         style="
+          font-family: 'Courier New', monospace;
           font-size: 10px;
           color: #4ade80;
-          margin-bottom: 20px;
-          line-height: 1.5;
+          text-align: center;
+          margin-bottom: 15px;
+          font-weight: bold;
         "
       ></div>
 
+      <!-- Сюда JS будет рендерить карточки -->
       <div id="category-list" class="category-grid"></div>
 
-      <button
-        class="exit-btn"
-        onclick="location.reload()"
-        style="position: static; margin-top: 20px"
-      >
-        BACK
+      <!-- Кнопка назад -->
+      <button class="exit-btn" onclick="location.reload()">
+        . BACK
       </button>
     </div>
 
@@ -121,6 +207,6 @@
     </div>
 
     <script src="words_optimized.js"></script>
-    <script src="app.js?v=336_ULTIMATE"></script>
+    <script src="app.js?v=337_FINAL_FIX"></script>
   </body>
 </html>
