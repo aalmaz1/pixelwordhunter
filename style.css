@@ -71,48 +71,38 @@ body {
   to { text-shadow: 0 0 20px rgba(0,255,136,0.8), 4px 4px 0 #000; }
 }
 
-/* СЕТКА КАТЕГОРИЙ (Исправлено) */
+/* Исправленная сетка категорий */
 .category-grid {
   width: 100%;
-  max-width: 600px; /* Чтобы на ПК не растягивалось на весь экран */
-  flex-grow: 1;
-  overflow-y: auto;
-  padding: 10px;
+  max-width: 800px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Адаптивные колонки */
-  gap: 15px;
-  align-content: start; /* Чтобы карточки начинались сверху */
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Авто-колонки */
+  gap: 12px;
+  padding: 10px;
+  overflow-y: auto;
+  align-content: start;
 }
 
-/* Скрываем скроллбар, но оставляем скролл */
-.category-grid::-webkit-scrollbar {
-  display: none;
-}
-
-/* КАРТОЧКА КАТЕГОРИИ (Вот этого класса не хватало!) */
+/* Стили карточки, чтобы она была пиксельной и аккуратной */
 .category-card {
-  background: rgba(0, 0, 0, 0.4);
-  border: 2px solid var(--yellow);
-  color: var(--yellow);
-  padding: 15px;
-  text-align: center;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid var(--yellow, #fbbf24);
+  color: var(--yellow, #fbbf24);
+  padding: 15px 10px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 8px; /* Для длинных названий */
   cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 4px 4px 0 #000;
+  text-align: center;
+  box-shadow: 4px 4px 0px #000;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  min-height: 80px;
+  transition: transform 0.1s;
 }
 
 .category-card:active {
   transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 #000;
-}
-
-.category-card:hover {
-  background: rgba(251, 191, 36, 0.2);
+  box-shadow: 2px 2px 0px #000;
 }
 
 .cat-title {
