@@ -49,12 +49,22 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  pointer-events: none; /* Чтобы можно было кликать сквозь него */
+  pointer-events: none;
   z-index: 999;
+  /* Делаем эффект едва заметным (0.03 и 0.05 вместо 0.1 и 0.5) */
   background:
-    linear-gradient(90deg, transparent 49%, rgba(0, 255, 136, 0.03) 50%, transparent 51%),
-    linear-gradient(rgba(255, 51, 102, 0.1) 50%, rgba(0, 0, 0, 0.5) 50%);
+    linear-gradient(
+      90deg,
+      transparent 49%,
+      rgba(0, 255, 136, 0.01) 50%,
+      transparent 51%
+    ),
+    linear-gradient(
+      rgba(32, 32, 32, 0.05) 50%, 
+      transparent 50%
+    );
   background-size: 100% 2px, 100% 4px;
+  opacity: 0.4; /* Общая прозрачность слоя */
 }
 
 /* Заголовок */
