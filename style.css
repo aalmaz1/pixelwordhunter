@@ -100,7 +100,7 @@ body {
   background: rgba(0, 0, 0, 0.6);
   border: 2px solid var(--yellow, #fbbf24);
   color: var(--yellow, #fbbf24);
-  padding: 15px 10px;
+  padding: 15px 5px;
   font-family: 'Press Start 2P', cursive;
   font-size: 8px; /* Для длинных названий */
   cursor: pointer;
@@ -109,12 +109,28 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center; /* Центрируем всё */
   transition: transform 0.1s;
+
+   /* ВАЖНО для фикса ширины */
+  width: 100%; 
+  box-sizing: border-box; 
+  overflow: hidden; /* Скрываем вылезающее */
 }
 
 .category-card:active {
   transform: translate(2px, 2px);
   box-shadow: 2px 2px 0px #000;
+}
+
+/* Добавь этот блок для текста внутри карточки */
+.category-card .cat-title, 
+.category-card span {
+  width: 100%;
+  white-space: normal; /* Разрешаем перенос строк */
+  word-wrap: break-word; /* Старый стандарт */
+  overflow-wrap: break-word; /* Новый стандарт переноса длинных слов */
+  hyphens: auto; /* Расстановка переносов, если браузер умеет */
 }
 
 .cat-title {
