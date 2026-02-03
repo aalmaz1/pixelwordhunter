@@ -1,12 +1,14 @@
+/* --- app.js (Адаптирован под структуру массива [eng, rus, exEn, exRu]) --- */
+
 // Состояние игры
 const State = {
     cat: null,
-    word: null,
+    word: null, // Здесь будет массив ["word", "trans", "exEn", "exRu"]
     isAnswering: false,
     xp: 0
 };
 
-// Ссылки на элементы модального окна (чтобы не искать их каждый раз)
+// Ссылки на элементы модального окна
 const modal = {
     el: document.getElementById('feedback-modal'),
     status: document.getElementById('feedback-status'),
@@ -17,31 +19,31 @@ const modal = {
     nextBtn: document.getElementById('next-btn')
 };
 
-// 1. Инициализация
+// 1. Инициализация при загрузке
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("🚀 Игра готова!");
+    console.log("🚀 Игра загружена. Структура данных: Array");
+
+    // Подсчет общего количества слов
     const total = document.getElementById('total-count');
     if(total && window.GAME_DATA) {
         let count = 0;
-        Object.values(window.GAME_DATA).forEach(a => count += a.length);
+        Object.values(window.GAME_DATA).forEach(list => count += list.length);
         total.innerText = count;
     }
 
-    // Привязываем клик к кнопке NEXT в модальном окне
+    // Логика кнопки "NEXT" в модальном окне
     if(modal.nextBtn) {
         modal.nextBtn.onclick = function() {
             modal.el.classList.add('hidden'); // Скрываем окно
-            window.nextQuestion();            // Следующий вопрос
+            window.nextQuestion();            // Генерируем новый вопрос
         };
     }
 });
 
-// 2. Показ категорий
+// 2. Показ категорий (Главное меню)
 window.showCategories = function() {
     document.getElementById('menu-screen').classList.add('hidden');
     document.getElementById('category-screen').classList.remove('hidden');
-    
-    // Используем renderCategoryCards, раз он у тебя есть, или пишем логику тут
     window.renderCategoryCards();
 };
 
@@ -51,60 +53,68 @@ window.renderCategoryCards = function() {
 
     list.innerHTML = "";
     
+    // Пробегаем по всем категориям
     Object.keys(window.GAME_DATA || {}).forEach(cat => {
-        const btn = document.createElement('div'); // Или button
+        const btn = document.createElement('div');
         btn.className = 'category-card'; 
         
-        // ВАЖНО: Добавил переносы строк и структуру, чтобы не ломать верстку
+        // Красивая карточка с количеством слов
         btn.innerHTML = `
             <div class="cat-title">${cat}</div>
             <div class="cat-stat">${window.GAME_DATA[cat].length} WORDS</div>
         `;
         
+        // Клик по категории
         btn.onclick = () => {
             State.cat = cat;
             document.getElementById('category-screen').classList.add('hidden');
             document.getElementById('game-screen').classList.remove('hidden');
-            document.getElementById('category').innerText = cat;
-            window.nextQuestion();
+            
+            // Обновляем заголовок игры на название категории
+            const titleEl = document.getElementById('category');
+            if(titleEl) titleEl.innerText = cat;
+            
+            window.nextQuestion(); // Начинаем игру
         };
         list.appendChild(btn);
     });
 };
 
-// 3. Логика игры (ГЕНЕРАЦИЯ ВОПРОСА)
+// 3. Генерация вопроса
 window.nextQuestion = function() {
     State.isAnswering = false;
     const grid = document.getElementById('options');
     const wordDisplay = document.getElementById('word');
-    // Старый фидбек (текст снизу) нам больше не нужен, но если он есть в HTML - скроем
-    const feedback = document.getElementById('feedback'); 
-    if(feedback) feedback.classList.add('hidden');
 
+    // Очищаем старые варианты
     grid.innerHTML = "";
 
+    // Получаем список слов текущей категории
     const words = window.GAME_DATA[State.cat];
-    // Берем случайное слово
+    
+    // Выбираем случайное слово (ЭТО МАССИВ [eng, rus, exEn, exRu])
     State.word = words[Math.floor(Math.random() * words.length)];
 
-    // Поддержка любой структуры (word/eng/term и translation/rus/definition)
-    const questionText = State.word.word || State.word.eng || State.word.term || State.word[0];
-    wordDisplay.innerText = questionText;
+    // Показываем Английское слово (индекс 0)
+    wordDisplay.innerText = State.word[0];
 
-    // Генерируем 4 варианта
+    // Генерируем варианты ответов (неправильные + правильный)
     let choices = [State.word];
     while(choices.length < 4) {
         let r = words[Math.floor(Math.random() * words.length)];
+        // Чтобы не было дубликатов
         if(!choices.includes(r)) choices.push(r);
     }
+    // Перемешиваем варианты
     choices.sort(() => Math.random() - 0.5);
 
     // Рендерим кнопки
     choices.forEach(choice => {
         const btn = document.createElement('button');
         btn.className = 'option-btn'; 
-        const answerText = choice.translation || choice.rus || choice.definition || choice[1];
-        btn.innerText = answerText;
+        
+        // Показываем ПЕРЕВОД (индекс 1)
+        btn.innerText = choice[1];
         
         btn.onclick = () => {
             if(State.isAnswering) return; // Защита от двойного клика
@@ -112,7 +122,7 @@ window.nextQuestion = function() {
             
             const correct = (choice === State.word);
             
-            // Подсветка кнопки (для красоты на фоне)
+            // Визуальная реакция кнопки
             if(correct) {
                 btn.style.background = "var(--green)";
                 State.xp += 10;
@@ -122,8 +132,7 @@ window.nextQuestion = function() {
                 btn.style.background = "var(--red)";
             }
             
-            // ВМЕСТО setTimeout -> ПОКАЗЫВАЕМ МОДАЛКУ!
-            // Небольшая задержка (300мс), чтобы игрок успел увидеть цвет кнопки
+            // Ждем 300мс и открываем карточку
             setTimeout(() => {
                 showFeedbackModal(correct, State.word);
             }, 300);
@@ -132,38 +141,35 @@ window.nextQuestion = function() {
     });
 };
 
-// 4. Функция показа модального окна
-function showFeedbackModal(isCorrect, wordObj) {
-    // Безопасное получение данных (чтобы не было undefined)
-    const wWord = wordObj.word || wordObj.eng || wordObj.term || "Word";
-    const wTrans = wordObj.translation || wordObj.rus || wordObj.definition || "Translation";
-    const wExEn = wordObj.example || "No example available."; 
-    const wExRu = wordObj.exampleTranslate || ""; 
-
-    // Заполняем поля
-    modal.word.textContent = wWord;
-    modal.translation.textContent = wTrans;
-    modal.sentEn.textContent = wExEn;
-    modal.sentRu.textContent = wExRu;
+// 4. Показ модального окна (АДАПТИРОВАНО ПОД МАССИВ)
+function showFeedbackModal(isCorrect, wordArr) {
+    // wordArr = ["eng", "rus", "exEn", "exRu"]
+    
+    // Заполняем данные из массива по индексам
+    modal.word.textContent = wordArr[0];       // Английское слово
+    modal.translation.textContent = wordArr[1]; // Перевод
+    modal.sentEn.textContent = wordArr[2] || "No example."; // Пример EN
+    modal.sentRu.textContent = wordArr[3] || "";           // Пример RU
 
     // Настраиваем статус (цвет и текст)
     if (isCorrect) {
         modal.status.textContent = "CORRECT!";
+        modal.status.className = "status-text status-correct";
         modal.status.style.color = "var(--green)";
     } else {
         modal.status.textContent = "WRONG!";
+        modal.status.className = "status-text status-wrong";
         modal.status.style.color = "var(--red)";
     }
 
     // Показываем
     modal.el.classList.remove('hidden');
-    modal.nextBtn.focus(); // Фокус на кнопку Next
+    modal.nextBtn.focus();
 }
 
-// 5. Выход
+// 5. Выход в меню
 window.exitGame = function() {
     document.getElementById('game-screen').classList.add('hidden');
     document.getElementById('menu-screen').classList.remove('hidden');
-    // Скрываем модалку, если вдруг она открыта
     if(modal.el) modal.el.classList.add('hidden');
 };
