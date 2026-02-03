@@ -86,11 +86,13 @@ body {
   width: 100%;
   max-width: 800px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Авто-колонки */
+  grid-template-columns: repeat(2, minmax(0, 1fr));; /* Авто-колонки */
   gap: 12px;
   padding: 10px;
   overflow-y: auto;
+  overflow-x: hidden;
   align-content: start;
+  box-sizing: border-box;
 }
 
 /* Стили карточки, чтобы она была пиксельной и аккуратной */
