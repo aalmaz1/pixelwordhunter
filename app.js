@@ -91,6 +91,29 @@ window.nextQuestion = function() {
     });
 };
 
+
+window.renderCategoryCards = function() {
+    const container = document.getElementById("category-list");
+    if (!container) return;
+
+    container.innerHTML = ""; 
+    const categories = Object.keys(window.GAME_DATA || {});
+
+    categories.forEach(cat => {
+        const card = document.createElement("div"); // Создаем div, как в старой версии
+        card.className = "category-card"; 
+        
+        // Вставляем структуру, которая не раздувает блоки
+        card.innerHTML = `
+            <div style="margin-bottom: 5px;">${cat.toUpperCase()}</div>
+            <div style="font-size: 7px; color: #666;">${window.GAME_DATA[cat].length} WDS</div>
+        `;
+        
+        card.onclick = () => window.startQuiz(cat);
+        container.appendChild(card);
+    });
+};
+
 // 4. Выход
 window.exitGame = function() {
     document.getElementById('game-screen').classList.add('hidden');
