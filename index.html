@@ -191,6 +191,30 @@
         <button class="exit-btn" onclick="exitGame()">✕</button>
       </header>
 
+      <!-- МОДАЛЬНОЕ ОКНО ОБРАТНОЙ СВЯЗИ (Скрыто по умолчанию) -->
+<div id="feedback-modal" class="modal-overlay hidden">
+  <div class="feedback-card">
+    <!-- Заголовок: Правильно/Неправильно -->
+    <h2 id="feedback-status" class="status-text">CORRECT!</h2>
+    
+    <!-- Слово -->
+    <div class="word-block">
+      <p id="feedback-word" class="main-word">Example</p>
+      <p id="feedback-translation" class="sub-word">Пример</p>
+    </div>
+
+    <!-- Пример (контекст) -->
+    <div class="context-block">
+      <p id="feedback-sentence-en" class="sentence-en">This is a good example.</p>
+      <p id="feedback-sentence-ru" class="sentence-ru">Это хороший пример.</p>
+    </div>
+
+    <!-- Кнопка "Дальше" -->
+    <button id="next-btn" class="next-btn">NEXT -></button>
+  </div>
+</div>
+
+
       <main id="quiz-box">
         <div class="progress-bar"><div id="progress"></div></div>
         <div class="question-card">
