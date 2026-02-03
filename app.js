@@ -903,30 +903,45 @@ function calculateStats(arr) {
 
 
   
-function renderCategoryCards() {
-  const categories = Object.keys(window.GAME_DATA);
-  const allCards = document.querySelectorAll(
-    ".category-card, .folder-box, #category-screen button",
-  );
+// ЗАМЕНИ ФУНКЦИЮ renderCategoryCards НА ЭТУ:
 
-  allCards.forEach((card) => {
-    const cardText = card.innerText.split("\n")[0].trim();
-    // Ищем категорию, игнорируя регистр
-    const matchedCat = categories.find(
-      (c) => c.toUpperCase() === cardText.toUpperCase(),
-    );
+window.renderCategoryCards = function() {
+    console.log("🎨 Отрисовка красивого меню...");
+    const container = document.getElementById("category-list");
+    if (!container) return;
 
-    if (matchedCat) {
-      const s = calculateStats(window.GAME_DATA[matchedCat]);
-      card.innerHTML = `
-        <div class="category-name" style="margin-bottom:8px; font-weight:bold;">${matchedCat.toUpperCase()}</div>
-        <div style="color:#f87171; font-size:10px;">NOT STUDIED: ${s.ns}</div>
-        <div style="color:#fbbf24; font-size:10px;">LEARNING: ${s.sl}</div>
-        <div style="color:#4ade80; font-size:10px;">MASTERED: ${s.ms}</div>
-      `;
-    }
-  });
-}
+    container.innerHTML = ""; // Очистка
+
+    // Берем данные
+    const data = window.GAME_DATA || {};
+    const categories = Object.keys(data);
+
+    categories.forEach(cat => {
+        // Создаем кнопку (button лучше для кликов, чем div)
+        const btn = document.createElement("button");
+        
+        // 🔥 ВАЖНО: Просто ставим класс, и CSS всё сделает сам
+        btn.className = "category-card"; 
+
+        // Внутренности карточки (Заголовок + кол-во слов)
+        const count = data[cat].length;
+        btn.innerHTML = `
+            <div class="cat-title">${cat}</div>
+            <div class="cat-stat">${count} WORDS</div>
+        `;
+
+        // Клик запускает игру
+        btn.onclick = () => {
+            if (typeof startQuiz === "function") {
+                startQuiz(cat);
+            } else {
+                console.error("startQuiz не найдена!");
+            }
+        };
+
+        container.appendChild(btn);
+    });
+};
 
 // Ждем, пока всё загрузится, и запускаем обновление
 // Этот код сработает ОДИН РАЗ сразу при загрузке страницы
