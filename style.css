@@ -307,3 +307,68 @@ body {
   box-shadow: 2px 2px 0 #000;
 }
 
+/* Увеличим карточку, так как контента стало больше */
+.large-card {
+  max-width: 500px;
+  width: 95%;
+  max-height: 85vh; /* Чтобы не вылезала за экран */
+  overflow-y: auto; /* Прокрутка, если примеров много */
+  padding: 15px;
+}
+
+/* Список слов */
+.feedback-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Элемент списка (одно слово) */
+.feedback-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #444;
+  padding: 10px;
+  border-radius: 4px;
+  font-family: sans-serif; /* Читать примеры лучше обычным шрифтом */
+}
+
+/* Подсветка */
+.item-correct {
+  border: 2px solid var(--green);
+  background: rgba(74, 222, 128, 0.1);
+}
+
+.item-wrong {
+  border: 2px solid var(--red);
+  background: rgba(248, 113, 113, 0.1);
+}
+
+/* Заголовок слова внутри элемента */
+.fb-word-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.fb-word {
+  font-weight: bold;
+  color: var(--cyan);
+  font-size: 14px;
+}
+
+.fb-trans {
+  color: #aaa;
+  font-size: 12px;
+}
+
+/* Пример */
+.fb-ex {
+  font-size: 11px;
+  color: #ddd;
+  font-style: italic;
+  line-height: 1.3;
+}
+
