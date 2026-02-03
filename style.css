@@ -1,398 +1,186 @@
-/* 1. ОБЯЗАТЕЛЬНЫЕ ПЕРЕМЕННЫЕ */
+/* 1. БАЗОВЫЕ НАСТРОЙКИ И ПЕРЕМЕННЫЕ */
 :root {
-  --bg: #0a0a0c;
-  --text: #e0f7ff;
-  --green: #4ade80;
-  --yellow: #fbbf24;
-  --red: #f87171;
+  --bg: #0f172a;       /* Темно-синий фон */
+  --text: #e2e8f0;     /* Светлый текст */
+  --green: #4ade80;    /* Неоновый зеленый */
+  --red: #f87171;      /* Неоновый красный */
+  --yellow: #fbbf24;   /* Неоновый желтый */
+  --cyan: #00ccff;     /* Голубой */
 }
 
-/* 2. СБРОС И БАЗА */
-* {
+/* Шрифты и сброс */
+html, body {
+  height: 100dvh;
+  width: 100vw;
   margin: 0;
   padding: 0;
-  box-sizing: border-box !important;
-  font-family: 'Press Start 2P', cursive;
+  overflow: hidden; /* Важно для мобилок */
+  font-family: 'Press Start 2P', monospace; /* Твой пиксельный шрифт */
+  background-color: var(--bg);
+  color: var(--text);
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-html, body {
-  height: 100dvh !important;
-  width: 100vw !important;
-  background-color: var(--bg) !important;
-  overflow: hidden !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  position: fixed;
+/* Красивый фон с градиентами */
+body {
+  background:
+    radial-gradient(circle at 20% 15%, rgba(0, 204, 255, 0.1), transparent 55%),
+    radial-gradient(circle at 80% 85%, rgba(255, 51, 102, 0.08), transparent 60%),
+    var(--bg);
 }
 
-/* Фоновое свечение */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: 
-    radial-gradient(circle at 15% 15%, rgba(0, 204, 255, 0.15), transparent 45%),
-    radial-gradient(circle at 85% 85%, rgba(248, 113, 113, 0.1), transparent 45%);
-  z-index: -1;
-}
-
-/* 3. ОСНОВНОЙ КОНТЕЙНЕР (Центрирует всё меню) */
+/* Контейнер для центрирования */
 .game-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Эффект старого монитора (CRT) */
+.crt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Чтобы можно было кликать сквозь него */
+  z-index: 999;
+  background:
+    linear-gradient(90deg, transparent 49%, rgba(0, 255, 136, 0.03) 50%, transparent 51%),
+    linear-gradient(rgba(255, 51, 102, 0.1) 50%, rgba(0, 0, 0, 0.5) 50%);
+  background-size: 100% 2px, 100% 4px;
+}
+
+/* Заголовок */
+.game-title {
+  font-size: clamp(28px, 6vw, 48px);
+  text-align: center;
+  margin-bottom: 25px;
+  text-shadow: 4px 4px 0px #000;
+  animation: neonPulse 2s infinite alternate;
+}
+
+@keyframes neonPulse {
+  from { text-shadow: 0 0 5px rgba(0,255,136,0.5), 4px 4px 0 #000; }
+  to { text-shadow: 0 0 20px rgba(0,255,136,0.8), 4px 4px 0 #000; }
+}
+
+/* СЕТКА КАТЕГОРИЙ (Исправлено) */
+.category-grid {
+  width: 100%;
+  max-width: 600px; /* Чтобы на ПК не растягивалось на весь экран */
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Адаптивные колонки */
+  gap: 15px;
+  align-content: start; /* Чтобы карточки начинались сверху */
+}
+
+/* Скрываем скроллбар, но оставляем скролл */
+.category-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* КАРТОЧКА КАТЕГОРИИ (Вот этого класса не хватало!) */
+.category-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid var(--yellow);
+  color: var(--yellow);
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 4px 4px 0 #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80px;
+}
+
+.category-card:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+.category-card:hover {
+  background: rgba(251, 191, 36, 0.2);
+}
+
+.cat-title {
+  font-size: 12px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.cat-stat {
+  font-size: 10px;
+  color: #888;
+}
+
+/* КНОПКИ ГЛАВНОГО МЕНЮ */
+.start-btn {
+  background: var(--green);
+  color: #000;
+  border: none;
+  padding: 20px 40px;
+  font-family: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #000;
+  margin-top: 20px;
+}
+
+.start-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+/* ИГРОВОЙ ЭКРАН */
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
   width: 100%;
   max-width: 500px;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  padding: 20px;
-  z-index: 10;
+  margin-top: 20px;
 }
 
-/* 4. ЗАГОЛОВОК (Тот самый неон) */
-.game-title {
-  font-size: clamp(26px, 8vw, 44px) !important;
-  line-height: 1.3 !important;
-  margin-bottom: 20px !important;
-  text-shadow: 
-    0 0 10px rgba(251, 191, 36, 0.4),
-    0 0 20px rgba(248, 113, 113, 0.3),
-    4px 4px 0px #000 !important;
-  animation: float 3s ease-in-out infinite;
-}
-
-/* 5. КНОПКА HUNT (Из твоего скриншота) */
-.start-btn {
-  background: var(--yellow) !important;
-  color: #000 !important;
-  padding: 18px 40px !important;
-  border: 4px solid #fff !important;
-  font-size: 16px !important;
-  margin-top: 20px !important;
-  cursor: pointer !important;
-  box-shadow: 6px 6px 0px #000 !important;
-  text-transform: uppercase;
-}
-
-.start-btn:active {
-  transform: translate(3px, 3px);
-  box-shadow: 3px 3px 0px #000 !important;
-}
-
-/* 6. ТЕКСТОВЫЕ ЭФФЕКТЫ */
-.blink {
-  font-size: 14px;
-  color: var(--green);
-  margin-top: 15px;
-  animation: blinker 1.5s linear infinite;
-}
-
-.edition-badge {
-  font-size: 10px;
-  letter-spacing: 2px;
-  margin-bottom: 15px;
-  opacity: 0.9;
-}
-
-.credits {
-  margin-top: 40px;
-  font-size: 9px;
-  opacity: 0.4;
-}
-
-/* 7. ТЕХНИЧЕСКИЕ КЛАССЫ */
-.hidden { display: none !important; }
-
-.crt-overlay {
-  position: fixed !important;
-  top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none !important;
-  z-index: 9999;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
-              linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
-  background-size: 100% 3px, 3px 100%;
-}
-
-/* АНИМАЦИИ */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes blinker {
-  50% { opacity: 0; }
-}
-
-/* СЕТКА КАТЕГОРИЙ (Чтобы не ломалась) */
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 12px;
-  width: 100%;
-  max-height: 60vh;
-  overflow-y: auto;
-  padding: 10px;
-}
-
-.start-btn {
-  /* Цвета из твоего локалхоста */
-  background-color: #fbbf24 !important; /* Тот самый желтый */
-  color: #000000 !important;             /* Черный текст */
-  
-  /* Рамка и форма */
-  border: 4px solid #ffffff !important;  /* Белая толстая рамка */
-  border-radius: 0 !important;           /* Убираем скругления, если они есть */
-  
-  /* Размеры и отступы */
-  padding: 12px 30px !important;
-  font-family: 'Press Start 2P', cursive !important;
-  font-size: 16px !important;
-  
-  /* Тень (эффект объема) */
-  box-shadow: 6px 6px 0px #000000 !important; /* Жесткая черная тень */
-  
-  /* Позиционирование */
-  cursor: pointer !important;
-  margin-top: 20px !important;
-  display: inline-block !important;
-  text-transform: uppercase !important;
-  
-  /* Анимация нажатия */
-  transition: transform 0.05s;
-}
-
-.start-btn:active {
-  /* Эффект нажатия: кнопка уходит вглубь */
-  transform: translate(3px, 3px);
-  box-shadow: 3px 3px 0px #000000 !important;
-}
-
-
-/* --- СТРОГИЙ "TRON/CYBER" ДИЗАЙН МЕНЮ --- */
-
-/* 1. Основной контейнер экрана категорий */
-#category-screen {
-  text-align: center;
-  padding-top: 20px;
-  /* Можно добавить темный градиент на фон, если его нет в body */
-}
-
-/* 2. Сетка списка (ровно 2 колонки) */
-#category-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px; /* Отступы между карточками */
-  width: 90%;
-  max-width: 600px; /* Чуть шире, чтобы текст влезал */
-  margin: 20px auto;
-  padding: 10px;
-  max-height: 60vh; /* Ограничиваем высоту */
-  overflow-y: auto; /* Скролл только внутри этого блока */
-  
-  /* Кастомный скроллбар (как на скрине - желтая полоска) */
-  scrollbar-width: thin;
-  scrollbar-color: #ffd700 #001f3f; 
-}
-
-/* Стиль скроллбара для Chrome/Safari */
-#category-list::-webkit-scrollbar {
-  width: 8px;
-}
-#category-list::-webkit-scrollbar-track {
-  background: #001f3f; /* Темно-синий трек */
-  border-left: 1px solid #fff;
-}
-#category-list::-webkit-scrollbar-thumb {
-  background-color: #ffd700; /* Желтый бегунок */
-  border: 1px solid #000;
-}
-
-/* 3. Карточка категории (тонкая рамка, синий фон) */
-.category-card {
-  background-color: rgba(0, 31, 63, 0.8); /* Полупрозрачный темно-синий */
-  border: 2px solid #fff; /* Тонкая белая рамка */
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Легкое свечение */
-  color: #fff;
-  padding: 12px 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100px;
+.option-btn {
+  background: rgba(0, 204, 255, 0.1);
+  border: 2px solid var(--cyan);
+  color: var(--text);
+  padding: 15px;
+  font-family: inherit;
+  font-size: 12px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  box-shadow: 4px 4px 0 #000;
+  text-align: center;
 }
 
-/* Эффект наведения */
-.category-card:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+.option-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
 }
 
-/* Эффект нажатия */
-.category-card:active {
-  transform: scale(0.98);
+/* УТИЛИТЫ */
+.hidden {
+  display: none !important;
 }
 
-/* 4. Текст внутри */
-.category-name {
-  font-family: 'Courier New', monospace; /* Или твой пиксельный шрифт */
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-  letter-spacing: 1px;
-  text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
-}
-
-/* Статистика */
-.cat-stat {
-  font-family: 'Courier New', monospace;
-  font-size: 9px;
-  line-height: 1.4;
-  letter-spacing: 0.5px;
-}
-
-/* Цвета статусов (как на скрине) */
-.stat-ns { color: #ff4136; } /* Красный */
-.stat-sl { color: #ffdc00; } /* Желтый */
-.stat-ms { color: #2ecc40; } /* Зеленый */
-
-/* 5. Кнопка BACK внизу */
-#back-btn-container {
-  width: 90%;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.pixel-btn-back {
-  width: 100%;
+.exit-btn {
   background: transparent;
-  border: 2px solid #fff;
-  color: #fff;
-  padding: 12px;
-  font-family: 'Courier New', monospace;
-  text-transform: uppercase;
+  border: 2px solid var(--red);
+  color: var(--red);
+  padding: 5px 10px;
   cursor: pointer;
-  transition: background 0.2s;
+  font-family: inherit;
 }
-
-.pixel-btn-back:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-/* --- АДАПТИВНОЕ "TRON" МЕНЮ (S23 Ultra Ready) --- */
-
-/* 1. Главный контейнер сетки */
-#category-list {
-  display: grid;
-  /* Авто-сетка: минимум 160px на колонку, иначе перенос */
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
-  gap: 12px; /* Чуть меньше отступ для мобилок */
-  
-  width: 95%; /* Почти на всю ширину экрана */
-  max-width: 800px; /* Ограничение на планшетах */
-  margin: 15px auto;
-  padding: 5px;
-  
-  /* Адаптивная высота списка */
-  max-height: 70vh; 
-  overflow-y: auto;
-  
-  /* Кастомный скроллбар (желтая полоска) */
-  scrollbar-width: thin;
-  scrollbar-color: #ffd700 #001f3f; 
-}
-
-/* 2. Карточка категории */
-.category-card {
-  background-color: rgba(0, 31, 63, 0.95); /* Почти непрозрачный синий */
-  border: 2px solid #fff;
-  box-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
-  color: #fff;
-  
-  /* Гибкая высота */
-  min-height: 100px;
-  padding: 12px 4px;
-  
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  
-  cursor: pointer;
-  transition: transform 0.1s ease;
-  
-  /* Чтобы текст не вылезал */
-  word-wrap: break-word;
-}
-
-.category-card:active {
-  transform: scale(0.96);
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* 3. Текст внутри (адаптивный размер) */
-.category-name {
-  font-family: 'Courier New', monospace; 
-  /* Шрифт подстраивается: мин 12px, макс 16px */
-  font-size: clamp(12px, 4vw, 16px); 
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-  text-align: center;
-  line-height: 1.2;
-  text-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
-}
-
-.cat-stat {
-  font-family: monospace;
-  /* Шрифт статов чуть меньше */
-  font-size: clamp(9px, 3vw, 11px);
-  margin: 2px 0;
-  font-weight: bold;
-}
-
-/* Цвета статусов */
-.stat-ns { color: #ff4136; text-shadow: 0 0 2px #ff4136; }
-.stat-sl { color: #ffdc00; text-shadow: 0 0 2px #ffdc00; }
-.stat-ms { color: #2ecc40; text-shadow: 0 0 2px #2ecc40; }
-
-/* 4. Кнопка BACK внизу (фиксирована или нет - по желанию) */
-#back-btn-container {
-  width: 95%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding-bottom: 20px; /* Отступ снизу для жестов */
-}
-
-.pixel-btn-back {
-  width: 100%;
-  padding: 15px 0;
-  background: #001f3f;
-  border: 2px solid #fff;
-  color: #fff;
-  font-size: 16px;
-  font-family: monospace;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-/* --- МЕДИА-ЗАПРОСЫ ДЛЯ ТОНКОЙ НАСТРОЙКИ --- */
-
-/* Для совсем маленьких экранов (старые iPhone) */
-@media (max-width: 380px) {
-  #category-list {
-    grid-template-columns: 1fr; /* Одна колонка, если совсем узко */
-  }
-}
-
-/* Для больших экранов (Desktop) */
-@media (min-width: 1024px) {
-  #category-list {
-    max-width: 900px;
-    grid-template-columns: repeat(3, 1fr); /* 3 колонки на ПК */
-  }
-}
-
