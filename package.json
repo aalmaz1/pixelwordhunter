@@ -1,0 +1,32 @@
+{
+  "name": "pixelwordhunter",
+  "version": "1.0.0",
+  "description": "TOEIC Vocabulary Trainer - Learn 600 business English words with adaptive spaced repetition",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .js"
+  },
+  "keywords": [
+    "toeic",
+    "vocabulary",
+    "english",
+    "learning",
+    "pwa",
+    "game"
+  ],
+  "author": "Almaz Corp",
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^11.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.1",
+    "eslint": "^9.0.0",
+    "globals": "^17.6.0",
+    "vite": "^8.1.2",
+    "vite-plugin-pwa": "^1.3.0"
+  }
+}
