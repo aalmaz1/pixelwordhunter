@@ -1,9 +1,6 @@
 // i18n - Internationalization module for Pixel Word Hunter
 // Lazy loading implementation for translations
 
-// Global regex for Korean text detection
-const koreanRegex = /[ㄱ-ㅎㅏ-ㅣ가-힣]/;
-
 // Helper function to get the base path dynamically
 function getBasePath() {
   // Use window.location.origin to get the protocol, hostname, and port
