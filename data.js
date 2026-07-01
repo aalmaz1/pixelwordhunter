@@ -4,6 +4,7 @@
  */
 
 import { store } from './store.js';
+import wordsData from './words_optimized.json';
 
 let gameData = null;
 let categoriesCache = null;
@@ -51,12 +52,8 @@ function getBasePath() {
  */
 async function fetchFreshData() {
   try {
-    const basePath = getBasePath();
-    const url = `${basePath}assets/words_optimized.json`; // Corrected path
-    const response = await fetch(url);
-    if (!response.ok) throw new Error('Failed to fetch words');
-    
-    const freshData = await response.json();
+    // Use imported JSON data directly instead of fetch
+    const freshData = wordsData;
     
     // Create a new worker
     const worker = new Worker('./data.worker.js');
