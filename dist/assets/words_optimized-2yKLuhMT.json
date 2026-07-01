@@ -1,0 +1,4851 @@
+[
+  {
+    "category": "Contracts",
+    "eng": "abide by",
+    "rus": "соблюдать",
+    "correct": "соблюдать",
+    "exampleEng": "You must abide by the company rules.",
+    "exampleRus": "Вы должны соблюдать правила компании."
+  },
+  {
+    "category": "Contracts",
+    "eng": "agreement",
+    "rus": "соглашение",
+    "correct": "соглашение",
+    "exampleEng": "They reached an agreement about the contract.",
+    "exampleRus": "Они достигли соглашения по контракту."
+  },
+  {
+    "category": "Contracts",
+    "eng": "assurance",
+    "rus": "гарантия",
+    "correct": "гарантия",
+    "exampleEng": "We received assurance of delivery.",
+    "exampleRus": "Мы получили гарантию доставки."
+  },
+  {
+    "category": "Contracts",
+    "eng": "cancellation",
+    "rus": "отмена",
+    "correct": "отмена",
+    "exampleEng": "The cancellation fee is $50.",
+    "exampleRus": "Плата за отмену составляет $50."
+  },
+  {
+    "category": "Contracts",
+    "eng": "determine",
+    "rus": "определять",
+    "correct": "определять",
+    "exampleEng": "We need to determine the cause.",
+    "exampleRus": "Нам нужно определить причину."
+  },
+  {
+    "category": "Contracts",
+    "eng": "engage",
+    "rus": "нанимать",
+    "correct": "нанимать",
+    "exampleEng": "We engaged a new consultant.",
+    "exampleRus": "Мы наняли нового консультанта."
+  },
+  {
+    "category": "Contracts",
+    "eng": "establish",
+    "rus": "устанавливать",
+    "correct": "устанавливать",
+    "exampleEng": "They established a new branch.",
+    "exampleRus": "Они открыли новый филиал."
+  },
+  {
+    "category": "Contracts",
+    "eng": "obligate",
+    "rus": "обязывать",
+    "correct": "обязывать",
+    "exampleEng": "The contract obligates us to deliver.",
+    "exampleRus": "Контракт обязывает нас доставить."
+  },
+  {
+    "category": "Contracts",
+    "eng": "party",
+    "rus": "сторона",
+    "correct": "сторона",
+    "exampleEng": "Both parties signed the agreement.",
+    "exampleRus": "Обе стороны подписали соглашение."
+  },
+  {
+    "category": "Contracts",
+    "eng": "provision",
+    "rus": "положение",
+    "correct": "положение",
+    "exampleEng": "Read the provision carefully.",
+    "exampleRus": "Внимательно прочитайте положение."
+  },
+  {
+    "category": "Contracts",
+    "eng": "reinforce",
+    "rus": "усиливать",
+    "correct": "усиливать",
+    "exampleEng": "We need to reinforce security.",
+    "exampleRus": "Нам нужно усилить безопасность."
+  },
+  {
+    "category": "Contracts",
+    "eng": "terminate",
+    "rus": "прекращать",
+    "correct": "прекращать",
+    "exampleEng": "We decided to terminate the contract.",
+    "exampleRus": "Мы решили расторгнуть контракт."
+  },
+  {
+    "category": "Contracts",
+    "eng": "clause",
+    "rus": "пункт",
+    "correct": "пункт",
+    "exampleEng": "The penalty clause was included.",
+    "exampleRus": "Штрафная оговорка была включена."
+  },
+  {
+    "category": "Contracts",
+    "eng": "breach",
+    "rus": "нарушение",
+    "correct": "нарушение",
+    "exampleEng": "The supplier was in breach of contract.",
+    "exampleRus": "Поставщик нарушил условия контракта."
+  },
+  {
+    "category": "Contracts",
+    "eng": "nullify",
+    "rus": "аннулировать",
+    "correct": "аннулировать",
+    "exampleEng": "The court nullified the invalid clause.",
+    "exampleRus": "Суд аннулировал недействительную оговорку."
+  },
+  {
+    "category": "Contracts",
+    "eng": "comply",
+    "rus": "соблюдать",
+    "correct": "соблюдать",
+    "exampleEng": "All parties must comply with the terms.",
+    "exampleRus": "Все стороны должны соблюдать условия."
+  },
+  {
+    "category": "Contracts",
+    "eng": "liability",
+    "rus": "ответственность",
+    "correct": "ответственность",
+    "exampleEng": "Liability insurance is required.",
+    "exampleRus": "Страхование ответственности обязательно."
+  },
+  {
+    "category": "Contracts",
+    "eng": "term",
+    "rus": "условие",
+    "correct": "условие",
+    "exampleEng": "Review all terms before signing.",
+    "exampleRus": "Ознакомьтесь со всеми условиями перед подписанием."
+  },
+  {
+    "category": "Contracts",
+    "eng": "binding",
+    "rus": "обязательный",
+    "correct": "обязательный",
+    "exampleEng": "The agreement is binding on both parties.",
+    "exampleRus": "Соглашение обязательно для обеих сторон."
+  },
+  {
+    "category": "Contracts",
+    "eng": "explicit",
+    "rus": "явный",
+    "correct": "явный",
+    "exampleEng": "The contract includes explicit payment terms.",
+    "exampleRus": "Контракт содержит чёткие условия оплаты."
+  },
+  {
+    "category": "Marketing",
+    "eng": "advertise",
+    "rus": "рекламировать",
+    "correct": "рекламировать",
+    "exampleEng": "We should advertise the product.",
+    "exampleRus": "Нам нужно рекламировать продукт."
+  },
+  {
+    "category": "Marketing",
+    "eng": "benefit",
+    "rus": "льгота",
+    "correct": "льгота",
+    "exampleEng": "Health benefits are included.",
+    "exampleRus": "Льготы на здоровье включены."
+  },
+  {
+    "category": "Marketing",
+    "eng": "campaign",
+    "rus": "кампания",
+    "correct": "кампания",
+    "exampleEng": "The marketing campaign was successful.",
+    "exampleRus": "Маркетинговая кампания была успешной."
+  },
+  {
+    "category": "Marketing",
+    "eng": "consumer",
+    "rus": "потребитель",
+    "correct": "потребитель",
+    "exampleEng": "Consumer demand is increasing.",
+    "exampleRus": "Потребительский спрос растет."
+  },
+  {
+    "category": "Marketing",
+    "eng": "convince",
+    "rus": "убеждать",
+    "correct": "убеждать",
+    "exampleEng": "The ad convinced customers to switch brands.",
+    "exampleRus": "Реклама убедила клиентов сменить бренд."
+  },
+  {
+    "category": "Marketing",
+    "eng": "cost",
+    "rus": "стоимость",
+    "correct": "стоимость",
+    "exampleEng": "Utility cost reduction.",
+    "exampleRus": "Сокращение стоимости коммунальных услуг."
+  },
+  {
+    "category": "Marketing",
+    "eng": "discount",
+    "rus": "скидка",
+    "correct": "скидка",
+    "exampleEng": "We offer a 10% discount.",
+    "exampleRus": "Мы предлагаем скидку 10%."
+  },
+  {
+    "category": "Marketing",
+    "eng": "efficient",
+    "rus": "эффективный",
+    "correct": "эффективный",
+    "exampleEng": "This method is very efficient.",
+    "exampleRus": "Этот метод очень эффективен."
+  },
+  {
+    "category": "Marketing",
+    "eng": "estimate",
+    "rus": "оценивать",
+    "correct": "оценивать",
+    "exampleEng": "Request a marketing cost estimate.",
+    "exampleRus": "Запросите смету на маркетинговые расходы."
+  },
+  {
+    "category": "Marketing",
+    "eng": "expand",
+    "rus": "расширять",
+    "correct": "расширять",
+    "exampleEng": "Expand into new territories.",
+    "exampleRus": "Расширяйтесь на новые территории."
+  },
+  {
+    "category": "Marketing",
+    "eng": "launch",
+    "rus": "запускать",
+    "correct": "запускать",
+    "exampleEng": "We will launch the product soon.",
+    "exampleRus": "Мы скоро запустим продукт."
+  },
+  {
+    "category": "Marketing",
+    "eng": "market",
+    "rus": "рынок",
+    "correct": "рынок",
+    "exampleEng": "The market is competitive.",
+    "exampleRus": "Рынок конкурентен."
+  },
+  {
+    "category": "Marketing",
+    "eng": "profitable",
+    "rus": "прибыльный",
+    "correct": "прибыльный",
+    "exampleEng": "Profitable business model.",
+    "exampleRus": "Прибыльная бизнес-модель."
+  },
+  {
+    "category": "Marketing",
+    "eng": "promote",
+    "rus": "продвигать",
+    "correct": "продвигать",
+    "exampleEng": "Promote the brand effectively.",
+    "exampleRus": "Эффективно продвигайте бренд."
+  },
+  {
+    "category": "Marketing",
+    "eng": "purchase",
+    "rus": "покупка",
+    "correct": "покупка",
+    "exampleEng": "The purchase was approved.",
+    "exampleRus": "Покупка была одобрена."
+  },
+  {
+    "category": "Marketing",
+    "eng": "retail",
+    "rus": "розничная торговля",
+    "correct": "розничная торговля",
+    "exampleEng": "Retail sales have increased.",
+    "exampleRus": "Розничные продажи выросли."
+  },
+  {
+    "category": "Marketing",
+    "eng": "satisfaction",
+    "rus": "удовлетворенность",
+    "correct": "удовлетворенность",
+    "exampleEng": "Customer satisfaction is our priority.",
+    "exampleRus": "Удовлетворенность клиентов - наш приоритет."
+  },
+  {
+    "category": "Marketing",
+    "eng": "solicitation",
+    "rus": "обращение",
+    "question": "solicitation",
+    "optionsList": [
+      "чип",
+      "обращение",
+      "посадочный талон"
+    ],
+    "correct": "обращение",
+    "mastery": 0,
+    "exampleEng": "Email solicitation increased lead generation.",
+    "exampleRus": "Рассылка по электронной почте увеличила обращение."
+  },
+  {
+    "category": "Marketing",
+    "eng": "target",
+    "rus": "целевая группа",
+    "correct": "целевая группа",
+    "exampleEng": "Our target is young professionals.",
+    "exampleRus": "Наша целевая группа - молодые профессионалы."
+  },
+  {
+    "category": "Marketing",
+    "eng": "wholesale",
+    "rus": "оптовая торговля",
+    "correct": "оптовая торговля",
+    "exampleEng": "We sell at wholesale prices.",
+    "exampleRus": "Мы продаем по оптовым ценам."
+  },
+  {
+    "category": "Warranties",
+    "eng": "warranty",
+    "rus": "гарантия",
+    "correct": "гарантия",
+    "exampleEng": "The product comes with a one-year warranty.",
+    "exampleRus": "Продукт поставляется с однолетней гарантией."
+  },
+  {
+    "category": "Warranties",
+    "eng": "guarantee",
+    "rus": "гарантировать",
+    "correct": "гарантировать",
+    "exampleEng": "We guarantee full satisfaction or refund.",
+    "exampleRus": "Мы гарантируем полное удовлетворение или возврат денег."
+  },
+  {
+    "category": "Warranties",
+    "eng": "defect",
+    "rus": "дефект",
+    "correct": "дефект",
+    "exampleEng": "Report any defects immediately.",
+    "exampleRus": "Сообщайте о любых дефектах немедленно."
+  },
+  {
+    "category": "Warranties",
+    "eng": "expire",
+    "rus": "истекать",
+    "correct": "истекать",
+    "exampleEng": "The warranty expires after 24 months.",
+    "exampleRus": "Гарантия истекает через 24 месяца."
+  },
+  {
+    "category": "Warranties",
+    "eng": "valid",
+    "rus": "действительный",
+    "correct": "действительный",
+    "exampleEng": "The warranty is valid from date of purchase.",
+    "exampleRus": "Гарантия действительна с даты покупки."
+  },
+  {
+    "category": "Warranties",
+    "eng": "refund",
+    "rus": "возврат",
+    "correct": "возврат",
+    "exampleEng": "Process the refund within 3 days.",
+    "exampleRus": "Обработайте возврат в течение 3 дней."
+  },
+  {
+    "category": "Warranties",
+    "eng": "replace",
+    "rus": "заменять",
+    "correct": "заменять",
+    "exampleEng": "We will replace any defective item.",
+    "exampleRus": "Мы заменим любой дефектный товар."
+  },
+  {
+    "category": "Warranties",
+    "eng": "repair",
+    "rus": "ремонт",
+    "correct": "ремонт",
+    "exampleEng": "Repairs are covered under the warranty.",
+    "exampleRus": "Ремонт покрывается гарантией."
+  },
+  {
+    "category": "Warranties",
+    "eng": "service",
+    "rus": "сервис",
+    "correct": "сервис",
+    "exampleEng": "Utility service is reliable.",
+    "exampleRus": "Сервис коммунальных услуг надежен."
+  },
+  {
+    "category": "Warranties",
+    "eng": "coverage",
+    "rus": "покрытие",
+    "correct": "покрытие",
+    "exampleEng": "Check your insurance coverage.",
+    "exampleRus": "Проверьте ваше страховое покрытие."
+  },
+  {
+    "category": "Warranties",
+    "eng": "extend",
+    "rus": "продлевать",
+    "correct": "продлевать",
+    "exampleEng": "Extend the warranty for two more years.",
+    "exampleRus": "Продлите гарантию ещё на два года."
+  },
+  {
+    "category": "Warranties",
+    "eng": "malfunction",
+    "rus": "неисправность",
+    "correct": "неисправность",
+    "exampleEng": "Report any malfunction to our service desk.",
+    "exampleRus": "Сообщите о любой неисправности на наш сервисный стол."
+  },
+  {
+    "category": "Warranties",
+    "eng": "reliable",
+    "rus": "надежный",
+    "correct": "надежный",
+    "exampleEng": "Reliable service provider.",
+    "exampleRus": "Надежный поставщик услуг."
+  },
+  {
+    "category": "Warranties",
+    "eng": "troubleshoot",
+    "rus": "устранять неисправности",
+    "correct": "устранять неисправности",
+    "exampleEng": "Troubleshoot technical issues.",
+    "exampleRus": "Устраняйте технические проблемы."
+  },
+  {
+    "category": "Warranties",
+    "eng": "duration",
+    "rus": "длительность",
+    "correct": "длительность",
+    "exampleEng": "Warranty duration depends on the product type.",
+    "exampleRus": "Срок гарантии зависит от типа продукта."
+  },
+  {
+    "category": "Warranties",
+    "eng": "condition",
+    "rus": "условие",
+    "correct": "условие",
+    "exampleEng": "Terms and conditions apply to this warranty.",
+    "exampleRus": "На данную гарантию распространяются условия."
+  },
+  {
+    "category": "Warranties",
+    "eng": "exclude",
+    "rus": "исключать",
+    "correct": "исключать",
+    "exampleEng": "Water damage is excluded from the warranty.",
+    "exampleRus": "Повреждения водой исключены из гарантии."
+  },
+  {
+    "category": "Warranties",
+    "eng": "include",
+    "rus": "включать",
+    "correct": "включать",
+    "exampleEng": "Labor costs are included in the warranty.",
+    "exampleRus": "Трудозатраты включены в гарантию."
+  },
+  {
+    "category": "Warranties",
+    "eng": "renew",
+    "rus": "обновлять",
+    "correct": "обновлять",
+    "exampleEng": "Renew the service warranty annually.",
+    "exampleRus": "Ежегодно продлевайте сервисную гарантию."
+  },
+  {
+    "category": "Warranties",
+    "eng": "automatic",
+    "rus": "автоматический",
+    "correct": "автоматический",
+    "exampleEng": "The device has automatic warranty registration.",
+    "exampleRus": "Устройство имеет автоматическую регистрацию гарантии."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "agenda",
+    "rus": "повестка дня",
+    "correct": "повестка дня",
+    "exampleEng": "Review the meeting agenda.",
+    "exampleRus": "Просмотрите повестку дня встречи."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "alternative",
+    "rus": "альтернатива",
+    "correct": "альтернатива",
+    "exampleEng": "Consider an alternative business approach.",
+    "exampleRus": "Рассмотрите альтернативный деловой подход."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "assign",
+    "rus": "назначать",
+    "correct": "назначать",
+    "exampleEng": "Assign tasks to team members.",
+    "exampleRus": "Назначайте задачи членам команды."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "brief",
+    "rus": "информировать",
+    "question": "brief",
+    "optionsList": [
+      "продлевать",
+      "информировать",
+      "каталог"
+    ],
+    "correct": "информировать",
+    "mastery": 0,
+    "exampleEng": "The director briefed the board on strategy.",
+    "exampleRus": "Юрисконсульт подготовил письменное заключение для руководства."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "clarify",
+    "rus": "уточнять",
+    "correct": "уточнять",
+    "exampleEng": "Please clarify the project objectives.",
+    "exampleRus": "Пожалуйста, уточните цели проекта."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "cooperation",
+    "rus": "сотрудничество",
+    "correct": "сотрудничество",
+    "exampleEng": "Cross-team cooperation improved results.",
+    "exampleRus": "Межкомандное сотрудничество улучшило результаты."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "deadline",
+    "rus": "дедлайн",
+    "correct": "дедлайн",
+    "exampleEng": "Meet the project deadline.",
+    "exampleRus": "Уложитесь в дедлайн проекта."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "determine",
+    "rus": "определять",
+    "correct": "определять",
+    "exampleEng": "We need to determine the cause.",
+    "exampleRus": "Нам нужно определить причину."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "delegation",
+    "rus": "делегирование",
+    "correct": "делегирование",
+    "exampleEng": "Effective delegation skills.",
+    "exampleRus": "Навыки эффективного делегирования."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "implement",
+    "rus": "внедрять",
+    "correct": "внедрять",
+    "exampleEng": "We will implement the system next week.",
+    "exampleRus": "Мы внедрим систему на следующей неделе."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "meeting",
+    "rus": "встреча",
+    "correct": "встреча",
+    "exampleEng": "Schedule a meeting with the client.",
+    "exampleRus": "Назначьте встречу с клиентом."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "objective",
+    "rus": "цель",
+    "correct": "цель",
+    "exampleEng": "Set clear objectives.",
+    "exampleRus": "Установите четкие цели."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "participant",
+    "rus": "участник",
+    "correct": "участник",
+    "exampleEng": "All participants reviewed the plan.",
+    "exampleRus": "Все участники ознакомились с планом."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "priority",
+    "rus": "приоритет",
+    "correct": "приоритет",
+    "exampleEng": "Set priorities for the next quarter.",
+    "exampleRus": "Установите приоритеты на следующий квартал."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "proposal",
+    "rus": "предложение",
+    "correct": "предложение",
+    "exampleEng": "Submit a business proposal.",
+    "exampleRus": "Подайте бизнес-предложение."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "recommendation",
+    "rus": "рекомендация",
+    "correct": "рекомендация",
+    "exampleEng": "The consultant's recommendation was accepted.",
+    "exampleRus": "Рекомендация консультанта была принята."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "strategy",
+    "rus": "стратегия",
+    "correct": "стратегия",
+    "exampleEng": "Develop a growth strategy.",
+    "exampleRus": "Разработайте стратегию роста."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "analysis",
+    "rus": "анализ",
+    "correct": "анализ",
+    "exampleEng": "Financial analysis report.",
+    "exampleRus": "Отчет финансового анализа."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "approach",
+    "rus": "подход",
+    "correct": "подход",
+    "exampleEng": "A flexible approach was taken.",
+    "exampleRus": "Был применён гибкий подход."
+  },
+  {
+    "category": "Business Planning",
+    "eng": "assessment",
+    "rus": "оценка",
+    "correct": "оценка",
+    "exampleEng": "A risk assessment was completed.",
+    "exampleRus": "Оценка рисков была завершена."
+  },
+  {
+    "category": "Conferences",
+    "eng": "accommodate",
+    "rus": "размещать",
+    "correct": "размещать",
+    "exampleEng": "We can accommodate 200 guests.",
+    "exampleRus": "Мы можем разместить 200 гостей."
+  },
+  {
+    "category": "Conferences",
+    "eng": "agenda",
+    "rus": "повестка дня",
+    "correct": "повестка дня",
+    "exampleEng": "Review the meeting agenda.",
+    "exampleRus": "Просмотрите повестку дня встречи."
+  },
+  {
+    "category": "Conferences",
+    "eng": "attendance",
+    "rus": "посещаемость",
+    "correct": "посещаемость",
+    "exampleEng": "Attendance at the conference was high.",
+    "exampleRus": "Посещаемость конференции была высокой."
+  },
+  {
+    "category": "Conferences",
+    "eng": "award",
+    "rus": "награда",
+    "correct": "награда",
+    "exampleEng": "The award was presented at the gala.",
+    "exampleRus": "Награда была вручена на торжественном ужине."
+  },
+  {
+    "category": "Conferences",
+    "eng": "banquet",
+    "rus": "банкет",
+    "correct": "банкет",
+    "exampleEng": "A banquet followed the closing ceremony.",
+    "exampleRus": "После церемонии закрытия состоялся банкет."
+  },
+  {
+    "category": "Conferences",
+    "eng": "book",
+    "rus": "бронировать",
+    "correct": "бронировать",
+    "exampleEng": "Book your conference seat in advance.",
+    "exampleRus": "Заранее забронируйте место на конференции."
+  },
+  {
+    "category": "Conferences",
+    "eng": "capacity",
+    "rus": "вместимость",
+    "correct": "вместимость",
+    "exampleEng": "The venue has a capacity of 300 people.",
+    "exampleRus": "Зал вмещает 300 человек."
+  },
+  {
+    "category": "Conferences",
+    "eng": "conclude",
+    "rus": "заключать",
+    "correct": "заключать",
+    "exampleEng": "The summit concluded with an agreement.",
+    "exampleRus": "Саммит завершился подписанием соглашения."
+  },
+  {
+    "category": "Conferences",
+    "eng": "conference",
+    "rus": "конференция",
+    "correct": "конференция",
+    "exampleEng": "We will attend the annual conference.",
+    "exampleRus": "Мы посетим ежегодную конференцию."
+  },
+  {
+    "category": "Conferences",
+    "eng": "convention",
+    "rus": "конвенция",
+    "correct": "конвенция",
+    "exampleEng": "The convention center is nearby.",
+    "exampleRus": "Конференц-центр находится поблизости."
+  },
+  {
+    "category": "Conferences",
+    "eng": "demonstrate",
+    "rus": "демонстрировать",
+    "correct": "демонстрировать",
+    "exampleEng": "Let me demonstrate how it works.",
+    "exampleRus": "Позвольте мне продемонстрировать, как это работает."
+  },
+  {
+    "category": "Conferences",
+    "eng": "discussion",
+    "rus": "обсуждение",
+    "correct": "обсуждение",
+    "exampleEng": "A panel discussion followed the keynote.",
+    "exampleRus": "После основного доклада состоялась дискуссия."
+  },
+  {
+    "category": "Conferences",
+    "eng": "display",
+    "rus": "дисплей",
+    "correct": "дисплей",
+    "exampleEng": "Companies display products in the exhibit hall.",
+    "exampleRus": "Компании демонстрируют продукты в выставочном зале."
+  },
+  {
+    "category": "Conferences",
+    "eng": "distribute",
+    "rus": "распределять",
+    "correct": "распределять",
+    "exampleEng": "Distribute materials to all attendees.",
+    "exampleRus": "Раздайте материалы всем участникам."
+  },
+  {
+    "category": "Conferences",
+    "eng": "enroll",
+    "rus": "записываться",
+    "correct": "записываться",
+    "exampleEng": "Enroll early to secure your spot.",
+    "exampleRus": "Зарегистрируйтесь заранее, чтобы занять место."
+  },
+  {
+    "category": "Conferences",
+    "eng": "exhibit",
+    "rus": "экспонат",
+    "correct": "экспонат",
+    "exampleEng": "Visit the product exhibits.",
+    "exampleRus": "Посетите выставку продуктов."
+  },
+  {
+    "category": "Conferences",
+    "eng": "fair",
+    "rus": "ярмарка",
+    "correct": "ярмарка",
+    "exampleEng": "The trade fair attracted 200 exhibitors.",
+    "exampleRus": "На выставке присутствовали 200 экспонентов."
+  },
+  {
+    "category": "Conferences",
+    "eng": "host",
+    "rus": "принимать",
+    "correct": "принимать",
+    "exampleEng": "Tokyo will host the annual conference.",
+    "exampleRus": "Токио примет ежегодную конференцию."
+  },
+  {
+    "category": "Conferences",
+    "eng": "name tag",
+    "rus": "бейдж",
+    "correct": "бейдж",
+    "exampleEng": "Wear your name tag during the event.",
+    "exampleRus": "Носите именной бейдж во время мероприятия."
+  },
+  {
+    "category": "Conferences",
+    "eng": "participant",
+    "rus": "участник",
+    "correct": "участник",
+    "exampleEng": "All participants signed the attendance sheet.",
+    "exampleRus": "Все участники подписали лист посещаемости."
+  },
+  {
+    "category": "Computers",
+    "eng": "access",
+    "rus": "доступ",
+    "correct": "доступ",
+    "exampleEng": "You need access to the system.",
+    "exampleRus": "Вам нужен доступ к системе."
+  },
+  {
+    "category": "Computers",
+    "eng": "browser",
+    "rus": "браузер",
+    "correct": "браузер",
+    "exampleEng": "Use the latest browser version.",
+    "exampleRus": "Используйте последнюю версию браузера."
+  },
+  {
+    "category": "Computers",
+    "eng": "capacity",
+    "rus": "вместимость",
+    "correct": "вместимость",
+    "exampleEng": "Increase storage capacity for the database.",
+    "exampleRus": "Увеличьте ёмкость хранилища для базы данных."
+  },
+  {
+    "category": "Computers",
+    "eng": "component",
+    "rus": "компонент",
+    "correct": "компонент",
+    "exampleEng": "Replace the faulty hardware component.",
+    "exampleRus": "Замените неисправный аппаратный компонент."
+  },
+  {
+    "category": "Computers",
+    "eng": "connect",
+    "rus": "подключать",
+    "correct": "подключать",
+    "exampleEng": "Connect to the conference call.",
+    "exampleRus": "Подключитесь к конференц-звонку."
+  },
+  {
+    "category": "Computers",
+    "eng": "cursor",
+    "rus": "курсор",
+    "correct": "курсор",
+    "exampleEng": "Move the cursor to select the field.",
+    "exampleRus": "Переместите курсор, чтобы выбрать поле."
+  },
+  {
+    "category": "Computers",
+    "eng": "data",
+    "rus": "данные",
+    "correct": "данные",
+    "exampleEng": "We need to analyze the data.",
+    "exampleRus": "Нам нужно проанализировать данные."
+  },
+  {
+    "category": "Computers",
+    "eng": "database",
+    "rus": "база данных",
+    "correct": "база данных",
+    "exampleEng": "The database contains customer information.",
+    "exampleRus": "База данных содержит информацию о клиентах."
+  },
+  {
+    "category": "Computers",
+    "eng": "delete",
+    "rus": "удалять",
+    "correct": "удалять",
+    "exampleEng": "Delete old files to free up storage.",
+    "exampleRus": "Удалите старые файлы, чтобы освободить место."
+  },
+  {
+    "category": "Computers",
+    "eng": "desktop",
+    "rus": "рабочий стол",
+    "correct": "рабочий стол",
+    "exampleEng": "Access all files from the desktop.",
+    "exampleRus": "Получайте доступ ко всем файлам с рабочего стола."
+  },
+  {
+    "category": "Computers",
+    "eng": "document",
+    "rus": "документировать",
+    "correct": "документировать",
+    "exampleEng": "Document all procedures.",
+    "exampleRus": "Документируйте все процедуры."
+  },
+  {
+    "category": "Computers",
+    "eng": "download",
+    "rus": "скачивать",
+    "correct": "скачивать",
+    "exampleEng": "Download the software update.",
+    "exampleRus": "Скачайте обновление программного обеспечения."
+  },
+  {
+    "category": "Computers",
+    "eng": "file",
+    "rus": "файл",
+    "correct": "файл",
+    "exampleEng": "File the document properly.",
+    "exampleRus": "Правильно оформите документ."
+  },
+  {
+    "category": "Computers",
+    "eng": "folder",
+    "rus": "папка",
+    "correct": "папка",
+    "exampleEng": "Save reports in the shared folder.",
+    "exampleRus": "Сохраняйте отчёты в общей папке."
+  },
+  {
+    "category": "Computers",
+    "eng": "hard copy",
+    "rus": "бумажная копия",
+    "correct": "бумажная копия",
+    "exampleEng": "Print a hard copy for the records.",
+    "exampleRus": "Распечатайте бумажную копию для архива."
+  },
+  {
+    "category": "Computers",
+    "eng": "hardware",
+    "rus": "аппаратное обеспечение",
+    "correct": "аппаратное обеспечение",
+    "exampleEng": "We need to upgrade our hardware.",
+    "exampleRus": "Нам нужно обновить наше аппаратное обеспечение."
+  },
+  {
+    "category": "Computers",
+    "eng": "icon",
+    "rus": "иконка",
+    "correct": "иконка",
+    "exampleEng": "Double-click the icon to open.",
+    "exampleRus": "Дважды щёлкните значок для открытия."
+  },
+  {
+    "category": "Computers",
+    "eng": "install",
+    "rus": "устанавливать",
+    "correct": "устанавливать",
+    "exampleEng": "Install the program on your computer.",
+    "exampleRus": "Установите программу на ваш компьютер."
+  },
+  {
+    "category": "Computers",
+    "eng": "keyboard",
+    "rus": "клавиатура",
+    "correct": "клавиатура",
+    "exampleEng": "A wireless keyboard was issued to staff.",
+    "exampleRus": "Сотрудникам выдали беспроводную клавиатуру."
+  },
+  {
+    "category": "Computers",
+    "eng": "laptop",
+    "rus": "ноутбук",
+    "correct": "ноутбук",
+    "exampleEng": "Each manager received a company laptop.",
+    "exampleRus": "Каждый менеджер получил корпоративный ноутбук."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "log on",
+    "rus": "входить",
+    "correct": "входить",
+    "exampleEng": "Log on to the system with your credentials.",
+    "exampleRus": "Войдите в систему с вашими учётными данными."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "memory",
+    "rus": "память",
+    "correct": "память",
+    "exampleEng": "Upgrade the memory for faster performance.",
+    "exampleRus": "Увеличьте объём памяти для повышения производительности."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "monitor",
+    "rus": "мониторить",
+    "correct": "мониторить",
+    "exampleEng": "Monitor production quality.",
+    "exampleRus": "Мониторьте качество производства."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "mouse",
+    "rus": "мышка",
+    "correct": "мышка",
+    "exampleEng": "Use the mouse to navigate the screen.",
+    "exampleRus": "Используйте мышь для навигации по экрану."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "network",
+    "rus": "сеть",
+    "correct": "сеть",
+    "exampleEng": "Connect to the company network.",
+    "exampleRus": "Подключитесь к корпоративной сети."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "operating system",
+    "rus": "операционная система",
+    "correct": "операционная система",
+    "exampleEng": "Upgrade the operating system this quarter.",
+    "exampleRus": "Обновите операционную систему в этом квартале."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "outage",
+    "rus": "перебой",
+    "correct": "перебой",
+    "exampleEng": "Report power outages immediately.",
+    "exampleRus": "Сообщайте о перебоях электроэнергии немедленно."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "password",
+    "rus": "пароль",
+    "correct": "пароль",
+    "exampleEng": "Enter your password to log in.",
+    "exampleRus": "Введите ваш пароль для входа."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "printer",
+    "rus": "принтер",
+    "correct": "принтер",
+    "exampleEng": "The printer is out of ink.",
+    "exampleRus": "В принтере закончились чернила."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "reboot",
+    "rus": "перезагружать",
+    "correct": "перезагружать",
+    "exampleEng": "Reboot the server after the update.",
+    "exampleRus": "Перезагрузите сервер после обновления."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "screen",
+    "rus": "экран",
+    "correct": "экран",
+    "exampleEng": "The screen resolution was adjusted.",
+    "exampleRus": "Разрешение экрана было настроено."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "scroll",
+    "rus": "прокручивать",
+    "correct": "прокручивать",
+    "exampleEng": "Scroll down to view the full report.",
+    "exampleRus": "Прокрутите вниз, чтобы просмотреть полный отчёт."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "server",
+    "rus": "сервер",
+    "correct": "сервер",
+    "exampleEng": "The server is down.",
+    "exampleRus": "Сервер не работает."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "software",
+    "rus": "программное обеспечение",
+    "correct": "программное обеспечение",
+    "exampleEng": "The software needs an update.",
+    "exampleRus": "Программное обеспечение требует обновления."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "spam",
+    "rus": "спам",
+    "correct": "спам",
+    "exampleEng": "Filter spam to protect the inbox.",
+    "exampleRus": "Фильтруйте спам для защиты входящих."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "spreadsheet",
+    "rus": "таблица",
+    "correct": "таблица",
+    "exampleEng": "Enter budget data into the spreadsheet.",
+    "exampleRus": "Введите данные бюджета в таблицу."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "storage",
+    "rus": "хранилище",
+    "correct": "хранилище",
+    "exampleEng": "Cloud storage is convenient.",
+    "exampleRus": "Облачное хранилище удобно."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "system",
+    "rus": "система",
+    "correct": "система",
+    "exampleEng": "The system is working properly.",
+    "exampleRus": "Система работает правильно."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "technical",
+    "rus": "технический",
+    "correct": "технический",
+    "exampleEng": "Technical support department.",
+    "exampleRus": "Отдел технической поддержки."
+  },
+  {
+    "category": "Office Technology",
+    "eng": "troubleshoot",
+    "rus": "устранять неисправности",
+    "correct": "устранять неисправности",
+    "exampleEng": "Troubleshoot technical issues.",
+    "exampleRus": "Устраняйте технические проблемы."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "archive",
+    "rus": "архивировать",
+    "correct": "архивировать",
+    "exampleEng": "Archive old files.",
+    "exampleRus": "Архивируйте старые файлы."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "arrange",
+    "rus": "организовывать",
+    "correct": "организовывать",
+    "exampleEng": "Arrange a meeting with all department heads.",
+    "exampleRus": "Организуйте встречу со всеми руководителями отделов."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "binder",
+    "rus": "папка",
+    "correct": "папка",
+    "exampleEng": "Keep all contracts in the binder.",
+    "exampleRus": "Храните все контракты в папке."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "brief",
+    "rus": "информировать",
+    "question": "brief",
+    "optionsList": [
+      "продлевать",
+      "информировать",
+      "каталог"
+    ],
+    "correct": "информировать",
+    "mastery": 0,
+    "exampleEng": "The manager briefed the team on the project.",
+    "exampleRus": "Юрисконсульт подготовил письменное заключение для руководства."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "calendar",
+    "rus": "календарь",
+    "correct": "календарь",
+    "exampleEng": "Check the calendar before scheduling.",
+    "exampleRus": "Проверьте календарь перед планированием встречи."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "circular",
+    "rus": "циркуляр",
+    "correct": "циркуляр",
+    "exampleEng": "Company circular to employees.",
+    "exampleRus": "Корпоративный циркуляр для сотрудников."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "collate",
+    "rus": "собирать",
+    "correct": "собирать",
+    "exampleEng": "Collate all reports before the meeting.",
+    "exampleRus": "Соберите все отчёты перед совещанием."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "correspondence",
+    "rus": "переписка",
+    "correct": "переписка",
+    "exampleEng": "Maintain professional correspondence.",
+    "exampleRus": "Поддерживайте профессиональную переписку."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "deliver",
+    "rus": "доставлять",
+    "correct": "доставлять",
+    "exampleEng": "Deliver the report to the director today.",
+    "exampleRus": "Передайте отчёт директору сегодня."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "duplicate",
+    "rus": "дублировать",
+    "correct": "дублировать",
+    "exampleEng": "Duplicate the form for each employee.",
+    "exampleRus": "Продублируйте форму для каждого сотрудника."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "enter",
+    "rus": "вводить",
+    "correct": "вводить",
+    "exampleEng": "Enter all data into the system accurately.",
+    "exampleRus": "Точно введите все данные в систему."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "file",
+    "rus": "файл",
+    "correct": "файл",
+    "exampleEng": "File the document properly.",
+    "exampleRus": "Правильно оформите документ."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "filing",
+    "rus": "подача",
+    "correct": "подача",
+    "exampleEng": "Proper filing keeps records accessible.",
+    "exampleRus": "Правильная документация обеспечивает доступность записей."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "forward",
+    "rus": "пересылать",
+    "correct": "пересылать",
+    "exampleEng": "Please forward the email to the team.",
+    "exampleRus": "Пожалуйста, перешлите письмо команде."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "inbox",
+    "rus": "входящие",
+    "correct": "входящие",
+    "exampleEng": "Check your inbox for the updated agenda.",
+    "exampleRus": "Проверьте входящие для получения обновлённой повестки."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "input",
+    "rus": "ввод",
+    "correct": "ввод",
+    "exampleEng": "Input the client data into the database.",
+    "exampleRus": "Введите данные клиента в базу данных."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "letter",
+    "rus": "письмо",
+    "correct": "письмо",
+    "exampleEng": "Write a formal letter.",
+    "exampleRus": "Напишите формальное письмо."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "list",
+    "rus": "список",
+    "correct": "список",
+    "exampleEng": "Create a task list for the week.",
+    "exampleRus": "Составьте список задач на неделю."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "memo",
+    "rus": "заметка",
+    "correct": "заметка",
+    "exampleEng": "Send a memo to staff.",
+    "exampleRus": "Отправьте заметку персоналу."
+  },
+  {
+    "category": "Office Procedures",
+    "eng": "memorandum",
+    "rus": "меморандум",
+    "correct": "меморандум",
+    "exampleEng": "A memorandum was sent to all staff.",
+    "exampleRus": "Всем сотрудникам был направлен меморандум."
+  },
+  {
+    "category": "Electronics",
+    "eng": "automatic",
+    "rus": "автоматический",
+    "correct": "автоматический",
+    "exampleEng": "The door has an automatic locking system.",
+    "exampleRus": "Дверь оснащена автоматической системой блокировки."
+  },
+  {
+    "category": "Electronics",
+    "eng": "battery",
+    "rus": "батарея",
+    "correct": "батарея",
+    "exampleEng": "Replace the battery before the trip.",
+    "exampleRus": "Замените батарею перед поездкой."
+  },
+  {
+    "category": "Electronics",
+    "eng": "cable",
+    "rus": "кабель",
+    "correct": "кабель",
+    "exampleEng": "The network cable was replaced.",
+    "exampleRus": "Сетевой кабель был заменён."
+  },
+  {
+    "category": "Electronics",
+    "eng": "camera",
+    "rus": "камера",
+    "correct": "камера",
+    "exampleEng": "Install a security camera at the entrance.",
+    "exampleRus": "Установите камеру видеонаблюдения у входа."
+  },
+  {
+    "category": "Electronics",
+    "eng": "chip",
+    "rus": "чип",
+    "correct": "чип",
+    "exampleEng": "A microchip controls the device functions.",
+    "exampleRus": "Микросхема управляет функциями устройства."
+  },
+  {
+    "category": "Electronics",
+    "eng": "connection",
+    "rus": "соединение",
+    "correct": "соединение",
+    "exampleEng": "Check your internet connection.",
+    "exampleRus": "Проверьте ваше интернет-соединение."
+  },
+  {
+    "category": "Electronics",
+    "eng": "device",
+    "rus": "устройство",
+    "correct": "устройство",
+    "exampleEng": "Connect the device to the computer.",
+    "exampleRus": "Подключите устройство к компьютеру."
+  },
+  {
+    "category": "Electronics",
+    "eng": "digital",
+    "rus": "цифровой",
+    "correct": "цифровой",
+    "exampleEng": "Digital transformation initiative.",
+    "exampleRus": "Инициатива цифровой трансформации."
+  },
+  {
+    "category": "Electronics",
+    "eng": "disk",
+    "rus": "диск",
+    "correct": "диск",
+    "exampleEng": "Store backups on an external disk.",
+    "exampleRus": "Храните резервные копии на внешнем диске."
+  },
+  {
+    "category": "Electronics",
+    "eng": "display",
+    "rus": "дисплей",
+    "correct": "дисплей",
+    "exampleEng": "The display shows live sales data.",
+    "exampleRus": "На дисплее отображаются данные о продажах."
+  },
+  {
+    "category": "Electronics",
+    "eng": "drive",
+    "rus": "диск",
+    "correct": "диск",
+    "exampleEng": "The hard drive stores all company data.",
+    "exampleRus": "На жёстком диске хранятся все данные компании."
+  },
+  {
+    "category": "Electronics",
+    "eng": "electronic",
+    "rus": "электронный",
+    "correct": "электронный",
+    "exampleEng": "Electronic payments are now standard.",
+    "exampleRus": "Электронные платежи сейчас являются стандартом."
+  },
+  {
+    "category": "Electronics",
+    "eng": "feature",
+    "rus": "особенность",
+    "correct": "особенность",
+    "exampleEng": "This product has many features.",
+    "exampleRus": "У этого продукта много особенностей."
+  },
+  {
+    "category": "Electronics",
+    "eng": "input",
+    "rus": "ввод",
+    "correct": "ввод",
+    "exampleEng": "Connect the input device to the system.",
+    "exampleRus": "Подключите устройство ввода к системе."
+  },
+  {
+    "category": "Electronics",
+    "eng": "insert",
+    "rus": "вставлять",
+    "correct": "вставлять",
+    "exampleEng": "Insert the card into the reader.",
+    "exampleRus": "Вставьте карту в считыватель."
+  },
+  {
+    "category": "Electronics",
+    "eng": "install",
+    "rus": "устанавливать",
+    "correct": "устанавливать",
+    "exampleEng": "Install the program on your computer.",
+    "exampleRus": "Установите программу на ваш компьютер."
+  },
+  {
+    "category": "Electronics",
+    "eng": "instruction",
+    "rus": "инструкция",
+    "correct": "инструкция",
+    "exampleEng": "Read the instruction manual carefully.",
+    "exampleRus": "Внимательно прочитайте инструкцию по эксплуатации."
+  },
+  {
+    "category": "Electronics",
+    "eng": "key",
+    "rus": "клавиша",
+    "correct": "клавиша",
+    "exampleEng": "Press the function key to activate.",
+    "exampleRus": "Нажмите функциональную клавишу для активации."
+  },
+  {
+    "category": "Electronics",
+    "eng": "keypad",
+    "rus": "клавиатура",
+    "correct": "клавиатура",
+    "exampleEng": "Enter the code on the keypad.",
+    "exampleRus": "Введите код на клавиатуре."
+  },
+  {
+    "category": "Electronics",
+    "eng": "lens",
+    "rus": "линза",
+    "correct": "линза",
+    "exampleEng": "Clean the camera lens before the demo.",
+    "exampleRus": "Протрите объектив камеры перед презентацией."
+  },
+  {
+    "category": "Hiring",
+    "eng": "applicant",
+    "rus": "соискатель",
+    "correct": "соискатель",
+    "exampleEng": "The applicant had impressive qualifications.",
+    "exampleRus": "У соискателя были впечатляющие квалификации."
+  },
+  {
+    "category": "Hiring",
+    "eng": "apply",
+    "rus": "подавать заявку",
+    "correct": "подавать заявку",
+    "exampleEng": "Apply online for the management position.",
+    "exampleRus": "Подайте заявку онлайн на должность менеджера."
+  },
+  {
+    "category": "Hiring",
+    "eng": "benefit",
+    "rus": "льгота",
+    "correct": "льгота",
+    "exampleEng": "Health benefits are included.",
+    "exampleRus": "Льготы на здоровье включены."
+  },
+  {
+    "category": "Hiring",
+    "eng": "candidate",
+    "rus": "кандидат",
+    "correct": "кандидат",
+    "exampleEng": "She is the best candidate for the job.",
+    "exampleRus": "Она лучший кандидат на эту работу."
+  },
+  {
+    "category": "Hiring",
+    "eng": "compensation",
+    "rus": "компенсация",
+    "correct": "компенсация",
+    "exampleEng": "You will receive compensation.",
+    "exampleRus": "Вы получите компенсацию."
+  },
+  {
+    "category": "Hiring",
+    "eng": "coordinate",
+    "rus": "координировать",
+    "correct": "координировать",
+    "exampleEng": "Coordinate the schedule with the team.",
+    "exampleRus": "Согласуйте расписание с командой."
+  },
+  {
+    "category": "Hiring",
+    "eng": "cover letter",
+    "rus": "сопроводительное письмо",
+    "correct": "сопроводительное письмо",
+    "exampleEng": "A strong cover letter sets you apart.",
+    "exampleRus": "Хорошее сопроводительное письмо выделяет вас."
+  },
+  {
+    "category": "Hiring",
+    "eng": "employer",
+    "rus": "работодатель",
+    "correct": "работодатель",
+    "exampleEng": "The employer offers excellent benefits.",
+    "exampleRus": "Работодатель предлагает отличные льготы."
+  },
+  {
+    "category": "Hiring",
+    "eng": "experience",
+    "rus": "опыт",
+    "correct": "опыт",
+    "exampleEng": "Customer experience journey.",
+    "exampleRus": "Путешествие клиентского опыта."
+  },
+  {
+    "category": "Hiring",
+    "eng": "hire",
+    "rus": "нанять",
+    "correct": "нанять",
+    "exampleEng": "We plan to hire five new employees.",
+    "exampleRus": "Мы планируем нанять пять новых сотрудников."
+  },
+  {
+    "category": "Hiring",
+    "eng": "interview",
+    "rus": "интервью",
+    "correct": "интервью",
+    "exampleEng": "The interview went well.",
+    "exampleRus": "Интервью прошло хорошо."
+  },
+  {
+    "category": "Hiring",
+    "eng": "job",
+    "rus": "работа",
+    "correct": "работа",
+    "exampleEng": "The job requires 5 years of experience.",
+    "exampleRus": "Работа требует 5 лет опыта."
+  },
+  {
+    "category": "Hiring",
+    "eng": "position",
+    "rus": "позиция",
+    "correct": "позиция",
+    "exampleEng": "Position your product correctly.",
+    "exampleRus": "Правильно позиционируйте свой продукт."
+  },
+  {
+    "category": "Hiring",
+    "eng": "post",
+    "rus": "должность",
+    "correct": "должность",
+    "exampleEng": "The job was posted on the company website.",
+    "exampleRus": "Вакансия была размещена на сайте компании."
+  },
+  {
+    "category": "Hiring",
+    "eng": "qualification",
+    "rus": "квалификация",
+    "correct": "квалификация",
+    "exampleEng": "What are your qualifications?",
+    "exampleRus": "Какова ваша квалификация?"
+  },
+  {
+    "category": "Hiring",
+    "eng": "recruit",
+    "rus": "нанимать",
+    "correct": "нанимать",
+    "exampleEng": "We need to recruit more staff.",
+    "exampleRus": "Нам нужно нанять больше персонала."
+  },
+  {
+    "category": "Hiring",
+    "eng": "reference",
+    "rus": "рекомендация",
+    "correct": "рекомендация",
+    "exampleEng": "Please provide two professional references.",
+    "exampleRus": "Пожалуйста, предоставьте две профессиональные рекомендации."
+  },
+  {
+    "category": "Hiring",
+    "eng": "reject",
+    "rus": "отклонять",
+    "correct": "отклонять",
+    "exampleEng": "The committee rejected three applications.",
+    "exampleRus": "Комитет отклонил три заявки."
+  },
+  {
+    "category": "Hiring",
+    "eng": "resume",
+    "rus": "резюме",
+    "correct": "резюме",
+    "exampleEng": "Submit your resume by Friday.",
+    "exampleRus": "Пришлите резюме до пятницы."
+  },
+  {
+    "category": "Hiring",
+    "eng": "salary",
+    "rus": "зарплата",
+    "correct": "зарплата",
+    "exampleEng": "The salary is paid monthly.",
+    "exampleRus": "Зарплата выплачивается ежемесячно."
+  },
+  {
+    "category": "Salaries",
+    "eng": "bonus",
+    "rus": "бонус",
+    "correct": "бонус",
+    "exampleEng": "You earned a performance bonus.",
+    "exampleRus": "Вы заработали бонус за производительность."
+  },
+  {
+    "category": "Salaries",
+    "eng": "commission",
+    "rus": "комиссия",
+    "correct": "комиссия",
+    "exampleEng": "The salesperson earns 5% commission.",
+    "exampleRus": "Продавец получает комиссию 5%."
+  },
+  {
+    "category": "Salaries",
+    "eng": "deduction",
+    "rus": "вычет",
+    "correct": "вычет",
+    "exampleEng": "Tax deductions from salary.",
+    "exampleRus": "Налоговые вычеты из зарплаты."
+  },
+  {
+    "category": "Salaries",
+    "eng": "earnings",
+    "rus": "заработок",
+    "correct": "заработок",
+    "exampleEng": "Annual earnings are reported in December.",
+    "exampleRus": "Годовой заработок сообщается в декабре."
+  },
+  {
+    "category": "Salaries",
+    "eng": "gross",
+    "rus": "брутто",
+    "correct": "брутто",
+    "exampleEng": "Gross salary is before tax deductions.",
+    "exampleRus": "Зарплата брутто — до вычета налогов."
+  },
+  {
+    "category": "Salaries",
+    "eng": "income",
+    "rus": "доход",
+    "correct": "доход",
+    "exampleEng": "The company's income increased.",
+    "exampleRus": "Доход компании вырос."
+  },
+  {
+    "category": "Salaries",
+    "eng": "increment",
+    "rus": "прирост",
+    "correct": "прирост",
+    "exampleEng": "A salary increment was approved.",
+    "exampleRus": "Было одобрено повышение зарплаты."
+  },
+  {
+    "category": "Salaries",
+    "eng": "net",
+    "rus": "нетто",
+    "correct": "нетто",
+    "exampleEng": "Net salary is transferred on the 1st.",
+    "exampleRus": "Зарплата нетто перечисляется 1-го числа."
+  },
+  {
+    "category": "Salaries",
+    "eng": "pay",
+    "rus": "платить",
+    "correct": "платить",
+    "exampleEng": "Staff are paid on the last business day.",
+    "exampleRus": "Сотрудникам платят в последний рабочий день."
+  },
+  {
+    "category": "Salaries",
+    "eng": "paycheck",
+    "rus": "зарплата",
+    "correct": "зарплата",
+    "exampleEng": "The paycheck was deposited automatically.",
+    "exampleRus": "Зарплата была автоматически зачислена."
+  },
+  {
+    "category": "Salaries",
+    "eng": "payroll",
+    "rus": "платёжная ведомость",
+    "correct": "платёжная ведомость",
+    "exampleEng": "HR manages the monthly payroll.",
+    "exampleRus": "Отдел кадров управляет ежемесячной платёжной ведомостью."
+  },
+  {
+    "category": "Salaries",
+    "eng": "raise",
+    "rus": "повышение",
+    "correct": "повышение",
+    "exampleEng": "Employees received a 5% pay raise.",
+    "exampleRus": "Сотрудники получили повышение зарплаты на 5%."
+  },
+  {
+    "category": "Salaries",
+    "eng": "remuneration",
+    "rus": "вознаграждение",
+    "correct": "вознаграждение",
+    "exampleEng": "Total remuneration includes benefits.",
+    "exampleRus": "Общее вознаграждение включает льготы."
+  },
+  {
+    "category": "Salaries",
+    "eng": "salary",
+    "rus": "зарплата",
+    "correct": "зарплата",
+    "exampleEng": "The salary is paid monthly.",
+    "exampleRus": "Зарплата выплачивается ежемесячно."
+  },
+  {
+    "category": "Salaries",
+    "eng": "tax",
+    "rus": "налог",
+    "correct": "налог",
+    "exampleEng": "File your tax return by April.",
+    "exampleRus": "Подайте налоговую декларацию до апреля."
+  },
+  {
+    "category": "Salaries",
+    "eng": "wage",
+    "rus": "зарплата",
+    "correct": "зарплата",
+    "exampleEng": "The minimum wage was recently increased.",
+    "exampleRus": "Минимальная заработная плата была недавно повышена."
+  },
+  {
+    "category": "Salaries",
+    "eng": "withhold",
+    "rus": "удерживать",
+    "correct": "удерживать",
+    "exampleEng": "Taxes are withheld from each paycheck.",
+    "exampleRus": "Налоги удерживаются с каждой зарплаты."
+  },
+  {
+    "category": "Salaries",
+    "eng": "compensation",
+    "rus": "компенсация",
+    "correct": "компенсация",
+    "exampleEng": "You will receive compensation.",
+    "exampleRus": "Вы получите компенсацию."
+  },
+  {
+    "category": "Salaries",
+    "eng": "exempt",
+    "rus": "освобождённый",
+    "correct": "освобождённый",
+    "exampleEng": "Salaried managers are exempt from overtime.",
+    "exampleRus": "Менеджеры на окладе освобождены от сверхурочной оплаты."
+  },
+  {
+    "category": "Salaries",
+    "eng": "minimum wage",
+    "rus": "минимальная зарплата",
+    "correct": "минимальная зарплата",
+    "exampleEng": "All staff must receive at least minimum wage.",
+    "exampleRus": "Все сотрудники должны получать не менее минимальной зарплаты."
+  },
+  {
+    "category": "Promotions",
+    "eng": "achievement",
+    "rus": "достижение",
+    "correct": "достижение",
+    "exampleEng": "Her achievement earned a promotion.",
+    "exampleRus": "Её достижение принесло продвижение по службе."
+  },
+  {
+    "category": "Promotions",
+    "eng": "advancement",
+    "rus": "продвижение",
+    "correct": "продвижение",
+    "exampleEng": "Career advancement depends on performance.",
+    "exampleRus": "Карьерный рост зависит от результатов работы."
+  },
+  {
+    "category": "Promotions",
+    "eng": "appoint",
+    "rus": "назначать",
+    "correct": "назначать",
+    "exampleEng": "She was appointed regional manager.",
+    "exampleRus": "Она была назначена региональным менеджером."
+  },
+  {
+    "category": "Promotions",
+    "eng": "assign",
+    "rus": "назначать",
+    "correct": "назначать",
+    "exampleEng": "Assign tasks to team members.",
+    "exampleRus": "Назначайте задачи членам команды."
+  },
+  {
+    "category": "Promotions",
+    "eng": "authority",
+    "rus": "полномочие",
+    "correct": "полномочие",
+    "exampleEng": "The director has full authority over the team.",
+    "exampleRus": "Директор имеет полные полномочия над командой."
+  },
+  {
+    "category": "Promotions",
+    "eng": "compete",
+    "rus": "конкурировать",
+    "correct": "конкурировать",
+    "exampleEng": "Compete in the global market.",
+    "exampleRus": "Конкурируйте на глобальном рынке."
+  },
+  {
+    "category": "Promotions",
+    "eng": "demote",
+    "rus": "понижать",
+    "correct": "понижать",
+    "exampleEng": "He was demoted after poor performance.",
+    "exampleRus": "Он был понижен в должности из-за низких результатов."
+  },
+  {
+    "category": "Promotions",
+    "eng": "discharge",
+    "rus": "увольнять",
+    "correct": "увольнять",
+    "exampleEng": "The employee was discharged last month.",
+    "exampleRus": "Сотрудник был уволен в прошлом месяце."
+  },
+  {
+    "category": "Promotions",
+    "eng": "dismiss",
+    "rus": "увольнять",
+    "correct": "увольнять",
+    "exampleEng": "Management dismissed three employees.",
+    "exampleRus": "Руководство уволило трёх сотрудников."
+  },
+  {
+    "category": "Promotions",
+    "eng": "evaluation",
+    "rus": "оценка",
+    "correct": "оценка",
+    "exampleEng": "Annual performance evaluation.",
+    "exampleRus": "Ежегодная оценка производительности."
+  },
+  {
+    "category": "Promotions",
+    "eng": "experience",
+    "rus": "опыт",
+    "correct": "опыт",
+    "exampleEng": "Customer experience journey.",
+    "exampleRus": "Путешествие клиентского опыта."
+  },
+  {
+    "category": "Promotions",
+    "eng": "expert",
+    "rus": "эксперт",
+    "correct": "эксперт",
+    "exampleEng": "Expert advice needed.",
+    "exampleRus": "Нужен экспертный совет."
+  },
+  {
+    "category": "Promotions",
+    "eng": "fire",
+    "rus": "увольнять",
+    "correct": "увольнять",
+    "exampleEng": "He was fired for misconduct.",
+    "exampleRus": "Он был уволен за неправомерное поведение."
+  },
+  {
+    "category": "Promotions",
+    "eng": "lay off",
+    "rus": "уволнять",
+    "correct": "уволнять",
+    "exampleEng": "The company laid off 50 workers.",
+    "exampleRus": "Компания уволила 50 работников."
+  },
+  {
+    "category": "Promotions",
+    "eng": "manage",
+    "rus": "управлять",
+    "correct": "управлять",
+    "exampleEng": "She manages the team effectively.",
+    "exampleRus": "Она эффективно управляет командой."
+  },
+  {
+    "category": "Promotions",
+    "eng": "motivate",
+    "rus": "мотивировать",
+    "correct": "мотивировать",
+    "exampleEng": "Bonuses motivate employees to perform.",
+    "exampleRus": "Бонусы мотивируют сотрудников работать эффективно."
+  },
+  {
+    "category": "Promotions",
+    "eng": "promote",
+    "rus": "продвигать",
+    "correct": "продвигать",
+    "exampleEng": "Promote the brand effectively.",
+    "exampleRus": "Эффективно продвигайте бренд."
+  },
+  {
+    "category": "Promotions",
+    "eng": "qualified",
+    "rus": "квалифицированный",
+    "correct": "квалифицированный",
+    "exampleEng": "Qualified candidate pool.",
+    "exampleRus": "Пул квалифицированных кандидатов."
+  },
+  {
+    "category": "Promotions",
+    "eng": "raise",
+    "rus": "повышение",
+    "correct": "повышение",
+    "exampleEng": "She received a salary raise after review.",
+    "exampleRus": "После аттестации она получила повышение зарплаты."
+  },
+  {
+    "category": "Promotions",
+    "eng": "recruit",
+    "rus": "нанимать",
+    "correct": "нанимать",
+    "exampleEng": "We need to recruit more staff.",
+    "exampleRus": "Нам нужно нанять больше персонала."
+  },
+  {
+    "category": "Shopping",
+    "eng": "acquisition",
+    "rus": "приобретение",
+    "correct": "приобретение",
+    "exampleEng": "Company acquisition strategy.",
+    "exampleRus": "Стратегия приобретения компании."
+  },
+  {
+    "category": "Shopping",
+    "eng": "browse",
+    "rus": "просматривать",
+    "correct": "просматривать",
+    "exampleEng": "Customers can browse the online catalog.",
+    "exampleRus": "Покупатели могут просматривать онлайн-каталог."
+  },
+  {
+    "category": "Shopping",
+    "eng": "bulk",
+    "rus": "оптом",
+    "correct": "оптом",
+    "exampleEng": "Purchase in bulk for better pricing.",
+    "exampleRus": "Покупайте оптом для лучшей цены."
+  },
+  {
+    "category": "Shopping",
+    "eng": "cart",
+    "rus": "корзина",
+    "correct": "корзина",
+    "exampleEng": "Add the items to your shopping cart.",
+    "exampleRus": "Добавьте товары в корзину."
+  },
+  {
+    "category": "Shopping",
+    "eng": "cashier",
+    "rus": "кассир",
+    "correct": "кассир",
+    "exampleEng": "The cashier processed the payment quickly.",
+    "exampleRus": "Кассир быстро обработал платёж."
+  },
+  {
+    "category": "Shopping",
+    "eng": "catalog",
+    "rus": "каталог",
+    "correct": "каталог",
+    "exampleEng": "Browse our product catalog.",
+    "exampleRus": "Просмотрите наш каталог продуктов."
+  },
+  {
+    "category": "Shopping",
+    "eng": "close out",
+    "rus": "распродажа",
+    "correct": "распродажа",
+    "exampleEng": "Close out sales reduced old inventory.",
+    "exampleRus": "Распродажа ликвидировала старые запасы."
+  },
+  {
+    "category": "Shopping",
+    "eng": "coupon",
+    "rus": "купон",
+    "correct": "купон",
+    "exampleEng": "Use a coupon for 20% off.",
+    "exampleRus": "Используйте купон для скидки 20%."
+  },
+  {
+    "category": "Shopping",
+    "eng": "customer",
+    "rus": "клиент",
+    "correct": "клиент",
+    "exampleEng": "The customer is always right.",
+    "exampleRus": "Клиент всегда прав."
+  },
+  {
+    "category": "Shopping",
+    "eng": "discount",
+    "rus": "скидка",
+    "correct": "скидка",
+    "exampleEng": "We offer a 10% discount.",
+    "exampleRus": "Мы предлагаем скидку 10%."
+  },
+  {
+    "category": "Shopping",
+    "eng": "exchange",
+    "rus": "обмен",
+    "correct": "обмен",
+    "exampleEng": "You may exchange the item within 30 days.",
+    "exampleRus": "Вы можете обменять товар в течение 30 дней."
+  },
+  {
+    "category": "Shopping",
+    "eng": "item",
+    "rus": "товар",
+    "correct": "товар",
+    "exampleEng": "Every item is inspected before shipment.",
+    "exampleRus": "Каждый товар проверяется перед отправкой."
+  },
+  {
+    "category": "Shopping",
+    "eng": "location",
+    "rus": "местоположение",
+    "correct": "местоположение",
+    "exampleEng": "The location is convenient.",
+    "exampleRus": "Местоположение удобное."
+  },
+  {
+    "category": "Shopping",
+    "eng": "mark down",
+    "rus": "уценивать",
+    "correct": "уценивать",
+    "exampleEng": "Prices were marked down 30%.",
+    "exampleRus": "Цены были снижены на 30%."
+  },
+  {
+    "category": "Shopping",
+    "eng": "merchant",
+    "rus": "торговец",
+    "correct": "торговец",
+    "exampleEng": "The merchant accepted all major cards.",
+    "exampleRus": "Торговец принимал все основные карты."
+  },
+  {
+    "category": "Shopping",
+    "eng": "obtain",
+    "rus": "получать",
+    "correct": "получать",
+    "exampleEng": "Obtain a receipt for every purchase.",
+    "exampleRus": "Получайте чек за каждую покупку."
+  },
+  {
+    "category": "Shopping",
+    "eng": "on sale",
+    "rus": "в продаже",
+    "correct": "в продаже",
+    "exampleEng": "All winter coats are on sale today.",
+    "exampleRus": "Все зимние пальто сегодня продаются со скидкой."
+  },
+  {
+    "category": "Shopping",
+    "eng": "outlet",
+    "rus": "магазин",
+    "correct": "магазин",
+    "exampleEng": "The factory outlet offers lower prices.",
+    "exampleRus": "Фирменный магазин предлагает более низкие цены."
+  },
+  {
+    "category": "Shopping",
+    "eng": "purchase",
+    "rus": "покупка",
+    "correct": "покупка",
+    "exampleEng": "The purchase was approved.",
+    "exampleRus": "Покупка была одобрена."
+  },
+  {
+    "category": "Shopping",
+    "eng": "quantity",
+    "rus": "количество",
+    "correct": "количество",
+    "exampleEng": "Order the required quantity by Friday.",
+    "exampleRus": "Закажите необходимое количество до пятницы."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "acknowledge",
+    "rus": "подтверждать",
+    "correct": "подтверждать",
+    "exampleEng": "Please acknowledge the purchase order.",
+    "exampleRus": "Пожалуйста, подтвердите заказ на поставку."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "address",
+    "rus": "адрес",
+    "correct": "адрес",
+    "exampleEng": "Verify the delivery address before shipping.",
+    "exampleRus": "Проверьте адрес доставки перед отправкой."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "bill",
+    "rus": "счет",
+    "correct": "счет",
+    "exampleEng": "Pay the utility bill on time.",
+    "exampleRus": "Оплачивайте счет за коммунальные услуги вовремя."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "cancel",
+    "rus": "отменять",
+    "correct": "отменять",
+    "exampleEng": "Cancel the order if stock is unavailable.",
+    "exampleRus": "Отмените заказ, если товар недоступен."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "catalog",
+    "rus": "каталог",
+    "correct": "каталог",
+    "exampleEng": "Browse our product catalog.",
+    "exampleRus": "Просмотрите наш каталог продуктов."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "charge",
+    "rus": "плата",
+    "correct": "плата",
+    "exampleEng": "A handling charge was added to the order.",
+    "exampleRus": "К заказу добавлена плата за обработку."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "check",
+    "rus": "чек",
+    "question": "check",
+    "optionsList": [
+      "чек",
+      "браузер",
+      "прибыльный"
+    ],
+    "correct": "чек",
+    "mastery": 0,
+    "exampleEng": "Please pay by check.",
+    "exampleRus": "Пожалуйста, оплатите чеком."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "confirm",
+    "rus": "подтверждать",
+    "correct": "подтверждать",
+    "exampleEng": "Confirm your order within 48 hours.",
+    "exampleRus": "Подтвердите заказ в течение 48 часов."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "consignment",
+    "rus": "партия",
+    "correct": "партия",
+    "exampleEng": "The consignment was delivered yesterday.",
+    "exampleRus": "Партия товара была доставлена вчера."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "cost",
+    "rus": "стоимость",
+    "correct": "стоимость",
+    "exampleEng": "Utility cost reduction.",
+    "exampleRus": "Сокращение стоимости коммунальных услуг."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "credit",
+    "rus": "кредит",
+    "correct": "кредит",
+    "exampleEng": "She has good credit.",
+    "exampleRus": "У неё хорошая кредитная история."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "debit",
+    "rus": "дебет",
+    "correct": "дебет",
+    "exampleEng": "The amount was debited upon shipment.",
+    "exampleRus": "Сумма была списана при отправке."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "deliver",
+    "rus": "доставлять",
+    "correct": "доставлять",
+    "exampleEng": "Deliver supplies to the main office.",
+    "exampleRus": "Доставьте расходные материалы в главный офис."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "delivery",
+    "rus": "доставка",
+    "correct": "доставка",
+    "exampleEng": "Free delivery on orders over $50.",
+    "exampleRus": "Бесплатная доставка при заказе от $50."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "discount",
+    "rus": "скидка",
+    "correct": "скидка",
+    "exampleEng": "We offer a 10% discount.",
+    "exampleRus": "Мы предлагаем скидку 10%."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "dispatch",
+    "rus": "отправлять",
+    "correct": "отправлять",
+    "exampleEng": "Dispatch the order by end of day.",
+    "exampleRus": "Отправьте заказ до конца рабочего дня."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "estimate",
+    "rus": "оценивать",
+    "correct": "оценивать",
+    "exampleEng": "Request an estimate for bulk supplies.",
+    "exampleRus": "Запросите смету на оптовые поставки."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "expedite",
+    "rus": "ускорять",
+    "correct": "ускорять",
+    "exampleEng": "Please expedite this urgent order.",
+    "exampleRus": "Пожалуйста, ускорьте выполнение этого срочного заказа."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "fill",
+    "rus": "заполнять",
+    "correct": "заполнять",
+    "exampleEng": "Fill the order and confirm shipment.",
+    "exampleRus": "Выполните заказ и подтвердите отгрузку."
+  },
+  {
+    "category": "Ordering Supplies",
+    "eng": "invoice",
+    "rus": "счет-фактура",
+    "correct": "счет-фактура",
+    "exampleEng": "Send the invoice to the client.",
+    "exampleRus": "Отправьте счет-фактуру клиенту."
+  },
+  {
+    "category": "Shipping",
+    "eng": "address",
+    "rus": "адрес",
+    "correct": "адрес",
+    "exampleEng": "Verify the shipping address before dispatch.",
+    "exampleRus": "Проверьте адрес доставки перед отправкой."
+  },
+  {
+    "category": "Shipping",
+    "eng": "arrive",
+    "rus": "прибывать",
+    "correct": "прибывать",
+    "exampleEng": "The shipment will arrive Thursday.",
+    "exampleRus": "Груз прибудет в четверг."
+  },
+  {
+    "category": "Shipping",
+    "eng": "attention",
+    "rus": "внимание",
+    "correct": "внимание",
+    "exampleEng": "Mark the package: Attention Sales Dept.",
+    "exampleRus": "Пометьте посылку: Внимание Отдел продаж."
+  },
+  {
+    "category": "Shipping",
+    "eng": "bill of lading",
+    "rus": "накладная",
+    "correct": "накладная",
+    "exampleEng": "Attach the bill of lading to the shipment.",
+    "exampleRus": "Приложите накладную к отправлению."
+  },
+  {
+    "category": "Shipping",
+    "eng": "box",
+    "rus": "коробка",
+    "correct": "коробка",
+    "exampleEng": "Pack the items securely in the box.",
+    "exampleRus": "Надёжно упакуйте предметы в коробку."
+  },
+  {
+    "category": "Shipping",
+    "eng": "carrier",
+    "rus": "перевозчик",
+    "correct": "перевозчик",
+    "exampleEng": "Choose a reliable freight carrier.",
+    "exampleRus": "Выберите надёжного транспортного перевозчика."
+  },
+  {
+    "category": "Shipping",
+    "eng": "carton",
+    "rus": "коробка",
+    "correct": "коробка",
+    "exampleEng": "Each carton holds 24 units.",
+    "exampleRus": "Каждая коробка вмещает 24 единицы."
+  },
+  {
+    "category": "Shipping",
+    "eng": "cargo",
+    "rus": "груз",
+    "correct": "груз",
+    "exampleEng": "The cargo arrived safely.",
+    "exampleRus": "Груз прибыл безопасно."
+  },
+  {
+    "category": "Shipping",
+    "eng": "certificate",
+    "rus": "сертификат",
+    "correct": "сертификат",
+    "exampleEng": "A certificate of origin is required.",
+    "exampleRus": "Требуется сертификат происхождения."
+  },
+  {
+    "category": "Shipping",
+    "eng": "classify",
+    "rus": "классифицировать",
+    "correct": "классифицировать",
+    "exampleEng": "Correctly classify goods for customs.",
+    "exampleRus": "Правильно классифицируйте товары для таможни."
+  },
+  {
+    "category": "Shipping",
+    "eng": "consignee",
+    "rus": "грузополучатель",
+    "correct": "грузополучатель",
+    "exampleEng": "The consignee signs for the delivery.",
+    "exampleRus": "Грузополучатель расписывается при получении."
+  },
+  {
+    "category": "Shipping",
+    "eng": "consignment",
+    "rus": "партия",
+    "correct": "партия",
+    "exampleEng": "The consignment cleared customs today.",
+    "exampleRus": "Партия товара прошла таможенную очистку сегодня."
+  },
+  {
+    "category": "Shipping",
+    "eng": "container",
+    "rus": "контейнер",
+    "correct": "контейнер",
+    "exampleEng": "Load the goods into the container.",
+    "exampleRus": "Загрузите товары в контейнер."
+  },
+  {
+    "category": "Shipping",
+    "eng": "courier",
+    "rus": "курьер",
+    "correct": "курьер",
+    "exampleEng": "A courier delivered the documents.",
+    "exampleRus": "Курьер доставил документы."
+  },
+  {
+    "category": "Shipping",
+    "eng": "crate",
+    "rus": "ящик",
+    "correct": "ящик",
+    "exampleEng": "Fragile items are packed in wooden crates.",
+    "exampleRus": "Хрупкие предметы упакованы в деревянные ящики."
+  },
+  {
+    "category": "Shipping",
+    "eng": "customs",
+    "rus": "таможня",
+    "correct": "таможня",
+    "exampleEng": "Goods were held at customs.",
+    "exampleRus": "Товары были задержаны на таможне."
+  },
+  {
+    "category": "Shipping",
+    "eng": "deliver",
+    "rus": "доставлять",
+    "correct": "доставлять",
+    "exampleEng": "We deliver worldwide within 5 days.",
+    "exampleRus": "Мы доставляем по всему миру в течение 5 дней."
+  },
+  {
+    "category": "Shipping",
+    "eng": "dispatcher",
+    "rus": "диспетчер",
+    "correct": "диспетчер",
+    "exampleEng": "The dispatcher tracked all outgoing shipments.",
+    "exampleRus": "Диспетчер отслеживал все исходящие отправления."
+  },
+  {
+    "category": "Shipping",
+    "eng": "distribution",
+    "rus": "распределение",
+    "correct": "распределение",
+    "exampleEng": "Product distribution network.",
+    "exampleRus": "Сеть распределения продуктов."
+  },
+  {
+    "category": "Shipping",
+    "eng": "export",
+    "rus": "экспорт",
+    "correct": "экспорт",
+    "exampleEng": "Export regulations have changed.",
+    "exampleRus": "Регулирование экспорта изменилось."
+  },
+  {
+    "category": "Invoices",
+    "eng": "acknowledge",
+    "rus": "подтверждать",
+    "correct": "подтверждать",
+    "exampleEng": "Please acknowledge receipt of the invoice.",
+    "exampleRus": "Пожалуйста, подтвердите получение счёта."
+  },
+  {
+    "category": "Invoices",
+    "eng": "accurate",
+    "rus": "точный",
+    "correct": "точный",
+    "exampleEng": "Ensure all invoice amounts are accurate.",
+    "exampleRus": "Убедитесь, что все суммы в счёте точны."
+  },
+  {
+    "category": "Invoices",
+    "eng": "arrear",
+    "rus": "задолженность",
+    "correct": "задолженность",
+    "exampleEng": "Payment is three weeks in arrear.",
+    "exampleRus": "Платёж просрочен на три недели."
+  },
+  {
+    "category": "Invoices",
+    "eng": "balance",
+    "rus": "баланс",
+    "correct": "баланс",
+    "exampleEng": "Your account balance is low.",
+    "exampleRus": "Баланс вашего счета низок."
+  },
+  {
+    "category": "Invoices",
+    "eng": "bill",
+    "rus": "счет",
+    "correct": "счет",
+    "exampleEng": "Pay the utility bill on time.",
+    "exampleRus": "Оплачивайте счет за коммунальные услуги вовремя."
+  },
+  {
+    "category": "Invoices",
+    "eng": "calculate",
+    "rus": "вычислять",
+    "correct": "вычислять",
+    "exampleEng": "Calculate the total cost.",
+    "exampleRus": "Вычислите общую стоимость."
+  },
+  {
+    "category": "Invoices",
+    "eng": "charge",
+    "rus": "плата",
+    "correct": "плата",
+    "exampleEng": "A service charge was added to the invoice.",
+    "exampleRus": "В счёт была добавлена плата за обслуживание."
+  },
+  {
+    "category": "Invoices",
+    "eng": "check",
+    "rus": "чек",
+    "question": "check",
+    "optionsList": [
+      "чек",
+      "браузер",
+      "прибыльный"
+    ],
+    "correct": "чек",
+    "mastery": 0,
+    "exampleEng": "Please pay by check.",
+    "exampleRus": "Пожалуйста, оплатите чеком."
+  },
+  {
+    "category": "Invoices",
+    "eng": "collect",
+    "rus": "собирать",
+    "correct": "собирать",
+    "exampleEng": "We collect payments within 30 days.",
+    "exampleRus": "Мы взимаем платежи в течение 30 дней."
+  },
+  {
+    "category": "Invoices",
+    "eng": "consolidate",
+    "rus": "консолидировать",
+    "correct": "консолидировать",
+    "exampleEng": "Consolidate all invoices into one payment.",
+    "exampleRus": "Объедините все счета в один платёж."
+  },
+  {
+    "category": "Invoices",
+    "eng": "credit",
+    "rus": "кредит",
+    "correct": "кредит",
+    "exampleEng": "She has good credit.",
+    "exampleRus": "У неё хорошая кредитная история."
+  },
+  {
+    "category": "Invoices",
+    "eng": "debit",
+    "rus": "дебет",
+    "correct": "дебет",
+    "exampleEng": "The amount was debited from the account.",
+    "exampleRus": "Сумма была списана со счёта."
+  },
+  {
+    "category": "Invoices",
+    "eng": "detail",
+    "rus": "деталь",
+    "correct": "деталь",
+    "exampleEng": "Include full details on every invoice.",
+    "exampleRus": "Включайте полные сведения в каждый счёт."
+  },
+  {
+    "category": "Invoices",
+    "eng": "discount",
+    "rus": "скидка",
+    "correct": "скидка",
+    "exampleEng": "We offer a 10% discount.",
+    "exampleRus": "Мы предлагаем скидку 10%."
+  },
+  {
+    "category": "Invoices",
+    "eng": "due",
+    "rus": "подлежащий",
+    "correct": "подлежащий",
+    "exampleEng": "Payment is due within 30 days.",
+    "exampleRus": "Платёж должен быть произведён в течение 30 дней."
+  },
+  {
+    "category": "Invoices",
+    "eng": "duty",
+    "rus": "пошлина",
+    "correct": "пошлина",
+    "exampleEng": "Import duty was added to the invoice.",
+    "exampleRus": "В счёт была включена импортная пошлина."
+  },
+  {
+    "category": "Invoices",
+    "eng": "estimate",
+    "rus": "оценивать",
+    "correct": "оценивать",
+    "exampleEng": "An estimate was sent before the invoice.",
+    "exampleRus": "Перед выставлением счёта была отправлена смета."
+  },
+  {
+    "category": "Invoices",
+    "eng": "fee",
+    "rus": "плата",
+    "correct": "плата",
+    "exampleEng": "A late fee applies after 30 days.",
+    "exampleRus": "Штраф за просрочку применяется после 30 дней."
+  },
+  {
+    "category": "Invoices",
+    "eng": "figure",
+    "rus": "цифра",
+    "correct": "цифра",
+    "exampleEng": "Check the figures before sending the invoice.",
+    "exampleRus": "Проверьте цифры перед отправкой счёта."
+  },
+  {
+    "category": "Invoices",
+    "eng": "finance",
+    "rus": "финансы",
+    "correct": "финансы",
+    "exampleEng": "Finance approved the payment schedule.",
+    "exampleRus": "Финансовый отдел одобрил график платежей."
+  },
+  {
+    "category": "Inventory",
+    "eng": "accurate",
+    "rus": "точный",
+    "correct": "точный",
+    "exampleEng": "Accurate inventory data prevents shortages.",
+    "exampleRus": "Точные данные об инвентаре предотвращают дефицит."
+  },
+  {
+    "category": "Inventory",
+    "eng": "adequate",
+    "rus": "достаточный",
+    "correct": "достаточный",
+    "exampleEng": "Maintain adequate stock levels at all times.",
+    "exampleRus": "Поддерживайте достаточный уровень запасов."
+  },
+  {
+    "category": "Inventory",
+    "eng": "adjustment",
+    "rus": "корректировка",
+    "correct": "корректировка",
+    "exampleEng": "An inventory adjustment was made.",
+    "exampleRus": "Была проведена корректировка инвентаря."
+  },
+  {
+    "category": "Inventory",
+    "eng": "available",
+    "rus": "доступный",
+    "correct": "доступный",
+    "exampleEng": "Available inventory status.",
+    "exampleRus": "Статус доступного инвентаря."
+  },
+  {
+    "category": "Inventory",
+    "eng": "backlog",
+    "rus": "задел",
+    "correct": "задел",
+    "exampleEng": "A backlog of orders built up quickly.",
+    "exampleRus": "Невыполненные заказы накапливались быстро."
+  },
+  {
+    "category": "Inventory",
+    "eng": "bulk",
+    "rus": "оптом",
+    "correct": "оптом",
+    "exampleEng": "Buying in bulk reduces unit costs.",
+    "exampleRus": "Покупка оптом снижает стоимость единицы."
+  },
+  {
+    "category": "Inventory",
+    "eng": "carrier",
+    "rus": "перевозчик",
+    "correct": "перевозчик",
+    "exampleEng": "The carrier delivered the stock on time.",
+    "exampleRus": "Перевозчик доставил товар вовремя."
+  },
+  {
+    "category": "Inventory",
+    "eng": "catalog",
+    "rus": "каталог",
+    "correct": "каталог",
+    "exampleEng": "Browse our product catalog.",
+    "exampleRus": "Просмотрите наш каталог продуктов."
+  },
+  {
+    "category": "Inventory",
+    "eng": "complete",
+    "rus": "завершать",
+    "correct": "завершать",
+    "exampleEng": "Complete the stock count by Friday.",
+    "exampleRus": "Завершите инвентаризацию до пятницы."
+  },
+  {
+    "category": "Inventory",
+    "eng": "consignment",
+    "rus": "партия",
+    "correct": "партия",
+    "exampleEng": "A consignment arrived from the supplier.",
+    "exampleRus": "От поставщика поступила партия товара."
+  },
+  {
+    "category": "Inventory",
+    "eng": "count",
+    "rus": "считать",
+    "correct": "считать",
+    "exampleEng": "A full inventory count is done quarterly.",
+    "exampleRus": "Полная инвентаризация проводится ежеквартально."
+  },
+  {
+    "category": "Inventory",
+    "eng": "decrease",
+    "rus": "уменьшать",
+    "correct": "уменьшать",
+    "exampleEng": "Inventory levels decreased due to high demand.",
+    "exampleRus": "Уровень запасов снизился из-за высокого спроса."
+  },
+  {
+    "category": "Inventory",
+    "eng": "defective",
+    "rus": "дефектный",
+    "correct": "дефектный",
+    "exampleEng": "Defective items were returned to the supplier.",
+    "exampleRus": "Дефектные товары были возвращены поставщику."
+  },
+  {
+    "category": "Inventory",
+    "eng": "delivery",
+    "rus": "доставка",
+    "correct": "доставка",
+    "exampleEng": "Free delivery on orders over $50.",
+    "exampleRus": "Бесплатная доставка при заказе от $50."
+  },
+  {
+    "category": "Inventory",
+    "eng": "demand",
+    "rus": "спрос",
+    "correct": "спрос",
+    "exampleEng": "Strong demand depleted the warehouse stock.",
+    "exampleRus": "Высокий спрос истощил складские запасы."
+  },
+  {
+    "category": "Inventory",
+    "eng": "diminish",
+    "rus": "уменьшать",
+    "correct": "уменьшать",
+    "exampleEng": "Reserves continue to diminish this season.",
+    "exampleRus": "Запасы продолжают уменьшаться в этом сезоне."
+  },
+  {
+    "category": "Inventory",
+    "eng": "dispatch",
+    "rus": "отправлять",
+    "correct": "отправлять",
+    "exampleEng": "Dispatch goods from the warehouse daily.",
+    "exampleRus": "Ежедневно отправляйте товары со склада."
+  },
+  {
+    "category": "Inventory",
+    "eng": "distribute",
+    "rus": "распределять",
+    "correct": "распределять",
+    "exampleEng": "Goods are distributed to regional warehouses.",
+    "exampleRus": "Товары распределяются по региональным складам."
+  },
+  {
+    "category": "Inventory",
+    "eng": "distribution",
+    "rus": "распределение",
+    "correct": "распределение",
+    "exampleEng": "Product distribution network.",
+    "exampleRus": "Сеть распределения продуктов."
+  },
+  {
+    "category": "Inventory",
+    "eng": "excess",
+    "rus": "излишек",
+    "correct": "излишек",
+    "exampleEng": "Excess inventory was discounted and sold.",
+    "exampleRus": "Излишки запасов были уценены и проданы."
+  },
+  {
+    "category": "Banking",
+    "eng": "account",
+    "rus": "счет",
+    "correct": "счет",
+    "exampleEng": "Open a bank account with us.",
+    "exampleRus": "Откройте банковский счет у нас."
+  },
+  {
+    "category": "Banking",
+    "eng": "asset",
+    "rus": "актив",
+    "correct": "актив",
+    "exampleEng": "Fixed asset management.",
+    "exampleRus": "Управление основными активами."
+  },
+  {
+    "category": "Banking",
+    "eng": "balance",
+    "rus": "баланс",
+    "correct": "баланс",
+    "exampleEng": "Your account balance is low.",
+    "exampleRus": "Баланс вашего счета низок."
+  },
+  {
+    "category": "Banking",
+    "eng": "bank",
+    "rus": "банк",
+    "correct": "банк",
+    "exampleEng": "The company banks with a major institution.",
+    "exampleRus": "Компания обслуживается в крупном банке."
+  },
+  {
+    "category": "Banking",
+    "eng": "bankruptcy",
+    "rus": "банкротство",
+    "correct": "банкротство",
+    "exampleEng": "The firm filed for bankruptcy protection.",
+    "exampleRus": "Компания подала заявление о банкротстве."
+  },
+  {
+    "category": "Banking",
+    "eng": "bill",
+    "rus": "счет",
+    "correct": "счет",
+    "exampleEng": "Pay the utility bill on time.",
+    "exampleRus": "Оплачивайте счет за коммунальные услуги вовремя."
+  },
+  {
+    "category": "Banking",
+    "eng": "borrow",
+    "rus": "занимать",
+    "correct": "занимать",
+    "exampleEng": "I need to borrow some money.",
+    "exampleRus": "Мне нужно занять немного денег."
+  },
+  {
+    "category": "Banking",
+    "eng": "budget",
+    "rus": "бюджет",
+    "correct": "бюджет",
+    "exampleEng": "We need to prepare the annual budget.",
+    "exampleRus": "Нам нужно подготовить годовой бюджет."
+  },
+  {
+    "category": "Banking",
+    "eng": "calculate",
+    "rus": "вычислять",
+    "correct": "вычислять",
+    "exampleEng": "Calculate the total cost.",
+    "exampleRus": "Вычислите общую стоимость."
+  },
+  {
+    "category": "Banking",
+    "eng": "capital",
+    "rus": "капитал",
+    "correct": "капитал",
+    "exampleEng": "The company has sufficient capital.",
+    "exampleRus": "У компании достаточно капитала."
+  },
+  {
+    "category": "Banking",
+    "eng": "cash",
+    "rus": "наличные",
+    "correct": "наличные",
+    "exampleEng": "Cash flow management.",
+    "exampleRus": "Управление денежным потоком."
+  },
+  {
+    "category": "Banking",
+    "eng": "check",
+    "rus": "чек",
+    "question": "check",
+    "optionsList": [
+      "чек",
+      "браузер",
+      "прибыльный"
+    ],
+    "correct": "чек",
+    "mastery": 0,
+    "exampleEng": "Please pay by check.",
+    "exampleRus": "Пожалуйста, оплатите чеком."
+  },
+  {
+    "category": "Banking",
+    "eng": "collateral",
+    "rus": "залог",
+    "correct": "залог",
+    "exampleEng": "The loan requires collateral.",
+    "exampleRus": "Кредит требует залогового обеспечения."
+  },
+  {
+    "category": "Banking",
+    "eng": "commit",
+    "rus": "обязываться",
+    "correct": "обязываться",
+    "exampleEng": "We commit to repaying the loan on time.",
+    "exampleRus": "Мы обязуемся погасить кредит своевременно."
+  },
+  {
+    "category": "Banking",
+    "eng": "compensate",
+    "rus": "компенсировать",
+    "correct": "компенсировать",
+    "exampleEng": "The bank will compensate for the error.",
+    "exampleRus": "Банк компенсирует допущенную ошибку."
+  },
+  {
+    "category": "Banking",
+    "eng": "compensation",
+    "rus": "компенсация",
+    "correct": "компенсация",
+    "exampleEng": "You will receive compensation.",
+    "exampleRus": "Вы получите компенсацию."
+  },
+  {
+    "category": "Banking",
+    "eng": "credit",
+    "rus": "кредит",
+    "correct": "кредит",
+    "exampleEng": "She has good credit.",
+    "exampleRus": "У неё хорошая кредитная история."
+  },
+  {
+    "category": "Banking",
+    "eng": "currency",
+    "rus": "валюта",
+    "correct": "валюта",
+    "exampleEng": "Convert currency before the business trip.",
+    "exampleRus": "Обменяйте валюту перед деловой поездкой."
+  },
+  {
+    "category": "Banking",
+    "eng": "debit",
+    "rus": "дебет",
+    "correct": "дебет",
+    "exampleEng": "The fee was debited from the account.",
+    "exampleRus": "Комиссия была списана со счёта."
+  },
+  {
+    "category": "Banking",
+    "eng": "debt",
+    "rus": "долг",
+    "correct": "долг",
+    "exampleEng": "The company reduced its debt this year.",
+    "exampleRus": "Компания сократила долг в этом году."
+  },
+  {
+    "category": "Accounting",
+    "eng": "account",
+    "rus": "счет",
+    "correct": "счет",
+    "exampleEng": "Open a bank account with us.",
+    "exampleRus": "Откройте банковский счет у нас."
+  },
+  {
+    "category": "Accounting",
+    "eng": "accrue",
+    "rus": "начисляться",
+    "correct": "начисляться",
+    "exampleEng": "Interest accrues monthly on overdue accounts.",
+    "exampleRus": "Проценты начисляются ежемесячно на просроченные счета."
+  },
+  {
+    "category": "Accounting",
+    "eng": "accumulate",
+    "rus": "накапливать",
+    "correct": "накапливать",
+    "exampleEng": "Costs accumulated over the fiscal year.",
+    "exampleRus": "Затраты накапливались в течение финансового года."
+  },
+  {
+    "category": "Accounting",
+    "eng": "adjust",
+    "rus": "настраивать",
+    "correct": "настраивать",
+    "exampleEng": "Adjust the strategy accordingly.",
+    "exampleRus": "Соответственно настройте стратегию."
+  },
+  {
+    "category": "Accounting",
+    "eng": "allocation",
+    "rus": "распределение",
+    "correct": "распределение",
+    "exampleEng": "Budget allocation was revised quarterly.",
+    "exampleRus": "Распределение бюджета пересматривалось ежеквартально."
+  },
+  {
+    "category": "Accounting",
+    "eng": "allowance",
+    "rus": "пособие",
+    "correct": "пособие",
+    "exampleEng": "A travel allowance is provided to staff.",
+    "exampleRus": "Сотрудникам предоставляется командировочное пособие."
+  },
+  {
+    "category": "Accounting",
+    "eng": "amortize",
+    "rus": "амортизировать",
+    "correct": "амортизировать",
+    "exampleEng": "Intangible assets are amortized over time.",
+    "exampleRus": "Нематериальные активы амортизируются со временем."
+  },
+  {
+    "category": "Accounting",
+    "eng": "asset",
+    "rus": "актив",
+    "correct": "актив",
+    "exampleEng": "Fixed asset management.",
+    "exampleRus": "Управление основными активами."
+  },
+  {
+    "category": "Accounting",
+    "eng": "assessment",
+    "rus": "оценка",
+    "correct": "оценка",
+    "exampleEng": "A financial assessment was conducted.",
+    "exampleRus": "Была проведена финансовая оценка."
+  },
+  {
+    "category": "Accounting",
+    "eng": "audit",
+    "rus": "аудит",
+    "correct": "аудит",
+    "exampleEng": "Conduct a quality audit.",
+    "exampleRus": "Проведите аудит качества."
+  },
+  {
+    "category": "Accounting",
+    "eng": "balance",
+    "rus": "баланс",
+    "correct": "баланс",
+    "exampleEng": "Your account balance is low.",
+    "exampleRus": "Баланс вашего счета низок."
+  },
+  {
+    "category": "Accounting",
+    "eng": "bankruptcy",
+    "rus": "банкротство",
+    "correct": "банкротство",
+    "exampleEng": "Bankruptcy proceedings affect all creditors.",
+    "exampleRus": "Процедура банкротства затрагивает всех кредиторов."
+  },
+  {
+    "category": "Accounting",
+    "eng": "bond",
+    "rus": "облигация",
+    "correct": "облигация",
+    "exampleEng": "Invest in government bonds.",
+    "exampleRus": "Инвестируйте в государственные облигации."
+  },
+  {
+    "category": "Accounting",
+    "eng": "budget",
+    "rus": "бюджет",
+    "correct": "бюджет",
+    "exampleEng": "We need to prepare the annual budget.",
+    "exampleRus": "Нам нужно подготовить годовой бюджет."
+  },
+  {
+    "category": "Accounting",
+    "eng": "capital",
+    "rus": "капитал",
+    "correct": "капитал",
+    "exampleEng": "The company has sufficient capital.",
+    "exampleRus": "У компании достаточно капитала."
+  },
+  {
+    "category": "Accounting",
+    "eng": "cash flow",
+    "rus": "денежный поток",
+    "correct": "денежный поток",
+    "exampleEng": "Cash flow improved this quarter.",
+    "exampleRus": "Денежный поток улучшился в этом квартале."
+  },
+  {
+    "category": "Accounting",
+    "eng": "certificate",
+    "rus": "сертификат",
+    "correct": "сертификат",
+    "exampleEng": "Obtain a tax certificate from authorities.",
+    "exampleRus": "Получите налоговый сертификат в государственных органах."
+  },
+  {
+    "category": "Accounting",
+    "eng": "classify",
+    "rus": "классифицировать",
+    "correct": "классифицировать",
+    "exampleEng": "Classify all expenses by department.",
+    "exampleRus": "Классифицируйте все расходы по отделам."
+  },
+  {
+    "category": "Accounting",
+    "eng": "commitment",
+    "rus": "обязательство",
+    "correct": "обязательство",
+    "exampleEng": "Honor your commitment.",
+    "exampleRus": "Выполняйте свое обязательство."
+  },
+  {
+    "category": "Accounting",
+    "eng": "compound",
+    "rus": "сложный",
+    "correct": "сложный",
+    "exampleEng": "Compound interest grows the investment.",
+    "exampleRus": "Сложные проценты увеличивают инвестиции."
+  },
+  {
+    "category": "Investments",
+    "eng": "account",
+    "rus": "счет",
+    "correct": "счет",
+    "exampleEng": "Open a bank account with us.",
+    "exampleRus": "Откройте банковский счет у нас."
+  },
+  {
+    "category": "Investments",
+    "eng": "appreciate",
+    "rus": "оценивать",
+    "correct": "оценивать",
+    "exampleEng": "Property values appreciated significantly.",
+    "exampleRus": "Стоимость недвижимости значительно выросла."
+  },
+  {
+    "category": "Investments",
+    "eng": "asset",
+    "rus": "актив",
+    "correct": "актив",
+    "exampleEng": "Fixed asset management.",
+    "exampleRus": "Управление основными активами."
+  },
+  {
+    "category": "Investments",
+    "eng": "bond",
+    "rus": "облигация",
+    "correct": "облигация",
+    "exampleEng": "Invest in government bonds.",
+    "exampleRus": "Инвестируйте в государственные облигации."
+  },
+  {
+    "category": "Investments",
+    "eng": "broker",
+    "rus": "брокер",
+    "correct": "брокер",
+    "exampleEng": "Our broker advised on the portfolio.",
+    "exampleRus": "Наш брокер консультировал по портфелю."
+  },
+  {
+    "category": "Investments",
+    "eng": "capital",
+    "rus": "капитал",
+    "correct": "капитал",
+    "exampleEng": "The company has sufficient capital.",
+    "exampleRus": "У компании достаточно капитала."
+  },
+  {
+    "category": "Investments",
+    "eng": "certificate",
+    "rus": "сертификат",
+    "correct": "сертификат",
+    "exampleEng": "Purchase a certificate of deposit.",
+    "exampleRus": "Купите депозитный сертификат."
+  },
+  {
+    "category": "Investments",
+    "eng": "commission",
+    "rus": "комиссия",
+    "correct": "комиссия",
+    "exampleEng": "The broker charges a 2% commission.",
+    "exampleRus": "Брокер взимает комиссию в размере 2%."
+  },
+  {
+    "category": "Investments",
+    "eng": "compound",
+    "rus": "сложный",
+    "correct": "сложный",
+    "exampleEng": "Compound returns accelerate wealth growth.",
+    "exampleRus": "Сложный доход ускоряет рост богатства."
+  },
+  {
+    "category": "Investments",
+    "eng": "convertible",
+    "rus": "конвертируемый",
+    "correct": "конвертируемый",
+    "exampleEng": "Convertible bonds can become company stock.",
+    "exampleRus": "Конвертируемые облигации можно обменять на акции."
+  },
+  {
+    "category": "Investments",
+    "eng": "decline",
+    "rus": "снижаться",
+    "correct": "снижаться",
+    "exampleEng": "Share prices declined after the report.",
+    "exampleRus": "Цены акций снизились после отчёта."
+  },
+  {
+    "category": "Investments",
+    "eng": "deferred",
+    "rus": "отложенный",
+    "correct": "отложенный",
+    "exampleEng": "Deferred tax liabilities were disclosed.",
+    "exampleRus": "Отложенные налоговые обязательства были раскрыты."
+  },
+  {
+    "category": "Investments",
+    "eng": "deposit",
+    "rus": "вклад",
+    "correct": "вклад",
+    "exampleEng": "Make a deposit to your account.",
+    "exampleRus": "Сделайте вклад на свой счет."
+  },
+  {
+    "category": "Investments",
+    "eng": "depreciate",
+    "rus": "обесцениваться",
+    "correct": "обесцениваться",
+    "exampleEng": "The asset value may depreciate rapidly.",
+    "exampleRus": "Стоимость актива может быстро обесцениться."
+  },
+  {
+    "category": "Investments",
+    "eng": "diversify",
+    "rus": "диверсифицировать",
+    "correct": "диверсифицировать",
+    "exampleEng": "Diversify your investment portfolio wisely.",
+    "exampleRus": "Разумно диверсифицируйте инвестиционный портфель."
+  },
+  {
+    "category": "Investments",
+    "eng": "dividend",
+    "rus": "дивиденд",
+    "correct": "дивиденд",
+    "exampleEng": "Receive quarterly dividends.",
+    "exampleRus": "Получайте ежеквартальные дивиденды."
+  },
+  {
+    "category": "Investments",
+    "eng": "dollar",
+    "rus": "доллар",
+    "correct": "доллар",
+    "exampleEng": "The dollar strengthened against major currencies.",
+    "exampleRus": "Доллар укрепился относительно основных валют."
+  },
+  {
+    "category": "Investments",
+    "eng": "downturn",
+    "rus": "спад",
+    "correct": "спад",
+    "exampleEng": "A market downturn affected all portfolios.",
+    "exampleRus": "Спад на рынке затронул все портфели."
+  },
+  {
+    "category": "Investments",
+    "eng": "equity",
+    "rus": "собственный капитал",
+    "correct": "собственный капитал",
+    "exampleEng": "Build equity in your home.",
+    "exampleRus": "Накапливайте собственный капитал в вашем доме."
+  },
+  {
+    "category": "Investments",
+    "eng": "fluctuate",
+    "rus": "колебаться",
+    "correct": "колебаться",
+    "exampleEng": "Currency values fluctuate daily.",
+    "exampleRus": "Курсы валют колеблются ежедневно."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "account",
+    "rus": "счет",
+    "correct": "счет",
+    "exampleEng": "Open a bank account with us.",
+    "exampleRus": "Откройте банковский счет у нас."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "accrue",
+    "rus": "начисляться",
+    "correct": "начисляться",
+    "exampleEng": "Revenue accrues when services are delivered.",
+    "exampleRus": "Выручка начисляется при оказании услуг."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "accumulate",
+    "rus": "накапливать",
+    "correct": "накапливать",
+    "exampleEng": "Retained earnings accumulate over fiscal years.",
+    "exampleRus": "Нераспределённая прибыль накапливается в течение финансовых лет."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "adjustment",
+    "rus": "корректировка",
+    "correct": "корректировка",
+    "exampleEng": "Year-end adjustment improved the balance sheet.",
+    "exampleRus": "Корректировка на конец года улучшила баланс."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "amortize",
+    "rus": "амортизировать",
+    "correct": "амортизировать",
+    "exampleEng": "Goodwill is amortized over several years.",
+    "exampleRus": "Деловая репутация амортизируется в течение нескольких лет."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "analysis",
+    "rus": "анализ",
+    "correct": "анализ",
+    "exampleEng": "Financial analysis report.",
+    "exampleRus": "Отчет финансового анализа."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "annual",
+    "rus": "годовой",
+    "correct": "годовой",
+    "exampleEng": "The annual report is due in March.",
+    "exampleRus": "Годовой отчёт должен быть готов в марте."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "appreciate",
+    "rus": "оценивать",
+    "correct": "оценивать",
+    "exampleEng": "The asset appreciated significantly last year.",
+    "exampleRus": "Актив значительно вырос в цене в прошлом году."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "asset",
+    "rus": "актив",
+    "correct": "актив",
+    "exampleEng": "Fixed asset management.",
+    "exampleRus": "Управление основными активами."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "audit",
+    "rus": "аудит",
+    "correct": "аудит",
+    "exampleEng": "Conduct a quality audit.",
+    "exampleRus": "Проведите аудит качества."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "balance",
+    "rus": "баланс",
+    "correct": "баланс",
+    "exampleEng": "Your account balance is low.",
+    "exampleRus": "Баланс вашего счета низок."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "bankruptcy",
+    "rus": "банкротство",
+    "correct": "банкротство",
+    "exampleEng": "Bankruptcy was declared after losses mounted.",
+    "exampleRus": "Банкротство было объявлено после накопившихся убытков."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "bond",
+    "rus": "облигация",
+    "correct": "облигация",
+    "exampleEng": "Invest in government bonds.",
+    "exampleRus": "Инвестируйте в государственные облигации."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "budget",
+    "rus": "бюджет",
+    "correct": "бюджет",
+    "exampleEng": "We need to prepare the annual budget.",
+    "exampleRus": "Нам нужно подготовить годовой бюджет."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "capital",
+    "rus": "капитал",
+    "correct": "капитал",
+    "exampleEng": "The company has sufficient capital.",
+    "exampleRus": "У компании достаточно капитала."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "cash flow",
+    "rus": "денежный поток",
+    "correct": "денежный поток",
+    "exampleEng": "Positive cash flow ensures business stability.",
+    "exampleRus": "Положительный денежный поток обеспечивает стабильность бизнеса."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "certificate",
+    "rus": "сертификат",
+    "correct": "сертификат",
+    "exampleEng": "The auditor issued a clean certificate.",
+    "exampleRus": "Аудитор выдал чистое заключение."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "classify",
+    "rus": "классифицировать",
+    "correct": "классифицировать",
+    "exampleEng": "Classify each item on the balance sheet.",
+    "exampleRus": "Классифицируйте каждую статью в балансе."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "consolidate",
+    "rus": "консолидировать",
+    "correct": "консолидировать",
+    "exampleEng": "Consolidate all subsidiary results.",
+    "exampleRus": "Консолидируйте результаты всех дочерних компаний."
+  },
+  {
+    "category": "Financial Statements",
+    "eng": "corporate",
+    "rus": "корпоративный",
+    "correct": "корпоративный",
+    "exampleEng": "Corporate headquarters location.",
+    "exampleRus": "Местоположение корпоративного штаб-квартиры."
+  },
+  {
+    "category": "Taxes",
+    "eng": "assess",
+    "rus": "оценивать",
+    "correct": "оценивать",
+    "exampleEng": "Assess the situation carefully.",
+    "exampleRus": "Тщательно оцените ситуацию."
+  },
+  {
+    "category": "Taxes",
+    "eng": "assessment",
+    "rus": "оценка",
+    "correct": "оценка",
+    "exampleEng": "The tax assessment was sent by mail.",
+    "exampleRus": "Налоговая оценка была отправлена по почте."
+  },
+  {
+    "category": "Taxes",
+    "eng": "audit",
+    "rus": "аудит",
+    "correct": "аудит",
+    "exampleEng": "Conduct a quality audit.",
+    "exampleRus": "Проведите аудит качества."
+  },
+  {
+    "category": "Taxes",
+    "eng": "balance",
+    "rus": "баланс",
+    "correct": "баланс",
+    "exampleEng": "Your account balance is low.",
+    "exampleRus": "Баланс вашего счета низок."
+  },
+  {
+    "category": "Taxes",
+    "eng": "bracket",
+    "rus": "скобка",
+    "correct": "скобка",
+    "exampleEng": "Higher income moves you into a new bracket.",
+    "exampleRus": "Более высокий доход переводит вас в новую налоговую категорию."
+  },
+  {
+    "category": "Taxes",
+    "eng": "calculate",
+    "rus": "вычислять",
+    "correct": "вычислять",
+    "exampleEng": "Calculate the total cost.",
+    "exampleRus": "Вычислите общую стоимость."
+  },
+  {
+    "category": "Taxes",
+    "eng": "corporate",
+    "rus": "корпоративный",
+    "correct": "корпоративный",
+    "exampleEng": "Corporate headquarters location.",
+    "exampleRus": "Местоположение корпоративного штаб-квартиры."
+  },
+  {
+    "category": "Taxes",
+    "eng": "deduct",
+    "rus": "вычитать",
+    "correct": "вычитать",
+    "exampleEng": "Deduct expenses from revenue.",
+    "exampleRus": "Вычтите расходы из выручки."
+  },
+  {
+    "category": "Taxes",
+    "eng": "deduction",
+    "rus": "вычет",
+    "correct": "вычет",
+    "exampleEng": "Tax deductions from salary.",
+    "exampleRus": "Налоговые вычеты из зарплаты."
+  },
+  {
+    "category": "Taxes",
+    "eng": "depend",
+    "rus": "зависеть",
+    "correct": "зависеть",
+    "exampleEng": "Tax owed depends on annual earnings.",
+    "exampleRus": "Сумма налога зависит от годового заработка."
+  },
+  {
+    "category": "Taxes",
+    "eng": "depreciate",
+    "rus": "обесцениваться",
+    "correct": "обесцениваться",
+    "exampleEng": "Office equipment depreciates over 5 years.",
+    "exampleRus": "Офисное оборудование амортизируется за 5 лет."
+  },
+  {
+    "category": "Taxes",
+    "eng": "discretionary",
+    "rus": "дискреционный",
+    "correct": "дискреционный",
+    "exampleEng": "Discretionary spending must be justified.",
+    "exampleRus": "Дискреционные расходы должны быть обоснованы."
+  },
+  {
+    "category": "Taxes",
+    "eng": "dividend",
+    "rus": "дивиденд",
+    "correct": "дивиденд",
+    "exampleEng": "Receive quarterly dividends.",
+    "exampleRus": "Получайте ежеквартальные дивиденды."
+  },
+  {
+    "category": "Taxes",
+    "eng": "e-file",
+    "rus": "электронная сдача",
+    "correct": "электронная сдача",
+    "exampleEng": "Most companies e-file their tax returns.",
+    "exampleRus": "Большинство компаний подают налоговые декларации в электронном виде."
+  },
+  {
+    "category": "Taxes",
+    "eng": "exempt",
+    "rus": "освобождённый",
+    "correct": "освобождённый",
+    "exampleEng": "Non-profit organizations are tax exempt.",
+    "exampleRus": "Некоммерческие организации освобождены от налогов."
+  },
+  {
+    "category": "Taxes",
+    "eng": "exemption",
+    "rus": "освобождение",
+    "correct": "освобождение",
+    "exampleEng": "Claim all eligible tax exemptions.",
+    "exampleRus": "Заявите все применимые налоговые льготы."
+  },
+  {
+    "category": "Taxes",
+    "eng": "file",
+    "rus": "файл",
+    "correct": "файл",
+    "exampleEng": "File the document properly.",
+    "exampleRus": "Правильно оформите документ."
+  },
+  {
+    "category": "Taxes",
+    "eng": "filer",
+    "rus": "налогоплательщик",
+    "correct": "налогоплательщик",
+    "exampleEng": "Each filer must submit receipts.",
+    "exampleRus": "Каждый налогоплательщик должен предоставить квитанции."
+  },
+  {
+    "category": "Taxes",
+    "eng": "filing",
+    "rus": "подача",
+    "correct": "подача",
+    "exampleEng": "The tax filing deadline is in April.",
+    "exampleRus": "Срок подачи налоговой декларации — в апреле."
+  },
+  {
+    "category": "Taxes",
+    "eng": "government",
+    "rus": "правительство",
+    "correct": "правительство",
+    "exampleEng": "Government taxes fund public services.",
+    "exampleRus": "Государственные налоги финансируют общественные услуги."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "accommodate",
+    "rus": "размещать",
+    "correct": "размещать",
+    "exampleEng": "We can accommodate 200 guests.",
+    "exampleRus": "Мы можем разместить 200 гостей."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "acquisition",
+    "rus": "приобретение",
+    "correct": "приобретение",
+    "exampleEng": "Company acquisition strategy.",
+    "exampleRus": "Стратегия приобретения компании."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "adjacent",
+    "rus": "смежный",
+    "correct": "смежный",
+    "exampleEng": "The adjacent lot is available for purchase.",
+    "exampleRus": "Соседний участок доступен для покупки."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "amenity",
+    "rus": "удобство",
+    "correct": "удобство",
+    "exampleEng": "The building offers premium amenities.",
+    "exampleRus": "Здание предлагает премиальные удобства."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "appraisal",
+    "rus": "оценка",
+    "correct": "оценка",
+    "exampleEng": "Get an appraisal before signing the deal.",
+    "exampleRus": "Получите оценку перед подписанием сделки."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "appropriate",
+    "rus": "подходящий",
+    "correct": "подходящий",
+    "exampleEng": "The space is appropriate for a head office.",
+    "exampleRus": "Помещение подходит для главного офиса."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "asset",
+    "rus": "актив",
+    "correct": "актив",
+    "exampleEng": "Fixed asset management.",
+    "exampleRus": "Управление основными активами."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "broker",
+    "rus": "брокер",
+    "correct": "брокер",
+    "exampleEng": "Our real estate broker found the space.",
+    "exampleRus": "Наш риэлтор нашёл это помещение."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "concern",
+    "rus": "беспокойство",
+    "correct": "беспокойство",
+    "exampleEng": "Address customer concerns.",
+    "exampleRus": "Решайте беспокойства клиентов."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "condition",
+    "rus": "условие",
+    "correct": "условие",
+    "exampleEng": "The building is in excellent condition.",
+    "exampleRus": "Здание находится в отличном состоянии."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "construction",
+    "rus": "строительство",
+    "correct": "строительство",
+    "exampleEng": "Construction of the new office begins soon.",
+    "exampleRus": "Строительство нового офиса начинается скоро."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "contractor",
+    "rus": "подрядчик",
+    "correct": "подрядчик",
+    "exampleEng": "A contractor was hired for the renovation.",
+    "exampleRus": "Для ремонта был нанят подрядчик."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "deed",
+    "rus": "документ",
+    "correct": "документ",
+    "exampleEng": "The deed was transferred to the new owner.",
+    "exampleRus": "Право собственности было передано новому владельцу."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "development",
+    "rus": "развитие",
+    "correct": "развитие",
+    "exampleEng": "Career development opportunities.",
+    "exampleRus": "Возможности развития карьеры."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "dwelling",
+    "rus": "жилище",
+    "correct": "жилище",
+    "exampleEng": "The dwelling was converted to office space.",
+    "exampleRus": "Жилище было переоборудовано в офисное помещение."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "estate",
+    "rus": "имущество",
+    "correct": "имущество",
+    "exampleEng": "The estate includes a warehouse facility.",
+    "exampleRus": "Объект недвижимости включает складское помещение."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "eviction",
+    "rus": "выселение",
+    "correct": "выселение",
+    "exampleEng": "Eviction proceedings began for non-payment.",
+    "exampleRus": "Процедура выселения была начата за неуплату."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "facility",
+    "rus": "объект",
+    "correct": "объект",
+    "exampleEng": "The facility is well-maintained.",
+    "exampleRus": "Объект хорошо обслуживается."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "finance",
+    "rus": "финансы",
+    "correct": "финансы",
+    "exampleEng": "Secure finance before making an offer.",
+    "exampleRus": "Обеспечьте финансирование перед подачей предложения."
+  },
+  {
+    "category": "Property & Real Estate",
+    "eng": "furnish",
+    "rus": "меблировать",
+    "correct": "меблировать",
+    "exampleEng": "The office was furnished with new desks.",
+    "exampleRus": "Офис был обставлен новыми столами."
+  },
+  {
+    "category": "Insurance",
+    "eng": "actuary",
+    "rus": "актуарий",
+    "correct": "актуарий",
+    "exampleEng": "The actuary calculated the risk premium.",
+    "exampleRus": "Актуарий рассчитал страховую премию за риск."
+  },
+  {
+    "category": "Insurance",
+    "eng": "adjuster",
+    "rus": "аварийный комиссар",
+    "correct": "аварийный комиссар",
+    "exampleEng": "The adjuster assessed the claim value.",
+    "exampleRus": "Аварийный комиссар оценил размер претензии."
+  },
+  {
+    "category": "Insurance",
+    "eng": "adverse",
+    "rus": "неблагоприятный",
+    "correct": "неблагоприятный",
+    "exampleEng": "Adverse weather led to many claims.",
+    "exampleRus": "Неблагоприятная погода привела к многочисленным претензиям."
+  },
+  {
+    "category": "Insurance",
+    "eng": "agent",
+    "rus": "агент",
+    "correct": "агент",
+    "exampleEng": "Contact a real estate agent.",
+    "exampleRus": "Свяжитесь с риелтором."
+  },
+  {
+    "category": "Insurance",
+    "eng": "appraisal",
+    "rus": "оценка",
+    "correct": "оценка",
+    "exampleEng": "An appraisal determined the property value.",
+    "exampleRus": "Оценка определила стоимость имущества."
+  },
+  {
+    "category": "Insurance",
+    "eng": "applicant",
+    "rus": "соискатель",
+    "correct": "соискатель",
+    "exampleEng": "The applicant had impressive qualifications.",
+    "exampleRus": "У соискателя были впечатляющие квалификации."
+  },
+  {
+    "category": "Insurance",
+    "eng": "asset",
+    "rus": "актив",
+    "correct": "актив",
+    "exampleEng": "Fixed asset management.",
+    "exampleRus": "Управление основными активами."
+  },
+  {
+    "category": "Insurance",
+    "eng": "beneficiary",
+    "rus": "бенефициар",
+    "correct": "бенефициар",
+    "exampleEng": "Name the beneficiary on the policy.",
+    "exampleRus": "Укажите бенефициара в полисе."
+  },
+  {
+    "category": "Insurance",
+    "eng": "broker",
+    "rus": "брокер",
+    "correct": "брокер",
+    "exampleEng": "An insurance broker compared all plans.",
+    "exampleRus": "Страховой брокер сравнил все планы."
+  },
+  {
+    "category": "Insurance",
+    "eng": "cancel",
+    "rus": "отменять",
+    "correct": "отменять",
+    "exampleEng": "You may cancel the policy with 30 days notice.",
+    "exampleRus": "Вы можете отменить полис с уведомлением за 30 дней."
+  },
+  {
+    "category": "Insurance",
+    "eng": "carrier",
+    "rus": "перевозчик",
+    "correct": "перевозчик",
+    "exampleEng": "The insurance carrier processed the claim.",
+    "exampleRus": "Страховая компания обработала претензию."
+  },
+  {
+    "category": "Insurance",
+    "eng": "claim",
+    "rus": "претензия",
+    "correct": "претензия",
+    "exampleEng": "File an insurance claim.",
+    "exampleRus": "Подайте страховую претензию."
+  },
+  {
+    "category": "Insurance",
+    "eng": "compensation",
+    "rus": "компенсация",
+    "correct": "компенсация",
+    "exampleEng": "You will receive compensation.",
+    "exampleRus": "Вы получите компенсацию."
+  },
+  {
+    "category": "Insurance",
+    "eng": "coverage",
+    "rus": "покрытие",
+    "correct": "покрытие",
+    "exampleEng": "Check your insurance coverage.",
+    "exampleRus": "Проверьте ваше страховое покрытие."
+  },
+  {
+    "category": "Insurance",
+    "eng": "damage",
+    "rus": "ущерб",
+    "correct": "ущерб",
+    "exampleEng": "Damage to equipment was fully covered.",
+    "exampleRus": "Ущерб оборудованию был полностью покрыт."
+  },
+  {
+    "category": "Insurance",
+    "eng": "deductible",
+    "rus": "вычитаемый",
+    "correct": "вычитаемый",
+    "exampleEng": "The deductible is $500.",
+    "exampleRus": "Вычитаемая сумма составляет $500."
+  },
+  {
+    "category": "Insurance",
+    "eng": "detriment",
+    "rus": "ущерб",
+    "correct": "ущерб",
+    "exampleEng": "The incident caused detriment to business.",
+    "exampleRus": "Инцидент нанёс ущерб бизнесу."
+  },
+  {
+    "category": "Insurance",
+    "eng": "disability",
+    "rus": "нетрудоспособность",
+    "correct": "нетрудоспособность",
+    "exampleEng": "Disability insurance covers lost income.",
+    "exampleRus": "Страхование по нетрудоспособности покрывает потерю дохода."
+  },
+  {
+    "category": "Insurance",
+    "eng": "endorse",
+    "rus": "одобрять",
+    "correct": "одобрять",
+    "exampleEng": "The broker endorsed the policy change.",
+    "exampleRus": "Брокер одобрил изменение полиса."
+  },
+  {
+    "category": "Insurance",
+    "eng": "exempt",
+    "rus": "освобождённый",
+    "correct": "освобождённый",
+    "exampleEng": "Certain items are exempt from coverage.",
+    "exampleRus": "Некоторые предметы освобождены от страхового покрытия."
+  },
+  {
+    "category": "Legal",
+    "eng": "abide by",
+    "rus": "соблюдать",
+    "correct": "соблюдать",
+    "exampleEng": "You must abide by the company rules.",
+    "exampleRus": "Вы должны соблюдать правила компании."
+  },
+  {
+    "category": "Legal",
+    "eng": "accuse",
+    "rus": "обвинять",
+    "correct": "обвинять",
+    "exampleEng": "The company was accused of fraud.",
+    "exampleRus": "Компанию обвинили в мошенничестве."
+  },
+  {
+    "category": "Legal",
+    "eng": "adjudicate",
+    "rus": "судить",
+    "correct": "судить",
+    "exampleEng": "The dispute was adjudicated by arbitration.",
+    "exampleRus": "Спор был урегулирован в арбитражном порядке."
+  },
+  {
+    "category": "Legal",
+    "eng": "admissible",
+    "rus": "допустимый",
+    "correct": "допустимый",
+    "exampleEng": "Only admissible evidence is accepted.",
+    "exampleRus": "Принимаются только допустимые доказательства."
+  },
+  {
+    "category": "Legal",
+    "eng": "affidavit",
+    "rus": "аффидевит",
+    "correct": "аффидевит",
+    "exampleEng": "An affidavit was submitted to the court.",
+    "exampleRus": "Аффидевит был подан в суд."
+  },
+  {
+    "category": "Legal",
+    "eng": "allege",
+    "rus": "утверждать",
+    "correct": "утверждать",
+    "exampleEng": "The client alleged a breach of contract.",
+    "exampleRus": "Клиент утверждал о нарушении договора."
+  },
+  {
+    "category": "Legal",
+    "eng": "announcement",
+    "rus": "объявление",
+    "correct": "объявление",
+    "exampleEng": "Make an official announcement.",
+    "exampleRus": "Сделайте официальное объявление."
+  },
+  {
+    "category": "Legal",
+    "eng": "annul",
+    "rus": "аннулировать",
+    "correct": "аннулировать",
+    "exampleEng": "The court may annul the agreement.",
+    "exampleRus": "Суд может аннулировать соглашение."
+  },
+  {
+    "category": "Legal",
+    "eng": "appeal",
+    "rus": "апеллировать",
+    "correct": "апеллировать",
+    "exampleEng": "The company filed an appeal against the ruling.",
+    "exampleRus": "Компания подала апелляцию на решение суда."
+  },
+  {
+    "category": "Legal",
+    "eng": "applicable",
+    "rus": "применимый",
+    "correct": "применимый",
+    "exampleEng": "All applicable laws must be followed.",
+    "exampleRus": "Необходимо соблюдать все применимые законы."
+  },
+  {
+    "category": "Legal",
+    "eng": "arbitration",
+    "rus": "арбитраж",
+    "correct": "арбитраж",
+    "exampleEng": "Choose arbitration instead of court.",
+    "exampleRus": "Выберите арбитраж вместо суда."
+  },
+  {
+    "category": "Legal",
+    "eng": "attorney",
+    "rus": "адвокат",
+    "correct": "адвокат",
+    "exampleEng": "Consult an attorney for legal advice.",
+    "exampleRus": "Проконсультируйтесь с адвокатом по юридическим вопросам."
+  },
+  {
+    "category": "Legal",
+    "eng": "binding",
+    "rus": "обязательный",
+    "correct": "обязательный",
+    "exampleEng": "The contract is legally binding.",
+    "exampleRus": "Контракт является юридически обязательным."
+  },
+  {
+    "category": "Legal",
+    "eng": "breach",
+    "rus": "нарушение",
+    "correct": "нарушение",
+    "exampleEng": "A breach of contract was reported.",
+    "exampleRus": "Было сообщено о нарушении контракта."
+  },
+  {
+    "category": "Legal",
+    "eng": "brief",
+    "rus": "информировать",
+    "question": "brief",
+    "optionsList": [
+      "продлевать",
+      "информировать",
+      "каталог"
+    ],
+    "correct": "информировать",
+    "mastery": 0,
+    "exampleEng": "Legal counsel briefed the management team.",
+    "exampleRus": "Юрисконсульт подготовил письменное заключение для руководства."
+  },
+  {
+    "category": "Legal",
+    "eng": "case",
+    "rus": "дело",
+    "correct": "дело",
+    "exampleEng": "The legal case was settled out of court.",
+    "exampleRus": "Судебное дело было урегулировано во внесудебном порядке."
+  },
+  {
+    "category": "Legal",
+    "eng": "cause",
+    "rus": "причина",
+    "correct": "причина",
+    "exampleEng": "The cause of action was clearly stated.",
+    "exampleRus": "Основание для иска было чётко изложено."
+  },
+  {
+    "category": "Legal",
+    "eng": "certify",
+    "rus": "сертифицировать",
+    "correct": "сертифицировать",
+    "exampleEng": "The document must be certified by a notary.",
+    "exampleRus": "Документ должен быть заверен нотариусом."
+  },
+  {
+    "category": "Legal",
+    "eng": "civil",
+    "rus": "гражданский",
+    "correct": "гражданский",
+    "exampleEng": "A civil lawsuit was filed against the firm.",
+    "exampleRus": "Против компании был подан гражданский иск."
+  },
+  {
+    "category": "Legal",
+    "eng": "clause",
+    "rus": "пункт",
+    "correct": "пункт",
+    "exampleEng": "The exclusion clause limits liability.",
+    "exampleRus": "Оговорка об исключении ограничивает ответственность."
+  },
+  {
+    "category": "Travel",
+    "eng": "accommodation",
+    "rus": "размещение",
+    "correct": "размещение",
+    "exampleEng": "Book your accommodation in advance.",
+    "exampleRus": "Забронируйте размещение заранее."
+  },
+  {
+    "category": "Travel",
+    "eng": "agent",
+    "rus": "агент",
+    "correct": "агент",
+    "exampleEng": "Contact a real estate agent.",
+    "exampleRus": "Свяжитесь с риелтором."
+  },
+  {
+    "category": "Travel",
+    "eng": "airfare",
+    "rus": "стоимость авиабилета",
+    "correct": "стоимость авиабилета",
+    "exampleEng": "Airfare was reimbursed by the company.",
+    "exampleRus": "Стоимость авиабилета была возмещена компанией."
+  },
+  {
+    "category": "Travel",
+    "eng": "allergy",
+    "rus": "аллергия",
+    "correct": "аллергия",
+    "exampleEng": "Inform the hotel of any food allergy.",
+    "exampleRus": "Сообщите отелю об аллергии на продукты питания."
+  },
+  {
+    "category": "Travel",
+    "eng": "altitude",
+    "rus": "высота",
+    "correct": "высота",
+    "exampleEng": "High altitude affects some travellers.",
+    "exampleRus": "Большая высота влияет на некоторых путешественников."
+  },
+  {
+    "category": "Travel",
+    "eng": "area",
+    "rus": "район",
+    "correct": "район",
+    "exampleEng": "The hotel is in the business area.",
+    "exampleRus": "Отель находится в деловом районе."
+  },
+  {
+    "category": "Travel",
+    "eng": "arrival",
+    "rus": "прибытие",
+    "correct": "прибытие",
+    "exampleEng": "Arrival time is listed on the itinerary.",
+    "exampleRus": "Время прибытия указано в маршруте."
+  },
+  {
+    "category": "Travel",
+    "eng": "arrive",
+    "rus": "прибывать",
+    "correct": "прибывать",
+    "exampleEng": "We arrive in Tokyo at 8 AM.",
+    "exampleRus": "Мы прилетаем в Токио в 8 утра."
+  },
+  {
+    "category": "Travel",
+    "eng": "baggage",
+    "rus": "багаж",
+    "correct": "багаж",
+    "exampleEng": "Baggage allowance is 23 kg per person.",
+    "exampleRus": "Норма провоза багажа — 23 кг на человека."
+  },
+  {
+    "category": "Travel",
+    "eng": "book",
+    "rus": "бронировать",
+    "correct": "бронировать",
+    "exampleEng": "Book your business trip two weeks ahead.",
+    "exampleRus": "Забронируйте деловую поездку за две недели."
+  },
+  {
+    "category": "Travel",
+    "eng": "border",
+    "rus": "граница",
+    "correct": "граница",
+    "exampleEng": "Cross the border with valid documents.",
+    "exampleRus": "Пересекайте границу с действительными документами."
+  },
+  {
+    "category": "Travel",
+    "eng": "boarding pass",
+    "rus": "посадочный талон",
+    "correct": "посадочный талон",
+    "exampleEng": "Present your boarding pass at the gate.",
+    "exampleRus": "Предъявите посадочный талон у выхода."
+  },
+  {
+    "category": "Travel",
+    "eng": "carrier",
+    "rus": "перевозчик",
+    "correct": "перевозчик",
+    "exampleEng": "Choose a carrier with flexible refund policy.",
+    "exampleRus": "Выберите перевозчика с гибкой политикой возврата."
+  },
+  {
+    "category": "Travel",
+    "eng": "certificate",
+    "rus": "сертификат",
+    "correct": "сертификат",
+    "exampleEng": "A health certificate may be required.",
+    "exampleRus": "Может потребоваться медицинская справка."
+  },
+  {
+    "category": "Travel",
+    "eng": "check in",
+    "rus": "регистрация",
+    "correct": "регистрация",
+    "exampleEng": "Check-in time is 3 PM.",
+    "exampleRus": "Время регистрации - 15:00."
+  },
+  {
+    "category": "Travel",
+    "eng": "check out",
+    "rus": "выезд",
+    "correct": "выезд",
+    "exampleEng": "Check-out time is 11 AM.",
+    "exampleRus": "Время выезда - 11:00."
+  },
+  {
+    "category": "Travel",
+    "eng": "coach",
+    "rus": "тренер",
+    "correct": "тренер",
+    "exampleEng": "Coach new employees.",
+    "exampleRus": "Тренируйте новых сотрудников."
+  },
+  {
+    "category": "Travel",
+    "eng": "comfort",
+    "rus": "комфорт",
+    "correct": "комфорт",
+    "exampleEng": "Business class offers greater comfort.",
+    "exampleRus": "Бизнес-класс обеспечивает больший комфорт."
+  },
+  {
+    "category": "Travel",
+    "eng": "confirm",
+    "rus": "подтверждать",
+    "correct": "подтверждать",
+    "exampleEng": "Confirm your hotel booking 48 hours ahead.",
+    "exampleRus": "Подтвердите бронирование отеля за 48 часов."
+  },
+  {
+    "category": "Travel",
+    "eng": "confirmation",
+    "rus": "подтверждение",
+    "correct": "подтверждение",
+    "exampleEng": "Keep the confirmation email for check-in.",
+    "exampleRus": "Сохраните письмо с подтверждением для регистрации."
+  },
+  {
+    "category": "Hotels",
+    "eng": "accommodate",
+    "rus": "размещать",
+    "correct": "размещать",
+    "exampleEng": "We can accommodate 200 guests.",
+    "exampleRus": "Мы можем разместить 200 гостей."
+  },
+  {
+    "category": "Hotels",
+    "eng": "amenity",
+    "rus": "удобство",
+    "correct": "удобство",
+    "exampleEng": "The hotel offers excellent amenities.",
+    "exampleRus": "Отель предлагает отличные удобства."
+  },
+  {
+    "category": "Hotels",
+    "eng": "arrange",
+    "rus": "организовывать",
+    "correct": "организовывать",
+    "exampleEng": "The concierge arranged airport transfer.",
+    "exampleRus": "Консьерж организовал трансфер из аэропорта."
+  },
+  {
+    "category": "Hotels",
+    "eng": "book",
+    "rus": "бронировать",
+    "correct": "бронировать",
+    "exampleEng": "Please book a room for the client.",
+    "exampleRus": "Пожалуйста, забронируйте номер для клиента."
+  },
+  {
+    "category": "Hotels",
+    "eng": "cancel",
+    "rus": "отменять",
+    "correct": "отменять",
+    "exampleEng": "You may cancel up to 24 hours before.",
+    "exampleRus": "Вы можете отменить за 24 часа до заезда."
+  },
+  {
+    "category": "Hotels",
+    "eng": "check in",
+    "rus": "регистрация",
+    "correct": "регистрация",
+    "exampleEng": "Check-in time is 3 PM.",
+    "exampleRus": "Время регистрации - 15:00."
+  },
+  {
+    "category": "Hotels",
+    "eng": "check out",
+    "rus": "выезд",
+    "correct": "выезд",
+    "exampleEng": "Check-out time is 11 AM.",
+    "exampleRus": "Время выезда - 11:00."
+  },
+  {
+    "category": "Hotels",
+    "eng": "concierge",
+    "rus": "консьерж",
+    "correct": "консьерж",
+    "exampleEng": "Ask the concierge for recommendations.",
+    "exampleRus": "Попросите консьержа дать рекомендации."
+  },
+  {
+    "category": "Hotels",
+    "eng": "confirm",
+    "rus": "подтверждать",
+    "correct": "подтверждать",
+    "exampleEng": "Please confirm your reservation by email.",
+    "exampleRus": "Пожалуйста, подтвердите бронирование по электронной почте."
+  },
+  {
+    "category": "Hotels",
+    "eng": "cot",
+    "rus": "детская кроватка",
+    "correct": "детская кроватка",
+    "exampleEng": "A cot was added to the room.",
+    "exampleRus": "В номер добавили детскую кроватку."
+  },
+  {
+    "category": "Hotels",
+    "eng": "courtesy",
+    "rus": "любезность",
+    "correct": "любезность",
+    "exampleEng": "A courtesy van takes guests to the airport.",
+    "exampleRus": "Бесплатный микроавтобус отвозит гостей в аэропорт."
+  },
+  {
+    "category": "Hotels",
+    "eng": "customer",
+    "rus": "клиент",
+    "correct": "клиент",
+    "exampleEng": "The customer is always right.",
+    "exampleRus": "Клиент всегда прав."
+  },
+  {
+    "category": "Hotels",
+    "eng": "deposit",
+    "rus": "вклад",
+    "correct": "вклад",
+    "exampleEng": "Make a deposit to your account.",
+    "exampleRus": "Сделайте вклад на свой счет."
+  },
+  {
+    "category": "Hotels",
+    "eng": "discount",
+    "rus": "скидка",
+    "correct": "скидка",
+    "exampleEng": "We offer a 10% discount.",
+    "exampleRus": "Мы предлагаем скидку 10%."
+  },
+  {
+    "category": "Hotels",
+    "eng": "front desk",
+    "rus": "стойка регистрации",
+    "correct": "стойка регистрации",
+    "exampleEng": "Contact the front desk for assistance.",
+    "exampleRus": "Обратитесь на стойку регистрации за помощью."
+  },
+  {
+    "category": "Hotels",
+    "eng": "guest",
+    "rus": "гость",
+    "correct": "гость",
+    "exampleEng": "The guest checked in early.",
+    "exampleRus": "Гость зарегистрировался рано."
+  },
+  {
+    "category": "Hotels",
+    "eng": "hospitality",
+    "rus": "гостеприимство",
+    "correct": "гостеприимство",
+    "exampleEng": "Their hospitality is excellent.",
+    "exampleRus": "Их гостеприимство превосходное."
+  },
+  {
+    "category": "Hotels",
+    "eng": "host",
+    "rus": "принимать",
+    "correct": "принимать",
+    "exampleEng": "The hotel hosted the international summit.",
+    "exampleRus": "Отель принял международный саммит."
+  },
+  {
+    "category": "Hotels",
+    "eng": "hostel",
+    "rus": "хостел",
+    "correct": "хостел",
+    "exampleEng": "The hostel offers budget accommodation.",
+    "exampleRus": "Хостел предлагает бюджетное размещение."
+  },
+  {
+    "category": "Hotels",
+    "eng": "inn",
+    "rus": "гостиница",
+    "correct": "гостиница",
+    "exampleEng": "The country inn has 20 guest rooms.",
+    "exampleRus": "В загородной гостинице 20 номеров."
+  },
+  {
+    "category": "Transportation",
+    "eng": "accommodate",
+    "rus": "размещать",
+    "correct": "размещать",
+    "exampleEng": "We can accommodate 200 guests.",
+    "exampleRus": "Мы можем разместить 200 гостей."
+  },
+  {
+    "category": "Transportation",
+    "eng": "aisle",
+    "rus": "проход",
+    "correct": "проход",
+    "exampleEng": "The aisle seat is preferred for quick exits.",
+    "exampleRus": "Место у прохода предпочтительнее для быстрого выхода."
+  },
+  {
+    "category": "Transportation",
+    "eng": "allocate",
+    "rus": "распределять",
+    "correct": "распределять",
+    "exampleEng": "Allocate resources wisely.",
+    "exampleRus": "Распределяйте ресурсы мудро."
+  },
+  {
+    "category": "Transportation",
+    "eng": "arrival",
+    "rus": "прибытие",
+    "correct": "прибытие",
+    "exampleEng": "Check the arrival board for updates.",
+    "exampleRus": "Проверьте табло прибытия для получения информации."
+  },
+  {
+    "category": "Transportation",
+    "eng": "arrive",
+    "rus": "прибывать",
+    "correct": "прибывать",
+    "exampleEng": "The train will arrive at platform 3.",
+    "exampleRus": "Поезд прибудет на платформу 3."
+  },
+  {
+    "category": "Transportation",
+    "eng": "assemble",
+    "rus": "собирать",
+    "correct": "собирать",
+    "exampleEng": "Passengers should assemble at gate 12.",
+    "exampleRus": "Пассажиры должны собраться у выхода 12."
+  },
+  {
+    "category": "Transportation",
+    "eng": "assembly",
+    "rus": "сборка",
+    "correct": "сборка",
+    "exampleEng": "The assembly point is near the main entrance.",
+    "exampleRus": "Место сбора находится у главного входа."
+  },
+  {
+    "category": "Transportation",
+    "eng": "baggage",
+    "rus": "багаж",
+    "correct": "багаж",
+    "exampleEng": "Baggage claim is on the lower level.",
+    "exampleRus": "Выдача багажа находится на нижнем уровне."
+  },
+  {
+    "category": "Transportation",
+    "eng": "board",
+    "rus": "сажаться",
+    "correct": "сажаться",
+    "exampleEng": "Passengers may board starting at 6:30 AM.",
+    "exampleRus": "Посадка начинается в 6:30."
+  },
+  {
+    "category": "Transportation",
+    "eng": "boarding",
+    "rus": "посадка",
+    "correct": "посадка",
+    "exampleEng": "Boarding closes 15 minutes before departure.",
+    "exampleRus": "Посадка заканчивается за 15 минут до отправления."
+  },
+  {
+    "category": "Transportation",
+    "eng": "book",
+    "rus": "бронировать",
+    "correct": "бронировать",
+    "exampleEng": "Book your train ticket in advance.",
+    "exampleRus": "Заранее купите железнодорожный билет."
+  },
+  {
+    "category": "Transportation",
+    "eng": "cancel",
+    "rus": "отменять",
+    "correct": "отменять",
+    "exampleEng": "The flight was cancelled due to weather.",
+    "exampleRus": "Рейс был отменён из-за погоды."
+  },
+  {
+    "category": "Transportation",
+    "eng": "carrier",
+    "rus": "перевозчик",
+    "correct": "перевозчик",
+    "exampleEng": "The carrier confirmed the booking.",
+    "exampleRus": "Перевозчик подтвердил бронирование."
+  },
+  {
+    "category": "Transportation",
+    "eng": "carry",
+    "rus": "переносить",
+    "correct": "переносить",
+    "exampleEng": "Carry-on bags must fit in the overhead bin.",
+    "exampleRus": "Ручная кладь должна помещаться в верхний отсек."
+  },
+  {
+    "category": "Transportation",
+    "eng": "circulate",
+    "rus": "циркулировать",
+    "correct": "циркулировать",
+    "exampleEng": "Buses circulate every 15 minutes.",
+    "exampleRus": "Автобусы курсируют каждые 15 минут."
+  },
+  {
+    "category": "Transportation",
+    "eng": "commute",
+    "rus": "ездить на работу",
+    "correct": "ездить на работу",
+    "exampleEng": "Employees commute by train daily.",
+    "exampleRus": "Сотрудники ежедневно добираются на работу поездом."
+  },
+  {
+    "category": "Transportation",
+    "eng": "commuter",
+    "rus": "пассажир",
+    "correct": "пассажир",
+    "exampleEng": "The commuter line runs every 20 minutes.",
+    "exampleRus": "Пригородная линия ходит каждые 20 минут."
+  },
+  {
+    "category": "Transportation",
+    "eng": "confirm",
+    "rus": "подтверждать",
+    "correct": "подтверждать",
+    "exampleEng": "Confirm your travel arrangements early.",
+    "exampleRus": "Подтвердите дорожные договорённости заблаговременно."
+  },
+  {
+    "category": "Transportation",
+    "eng": "congestion",
+    "rus": "затор",
+    "correct": "затор",
+    "exampleEng": "Peak-hour congestion delays deliveries.",
+    "exampleRus": "Заторы в часы пик задерживают доставку."
+  },
+  {
+    "category": "Transportation",
+    "eng": "connect",
+    "rus": "подключать",
+    "correct": "подключать",
+    "exampleEng": "Connect to the conference call.",
+    "exampleRus": "Подключитесь к конференц-звонку."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "airline",
+    "rus": "авиакомпания",
+    "correct": "авиакомпания",
+    "exampleEng": "The airline provides in-flight meals.",
+    "exampleRus": "Авиакомпания обеспечивает питание на борту."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "appetizing",
+    "rus": "аппетитный",
+    "correct": "аппетитный",
+    "exampleEng": "The menu looks very appetizing.",
+    "exampleRus": "Меню выглядит очень аппетитно."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "aroma",
+    "rus": "арома",
+    "correct": "арома",
+    "exampleEng": "The aroma of fresh coffee fills the café.",
+    "exampleRus": "Аромат свежего кофе наполняет кафе."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "beverage",
+    "rus": "напиток",
+    "correct": "напиток",
+    "exampleEng": "Beverages are included in the lunch package.",
+    "exampleRus": "Напитки включены в пакет обеда."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "bill",
+    "rus": "счет",
+    "correct": "счет",
+    "exampleEng": "Pay the utility bill on time.",
+    "exampleRus": "Оплачивайте счет за коммунальные услуги вовремя."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "book",
+    "rus": "бронировать",
+    "correct": "бронировать",
+    "exampleEng": "Book a table for ten for Friday.",
+    "exampleRus": "Забронируйте столик на десять человек на пятницу."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "capacity",
+    "rus": "вместимость",
+    "correct": "вместимость",
+    "exampleEng": "The restaurant has a capacity of 80 guests.",
+    "exampleRus": "Ресторан вмещает 80 гостей."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "carryout",
+    "rus": "на вынос",
+    "correct": "на вынос",
+    "exampleEng": "Carryout orders account for 30% of sales.",
+    "exampleRus": "Заказы на вынос составляют 30% продаж."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "cashier",
+    "rus": "кассир",
+    "correct": "кассир",
+    "exampleEng": "Pay the cashier before leaving.",
+    "exampleRus": "Рассчитайтесь с кассиром перед уходом."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "cater",
+    "rus": "обеспечивать питанием",
+    "correct": "обеспечивать питанием",
+    "exampleEng": "We cater corporate lunches and dinners.",
+    "exampleRus": "Мы организуем корпоративные обеды и ужины."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "certificate",
+    "rus": "сертификат",
+    "correct": "сертификат",
+    "exampleEng": "Health certificate must be displayed.",
+    "exampleRus": "Санитарный сертификат должен быть выставлен на видном месте."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "charge",
+    "rus": "плата",
+    "correct": "плата",
+    "exampleEng": "A service charge of 15% was applied.",
+    "exampleRus": "Была применена плата за обслуживание 15%."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "chef",
+    "rus": "шеф-повар",
+    "correct": "шеф-повар",
+    "exampleEng": "The chef prepares fresh daily specials.",
+    "exampleRus": "Шеф-повар готовит свежие блюда дня."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "close",
+    "rus": "закрывать",
+    "correct": "закрывать",
+    "exampleEng": "The restaurant closes at 11 PM.",
+    "exampleRus": "Ресторан закрывается в 23:00."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "cuisine",
+    "rus": "кухня",
+    "correct": "кухня",
+    "exampleEng": "The menu features international cuisine.",
+    "exampleRus": "В меню представлена международная кухня."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "customer",
+    "rus": "клиент",
+    "correct": "клиент",
+    "exampleEng": "The customer is always right.",
+    "exampleRus": "Клиент всегда прав."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "delicacy",
+    "rus": "деликатес",
+    "correct": "деликатес",
+    "exampleEng": "Local delicacies were served at the banquet.",
+    "exampleRus": "На банкете были поданы местные деликатесы."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "delicious",
+    "rus": "вкусный",
+    "correct": "вкусный",
+    "exampleEng": "The catered meal was absolutely delicious.",
+    "exampleRus": "Блюда кейтеринга были абсолютно восхитительны."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "dessert",
+    "rus": "десерт",
+    "correct": "десерт",
+    "exampleEng": "Dessert is included in the business lunch.",
+    "exampleRus": "Десерт включён в бизнес-ланч."
+  },
+  {
+    "category": "Restaurants",
+    "eng": "dine",
+    "rus": "обедать",
+    "correct": "обедать",
+    "exampleEng": "Clients often dine in private rooms.",
+    "exampleRus": "Клиенты часто обедают в отдельных залах."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "amusement",
+    "rus": "развлечение",
+    "correct": "развлечение",
+    "exampleEng": "The amusement park hosted a company event.",
+    "exampleRus": "Парк развлечений принял корпоративное мероприятие."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "announcer",
+    "rus": "ведущий",
+    "correct": "ведущий",
+    "exampleEng": "The announcer introduced the keynote speaker.",
+    "exampleRus": "Ведущий представил основного докладчика."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "appetizer",
+    "rus": "закуска",
+    "correct": "закуска",
+    "exampleEng": "Appetizers were served before the banquet.",
+    "exampleRus": "Перед банкетом подали закуски."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "arrange",
+    "rus": "организовывать",
+    "correct": "организовывать",
+    "exampleEng": "HR arranged the year-end celebration.",
+    "exampleRus": "Отдел кадров организовал праздник по итогам года."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "auditorium",
+    "rus": "зал",
+    "correct": "зал",
+    "exampleEng": "The auditorium holds 500 people.",
+    "exampleRus": "Зал вмещает 500 человек."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "banquet",
+    "rus": "банкет",
+    "correct": "банкет",
+    "exampleEng": "A banquet was held for all partners.",
+    "exampleRus": "Банкет был проведён для всех партнёров."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "beneficial",
+    "rus": "полезный",
+    "correct": "полезный",
+    "exampleEng": "The team event was beneficial for morale.",
+    "exampleRus": "Командное мероприятие благотворно повлияло на моральный дух."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "book",
+    "rus": "бронировать",
+    "correct": "бронировать",
+    "exampleEng": "Book the venue three months in advance.",
+    "exampleRus": "Забронируйте площадку за три месяца."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "calendar",
+    "rus": "календарь",
+    "correct": "календарь",
+    "exampleEng": "Add all events to the corporate calendar.",
+    "exampleRus": "Добавьте все события в корпоративный календарь."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "celebration",
+    "rus": "празднование",
+    "correct": "празднование",
+    "exampleEng": "The celebration honored top performers.",
+    "exampleRus": "Праздник чествовал лучших сотрудников."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "ceremony",
+    "rus": "церемония",
+    "correct": "церемония",
+    "exampleEng": "The awards ceremony starts at 7 PM.",
+    "exampleRus": "Церемония награждения начинается в 19:00."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "choreograph",
+    "rus": "хореограф",
+    "correct": "хореограф",
+    "exampleEng": "A professional choreographed the stage show.",
+    "exampleRus": "Профессионал поставил сценическое шоу."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "choreographer",
+    "rus": "хореограф",
+    "correct": "хореограф",
+    "exampleEng": "The choreographer led rehearsals all week.",
+    "exampleRus": "Хореограф проводил репетиции всю неделю."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "collaborate",
+    "rus": "сотрудничать",
+    "correct": "сотрудничать",
+    "exampleEng": "Teams collaborated to plan the summit.",
+    "exampleRus": "Команды сотрудничали при планировании саммита."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "commemorate",
+    "rus": "отмечать",
+    "correct": "отмечать",
+    "exampleEng": "The event commemorated 25 years of business.",
+    "exampleRus": "Мероприятие отметило 25 лет деятельности компании."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "commencement",
+    "rus": "начало",
+    "correct": "начало",
+    "exampleEng": "Commencement of the conference is at 9 AM.",
+    "exampleRus": "Начало конференции в 9:00."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "compere",
+    "rus": "ведущий",
+    "correct": "ведущий",
+    "exampleEng": "The compere introduced each speaker.",
+    "exampleRus": "Ведущий представил каждого докладчика."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "concert",
+    "rus": "концерт",
+    "correct": "концерт",
+    "exampleEng": "A concert was organized for the gala.",
+    "exampleRus": "Для гала-вечера был организован концерт."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "confer",
+    "rus": "совещаться",
+    "correct": "совещаться",
+    "exampleEng": "Directors will confer after the presentation.",
+    "exampleRus": "Директора проведут совещание после презентации."
+  },
+  {
+    "category": "Events & Entertainment",
+    "eng": "congregate",
+    "rus": "собираться",
+    "correct": "собираться",
+    "exampleEng": "Guests congregated in the main hall.",
+    "exampleRus": "Гости собрались в главном зале."
+  }
+]
