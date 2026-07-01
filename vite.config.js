@@ -1,9 +1,14 @@
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   root: '.',
-  base: './', // Уже изменено
+  base: './',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
@@ -15,6 +20,30 @@ export default defineConfig({
     }
   },
   plugins: [
+    {
+      name: 'copy-i18n',
+      closeBundle() {
+        try {
+          const srcDir = path.resolve(__dirname, 'i18n');
+          const destDir = path.resolve(__dirname, 'dist/assets/i18n');
+          
+          if (!fs.existsSync(destDir)) {
+            fs.mkdirSync(destDir, { recursive: true });
+          }
+          
+          const files = fs.readdirSync(srcDir);
+          files.forEach(file => {
+            fs.copyFileSync(
+              path.join(srcDir, file),
+              path.join(destDir, file)
+            );
+          });
+          console.log('✅ i18n files copied to dist/assets/i18n');
+        } catch (err) {
+          console.error('❌ Failed to copy i18n files:', err);
+        }
+      }
+    },
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
