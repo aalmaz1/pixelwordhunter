@@ -18,24 +18,6 @@ const INTERVALS = {
   5: 168 * 60 * 60 * 1000,
 };
 
-const MAX_FETCH_RETRIES = 3;
-const FETCH_RETRY_DELAY_MS = 1000;
-const UNCONFIRMED_MARKER = '미확인';
-
-const TOEIC_CATEGORIES = new Set([
-  "Contracts", "Marketing", "Warranties", "Business Planning", "Conferences",
-  "Computers", "Office Technology", "Office Procedures", "Electronics", "Correspondence",
-  "Job Advertising and Recruiting", "Applying and Interviewing", "Hiring and Training",
-  "Salaries and Benefits", "Promotions, Pensions, and Awards", "Shopping",
-  "Ordering Supplies", "Shipping", "Invoices", "Inventory", "Banking",
-  "Accounting", "Investments", "Taxes", "Financial Statements", "Property and Departments",
-  "Board Meeting and Committees", "Quality Control", "Product Development",
-  "Renting and Leasing", "Selecting a Restaurant", "Eating Out", "Ordering Lunch",
-  "Cooking as a Career", "Events", "General Travel", "Airlines", "Trains", "Hotels",
-  "Car Rentals", "Movies", "Theater", "Music", "Museums", "Media",
-  "Doctors Office", "Dentists Office", "Health Insurance", "Hospitals", "Pharmacy"
-]);
-
 // Helper function to get the base path dynamically
 function getBasePath() {
   const baseTag = document.querySelector('base');
@@ -116,7 +98,7 @@ export async function loadGameData() {
       // Запускаем обновление кэша в фоновом режиме, не дожидаясь его
       fetchFreshData().catch(err => console.error("Background data fetch failed:", err));
       return gameData; // Сразу возвращаем кэшированные данные
-    } catch (e) {
+    } catch {
       console.warn('[Data] Cache corrupted');
       // Если кэш поврежден, то придется ждать загрузки
       dataLoadPromise = fetchFreshData();

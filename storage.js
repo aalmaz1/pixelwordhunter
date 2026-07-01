@@ -18,7 +18,7 @@ const BACKUP_KEY = STORAGE_KEY + '_backup';
 export function validateSaveData(data) {
   if (!data || typeof data !== 'object') return false;
   
-  for (const [word, progress] of Object.entries(data)) {
+  for (const [, progress] of Object.entries(data)) {
     if (typeof progress.mastery !== 'number' || progress.mastery < 0) return false;
     if (typeof progress.lastSeen !== 'number' || progress.lastSeen < 0) return false;
   }
@@ -34,7 +34,7 @@ export function storageSet(key, value) {
 }
 
 export function storageRemove(key) {
-  try { localStorage.removeItem(key); } catch {}
+  try { localStorage.removeItem(key); } catch { /* ignore */ }
 }
 
 /**
@@ -67,7 +67,7 @@ export async function loadProgress(firebaseDb, doc, getDoc) {
           return progress;
         }
       }
-    } catch (e) {
+    } catch {
       console.warn('[Storage] Cloud load failed, using local');
     }
   }
@@ -81,7 +81,7 @@ export async function loadProgress(firebaseDb, doc, getDoc) {
         console.log('[Storage] Local data loaded');
         return parsed;
       }
-    } catch (e) {
+    } catch {
       console.error('[Storage] Parse error');
     }
   }
@@ -130,7 +130,7 @@ export async function saveProgress(firebaseDb, doc, setDoc, serverTimestamp) {
         }, { merge: true });
         console.log('[Storage] Cloud saved');
         storageRemove(BACKUP_KEY);
-      } catch (e) {
+      } catch {
         console.warn('[Storage] Cloud save failed');
       }
     }, 2000);
@@ -206,7 +206,7 @@ export async function importProgress(file) {
       alert('Import successful! Reloading...');
       location.reload();
     }
-  } catch (e) {
+  } catch {
     alert('Invalid backup file');
   }
 }

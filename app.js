@@ -23,8 +23,6 @@ import {
   selectWordsForRound,
   generateOptionsForWord,
   updateWordProgress,
-  getMasteryLevel,
-  getMasteryLabel,
   getCategories,
   getProgressStats,
   getCorrectTranslation,
@@ -46,7 +44,7 @@ import { initUI, renderCategoryButtons, showNotification } from './ui.js';
 // Локальные переменные для Firebase-сервисов и функций
 let firebaseAuth, firebaseDb;
 let createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut, onAuthStateChanged;
-let doc, setDoc, getDoc;
+let doc, setDoc;
 
 /**
  * Динамически импортирует и инициализирует Firebase-сервисы.
@@ -72,7 +70,6 @@ async function initializeFirebaseServices() {
   const firestoreModule = await import('firebase/firestore');
   doc = firestoreModule.doc;
   setDoc = firestoreModule.setDoc;
-  getDoc = firestoreModule.getDoc;
 
   // Теперь firebaseAuth и firebaseDb доступны, можно настроить слушатель
   if (firebaseAuth) {
@@ -116,7 +113,7 @@ const AudioEngine = {
         this.masterGain = this.ctx.createGain();
         this.masterGain.connect(this.ctx.destination);
         this.updateGain();
-      } catch (e) {
+      } catch {
         return false;
       }
     }
