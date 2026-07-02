@@ -90,12 +90,12 @@ export default defineConfig({
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,json}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}', '!**/words_optimized.json'],
         cleanupOutdatedCaches: true,
         clientsClaim: true,
         skipWaiting: true,
         additionalManifestEntries: [
-          { url: '/words_optimized.json', revision: null }
+          { url: 'words_optimized.json', revision: null }
         ],
         runtimeCaching: [
           {
