@@ -62,10 +62,15 @@ async function fetchFreshData() {
     worker.postMessage(freshData);
 
     // Wait for the worker to send back the sanitized data
-    const sanitizedData = await new Promise(resolve => {
+    const sanitizedData = await new Promise((resolve, reject) => {
       worker.onmessage = (e) => {
         resolve(e.data);
         worker.terminate(); // Terminate worker after use
+      };
+      worker.onerror = (err) => {
+        console.error('[Worker] Error:', err);
+        reject(err);
+        worker.terminate();
       };
     });
 
@@ -99,13 +104,29 @@ export async function loadGameData() {
       console.warn('[Data] Cache corrupted');
       // Если кэш поврежден, то придется ждать загрузки
       dataLoadPromise = fetchFreshData();
-      return dataLoadPromise;
+      try {
+        return await dataLoadPromise;
+      } catch (err) {
+        // If fresh data also fails, return empty array to allow app to continue
+        console.error('[Data] Fresh data load failed, using empty dataset');
+        gameData = [];
+        store.setState({ words: [], categories: [] });
+        return gameData;
+      }
     }
   }
 
   // Если кэша нет, то ждем загрузки
   dataLoadPromise = fetchFreshData();
-  return dataLoadPromise;
+  try {
+    return await dataLoadPromise;
+  } catch (err) {
+    // If fresh data fails, return empty array to allow app to continue
+    console.error('[Data] Fresh data load failed, using empty dataset');
+    gameData = [];
+    store.setState({ words: [], categories: [] });
+    return gameData;
+  }
 }
 
 export function getGameData() {

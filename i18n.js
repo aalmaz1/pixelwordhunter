@@ -78,9 +78,16 @@ const I18nManager = {
       try {
         // Use getBasePath() to construct the URL
         const basePath = getBasePath();
-        // Corrected path to include 'assets/'
-        const url = `${basePath}assets/i18n/${lang}.json`;
-        const response = await fetch(url);
+        // Try the assets/i18n path first (for production build)
+        let url = `${basePath}assets/i18n/${lang}.json`;
+        let response = await fetch(url);
+        
+        // If that fails, try the i18n path (for development)
+        if (!response.ok) {
+          url = `${basePath}i18n/${lang}.json`;
+          response = await fetch(url);
+        }
+        
         if (!response.ok) throw new Error(`Failed to load translations for ${lang}`);
         
         this.translations[lang] = await response.json();
@@ -88,8 +95,18 @@ const I18nManager = {
         return this.translations[lang];
       } catch (error) {
         console.error(`Error loading ${lang} translations:`, error);
-        if (lang !== 'en' && !this.loadedLanguages.has('en')) await this.loadLanguage('en');
-        throw error;
+        // Fallback to English if available
+        if (lang !== 'en' && !this.loadedLanguages.has('en')) {
+          try {
+            await this.loadLanguage('en');
+          } catch (enError) {
+            console.error('Failed to load English fallback:', enError);
+          }
+        }
+        // Don't rethrow - allow app to continue with empty translations
+        this.translations[lang] = {};
+        this.loadedLanguages.add(lang);
+        return {};
       } finally {
         this.loadPromises.delete(lang);
       }
