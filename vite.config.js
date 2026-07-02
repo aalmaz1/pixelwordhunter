@@ -44,6 +44,24 @@ export default defineConfig({
         }
       }
     },
+    {
+      name: 'copy-words-json',
+      closeBundle() {
+        try {
+          const srcFile = path.resolve(__dirname, 'words_optimized.json');
+          const destFile = path.resolve(__dirname, 'dist/words_optimized.json');
+          
+          if (fs.existsSync(srcFile)) {
+            fs.copyFileSync(srcFile, destFile);
+            console.log('✅ words_optimized.json copied to dist/');
+          } else {
+            console.warn('⚠️ words_optimized.json not found in source');
+          }
+        } catch (err) {
+          console.error('❌ Failed to copy words_optimized.json:', err);
+        }
+      }
+    },
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
@@ -76,6 +94,9 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         clientsClaim: true,
         skipWaiting: true,
+        additionalManifestEntries: [
+          { url: '/words_optimized.json', revision: null }
+        ],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
