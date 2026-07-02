@@ -20,32 +20,102 @@ const INTERVALS = {
 };
 
 /**
+ * Sanitize data inline (fallback when worker fails)
+ */
+function sanitizeDataInline(rawData) {
+  if (!Array.isArray(rawData)) return [];
+  
+  const TOEIC_CATEGORIES = new Set([
+    "Contracts", "Marketing", "Warranties", "Business Planning", "Conferences",
+    "Computers", "Office Technology", "Office Procedures", "Electronics", "Correspondence",
+    "Job Advertising and Recruiting", "Applying and Interviewing", "Hiring and Training",
+    "Salaries and Benefits", "Promotions, Pensions, and Awards", "Shopping",
+    "Ordering Supplies", "Shipping", "Invoices", "Inventory", "Banking",
+    "Accounting", "Investments", "Taxes", "Financial Statements", "Property and Departments",
+    "Board Meeting and Committees", "Quality Control", "Product Development",
+    "Renting and Leasing", "Selecting a Restaurant", "Eating Out", "Ordering Lunch",
+    "Cooking as a Career", "Events", "General Travel", "Airlines", "Trains", "Hotels",
+    "Car Rentals", "Movies", "Theater", "Music", "Museums", "Media",
+    "Doctors Office", "Dentists Office", "Health Insurance", "Hospitals", "Pharmacy"
+  ]);
+  
+  const UNCONFIRMED_MARKER = '미확인';
+  
+  return rawData.map(rawWord => {
+    if (!rawWord || typeof rawWord !== 'object') return null;
+    
+    const eng = typeof rawWord.eng === 'string' ? rawWord.eng.trim() : '';
+    const category = typeof rawWord.category === 'string' ? rawWord.category.trim() : 'General';
+    const rus = typeof rawWord.rus === 'string' && rawWord.rus.trim() ? rawWord.rus.trim() : '';
+    const kor = typeof rawWord.kor === 'string' && rawWord.kor.trim() ? rawWord.kor.trim() : 
+                (typeof rawWord.ko === 'string' && rawWord.ko.trim() ? rawWord.ko.trim() : '');
+    const exampleEng = typeof rawWord.exampleEng === 'string' ? rawWord.exampleEng.trim() : '';
+    const exampleRus = typeof rawWord.exampleRus === 'string' ? rawWord.exampleRus.trim() : '';
+    const exampleKor = typeof rawWord.exampleKor === 'string' && rawWord.exampleKor.trim() ? rawWord.exampleKor.trim() : 
+                      (typeof rawWord.exampleKo === 'string' && rawWord.exampleKo.trim() ? rawWord.exampleKo.trim() : '');
+    
+    if (!eng || (!rus && !kor)) return null;
+    
+    return {
+      eng,
+      category,
+      rus: rus || 'No translation',
+      kor: kor || UNCONFIRMED_MARKER,
+      exampleEng,
+      exampleRus,
+      exampleKor: exampleKor || UNCONFIRMED_MARKER,
+      mastery: Number(rawWord.mastery) || 0,
+      lastSeen: Number(rawWord.lastSeen) || 0,
+      correctCount: Number(rawWord.correctCount) || 0,
+      incorrectCount: Number(rawWord.incorrectCount) || 0
+    };
+  }).filter(Boolean);
+}
+
+/**
  * Fetch fresh data with retry logic
  */
 async function fetchFreshData() {
   try {
-    // Use imported JSON data directly instead of fetch
+    // Use imported JSON data directly
     const freshData = wordsData;
     
-    // Create a new worker
-    const worker = new Worker('./data.worker.js');
-
-    // Send raw data to the worker for sanitization
-    worker.postMessage(freshData);
-
-    // Wait for the worker to send back the sanitized data
-    const sanitizedData = await new Promise((resolve, reject) => {
-      worker.onmessage = (e) => {
-        resolve(e.data);
-        worker.terminate(); // Terminate worker after use
-      };
-      worker.onerror = (err) => {
-        console.error('[Worker] Error:', err);
-        reject(err);
-        worker.terminate();
-      };
-    });
-
+    let sanitizedData;
+    
+    // Try to use worker first
+    try {
+      // Use dynamic import for the worker to ensure proper bundling
+      const workerUrl = new URL('./data.worker.js', import.meta.url);
+      const worker = new Worker(workerUrl, { type: 'module' });
+      
+      // Send raw data to the worker for sanitization
+      worker.postMessage(freshData);
+      
+      // Wait for the worker to send back the sanitized data
+      sanitizedData = await new Promise((resolve, reject) => {
+        const timeout = setTimeout(() => {
+          reject(new Error('Worker timeout'));
+          worker.terminate();
+        }, 5000);
+        
+        worker.onmessage = (e) => {
+          clearTimeout(timeout);
+          resolve(e.data);
+          worker.terminate();
+        };
+        worker.onerror = (err) => {
+          clearTimeout(timeout);
+          console.error('[Worker] Error:', err);
+          reject(err);
+          worker.terminate();
+        };
+      });
+    } catch (workerErr) {
+      console.warn('[Data] Worker failed, using inline sanitization:', workerErr.message);
+      // Fallback to inline sanitization
+      sanitizedData = sanitizeDataInline(freshData);
+    }
+    
     gameData = sanitizedData;
     localStorage.setItem('pixelWordHunter_words_cache', JSON.stringify(sanitizedData));
     
@@ -53,8 +123,8 @@ async function fetchFreshData() {
     store.setState({ words: sanitizedData, categories: getCategories() });
     
     return gameData;
-  } catch {
-    console.error('[Data] Load failed');
+  } catch (err) {
+    console.error('[Data] Load failed:', err);
     if (gameData) return gameData;
     throw err;
   }
