@@ -270,9 +270,8 @@ async function init() {
       updateUI(state);
     });
 
-    const hasSeenOnboarding = storageGet('pixelWordHunter_onboarding_seen') === 'true';
-    toggleScreen(hasSeenOnboarding ? 'menu' : 'onboarding');
-    
+    toggleScreen('menu');
+
     // Fallback: Ensure at least one screen is visible after a short delay
     setTimeout(() => {
       const visibleScreen = document.querySelector('.game-container:not(.hidden)');
@@ -300,13 +299,6 @@ async function init() {
 
 function setupEventListeners() {
   // Navigation
-  ui.onboardingInitBtn = document.getElementById('onboarding-init-btn');
-  ui.onboardingInitBtn?.addEventListener('click', () => {
-    storageSet('pixelWordHunter_onboarding_seen', 'true');
-    AudioEngine.playTransition();
-    toggleScreen('menu');
-  });
-
   document.getElementById('settings-btn')?.addEventListener('click', () => {
     AudioEngine.playTransition();
     toggleScreen('settings');
@@ -441,7 +433,7 @@ async function handleAuthSubmit() {
 }
 
 function toggleScreen(screenId) {
-  const screens = ['onboarding', 'menu', 'settings', 'category', 'game'];
+  const screens = ['menu', 'settings', 'category', 'game'];
   screens.forEach(s => {
     const el = document.getElementById(`${s}-screen`);
     if (el) {

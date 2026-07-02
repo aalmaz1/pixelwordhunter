@@ -5,7 +5,6 @@
 
 export function initUI() {
   return {
-    onboardingScreenElement: document.getElementById('onboarding-screen'),
     menuScreenElement: document.getElementById('menu-screen'),
     settingsScreenElement: document.getElementById('settings-screen'),
     categoryScreenElement: document.getElementById('category-screen'),
@@ -16,8 +15,6 @@ export function initUI() {
     xpElement: document.getElementById('menu-xp'),
     gameXpElement: document.getElementById('game-xp'),
     masteredCountElement: document.getElementById('mastered-count'),
-    totalCountElement: document.getElementById('total-count'),
-    feedbackElement: document.getElementById('feedback'),
     // Auth elements
     authModal: document.getElementById('auth-modal'),
     authTitle: document.getElementById('auth-title'),

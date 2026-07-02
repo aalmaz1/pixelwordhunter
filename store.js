@@ -85,4 +85,3 @@ class Store extends EventTarget {
 }
 
 export const store = new Store();
-window.appStore = store; // For debugging

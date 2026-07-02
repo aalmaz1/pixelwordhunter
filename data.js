@@ -19,34 +19,6 @@ const INTERVALS = {
   5: 168 * 60 * 60 * 1000,
 };
 
-// Helper function to get the base path dynamically
-function getBasePath() {
-  const baseTag = document.querySelector('base');
-  let basePath = '/';
-
-  if (baseTag && baseTag.href) {
-    const url = new URL(baseTag.href);
-    basePath = url.pathname;
-  } else if (import.meta.env.BASE_URL) {
-    basePath = import.meta.env.BASE_URL;
-  }
-
-  if (basePath && !basePath.endsWith('/')) {
-    basePath += '/';
-  }
-  if (basePath && !basePath.startsWith('/')) {
-    basePath = `/${basePath}`;
-  }
-  
-  const currentPathname = window.location.pathname;
-  const subpathMatch = currentPathname.match(/^\/(.*?)\//);
-  if (subpathMatch && subpathMatch[1] && basePath === '/') {
-    basePath = `/${subpathMatch[1]}/`;
-  }
-
-  return basePath;
-}
-
 /**
  * Fetch fresh data with retry logic
  */
@@ -81,8 +53,8 @@ async function fetchFreshData() {
     store.setState({ words: sanitizedData, categories: getCategories() });
     
     return gameData;
-  } catch (err) {
-    console.error('[Data] Load failed:', err);
+  } catch {
+    console.error('[Data] Load failed');
     if (gameData) return gameData;
     throw err;
   }
@@ -120,7 +92,7 @@ export async function loadGameData() {
   dataLoadPromise = fetchFreshData();
   try {
     return await dataLoadPromise;
-  } catch (err) {
+  } catch {
     // If fresh data fails, return empty array to allow app to continue
     console.error('[Data] Fresh data load failed, using empty dataset');
     gameData = [];
