@@ -54,16 +54,17 @@ export default defineConfig({
         background_color: '#0a0010',
         display: 'standalone',
         orientation: 'any',
-        start_url: '/', // Изменено с '/pwhbeta/' на '/'
+        start_url: './',
+        scope: './',
         icons: [
           {
-            src: '/assets/logo.png', // Изменено с '/pwhbeta/assets/logo.png' на '/assets/logo.png'
+            src: './assets/logo.png',
             sizes: '192x192',
             type: 'image/png',
             purpose: 'any'
           },
           {
-            src: '/assets/logo.png', // Изменено с '/pwhbeta/assets/logo.png' на '/assets/logo.png'
+            src: './assets/logo.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable'
