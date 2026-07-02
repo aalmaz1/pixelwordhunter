@@ -224,64 +224,78 @@ const AuthManager = {
 let ui = null;
 
 async function init() {
-  ui = initUI();
-  AudioEngine.init();
-  // initializeFirebaseServices() будет вызвана только при необходимости
-  // await initializeFirebaseServices(); // Убрали отсюда, чтобы загрузка была ленивой
-  await I18nManager.init();
+  try {
+    ui = initUI();
+    AudioEngine.init();
+    // initializeFirebaseServices() будет вызвана только при необходимости
+    // await initializeFirebaseServices(); // Убрали отсюда, чтобы загрузка была ленивой
+    await I18nManager.init();
 
-  // Unlock audio on first interaction
-  const unlockAudio = () => {
-    AudioEngine.ensureContext();
-    document.removeEventListener('click', unlockAudio);
-    document.removeEventListener('keydown', unlockAudio);
-    document.removeEventListener('touchstart', unlockAudio);
-  };
-  document.addEventListener('click', unlockAudio, { once: true });
-  document.addEventListener('keydown', unlockAudio, { once: true });
-  document.addEventListener('touchstart', unlockAudio, { once: true });
+    // Unlock audio on first interaction
+    const unlockAudio = () => {
+      AudioEngine.ensureContext();
+      document.removeEventListener('click', unlockAudio);
+      document.removeEventListener('keydown', unlockAudio);
+      document.removeEventListener('touchstart', unlockAudio);
+    };
+    document.addEventListener('click', unlockAudio, { once: true });
+    document.addEventListener('keydown', unlockAudio, { once: true });
+    document.addEventListener('touchstart', unlockAudio, { once: true });
 
-  // Auth listener - теперь настраивается внутри initializeFirebaseServices()
-  // if (firebaseAuth) {
-  //   onAuthStateChanged(firebaseAuth, async (user) => {
-  //     store.setUser(user);
-  //     if (user) {
-  //       const progress = await loadProgress();
-  //       applyProgress(progress);
-  //     }
-  //   });
-  // }
+    // Load Data
+    await loadGameData();
+    const progress = await loadProgress();
+    applyProgress(progress);
 
-  // Load Data
-  await loadGameData();
-  const progress = await loadProgress();
-  applyProgress(progress);
+    // Initial UI state
+    const theme = storageGet('pixelWordHunter_theme') || 'cyberpunk';
+    ThemeManager.apply(theme);
 
-  // Initial UI state
-  const theme = storageGet('pixelWordHunter_theme') || 'cyberpunk';
-  ThemeManager.apply(theme);
+    const categories = ['All', ...getCategories()];
+    renderCategoryButtons(categories, (cat) => startGame(cat));
 
-  const categories = ['All', ...getCategories()];
-  renderCategoryButtons(categories, (cat) => startGame(cat));
+    // Event Listeners
+    setupEventListeners();
 
-  // Event Listeners
-  setupEventListeners();
+    // App state listener for UI reactivity
+    store.addEventListener('stateChange', (e) => {
+      const { state, changedKeys } = e.detail;
+      if (changedKeys.includes('audioEnabled')) {
+        AudioEngine.updateGain();
+        storageSet('pixelWordHunter_muted', String(!state.audioEnabled));
+      }
+      if (changedKeys.includes('theme')) {
+        storageSet('pixelWordHunter_theme', state.theme);
+      }
+      updateUI(state);
+    });
 
-  // App state listener for UI reactivity
-  store.addEventListener('stateChange', (e) => {
-    const { state, changedKeys } = e.detail;
-    if (changedKeys.includes('audioEnabled')) {
-      AudioEngine.updateGain();
-      storageSet('pixelWordHunter_muted', String(!state.audioEnabled));
+    const hasSeenOnboarding = storageGet('pixelWordHunter_onboarding_seen') === 'true';
+    toggleScreen(hasSeenOnboarding ? 'menu' : 'onboarding');
+    
+    // Fallback: Ensure at least one screen is visible after a short delay
+    setTimeout(() => {
+      const visibleScreen = document.querySelector('.game-container:not(.hidden)');
+      if (!visibleScreen) {
+        console.warn('[App] No screen visible, forcing menu screen');
+        toggleScreen('menu');
+      }
+    }, 500);
+  } catch (err) {
+    console.error('[App] Initialization failed:', err);
+    // Show load error message to user
+    const loadErrorEl = document.getElementById('load-error');
+    if (loadErrorEl) {
+      loadErrorEl.textContent = `Initialization Error: ${err.message}. Please refresh the page.`;
+      loadErrorEl.hidden = false;
+      loadErrorEl.style.display = 'block';
+      loadErrorEl.style.padding = '20px';
+      loadErrorEl.style.color = 'var(--neon-pink)';
+      loadErrorEl.style.textAlign = 'center';
     }
-    if (changedKeys.includes('theme')) {
-      storageSet('pixelWordHunter_theme', state.theme);
-    }
-    updateUI(state);
-  });
-
-  const hasSeenOnboarding = storageGet('pixelWordHunter_onboarding_seen') === 'true';
-  toggleScreen(hasSeenOnboarding ? 'menu' : 'onboarding');
+    // Still try to show the menu screen as a fallback
+    toggleScreen('menu');
+  }
 }
 
 function setupEventListeners() {
@@ -430,7 +444,16 @@ function toggleScreen(screenId) {
   const screens = ['onboarding', 'menu', 'settings', 'category', 'game'];
   screens.forEach(s => {
     const el = document.getElementById(`${s}-screen`);
-    if (el) el.classList.toggle('hidden', s !== screenId);
+    if (el) {
+      const shouldBeHidden = s !== screenId;
+      el.classList.toggle('hidden', shouldBeHidden);
+      // Force display for the active screen to ensure visibility
+      if (!shouldBeHidden) {
+        el.style.display = 'flex';
+      } else {
+        el.style.display = '';
+      }
+    }
   });
 }
 
