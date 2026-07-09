@@ -64,31 +64,7 @@ export default defineConfig({
     },
     VitePWA({
       registerType: 'autoUpdate',
-      manifest: {
-        name: 'Pixel Word Hunter',
-        short_name: 'Word Hunter',
-        description: 'TOEIC Vocabulary Trainer - Learn 600 business English words with adaptive spaced repetition',
-        theme_color: '#0a0010',
-        background_color: '#0a0010',
-        display: 'standalone',
-        orientation: 'any',
-        start_url: './',
-        scope: './',
-        icons: [
-          {
-            src: 'assets/logo.png',
-            sizes: '192x192',
-            type: 'image/png',
-            purpose: 'any'
-          },
-          {
-            src: 'assets/logo.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable'
-          }
-        ]
-      },
+      manifest: false, // Disable auto-generated manifest, use manifest.json instead
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}', '!**/words_optimized.json'],
         cleanupOutdatedCaches: true,

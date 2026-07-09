@@ -117,7 +117,9 @@ const AudioEngine = {
         return false;
       }
     }
-    if (this.ctx.state === 'suspended') this.ctx.resume();
+    if (this.ctx.state === 'suspended') {
+      this.ctx.resume().catch(() => {});
+    }
     return true;
   },
 
@@ -403,6 +405,16 @@ function setupEventListeners() {
 }
 
 let lastFocusedElement = null;
+
+/**
+ * Returns an array of focusable elements within the given parent.
+ * Used for accessibility and keyboard navigation management.
+ */
+function getFocusableElements(parent = document) {
+  return Array.from(parent.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  ));
+}
 
 function showAuthModal(mode) {
   store.setState({ authMode: mode });
