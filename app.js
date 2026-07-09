@@ -39,7 +39,7 @@ import {
   exportProgress,
   importProgress
 } from './storage.js';
-import { initUI, renderCategoryButtons, showNotification } from './ui.js';
+import { initUI, renderCategoryButtons, showNotification, getFocusableElements } from './ui.js';
 
 // Локальные переменные для Firebase-сервисов и функций
 let firebaseAuth, firebaseDb;
@@ -405,16 +405,6 @@ function setupEventListeners() {
 }
 
 let lastFocusedElement = null;
-
-/**
- * Returns an array of focusable elements within the given parent.
- * Used for accessibility and keyboard navigation management.
- */
-function getFocusableElements(parent = document) {
-  return Array.from(parent.querySelectorAll(
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-  ));
-}
 
 function showAuthModal(mode) {
   store.setState({ authMode: mode });
