@@ -1,33 +1,7 @@
-```
-# Build artifacts
-dist/
-build/
-*.js.map
-
-# Dependencies
-node_modules/
-
-# Environment
-.env
-.env.local
-.env.*
-
-# Editors
-.vscode/
-.idea/
-
-# Logs and temp files
-*.log
-*.tmp
-*.swp
-
-# Python
-__pycache__/
+```gitignore
+# Compiled and build artifacts
 *.pyc
-*.pyo
-*.pyd
-
-# Compiled and binary
+__pycache__/
 *.o
 *.obj
 *.exe
@@ -35,8 +9,44 @@ __pycache__/
 *.so
 *.a
 *.out
+*.class
 
-# Compression
+# Dependencies
+node_modules/
+venv/
+.venv/
+.env
+.env.local
+.env.*
+
+# Build directories
+dist/
+build/
+target/
+*.log
+coverage/
+htmlcov/
+.coverage
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Python specific
+.mypy_cache/
+.pytest_cache/
+
+# Gradle
+.gradle/
+
+# Compressed files
 *.zip
 *.gz
 *.tar
@@ -59,23 +69,4 @@ __pycache__/
 *.tar.bz2
 *.tar.xz
 *.tar.zst
-
-# System files
-.DS_Store
-Thumbs.db
-
-# Testing and coverage
-.coverage
-coverage/
-htmlcov/
-.mypy_cache/
-.pytest_cache/
-
-# Java/Gradle
-target/
-.gradle/
-
-# Venv
-.venv/
-venv/
 ```
