@@ -1,66 +1,56 @@
+```gitignore
+# Compiled and build artifacts
+*.pyc
+__pycache__/
+*.o
+*.obj
+*.class
+*.exe
+*.dll
+*.so
+*.a
+*.out
+
 # Dependencies
 node_modules/
-
-# Build outputs
-dist/
-build/
-coverage/
-htmlcov/
-
-# Environment variables
+venv/
+.venv/
 .env
 .env.local
 .env.*
 
+# Build directories
+dist/
+build/
+target/
+.gradle/
+
 # Python specific
-__pycache__/
 *.pyc
+__pycache__/
 *.pyo
 *.pyd
 .Python
-env/
-venv/
-.venv/
-pip-log.txt
-pip-delete-this-directory.txt
-.tox/
+*.so
 .coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.log
-*.pot
-*.pyc
-*.pyo
-.pytest_cache/
+coverage/
+htmlcov/
 .mypy_cache/
-.hypothesis/
+.pytest_cache/
 
-# IDE and editor files
-.vscode/
-.idea/
+# Logs and temp files
+*.log
+*.tmp
 *.swp
 *.swo
-*~
 
 # OS generated files
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
 
-# Logs
-*.log
-
-# Temporary files
-*.tmp
-*.temp
-*.bak
+# Editors
+.vscode/
+.idea/
 
 # Compressed files
 *.zip
@@ -85,21 +75,4 @@ Thumbs.db
 *.tar.bz2
 *.tar.xz
 *.tar.zst
-
-# Compiled binaries
-*.exe
-*.dll
-*.so
-*.a
-*.obj
-*.out
-*.class
-
-# Package manager caches
-.npm/
-.yarn/
-.pnpm-store/
-.target/
-.gradle/
-.cargo/
-.packages/
+```

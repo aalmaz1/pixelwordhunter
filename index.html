@@ -27,7 +27,7 @@
   <link rel="preload" href="/assets/Mulmaru.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body data-theme="cyberpunk">
-  <a href="#options" class="skip-link">Skip to options</a>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <div class="crt-overlay"></div>
   
   <!-- iOS Notification -->
@@ -36,7 +36,7 @@
     <span class="notification-text" id="notification-text"></span>
   </div>
 
-  <main role="main">
+  <main id="main-content" role="main" tabindex="-1">
     <!-- ── LOAD ERROR ──────────────────────────── -->
     <div id="load-error" hidden role="alert"></div>
 
@@ -46,11 +46,11 @@
         <span data-i18n="pixel_word_hunter">PIXEL<br>WORD<br>HUNTER</span>
       </h1>
       <div class="edition-badge" data-i18n="toEIC_edition">// TOEIC EDITION //</div>
-      <div class="stats-line" aria-live="polite">
+      <div class="stats-line" aria-live="polite" aria-atomic="true">
         <span data-i18n="mastered">MASTERED</span>&nbsp;<span id="mastered-count">0</span>&nbsp;/&nbsp;<span id="total-count">600</span> | <span id="menu-xp">0 XP</span>
       </div>
       <!-- Индикатор синхронизации с облаком -->
-      <div id="sync-status" class="sync-indicator" aria-live="polite">
+      <div id="sync-status" class="sync-indicator" aria-live="polite" aria-atomic="true">
         <span id="sync-text"></span>
         <button id="retry-sync-btn" class="hidden retry-sync-btn" aria-label="Retry synchronization">🔄 Retry</button>
       </div>
@@ -187,7 +187,7 @@
             <input type="password" id="auth-password" data-i18n-placeholder="enter_password" placeholder="Enter password" autocomplete="current-password" required>
           </div>
           
-          <div id="auth-error" class="auth-error"></div>
+          <div id="auth-error" class="auth-error" role="alert" aria-live="assertive" aria-atomic="true"></div>
           
           <button type="button" class="auth-submit" id="auth-submit" data-i18n="submit">ENTER</button>
         </form>
