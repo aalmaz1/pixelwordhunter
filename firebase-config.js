@@ -4,7 +4,7 @@
  */
 
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
 import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager } from 'firebase/firestore';
 import { store } from './store.js';
 
@@ -40,6 +40,23 @@ export async function initFirebase() {
     
     firebaseAvailable = true;
     console.log('✅ Firebase initialized (Bundled)');
+  onAuthStateChanged(firebaseAuth, (user) => {      
+    if (user) {        
+      // Пользователь уже вошел (или только что вошел)        
+      console.log('👤 User signed in:', user.uid);      
+    } else {        
+      // Пользователя нет -> выполняем анонимный вход        
+      console.log('⏳ No user detected, signing in anonymously...');        
+      signInAnonymously(firebaseAuth)          
+        .then((result) => {            
+          console.log('✅ Anonymous sign-in successful:', result.user.uid);          
+        })          
+        .catch((error) => {            
+          console.error('❌ Anonymous sign-in failed:', error.code, error.message);          
+        });      
+    }    
+  });
+  
   } catch (error) {
     console.warn('⚠️ Firebase not available - running in offline mode:', error.message);
     firebaseAvailable = false;
