@@ -311,7 +311,9 @@ function setupEventListeners() {
   // Auth
   document.getElementById('login-modal-btn')?.addEventListener('click', () => showAuthModal('login'));
   document.getElementById('register-modal-btn')?.addEventListener('click', () => showAuthModal('register'));
-  document.getElementById('auth-close-btn')?.addEventListener('click', () => ui.authModal.classList.add('hidden'));
+  document.getElementById('auth-close-btn')?.addEventListener('click', () => {
+    closeAuthModal();
+  });
   document.getElementById('auth-toggle-btn')?.addEventListener('click', () => {
     const mode = store.getState().authMode === 'login' ? 'register' : 'login';
     showAuthModal(mode);
@@ -400,13 +402,38 @@ function setupEventListeners() {
   });
 }
 
+let lastFocusedElement = null;
+
 function showAuthModal(mode) {
   store.setState({ authMode: mode });
   ui.authTitle.textContent = mode === 'login' ? '// LOGIN //' : '// REGISTER //';
-  ui.usernameField.style.display = mode === 'login' ? 'none' : 'flex'; // Corrected display logic
-  ui.authToggleText.textContent = mode === 'login' ? 'Need an account?' : 'Have an account?';
-  ui.authToggleBtn.textContent = mode === 'login' ? 'REGISTER' : 'LOGIN';
+  
+  const isLogin = mode === 'login';
+  ui.usernameField.style.display = isLogin ? 'none' : 'flex';
+  ui.usernameField.setAttribute('aria-hidden', isLogin ? 'true' : 'false');
+  const usernameInput = document.getElementById('auth-username');
+  if (isLogin) {
+    usernameInput.setAttribute('tabindex', '-1');
+  } else {
+    usernameInput.removeAttribute('tabindex');
+  }
+  
+  ui.authToggleText.textContent = isLogin ? 'Need an account?' : 'Have an account?';
+  ui.authToggleBtn.textContent = isLogin ? 'REGISTER' : 'LOGIN';
   ui.authModal.classList.remove('hidden');
+  ui.authModal.setAttribute('aria-hidden', 'false');
+  
+  lastFocusedElement = document.activeElement;
+  
+  setTimeout(() => {
+    const focusable = getFocusableElements(ui.authModal);
+    if (focusable.length > 0) {
+      focusable[0].focus();
+    } else {
+      ui.authModal.setAttribute('tabindex', '-1');
+      ui.authModal.focus();
+    }
+  }, 50);
 }
 
 async function handleAuthSubmit() {
@@ -424,12 +451,23 @@ async function handleAuthSubmit() {
   }
 
   if (result.success) {
-    ui.authModal.classList.add('hidden');
+    closeAuthModal();
     showNotification('Success!');
   } else {
     ui.authError.textContent = result.error;
   }
   ui.authSubmit.disabled = false;
+}
+
+function closeAuthModal() {
+  ui.authModal.classList.add('hidden');
+  ui.authModal.setAttribute('aria-hidden', 'true');
+  ui.authError.textContent = '';
+  
+  if (lastFocusedElement && document.body.contains(lastFocusedElement)) {
+    lastFocusedElement.focus();
+  }
+  lastFocusedElement = null;
 }
 
 function toggleScreen(screenId) {

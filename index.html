@@ -158,8 +158,8 @@
         </div>
         <div class="options-grid" id="options" role="group" aria-label="Answer options"></div>
       </div>
-      <div id="explanation-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Word review">
-        <h2 class="modal-title" data-i18n="word_review">// WORD REVIEW //</h2>
+      <div id="explanation-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="explanation-title" aria-describedby="explanation-list">
+        <h2 class="modal-title" id="explanation-title" data-i18n="word_review">// WORD REVIEW //</h2>
         <div id="explanation-list"></div>
         <button class="next-btn" id="next-question-btn" role="button"><span data-i18n="next">NEXT</span>&nbsp;▶</button>
       </div>
@@ -167,14 +167,14 @@
     </div>
 
     <!-- ── AUTH MODAL ─────────────────────────── -->
-    <div id="auth-modal" class="modal auth-modal hidden" role="dialog" aria-modal="true" aria-label="Authentication">
+    <div id="auth-modal" class="modal auth-modal hidden" role="dialog" aria-modal="true" aria-labelledby="auth-title" aria-describedby="auth-error">
       <div class="auth-container">
         <h2 class="modal-title" id="auth-title" data-i18n="login_title">// LOGIN //</h2>
         
         <form id="auth-form" class="auth-form" onsubmit="return false;">
-          <div class="auth-field username-field-hidden" id="username-field">
+          <div class="auth-field username-field-hidden" id="username-field" aria-hidden="true">
             <label for="auth-username" data-i18n="username">USERNAME</label>
-            <input type="text" id="auth-username" data-i18n-placeholder="enter_username" placeholder="Enter username" autocomplete="username">
+            <input type="text" id="auth-username" data-i18n-placeholder="enter_username" placeholder="Enter username" autocomplete="username" tabindex="-1">
           </div>
           
           <div class="auth-field">
