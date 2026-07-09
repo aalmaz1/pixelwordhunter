@@ -76,13 +76,13 @@ export default defineConfig({
         scope: './',
         icons: [
           {
-            src: './assets/logo.png',
+            src: 'assets/logo.png',
             sizes: '192x192',
             type: 'image/png',
             purpose: 'any'
           },
           {
-            src: './assets/logo.png',
+            src: 'assets/logo.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable'
