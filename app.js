@@ -720,31 +720,17 @@ function showReviewSession() {
 
       // Green card for correct, red for wrong
       card.className = `review-card ${isCorrect ? 'correct' : 'wrong'}`;
-      card.style.marginBottom = '20px';
-      card.style.padding = '15px';
-      card.style.border = `2px solid ${isCorrect ? 'var(--neon-green)' : 'var(--wrong-red)'}`;
-      card.style.borderRadius = '8px';
-      card.style.background = isCorrect
-        ? 'rgba(57, 255, 20, 0.1)'
-        : 'rgba(231, 76, 60, 0.1)';
 
       const wordP = document.createElement('p');
       wordP.className = 'explanation-word';
-      wordP.style.marginBottom = '10px';
       wordP.textContent = item.word.eng;
 
       const defP = document.createElement('p');
       defP.className = 'explanation-definition';
-      defP.style.marginBottom = '8px';
-      defP.style.borderBottom = 'none';
-      defP.style.paddingBottom = '0';
       defP.textContent = getCorrectTranslation(item.word, store.getState().language, item.questionIsEnglish);
 
       const statusP = document.createElement('p');
-      statusP.style.fontSize = '9px';
-      statusP.style.color = isCorrect ? 'var(--neon-green)' : 'var(--wrong-red)';
-      statusP.style.textTransform = 'uppercase';
-      statusP.style.letterSpacing = '2px';
+      statusP.className = 'review-status';
       statusP.textContent = isCorrect ? '✓ CORRECT' : '✗ NEEDS REVIEW';
 
       card.appendChild(wordP);
@@ -757,9 +743,7 @@ function showReviewSession() {
   // Add a "Continue" button to start new round
   const continueBtn = document.createElement('button');
   continueBtn.id = 'continue-after-review-btn';
-  continueBtn.className = 'option-btn';
-  continueBtn.style.marginTop = '20px';
-  continueBtn.style.width = '100%';
+  continueBtn.className = 'option-btn continue-after-review-btn';
   continueBtn.textContent = 'CONTINUE';
   continueBtn.addEventListener('click', () => {
     // Reset review data and start new round using store state

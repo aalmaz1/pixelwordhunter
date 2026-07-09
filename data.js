@@ -25,20 +25,6 @@ const INTERVALS = {
 function sanitizeDataInline(rawData) {
   if (!Array.isArray(rawData)) return [];
   
-  const TOEIC_CATEGORIES = new Set([
-    "Contracts", "Marketing", "Warranties", "Business Planning", "Conferences",
-    "Computers", "Office Technology", "Office Procedures", "Electronics", "Correspondence",
-    "Job Advertising and Recruiting", "Applying and Interviewing", "Hiring and Training",
-    "Salaries and Benefits", "Promotions, Pensions, and Awards", "Shopping",
-    "Ordering Supplies", "Shipping", "Invoices", "Inventory", "Banking",
-    "Accounting", "Investments", "Taxes", "Financial Statements", "Property and Departments",
-    "Board Meeting and Committees", "Quality Control", "Product Development",
-    "Renting and Leasing", "Selecting a Restaurant", "Eating Out", "Ordering Lunch",
-    "Cooking as a Career", "Events", "General Travel", "Airlines", "Trains", "Hotels",
-    "Car Rentals", "Movies", "Theater", "Music", "Museums", "Media",
-    "Doctors Office", "Dentists Office", "Health Insurance", "Hospitals", "Pharmacy"
-  ]);
-  
   const UNCONFIRMED_MARKER = '미확인';
   
   return rawData.map(rawWord => {
@@ -150,7 +136,7 @@ export async function loadGameData() {
         return await dataLoadPromise;
       } catch (err) {
         // If fresh data also fails, return empty array to allow app to continue
-        console.error('[Data] Fresh data load failed, using empty dataset');
+        console.error('[Data] Fresh data load failed, using empty dataset', err);
         gameData = [];
         store.setState({ words: [], categories: [] });
         return gameData;
@@ -162,9 +148,9 @@ export async function loadGameData() {
   dataLoadPromise = fetchFreshData();
   try {
     return await dataLoadPromise;
-  } catch {
+  } catch (err) {
     // If fresh data fails, return empty array to allow app to continue
-    console.error('[Data] Fresh data load failed, using empty dataset');
+    console.error('[Data] Fresh data load failed, using empty dataset', err);
     gameData = [];
     store.setState({ words: [], categories: [] });
     return gameData;

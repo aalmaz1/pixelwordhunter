@@ -52,7 +52,7 @@
       <!-- Индикатор синхронизации с облаком -->
       <div id="sync-status" class="sync-indicator" aria-live="polite">
         <span id="sync-text"></span>
-        <button id="retry-sync-btn" class="hidden" style="margin-left:8px;font-size:10px;padding:2px 6px;border:1px solid var(--neon-yellow);background:transparent;color:var(--neon-yellow);cursor:pointer;display:inline-flex;align-items:center;" aria-label="Retry synchronization">🔄 Retry</button>
+        <button id="retry-sync-btn" class="hidden retry-sync-btn" aria-label="Retry synchronization">🔄 Retry</button>
       </div>
       <p class="blink" aria-hidden="true" data-i18n="press_hunt">▸ PRESS HUNT ◂</p>
       
@@ -120,9 +120,9 @@
         <!-- Backup/Restore -->
         <div class="settings-row">
           <span class="settings-label">BACKUP</span>
-          <div style="display:flex;gap:10px;">
+          <div class="backup-actions">
             <button class="theme-btn" id="export-btn" aria-label="Export progress">📤 EXPORT</button>
-            <label class="theme-btn" style="cursor:pointer;" aria-label="Import progress">
+            <label class="theme-btn backup-import-label" aria-label="Import progress">
               📥 IMPORT
               <input type="file" id="import-input" accept=".json" hidden>
             </label>
@@ -172,7 +172,7 @@
         <h2 class="modal-title" id="auth-title" data-i18n="login_title">// LOGIN //</h2>
         
         <form id="auth-form" class="auth-form" onsubmit="return false;">
-          <div class="auth-field" id="username-field" style="display:none;">
+          <div class="auth-field username-field-hidden" id="username-field">
             <label for="auth-username" data-i18n="username">USERNAME</label>
             <input type="text" id="auth-username" data-i18n-placeholder="enter_username" placeholder="Enter username" autocomplete="username">
           </div>
