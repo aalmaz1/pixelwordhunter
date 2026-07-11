@@ -361,6 +361,16 @@ function setupEventListeners() {
     }
   });
 
+  // Logout button
+  document.getElementById('logout-btn')?.addEventListener('click', async () => {
+    // Dynamically import logoutUser from firebase-config
+    const firebaseConfigModule = await import('./firebase-config.js');
+    await firebaseConfigModule.logoutUser();
+    showNotification('Logged out successfully');
+    // Reload to reset state and show login buttons
+    location.reload();
+  });
+
   // Note: next-question-btn click is now handled within the game flow
   // to properly support Word Review sessions
 
