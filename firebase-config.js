@@ -5,7 +5,7 @@
 
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
-import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, doc, onSnapshot } from 'firebase/firestore';
+import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, doc, onSnapshot, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { store } from './store.js';
 
 // Firebase config
@@ -82,23 +82,24 @@ export async function initFirebase() {
     
     firebaseAvailable = true;
     console.log('✅ Firebase initialized (Bundled)');
-  onAuthStateChanged(firebaseAuth, (user) => {      
-    if (user) {        
-      // Пользователь уже вошел (или только что вошел)        
-      console.log('👤 User signed in:', user.uid);      
-    } else {        
-      // Пользователя нет -> выполняем анонимный вход        
-      console.log('⏳ No user detected, signing in anonymously...');        
-      signInAnonymously(firebaseAuth)          
-        .then((result) => {            
-          console.log('✅ Anonymous sign-in successful:', result.user.uid);          
-        })          
-        .catch((error) => {            
-          console.error('❌ Anonymous sign-in failed:', error.code, error.message);          
-        });      
-    }    
-  });
-  
+    
+    onAuthStateChanged(firebaseAuth, (user) => {      
+      if (user) {        
+        // Пользователь уже вошел (или только что вошел)        
+        console.log('👤 User signed in:', user.uid);      
+      } else {        
+        // Пользователя нет -> выполняем анонимный вход        
+        console.log('⏳ No user detected, signing in anonymously...');        
+        signInAnonymously(firebaseAuth)          
+          .then((result) => {            
+            console.log('✅ Anonymous sign-in successful:', result.user.uid);          
+          })          
+          .catch((error) => {            
+            console.error('❌ Anonymous sign-in failed:', error.code, error.message);          
+          });      
+      }    
+    });
+    
   } catch (error) {
     console.warn('⚠️ Firebase not available - running in offline mode:', error.message);
     firebaseAvailable = false;
@@ -124,12 +125,8 @@ export async function initFirebase() {
   window.firebaseAuth = firebaseAuth;
   window.firebaseDb = firebaseDb;
   window.firebaseAvailable = firebaseAvailable;
-  window.doc = doc;
-  window.getDoc = getDoc;
-  window.setDoc = setDoc;
-  window.serverTimestamp = serverTimestamp;
 
-  return { firebaseAuth, firebaseDb, firebaseAvailable };
-  }
+  return { firebaseAuth, firebaseDb, firebaseAvailable, doc, getDoc, setDoc, serverTimestamp, onSnapshot };
+}
 
-  export { firebaseAuth, firebaseDb, firebaseAvailable };
+export { firebaseAuth, firebaseDb, firebaseAvailable };

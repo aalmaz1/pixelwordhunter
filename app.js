@@ -74,13 +74,14 @@ async function initializeFirebaseServices() {
   setDoc = firestoreModule.setDoc;
   getDoc = firestoreModule.getDoc;
   serverTimestamp = firestoreModule.serverTimestamp;
+  onSnapshot = firestoreModule.onSnapshot;
 
   // Теперь firebaseAuth и firebaseDb доступны, можно настроить слушатель
   if (firebaseAuth) {
     onAuthStateChanged(firebaseAuth, async (user) => {
       store.setUser(user);
       if (user) {
-        const progress = await loadProgress(firebaseDb, doc, firestoreModule.getDoc);
+        const progress = await loadProgress(firebaseDb, doc, getDoc);
         applyProgress(progress);
       }
     });
