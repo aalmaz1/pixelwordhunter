@@ -4,9 +4,8 @@
  */
 
 import { getGameData } from './data.js';
-// Удаляем прямые импорты Firebase
-// import { firebaseAuth, firebaseDb, firebaseAvailable } from './firebase-config.js';
-// import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
+import { firebaseDb, firebaseAuth } from './firebase-config.js';
+import { doc, updateDoc, increment } from 'firebase/firestore';
 import { store } from './store.js';
 
 const STORAGE_KEY = 'pixelWordHunter_save_v2';
@@ -116,6 +115,8 @@ export async function saveProgress(firebaseDb, doc, setDoc, serverTimestamp) {
 
   // Firestore Sync (Debounced with module-level timeout)
   const { user, isAuthenticated, xp } = store.getState();
+  // Note: XP is now synced via atomic increments and real-time listeners
+  // so we don't need to explicitly save it here anymore
   if (isAuthenticated && user && firebaseDb && doc && setDoc && serverTimestamp) {
     // Use a local timeout variable scoped to this module
     if (saveProgress._timeout) clearTimeout(saveProgress._timeout);
@@ -124,7 +125,6 @@ export async function saveProgress(firebaseDb, doc, setDoc, serverTimestamp) {
       try {
         await setDoc(doc(firebaseDb, 'users', user.uid), {
           progress,
-          xp,
           lastSync: serverTimestamp(),
           updatedAt: new Date().toISOString()
         }, { merge: true });
@@ -138,23 +138,62 @@ export async function saveProgress(firebaseDb, doc, setDoc, serverTimestamp) {
 }
 
 /**
- * User-specific XP handling
+ * User-specific XP handling with atomic server increments
  */
 export function getCurrentUserId() {
-  return store.getState().user?.uid || 'guest';
+  const state = store.getState();
+  return state.user?.uid || null;
 }
 
+/**
+ * Sets XP locally and persists to localStorage (for offline/guest users)
+ * For authenticated users, XP is synced via real-time listener in firebase-config.js
+ */
 export function setUserXP(xp) {
   const userId = getCurrentUserId();
-  storageSet(`xp_${userId}`, String(xp || 0));
+  storageSet(`xp_${userId || 'guest'}`, String(xp || 0));
   store.setState({ xp: Number(xp) || 0 });
 }
 
 export function getUserXP() {
   const userId = getCurrentUserId();
-  const saved = storageGet(`xp_${userId}`);
+  const saved = storageGet(`xp_${userId || 'guest'}`);
   const xp = parseInt(saved, 10) || 0;
   return xp;
+}
+
+/**
+ * Adds XP using atomic server-side increment to prevent race conditions
+ * This ensures XP updates are consistent across multiple tabs/devices
+ */
+export async function addXP(points) {
+  const userId = getCurrentUserId();
+  
+  if (!userId || !firebaseDb) {
+    // Offline or guest mode - update locally only
+    const currentXP = getUserXP();
+    const newXP = currentXP + points;
+    setUserXP(newXP);
+    return newXP;
+  }
+  
+  try {
+    const userRef = doc(firebaseDb, 'users', userId);
+    // Use atomic increment on server to prevent race conditions
+    await updateDoc(userRef, {
+      xp: increment(points)
+    });
+    console.log(`[XP] Added ${points} XP atomically for user ${userId}`);
+    // Note: The real-time listener in firebase-config.js will update local state
+    return getUserXP() + points;
+  } catch (error) {
+    console.error('[XP] Failed to add XP:', error);
+    // Fallback to local update
+    const currentXP = getUserXP();
+    const newXP = currentXP + points;
+    setUserXP(newXP);
+    return newXP;
+  }
 }
 
 export function resetProgress() {

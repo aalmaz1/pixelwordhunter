@@ -35,6 +35,7 @@ import {
   storageSet,
   setUserXP,
   getUserXP,
+  addXP,
   resetProgress,
   exportProgress,
   importProgress
@@ -44,7 +45,7 @@ import { initUI, renderCategoryButtons, showNotification, getFocusableElements }
 // Локальные переменные для Firebase-сервисов и функций
 let firebaseAuth, firebaseDb;
 let createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut, onAuthStateChanged;
-let doc, setDoc;
+let doc, setDoc, serverTimestamp;
 
 /**
  * Динамически импортирует и инициализирует Firebase-сервисы.
@@ -70,13 +71,14 @@ async function initializeFirebaseServices() {
   const firestoreModule = await import('firebase/firestore');
   doc = firestoreModule.doc;
   setDoc = firestoreModule.setDoc;
+  serverTimestamp = firestoreModule.serverTimestamp;
 
   // Теперь firebaseAuth и firebaseDb доступны, можно настроить слушатель
   if (firebaseAuth) {
     onAuthStateChanged(firebaseAuth, async (user) => {
       store.setUser(user);
       if (user) {
-        const progress = await loadProgress();
+        const progress = await loadProgress(firebaseDb, doc, firestoreModule.getDoc);
         applyProgress(progress);
       }
     });
@@ -595,9 +597,8 @@ function checkAnswer(selected, word, btn, questionIsEnglish) {
     btn.classList.add('correct');
     AudioEngine.playCorrect();
     const bonus = 10; // Simple scoring
-    const newXP = state.xp + bonus;
-    store.updateXP(bonus);
-    setUserXP(newXP);
+    // Use atomic XP increment for multi-tab synchronization
+    addXP(bonus);
     updateWordProgress(word.eng, true);
   } else {
     btn.classList.add('wrong');
@@ -618,7 +619,7 @@ function checkAnswer(selected, word, btn, questionIsEnglish) {
   const updatedReviewData = [...currentState.reviewSessionData, wordResult];
   store.setState({ reviewSessionData: updatedReviewData });
 
-  saveProgress();
+  saveProgress(firebaseDb, doc, setDoc, serverTimestamp);
   setTimeout(() => showExplanation(word, questionIsEnglish, false), 1000);
 }
 
