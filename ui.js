@@ -3,6 +3,17 @@
  * UI initialization and common rendering functions
  */
 
+/**
+ * Returns an array of focusable elements within the given parent.
+ * Used for accessibility and keyboard navigation management.
+ * Exported for use in app.js and other modules.
+ */
+export function getFocusableElements(parent = document) {
+  return Array.from(parent.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  ));
+}
+
 export function initUI() {
   return {
     menuScreenElement: document.getElementById('menu-screen'),
