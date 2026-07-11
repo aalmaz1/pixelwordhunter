@@ -31,6 +31,7 @@ import {
 import {
   saveProgress,
   loadProgress,
+  loadProgressWrapper,
   storageGet,
   storageSet,
   setUserXP,
@@ -45,7 +46,7 @@ import { initUI, renderCategoryButtons, showNotification, getFocusableElements }
 // Локальные переменные для Firebase-сервисов и функций
 let firebaseAuth, firebaseDb;
 let createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut, onAuthStateChanged;
-let doc, setDoc, serverTimestamp;
+let doc, setDoc, getDoc, serverTimestamp;
 
 /**
  * Динамически импортирует и инициализирует Firebase-сервисы.
@@ -71,14 +72,16 @@ async function initializeFirebaseServices() {
   const firestoreModule = await import('firebase/firestore');
   doc = firestoreModule.doc;
   setDoc = firestoreModule.setDoc;
+  getDoc = firestoreModule.getDoc;
   serverTimestamp = firestoreModule.serverTimestamp;
+  onSnapshot = firestoreModule.onSnapshot;
 
   // Теперь firebaseAuth и firebaseDb доступны, можно настроить слушатель
   if (firebaseAuth) {
     onAuthStateChanged(firebaseAuth, async (user) => {
       store.setUser(user);
       if (user) {
-        const progress = await loadProgress(firebaseDb, doc, firestoreModule.getDoc);
+        const progress = await loadProgress(firebaseDb, doc, getDoc);
         applyProgress(progress);
       }
     });
@@ -202,6 +205,8 @@ const AuthManager = {
           username, email, xp: 0, createdAt: new Date()
         });
       }
+      // Track auth method to prevent auto anonymous sign-in
+      localStorage.setItem('pixelWordHunter_authMethod', 'email');
       return { success: true };
     } catch (e) { return { success: false, error: e.message }; }
   },
@@ -215,12 +220,16 @@ const AuthManager = {
     }
     try {
       await signInWithEmailAndPassword(firebaseAuth, email, password);
+      // Track auth method to prevent auto anonymous sign-in
+      localStorage.setItem('pixelWordHunter_authMethod', 'email');
       return { success: true };
     } catch (e) { return { success: false, error: e.message }; }
   },
 
   async logout() {
     if (firebaseAuth) await signOut(firebaseAuth);
+    // Clear auth method on logout
+    localStorage.removeItem('pixelWordHunter_authMethod');
   }
 };
 
@@ -248,7 +257,7 @@ async function init() {
 
     // Load Data
     await loadGameData();
-    const progress = await loadProgress();
+    const progress = await loadProgressWrapper();
     applyProgress(progress);
 
     // Initial UI state
