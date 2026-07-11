@@ -1,42 +1,49 @@
-# Compiled and binary files
-*.pyc
-*.class
-*.o
-*.exe
-*.dll
-*.so
-*.a
-*.obj
-*.out
-
-# Dependencies
-node_modules/
-venv/
-.venv/
-__pycache__/
-dist/
-build/
-target/
-.gradle/
-
-# Editors
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# System files
-.DS_Store
-Thumbs.db
+```
+# Environment variables
 .env
 .env.local
 *.env.*
 
-# Logs and coverage
+# Logs
 *.log
-coverage/
-htmlcov/
-.coverage
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+target/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+.Python
+env/
+venv/
+.venv/
+.eggs/
+.egg-info/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Compiled and binary files
+*.o
+*.obj
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+*.exe
+*.out
+*.class
+*.jar
+*.war
+*.ear
 
 # Compressed files
 *.zip
@@ -57,3 +64,29 @@ htmlcov/
 *.Z
 *.lz
 *.lzo
+
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+
+# Testing
+.pytest_cache/
+.mypy_cache/
+.tox/
+.nox/
+
+# IDE specific
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+```
