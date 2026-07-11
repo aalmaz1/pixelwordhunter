@@ -46,7 +46,7 @@ import { initUI, renderCategoryButtons, showNotification, getFocusableElements }
 // Локальные переменные для Firebase-сервисов и функций
 let firebaseAuth, firebaseDb;
 let createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut, onAuthStateChanged;
-let doc, setDoc, getDoc, serverTimestamp;
+let doc, setDoc, getDoc, serverTimestamp, onSnapshot;
 
 /**
  * Динамически импортирует и инициализирует Firebase-сервисы.
