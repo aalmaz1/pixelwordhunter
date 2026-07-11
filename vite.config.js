@@ -13,6 +13,7 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     minify: 'esbuild',
+    sourcemap: true, // Generate source maps for production debugging
     rollupOptions: {
       input: {
         main: './index.html'
@@ -66,7 +67,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       manifest: false, // Disable auto-generated manifest, use manifest.json instead
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}', '!**/words_optimized.json'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         cleanupOutdatedCaches: true,
         clientsClaim: true,
         skipWaiting: true,
