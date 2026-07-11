@@ -89,6 +89,17 @@ export async function loadProgress(firebaseDb, doc, getDoc) {
 }
 
 /**
+ * Load progress wrapper for backward compatibility (no args)
+ */
+export async function loadProgressWrapper() {
+  const state = store.getState();
+  const firebaseDb = state.firebaseDb || window.firebaseDb;
+  const doc = window.doc;
+  const getDoc = window.getDoc;
+  return loadProgress(firebaseDb, doc, getDoc);
+}
+
+/**
  * Save progress with atomic LocalStorage + Async Firebase
  * Принимает firebaseDb, doc, setDoc, serverTimestamp как аргументы
  */
