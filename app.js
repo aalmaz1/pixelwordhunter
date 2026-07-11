@@ -205,6 +205,8 @@ const AuthManager = {
           username, email, xp: 0, createdAt: new Date()
         });
       }
+      // Track auth method to prevent auto anonymous sign-in
+      localStorage.setItem('pixelWordHunter_authMethod', 'email');
       return { success: true };
     } catch (e) { return { success: false, error: e.message }; }
   },
@@ -218,12 +220,16 @@ const AuthManager = {
     }
     try {
       await signInWithEmailAndPassword(firebaseAuth, email, password);
+      // Track auth method to prevent auto anonymous sign-in
+      localStorage.setItem('pixelWordHunter_authMethod', 'email');
       return { success: true };
     } catch (e) { return { success: false, error: e.message }; }
   },
 
   async logout() {
     if (firebaseAuth) await signOut(firebaseAuth);
+    // Clear auth method on logout
+    localStorage.removeItem('pixelWordHunter_authMethod');
   }
 };
 

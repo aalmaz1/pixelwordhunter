@@ -83,22 +83,33 @@ export async function initFirebase() {
     firebaseAvailable = true;
     console.log('✅ Firebase initialized (Bundled)');
     
-    onAuthStateChanged(firebaseAuth, (user) => {      
-      if (user) {        
-        // Пользователь уже вошел (или только что вошел)        
-        console.log('👤 User signed in:', user.uid);      
-      } else {        
-        // Пользователя нет -> выполняем анонимный вход        
-        console.log('⏳ No user detected, signing in anonymously...');        
-        signInAnonymously(firebaseAuth)          
-          .then((result) => {            
-            console.log('✅ Anonymous sign-in successful:', result.user.uid);          
-          })          
-          .catch((error) => {            
-            console.error('❌ Anonymous sign-in failed:', error.code, error.message);          
-          });      
-      }    
-    });
+    // Only auto-sign-in anonymously if no explicit auth action is taken
+    // This prevents interference with email/password registration
+    const storedAuthMethod = localStorage.getItem('pixelWordHunter_authMethod');
+    
+    // If user previously used anonymous auth or has no auth method set (new user), enable anonymous sign-in
+    if (!storedAuthMethod || storedAuthMethod === 'anonymous') {
+      onAuthStateChanged(firebaseAuth, (user) => {      
+        if (user) {        
+          // User already signed in (or just signed in)        
+          console.log('👤 User signed in:', user.uid);        
+        } else {        
+          // No user detected -> perform anonymous sign-in for new/anonymous users
+          console.log('⏳ No user detected, signing in anonymously...');        
+          signInAnonymously(firebaseAuth)          
+            .then((result) => {            
+              console.log('✅ Anonymous sign-in successful:', result.user.uid);
+              // Track anonymous auth method
+              localStorage.setItem('pixelWordHunter_authMethod', 'anonymous');
+            })          
+            .catch((error) => {            
+              console.error('❌ Anonymous sign-in failed:', error.code, error.message);          
+            });      
+        }    
+      });
+    }
+    // If user previously used email/password, don't auto-sign-in anonymously
+    // They need to explicitly log in with credentials
     
   } catch (error) {
     console.warn('⚠️ Firebase not available - running in offline mode:', error.message);
