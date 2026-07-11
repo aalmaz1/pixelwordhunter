@@ -55,10 +55,11 @@ let doc, setDoc, getDoc, serverTimestamp, onSnapshot;
 async function initializeFirebaseServices() {
   // Динамический импорт firebase-config.js
   const firebaseConfigModule = await import('./firebase-config.js');
-  await firebaseConfigModule.initFirebase(); // Инициализируем Firebase-приложение
+  const initResult = await firebaseConfigModule.initFirebase(); // Инициализируем Firebase-приложение
 
-  firebaseAuth = firebaseConfigModule.firebaseAuth;
-  firebaseDb = firebaseConfigModule.firebaseDb;
+  // Use the returned values from initFirebase for immediate access
+  firebaseAuth = initResult.firebaseAuth || firebaseConfigModule.firebaseAuth;
+  firebaseDb = initResult.firebaseDb || firebaseConfigModule.firebaseDb;
 
   // Динамический импорт функций аутентификации
   const authModule = await import('firebase/auth');
@@ -122,7 +123,8 @@ const AudioEngine = {
         return false;
       }
     }
-    if (this.ctx.state === 'suspended') {
+    // Resume context only after user gesture (handled by unlockAudio in init)
+    if (this.ctx && this.ctx.state === 'suspended') {
       this.ctx.resume().catch(() => {});
     }
     return true;
@@ -191,10 +193,12 @@ const ThemeManager = {
 // ==================== AUTH MANAGER ====================
 const AuthManager = {
   async register(username, email, password) {
-    // Проверяем, что Firebase Auth загружен
-    if (!firebaseAuth) {
-      console.warn('Firebase Auth not loaded. Attempting to load...');
-      await initializeFirebaseServices(); // Попытка загрузить, если еще не загружено
+    // Ensure Firebase services are initialized
+    if (!firebaseAuth || !firebaseDb) {
+      console.log('[Auth] Initializing Firebase services for registration...');
+      await initializeFirebaseServices();
+      // Small delay to ensure Firebase is fully ready
+      await new Promise(resolve => setTimeout(resolve, 100));
       if (!firebaseAuth) return { success: false, error: 'Firebase Auth failed to load.' };
     }
     try {
@@ -212,10 +216,12 @@ const AuthManager = {
   },
 
   async login(email, password) {
-    // Проверяем, что Firebase Auth загружен
+    // Ensure Firebase services are initialized
     if (!firebaseAuth) {
-      console.warn('Firebase Auth not loaded. Attempting to load...');
-      await initializeFirebaseServices(); // Попытка загрузить, если еще не загружено
+      console.log('[Auth] Initializing Firebase services for login...');
+      await initializeFirebaseServices();
+      // Small delay to ensure Firebase Auth is fully ready
+      await new Promise(resolve => setTimeout(resolve, 100));
       if (!firebaseAuth) return { success: false, error: 'Firebase Auth failed to load.' };
     }
     try {
@@ -227,6 +233,9 @@ const AuthManager = {
   },
 
   async logout() {
+    if (!firebaseAuth) {
+      await initializeFirebaseServices();
+    }
     if (firebaseAuth) await signOut(firebaseAuth);
     // Clear auth method on logout
     localStorage.removeItem('pixelWordHunter_authMethod');
@@ -466,6 +475,7 @@ async function handleAuthSubmit() {
   const username = document.getElementById('auth-username').value;
 
   ui.authSubmit.disabled = true;
+  ui.authError.textContent = ''; // Clear previous errors
   let result;
   if (mode === 'register') {
     result = await AuthManager.register(username, email, password);
@@ -477,7 +487,7 @@ async function handleAuthSubmit() {
     closeAuthModal();
     showNotification('Success!');
   } else {
-    ui.authError.textContent = result.error;
+    ui.authError.textContent = result.error || 'Authentication failed';
   }
   ui.authSubmit.disabled = false;
 }
