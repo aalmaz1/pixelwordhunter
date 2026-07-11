@@ -19,12 +19,11 @@ build/
 target/
 .gradle/
 
-# Editor/IDE files
+# Editors
 .vscode/
 .idea/
 *.swp
 *.swo
-*.tmp
 
 # System files
 .DS_Store

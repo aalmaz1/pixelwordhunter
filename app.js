@@ -45,7 +45,7 @@ import { initUI, renderCategoryButtons, showNotification, getFocusableElements }
 // Локальные переменные для Firebase-сервисов и функций
 let firebaseAuth, firebaseDb;
 let createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut, onAuthStateChanged;
-let doc, setDoc, serverTimestamp;
+let doc, setDoc, getDoc, serverTimestamp;
 
 /**
  * Динамически импортирует и инициализирует Firebase-сервисы.
@@ -71,6 +71,7 @@ async function initializeFirebaseServices() {
   const firestoreModule = await import('firebase/firestore');
   doc = firestoreModule.doc;
   setDoc = firestoreModule.setDoc;
+  getDoc = firestoreModule.getDoc;
   serverTimestamp = firestoreModule.serverTimestamp;
 
   // Теперь firebaseAuth и firebaseDb доступны, можно настроить слушатель
