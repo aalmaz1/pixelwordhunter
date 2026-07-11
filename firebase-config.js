@@ -4,8 +4,8 @@
  */
 
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager } from 'firebase/firestore';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, doc, onSnapshot } from 'firebase/firestore';
 import { store } from './store.js';
 
 // Firebase config
@@ -23,6 +23,48 @@ const FIREBASE_CONFIG = {
 let firebaseAuth = null;
 let firebaseDb = null;
 let firebaseAvailable = false;
+let xpUnsubscribe = null; // Store unsubscribe function for XP listener
+
+/**
+ * Sets up real-time listener for XP synchronization across tabs/devices
+ */
+export function setupXPListener(userId) {
+  // Unsubscribe from previous listener if exists
+  if (xpUnsubscribe) {
+    xpUnsubscribe();
+    xpUnsubscribe = null;
+  }
+  
+  if (!firebaseDb || !userId) return;
+  
+  const userRef = doc(firebaseDb, 'users', userId);
+  
+  xpUnsubscribe = onSnapshot(userRef, (docSnap) => {
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      if (data.xp !== undefined) {
+        // Update local store with server XP value
+        store.setState({ xp: data.xp });
+        console.log(`[XP Sync] XP updated from server: ${data.xp}`);
+      }
+    }
+  }, (error) => {
+    console.warn('[XP Sync] Listener error:', error.message);
+  });
+  
+  console.log('[XP Sync] Real-time listener established for user:', userId);
+}
+
+/**
+ * Cleans up the XP listener when user logs out
+ */
+export function cleanupXPListener() {
+  if (xpUnsubscribe) {
+    xpUnsubscribe();
+    xpUnsubscribe = null;
+    console.log('[XP Sync] Real-time listener cleaned up');
+  }
+}
 
 export async function initFirebase() {
   if (firebaseAvailable) return { firebaseAuth, firebaseDb, firebaseAvailable };
@@ -47,6 +89,19 @@ export async function initFirebase() {
   
   // Sync with store
   store.setState({ firebaseAvailable });
+  
+  // Set up auth state listener to manage XP synchronization
+  if (firebaseAuth) {
+    onAuthStateChanged(firebaseAuth, (user) => {
+      if (user) {
+        // User logged in - set up real-time XP listener
+        setupXPListener(user.uid);
+      } else {
+        // User logged out - clean up listener
+        cleanupXPListener();
+      }
+    });
+  }
   
   // Export for legacy support if needed
   window.firebaseAuth = firebaseAuth;
