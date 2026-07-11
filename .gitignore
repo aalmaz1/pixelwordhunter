@@ -1,51 +1,38 @@
 ```
-# Environment variables
+# Dependencies
+node_modules/
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Environment
 .env
 .env.local
 *.env.*
 
-# Logs
-*.log
+# Editors
+.vscode/
+.idea/
 
-# Dependencies
-node_modules/
-
-# Build outputs
+# Build artifacts
 dist/
 build/
-target/
-
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-*.so
-.Python
-env/
-venv/
-.venv/
-.eggs/
-.egg-info/
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Compiled and binary files
 *.o
 *.obj
-*.a
-*.lib
-*.dll
-*.so
-*.dylib
-*.exe
-*.out
-*.class
-*.jar
-*.war
-*.ear
+*.pyc
+__pycache__/
 
-# Compressed files
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# Compression
 *.zip
 *.gz
 *.tar
@@ -64,29 +51,35 @@ pip-delete-this-directory.txt
 *.Z
 *.lz
 *.lzo
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tar.zst
 
-# Coverage reports
-coverage/
-htmlcov/
-.coverage
+# Java
+*.class
 
-# Testing
-.pytest_cache/
-.mypy_cache/
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
 .tox/
-.nox/
-
-# IDE specific
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.DS_Store
-Thumbs.db
-
-# Temporary files
-*.tmp
-*.temp
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
 *.log
+.git/
+.hg/
+.svn/
+ CVS/
 ```

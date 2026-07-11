@@ -31,6 +31,7 @@ import {
 import {
   saveProgress,
   loadProgress,
+  loadProgressWrapper,
   storageGet,
   storageSet,
   setUserXP,
@@ -249,7 +250,7 @@ async function init() {
 
     // Load Data
     await loadGameData();
-    const progress = await loadProgress();
+    const progress = await loadProgressWrapper();
     applyProgress(progress);
 
     // Initial UI state

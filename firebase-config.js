@@ -124,6 +124,10 @@ export async function initFirebase() {
   window.firebaseAuth = firebaseAuth;
   window.firebaseDb = firebaseDb;
   window.firebaseAvailable = firebaseAvailable;
+  window.doc = doc;
+  window.getDoc = getDoc;
+  window.setDoc = setDoc;
+  window.serverTimestamp = serverTimestamp;
 
   return { firebaseAuth, firebaseDb, firebaseAvailable };
   }
