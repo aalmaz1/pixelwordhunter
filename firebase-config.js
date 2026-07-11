@@ -4,7 +4,7 @@
  */
 
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, signInAnonymously, onAuthStateChanged, signOut } from 'firebase/auth';
 import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, doc, onSnapshot, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { store } from './store.js';
 
@@ -63,6 +63,21 @@ export function cleanupXPListener() {
     xpUnsubscribe();
     xpUnsubscribe = null;
     console.log('[XP Sync] Real-time listener cleaned up');
+  }
+}
+
+/**
+ * Signs out the current user and performs necessary cleanup.
+ */
+export async function logoutUser() {
+  if (!firebaseAuth) return;
+  try {
+    await signOut(firebaseAuth);
+    localStorage.removeItem('pixelWordHunter_authMethod');
+    cleanupXPListener();
+    console.log('User signed out successfully');
+  } catch (error) {
+    console.error('Logout failed:', error.message);
   }
 }
 
