@@ -57,17 +57,23 @@ export async function loadProgress(firebaseDb, doc, getDoc) {
           // Cache for offline use
           storageSet(STORAGE_KEY, JSON.stringify(progress));
           
-          if (serverData.xp) {
-            store.setState({ xp: serverData.xp });
-            setUserXP(serverData.xp);
+          // Загружаем XP с сервера и сохраняем локально
+          if (serverData.xp !== undefined) {
+            const serverXP = Number(serverData.xp) || 0;
+            storageSet(`xp_${user.uid}`, String(serverXP));
+            store.setState({ xp: serverXP });
+            console.log(`[Storage] XP loaded from server: ${serverXP}`);
           }
           
           console.log('[Storage] Cloud sync successful');
           return progress;
         }
+      } else {
+        // Документ не существует - создадим пустой при первом сохранении
+        console.log('[Storage] No user document found, will create on first save');
       }
-    } catch {
-      console.warn('[Storage] Cloud load failed, using local');
+    } catch (error) {
+      console.warn('[Storage] Cloud load failed, using local:', error.message);
     }
   }
 
@@ -134,15 +140,34 @@ export async function saveProgress(firebaseDb, doc, setDoc, serverTimestamp) {
     
     saveProgress._timeout = setTimeout(async () => {
       try {
-        await setDoc(doc(firebaseDb, 'users', user.uid), {
-          progress,
-          lastSync: serverTimestamp(),
-          updatedAt: new Date().toISOString()
-        }, { merge: true });
-        console.log('[Storage] Cloud saved');
+        const userRef = doc(firebaseDb, 'users', user.uid);
+        
+        // Проверяем существование документа пользователя
+        const userSnap = await getDoc(userRef);
+        
+        if (!userSnap.exists()) {
+          // Создаём новый документ с начальными данными
+          await setDoc(userRef, {
+            progress,
+            xp: xp || 0,
+            lastSync: serverTimestamp(),
+            updatedAt: new Date().toISOString(),
+            createdAt: new Date().toISOString()
+          }, { merge: true });
+          console.log('[Storage] New user document created in Firestore');
+        } else {
+          // Обновляем существующий документ
+          await setDoc(userRef, {
+            progress,
+            lastSync: serverTimestamp(),
+            updatedAt: new Date().toISOString()
+          }, { merge: true });
+          console.log('[Storage] Cloud saved');
+        }
+        
         storageRemove(BACKUP_KEY);
-      } catch {
-        console.warn('[Storage] Cloud save failed');
+      } catch (error) {
+        console.warn('[Storage] Cloud save failed:', error.message);
       }
     }, 2000);
   }

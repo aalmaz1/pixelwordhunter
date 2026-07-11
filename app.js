@@ -77,16 +77,38 @@ async function initializeFirebaseServices() {
   serverTimestamp = firestoreModule.serverTimestamp;
   onSnapshot = firestoreModule.onSnapshot;
 
-  // Теперь firebaseAuth и firebaseDb доступны, можно настроить слушатель
+  // Экспортируем функции глобально для доступа из других модулей
+  window.doc = doc;
+  window.getDoc = getDoc;
+  window.setDoc = setDoc;
+  window.serverTimestamp = serverTimestamp;
+
+  // Настраиваем слушатель состояния аутентификации
   if (firebaseAuth) {
     onAuthStateChanged(firebaseAuth, async (user) => {
+      console.log('[Auth] Auth state changed:', user ? user.uid : 'null');
       store.setUser(user);
+      
       if (user) {
-        const progress = await loadProgress(firebaseDb, doc, getDoc);
-        applyProgress(progress);
+        // Пользователь вошёл - загружаем данные с сервера
+        console.log('[Auth] User authenticated, loading progress from Firestore...');
+        try {
+          const progress = await loadProgress(firebaseDb, doc, getDoc);
+          applyProgress(progress, true); // true = данные с сервера
+          console.log('[Auth] Progress loaded successfully');
+        } catch (error) {
+          console.error('[Auth] Failed to load progress:', error);
+        }
+      } else {
+        // Пользователь вышел - очищаем состояние
+        console.log('[Auth] User logged out, resetting to local data');
+        const localProgress = await loadProgressWrapper();
+        applyProgress(localProgress, false);
       }
     });
   }
+  
+  return { firebaseAuth, firebaseDb };
 }
 
 // ==================== AUDIO ENGINE ====================
@@ -520,7 +542,7 @@ function toggleScreen(screenId) {
   });
 }
 
-function applyProgress(progressData) {
+function applyProgress(progressData, fromServer = false) {
   const words = getGameData();
   Object.entries(progressData).forEach(([eng, data]) => {
     const word = words.find(w => w.eng === eng);
@@ -528,12 +550,18 @@ function applyProgress(progressData) {
   });
 
   const stats = getProgressStats();
+  
+  // Если данные с сервера - используем XP из сервера, иначе - локальный
+  const xpValue = fromServer ? getUserXP() : getUserXP();
+  
   store.setState({
-    xp: getUserXP(),
+    xp: xpValue,
     masteredCount: stats.mastered,
     learningCount: stats.learning,
     reviewCount: stats.newWords
   });
+  
+  console.log(`[App] Progress applied: ${Object.keys(progressData).length} words, XP: ${xpValue}`);
 }
 
 function updateUI(state = store.getState()) {
