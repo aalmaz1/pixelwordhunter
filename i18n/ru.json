@@ -55,7 +55,15 @@
   "theme_sunset": "ЗАКАТ",
   "theme_mono": "МОНО",
   "language": "ЯЗЫК",
-  "lang_en": "EN",
+  "lang_en": "RU",
   "lang_ru": "RU",
-  "lang_ko": "KO"
+  "lang_ko": "KO",
+  "username_required": "Имя пользователя обязательно",
+  "authentication_failed": "Ошибка аутентификации",
+  "firebase_offline": "Firebase недоступен - автономный режим",
+  "reset_progress_confirm": "Сбросить весь прогресс?",
+  "new_version_available": "Доступна новая версия! Перезагрузить для обновления?",
+  "round_complete": "// РАУНД ЗАВЕРШЁН //",
+  "score_label": "СЧЁТ:",
+  "status_good": "ХОРОШО"
 }
