@@ -46,7 +46,7 @@ import { initUI, renderCategoryButtons, showNotification, getFocusableElements }
 // Локальные переменные для Firebase-сервисов и функций
 let firebaseAuth, firebaseDb;
 let createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut, onAuthStateChanged;
-let doc, setDoc, getDoc, serverTimestamp;
+let doc, setDoc, getDoc, serverTimestamp, onSnapshot;
 
 /**
  * Динамически импортирует и инициализирует Firebase-сервисы.
@@ -359,6 +359,16 @@ function setupEventListeners() {
       resetProgress();
       location.reload();
     }
+  });
+
+  // Logout button
+  document.getElementById('logout-btn')?.addEventListener('click', async () => {
+    // Dynamically import logoutUser from firebase-config
+    const firebaseConfigModule = await import('./firebase-config.js');
+    await firebaseConfigModule.logoutUser();
+    showNotification('Logged out successfully');
+    // Reload to reset state and show login buttons
+    location.reload();
   });
 
   // Note: next-question-btn click is now handled within the game flow

@@ -5,7 +5,7 @@
 
 import { getGameData } from './data.js';
 import { firebaseDb, firebaseAuth } from './firebase-config.js';
-import { doc, updateDoc, increment } from 'firebase/firestore';
+import { doc, updateDoc, increment, getDoc, setDoc } from 'firebase/firestore';
 import { store } from './store.js';
 
 const STORAGE_KEY = 'pixelWordHunter_save_v2';
@@ -190,6 +190,11 @@ export async function addXP(points) {
   
   try {
     const userRef = doc(firebaseDb, 'users', userId);
+    // Check if document exists, if not create it first
+    const userSnap = await getDoc(userRef);
+    if (!userSnap.exists()) {
+      await setDoc(userRef, { xp: 0 });
+    }
     // Use atomic increment on server to prevent race conditions
     await updateDoc(userRef, {
       xp: increment(points)
