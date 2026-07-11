@@ -1,3 +1,31 @@
 ```
+# Build artifacts
+dist/
+*.js
+*.map
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Logs
+*.log
+
+# Dependencies
 node_modules/
+
+# Editors
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# System
+.DS_Store
+Thumbs.db
 ```
