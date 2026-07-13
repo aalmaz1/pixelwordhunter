@@ -54,22 +54,22 @@
         <span id="sync-text"></span>
         <button id="retry-sync-btn" class="hidden retry-sync-btn" aria-label="Retry synchronization">🔄 Retry</button>
       </div>
-      <p class="blink" aria-hidden="true" data-i18n="press_hunt">▸ PRESS HUNT ◂</p>
+      <p class="blink" aria-hidden="true" data-i18n="press_hunt">PRESS HUNT</p>
       
       <!-- Auth Buttons (до логина) -->
       <div class="auth-buttons" id="auth-buttons">
-        <button class="auth-btn" id="login-modal-btn" data-i18n="login">▸ LOGIN</button>
-        <button class="auth-btn register-btn" id="register-modal-btn" data-i18n="register">▸ REGISTER</button>
+        <button class="auth-btn" id="login-modal-btn" data-i18n="login">LOGIN</button>
+        <button class="auth-btn register-btn" id="register-modal-btn" data-i18n="register">REGISTER</button>
       </div>
       <!-- Hunt Button (после логина) -->
-      <button class="start-btn hunt-btn hidden" id="hunt-btn" role="button" data-i18n-prefix="hunt_prefix">▶&#xFE0E;&nbsp;<span data-i18n="hunt">HUNT</span></button>
+      <button class="start-btn hunt-btn hidden" id="hunt-btn" role="button"><span data-i18n="hunt">HUNT</span></button>
       <button class="settings-btn" id="settings-btn" role="button" data-i18n="settings">SETTINGS</button>
       <div class="credits" data-i18n="credits">© 2026 ALMAZ CORP</div>
     </div>
 
     <!-- ── SETTINGS SCREEN ─────────────────────── -->
     <div id="settings-screen" class="game-container hidden" role="region" aria-label="Settings">
-      <button class="back-btn" id="settings-back-btn" role="button" data-i18n="back">◀ BACK</button>
+      <button class="back-btn" id="settings-back-btn" role="button" data-i18n="back">BACK</button>
       <h2 class="screen-title" data-i18n="settings_title">// SETTINGS //</h2>
       
       <div class="settings-content">
@@ -143,7 +143,7 @@
 
     <!-- ── CATEGORY SCREEN ────────────────────── -->
     <div id="category-screen" class="game-container hidden" role="region" aria-label="Category selection">
-      <button class="back-btn" id="category-back-btn" role="button" data-i18n="back">◀ BACK</button>
+      <button class="back-btn" id="category-back-btn" role="button" data-i18n="back">BACK</button>
       <h2 class="screen-title" data-i18n="select_category">// SELECT CATEGORY //</h2>
       <div id="category-list" class="category-grid" role="list"></div>
     </div>
@@ -166,7 +166,7 @@
       <div id="explanation-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="explanation-title" aria-describedby="explanation-list">
         <h2 class="modal-title" id="explanation-title" data-i18n="word_review">// WORD REVIEW //</h2>
         <div id="explanation-list"></div>
-        <button class="next-btn" id="next-question-btn" role="button"><span data-i18n="next">NEXT</span>&nbsp;&#x25B6;&#xFE0E;</button>
+        <button class="next-btn" id="next-question-btn" role="button"><span data-i18n="next">NEXT</span></button>
       </div>
       <div id="feedback" class="hidden" aria-live="polite"></div>
     </div>
