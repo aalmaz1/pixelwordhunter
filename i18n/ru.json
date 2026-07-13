@@ -65,5 +65,6 @@
   "new_version_available": "Доступна новая версия! Перезагрузить для обновления?",
   "round_complete": "// РАУНД ЗАВЕРШЁН //",
   "score_label": "СЧЁТ:",
-  "status_good": "ХОРОШО"
+  "status_good": "ХОРОШО",
+  "close": "ЗАКРЫТЬ"
 }
