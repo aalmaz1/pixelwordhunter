@@ -23,7 +23,7 @@
   "xp_label": "경험치:",
   "exit": "✕",
   "word_review": "// 단어 복습 //",
-  "next": "다음 ▶",
+  "next": "다음 ▶\uFE0E",
   "login_title": "// 로그인 //",
   "register_title": "// 회원가입 //",
   "username": "사용자 이름",
