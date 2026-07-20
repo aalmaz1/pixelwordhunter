@@ -133,6 +133,21 @@
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   transition: all .2s;
   font-variant-emoji: text;
+  position: relative;
+  padding-left: 28px;
+}
+
+.next-btn:before {
+  content: "▸";
+  position: absolute;
+  left: 8px;
+  color: var(--neon-cyan);
+  text-shadow: var(--shadow-cyan);
+  transition: opacity .15s;
+}
+
+.next-btn:hover:before {
+  opacity: 1;
 }
 
 .next-btn:hover {
