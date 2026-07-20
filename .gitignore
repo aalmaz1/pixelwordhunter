@@ -1,71 +1,31 @@
 ```
+# Build artifacts
+dist/
+build/
+*.map
+
 # Dependencies
 node_modules/
 
-# Logs
-*.log
-
-# Environment variables
+# Environment
 .env
 .env.local
 *.env.*
 
-# IDE
+# Editors
 .vscode/
 .idea/
 
-# OS generated files
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+*.log
+
+# OS
 .DS_Store
 Thumbs.db
-
-# Build outputs
-dist/
-build/
-target/
-coverage/
-htmlcov/
-.nyc_output/
-.mypy_cache/
-.pytest_cache/
-.cargo/
-
-# Compressed archives
-*.zip
-*.gz
-*.tar
-*.tgz
-*.bz2
-*.xz
-*.7z
-*.rar
-*.zst
-*.lz4
-*.lzh
-*.cab
-*.arj
-*.rpm
-*.deb
-*.Z
-*.lz
-*.lzo
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.tar.zst
-
-# Runtime data
-*.pid
-*.seed
-*.pid.lock
-
-# Temporary folders
-temp/
-tmp/
-
-# User-specific
-*.local/share/Trash/
-
-# System
-ehthumbs.db
-Icon?
 ```
