@@ -141,13 +141,17 @@ const AudioEngine = {
         this.masterGain = this.ctx.createGain();
         this.masterGain.connect(this.ctx.destination);
         this.updateGain();
-      } catch {
+      } catch (e) {
+        console.warn('[AudioEngine] Failed to create AudioContext:', e.message);
         return false;
       }
     }
     // Resume context only after user gesture (handled by unlockAudio in init)
+    // Avoid calling resume() if state is already running or if no gesture occurred
     if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume().catch(() => {});
+      this.ctx.resume().catch(() => {
+        /* Silent fail until next interaction */
+      });
     }
     return true;
   },
