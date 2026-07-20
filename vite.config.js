@@ -65,7 +65,34 @@ export default defineConfig({
     },
     VitePWA({
       registerType: 'autoUpdate',
-      manifest: false, // Disable auto-generated manifest, use manifest.json instead
+      injectRegister: null, // Disable auto-injection of registerSW script
+      manifest: {
+        short_name: 'WordHunter',
+        name: 'Pixel Word Hunter',
+        description: 'TOEIC vocabulary learning game',
+        start_url: './',
+        display: 'standalone',
+        orientation: 'any',
+        theme_color: '#0a0010',
+        background_color: '#0a0010',
+        categories: ['education', 'games'],
+        icons: [
+          {
+            src: '/assets/logo.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'any'
+          },
+          {
+            src: '/assets/logo.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable'
+          }
+        ],
+        prefer_related_applications: false,
+        scope: './'
+      },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         cleanupOutdatedCaches: true,
