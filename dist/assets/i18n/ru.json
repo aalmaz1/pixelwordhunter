@@ -1,13 +1,13 @@
 {
   "welcome": "ДОБРО ПОЖАЛОВАТЬ",
   "initializing": "ИНИЦИАЛИЗАЦИЯ СИСТЕМЫ...",
-  "pixel_word_hunter": "ОХОТНИК ЗА СЛОВАМИ",
+  "pixel_word_hunter": "PIXEL WORD HUNTER",
   "toEIC_edition": "// TOEIC ВЕРСИЯ //",
   "mastered": "ИЗУЧЕНО",
   "press_hunt": "▸ НАЖМИТЕ ОХОТА ◂",
-  "login": "▶ ВОЙТИ",
-  "register": "▶ РЕГИСТРАЦИЯ",
-  "hunt": "▶ ОХОТА",
+  "login": "▶\uFE0E ВОЙТИ",
+  "register": "▶\uFE0E РЕГИСТРАЦИЯ",
+  "hunt": "▶\uFE0E ОХОТА",
   "settings": "НАСТРОЙКИ",
   "credits": "© 2026 ALMAZ CORP",
   "settings_title": "// НАСТРОЙКИ //",
@@ -23,7 +23,7 @@
   "xp_label": "ОПЫТ:",
   "exit": "✕",
   "word_review": "// ПОВТОРЕНИЕ СЛОВА //",
-  "next": "ДАЛЕЕ ▶",
+  "next": "ДАЛЕЕ ▶\uFE0E",
   "login_title": "// ВХОД //",
   "register_title": "// РЕГИСТРАЦИЯ //",
   "username": "ИМЯ ПОЛЬЗОВАТЕЛЯ",
@@ -65,5 +65,6 @@
   "new_version_available": "Доступна новая версия! Перезагрузить для обновления?",
   "round_complete": "// РАУНД ЗАВЕРШЁН //",
   "score_label": "СЧЁТ:",
-  "status_good": "ХОРОШО"
+  "status_good": "ХОРОШО",
+  "close": "ЗАКРЫТЬ"
 }
