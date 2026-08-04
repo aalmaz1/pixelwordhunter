@@ -13,7 +13,7 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     minify: 'esbuild',
-    sourcemap: true, // Generate source maps for production debugging
+    sourcemap: true,
     rollupOptions: {
       input: {
         main: './index.html'
@@ -21,6 +21,24 @@ export default defineConfig({
     }
   },
   plugins: [
+    {
+      name: 'copy-robots-txt',
+      closeBundle() {
+        try {
+          const srcFile = path.resolve(__dirname, 'robots.txt');
+          const destFile = path.resolve(__dirname, 'dist/robots.txt');
+          
+          if (fs.existsSync(srcFile)) {
+            fs.copyFileSync(srcFile, destFile);
+            console.log('✅ robots.txt copied to dist/');
+          } else {
+            console.warn('⚠️ robots.txt not found in source');
+          }
+        } catch (err) {
+          console.error('❌ Failed to copy robots.txt:', err);
+        }
+      }
+    },
     {
       name: 'copy-i18n',
       closeBundle() {
