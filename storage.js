@@ -4,12 +4,46 @@
  */
 
 import { getGameData } from './data.js';
-import { firebaseDb, firebaseAuth } from './firebase-config.js';
-import { doc, updateDoc, increment, getDoc, setDoc } from 'firebase/firestore';
 import { store } from './store.js';
 
 const STORAGE_KEY = 'pixelWordHunter_save_v2';
 const BACKUP_KEY = STORAGE_KEY + '_backup';
+
+async function resolveFirebaseSyncDeps(firebaseDbArg, docArg, getDocArg, setDocArg, serverTimestampArg, updateDocArg, incrementArg) {
+  if (firebaseDbArg && docArg && getDocArg && setDocArg) {
+    return {
+      firebaseDb: firebaseDbArg,
+      doc: docArg,
+      getDoc: getDocArg,
+      setDoc: setDocArg,
+      serverTimestamp: serverTimestampArg,
+      updateDoc: updateDocArg,
+      increment: incrementArg
+    };
+  }
+
+  const state = store.getState();
+  if (!state.isAuthenticated || !state.user) {
+    return {};
+  }
+
+  const [{ initFirebase, firebaseDb: configuredDb }, firestoreModule] = await Promise.all([
+    import('./firebase-config.js'),
+    import('firebase/firestore')
+  ]);
+
+  await initFirebase();
+
+  return {
+    firebaseDb: firebaseDbArg || configuredDb,
+    doc: docArg || firestoreModule.doc,
+    getDoc: getDocArg || firestoreModule.getDoc,
+    setDoc: setDocArg || firestoreModule.setDoc,
+    serverTimestamp: serverTimestampArg || firestoreModule.serverTimestamp,
+    updateDoc: updateDocArg || firestoreModule.updateDoc,
+    increment: incrementArg || firestoreModule.increment
+  };
+}
 
 /**
  * Data Validation Schema
@@ -45,32 +79,35 @@ export async function loadProgress(firebaseDb, doc, getDoc) {
   let progress = {};
 
   // 1. Try Firebase if authenticated
-  if (isAuthenticated && user && firebaseDb && doc && getDoc) {
+  if (isAuthenticated && user) {
     try {
-      const userRef = doc(firebaseDb, 'users', user.uid);
-      const userSnap = await getDoc(userRef);
+      const deps = await resolveFirebaseSyncDeps(firebaseDb, doc, getDoc);
+      if (deps.firebaseDb && deps.doc && deps.getDoc) {
+        const userRef = deps.doc(deps.firebaseDb, 'users', user.uid);
+        const userSnap = await deps.getDoc(userRef);
 
-      if (userSnap.exists()) {
-        const serverData = userSnap.data();
-        if (serverData.progress && validateSaveData(serverData.progress)) {
-          progress = serverData.progress;
-          // Cache for offline use
-          storageSet(STORAGE_KEY, JSON.stringify(progress));
-          
-          // Загружаем XP с сервера и сохраняем локально
-          if (serverData.xp !== undefined) {
-            const serverXP = Number(serverData.xp) || 0;
-            storageSet(`xp_${user.uid}`, String(serverXP));
-            store.setState({ xp: serverXP });
-            console.log(`[Storage] XP loaded from server: ${serverXP}`);
+        if (userSnap.exists()) {
+          const serverData = userSnap.data();
+          if (serverData.progress && validateSaveData(serverData.progress)) {
+            progress = serverData.progress;
+            // Cache for offline use
+            storageSet(STORAGE_KEY, JSON.stringify(progress));
+            
+            // Загружаем XP с сервера и сохраняем локально
+            if (serverData.xp !== undefined) {
+              const serverXP = Number(serverData.xp) || 0;
+              storageSet(`xp_${user.uid}`, String(serverXP));
+              store.setState({ xp: serverXP });
+              console.log(`[Storage] XP loaded from server: ${serverXP}`);
+            }
+            
+            console.log('[Storage] Cloud sync successful');
+            return progress;
           }
-          
-          console.log('[Storage] Cloud sync successful');
-          return progress;
+        } else {
+          // Документ не существует - создадим пустой при первом сохранении
+          console.log('[Storage] No user document found, will create on first save');
         }
-      } else {
-        // Документ не существует - создадим пустой при первом сохранении
-        console.log('[Storage] No user document found, will create on first save');
       }
     } catch (error) {
       console.warn('[Storage] Cloud load failed, using local:', error.message);
@@ -99,10 +136,7 @@ export async function loadProgress(firebaseDb, doc, getDoc) {
  */
 export async function loadProgressWrapper() {
   const state = store.getState();
-  const firebaseDb = state.firebaseDb || window.firebaseDb;
-  const doc = window.doc;
-  const getDoc = window.getDoc;
-  return loadProgress(firebaseDb, doc, getDoc);
+  return loadProgress(state.firebaseDb || window.firebaseDb, window.doc, window.getDoc);
 }
 
 /**
@@ -134,42 +168,45 @@ export async function saveProgress(firebaseDb, doc, setDoc, serverTimestamp) {
   const { user, isAuthenticated, xp } = store.getState();
   // Note: XP is now synced via atomic increments and real-time listeners
   // so we don't need to explicitly save it here anymore
-  if (isAuthenticated && user && firebaseDb && doc && setDoc && serverTimestamp) {
-    // Use a local timeout variable scoped to this module
-    if (saveProgress._timeout) clearTimeout(saveProgress._timeout);
-    
-    saveProgress._timeout = setTimeout(async () => {
-      try {
-        const userRef = doc(firebaseDb, 'users', user.uid);
-        
-        // Проверяем существование документа пользователя
-        const userSnap = await getDoc(userRef);
-        
-        if (!userSnap.exists()) {
-          // Создаём новый документ с начальными данными
-          await setDoc(userRef, {
-            progress,
-            xp: xp || 0,
-            lastSync: serverTimestamp(),
-            updatedAt: new Date().toISOString(),
-            createdAt: new Date().toISOString()
-          }, { merge: true });
-          console.log('[Storage] New user document created in Firestore');
-        } else {
-          // Обновляем существующий документ
-          await setDoc(userRef, {
-            progress,
-            lastSync: serverTimestamp(),
-            updatedAt: new Date().toISOString()
-          }, { merge: true });
-          console.log('[Storage] Cloud saved');
+  if (isAuthenticated && user) {
+    const deps = await resolveFirebaseSyncDeps(firebaseDb, doc, undefined, setDoc, serverTimestamp);
+    if (deps.firebaseDb && deps.doc && deps.getDoc && deps.setDoc && deps.serverTimestamp) {
+      // Use a local timeout variable scoped to this module
+      if (saveProgress._timeout) clearTimeout(saveProgress._timeout);
+      
+      saveProgress._timeout = setTimeout(async () => {
+        try {
+          const userRef = deps.doc(deps.firebaseDb, 'users', user.uid);
+          
+          // Проверяем существование документа пользователя
+          const userSnap = await deps.getDoc(userRef);
+          
+          if (!userSnap.exists()) {
+            // Создаём новый документ с начальными данными
+            await deps.setDoc(userRef, {
+              progress,
+              xp: xp || 0,
+              lastSync: deps.serverTimestamp(),
+              updatedAt: new Date().toISOString(),
+              createdAt: new Date().toISOString()
+            }, { merge: true });
+            console.log('[Storage] New user document created in Firestore');
+          } else {
+            // Обновляем существующий документ
+            await deps.setDoc(userRef, {
+              progress,
+              lastSync: deps.serverTimestamp(),
+              updatedAt: new Date().toISOString()
+            }, { merge: true });
+            console.log('[Storage] Cloud saved');
+          }
+          
+          storageRemove(BACKUP_KEY);
+        } catch (error) {
+          console.warn('[Storage] Cloud save failed:', error.message);
         }
-        
-        storageRemove(BACKUP_KEY);
-      } catch (error) {
-        console.warn('[Storage] Cloud save failed:', error.message);
-      }
-    }, 2000);
+      }, 2000);
+    }
   }
 }
 
@@ -205,7 +242,7 @@ export function getUserXP() {
 export async function addXP(points) {
   const userId = getCurrentUserId();
   
-  if (!userId || !firebaseDb) {
+  if (!userId || !store.getState().isAuthenticated) {
     // Offline or guest mode - update locally only
     const currentXP = getUserXP();
     const newXP = currentXP + points;
@@ -214,15 +251,20 @@ export async function addXP(points) {
   }
   
   try {
-    const userRef = doc(firebaseDb, 'users', userId);
+    const deps = await resolveFirebaseSyncDeps();
+    if (!deps.firebaseDb || !deps.doc || !deps.getDoc || !deps.updateDoc || !deps.increment) {
+      throw new Error('Firebase sync unavailable');
+    }
+
+    const userRef = deps.doc(deps.firebaseDb, 'users', userId);
     // Check if document exists, if not create it first
-    const userSnap = await getDoc(userRef);
-    if (!userSnap.exists()) {
-      await setDoc(userRef, { xp: 0 });
+    const userSnap = await deps.getDoc(userRef);
+    if (!userSnap.exists()) { 
+      await deps.setDoc(userRef, { xp: 0 });
     }
     // Use atomic increment on server to prevent race conditions
-    await updateDoc(userRef, {
-      xp: increment(points)
+    await deps.updateDoc(userRef, {
+      xp: deps.increment(points)
     });
     console.log(`[XP] Added ${points} XP atomically for user ${userId}`);
     // Note: The real-time listener in firebase-config.js will update local state
