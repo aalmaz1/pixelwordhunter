@@ -1,0 +1,11 @@
+# PixelWordHunter - TOEIC Edition
+# https://pixelwordhunter.pages.dev
+
+User-agent: *
+Allow: /
+
+# Sitemap location (if you add one later)
+# Sitemap: https://pixelwordhunter.pages.dev/sitemap.xml
+
+# Crawl-delay for polite crawling (optional)
+Crawl-delay: 1
