@@ -1,6 +1,12 @@
 /**
  * store.js
  * Central State Management for Pixel Word Hunter
+ *
+ * INP optimization: setState notifications are scheduled via
+ * requestAnimationFrame so rapid state changes (e.g. during a
+ * checkAnswer → updateWordProgress → saveProgress sequence) are
+ * batched into a single frame, avoiding multiple synchronous
+ * event dispatches that each trigger DOM updates.
  */
 
 class Store extends EventTarget {
@@ -40,6 +46,9 @@ class Store extends EventTarget {
       reviewSessionData: [],
       completedRoundsCount: 0
     };
+
+    // rAF-based notification batching
+    this._pendingNotify = null;
   }
 
   getState() {
@@ -49,15 +58,35 @@ class Store extends EventTarget {
   setState(newState) {
     const prevState = { ...this.state };
     this.state = { ...this.state, ...newState };
-    
-    // Notify listeners about the change
-    this.dispatchEvent(new CustomEvent('stateChange', { 
-      detail: { 
-        state: this.state,
+    const changedKeys = Object.keys(newState);
+
+    // Batch notifications via requestAnimationFrame.
+    // If multiple setState calls happen in the same frame
+    // (e.g. during answer checking), we merge the changedKeys
+    // and dispatch a single event, reducing synchronous DOM updates.
+    if (!this._pendingNotify) {
+      this._pendingNotify = {
         prevState,
-        changedKeys: Object.keys(newState)
-      } 
-    }));
+        changedKeys: new Set(changedKeys)
+      };
+      requestAnimationFrame(() => {
+        if (!this._pendingNotify) return;
+        const { prevState: prev, changedKeys: keys } = this._pendingNotify;
+        this._pendingNotify = null;
+        this.dispatchEvent(new CustomEvent('stateChange', {
+          detail: {
+            state: this.state,
+            prevState: prev,
+            changedKeys: Array.from(keys)
+          }
+        }));
+      });
+    } else {
+      // Merge changed keys from this call into the pending batch
+      for (const k of changedKeys) {
+        this._pendingNotify.changedKeys.add(k);
+      }
+    }
   }
 
   // Helper actions

@@ -10,6 +10,25 @@ let gameData = null;
 let categoriesCache = null;
 let dataLoadPromise = null;
 
+/**
+ * Yield control back to the browser so it can process pending
+ * interactions and paints. Breaks long tasks to reduce INP.
+ */
+function yieldToMain() {
+  return new Promise(resolve => setTimeout(resolve, 0));
+}
+
+/**
+ * Schedule a callback during idle time.
+ * Falls back to setTimeout if requestIdleCallback is unavailable.
+ */
+function scheduleIdle(callback, options) {
+  if (typeof requestIdleCallback === 'function') {
+    return requestIdleCallback(callback, options);
+  }
+  return setTimeout(callback, 1);
+}
+
 const INTERVALS = {
   0: 0,
   1: 60 * 60 * 1000,
@@ -59,7 +78,9 @@ function sanitizeDataInline(rawData) {
 }
 
 /**
- * Fetch fresh data with retry logic
+ * Fetch fresh data with retry logic.
+ * Yields to the main thread between major operations to keep the
+ * browser responsive and reduce INP input delay.
  */
 async function fetchFreshData() {
   try {
@@ -73,6 +94,10 @@ async function fetchFreshData() {
       // Use dynamic import for the worker to ensure proper bundling
       const workerUrl = new URL('./data.worker.js', import.meta.url);
       const worker = new Worker(workerUrl, { type: 'module' });
+      
+      // Yield after Worker creation so the browser can process any
+      // pending interactions before we block on postMessage
+      await yieldToMain();
       
       // Send raw data to the worker for sanitization
       worker.postMessage(freshData);
@@ -98,12 +123,29 @@ async function fetchFreshData() {
       });
     } catch (workerErr) {
       console.warn('[Data] Worker failed, using inline sanitization:', workerErr.message);
+      // Yield before heavy inline sanitization
+      await yieldToMain();
       // Fallback to inline sanitization
       sanitizedData = sanitizeDataInline(freshData);
     }
     
+    // Yield before assigning and storing so the browser can
+    // process any interactions that queued up during sanitization
+    await yieldToMain();
+    
     gameData = sanitizedData;
-    localStorage.setItem('pixelWordHunter_words_cache', JSON.stringify(sanitizedData));
+    
+    // Defer the expensive localStorage write to idle time.
+    // This prevents a ~50-100ms blocking write from creating
+    // a long task that delays user interactions.
+    const dataToCache = sanitizedData;
+    scheduleIdle(() => {
+      try {
+        localStorage.setItem('pixelWordHunter_words_cache', JSON.stringify(dataToCache));
+      } catch (e) {
+        console.warn('[Data] Cache write failed:', e.message);
+      }
+    }, { timeout: 2000 });
     
     // Update Store
     store.setState({ words: sanitizedData, categories: getCategories() });
@@ -125,6 +167,11 @@ export async function loadGameData() {
     try {
       gameData = JSON.parse(cached);
       store.setState({ words: gameData, categories: getCategories() });
+
+      // Yield before starting the background fetch so the browser
+      // can process any queued interactions from the cache parse
+      await yieldToMain();
+
       // Запускаем обновление кэша в фоновом режиме, не дожидаясь его
       fetchFreshData().catch(err => console.error("Background data fetch failed:", err));
       return gameData; // Сразу возвращаем кэшированные данные
