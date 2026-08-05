@@ -578,10 +578,15 @@ function updateUI(state = store.getState()) {
   // Stats
   if (ui.masteredCountElement) ui.masteredCountElement.textContent = state.masteredCount;
 
-  // Auth
+  // Auth - Ensure UI matches actual authentication state
   const authButtons = document.getElementById('auth-buttons');
   const huntBtn = document.getElementById('hunt-btn');
-  if (state.isAuthenticated) {
+  
+  // Critical fix: Check localStorage token to prevent "ghost" authorization
+  const hasToken = localStorage.getItem('pixelWordHunter_authMethod') !== null;
+  const isActuallyAuthenticated = state.isAuthenticated && hasToken;
+  
+  if (isActuallyAuthenticated) {
     authButtons?.classList.add('hidden');
     huntBtn?.classList.remove('hidden');
   } else {
@@ -627,10 +632,12 @@ function loadQuestion() {
   const options = generateOptionsForWord(word, language, questionData.isEnglish);
   ui.optionsElement.textContent = '';
 
-  options.forEach(opt => {
+  options.forEach((opt, index) => {
     const btn = document.createElement('button');
     btn.className = 'option-btn';
     btn.textContent = opt;
+    btn.setAttribute('aria-label', `Option ${index + 1}: ${opt}`);
+    btn.setAttribute('aria-pressed', 'false');
     btn.addEventListener('click', () => checkAnswer(opt, word, btn, questionData.isEnglish));
     ui.optionsElement.appendChild(btn);
   });
@@ -656,6 +663,7 @@ function checkAnswer(selected, word, btn, questionIsEnglish) {
 
   if (isCorrect) {
     btn.classList.add('correct');
+    btn.setAttribute('aria-pressed', 'true');
     AudioEngine.playCorrect();
     const bonus = 10; // Simple scoring
     // Use atomic XP increment for multi-tab synchronization
@@ -663,6 +671,7 @@ function checkAnswer(selected, word, btn, questionIsEnglish) {
     updateWordProgress(word.eng, true);
   } else {
     btn.classList.add('wrong');
+    btn.setAttribute('aria-pressed', 'false');
     AudioEngine.playWrong();
     updateWordProgress(word.eng, false);
 
@@ -671,6 +680,7 @@ function checkAnswer(selected, word, btn, questionIsEnglish) {
     Array.from(ui.optionsElement.children).forEach(b => {
       if (b.textContent === correctAnswer) {
         b.classList.add('correct');
+        b.setAttribute('aria-pressed', 'true');
       }
     });
   }
@@ -847,6 +857,7 @@ function showReviewSession() {
   continueBtn.id = 'continue-after-review-btn';
   continueBtn.className = 'option-btn continue-after-review-btn';
   continueBtn.textContent = 'CONTINUE';
+  continueBtn.setAttribute('aria-label', 'Continue to next round');
   continueBtn.addEventListener('click', () => {
     // Reset review data and start new round using store state
     store.setState({
