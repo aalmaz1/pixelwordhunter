@@ -20,6 +20,9 @@ export default defineConfig({
       }
     }
   },
+  // Ensure words_optimized.json is served as a static file in dev mode
+  // so fetch('./words_optimized.json') works during development.
+  publicDir: 'public',
   plugins: [
     {
       name: 'copy-robots-txt',
@@ -145,6 +148,21 @@ export default defineConfig({
           { url: 'words_optimized.json', revision: null }
         ],
         runtimeCaching: [
+          {
+            // Cache the words JSON fetch for offline use and fast reload
+            urlPattern: /words_optimized\.json$/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'words-data-cache',
+              expiration: {
+                maxEntries: 1,
+                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          },
           {
             urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
             handler: 'CacheFirst',

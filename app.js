@@ -635,8 +635,14 @@ function toggleScreen(screenId) {
 
 function applyProgress(progressData, fromServer = false) {
   const words = getGameData();
+
+  // Build a Map for O(1) lookups instead of O(n) Array.find()
+  // Previously: Object.entries × words.find = O(n²) = 360,000 ops for 600 words
+  // Now: Map build O(n) + Object.entries × Map.get = O(n) total
+  const wordsByEng = new Map(words.map(w => [w.eng, w]));
+
   Object.entries(progressData).forEach(([eng, data]) => {
-    const word = words.find(w => w.eng === eng);
+    const word = wordsByEng.get(eng);
     if (word) Object.assign(word, data);
   });
 

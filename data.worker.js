@@ -1,4 +1,6 @@
 // data.worker.js
+// Runs OFF the main thread — handles JSON parsing and data sanitization
+// to avoid blocking user interactions (reduces INP).
 
 const TOEIC_CATEGORIES = new Set([
   "Contracts", "Marketing", "Warranties", "Business Planning", "Conferences",
@@ -25,9 +27,7 @@ function sanitizeToeicWord(rawWord) {
   const eng = typeof rawWord.eng === 'string' ? rawWord.eng.trim() : '';
   const category = typeof rawWord.category === 'string' ? rawWord.category.trim() : 'General';
   
-  // Stricter translation checks
   const rus = typeof rawWord.rus === 'string' && rawWord.rus.trim() ? rawWord.rus.trim() : '';
-             
   const kor = typeof rawWord.kor === 'string' && rawWord.kor.trim() ? rawWord.kor.trim() : 
              (typeof rawWord.ko === 'string' && rawWord.ko.trim() ? rawWord.ko.trim() : '');
   
@@ -36,16 +36,7 @@ function sanitizeToeicWord(rawWord) {
   const exampleKor = typeof rawWord.exampleKor === 'string' && rawWord.exampleKor.trim() ? rawWord.exampleKor.trim() : 
                     (typeof rawWord.exampleKo === 'string' && rawWord.exampleKo.trim() ? rawWord.exampleKo.trim() : '');
 
-  // Validation: mandatory fields
-  if (!eng || (!rus && !kor)) {
-    // console.warn(`[Data Audit] Invalid word entry: missing eng or translation`, rawWord); // Log in worker might be noisy
-    return null;
-  }
-
-  // Audit: Category check
-  if (!TOEIC_CATEGORIES.has(category)) {
-    // console.warn(`[Data Audit] Unknown category: ${category} for word ${eng}`); // Log in worker might be noisy
-  }
+  if (!eng || (!rus && !kor)) return null;
 
   return {
     eng,
@@ -64,13 +55,33 @@ function sanitizeToeicWord(rawWord) {
 
 function sanitizeToeicData(words) {
   if (!Array.isArray(words)) return [];
-  const sanitized = words.map(sanitizeToeicWord).filter(Boolean);
-  // console.log(`[Data Audit] Processed ${words.length} words, ${sanitized.length} valid entries found.`); // Log in worker might be noisy
-  return sanitized;
+  return words.map(sanitizeToeicWord).filter(Boolean);
 }
 
 self.onmessage = function(event) {
-  const rawData = event.data;
-  const sanitizedData = sanitizeToeicData(rawData);
-  self.postMessage(sanitizedData);
+  const payload = event.data;
+  
+  // New path: raw JSON string — parse + sanitize in Worker (off main thread)
+  // This is the primary path for INP optimization: the main thread NEVER
+  // does JSON.parse(243KB), only this Worker does.
+  if (typeof payload === 'string') {
+    try {
+      const parsed = JSON.parse(payload);
+      const sanitized = sanitizeToeicData(parsed);
+      self.postMessage(sanitized);
+    } catch (err) {
+      self.postMessage({ __error: true, message: err.message });
+    }
+    return;
+  }
+  
+  // Legacy path: pre-parsed array (backward compatibility)
+  if (Array.isArray(payload)) {
+    const sanitizedData = sanitizeToeicData(payload);
+    self.postMessage(sanitizedData);
+    return;
+  }
+  
+  // Unknown payload
+  self.postMessage({ __error: true, message: 'Unknown payload type' });
 };
