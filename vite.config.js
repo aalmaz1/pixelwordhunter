@@ -81,6 +81,31 @@ export default defineConfig({
         }
       }
     },
+    {
+      // Emit PWA icon at a STABLE, unhashed path so the manifest's absolute
+      // "/assets/logo.png" reference resolves in production. Vite hashes logo.png
+      // (because index.html references it for apple-touch-icon), which would leave
+      // only "/assets/logo-[hash].png" in the build and break the manifest icon.
+      name: 'copy-pwa-assets',
+      closeBundle() {
+        try {
+          const destDir = path.resolve(__dirname, 'dist/assets');
+          if (!fs.existsSync(destDir)) {
+            fs.mkdirSync(destDir, { recursive: true });
+          }
+          const logoSrc = path.resolve(__dirname, 'assets/logo.png');
+          const logoDest = path.resolve(destDir, 'logo.png');
+          if (fs.existsSync(logoSrc)) {
+            fs.copyFileSync(logoSrc, logoDest);
+            console.log('✅ logo.png copied to dist/assets/logo.png (stable PWA icon path)');
+          } else {
+            console.warn('⚠️ assets/logo.png not found in source');
+          }
+        } catch (err) {
+          console.error('❌ Failed to copy PWA assets:', err);
+        }
+      }
+    },
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: null, // Disable auto-injection of registerSW script

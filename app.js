@@ -118,6 +118,11 @@ const AudioEngine = {
   volume: 0.7,
   lastHoverTime: 0,
   HOVER_THROTTLE_MS: 150, // Минимальный интервал между звуками hover (мс)
+  // Set to true only inside a qualifying user-gesture handler (click/keydown/touchstart).
+  // Browser autoplay policy blocks AudioContext creation/resume until a real gesture,
+  // and `mouseover` (used for hover sounds) does NOT count as one. Gating playback on
+  // this flag prevents the "AudioContext was not allowed to start" warning.
+  audioUnlocked: false,
 
   init() {
     const isMuted = storageGet('pixelWordHunter_muted') === 'true';
@@ -125,6 +130,16 @@ const AudioEngine = {
 
     this.volume = parseFloat(storageGet('pixelWordHunter_volume')) || 0.7;
     return true;
+  },
+
+  /**
+   * Called ONLY from a user-gesture listener (click/keydown/touchstart).
+   * Creates and resumes the AudioContext while a gesture is active, which the
+   * autoplay policy allows, then permits subsequent playback.
+   */
+  unlock() {
+    this.audioUnlocked = true;
+    this.ensureContext();
   },
 
   updateGain() {
@@ -135,6 +150,10 @@ const AudioEngine = {
   },
 
   ensureContext() {
+    // Never create/resume the AudioContext before a user gesture has unlocked audio.
+    // This guards against indirect callers (e.g. focus/automation) that could trip
+    // the browser's autoplay policy.
+    if (!this.audioUnlocked) return false;
     if (!this.ctx) {
       try {
         this.ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -146,8 +165,8 @@ const AudioEngine = {
         return false;
       }
     }
-    // Resume context only after user gesture (handled by unlockAudio in init)
-    // Avoid calling resume() if state is already running or if no gesture occurred
+    // Resume context only after user gesture (handled by unlock() in init).
+    // Avoid calling resume() if state is already running or if no gesture occurred.
     if (this.ctx && this.ctx.state === 'suspended') {
       this.ctx.resume().catch(() => {
         /* Silent fail until next interaction */
@@ -157,7 +176,10 @@ const AudioEngine = {
   },
 
   playTone(steps = []) {
-    if (!this.ensureContext() || !store.getState().audioEnabled || steps.length === 0) return;
+    // Bail out before touching the AudioContext until audio is unlocked by a gesture.
+    if (!this.audioUnlocked) return;
+    if (!store.getState().audioEnabled || steps.length === 0) return;
+    if (!this.ensureContext()) return;
     const startAt = this.ctx.currentTime;
 
     steps.forEach(step => {
@@ -279,9 +301,11 @@ async function init() {
     // await initializeFirebaseServices(); // Убрали отсюда, чтобы загрузка была ленивой
     await I18nManager.init();
 
-    // Unlock audio on first interaction
+    // Unlock audio on first qualifying user gesture (click/keydown/touchstart).
+    // mouseover/mousemove do NOT count as gestures for the autoplay policy, so we
+    // gate ALL playback on the flag set here.
     const unlockAudio = () => {
-      AudioEngine.ensureContext();
+      AudioEngine.unlock();
       document.removeEventListener('click', unlockAudio);
       document.removeEventListener('keydown', unlockAudio);
       document.removeEventListener('touchstart', unlockAudio);
