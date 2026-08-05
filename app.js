@@ -578,10 +578,15 @@ function updateUI(state = store.getState()) {
   // Stats
   if (ui.masteredCountElement) ui.masteredCountElement.textContent = state.masteredCount;
 
-  // Auth
+  // Auth - Ensure UI matches actual authentication state
   const authButtons = document.getElementById('auth-buttons');
   const huntBtn = document.getElementById('hunt-btn');
-  if (state.isAuthenticated) {
+  
+  // Critical fix: Check localStorage token to prevent "ghost" authorization
+  const hasToken = localStorage.getItem('pixelWordHunter_authMethod') !== null;
+  const isActuallyAuthenticated = state.isAuthenticated && hasToken;
+  
+  if (isActuallyAuthenticated) {
     authButtons?.classList.add('hidden');
     huntBtn?.classList.remove('hidden');
   } else {
