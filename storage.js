@@ -9,6 +9,30 @@ import { store } from './store.js';
 const STORAGE_KEY = 'pixelWordHunter_save_v2';
 const BACKUP_KEY = STORAGE_KEY + '_backup';
 
+// ==================== INP OPTIMIZATION ====================
+
+/**
+ * Yield to the browser to break long tasks and reduce INP input delay.
+ */
+function yieldToMain() {
+  return new Promise(resolve => setTimeout(resolve, 0));
+}
+
+/**
+ * Schedule a callback during idle time.
+ */
+function scheduleIdle(callback, options) {
+  if (typeof requestIdleCallback === 'function') {
+    return requestIdleCallback(callback, options);
+  }
+  return setTimeout(callback, 1);
+}
+
+// Debounce timer for local saves — prevents rapid-fire localStorage writes
+// (e.g. from fast answer clicks) from creating consecutive long tasks.
+let _localSaveTimer = null;
+const LOCAL_SAVE_DEBOUNCE_MS = 500;
+
 async function resolveFirebaseSyncDeps(firebaseDbArg, docArg, getDocArg, setDocArg, serverTimestampArg, updateDocArg, incrementArg) {
   if (firebaseDbArg && docArg && getDocArg && setDocArg) {
     return {
@@ -140,13 +164,13 @@ export async function loadProgressWrapper() {
 }
 
 /**
- * Save progress with atomic LocalStorage + Async Firebase
- * Принимает firebaseDb, doc, setDoc, serverTimestamp как аргументы
+ * Build the progress object from game data.
+ * Separated out so we can build it synchronously but write it
+ * to localStorage asynchronously (debounced / idle-scheduled).
  */
-export async function saveProgress(firebaseDb, doc, setDoc, serverTimestamp) {
+function buildProgressData() {
   const words = getGameData();
   const progress = {};
-  
   words.forEach((w) => {
     if (w.mastery > 0 || w.lastSeen > 0) {
       progress[w.eng] = {
@@ -157,12 +181,41 @@ export async function saveProgress(firebaseDb, doc, setDoc, serverTimestamp) {
       };
     }
   });
+  return progress;
+}
 
-  // Local Save
-  const newData = JSON.stringify(progress);
-  const oldData = storageGet(STORAGE_KEY);
-  if (oldData) storageSet(BACKUP_KEY, oldData);
-  storageSet(STORAGE_KEY, newData);
+/**
+ * Write progress to localStorage, debounced to avoid creating
+ * consecutive long tasks from rapid answer clicks.
+ */
+function debouncedLocalSave(progress) {
+  if (_localSaveTimer) clearTimeout(_localSaveTimer);
+  _localSaveTimer = setTimeout(() => {
+    // Schedule the actual write during idle to avoid blocking interactions
+    scheduleIdle(() => {
+      try {
+        const newData = JSON.stringify(progress);
+        const oldData = storageGet(STORAGE_KEY);
+        if (oldData) storageSet(BACKUP_KEY, oldData);
+        storageSet(STORAGE_KEY, newData);
+      } catch (e) {
+        console.warn('[Storage] Local save failed:', e.message);
+      }
+    }, { timeout: LOCAL_SAVE_DEBOUNCE_MS });
+  }, LOCAL_SAVE_DEBOUNCE_MS);
+}
+
+/**
+ * Save progress with atomic LocalStorage + Async Firebase.
+ * Local save is debounced and idle-scheduled to avoid blocking
+ * the main thread with large JSON.stringify + localStorage.setItem.
+ * Принимает firebaseDb, doc, setDoc, serverTimestamp как аргументы
+ */
+export async function saveProgress(firebaseDb, doc, setDoc, serverTimestamp) {
+  const progress = buildProgressData();
+
+  // Debounced local save — avoids creating long tasks on every answer
+  debouncedLocalSave(progress);
 
   // Firestore Sync (Debounced with module-level timeout)
   const { user, isAuthenticated, xp } = store.getState();

@@ -43,6 +43,46 @@ import {
 } from './storage.js';
 import { initUI, renderCategoryButtons, showNotification, getFocusableElements } from './ui.js';
 
+// ==================== INP OPTIMIZATION UTILITIES ====================
+
+/**
+ * Yields control back to the browser, allowing it to process pending
+ * user interactions and paint updates. Critical for reducing INP input delay
+ * by breaking long tasks into smaller yielding chunks.
+ *
+ * Uses scheduler.yield() when available (Chrome 110+), falls back to
+ * a microtask+setTimeout chain that ensures the browser gets a chance
+ * to process input events between our work.
+ */
+export function yieldToMain() {
+  if (typeof scheduler !== 'undefined' && typeof scheduler.yield === 'function') {
+    return scheduler.yield();
+  }
+  return new Promise(resolve => setTimeout(resolve, 0));
+}
+
+/**
+ * Schedule a callback during the browser's idle period.
+ * Falls back to setTimeout if requestIdleCallback is unavailable.
+ */
+export function scheduleIdle(callback, options) {
+  if (typeof requestIdleCallback === 'function') {
+    return requestIdleCallback(callback, options);
+  }
+  return setTimeout(callback, 1);
+}
+
+/**
+ * Cancel a callback scheduled with scheduleIdle.
+ */
+export function cancelIdle(id) {
+  if (typeof cancelIdleCallback === 'function' && typeof id !== 'undefined') {
+    cancelIdleCallback(id);
+  } else {
+    clearTimeout(id);
+  }
+}
+
 // Локальные переменные для Firebase-сервисов и функций
 let firebaseAuth, firebaseDb;
 let createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut, onAuthStateChanged;
@@ -301,6 +341,10 @@ async function init() {
     // await initializeFirebaseServices(); // Убрали отсюда, чтобы загрузка была ленивой
     await I18nManager.init();
 
+    // Yield to let the browser paint the initial UI and process any
+    // pending user interactions before we start heavy data loading.
+    await yieldToMain();
+
     // Unlock audio on first qualifying user gesture (click/keydown/touchstart).
     // mouseover/mousemove do NOT count as gestures for the autoplay policy, so we
     // gate ALL playback on the flag set here.
@@ -316,8 +360,15 @@ async function init() {
 
     // Load Data
     await loadGameData();
+
+    // Yield between data loading and progress loading to keep main thread responsive
+    await yieldToMain();
+
     const progress = await loadProgressWrapper();
     applyProgress(progress);
+
+    // Yield after progress before UI setup
+    await yieldToMain();
 
     // Initial UI state
     const theme = storageGet('pixelWordHunter_theme') || 'cyberpunk';
@@ -352,6 +403,15 @@ async function init() {
         toggleScreen('menu');
       }
     }, 500);
+
+    // Preload Firebase modules during idle time so they're ready
+    // when the user clicks LOGIN/REGISTER, avoiding long import()
+    // tasks during the interaction itself.
+    if (localStorage.getItem('pixelWordHunter_authMethod')) {
+      scheduleIdle(() => {
+        import('./firebase-config.js').catch(() => {});
+      }, { timeout: 3000 });
+    }
   } catch (err) {
     console.error('[App] Initialization failed:', err);
     // Show load error message to user
@@ -507,7 +567,10 @@ function showAuthModal(mode) {
   
   lastFocusedElement = document.activeElement;
   
-  setTimeout(() => {
+  // Yield to the browser first so it can paint the modal visible
+  // before we do focus management. This reduces presentation delay
+  // and ensures the visual update is seen before DOM focus moves.
+  scheduleIdle(() => {
     const focusable = getFocusableElements(ui.authModal);
     if (focusable.length > 0) {
       focusable[0].focus();
@@ -515,7 +578,7 @@ function showAuthModal(mode) {
       ui.authModal.setAttribute('tabindex', '-1');
       ui.authModal.focus();
     }
-  }, 50);
+  }, { timeout: 100 });
 }
 
 async function handleAuthSubmit() {
@@ -572,8 +635,14 @@ function toggleScreen(screenId) {
 
 function applyProgress(progressData, fromServer = false) {
   const words = getGameData();
+
+  // Build a Map for O(1) lookups instead of O(n) Array.find()
+  // Previously: Object.entries × words.find = O(n²) = 360,000 ops for 600 words
+  // Now: Map build O(n) + Object.entries × Map.get = O(n) total
+  const wordsByEng = new Map(words.map(w => [w.eng, w]));
+
   Object.entries(progressData).forEach(([eng, data]) => {
-    const word = words.find(w => w.eng === eng);
+    const word = wordsByEng.get(eng);
     if (word) Object.assign(word, data);
   });
 
@@ -714,7 +783,13 @@ function checkAnswer(selected, word, btn, questionIsEnglish) {
   const updatedReviewData = [...currentState.reviewSessionData, wordResult];
   store.setState({ reviewSessionData: updatedReviewData });
 
-  saveProgress(firebaseDb, doc, setDoc, serverTimestamp);
+  // Defer saveProgress to idle time to avoid blocking the main thread.
+  // The local save (localStorage write) is the expensive part; Firebase
+  // sync is already debounced inside saveProgress. By scheduling during
+  // idle we let the browser process any pending user interactions first.
+  scheduleIdle(() => {
+    saveProgress(firebaseDb, doc, setDoc, serverTimestamp);
+  });
   setTimeout(() => showExplanation(word, questionIsEnglish, false), 1000);
 }
 
