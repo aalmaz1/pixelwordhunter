@@ -21,7 +21,7 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     minify: 'esbuild',
-    sourcemap: true,
+    sourcemap: false,
     rollupOptions: {
       input: {
         main: './index.html'

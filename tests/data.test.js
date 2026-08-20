@@ -52,13 +52,13 @@ describe('updateWordProgress', () => {
   it('bumps mastery on correct, clamps to 0 on wrong', () => {
     const words = seed(5);
     const w = words[0];
-    dataMod.updateWordProgress(w.eng, true);
+    dataMod.updateWordProgress(w.id, true);
     expect(w.mastery).toBe(1);
     expect(w.correctCount).toBe(1);
-    dataMod.updateWordProgress(w.eng, false);
+    dataMod.updateWordProgress(w.id, false);
     expect(w.mastery).toBe(0);
     expect(w.incorrectCount).toBe(1);
-    dataMod.updateWordProgress(w.eng, false);
+    dataMod.updateWordProgress(w.id, false);
     expect(w.mastery).toBe(0);
   });
 });

@@ -107,6 +107,15 @@ html,body{overflow:visible;overflow-y:auto;overscroll-behavior:contain;user-sele
           </div>
         </div>
         
+        <!-- Vocabulary translation language (kept separate from UI language) -->
+        <div class="settings-row">
+          <span class="settings-label" id="translation-language-label" data-i18n="translation_language">TRANSLATION</span>
+          <div class="theme-btns" role="group" aria-labelledby="translation-language-label">
+            <button class="theme-btn translation-lang-btn" data-translation-lang="ru" aria-pressed="false">RU</button>
+            <button class="theme-btn translation-lang-btn" data-translation-lang="ko" aria-pressed="false">KO</button>
+          </div>
+        </div>
+
         <!-- Theme selector -->
         <div class="settings-row">
           <span class="settings-label" id="theme-label" data-i18n="theme">THEME</span>
@@ -143,11 +152,11 @@ html,body{overflow:visible;overflow-y:auto;overscroll-behavior:contain;user-sele
         
         <!-- Backup/Restore -->
         <div class="settings-row">
-          <span class="settings-label">BACKUP</span>
+          <span class="settings-label" data-i18n="backup">BACKUP</span>
           <div class="backup-actions">
-            <button class="theme-btn" id="export-btn" aria-label="Export progress">📤 EXPORT</button>
-            <label class="theme-btn backup-import-label" aria-label="Import progress">
-              📥 IMPORT
+            <button class="theme-btn" id="export-btn" data-i18n="export">📤 EXPORT</button>
+            <label class="theme-btn backup-import-label">
+              <span data-i18n="import">📥 IMPORT</span>
               <input type="file" id="import-input" accept=".json" hidden>
             </label>
           </div>
@@ -160,7 +169,7 @@ html,body{overflow:visible;overflow-y:auto;overscroll-behavior:contain;user-sele
         
         <!-- Logout button -->
         <div class="settings-reset">
-          <button class="reset-btn logout-btn" id="logout-btn" role="button">LOGOUT</button>
+          <button class="reset-btn logout-btn" id="logout-btn" data-i18n="logout">LOGOUT</button>
         </div>
       </div>
     </div>
@@ -182,9 +191,13 @@ html,body{overflow:visible;overflow-y:auto;overscroll-behavior:contain;user-sele
           <button class="icon-btn exit-icon-btn" id="exit-game-btn" role="button" data-i18n-title="exit" title="Exit to menu" aria-label="Exit to menu">✕</button>
         </div>
       </header>
+      <div class="round-progress" aria-live="polite">
+        <span id="question-progress-text">1 / 10</span>
+        <div class="round-progress-track" aria-hidden="true"><div id="question-progress-fill"></div></div>
+      </div>
       <div id="quiz-box">
         <div class="question-card">
-          <h1 id="word" aria-live="polite"></h1>
+          <button type="button" id="word" class="word-button" aria-live="polite" data-i18n-aria="pronounce_hint"></button>
         </div>
         <div class="options-grid" id="options" role="group" aria-label="Answer options"></div>
       </div>
@@ -194,6 +207,19 @@ html,body{overflow:visible;overflow-y:auto;overscroll-behavior:contain;user-sele
         <button class="next-btn" id="next-question-btn" role="button" aria-label="Next question"><span data-i18n="next">NEXT</span></button>
       </div>
       <div id="feedback" class="hidden" aria-live="polite"></div>
+    </div>
+
+    <!-- ── ROUND RESULT MODAL ─────────────────── -->
+    <div id="result-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="result-title">
+      <div class="result-box">
+        <h2 class="modal-title" id="result-title" data-i18n="round_complete">// ROUND COMPLETE //</h2>
+        <div id="result-summary" class="result-summary" aria-live="polite"></div>
+        <div class="result-actions">
+          <button class="option-btn" id="result-continue-btn" data-i18n="continue">CONTINUE</button>
+          <button class="option-btn" id="result-review-btn" data-i18n="review_mistakes">REVIEW MISTAKES</button>
+          <button class="option-btn" id="result-exit-btn" data-i18n="exit_menu">EXIT</button>
+        </div>
+      </div>
     </div>
 
     <!-- ── AUTH MODAL ─────────────────────────── -->
@@ -220,6 +246,7 @@ html,body{overflow:visible;overflow-y:auto;overscroll-behavior:contain;user-sele
           <div id="auth-error" class="auth-error" role="alert" aria-live="assertive" aria-atomic="true"></div>
           
           <button type="button" class="auth-submit" id="auth-submit" data-i18n="submit" aria-label="Submit authentication form">ENTER</button>
+          <button type="button" class="auth-toggle-btn" id="forgot-password-btn" data-i18n="forgot_password">FORGOT PASSWORD?</button>
         </form>
         
         <div class="auth-toggle">

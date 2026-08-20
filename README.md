@@ -132,9 +132,12 @@ building each round:
 
 ## 📚 Word Bank
 
-The dictionary (`words_optimized.json`) contains **600 entries** with English,
-Russian and Korean translations plus example sentences in all three languages.
-Categories are drawn from the classic TOEIC 600-word curriculum — business,
+The dictionary (`words_optimized.json`) contains **600 contextual learning cards**
+(325 unique English terms; recurring terms are intentionally practiced in multiple
+categories) with Russian and Korean translations plus example sentences in all
+three languages. Every card has a stable category-aware `id`, so repeated terms
+keep independent mastery and SRS history. Categories are drawn from the classic
+TOEIC 600-word curriculum — business,
 travel, office life, finance, dining, health and more.
 
 <details>
@@ -158,10 +161,22 @@ travel, office life, finance, dining, health and more.
 
 </details>
 
+### Progress and backup format
+
+Progress uses the version 3, ID-keyed format. On first load, legacy version 2
+saves keyed by English text are migrated automatically; a legacy result is copied
+to every matching contextual card to avoid data loss. Guest and signed-in users
+have separate local namespaces, and the app asks before merging guest progress
+into an email account. Version 2 backup files remain importable.
+
+The UI language (EN/RU/KO) and vocabulary translation language (RU/KO) are
+separate settings.
+
 ### Word entry format
 
 ```json
 {
+  "id": "contracts--abide-by",
   "category": "Contracts",
   "eng": "abide by",
   "rus": "соблюдать",
