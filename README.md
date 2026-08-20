@@ -324,7 +324,7 @@ Content-Security-Policy: frame-ancestors 'none'
 
 ```
 pixelwordhunter/
-├── index.html            # App shell — inline critical CSS, SEO, screens
+├── index.html            # App shell — SEO, screens (styles come from style.css)
 ├── app.js                # Game flow, audio engine, auth, themes, review
 ├── data.js               # Word loading pipeline + SRS scheduler
 ├── data.worker.js        # Web Worker: JSON.parse + sanitize off main thread

@@ -898,3 +898,19 @@ body.lang-ko .user-info { font-size: 11px !important; line-height: 1.6 !importan
   body.lang-ko .edition-badge { font-size: 11px !important; }
   body.lang-ko .stats-line { font-size: 10px !important; }
 }
+
+/* Load-error overlay (moved here from the now-removed inline critical CSS). */
+#load-error {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #0a0014f2;
+  border: 2px solid var(--neon-pink);
+  padding: 24px;
+  font-size: 12px;
+  color: var(--neon-pink);
+  text-shadow: var(--shadow-pink);
+  z-index: 10000;
+  text-align: center;
+}
