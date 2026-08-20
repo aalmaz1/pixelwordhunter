@@ -4,413 +4,240 @@
 
 ### // TOEIC EDITION //
 
-**Master 600 essential business English words through a retro pixel-art quiz game with adaptive spaced repetition, XP progression, and full offline support.**
+**Learn business English like an arcade game.**
 
-[![Version](https://img.shields.io/badge/version-1.0.0-ff2d78?style=flat-square)](package.json)
-[![License: MIT](https://img.shields.io/badge/license-MIT-00f5ff?style=flat-square)](#-license)
-[![PWA Ready](https://img.shields.io/badge/PWA-ready-bf5fff?style=flat-square)](vite.config.js)
-[![Built with Vite](https://img.shields.io/badge/built%20with-Vite%208-646cff?style=flat-square&logo=vite&logoColor=white)](vite.config.js)
-[![Firebase](https://img.shields.io/badge/sync-Firebase%2011-ffca28?style=flat-square&logo=firebase&logoColor=black)](firebase-config.js)
-[![Tests](https://img.shields.io/badge/tests-vitest-6E9F18?style=flat-square)](tests/)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-39ff14?style=flat-square)](../../pulls)
+A neon pixel-art vocabulary hunt with 600 TOEIC cards, adaptive practice, XP, sound effects and full English / Русский / 한국어 support.
+
+[![Play](https://img.shields.io/badge/PLAY%20THE%20GAME-pixelwordhunter.pages.dev-ff2d78?style=for-the-badge)](https://pixelwordhunter.pages.dev)
+[![PWA](https://img.shields.io/badge/INSTALLABLE-PWA-bf5fff?style=flat-square)](https://pixelwordhunter.pages.dev)
+[![Languages](https://img.shields.io/badge/LANGUAGES-EN%20%7C%20RU%20%7C%20KO-00f5ff?style=flat-square)](#-made-for-real-practice)
+[![License](https://img.shields.io/badge/LICENSE-MIT-39ff14?style=flat-square)](#-license)
 
 </div>
 
 ---
 
-## 📖 Table of Contents
+## 🎮 What is Pixel Word Hunter?
 
-- [About](#-about)
-- [Features](#-features)
-- [How to Play](#-how-to-play)
-- [Spaced Repetition System](#-spaced-repetition-system)
-- [Word Bank](#-word-bank)
-- [Internationalization & Themes](#-internationalization--themes)
-- [Tech Stack](#️-tech-stack)
-- [Getting Started](#-getting-started)
-- [Scripts](#-scripts)
-- [Firebase Setup](#-firebase-setup)
-- [Deployment](#-deployment)
-- [Project Structure](#-project-structure)
-- [Performance Engineering](#-performance-engineering)
-- [Accessibility](#-accessibility)
-- [Testing](#-testing)
-- [Contributing](#-contributing)
-- [License](#-license)
+I built **Pixel Word Hunter** because vocabulary practice should feel like playing a game, not opening another spreadsheet.
 
----
+It is a retro arcade-style TOEIC trainer: choose a hunt, answer fast, earn XP, discover your weak words and come back when they are ready for review. The interface combines CRT scanlines, neon themes, pixel typography and synthesized game sounds with a serious learning system underneath.
 
-## 🎮 About
+No endless setup. No account required. No giant course to navigate.
 
-**Pixel Word Hunter** is a Progressive Web App that turns TOEIC vocabulary drilling into an arcade experience. Wrapped in a neon cyberpunk aesthetic — CRT scanlines, glowing pixel typography, synthwave sound effects — it covers **600 contextual learning cards across 50 real-world categories**, from *Contracts* and *Banking* to *Ordering Lunch*.
+**Press HUNT. Pick an answer. Build your vocabulary.**
 
-Built with **vanilla JavaScript** (no UI framework), it is optimized for instant loads and silky interactions: the 246 KB dictionary is parsed in a **Web Worker**, **Firebase is lazy-loaded** only on auth, and the game is **fully playable offline** once installed.
+## ✨ The game at a glance
 
-> 🌍 UI is available in **English**, **Русский** and **한국어**. Vocabulary translations are RU / KO (auto-mapped from the UI language).
+- **600 essential business-English cards** across 50 TOEIC categories;
+- **10-question rounds** with four answer choices;
+- questions in both directions: English → translation and translation → English;
+- a clear English example sentence after every answer;
+- XP and mastery progress that stay with you between sessions;
+- **HARD WORDS** mode for focused practice;
+- a **WORD REVIEW** recap after every three rounds;
+- responsive play on phone, tablet and desktop;
+- installable as a PWA and playable offline after the first load.
 
----
+## 🕹 How a hunt works
 
-## ✨ Features
+1. Open the game and press **TRY** or **HUNT**.
+2. Choose a category, or select **ALL** for a mixed hunt.
+3. Answer ten questions.
+4. Learn from the translation and business example.
+5. Earn **10 XP** for every correct answer.
+6. Keep going, review mistakes, or return later to your hard words.
 
-### 🧠 Smart Learning Engine
-- **Adaptive spaced repetition (SM-2 inspired)** — strong words fade, weak words come back sooner
-- **600 TOEIC cards** in **50 categories × 12 words** (598 unique English terms; `productive` and `express` appear twice with independent mastery via category-aware IDs)
-- **Bidirectional quizzes** — question can be `EN → RU/KO` or `RU/KO → EN` (randomized per card; translation language is auto-mapped — `KO` UI → `KO` vocab, `EN`/`RU` UI → `RU` vocab)
-- **Real business context** — every card has an authentic example sentence in EN + RU + KO
-- **Mastery tracking** — 6 levels `NEW → LEARNING → FAMILIAR → GOOD → STRONG → MASTER` per card
+The game does not only count your score. It remembers which cards need attention and brings them back at the right time.
 
-### 🕹 Game Experience
-- **10-question rounds**, 4-option multiple-choice
-- **XP: +10 per correct answer**, persisted locally and synced to cloud
-- **WORD REVIEW** — Quizlet-style recap after every **3 rounds** with `✓ Correct / ✗ Needs review` cards for the full session
-- **Hard Words** — one-tap round built from your weakest cards
-- **Web Audio SFX** (correct / wrong / hover / transition) — synthesized live, zero audio files
-- Instant visual feedback with pixel-perfect correct/wrong animations
+## 🧠 Practice that adapts to you
 
-### 🎨 Personalization
-- **6 themes:** `Cyberpunk` (default), `Midnight`, `Matrix`, `Sunset`, `3310` (Nokia LCD), `Mono`
-- **3 UI languages:** EN / RU / KO — translations are lazy-loaded from `i18n/*.json`
-- Sound on/off persisted across sessions
+Every card has its own mastery level:
 
-### ☁️ Accounts & Sync
-- **Firebase Auth:** email/password **and** anonymous sign-in (explicit, no ghost session)
-- **Cloud sync via Firestore** — `users/{uid}` document; resume on any device
-- **Real-time XP** across tabs/windows via `onSnapshot`
-- **Offline-first:** no account required; guest progress lives in its own local namespace
-- **Smart merge:** on sign-in the app asks before merging guest progress into the account
-- **Backup & restore** — `pwh-backup-YYYY-MM-DD.json` (version 3, ID-keyed; v2 backups still importable)
+```text
+NEW → LEARNING → FAMILIAR → GOOD → STRONG → MASTER
+```
 
-### 📱 PWA & Performance
-- Installable (standalone, themed splash, `manifest.webmanifest` generated by `vite-plugin-pwa`)
-- **Fully offline** via Workbox — precached app shell + `NetworkFirst` for word data (30 days) and `CacheFirst` for fonts (1 year)
-- Engineered for near-zero INP (see [Performance Engineering](#-performance-engineering))
+Correct answers move a card forward. Wrong answers bring it back into practice. New, struggling and due cards are prioritized, while a random element keeps the wider word bank alive.
 
----
+The result is a short daily loop that feels like a game but behaves like a real study tool:
 
-## 🎯 How to Play
+> play → answer → understand → review → remember
 
-1. **Sign in optional** — play as guest or create an account to sync.
-2. Press **▸ HUNT ◂** → pick a category or **ALL** for a mixed run.
-3. Answer **10 questions** — pick the correct translation.
-4. Review the word with its **business example sentence**.
-5. After **3 rounds** you get a **WORD REVIEW** session for the whole batch.
-6. Repeat — the SRS scheduler resurfaces due cards exactly when you're about to forget them.
+## 📚 600 cards, made for real practice
 
-### ⌨️ Keyboard Shortcuts
+The word bank contains **600 cards in 50 categories**, with 12 cards in each category. Here are some of the categories:
+
+`Accounting` · `Airlines` · `Banking` · `Business Planning` · `Computers` · `Conferences` · `Contracts` · `Correspondence` · `Eating Out` · `Electronics` · `Events` · `Financial Statements` · `General Travel` · `Health Insurance` · `Hiring and Training` · `Hospitals` · `Hotels` · `Inventory` · `Investments` · `Invoices` · `Marketing` · `Media` · `Movies` · `Museums` · `Music` · `Office Procedures` · `Office Technology` · `Ordering Lunch` · `Ordering Supplies` · `Pharmacy` · `Product Development` · `Quality Control` · `Renting and Leasing` · `Salaries and Benefits` · `Shipping` · `Shopping` · `Taxes` · `Theater` · `Trains` · `Warranties` · and more.
+
+Every card includes:
+
+- the English term;
+- a Russian translation;
+- a Korean translation;
+- an English example sentence;
+- translated examples in Russian and Korean;
+- independent progress, even when the same English word appears in a different context.
+
+## 🌍 Made for real practice
+
+Pixel Word Hunter supports three interface languages:
+
+| Interface | Vocabulary and examples | Typeface |
+|---|---|---|
+| **English** | Russian | Press Start 2P |
+| **Русский** | Russian | Press Start 2P |
+| **한국어** | Korean | Mulmaru |
+
+Switch language from Settings. The game remembers your choice.
+
+## 🎨 Choose your atmosphere
+
+Six visual themes change the mood without changing the gameplay:
+
+- 💜 **Cyberpunk** — neon pink and cyan, CRT energy;
+- 🌃 **Midnight** — deep space blues and violet;
+- 🟢 **Matrix** — green terminal glow;
+- 🌅 **Sunset** — warm retro dusk;
+- 📟 **3310** — monochrome Nokia-inspired LCD;
+- ⬛ **Mono** — high-contrast black and white.
+
+Sound effects can be switched off at any time. Reduced-motion preferences are respected.
+
+## ☁️ Your progress is yours
+
+You can play without creating an account.
+
+- Guest progress is saved locally in your browser.
+- The **TRY** button can optionally create an anonymous Firebase session.
+- Email accounts can sync progress and XP across devices.
+- Guest and account progress are kept separate until you choose to merge them.
+- Progress can be exported as a backup and imported later.
+- If Firebase is unavailable, the local game remains playable.
+
+## 📱 Install it like an app
+
+Pixel Word Hunter is a Progressive Web App. Open it in a supported browser and use **Install** / **Add to Home Screen** when offered.
+
+Once loaded, the app shell and word bank are cached for offline play. A brand-new browser still needs one online visit before offline mode can work.
+
+## 🚀 Play now
+
+**[Open Pixel Word Hunter →](https://pixelwordhunter.pages.dev)**
+
+The game works in a modern desktop or mobile browser. No account is required to start.
+
+## 🛠 Built with intention
+
+Pixel Word Hunter is a small, focused web game built with:
+
+- vanilla JavaScript and semantic HTML;
+- CSS custom properties for the theme system;
+- a Web Worker for dictionary parsing;
+- Web Audio API for lightweight synthesized SFX;
+- Vite for the production build;
+- Firebase Auth and Firestore for optional sync;
+- Workbox-powered PWA caching;
+- Vitest and ESLint for quality checks.
+
+The goal was to keep the game fast, installable and understandable instead of hiding a simple learning loop behind a heavy framework.
+
+## ⌨️ Keyboard controls
 
 | Key | Action |
 |:---:|---|
-| `1` – `4` | Select answer |
-| `Enter` / `Space` | Next question / confirm modal / start |
-| `Esc` | Close modal / exit results |
+| `1` – `4` | Select an answer |
+| `Enter` / `Space` | Start, confirm or continue |
+| `Esc` | Close a modal or leave results |
 
----
+## 🧪 For developers
 
-## 🧠 Spaced Repetition System
+If you want to run the game locally or inspect the project:
 
-Each card has `mastery 0–5`. Correct → level up (max 5), wrong → level down (min 0). `lastSeen` + interval decides when it is *due*.
+### Requirements
 
-| Mastery | Label | Review Interval |
-|:--:|:---:|---:|
-| 0 | 🆕 NEW | Immediately |
-| 1 | 📗 LEARNING | 1 hour |
-| 2 | 📘 FAMILIAR | 6 hours |
-| 3 | 📙 GOOD | 24 hours |
-| 4 | 📕 STRONG | 3 days |
-| 5 | 👑 MASTER | 7 days |
+- Node.js **20.19+** or **22.12+**;
+- npm.
 
-> `mastery >= 4` counts as **Mastered** in stats. Scheduler priority: `NEW (100) > struggling (90) > due (80) > fresh random (30%)` — so you always see new material.
-
----
-
-## 📚 Word Bank
-
-`words_optimized.json` — **600 cards**, **246 KB**, **50 categories × 12**. `id` is category-aware (`contracts--abide-by`) so the same English term in different categories keeps independent progress. All cards have `rus`/`kor` and `exampleEng`/`exampleRus`/`exampleKor`; missing Korean falls back to sentinel `미확인` and is filtered out.
-
-<details>
-<summary><b>📂 All 50 categories (click to expand)</b></summary>
-
-<br>
-
-`Accounting` · `Airlines` · `Applying and Interviewing` · `Banking` ·
-`Board Meeting and Committees` · `Business Planning` · `Car Rentals` ·
-`Computers` · `Conferences` · `Contracts` · `Cooking as a Career` ·
-`Correspondence` · `Dentists Office` · `Doctors Office` · `Eating Out` ·
-`Electronics` · `Events` · `Financial Statements` · `General Travel` ·
-`Health Insurance` · `Hiring and Training` · `Hospitals` · `Hotels` ·
-`Inventory` · `Investments` · `Invoices` · `Job Advertising and Recruiting` ·
-`Marketing` · `Media` · `Movies` · `Museums` · `Music` · `Office Procedures` ·
-`Office Technology` · `Ordering Lunch` · `Ordering Supplies` · `Pharmacy` ·
-`Product Development` · `Promotions, Pensions, and Awards` ·
-`Property and Departments` · `Quality Control` · `Renting and Leasing` ·
-`Salaries and Benefits` · `Selecting a Restaurant` · `Shipping` · `Shopping` ·
-`Taxes` · `Theater` · `Trains` · `Warranties`
-
-</details>
-
-### Progress & backup format
-
-- **Current: version 3, ID-keyed** (`{ "contracts--abide-by": { mastery, lastSeen, correctCount, incorrectCount } }`).
-- Legacy **version 2** (keyed by English text) is auto-migrated on load — each legacy entry is copied to every matching contextual ID.
-- Guest and signed-in users have **separate local namespaces** (`guest` vs `uid`). Import accepts both v2 and v3.
-- `UI language` (`en`/`ru`/`ko`) and `vocabulary translation language` (`ru`/`ko`) are stored separately in the store, but the app **auto-maps** `ko` UI → `ko` vocab and `en`/`ru` UI → `ru` vocab.
-
-### Word entry format
-
-```json
-{
-  "id": "contracts--abide-by",
-  "category": "Contracts",
-  "eng": "abide by",
-  "rus": "соблюдать",
-  "kor": "준수하다",
-  "exampleEng": "You must abide by the company rules.",
-  "exampleRus": "Вы должны соблюдать правила компании.",
-  "exampleKor": "회사 규칙을 준수해야 합니다."
-}
-```
-
----
-
-## 🌐 Internationalization & Themes
-
-### Languages
-
-| Code | Language | UI | Word translations | Examples |
-|:---:|---|:---:|:---:|:---:|
-| `EN` | English | ✅ | — (quiz uses RU) | — |
-| `RU` | Русский | ✅ | ✅ | ✅ |
-| `KO` | 한국어 | ✅ | ✅ | ✅ |
-
-Translations are lazy `fetch()`ed from `i18n/*.json` (production: `assets/i18n/*.json`) and the active UI font is loaded on demand by CSS (`Press Start 2P` for EN/RU, `Mulmaru` for KO). Adding a language requires a new JSON file, an entry in `I18nManager.supportedLanguages`, and a language button — no framework changes.
-
-### Themes
-
-| Theme | Vibe |
-|:---:|---|
-| 💜 **Cyberpunk** *(default)* | Neon pink/cyan, CRT flicker |
-| 🌃 **Midnight** | Deep-space blues & violet |
-| 🟢 **Matrix** | Falling-code green |
-| 🌅 **Sunset** | Warm retro dusk |
-| 📟 **3310** | Nokia monochrome LCD — no glow |
-| ⬛ **Mono** | High-contrast B&W |
-
-Powered by CSS custom properties, instant switch, persisted in `localStorage`.
-
----
-
-## 🛠️ Tech Stack
-
-| Layer | Technology |
-|---|---|
-| **Core** | Vanilla JavaScript (ES Modules), HTML5, CSS3 — zero UI frameworks |
-| **Build** | [Vite 8](https://vite.dev) + `esbuild` minification |
-| **PWA** | [vite-plugin-pwa](https://vite-pwa-org.netlify.app/) + Workbox (`autoUpdate`, precache, `NetworkFirst`/`CacheFirst`) |
-| **Backend** | [Firebase 11](https://firebase.google.com) — Auth (email + anonymous), Firestore (progress & real-time XP) |
-| **Concurrency** | Web Worker (`data.worker.js` + `sanitize.js`) for off-main-thread `JSON.parse` |
-| **Audio** | Web Audio API — all SFX synthesized in code |
-| **Fonts** | `Press Start 2P` (UI) · `Mulmaru` (Korean) — self-hosted `.woff2`, `font-display: swap` |
-| **Quality** | ESLint 9 (flat config) · Vitest 4 + jsdom |
-| **Deploy** | Cloudflare Workers Static Assets (`wrangler.jsonc` → `dist/`), any static host |
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- **Node.js ≥ 18** and npm
-
-### Installation
+### Run locally
 
 ```bash
 git clone https://github.com/aalmaz1/pixelwordhunter.git
 cd pixelwordhunter
-npm install
+npm ci
 npm run dev
 ```
 
-Open the URL Vite prints (default `http://localhost:5173`).
+Open the local URL printed by Vite.
 
-### Production build
-
-```bash
-npm run build    # → dist/
-npm run preview  # serve dist locally
-```
-
-`dist/` is fully self-contained — hashed assets, `manifest.webmanifest`, service worker, word data and `i18n` — ready to deploy.
-
----
-
-## 📜 Scripts
-
-| Command | Description |
-|---|---|
-| `npm run dev` | Vite dev server + HMR |
-| `npm run build` | Optimized production build (`dist/`) |
-| `npm run preview` | Serve `dist/` locally |
-| `npm run lint` | ESLint (flat config) |
-| `npm run test` | Vitest run (jsdom) |
-| `npm run test:watch` | Vitest watch mode |
-
----
-
-## 🔥 Firebase Setup
-
-The repo ships with a working public web config (`firebase-config.js`) so the app runs out of the box. To use **your own** project:
-
-1. Create a project at [console.firebase.google.com](https://console.firebase.google.com).
-2. Enable **Auth → Email/Password** and **Anonymous**.
-3. Create a **Cloud Firestore** database.
-4. Replace `FIREBASE_CONFIG` in `firebase-config.js`.
-5. Deploy the included rules (`firestore.rules`):
-
-```javascript
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    function owns(uid) { return request.auth != null && request.auth.uid == uid; }
-    function validUserDocument() {
-      let d = request.resource.data;
-      return d.keys().hasOnly(['username','email','xp','progress','createdAt','updatedAt','lastSync'])
-          && (!d.keys().hasAny(['xp']) || (d.xp is int && d.xp >= 0 && d.xp <= 1000000000))
-          && (!d.keys().hasAny(['progress']) || (d.progress is map && d.progress.size() <= 1000));
-    }
-    match /users/{uid} {
-      allow read: if owns(uid);
-      allow create, update: if owns(uid) && validUserDocument();
-      allow delete: if owns(uid);
-    }
-    match /{document=**} { allow read, write: if false; }
-  }
-}
-```
-
-> **Data model:** one doc per user at `users/{uid}` → `{ username?, email?, xp: int, progress: map, createdAt, updatedAt, lastSync }`. No Firebase? The app auto-detects it and runs fully on `localStorage`.
-
----
-
-## 🚢 Deployment
-
-`base: './'` — deploy the `dist/` folder anywhere.
-
-### Cloudflare Workers Static Assets (preconfigured)
-
-`wrangler.jsonc` points at `dist/` (`not_found_handling: none`):
+### Quality checks
 
 ```bash
+npm run lint
+npm test
 npm run build
-npx wrangler deploy
+npm run preview
 ```
 
-`public/_headers` is **not** served — Cloudflare reads it at deploy time to emit:
+Current checks cover the data pipeline, SRS selection, word IDs, sanitization, i18n, storage validation and progress migration.
 
-```
-X-Frame-Options: DENY
-Content-Security-Policy: frame-ancestors 'none'
-```
+### Useful commands
 
-`frame-ancestors` is ignored in a `<meta>` CSP, so it must be a real HTTP header — `index.html` intentionally omits it and documents why.
+| Command | What it does |
+|---|---|
+| `npm run dev` | Development server with HMR |
+| `npm run build` | Production build in `dist/` |
+| `npm run preview` | Preview the production build |
+| `npm run lint` | Run ESLint |
+| `npm test` | Run the test suite |
+| `npm run test:watch` | Watch tests while developing |
 
-### GitHub Pages / Netlify / Vercel
+### Project map
 
-- **Build command:** `npm run build`
-- **Publish directory:** `dist`
-
----
-
-## 🗂 Project Structure
-
-```
-pixelwordhunter/
-├── index.html            # App shell — SEO, screens (styles come from style.css)
-├── app.js                # Game flow, audio engine, auth, themes, review
-├── data.js               # Word loading pipeline + SRS scheduler
-├── data.worker.js        # Web Worker: JSON.parse + sanitize off main thread
-├── sanitize.js           # Shared sanitizer (worker + main fallback)
-├── store.js              # Central reactive store (rAF-batched)
-├── storage.js            # localStorage, Firestore sync, backup/restore, XP batching
-├── ui.js                 # DOM helpers, category rendering, a11y
-├── i18n.js               # Lazy i18n + per-language font selection
-├── firebase-config.js    # Lazy Firebase init, real-time XP listener, logout
-├── style.css             # 6 themes, components, responsiveness
-├── words_optimized.json  # 600-card dictionary (source)
-├── public/
-│   ├── _headers              # Cloudflare headers (frame-ancestors)
-│   └── words_optimized.json  # Served copy for fetch() in dev/prod
-├── i18n/                 # en.json · ru.json · ko.json
-├── assets/               # Press Start 2P, Mulmaru, icons, logo, favicon
-├── tests/                # Vitest suites (data, store, i18n, sanitize, word-ids)
-├── firestore.rules       # Strict per-user Firestore rules
-├── vite.config.js        # Vite + PWA + asset-copy plugins
-├── vitest.config.js      # jsdom + tests/**/*.test.js
-├── eslint.config.js      # ESLint flat config
-├── wrangler.jsonc        # Cloudflare Workers static assets
-├── robots.txt
-└── package.json
+```text
+index.html             app shell and screens
+app.js                 game flow, audio, auth and review
+data.js                word loading and adaptive scheduler
+data.worker.js         off-main-thread parsing and sanitization
+sanitize.js            dictionary validation
+storage.js             local progress, backups and cloud sync
+ui.js                  DOM rendering and accessibility helpers
+i18n.js                language loading
+style.css              responsive UI and six themes
+words_optimized.json   600-card dictionary
+i18n/                  English, Russian and Korean UI text
+assets/                fonts, logo, icons and favicon
+tests/                 Vitest/jsdom tests
+firestore.rules        per-user Firestore rules
+vite.config.js         Vite and PWA configuration
+wrangler.jsonc         Cloudflare deployment configuration
 ```
 
-Build output (`dist/`) — hashed `assets/`, `manifest.webmanifest` + service worker (auto-generated), `assets/i18n/*.json`, `words_optimized.json?v=<hash>`.
+### Firebase
 
----
-
-## ⚡ Performance Engineering
-
-Targets **INP** (Interaction to Next Paint):
-
-- **Worker pipeline** — `words_optimized.json` is `fetch()`ed as text and `JSON.parse`d + sanitized inside `data.worker.js` (main thread never blocks; fallback is dynamic `import()` in a separate chunk)
-- **Versioned data URL** — `words_optimized.json?v=<sha256:16>` in precache + `NetworkFirst` (3s timeout, 30d) so translation fixes propagate instantly while offline still works
-- **Lazy Firebase** — `firebase/app` + `auth` + `firestore` are `import()`ed only on first auth action
-- **Task yielding** — `scheduler.yield()` / `setTimeout(0)` + `requestIdleCallback` / `scheduleIdle` to break long tasks; progress saves are debounced (2s Firestore, idle-scheduled local)
-- **XP batching** — increments coalesced up to 5s, flushed via `increment()` + `beforeunload` + `onSnapshot` echo
-- **rAF-batched store** — multiple `setState` calls per frame merge into one `stateChange` event
-- **Render discipline** — `content-visibility: auto`, CSS containment, `contain: strict` on overlays, async font `swap`, preconnect to Firebase
-
----
-
-## ♿ Accessibility
-
-- Semantic landmarks (`<main>`, `role="status/alert"`), `aria-live` for stats/notifications
-- Skip-to-content link, fully keyboard-navigable, focus trap in modals, `Esc` to close
-- `prefers-reduced-motion` disables animations
-- Touch targets ≥ 44px, `viewport-fit=cover` + safe-area aware
-- Portrait & landscape tested, `lang`/`dir` set, `aria-label`s on categories
-
----
-
-## 🧪 Testing
+The public web client configuration is included so the deployed game can work out of the box. To use your own Firebase project, enable Email/Password and Anonymous Authentication, create Firestore, replace `FIREBASE_CONFIG` in `firebase-config.js`, and deploy the rules from `firestore.rules`.
 
 ```bash
-npm run test        # single run
-npm run test:watch  # watch
+firebase deploy --only firestore:rules
 ```
 
-Suites in `tests/` (jsdom):
-
-- `data.test.js` — SRS, category/word selection, mastery
-- `store.test.js` — rAF batching, state transitions
-- `sanitize.test.js` — word sanitization & ID generation
-- `word-ids.test.js` — category-aware ID uniqueness
-- `i18n.test.js` / `storage.validate.test.js` — lazy loading & migration (v2→v3)
-
----
+The rules restrict each user to their own `users/{uid}` document. Do not replace them with open development rules.
 
 ## 🤝 Contributing
 
-PRs welcome — words, translations, themes, or features!
+Found a translation issue? Have an idea for a better hunt, theme or accessibility improvement? Contributions are welcome.
 
-1. Fork & `git checkout -b feature/amazing-idea`
-2. Commit & `npm run lint` + `npm run test`
-3. Push & open a Pull Request
+1. Fork the repository.
+2. Create a focused branch.
+3. Make the change.
+4. Run `npm run lint`, `npm test` and `npm run build`.
+5. Open a pull request with a short description and testing notes.
 
-Keep the pixel spirit alive 💜
-
----
+For dictionary changes, preserve the 600-card / 50-category structure, required translations and unique contextual IDs.
 
 ## 📄 License
 
-MIT — see `license` field in [`package.json`](package.json).
+MIT — see the [`license`](package.json) field in `package.json`.
 
 ---
 
