@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import * as dataMod from '../data.js';
+import { UNCONFIRMED_MARKER } from '../sanitize.js';
 
 function seed(n = 30) {
   const words = Array.from({ length: n }, (_, i) => ({
@@ -71,5 +72,55 @@ describe('getCategoryStats', () => {
     const stats = dataMod.getCategoryStats();
     expect(stats.A.total).toBe(10); // seeded n=10 all in A because i<15
     expect(stats.A.mastered).toBe(2);
+  });
+});
+
+describe('vocabulary translations follow the selected language', () => {
+  const word = {
+    eng: 'backlog',
+    rus: 'задолженность',
+    kor: '미해결 업무',
+    exampleEng: 'A backlog of orders built up quickly.',
+    exampleRus: 'Невыполненные заказы накапливались быстро.',
+    exampleKor: '미처리 주문이 빠르게 쌓였습니다.',
+  };
+
+  it('returns Korean word and sentence when lang is ko — never Russian', () => {
+    expect(dataMod.getWordTranslation(word, 'ko')).toBe('미해결 업무');
+    expect(dataMod.getExampleTranslation(word, 'ko')).toEqual({
+      text: '미처리 주문이 빠르게 쌓였습니다.',
+      usedLang: 'ko',
+    });
+    expect(dataMod.getCorrectTranslation(word, 'ko', true)).toBe('미해결 업무');
+  });
+
+  it('returns Russian word and sentence when lang is ru — never Korean', () => {
+    expect(dataMod.getWordTranslation(word, 'ru')).toBe('задолженность');
+    expect(dataMod.getExampleTranslation(word, 'ru')).toEqual({
+      text: 'Невыполненные заказы накапливались быстро.',
+      usedLang: 'ru',
+    });
+    expect(dataMod.getCorrectTranslation(word, 'ru', true)).toBe('задолженность');
+  });
+
+  it('does not fall back to Russian for Korean placeholders or unconfirmed text', () => {
+    const stub = {
+      ...word,
+      kor: UNCONFIRMED_MARKER,
+      exampleKor: '미해결 업무의 실제 사용 사례입니다.',
+    };
+    expect(dataMod.isUsableKoreanText(stub.kor)).toBe(false);
+    expect(dataMod.isUsableKoreanText(stub.exampleKor)).toBe(false);
+    expect(dataMod.getWordTranslation(stub, 'ko')).toBe('');
+    expect(dataMod.getExampleTranslation(stub, 'ko')).toEqual({ text: '', usedLang: null });
+    expect(dataMod.getExampleTranslation(stub, 'ko').text).not.toMatch(/[А-яЁё]/);
+  });
+});
+
+describe('word bank Korean examples', () => {
+  it('has no placeholder Korean sentences left in the dictionary', async () => {
+    const words = (await import('../words_optimized.json')).default;
+    const stubs = words.filter(w => (w.exampleKor || '').includes('실제 사용 사례'));
+    expect(stubs.map(w => w.id)).toEqual([]);
   });
 });

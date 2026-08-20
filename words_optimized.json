@@ -2427,7 +2427,7 @@
         "exampleEng": "A backlog of orders built up quickly.",
         "exampleRus": "Невыполненные заказы накапливались быстро.",
         "kor": "미해결 업무",
-        "exampleKor": "미해결 업무의 실제 사용 사례입니다.",
+        "exampleKor": "미처리 주문이 빠르게 쌓였습니다.",
         "id": "inventory--backlog"
     },
     {
@@ -2471,7 +2471,7 @@
         "exampleEng": "Complete the stock count by Friday.",
         "exampleRus": "Завершите инвентаризацию до пятницы.",
         "kor": "완료하다",
-        "exampleKor": "완료하다의 실제 사용 사례입니다.",
+        "exampleKor": "금요일까지 재고 실사를 완료하세요.",
         "id": "inventory--complete"
     },
     {
@@ -2493,7 +2493,7 @@
         "exampleEng": "A full inventory count is done quarterly.",
         "exampleRus": "Полная инвентаризация проводится ежеквартально.",
         "kor": "세다",
-        "exampleKor": "세다의 실제 사용 사례입니다.",
+        "exampleKor": "전체 재고 실사는 분기별로 실시됩니다.",
         "id": "inventory--count"
     },
     {
@@ -2504,7 +2504,7 @@
         "exampleEng": "Inventory levels decreased due to high demand.",
         "exampleRus": "Уровень запасов снизился из-за высокого спроса.",
         "kor": "감소",
-        "exampleKor": "감소의 실제 사용 사례입니다.",
+        "exampleKor": "높은 수요로 재고 수준이 감소했습니다.",
         "id": "inventory--decrease"
     },
     {
@@ -2515,7 +2515,7 @@
         "exampleEng": "Open a bank account with us.",
         "exampleRus": "Откройте банковский счет у нас.",
         "kor": "계좌",
-        "exampleKor": "계좌의 실제 사용 사례입니다.",
+        "exampleKor": "저희 은행에 계좌를 개설하세요.",
         "id": "banking--account"
     },
     {
@@ -2548,7 +2548,7 @@
         "exampleEng": "The company banks with a major institution.",
         "exampleRus": "Компания обслуживается в крупном банке.",
         "kor": "은행",
-        "exampleKor": "은행의 실제 사용 사례입니다.",
+        "exampleKor": "그 회사는 대형 금융기관과 거래합니다.",
         "id": "banking--bank"
     },
     {
@@ -2559,7 +2559,7 @@
         "exampleEng": "The firm filed for bankruptcy protection.",
         "exampleRus": "Компания подала заявление о банкротстве.",
         "kor": "파산",
-        "exampleKor": "파산의 실제 사용 사례입니다.",
+        "exampleKor": "그 회사는 파산 보호를 신청했습니다.",
         "id": "banking--bankruptcy"
     },
     {
@@ -2581,7 +2581,7 @@
         "exampleEng": "I need to borrow some money.",
         "exampleRus": "Мне нужно занять немного денег.",
         "kor": "빌리다",
-        "exampleKor": "빌리다의 실제 사용 사례입니다.",
+        "exampleKor": "돈을 좀 빌려야 합니다.",
         "id": "banking--borrow"
     },
     {
@@ -2614,7 +2614,7 @@
         "exampleEng": "The company has sufficient capital.",
         "exampleRus": "У компании достаточно капитала.",
         "kor": "자본",
-        "exampleKor": "자본의 실제 사용 사례입니다.",
+        "exampleKor": "그 회사는 충분한 자본을 보유하고 있습니다.",
         "id": "banking--capital"
     },
     {
@@ -2625,7 +2625,7 @@
         "exampleEng": "Cash flow management.",
         "exampleRus": "Управление денежным потоком.",
         "kor": "현금",
-        "exampleKor": "현금의 실제 사용 사례입니다.",
+        "exampleKor": "현금 흐름 관리.",
         "id": "banking--cash"
     },
     {
@@ -2647,7 +2647,7 @@
         "exampleEng": "Open a bank account with us.",
         "exampleRus": "Откройте банковский счет у нас.",
         "kor": "계좌",
-        "exampleKor": "계좌의 실제 사용 사례입니다.",
+        "exampleKor": "저희 은행에 계좌를 개설하세요.",
         "id": "accounting--account"
     },
     {
@@ -2680,7 +2680,7 @@
         "exampleEng": "Adjust the strategy accordingly.",
         "exampleRus": "Соответственно настройте стратегию.",
         "kor": "조정하다",
-        "exampleKor": "조정하다의 실제 사용 사례입니다.",
+        "exampleKor": "그에 맞게 전략을 조정하세요.",
         "id": "accounting--adjust"
     },
     {
@@ -2691,7 +2691,7 @@
         "exampleEng": "Budget allocation was revised quarterly.",
         "exampleRus": "Распределение бюджета пересматривалось ежеквартально.",
         "kor": "배분",
-        "exampleKor": "배분의 실제 사용 사례입니다.",
+        "exampleKor": "예산 배분은 분기별로 수정되었습니다.",
         "id": "accounting--allocation"
     },
     {
@@ -2702,7 +2702,7 @@
         "exampleEng": "A travel allowance is provided to staff.",
         "exampleRus": "Сотрудникам предоставляется командировочное пособие.",
         "kor": "수당",
-        "exampleKor": "수당의 실제 사용 사례입니다.",
+        "exampleKor": "직원에게 출장 수당이 지급됩니다.",
         "id": "accounting--allowance"
     },
     {
@@ -2713,7 +2713,7 @@
         "exampleEng": "Intangible assets are amortized over time.",
         "exampleRus": "Нематериальные активы амортизируются со временем.",
         "kor": "상각하다",
-        "exampleKor": "상각하다의 실제 사용 사례입니다.",
+        "exampleKor": "무형자산은 시간이 지나면서 상각됩니다.",
         "id": "accounting--amortize"
     },
     {
@@ -2768,7 +2768,7 @@
         "exampleEng": "Bankruptcy proceedings affect all creditors.",
         "exampleRus": "Процедура банкротства затрагивает всех кредиторов.",
         "kor": "파산",
-        "exampleKor": "파산의 실제 사용 사례입니다.",
+        "exampleKor": "파산 절차는 모든 채권자에게 영향을 미칩니다.",
         "id": "accounting--bankruptcy"
     },
     {
@@ -2779,7 +2779,7 @@
         "exampleEng": "Open a bank account with us.",
         "exampleRus": "Откройте банковский счет у нас.",
         "kor": "계좌",
-        "exampleKor": "계좌의 실제 사용 사례입니다.",
+        "exampleKor": "저희 은행에 계좌를 개설하세요.",
         "id": "investments--account"
     },
     {
@@ -2812,7 +2812,7 @@
         "exampleEng": "Invest in government bonds.",
         "exampleRus": "Инвестируйте в государственные облигации.",
         "kor": "채권",
-        "exampleKor": "채권의 실제 사용 사례입니다.",
+        "exampleKor": "국채에 투자하세요.",
         "id": "investments--bond"
     },
     {
@@ -2823,7 +2823,7 @@
         "exampleEng": "Our broker advised on the portfolio.",
         "exampleRus": "Наш брокер консультировал по портфелю.",
         "kor": "중개인",
-        "exampleKor": "중개인의 실제 사용 사례입니다.",
+        "exampleKor": "저희 중개인이 포트폴리오에 대해 조언했습니다.",
         "id": "investments--broker"
     },
     {
@@ -2834,7 +2834,7 @@
         "exampleEng": "The company has sufficient capital.",
         "exampleRus": "У компании достаточно капитала.",
         "kor": "자본",
-        "exampleKor": "자본의 실제 사용 사례입니다.",
+        "exampleKor": "그 회사는 충분한 자본을 보유하고 있습니다.",
         "id": "investments--capital"
     },
     {
@@ -2878,7 +2878,7 @@
         "exampleEng": "Convertible bonds can become company stock.",
         "exampleRus": "Конвертируемые облигации можно обменять на акции.",
         "kor": "전환 사채",
-        "exampleKor": "전환 사채의 실제 사용 사례입니다.",
+        "exampleKor": "전환사채는 회사 주식으로 전환될 수 있습니다.",
         "id": "investments--convertible"
     },
     {
@@ -2889,7 +2889,7 @@
         "exampleEng": "Share prices declined after the report.",
         "exampleRus": "Цены акций снизились после отчёта.",
         "kor": "하락",
-        "exampleKor": "하락의 실제 사용 사례입니다.",
+        "exampleKor": "보고서 발표 후 주가가 하락했습니다.",
         "id": "investments--decline"
     },
     {
@@ -2900,7 +2900,7 @@
         "exampleEng": "Deferred tax liabilities were disclosed.",
         "exampleRus": "Отложенные налоговые обязательства были раскрыты.",
         "kor": "연기된",
-        "exampleKor": "연기된의 실제 사용 사례입니다.",
+        "exampleKor": "이연 법인세 부채가 공시되었습니다.",
         "id": "investments--deferred"
     },
     {
@@ -2911,7 +2911,7 @@
         "exampleEng": "Assess the situation carefully.",
         "exampleRus": "Тщательно оцените ситуацию.",
         "kor": "평가하다",
-        "exampleKor": "평가하다의 실제 사용 사례입니다.",
+        "exampleKor": "상황을 신중하게 평가하세요.",
         "id": "taxes--assess"
     },
     {
@@ -2955,7 +2955,7 @@
         "exampleEng": "Higher income moves you into a new bracket.",
         "exampleRus": "Более высокий доход переводит вас в новую налоговую категорию.",
         "kor": "세율 구간",
-        "exampleKor": "세율 구간의 실제 사용 사례입니다.",
+        "exampleKor": "소득이 높아지면 새로운 세율 구간으로 이동합니다.",
         "id": "taxes--bracket"
     },
     {
@@ -2977,7 +2977,7 @@
         "exampleEng": "Corporate headquarters location.",
         "exampleRus": "Местоположение корпоративного штаб-квартиры.",
         "kor": "법인",
-        "exampleKor": "법인의 실제 사용 사례입니다.",
+        "exampleKor": "법인 본사 위치.",
         "id": "taxes--corporate"
     },
     {
@@ -3010,7 +3010,7 @@
         "exampleEng": "Tax owed depends on annual earnings.",
         "exampleRus": "Сумма налога зависит от годового заработка.",
         "kor": "의존하다",
-        "exampleKor": "의존하다의 실제 사용 사례입니다.",
+        "exampleKor": "납부할 세금은 연간 소득에 따라 달라집니다.",
         "id": "taxes--depend"
     },
     {
@@ -3021,7 +3021,7 @@
         "exampleEng": "Office equipment depreciates over 5 years.",
         "exampleRus": "Офисное оборудование амортизируется за 5 лет.",
         "kor": "감가상각",
-        "exampleKor": "감가상각의 실제 사용 사례입니다.",
+        "exampleKor": "사무 기기는 5년에 걸쳐 감가상각됩니다.",
         "id": "taxes--depreciate"
     },
     {
@@ -3032,7 +3032,7 @@
         "exampleEng": "Discretionary spending must be justified.",
         "exampleRus": "Дискреционные расходы должны быть обоснованы.",
         "kor": "임의의",
-        "exampleKor": "임의의의 실제 사용 사례입니다.",
+        "exampleKor": "재량 지출은 정당화되어야 합니다.",
         "id": "taxes--discretionary"
     },
     {
@@ -3043,7 +3043,7 @@
         "exampleEng": "Open a bank account with us.",
         "exampleRus": "Откройте банковский счет у нас.",
         "kor": "계좌",
-        "exampleKor": "계좌의 실제 사용 사례입니다.",
+        "exampleKor": "저희 은행에 계좌를 개설하세요.",
         "id": "financial-statements--account"
     },
     {
@@ -3087,7 +3087,7 @@
         "exampleEng": "Goodwill is amortized over several years.",
         "exampleRus": "Деловая репутация амортизируется в течение нескольких лет.",
         "kor": "상각하다",
-        "exampleKor": "상각하다의 실제 사용 사례입니다.",
+        "exampleKor": "영업권은 수년에 걸쳐 상각됩니다.",
         "id": "financial-statements--amortize"
     },
     {
@@ -3098,7 +3098,7 @@
         "exampleEng": "Financial analysis report.",
         "exampleRus": "Отчет финансового анализа.",
         "kor": "분석",
-        "exampleKor": "분석의 실제 사용 사례입니다.",
+        "exampleKor": "재무 분석 보고서.",
         "id": "financial-statements--analysis"
     },
     {
@@ -3164,7 +3164,7 @@
         "exampleEng": "Bankruptcy was declared after losses mounted.",
         "exampleRus": "Банкротство было объявлено после накопившихся убытков.",
         "kor": "파산",
-        "exampleKor": "파산의 실제 사용 사례입니다.",
+        "exampleKor": "손실이 누적된 후 파산이 선고되었습니다.",
         "id": "financial-statements--bankruptcy"
     },
     {
@@ -3208,7 +3208,7 @@
         "exampleEng": "The building offers premium amenities.",
         "exampleRus": "Здание предлагает премиальные удобства.",
         "kor": "편의 시설",
-        "exampleKor": "편의 시설의 실제 사용 사례입니다.",
+        "exampleKor": "그 건물은 고급 편의 시설을 제공합니다.",
         "id": "property-and-departments--amenity"
     },
     {
@@ -3219,7 +3219,7 @@
         "exampleEng": "Get an appraisal before signing the deal.",
         "exampleRus": "Получите оценку перед подписанием сделки.",
         "kor": "감정 평가",
-        "exampleKor": "감정 평가의 실제 사용 사례입니다.",
+        "exampleKor": "계약서에 서명하기 전에 감정 평가를 받으세요.",
         "id": "property-and-departments--appraisal"
     },
     {
@@ -3230,7 +3230,7 @@
         "exampleEng": "The space is appropriate for a head office.",
         "exampleRus": "Помещение подходит для главного офиса.",
         "kor": "적절한",
-        "exampleKor": "적절한의 실제 사용 사례입니다.",
+        "exampleKor": "그 공간은 본사로 적합합니다.",
         "id": "property-and-departments--appropriate"
     },
     {
@@ -3252,7 +3252,7 @@
         "exampleEng": "Our real estate broker found the space.",
         "exampleRus": "Наш риэлтор нашёл это помещение.",
         "kor": "중개인",
-        "exampleKor": "중개인의 실제 사용 사례입니다.",
+        "exampleKor": "저희 부동산 중개인이 그 공간을 찾았습니다.",
         "id": "property-and-departments--broker"
     },
     {
@@ -3285,7 +3285,7 @@
         "exampleEng": "Construction of the new office begins soon.",
         "exampleRus": "Строительство нового офиса начинается скоро.",
         "kor": "건설",
-        "exampleKor": "건설의 실제 사용 사례입니다.",
+        "exampleKor": "새 사무실 건설이 곧 시작됩니다.",
         "id": "property-and-departments--construction"
     },
     {
@@ -3296,7 +3296,7 @@
         "exampleEng": "A contractor was hired for the renovation.",
         "exampleRus": "Для ремонта был нанят подрядчик.",
         "kor": "계약자",
-        "exampleKor": "계약자의 실제 사용 사례입니다.",
+        "exampleKor": "리모델링을 위해 계약자를 고용했습니다.",
         "id": "property-and-departments--contractor"
     },
     {
@@ -3307,7 +3307,7 @@
         "exampleEng": "Get an appraisal before signing the deal.",
         "exampleRus": "Получите оценку перед подписанием сделки.",
         "kor": "감정 평가",
-        "exampleKor": "감정 평가의 실제 사용 사례입니다.",
+        "exampleKor": "계약서에 서명하기 전에 감정 평가를 받으세요.",
         "id": "board-meeting-and-committees--appraisal"
     },
     {
@@ -3318,7 +3318,7 @@
         "exampleEng": "The space is appropriate for a head office.",
         "exampleRus": "Помещение подходит для главного офиса.",
         "kor": "적절한",
-        "exampleKor": "적절한의 실제 사용 사례입니다.",
+        "exampleKor": "그 공간은 본사로 적합합니다.",
         "id": "board-meeting-and-committees--appropriate"
     },
     {
@@ -3340,7 +3340,7 @@
         "exampleEng": "Our real estate broker found the space.",
         "exampleRus": "Наш риэлтор нашёл это помещение.",
         "kor": "중개인",
-        "exampleKor": "중개인의 실제 사용 사례입니다.",
+        "exampleKor": "저희 부동산 중개인이 그 공간을 찾았습니다.",
         "id": "board-meeting-and-committees--broker"
     },
     {
@@ -3373,7 +3373,7 @@
         "exampleEng": "Construction of the new office begins soon.",
         "exampleRus": "Строительство нового офиса начинается скоро.",
         "kor": "건설",
-        "exampleKor": "건설의 실제 사용 사례입니다.",
+        "exampleKor": "새 사무실 건설이 곧 시작됩니다.",
         "id": "board-meeting-and-committees--construction"
     },
     {
@@ -3384,7 +3384,7 @@
         "exampleEng": "A contractor was hired for the renovation.",
         "exampleRus": "Для ремонта был нанят подрядчик.",
         "kor": "계약자",
-        "exampleKor": "계약자의 실제 사용 사례입니다.",
+        "exampleKor": "리모델링을 위해 계약자를 고용했습니다.",
         "id": "board-meeting-and-committees--contractor"
     },
     {
@@ -3395,7 +3395,7 @@
         "exampleEng": "The deed was transferred to the new owner.",
         "exampleRus": "Право собственности было передано новому владельцу.",
         "kor": "증서",
-        "exampleKor": "증서의 실제 사용 사례입니다.",
+        "exampleKor": "증서가 새 소유자에게 이전되었습니다.",
         "id": "board-meeting-and-committees--deed"
     },
     {
@@ -3406,7 +3406,7 @@
         "exampleEng": "Career development opportunities.",
         "exampleRus": "Возможности развития карьеры.",
         "kor": "개발",
-        "exampleKor": "개발의 실제 사용 사례입니다.",
+        "exampleKor": "경력 개발 기회.",
         "id": "board-meeting-and-committees--development"
     },
     {
@@ -3417,7 +3417,7 @@
         "exampleEng": "The dwelling was converted to office space.",
         "exampleRus": "Жилище было переоборудовано в офисное помещение.",
         "kor": "주거",
-        "exampleKor": "주거의 실제 사용 사례입니다.",
+        "exampleKor": "그 주거 공간은 사무실로 개조되었습니다.",
         "id": "board-meeting-and-committees--dwelling"
     },
     {
@@ -3428,7 +3428,7 @@
         "exampleEng": "The estate includes a warehouse facility.",
         "exampleRus": "Объект недвижимости включает складское помещение.",
         "kor": "부동산",
-        "exampleKor": "부동산의 실제 사용 사례입니다.",
+        "exampleKor": "그 부동산에는 창고 시설이 포함되어 있습니다.",
         "id": "board-meeting-and-committees--estate"
     },
     {
@@ -3461,7 +3461,7 @@
         "exampleEng": "Construction of the new office begins soon.",
         "exampleRus": "Строительство нового офиса начинается скоро.",
         "kor": "건설",
-        "exampleKor": "건설의 실제 사용 사례입니다.",
+        "exampleKor": "새 사무실 건설이 곧 시작됩니다.",
         "id": "quality-control--construction"
     },
     {
@@ -3472,7 +3472,7 @@
         "exampleEng": "A contractor was hired for the renovation.",
         "exampleRus": "Для ремонта был нанят подрядчик.",
         "kor": "계약자",
-        "exampleKor": "계약자의 실제 사용 사례입니다.",
+        "exampleKor": "리모델링을 위해 계약자를 고용했습니다.",
         "id": "quality-control--contractor"
     },
     {
@@ -3483,7 +3483,7 @@
         "exampleEng": "The deed was transferred to the new owner.",
         "exampleRus": "Право собственности было передано новому владельцу.",
         "kor": "증서",
-        "exampleKor": "증서의 실제 사용 사례입니다.",
+        "exampleKor": "증서가 새 소유자에게 이전되었습니다.",
         "id": "quality-control--deed"
     },
     {
@@ -3494,7 +3494,7 @@
         "exampleEng": "Career development opportunities.",
         "exampleRus": "Возможности развития карьеры.",
         "kor": "개발",
-        "exampleKor": "개발의 실제 사용 사례입니다.",
+        "exampleKor": "경력 개발 기회.",
         "id": "quality-control--development"
     },
     {
@@ -3505,7 +3505,7 @@
         "exampleEng": "The dwelling was converted to office space.",
         "exampleRus": "Жилище было переоборудовано в офисное помещение.",
         "kor": "주거",
-        "exampleKor": "주거의 실제 사용 사례입니다.",
+        "exampleKor": "그 주거 공간은 사무실로 개조되었습니다.",
         "id": "quality-control--dwelling"
     },
     {
@@ -3516,7 +3516,7 @@
         "exampleEng": "The estate includes a warehouse facility.",
         "exampleRus": "Объект недвижимости включает складское помещение.",
         "kor": "부동산",
-        "exampleKor": "부동산의 실제 사용 사례입니다.",
+        "exampleKor": "그 부동산에는 창고 시설이 포함되어 있습니다.",
         "id": "quality-control--estate"
     },
     {
@@ -3527,7 +3527,7 @@
         "exampleEng": "Eviction proceedings began for non-payment.",
         "exampleRus": "Процедура выселения была начата за неуплату.",
         "kor": "퇴거",
-        "exampleKor": "퇴거의 실제 사용 사례입니다.",
+        "exampleKor": "미납으로 퇴거 절차가 시작되었습니다.",
         "id": "quality-control--eviction"
     },
     {
@@ -3538,7 +3538,7 @@
         "exampleEng": "The facility is well-maintained.",
         "exampleRus": "Объект хорошо обслуживается.",
         "kor": "시설",
-        "exampleKor": "시설의 실제 사용 사례입니다.",
+        "exampleKor": "그 시설은 잘 관리되고 있습니다.",
         "id": "quality-control--facility"
     },
     {
@@ -3549,7 +3549,7 @@
         "exampleEng": "Secure finance before making an offer.",
         "exampleRus": "Обеспечьте финансирование перед подачей предложения.",
         "kor": "자금 조달",
-        "exampleKor": "자금 조달의 실제 사용 사례입니다.",
+        "exampleKor": "제안을 하기 전에 자금 조달을 확보하세요.",
         "id": "quality-control--finance"
     },
     {
@@ -3560,7 +3560,7 @@
         "exampleEng": "The office was furnished with new desks.",
         "exampleRus": "Офис был обставлен новыми столами.",
         "kor": "비품 비치",
-        "exampleKor": "비품 비치의 실제 사용 사례입니다.",
+        "exampleKor": "사무실에 새 책상이 비치되었습니다.",
         "id": "quality-control--furnish"
     },
     {
@@ -3604,7 +3604,7 @@
         "exampleEng": "The building offers premium amenities.",
         "exampleRus": "Здание предлагает премиальные удобства.",
         "kor": "편의 시설",
-        "exampleKor": "편의 시설의 실제 사용 사례입니다.",
+        "exampleKor": "그 건물은 고급 편의 시설을 제공합니다.",
         "id": "product-development--amenity"
     },
     {
@@ -3615,7 +3615,7 @@
         "exampleEng": "All participants reviewed the plan.",
         "exampleRus": "Все участники ознакомились с планом.",
         "kor": "참가자",
-        "exampleKor": "참가자의 실제 사용 사례입니다.",
+        "exampleKor": "모든 참가자가 계획을 검토했습니다.",
         "id": "product-development--participant"
     },
     {
@@ -3637,7 +3637,7 @@
         "exampleEng": "Submit a business proposal.",
         "exampleRus": "Подайте бизнес-предложение.",
         "kor": "제안",
-        "exampleKor": "제안의 실제 사용 사례입니다.",
+        "exampleKor": "사업 제안서를 제출하세요.",
         "id": "product-development--proposal"
     },
     {
@@ -3648,7 +3648,7 @@
         "exampleEng": "The consultant's recommendation was accepted.",
         "exampleRus": "Рекомендация консультанта была принята.",
         "kor": "권고",
-        "exampleKor": "권고의 실제 사용 사례입니다.",
+        "exampleKor": "컨설턴트의 권고가 받아들여졌습니다.",
         "id": "product-development--recommendation"
     },
     {
@@ -3659,7 +3659,7 @@
         "exampleEng": "Develop a growth strategy.",
         "exampleRus": "Разработайте стратегию роста.",
         "kor": "전략",
-        "exampleKor": "전략의 실제 사용 사례입니다.",
+        "exampleKor": "성장 전략을 수립하세요.",
         "id": "product-development--strategy"
     },
     {
@@ -3670,7 +3670,7 @@
         "exampleEng": "Financial analysis report.",
         "exampleRus": "Отчет финансового анализа.",
         "kor": "분석",
-        "exampleKor": "분석의 실제 사용 사례입니다.",
+        "exampleKor": "재무 분석 보고서.",
         "id": "product-development--analysis"
     },
     {
@@ -3681,7 +3681,7 @@
         "exampleEng": "A flexible approach was taken.",
         "exampleRus": "Был применён гибкий подход.",
         "kor": "접근 방식",
-        "exampleKor": "접근 방식의 실제 사용 사례입니다.",
+        "exampleKor": "유연한 접근 방식이 적용되었습니다.",
         "id": "product-development--approach"
     },
     {
@@ -3725,7 +3725,7 @@
         "exampleEng": "Construction of the new office begins soon.",
         "exampleRus": "Строительство нового офиса начинается скоро.",
         "kor": "건설",
-        "exampleKor": "건설의 실제 사용 사례입니다.",
+        "exampleKor": "새 사무실 건설이 곧 시작됩니다.",
         "id": "renting-and-leasing--construction"
     },
     {
@@ -3736,7 +3736,7 @@
         "exampleEng": "A contractor was hired for the renovation.",
         "exampleRus": "Для ремонта был нанят подрядчик.",
         "kor": "계약자",
-        "exampleKor": "계약자의 실제 사용 사례입니다.",
+        "exampleKor": "리모델링을 위해 계약자를 고용했습니다.",
         "id": "renting-and-leasing--contractor"
     },
     {
@@ -3747,7 +3747,7 @@
         "exampleEng": "The deed was transferred to the new owner.",
         "exampleRus": "Право собственности было передано новому владельцу.",
         "kor": "증서",
-        "exampleKor": "증서의 실제 사용 사례입니다.",
+        "exampleKor": "증서가 새 소유자에게 이전되었습니다.",
         "id": "renting-and-leasing--deed"
     },
     {
@@ -3758,7 +3758,7 @@
         "exampleEng": "Career development opportunities.",
         "exampleRus": "Возможности развития карьеры.",
         "kor": "개발",
-        "exampleKor": "개발의 실제 사용 사례입니다.",
+        "exampleKor": "경력 개발 기회.",
         "id": "renting-and-leasing--development"
     },
     {
@@ -3769,7 +3769,7 @@
         "exampleEng": "The dwelling was converted to office space.",
         "exampleRus": "Жилище было переоборудовано в офисное помещение.",
         "kor": "주거",
-        "exampleKor": "주거의 실제 사용 사례입니다.",
+        "exampleKor": "그 주거 공간은 사무실로 개조되었습니다.",
         "id": "renting-and-leasing--dwelling"
     },
     {
@@ -3780,7 +3780,7 @@
         "exampleEng": "The estate includes a warehouse facility.",
         "exampleRus": "Объект недвижимости включает складское помещение.",
         "kor": "부동산",
-        "exampleKor": "부동산의 실제 사용 사례입니다.",
+        "exampleKor": "그 부동산에는 창고 시설이 포함되어 있습니다.",
         "id": "renting-and-leasing--estate"
     },
     {
@@ -3791,7 +3791,7 @@
         "exampleEng": "Eviction proceedings began for non-payment.",
         "exampleRus": "Процедура выселения была начата за неуплату.",
         "kor": "퇴거",
-        "exampleKor": "퇴거의 실제 사용 사례입니다.",
+        "exampleKor": "미납으로 퇴거 절차가 시작되었습니다.",
         "id": "renting-and-leasing--eviction"
     },
     {
@@ -3802,7 +3802,7 @@
         "exampleEng": "The facility is well-maintained.",
         "exampleRus": "Объект хорошо обслуживается.",
         "kor": "시설",
-        "exampleKor": "시설의 실제 사용 사례입니다.",
+        "exampleKor": "그 시설은 잘 관리되고 있습니다.",
         "id": "renting-and-leasing--facility"
     },
     {
@@ -3813,7 +3813,7 @@
         "exampleEng": "Secure finance before making an offer.",
         "exampleRus": "Обеспечьте финансирование перед подачей предложения.",
         "kor": "자금 조달",
-        "exampleKor": "자금 조달의 실제 사용 사례입니다.",
+        "exampleKor": "제안을 하기 전에 자금 조달을 확보하세요.",
         "id": "renting-and-leasing--finance"
     },
     {
@@ -3824,7 +3824,7 @@
         "exampleEng": "The office was furnished with new desks.",
         "exampleRus": "Офис был обставлен новыми столами.",
         "kor": "비품 비치",
-        "exampleKor": "비품 비치의 실제 사용 사례입니다.",
+        "exampleKor": "사무실에 새 책상이 비치되었습니다.",
         "id": "renting-and-leasing--furnish"
     },
     {
@@ -3835,7 +3835,7 @@
         "exampleEng": "The airline provides in-flight meals.",
         "exampleRus": "Авиакомпания обеспечивает питание на борту.",
         "kor": "항공사",
-        "exampleKor": "항공사의 실제 사용 사례입니다.",
+        "exampleKor": "그 항공사는 기내식을 제공합니다.",
         "id": "selecting-a-restaurant--airline"
     },
     {
@@ -3846,7 +3846,7 @@
         "exampleEng": "The menu looks very appetizing.",
         "exampleRus": "Меню выглядит очень аппетитно.",
         "kor": "식욕을 돋우는",
-        "exampleKor": "식욕을 돋우는의 실제 사용 사례입니다.",
+        "exampleKor": "메뉴가 매우 식욕을 돋웁니다.",
         "id": "selecting-a-restaurant--appetizing"
     },
     {
@@ -3857,7 +3857,7 @@
         "exampleEng": "The aroma of fresh coffee fills the café.",
         "exampleRus": "Аромат свежего кофе наполняет кафе.",
         "kor": "향기",
-        "exampleKor": "향기의 실제 사용 사례입니다.",
+        "exampleKor": "신선한 커피 향기가 카페를 가득 채웁니다.",
         "id": "selecting-a-restaurant--aroma"
     },
     {
@@ -3912,7 +3912,7 @@
         "exampleEng": "Carryout orders account for 30% of sales.",
         "exampleRus": "Заказы на вынос составляют 30% продаж.",
         "kor": "포장",
-        "exampleKor": "포장의 실제 사용 사례입니다.",
+        "exampleKor": "포장 주문이 매출의 30%를 차지합니다.",
         "id": "selecting-a-restaurant--carryout"
     },
     {
@@ -3934,7 +3934,7 @@
         "exampleEng": "We cater corporate lunches and dinners.",
         "exampleRus": "Мы организуем корпоративные обеды и ужины.",
         "kor": "케이터링",
-        "exampleKor": "케이터링의 실제 사용 사례입니다.",
+        "exampleKor": "저희는 기업 점심과 저녁 케이터링을 합니다.",
         "id": "selecting-a-restaurant--cater"
     },
     {
@@ -4000,7 +4000,7 @@
         "exampleEng": "Carryout orders account for 30% of sales.",
         "exampleRus": "Заказы на вынос составляют 30% продаж.",
         "kor": "포장",
-        "exampleKor": "포장의 실제 사용 사례입니다.",
+        "exampleKor": "포장 주문이 매출의 30%를 차지합니다.",
         "id": "eating-out--carryout"
     },
     {
@@ -4022,7 +4022,7 @@
         "exampleEng": "We cater corporate lunches and dinners.",
         "exampleRus": "Мы организуем корпоративные обеды и ужины.",
         "kor": "케이터링",
-        "exampleKor": "케이터링의 실제 사용 사례입니다.",
+        "exampleKor": "저희는 기업 점심과 저녁 케이터링을 합니다.",
         "id": "eating-out--cater"
     },
     {
@@ -4055,7 +4055,7 @@
         "exampleEng": "The chef prepares fresh daily specials.",
         "exampleRus": "Шеф-повар готовит свежие блюда дня.",
         "kor": "셰프",
-        "exampleKor": "셰프의 실제 사용 사례입니다.",
+        "exampleKor": "셰프가 매일 신선한 일일 특선 요리를 준비합니다.",
         "id": "eating-out--chef"
     },
     {
@@ -4066,7 +4066,7 @@
         "exampleEng": "The restaurant closes at 11 PM.",
         "exampleRus": "Ресторан закрывается в 23:00.",
         "kor": "닫다",
-        "exampleKor": "닫다의 실제 사용 사례입니다.",
+        "exampleKor": "식당은 오후 11시에 닫습니다.",
         "id": "eating-out--close"
     },
     {
@@ -4077,7 +4077,7 @@
         "exampleEng": "The menu features international cuisine.",
         "exampleRus": "В меню представлена международная кухня.",
         "kor": "요리",
-        "exampleKor": "요리의 실제 사용 사례입니다.",
+        "exampleKor": "메뉴에는 세계 각국의 요리가 있습니다.",
         "id": "eating-out--cuisine"
     },
     {
@@ -4110,7 +4110,7 @@
         "exampleEng": "We cater corporate lunches and dinners.",
         "exampleRus": "Мы организуем корпоративные обеды и ужины.",
         "kor": "케이터링",
-        "exampleKor": "케이터링의 실제 사용 사례입니다.",
+        "exampleKor": "저희는 기업 점심과 저녁 케이터링을 합니다.",
         "id": "ordering-lunch--cater"
     },
     {
@@ -4143,7 +4143,7 @@
         "exampleEng": "The chef prepares fresh daily specials.",
         "exampleRus": "Шеф-повар готовит свежие блюда дня.",
         "kor": "셰프",
-        "exampleKor": "셰프의 실제 사용 사례입니다.",
+        "exampleKor": "셰프가 매일 신선한 일일 특선 요리를 준비합니다.",
         "id": "ordering-lunch--chef"
     },
     {
@@ -4154,7 +4154,7 @@
         "exampleEng": "The restaurant closes at 11 PM.",
         "exampleRus": "Ресторан закрывается в 23:00.",
         "kor": "닫다",
-        "exampleKor": "닫다의 실제 사용 사례입니다.",
+        "exampleKor": "식당은 오후 11시에 닫습니다.",
         "id": "ordering-lunch--close"
     },
     {
@@ -4165,7 +4165,7 @@
         "exampleEng": "The menu features international cuisine.",
         "exampleRus": "В меню представлена международная кухня.",
         "kor": "요리",
-        "exampleKor": "요리의 실제 사용 사례입니다.",
+        "exampleKor": "메뉴에는 세계 각국의 요리가 있습니다.",
         "id": "ordering-lunch--cuisine"
     },
     {
@@ -4187,7 +4187,7 @@
         "exampleEng": "Local delicacies were served at the banquet.",
         "exampleRus": "На банкете были поданы местные деликатесы.",
         "kor": "진미",
-        "exampleKor": "진미의 실제 사용 사례입니다.",
+        "exampleKor": "연회에서 지역 진미가 제공되었습니다.",
         "id": "ordering-lunch--delicacy"
     },
     {
@@ -4198,7 +4198,7 @@
         "exampleEng": "The catered meal was absolutely delicious.",
         "exampleRus": "Блюда кейтеринга были абсолютно восхитительны.",
         "kor": "맛있는",
-        "exampleKor": "맛있는의 실제 사용 사례입니다.",
+        "exampleKor": "케이터링 식사는 정말 맛있었습니다.",
         "id": "ordering-lunch--delicious"
     },
     {
@@ -4209,7 +4209,7 @@
         "exampleEng": "Dessert is included in the business lunch.",
         "exampleRus": "Десерт включён в бизнес-ланч.",
         "kor": "디저트",
-        "exampleKor": "디저트의 실제 사용 사례입니다.",
+        "exampleKor": "비즈니스 런치에는 디저트가 포함됩니다.",
         "id": "ordering-lunch--dessert"
     },
     {
@@ -4220,7 +4220,7 @@
         "exampleEng": "Clients often dine in private rooms.",
         "exampleRus": "Клиенты часто обедают в отдельных залах.",
         "kor": "식사하다",
-        "exampleKor": "식사하다의 실제 사용 사례입니다.",
+        "exampleKor": "고객들은 종종 별실에서 식사합니다.",
         "id": "ordering-lunch--dine"
     },
     {
@@ -4231,7 +4231,7 @@
         "exampleEng": "The chef prepares fresh daily specials.",
         "exampleRus": "Шеф-повар готовит свежие блюда дня.",
         "kor": "셰프",
-        "exampleKor": "셰프의 실제 사용 사례입니다.",
+        "exampleKor": "셰프가 매일 신선한 일일 특선 요리를 준비합니다.",
         "id": "cooking-as-a-career--chef"
     },
     {
@@ -4242,7 +4242,7 @@
         "exampleEng": "The restaurant closes at 11 PM.",
         "exampleRus": "Ресторан закрывается в 23:00.",
         "kor": "닫다",
-        "exampleKor": "닫다의 실제 사용 사례입니다.",
+        "exampleKor": "식당은 오후 11시에 닫습니다.",
         "id": "cooking-as-a-career--close"
     },
     {
@@ -4253,7 +4253,7 @@
         "exampleEng": "The menu features international cuisine.",
         "exampleRus": "В меню представлена международная кухня.",
         "kor": "요리",
-        "exampleKor": "요리의 실제 사용 사례입니다.",
+        "exampleKor": "메뉴에는 세계 각국의 요리가 있습니다.",
         "id": "cooking-as-a-career--cuisine"
     },
     {
@@ -4275,7 +4275,7 @@
         "exampleEng": "Local delicacies were served at the banquet.",
         "exampleRus": "На банкете были поданы местные деликатесы.",
         "kor": "진미",
-        "exampleKor": "진미의 실제 사용 사례입니다.",
+        "exampleKor": "연회에서 지역 진미가 제공되었습니다.",
         "id": "cooking-as-a-career--delicacy"
     },
     {
@@ -4286,7 +4286,7 @@
         "exampleEng": "The catered meal was absolutely delicious.",
         "exampleRus": "Блюда кейтеринга были абсолютно восхитительны.",
         "kor": "맛있는",
-        "exampleKor": "맛있는의 실제 사용 사례입니다.",
+        "exampleKor": "케이터링 식사는 정말 맛있었습니다.",
         "id": "cooking-as-a-career--delicious"
     },
     {
@@ -4297,7 +4297,7 @@
         "exampleEng": "Dessert is included in the business lunch.",
         "exampleRus": "Десерт включён в бизнес-ланч.",
         "kor": "디저트",
-        "exampleKor": "디저트의 실제 사용 사례입니다.",
+        "exampleKor": "비즈니스 런치에는 디저트가 포함됩니다.",
         "id": "cooking-as-a-career--dessert"
     },
     {
@@ -4308,7 +4308,7 @@
         "exampleEng": "Clients often dine in private rooms.",
         "exampleRus": "Клиенты часто обедают в отдельных залах.",
         "kor": "식사하다",
-        "exampleKor": "식사하다의 실제 사용 사례입니다.",
+        "exampleKor": "고객들은 종종 별실에서 식사합니다.",
         "id": "cooking-as-a-career--dine"
     },
     {
@@ -4363,7 +4363,7 @@
         "exampleEng": "The amusement park hosted a company event.",
         "exampleRus": "Парк развлечений принял корпоративное мероприятие.",
         "kor": "오락",
-        "exampleKor": "오락의 실제 사용 사례입니다.",
+        "exampleKor": "그 오락 공원에서 회사 행사가 열렸습니다.",
         "id": "events--amusement"
     },
     {
@@ -4374,7 +4374,7 @@
         "exampleEng": "The announcer introduced the keynote speaker.",
         "exampleRus": "Ведущий представил основного докладчика.",
         "kor": "아나운서",
-        "exampleKor": "아나운서의 실제 사용 사례입니다.",
+        "exampleKor": "아나운서가 기조 연설자를 소개했습니다.",
         "id": "events--announcer"
     },
     {
@@ -4385,7 +4385,7 @@
         "exampleEng": "Appetizers were served before the banquet.",
         "exampleRus": "Перед банкетом подали закуски.",
         "kor": "애피타이저",
-        "exampleKor": "애피타이저의 실제 사용 사례입니다.",
+        "exampleKor": "연회 전에 애피타이저가 나왔습니다.",
         "id": "events--appetizer"
     },
     {
@@ -4407,7 +4407,7 @@
         "exampleEng": "The auditorium holds 500 people.",
         "exampleRus": "Зал вмещает 500 человек.",
         "kor": "강당",
-        "exampleKor": "강당의 실제 사용 사례입니다.",
+        "exampleKor": "강당은 500명을 수용합니다.",
         "id": "events--auditorium"
     },
     {
@@ -4429,7 +4429,7 @@
         "exampleEng": "The team event was beneficial for morale.",
         "exampleRus": "Командное мероприятие благотворно повлияло на моральный дух.",
         "kor": "유익한",
-        "exampleKor": "유익한의 실제 사용 사례입니다.",
+        "exampleKor": "팀 행사는 사기에 유익했습니다.",
         "id": "events--beneficial"
     },
     {
@@ -4462,7 +4462,7 @@
         "exampleEng": "The celebration honored top performers.",
         "exampleRus": "Праздник чествовал лучших сотрудников.",
         "kor": "축제",
-        "exampleKor": "축제의 실제 사용 사례입니다.",
+        "exampleKor": "그 축제는 우수 성과자를 기렸습니다.",
         "id": "events--celebration"
     },
     {
@@ -4473,7 +4473,7 @@
         "exampleEng": "The awards ceremony starts at 7 PM.",
         "exampleRus": "Церемония награждения начинается в 19:00.",
         "kor": "의식",
-        "exampleKor": "의식의 실제 사용 사례입니다.",
+        "exampleKor": "시상식은 오후 7시에 시작됩니다.",
         "id": "events--ceremony"
     },
     {
@@ -4484,7 +4484,7 @@
         "exampleEng": "A professional choreographed the stage show.",
         "exampleRus": "Профессионал поставил сценическое шоу.",
         "kor": "안무하다",
-        "exampleKor": "안무하다의 실제 사용 사례입니다.",
+        "exampleKor": "전문가가 무대 쇼의 안무를 맡았습니다.",
         "id": "events--choreograph"
     },
     {
@@ -4506,7 +4506,7 @@
         "exampleEng": "Contact a real estate agent.",
         "exampleRus": "Свяжитесь с риелтором.",
         "kor": "대리인",
-        "exampleKor": "대리인의 실제 사용 사례입니다.",
+        "exampleKor": "부동산 대리인에게 연락하세요.",
         "id": "general-travel--agent"
     },
     {
@@ -4517,7 +4517,7 @@
         "exampleEng": "Airfare was reimbursed by the company.",
         "exampleRus": "Стоимость авиабилета была возмещена компанией.",
         "kor": "항공 요금",
-        "exampleKor": "항공 요금의 실제 사용 사례입니다.",
+        "exampleKor": "항공 요금은 회사에서 환급되었습니다.",
         "id": "general-travel--airfare"
     },
     {
@@ -4528,7 +4528,7 @@
         "exampleEng": "Inform the hotel of any food allergy.",
         "exampleRus": "Сообщите отелю об аллергии на продукты питания.",
         "kor": "알레르기",
-        "exampleKor": "알레르기의 실제 사용 사례입니다.",
+        "exampleKor": "음식 알레르기가 있으면 호텔에 알리세요.",
         "id": "general-travel--allergy"
     },
     {
@@ -4539,7 +4539,7 @@
         "exampleEng": "High altitude affects some travellers.",
         "exampleRus": "Большая высота влияет на некоторых путешественников.",
         "kor": "고도",
-        "exampleKor": "고도의 실제 사용 사례입니다.",
+        "exampleKor": "높은 고도는 일부 여행자에게 영향을 줍니다.",
         "id": "general-travel--altitude"
     },
     {
@@ -4550,7 +4550,7 @@
         "exampleEng": "The hotel is in the business area.",
         "exampleRus": "Отель находится в деловом районе.",
         "kor": "지역",
-        "exampleKor": "지역의 실제 사용 사례입니다.",
+        "exampleKor": "호텔은 비즈니스 지역에 있습니다.",
         "id": "general-travel--area"
     },
     {
@@ -4561,7 +4561,7 @@
         "exampleEng": "Arrival time is listed on the itinerary.",
         "exampleRus": "Время прибытия указано в маршруте.",
         "kor": "도착",
-        "exampleKor": "도착의 실제 사용 사례입니다.",
+        "exampleKor": "도착 시간은 일정표에 나와 있습니다.",
         "id": "general-travel--arrival"
     },
     {
@@ -4605,7 +4605,7 @@
         "exampleEng": "Cross the border with valid documents.",
         "exampleRus": "Пересекайте границу с действительными документами.",
         "kor": "국경",
-        "exampleKor": "국경의 실제 사용 사례입니다.",
+        "exampleKor": "유효한 서류로 국경을 넘으세요.",
         "id": "general-travel--border"
     },
     {
@@ -4638,7 +4638,7 @@
         "exampleEng": "The aisle seat is preferred for quick exits.",
         "exampleRus": "Место у прохода предпочтительнее для быстрого выхода.",
         "kor": "통로",
-        "exampleKor": "통로의 실제 사용 사례입니다.",
+        "exampleKor": "빠른 하차를 위해 통로 좌석이 선호됩니다.",
         "id": "airlines--aisle"
     },
     {
@@ -4649,7 +4649,7 @@
         "exampleEng": "Allocate resources wisely.",
         "exampleRus": "Распределяйте ресурсы мудро.",
         "kor": "할당하다",
-        "exampleKor": "할당하다의 실제 사용 사례입니다.",
+        "exampleKor": "자원을 현명하게 할당하세요.",
         "id": "airlines--allocate"
     },
     {
@@ -4660,7 +4660,7 @@
         "exampleEng": "Check the arrival board for updates.",
         "exampleRus": "Проверьте табло прибытия для получения информации.",
         "kor": "도착",
-        "exampleKor": "도착의 실제 사용 사례입니다.",
+        "exampleKor": "최신 정보를 보려면 도착 안내판을 확인하세요.",
         "id": "airlines--arrival"
     },
     {
@@ -4693,7 +4693,7 @@
         "exampleEng": "The assembly point is near the main entrance.",
         "exampleRus": "Место сбора находится у главного входа.",
         "kor": "집합",
-        "exampleKor": "집합의 실제 사용 사례입니다.",
+        "exampleKor": "집합 장소는 정문 근처입니다.",
         "id": "airlines--assembly"
     },
     {
@@ -4726,7 +4726,7 @@
         "exampleEng": "Boarding closes 15 minutes before departure.",
         "exampleRus": "Посадка заканчивается за 15 минут до отправления.",
         "kor": "탑승",
-        "exampleKor": "탑승의 실제 사용 사례입니다.",
+        "exampleKor": "탑승은 출발 15분 전에 마감됩니다.",
         "id": "airlines--boarding"
     },
     {
@@ -4781,7 +4781,7 @@
         "exampleEng": "The assembly point is near the main entrance.",
         "exampleRus": "Место сбора находится у главного входа.",
         "kor": "집합",
-        "exampleKor": "집합의 실제 사용 사례입니다.",
+        "exampleKor": "집합 장소는 정문 근처입니다.",
         "id": "trains--assembly"
     },
     {
@@ -4814,7 +4814,7 @@
         "exampleEng": "Boarding closes 15 minutes before departure.",
         "exampleRus": "Посадка заканчивается за 15 минут до отправления.",
         "kor": "탑승",
-        "exampleKor": "탑승의 실제 사용 사례입니다.",
+        "exampleKor": "탑승은 출발 15분 전에 마감됩니다.",
         "id": "trains--boarding"
     },
     {
@@ -4858,7 +4858,7 @@
         "exampleEng": "Carry-on bags must fit in the overhead bin.",
         "exampleRus": "Ручная кладь должна помещаться в верхний отсек.",
         "kor": "휴대하다",
-        "exampleKor": "휴대하다의 실제 사용 사례입니다.",
+        "exampleKor": "휴대 가방은 머리 위 선반에 들어가야 합니다.",
         "id": "trains--carry"
     },
     {
@@ -4880,7 +4880,7 @@
         "exampleEng": "Employees commute by train daily.",
         "exampleRus": "Сотрудники ежедневно добираются на работу поездом.",
         "kor": "통근하다",
-        "exampleKor": "통근하다의 실제 사용 사례입니다.",
+        "exampleKor": "직원들은 매일 기차로 통근합니다.",
         "id": "trains--commute"
     },
     {
@@ -4902,7 +4902,7 @@
         "exampleEng": "The hotel offers excellent amenities.",
         "exampleRus": "Отель предлагает отличные удобства.",
         "kor": "편의 시설",
-        "exampleKor": "편의 시설의 실제 사용 사례입니다.",
+        "exampleKor": "호텔은 훌륭한 편의 시설을 제공합니다.",
         "id": "hotels--amenity"
     },
     {
@@ -4946,7 +4946,7 @@
         "exampleEng": "Check-in time is 3 PM.",
         "exampleRus": "Время регистрации - 15:00.",
         "kor": "체크인",
-        "exampleKor": "체크인의 실제 사용 사례입니다.",
+        "exampleKor": "체크인 시간은 오후 3시입니다.",
         "id": "hotels--check-in"
     },
     {
@@ -4957,7 +4957,7 @@
         "exampleEng": "Check-out time is 11 AM.",
         "exampleRus": "Время выезда - 11:00.",
         "kor": "체크아웃",
-        "exampleKor": "체크아웃의 실제 사용 사례입니다.",
+        "exampleKor": "체크아웃 시간은 오전 11시입니다.",
         "id": "hotels--check-out"
     },
     {
@@ -4968,7 +4968,7 @@
         "exampleEng": "Ask the concierge for recommendations.",
         "exampleRus": "Попросите консьержа дать рекомендации.",
         "kor": "콘시어지",
-        "exampleKor": "콘시어지의 실제 사용 사례입니다.",
+        "exampleKor": "콘시어지에게 추천을 요청하세요.",
         "id": "hotels--concierge"
     },
     {
@@ -4990,7 +4990,7 @@
         "exampleEng": "A cot was added to the room.",
         "exampleRus": "В номер добавили детскую кроватку.",
         "kor": "보조 침대",
-        "exampleKor": "보조 침대의 실제 사용 사례입니다.",
+        "exampleKor": "객실에 보조 침대가 추가되었습니다.",
         "id": "hotels--cot"
     },
     {
@@ -5001,7 +5001,7 @@
         "exampleEng": "A courtesy van takes guests to the airport.",
         "exampleRus": "Бесплатный микроавтобус отвозит гостей в аэропорт.",
         "kor": "친절",
-        "exampleKor": "친절의 실제 사용 사례입니다.",
+        "exampleKor": "무료 셔틀이 투숙객을 공항까지 데려다 줍니다.",
         "id": "hotels--courtesy"
     },
     {
@@ -5034,7 +5034,7 @@
         "exampleEng": "Boarding closes 15 minutes before departure.",
         "exampleRus": "Посадка заканчивается за 15 минут до отправления.",
         "kor": "탑승",
-        "exampleKor": "탑승의 실제 사용 사례입니다.",
+        "exampleKor": "탑승은 출발 15분 전에 마감됩니다.",
         "id": "car-rentals--boarding"
     },
     {
@@ -5078,7 +5078,7 @@
         "exampleEng": "Carry-on bags must fit in the overhead bin.",
         "exampleRus": "Ручная кладь должна помещаться в верхний отсек.",
         "kor": "휴대하다",
-        "exampleKor": "휴대하다의 실제 사용 사례입니다.",
+        "exampleKor": "휴대 가방은 머리 위 선반에 들어가야 합니다.",
         "id": "car-rentals--carry"
     },
     {
@@ -5100,7 +5100,7 @@
         "exampleEng": "Employees commute by train daily.",
         "exampleRus": "Сотрудники ежедневно добираются на работу поездом.",
         "kor": "통근하다",
-        "exampleKor": "통근하다의 실제 사용 사례입니다.",
+        "exampleKor": "직원들은 매일 기차로 통근합니다.",
         "id": "car-rentals--commute"
     },
     {
@@ -5111,7 +5111,7 @@
         "exampleEng": "The commuter line runs every 20 minutes.",
         "exampleRus": "Пригородная линия ходит каждые 20 минут.",
         "kor": "통근자",
-        "exampleKor": "통근자의 실제 사용 사례입니다.",
+        "exampleKor": "통근 노선은 20분마다 운행됩니다.",
         "id": "car-rentals--commuter"
     },
     {
@@ -5133,7 +5133,7 @@
         "exampleEng": "Peak-hour congestion delays deliveries.",
         "exampleRus": "Заторы в часы пик задерживают доставку.",
         "kor": "혼잡",
-        "exampleKor": "혼잡의 실제 사용 사례입니다.",
+        "exampleKor": "출퇴근 시간 혼잡으로 배송이 지연됩니다.",
         "id": "car-rentals--congestion"
     },
     {
@@ -5155,7 +5155,7 @@
         "exampleEng": "The auditorium holds 500 people.",
         "exampleRus": "Зал вмещает 500 человек.",
         "kor": "강당",
-        "exampleKor": "강당의 실제 사용 사례입니다.",
+        "exampleKor": "강당은 500명을 수용합니다.",
         "id": "movies--auditorium"
     },
     {
@@ -5177,7 +5177,7 @@
         "exampleEng": "The team event was beneficial for morale.",
         "exampleRus": "Командное мероприятие благотворно повлияло на моральный дух.",
         "kor": "유익한",
-        "exampleKor": "유익한의 실제 사용 사례입니다.",
+        "exampleKor": "팀 행사는 사기에 유익했습니다.",
         "id": "movies--beneficial"
     },
     {
@@ -5210,7 +5210,7 @@
         "exampleEng": "The celebration honored top performers.",
         "exampleRus": "Праздник чествовал лучших сотрудников.",
         "kor": "축제",
-        "exampleKor": "축제의 실제 사용 사례입니다.",
+        "exampleKor": "그 축제는 우수 성과자를 기렸습니다.",
         "id": "movies--celebration"
     },
     {
@@ -5221,7 +5221,7 @@
         "exampleEng": "The awards ceremony starts at 7 PM.",
         "exampleRus": "Церемония награждения начинается в 19:00.",
         "kor": "의식",
-        "exampleKor": "의식의 실제 사용 사례입니다.",
+        "exampleKor": "시상식은 오후 7시에 시작됩니다.",
         "id": "movies--ceremony"
     },
     {
@@ -5232,7 +5232,7 @@
         "exampleEng": "A professional choreographed the stage show.",
         "exampleRus": "Профессионал поставил сценическое шоу.",
         "kor": "안무하다",
-        "exampleKor": "안무하다의 실제 사용 사례입니다.",
+        "exampleKor": "전문가가 무대 쇼의 안무를 맡았습니다.",
         "id": "movies--choreograph"
     },
     {
@@ -5243,7 +5243,7 @@
         "exampleEng": "The choreographer led rehearsals all week.",
         "exampleRus": "Хореограф проводил репетиции всю неделю.",
         "kor": "안무가",
-        "exampleKor": "안무가의 실제 사용 사례입니다.",
+        "exampleKor": "안무가가 일주일 내내 리허설을 이끌었습니다.",
         "id": "movies--choreographer"
     },
     {
@@ -5254,7 +5254,7 @@
         "exampleEng": "Teams collaborated to plan the summit.",
         "exampleRus": "Команды сотрудничали при планировании саммита.",
         "kor": "협력하다",
-        "exampleKor": "협력하다의 실제 사용 사례입니다.",
+        "exampleKor": "팀들이 정상회의를 계획하기 위해 협력했습니다.",
         "id": "movies--collaborate"
     },
     {
@@ -5265,7 +5265,7 @@
         "exampleEng": "The event commemorated 25 years of business.",
         "exampleRus": "Мероприятие отметило 25 лет деятельности компании.",
         "kor": "기념하다",
-        "exampleKor": "기념하다의 실제 사용 사례입니다.",
+        "exampleKor": "그 행사는 사업 25주년을 기념했습니다.",
         "id": "movies--commemorate"
     },
     {
@@ -5276,7 +5276,7 @@
         "exampleEng": "Commencement of the conference is at 9 AM.",
         "exampleRus": "Начало конференции в 9:00.",
         "kor": "졸업식",
-        "exampleKor": "졸업식의 실제 사용 사례입니다.",
+        "exampleKor": "회의 시작은 오전 9시입니다.",
         "id": "movies--commencement"
     },
     {
@@ -5298,7 +5298,7 @@
         "exampleEng": "The celebration honored top performers.",
         "exampleRus": "Праздник чествовал лучших сотрудников.",
         "kor": "축제",
-        "exampleKor": "축제의 실제 사용 사례입니다.",
+        "exampleKor": "그 축제는 우수 성과자를 기렸습니다.",
         "id": "theater--celebration"
     },
     {
@@ -5309,7 +5309,7 @@
         "exampleEng": "The awards ceremony starts at 7 PM.",
         "exampleRus": "Церемония награждения начинается в 19:00.",
         "kor": "의식",
-        "exampleKor": "의식의 실제 사용 사례입니다.",
+        "exampleKor": "시상식은 오후 7시에 시작됩니다.",
         "id": "theater--ceremony"
     },
     {
@@ -5320,7 +5320,7 @@
         "exampleEng": "A professional choreographed the stage show.",
         "exampleRus": "Профессионал поставил сценическое шоу.",
         "kor": "안무하다",
-        "exampleKor": "안무하다의 실제 사용 사례입니다.",
+        "exampleKor": "전문가가 무대 쇼의 안무를 맡았습니다.",
         "id": "theater--choreograph"
     },
     {
@@ -5331,7 +5331,7 @@
         "exampleEng": "The choreographer led rehearsals all week.",
         "exampleRus": "Хореограф проводил репетиции всю неделю.",
         "kor": "안무가",
-        "exampleKor": "안무가의 실제 사용 사례입니다.",
+        "exampleKor": "안무가가 일주일 내내 리허설을 이끌었습니다.",
         "id": "theater--choreographer"
     },
     {
@@ -5342,7 +5342,7 @@
         "exampleEng": "Teams collaborated to plan the summit.",
         "exampleRus": "Команды сотрудничали при планировании саммита.",
         "kor": "협력하다",
-        "exampleKor": "협력하다의 실제 사용 사례입니다.",
+        "exampleKor": "팀들이 정상회의를 계획하기 위해 협력했습니다.",
         "id": "theater--collaborate"
     },
     {
@@ -5353,7 +5353,7 @@
         "exampleEng": "The event commemorated 25 years of business.",
         "exampleRus": "Мероприятие отметило 25 лет деятельности компании.",
         "kor": "기념하다",
-        "exampleKor": "기념하다의 실제 사용 사례입니다.",
+        "exampleKor": "그 행사는 사업 25주년을 기념했습니다.",
         "id": "theater--commemorate"
     },
     {
@@ -5364,7 +5364,7 @@
         "exampleEng": "Commencement of the conference is at 9 AM.",
         "exampleRus": "Начало конференции в 9:00.",
         "kor": "졸업식",
-        "exampleKor": "졸업식의 실제 사용 사례입니다.",
+        "exampleKor": "회의 시작은 오전 9시입니다.",
         "id": "theater--commencement"
     },
     {
@@ -5375,7 +5375,7 @@
         "exampleEng": "The compere introduced each speaker.",
         "exampleRus": "Ведущий представил каждого докладчика.",
         "kor": "사회자",
-        "exampleKor": "사회자의 실제 사용 사례입니다.",
+        "exampleKor": "사회자가 각 발표자를 소개했습니다.",
         "id": "theater--compere"
     },
     {
@@ -5386,7 +5386,7 @@
         "exampleEng": "A concert was organized for the gala.",
         "exampleRus": "Для гала-вечера был организован концерт.",
         "kor": "콘서트",
-        "exampleKor": "콘서트의 실제 사용 사례입니다.",
+        "exampleKor": "갈라를 위해 콘서트가 준비되었습니다.",
         "id": "theater--concert"
     },
     {
@@ -5397,7 +5397,7 @@
         "exampleEng": "Directors will confer after the presentation.",
         "exampleRus": "Директора проведут совещание после презентации.",
         "kor": "협의하다",
-        "exampleKor": "협의하다의 실제 사용 사례입니다.",
+        "exampleKor": "이사들은 발표 후 협의할 예정입니다.",
         "id": "theater--confer"
     },
     {
@@ -5408,7 +5408,7 @@
         "exampleEng": "Guests congregated in the main hall.",
         "exampleRus": "Гости собрались в главном зале.",
         "kor": "모이다",
-        "exampleKor": "모이다의 실제 사용 사례입니다.",
+        "exampleKor": "손님들이 본관에 모였습니다.",
         "id": "theater--congregate"
     },
     {
@@ -5430,7 +5430,7 @@
         "exampleEng": "The celebration honored top performers.",
         "exampleRus": "Праздник чествовал лучших сотрудников.",
         "kor": "축제",
-        "exampleKor": "축제의 실제 사용 사례입니다.",
+        "exampleKor": "그 축제는 우수 성과자를 기렸습니다.",
         "id": "music--celebration"
     },
     {
@@ -5441,7 +5441,7 @@
         "exampleEng": "The awards ceremony starts at 7 PM.",
         "exampleRus": "Церемония награждения начинается в 19:00.",
         "kor": "의식",
-        "exampleKor": "의식의 실제 사용 사례입니다.",
+        "exampleKor": "시상식은 오후 7시에 시작됩니다.",
         "id": "music--ceremony"
     },
     {
@@ -5452,7 +5452,7 @@
         "exampleEng": "A professional choreographed the stage show.",
         "exampleRus": "Профессионал поставил сценическое шоу.",
         "kor": "안무하다",
-        "exampleKor": "안무하다의 실제 사용 사례입니다.",
+        "exampleKor": "전문가가 무대 쇼의 안무를 맡았습니다.",
         "id": "music--choreograph"
     },
     {
@@ -5463,7 +5463,7 @@
         "exampleEng": "The choreographer led rehearsals all week.",
         "exampleRus": "Хореограф проводил репетиции всю неделю.",
         "kor": "안무가",
-        "exampleKor": "안무가의 실제 사용 사례입니다.",
+        "exampleKor": "안무가가 일주일 내내 리허설을 이끌었습니다.",
         "id": "music--choreographer"
     },
     {
@@ -5474,7 +5474,7 @@
         "exampleEng": "Teams collaborated to plan the summit.",
         "exampleRus": "Команды сотрудничали при планировании саммита.",
         "kor": "협력하다",
-        "exampleKor": "협력하다의 실제 사용 사례입니다.",
+        "exampleKor": "팀들이 정상회의를 계획하기 위해 협력했습니다.",
         "id": "music--collaborate"
     },
     {
@@ -5485,7 +5485,7 @@
         "exampleEng": "The event commemorated 25 years of business.",
         "exampleRus": "Мероприятие отметило 25 лет деятельности компании.",
         "kor": "기념하다",
-        "exampleKor": "기념하다의 실제 사용 사례입니다.",
+        "exampleKor": "그 행사는 사업 25주년을 기념했습니다.",
         "id": "music--commemorate"
     },
     {
@@ -5496,7 +5496,7 @@
         "exampleEng": "Commencement of the conference is at 9 AM.",
         "exampleRus": "Начало конференции в 9:00.",
         "kor": "졸업식",
-        "exampleKor": "졸업식의 실제 사용 사례입니다.",
+        "exampleKor": "회의 시작은 오전 9시입니다.",
         "id": "music--commencement"
     },
     {
@@ -5507,7 +5507,7 @@
         "exampleEng": "The compere introduced each speaker.",
         "exampleRus": "Ведущий представил каждого докладчика.",
         "kor": "사회자",
-        "exampleKor": "사회자의 실제 사용 사례입니다.",
+        "exampleKor": "사회자가 각 발표자를 소개했습니다.",
         "id": "music--compere"
     },
     {
@@ -5518,7 +5518,7 @@
         "exampleEng": "A concert was organized for the gala.",
         "exampleRus": "Для гала-вечера был организован концерт.",
         "kor": "콘서트",
-        "exampleKor": "콘서트의 실제 사용 사례입니다.",
+        "exampleKor": "갈라를 위해 콘서트가 준비되었습니다.",
         "id": "music--concert"
     },
     {
@@ -5529,7 +5529,7 @@
         "exampleEng": "Directors will confer after the presentation.",
         "exampleRus": "Директора проведут совещание после презентации.",
         "kor": "협의하다",
-        "exampleKor": "협의하다의 실제 사용 사례입니다.",
+        "exampleKor": "이사들은 발표 후 협의할 예정입니다.",
         "id": "music--confer"
     },
     {
@@ -5540,7 +5540,7 @@
         "exampleEng": "Guests congregated in the main hall.",
         "exampleRus": "Гости собрались в главном зале.",
         "kor": "모이다",
-        "exampleKor": "모이다의 실제 사용 사례입니다.",
+        "exampleKor": "손님들이 본관에 모였습니다.",
         "id": "music--congregate"
     },
     {
@@ -5551,7 +5551,7 @@
         "exampleEng": "The amusement park hosted a company event.",
         "exampleRus": "Парк развлечений принял корпоративное мероприятие.",
         "kor": "오락",
-        "exampleKor": "오락의 실제 사용 사례입니다.",
+        "exampleKor": "그 오락 공원에서 회사 행사가 열렸습니다.",
         "id": "museums--amusement"
     },
     {
@@ -5562,7 +5562,7 @@
         "exampleEng": "The announcer introduced the keynote speaker.",
         "exampleRus": "Ведущий представил основного докладчика.",
         "kor": "아나운서",
-        "exampleKor": "아나운서의 실제 사용 사례입니다.",
+        "exampleKor": "아나운서가 기조 연설자를 소개했습니다.",
         "id": "museums--announcer"
     },
     {
@@ -5573,7 +5573,7 @@
         "exampleEng": "Appetizers were served before the banquet.",
         "exampleRus": "Перед банкетом подали закуски.",
         "kor": "애피타이저",
-        "exampleKor": "애피타이저의 실제 사용 사례입니다.",
+        "exampleKor": "연회 전에 애피타이저가 나왔습니다.",
         "id": "museums--appetizer"
     },
     {
@@ -5595,7 +5595,7 @@
         "exampleEng": "The auditorium holds 500 people.",
         "exampleRus": "Зал вмещает 500 человек.",
         "kor": "강당",
-        "exampleKor": "강당의 실제 사용 사례입니다.",
+        "exampleKor": "강당은 500명을 수용합니다.",
         "id": "museums--auditorium"
     },
     {
@@ -5617,7 +5617,7 @@
         "exampleEng": "The team event was beneficial for morale.",
         "exampleRus": "Командное мероприятие благотворно повлияло на моральный дух.",
         "kor": "유익한",
-        "exampleKor": "유익한의 실제 사용 사례입니다.",
+        "exampleKor": "팀 행사는 사기에 유익했습니다.",
         "id": "museums--beneficial"
     },
     {
@@ -5650,7 +5650,7 @@
         "exampleEng": "The celebration honored top performers.",
         "exampleRus": "Праздник чествовал лучших сотрудников.",
         "kor": "축제",
-        "exampleKor": "축제의 실제 사용 사례입니다.",
+        "exampleKor": "그 축제는 우수 성과자를 기렸습니다.",
         "id": "museums--celebration"
     },
     {
@@ -5661,7 +5661,7 @@
         "exampleEng": "The awards ceremony starts at 7 PM.",
         "exampleRus": "Церемония награждения начинается в 19:00.",
         "kor": "의식",
-        "exampleKor": "의식의 실제 사용 사례입니다.",
+        "exampleKor": "시상식은 오후 7시에 시작됩니다.",
         "id": "museums--ceremony"
     },
     {
@@ -5672,7 +5672,7 @@
         "exampleEng": "A professional choreographed the stage show.",
         "exampleRus": "Профессионал поставил сценическое шоу.",
         "kor": "안무하다",
-        "exampleKor": "안무하다의 실제 사용 사례입니다.",
+        "exampleKor": "전문가가 무대 쇼의 안무를 맡았습니다.",
         "id": "museums--choreograph"
     },
     {
@@ -5727,7 +5727,7 @@
         "exampleEng": "Proper filing keeps records accessible.",
         "exampleRus": "Правильная документация обеспечивает доступность записей.",
         "kor": "서류 보관",
-        "exampleKor": "서류 보관의 실제 사용 사례입니다.",
+        "exampleKor": "올바른 서류 보관은 기록을 쉽게 찾을 수 있게 합니다.",
         "id": "media--filing"
     },
     {
@@ -5738,7 +5738,7 @@
         "exampleEng": "Please forward the email to the team.",
         "exampleRus": "Пожалуйста, перешлите письмо команде.",
         "kor": "전송하다",
-        "exampleKor": "전송하다의 실제 사용 사례입니다.",
+        "exampleKor": "이메일을 팀에 전송해 주세요.",
         "id": "media--forward"
     },
     {
@@ -5749,7 +5749,7 @@
         "exampleEng": "Check your inbox for the updated agenda.",
         "exampleRus": "Проверьте входящие для получения обновлённой повестки.",
         "kor": "받은 편지함",
-        "exampleKor": "받은 편지함의 실제 사용 사례입니다.",
+        "exampleKor": "업데이트된 안건은 받은 편지함에서 확인하세요.",
         "id": "media--inbox"
     },
     {
@@ -5771,7 +5771,7 @@
         "exampleEng": "Write a formal letter.",
         "exampleRus": "Напишите формальное письмо.",
         "kor": "편지",
-        "exampleKor": "편지의 실제 사용 사례입니다.",
+        "exampleKor": "공식 편지를 작성하세요.",
         "id": "media--letter"
     },
     {
@@ -5793,7 +5793,7 @@
         "exampleEng": "Send a memo to staff.",
         "exampleRus": "Отправьте заметку персоналу.",
         "kor": "메모",
-        "exampleKor": "메모의 실제 사용 사례입니다.",
+        "exampleKor": "직원에게 메모를 보내세요.",
         "id": "media--memo"
     },
     {
@@ -5804,7 +5804,7 @@
         "exampleEng": "A memorandum was sent to all staff.",
         "exampleRus": "Всем сотрудникам был направлен меморандум.",
         "kor": "각서",
-        "exampleKor": "각서의 실제 사용 사례입니다.",
+        "exampleKor": "모든 직원에게 각서가 발송되었습니다.",
         "id": "media--memorandum"
     },
     {
@@ -5815,7 +5815,7 @@
         "exampleEng": "The actuary calculated the risk premium.",
         "exampleRus": "Актуарий рассчитал страховую премию за риск.",
         "kor": "보험계리사",
-        "exampleKor": "보험계리사의 실제 사용 사례입니다.",
+        "exampleKor": "보험계리사가 위험 보험료를 계산했습니다.",
         "id": "doctors-office--actuary"
     },
     {
@@ -5826,7 +5826,7 @@
         "exampleEng": "The adjuster assessed the claim value.",
         "exampleRus": "Аварийный комиссар оценил размер претензии.",
         "kor": "손해 사정인",
-        "exampleKor": "손해 사정인의 실제 사용 사례입니다.",
+        "exampleKor": "손해 사정인이 청구 금액을 평가했습니다.",
         "id": "doctors-office--adjuster"
     },
     {
@@ -5837,7 +5837,7 @@
         "exampleEng": "Adverse weather led to many claims.",
         "exampleRus": "Неблагоприятная погода привела к многочисленным претензиям.",
         "kor": "불리한",
-        "exampleKor": "불리한의 실제 사용 사례입니다.",
+        "exampleKor": "불리한 날씨로 많은 청구가 발생했습니다.",
         "id": "doctors-office--adverse"
     },
     {
@@ -5848,7 +5848,7 @@
         "exampleEng": "Contact a real estate agent.",
         "exampleRus": "Свяжитесь с риелтором.",
         "kor": "대리인",
-        "exampleKor": "대리인의 실제 사용 사례입니다.",
+        "exampleKor": "부동산 대리인에게 연락하세요.",
         "id": "doctors-office--agent"
     },
     {
@@ -5859,7 +5859,7 @@
         "exampleEng": "An appraisal determined the property value.",
         "exampleRus": "Оценка определила стоимость имущества.",
         "kor": "감정 평가",
-        "exampleKor": "감정 평가의 실제 사용 사례입니다.",
+        "exampleKor": "감정 평가로 부동산 가치가 산정되었습니다.",
         "id": "doctors-office--appraisal"
     },
     {
@@ -5892,7 +5892,7 @@
         "exampleEng": "Name the beneficiary on the policy.",
         "exampleRus": "Укажите бенефициара в полисе.",
         "kor": "수익자",
-        "exampleKor": "수익자의 실제 사용 사례입니다.",
+        "exampleKor": "증권에 수익자를 지정하세요.",
         "id": "doctors-office--beneficiary"
     },
     {
@@ -5903,7 +5903,7 @@
         "exampleEng": "An insurance broker compared all plans.",
         "exampleRus": "Страховой брокер сравнил все планы.",
         "kor": "중개인",
-        "exampleKor": "중개인의 실제 사용 사례입니다.",
+        "exampleKor": "보험 중개인이 모든 상품을 비교했습니다.",
         "id": "doctors-office--broker"
     },
     {
@@ -5947,7 +5947,7 @@
         "exampleEng": "An appraisal determined the property value.",
         "exampleRus": "Оценка определила стоимость имущества.",
         "kor": "감정 평가",
-        "exampleKor": "감정 평가의 실제 사용 사례입니다.",
+        "exampleKor": "감정 평가로 부동산 가치가 산정되었습니다.",
         "id": "dentists-office--appraisal"
     },
     {
@@ -5980,7 +5980,7 @@
         "exampleEng": "Name the beneficiary on the policy.",
         "exampleRus": "Укажите бенефициара в полисе.",
         "kor": "수익자",
-        "exampleKor": "수익자의 실제 사용 사례입니다.",
+        "exampleKor": "증권에 수익자를 지정하세요.",
         "id": "dentists-office--beneficiary"
     },
     {
@@ -5991,7 +5991,7 @@
         "exampleEng": "An insurance broker compared all plans.",
         "exampleRus": "Страховой брокер сравнил все планы.",
         "kor": "중개인",
-        "exampleKor": "중개인의 실제 사용 사례입니다.",
+        "exampleKor": "보험 중개인이 모든 상품을 비교했습니다.",
         "id": "dentists-office--broker"
     },
     {
@@ -6057,7 +6057,7 @@
         "exampleEng": "Damage to equipment was fully covered.",
         "exampleRus": "Ущерб оборудованию был полностью покрыт.",
         "kor": "손해",
-        "exampleKor": "손해의 실제 사용 사례입니다.",
+        "exampleKor": "장비 손해는 전액 보장되었습니다.",
         "id": "dentists-office--damage"
     },
     {
@@ -6068,7 +6068,7 @@
         "exampleEng": "The deductible is $500.",
         "exampleRus": "Вычитаемая сумма составляет $500.",
         "kor": "자기 부담금",
-        "exampleKor": "자기 부담금의 실제 사용 사례입니다.",
+        "exampleKor": "자기 부담금은 500달러입니다.",
         "id": "dentists-office--deductible"
     },
     {
@@ -6079,7 +6079,7 @@
         "exampleEng": "An insurance broker compared all plans.",
         "exampleRus": "Страховой брокер сравнил все планы.",
         "kor": "중개인",
-        "exampleKor": "중개인의 실제 사용 사례입니다.",
+        "exampleKor": "보험 중개인이 모든 상품을 비교했습니다.",
         "id": "health-insurance--broker"
     },
     {
@@ -6145,7 +6145,7 @@
         "exampleEng": "Damage to equipment was fully covered.",
         "exampleRus": "Ущерб оборудованию был полностью покрыт.",
         "kor": "손해",
-        "exampleKor": "손해의 실제 사용 사례입니다.",
+        "exampleKor": "장비 손해는 전액 보장되었습니다.",
         "id": "health-insurance--damage"
     },
     {
@@ -6156,7 +6156,7 @@
         "exampleEng": "The deductible is $500.",
         "exampleRus": "Вычитаемая сумма составляет $500.",
         "kor": "자기 부담금",
-        "exampleKor": "자기 부담금의 실제 사용 사례입니다.",
+        "exampleKor": "자기 부담금은 500달러입니다.",
         "id": "health-insurance--deductible"
     },
     {
@@ -6167,7 +6167,7 @@
         "exampleEng": "The incident caused detriment to business.",
         "exampleRus": "Инцидент нанёс ущерб бизнесу.",
         "kor": "손해",
-        "exampleKor": "손해의 실제 사용 사례입니다.",
+        "exampleKor": "그 사고로 사업에 손해가 발생했습니다.",
         "id": "health-insurance--detriment"
     },
     {
@@ -6178,7 +6178,7 @@
         "exampleEng": "Disability insurance covers lost income.",
         "exampleRus": "Страхование по нетрудоспособности покрывает потерю дохода.",
         "kor": "장애",
-        "exampleKor": "장애의 실제 사용 사례입니다.",
+        "exampleKor": "장애 보험은 소득 손실을 보장합니다.",
         "id": "health-insurance--disability"
     },
     {
@@ -6189,7 +6189,7 @@
         "exampleEng": "The broker endorsed the policy change.",
         "exampleRus": "Брокер одобрил изменение полиса.",
         "kor": "배서하다",
-        "exampleKor": "배서하다의 실제 사용 사례입니다.",
+        "exampleKor": "중개인이 증권 변경을 배서했습니다.",
         "id": "health-insurance--endorse"
     },
     {
@@ -6200,7 +6200,7 @@
         "exampleEng": "Certain items are exempt from coverage.",
         "exampleRus": "Некоторые предметы освобождены от страхового покрытия.",
         "kor": "면제",
-        "exampleKor": "면제의 실제 사용 사례입니다.",
+        "exampleKor": "일부 항목은 보장에서 면제됩니다.",
         "id": "health-insurance--exempt"
     },
     {
@@ -6211,7 +6211,7 @@
         "exampleEng": "An insurance broker compared all plans.",
         "exampleRus": "Страховой брокер сравнил все планы.",
         "kor": "중개인",
-        "exampleKor": "중개인의 실제 사용 사례입니다.",
+        "exampleKor": "보험 중개인이 모든 상품을 비교했습니다.",
         "id": "hospitals--broker"
     },
     {
@@ -6277,7 +6277,7 @@
         "exampleEng": "Damage to equipment was fully covered.",
         "exampleRus": "Ущерб оборудованию был полностью покрыт.",
         "kor": "손해",
-        "exampleKor": "손해의 실제 사용 사례입니다.",
+        "exampleKor": "장비 손해는 전액 보장되었습니다.",
         "id": "hospitals--damage"
     },
     {
@@ -6288,7 +6288,7 @@
         "exampleEng": "The deductible is $500.",
         "exampleRus": "Вычитаемая сумма составляет $500.",
         "kor": "자기 부담금",
-        "exampleKor": "자기 부담금의 실제 사용 사례입니다.",
+        "exampleKor": "자기 부담금은 500달러입니다.",
         "id": "hospitals--deductible"
     },
     {
@@ -6299,7 +6299,7 @@
         "exampleEng": "The incident caused detriment to business.",
         "exampleRus": "Инцидент нанёс ущерб бизнесу.",
         "kor": "손해",
-        "exampleKor": "손해의 실제 사용 사례입니다.",
+        "exampleKor": "그 사고로 사업에 손해가 발생했습니다.",
         "id": "hospitals--detriment"
     },
     {
@@ -6310,7 +6310,7 @@
         "exampleEng": "Disability insurance covers lost income.",
         "exampleRus": "Страхование по нетрудоспособности покрывает потерю дохода.",
         "kor": "장애",
-        "exampleKor": "장애의 실제 사용 사례입니다.",
+        "exampleKor": "장애 보험은 소득 손실을 보장합니다.",
         "id": "hospitals--disability"
     },
     {
@@ -6321,7 +6321,7 @@
         "exampleEng": "The broker endorsed the policy change.",
         "exampleRus": "Брокер одобрил изменение полиса.",
         "kor": "배서하다",
-        "exampleKor": "배서하다의 실제 사용 사례입니다.",
+        "exampleKor": "중개인이 증권 변경을 배서했습니다.",
         "id": "hospitals--endorse"
     },
     {
@@ -6332,7 +6332,7 @@
         "exampleEng": "Certain items are exempt from coverage.",
         "exampleRus": "Некоторые предметы освобождены от страхового покрытия.",
         "kor": "면제",
-        "exampleKor": "면제의 실제 사용 사례입니다.",
+        "exampleKor": "일부 항목은 보장에서 면제됩니다.",
         "id": "hospitals--exempt"
     },
     {
@@ -6343,7 +6343,7 @@
         "exampleEng": "The actuary calculated the risk premium.",
         "exampleRus": "Актуарий рассчитал страховую премию за риск.",
         "kor": "보험계리사",
-        "exampleKor": "보험계리사의 실제 사용 사례입니다.",
+        "exampleKor": "보험계리사가 위험 보험료를 계산했습니다.",
         "id": "pharmacy--actuary"
     },
     {
@@ -6354,7 +6354,7 @@
         "exampleEng": "The adjuster assessed the claim value.",
         "exampleRus": "Аварийный комиссар оценил размер претензии.",
         "kor": "손해 사정인",
-        "exampleKor": "손해 사정인의 실제 사용 사례입니다.",
+        "exampleKor": "손해 사정인이 청구 금액을 평가했습니다.",
         "id": "pharmacy--adjuster"
     },
     {
@@ -6365,7 +6365,7 @@
         "exampleEng": "Adverse weather led to many claims.",
         "exampleRus": "Неблагоприятная погода привела к многочисленным претензиям.",
         "kor": "불리한",
-        "exampleKor": "불리한의 실제 사용 사례입니다.",
+        "exampleKor": "불리한 날씨로 많은 청구가 발생했습니다.",
         "id": "pharmacy--adverse"
     },
     {
@@ -6376,7 +6376,7 @@
         "exampleEng": "Contact a real estate agent.",
         "exampleRus": "Свяжитесь с риелтором.",
         "kor": "대리인",
-        "exampleKor": "대리인의 실제 사용 사례입니다.",
+        "exampleKor": "부동산 대리인에게 연락하세요.",
         "id": "pharmacy--agent"
     },
     {
@@ -6475,7 +6475,7 @@
         "exampleEng": "Please see the attachment for details.",
         "exampleRus": "Пожалуйста, смотрите вложение для деталей.",
         "kor": "첨부 서류",
-        "exampleKor": "첨부 서류의 실제 사용 사례입니다.",
+        "exampleKor": "자세한 내용은 첨부 서류를 확인하세요.",
         "id": "correspondence--attachment"
     },
     {
@@ -6486,7 +6486,7 @@
         "exampleEng": "I will send you a carbon copy of the email.",
         "exampleRus": "Я отправлю вам копию письма.",
         "kor": "사본",
-        "exampleKor": "사본의 실제 사용 사례입니다.",
+        "exampleKor": "이메일 사본을 보내 드리겠습니다.",
         "id": "correspondence--carbon-copy"
     },
     {
@@ -6508,7 +6508,7 @@
         "exampleEng": "Please forward this message to all staff.",
         "exampleRus": "Пожалуйста, перешлите это сообщение всем сотрудникам.",
         "kor": "전송하다",
-        "exampleKor": "전송하다의 실제 사용 사례입니다.",
+        "exampleKor": "이 메시지를 모든 직원에게 전송해 주세요.",
         "id": "correspondence--forward"
     },
     {
@@ -6519,7 +6519,7 @@
         "exampleEng": "Check your inbox for new messages.",
         "exampleRus": "Проверьте ваши входящие для новых сообщений.",
         "kor": "받은 편지함",
-        "exampleKor": "받은 편지함의 실제 사용 사례입니다.",
+        "exampleKor": "새 메시지는 받은 편지함에서 확인하세요.",
         "id": "correspondence--inbox"
     },
     {
@@ -6530,7 +6530,7 @@
         "exampleEng": "The manager sent a memo about the meeting.",
         "exampleRus": "Менеджер отправил служебную записку о собрании.",
         "kor": "메모",
-        "exampleKor": "메모의 실제 사용 사례입니다.",
+        "exampleKor": "관리자가 회의에 관한 메모를 보냈습니다.",
         "id": "correspondence--memo"
     },
     {
@@ -6541,7 +6541,7 @@
         "exampleEng": "The recipient must sign for the package.",
         "exampleRus": "Получатель должен расписаться за посылку.",
         "kor": "수취인",
-        "exampleKor": "수취인의 실제 사용 사례입니다.",
+        "exampleKor": "수취인은 소포 수령에 서명해야 합니다.",
         "id": "correspondence--recipient"
     },
     {
@@ -6552,7 +6552,7 @@
         "exampleEng": "We await your reply to our inquiry.",
         "exampleRus": "Мы ждем вашего ответа на наш запрос.",
         "kor": "답장",
-        "exampleKor": "답장의 실제 사용 사례입니다.",
+        "exampleKor": "문의에 대한 답장을 기다리고 있습니다.",
         "id": "correspondence--reply"
     },
     {
@@ -6574,7 +6574,7 @@
         "exampleEng": "Write a clear subject line for the email.",
         "exampleRus": "Напишите четкую тему письма для электронного письма.",
         "kor": "제목",
-        "exampleKor": "제목의 실제 사용 사례입니다.",
+        "exampleKor": "이메일에 명확한 제목을 작성하세요.",
         "id": "correspondence--subject-line"
     },
     {
@@ -6585,7 +6585,7 @@
         "exampleEng": "This matter requires urgent attention.",
         "exampleRus": "Этот вопрос требует срочного внимания.",
         "kor": "긴급",
-        "exampleKor": "긴급의 실제 사용 사례입니다.",
+        "exampleKor": "이 문제는 긴급한 조치가 필요합니다.",
         "id": "correspondence--urgent"
     },
     {
@@ -6596,7 +6596,7 @@
         "exampleEng": "We will send the document via email.",
         "exampleRus": "Мы отправим документ посредством электронной почты.",
         "kor": "경유",
-        "exampleKor": "경유의 실제 사용 사례입니다.",
+        "exampleKor": "문서를 이메일을 경유해 보내겠습니다.",
         "id": "correspondence--via"
     }
 ]
