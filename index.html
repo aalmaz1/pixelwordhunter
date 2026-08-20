@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="PixelWordHunter - TOEIC Edition: Learn 600 business English words with adaptive spaced repetition. Master TOEIC vocabulary through a retro pixel-art quiz game.">
   <!-- Content Security Policy: locks the app down to same-origin plus the
-       Firebase/Firestore/Auth endpoints the SDK needs. style-src keeps
+       Firebase/Firestore/Auth endpoints the SDK needs. Firebase Auth also
+       loads its Google API bootstrap script from apis.google.com, which is
+       explicitly allowlisted in script-src below. style-src keeps
        'unsafe-inline' as a safety margin for any runtime inline styling.
        NOTE: frame-ancestors is deliberately NOT here — browsers ignore that
        directive in a <meta> policy (it must be an HTTP header). It is
        delivered instead via public/_headers on Cloudflare Workers. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://firebase.googleapis.com https://firebaseinstallations.googleapis.com https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; manifest-src 'self'; base-uri 'self'; object-src 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://firebase.googleapis.com https://firebaseinstallations.googleapis.com https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'self' 'wasm-unsafe-eval' https://apis.google.com; worker-src 'self' blob:; manifest-src 'self'; base-uri 'self'; object-src 'none'">
   <title>PixelWordHunter</title>
 
   <!-- PWA Manifest: the manifest link is injected at build time by
@@ -36,12 +38,11 @@
   <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://identitytoolkit.googleapis.com" crossorigin>
   
-  <!-- UI fonts are preloaded from i18n.js (via `new URL(..., import.meta.url)`)
-       once the active language is known — never statically here. style.css
-       forces one font per language (!important): lang-ko → Mulmaru, else
-       Press Start 2P. A static preload of either would sit unused for half
-       the sessions and trigger "preloaded but not used" console warnings
-       (and hard-coding the unhashed filename 404s after the build hashes it). -->
+  <!-- UI fonts are loaded on demand by the @font-face rules in style.css.
+       The active language is applied by i18n.js before the first screen is
+       shown, so the browser requests only the font that is actually used.
+       Do not add a static preload here: the inactive language's font would
+       be fetched unnecessarily and trigger "preloaded but not used" warnings. -->
 </head>
 <body data-theme="cyberpunk">
   <a href="#main-content" class="skip-link">Skip to main content</a>
