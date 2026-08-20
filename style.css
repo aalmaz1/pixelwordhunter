@@ -649,6 +649,34 @@ body.lang-ko *,
   font-family: 'Mulmaru', cursive !important;
 }
 
+/* Korean font-size compensation.
+   Mulmaru renders visibly smaller than Press Start 2P at the same px size:
+   its x-height is 0.5em (96/192 units) vs Press Start 2P's 0.75em (750/1000).
+   `font-size-adjust` is inherited, so this ONE rule rescales the *used* font
+   size of every element — including the many fixed px/clamp() sizes above —
+   without touching any layout (widths/padding/margins stay put).
+   0.75 / 0.5 = 1.5× → Hangul x-height now matches English exactly. Press Start
+   2P's own x-height is already 0.75, so English text is unaffected. */
+body.lang-ko,
+.lang-ko {
+  font-size-adjust: 0.75;
+}
+
+/* English vocabulary content keeps Press Start 2P (and its natural size) even
+   when the UI language is Korean. The broad body.lang-ko * rule above would
+   otherwise force Mulmaru's small, stylised Latin glyphs onto English words. */
+body.lang-ko .lang-en,
+body.lang-ko .en,
+body.lang-ko .english,
+body.lang-ko .explanation-word,
+body.lang-ko .explanation-example-en,
+.lang-ko .lang-en,
+.lang-ko .en,
+.lang-ko .english {
+  font-family: 'Press Start 2P', cursive !important;
+  font-size-adjust: none;
+}
+
 /* Helper classes for explicit language switching */
 .ko, .korean {
   font-family: 'Mulmaru', cursive !important;
