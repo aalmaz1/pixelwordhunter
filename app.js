@@ -1084,7 +1084,6 @@ function loadQuestion() {
     btn.className = 'option-btn';
     btn.textContent = opt;
     btn.setAttribute('aria-label', `Option ${index + 1}: ${opt}`);
-    btn.setAttribute('aria-pressed', 'false');
     btn.addEventListener('click', () => checkAnswer(opt, word, btn, questionData.isEnglish));
     ui.optionsElement.appendChild(btn);
   });
@@ -1112,7 +1111,6 @@ function checkAnswer(selected, word, btn, questionIsEnglish) {
 
   if (isCorrect) {
     btn.classList.add('correct');
-    btn.setAttribute('aria-pressed', 'true');
     AudioEngine.playCorrect();
     const bonus = 10; // Simple scoring
     // Use atomic XP increment for multi-tab synchronization
@@ -1121,7 +1119,6 @@ function checkAnswer(selected, word, btn, questionIsEnglish) {
     updateWordProgress(word.id, true);
   } else {
     btn.classList.add('wrong');
-    btn.setAttribute('aria-pressed', 'false');
     AudioEngine.playWrong();
     updateWordProgress(word.id, false);
 
@@ -1130,7 +1127,6 @@ function checkAnswer(selected, word, btn, questionIsEnglish) {
     Array.from(ui.optionsElement.children).forEach(b => {
       if (b.textContent === correctAnswer) {
         b.classList.add('correct');
-        b.setAttribute('aria-pressed', 'true');
       }
     });
   }

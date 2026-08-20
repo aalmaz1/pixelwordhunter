@@ -649,6 +649,19 @@ body.lang-ko *,
   font-family: 'Mulmaru', cursive !important;
 }
 
+/* Korean font-size compensation.
+   Mulmaru renders visibly smaller than Press Start 2P at the same px size:
+   its x-height is 0.5em (96/192 units) vs Press Start 2P's 0.75em (750/1000),
+   so Hangul and Latin text in Korean mode looks roughly a third shorter than
+   the English/Russian UI. `font-size-adjust` is inherited, so this ONE rule
+   rescales the *used* font size of every element — including the many fixed
+   px/clamp() sizes above — without touching any layout (widths/padding/margins
+   stay put). 0.6 / 0.5 = 1.2× compensation; raise 0.6 to enlarge further. */
+body.lang-ko,
+.lang-ko {
+  font-size-adjust: 0.6;
+}
+
 /* Helper classes for explicit language switching */
 .ko, .korean {
   font-family: 'Mulmaru', cursive !important;
