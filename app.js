@@ -394,10 +394,9 @@ async function init() {
     // await initializeFirebaseServices(); // Убрали отсюда, чтобы загрузка была ленивой
     await I18nManager.init();
     const uiLanguage = I18nManager.getCurrentLanguage();
-    const savedTranslationLanguage = storageGet('pixelWordHunter_translationLanguage');
-    const translationLanguage = ['ru', 'ko'].includes(savedTranslationLanguage)
-      ? savedTranslationLanguage
-      : (uiLanguage === 'ko' ? 'ko' : 'ru');
+    // Vocabulary translation follows the UI language: Korean UI → Korean
+    // translations, anything else → Russian. No separate toggle needed.
+    const translationLanguage = uiLanguage === 'ko' ? 'ko' : 'ru';
     store.setState({ uiLanguage, translationLanguage });
 
     // Yield to let the browser paint the initial UI and process any
@@ -557,16 +556,10 @@ function setupEventListeners() {
 
   document.querySelectorAll('[data-lang]').forEach(btn => {
     btn.addEventListener('click', async () => {
-      await I18nManager.setLanguage(btn.dataset.lang);
-      store.setState({ uiLanguage: btn.dataset.lang });
-    });
-  });
-
-  document.querySelectorAll('[data-translation-lang]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const translationLanguage = btn.dataset.translationLang;
-      storageSet('pixelWordHunter_translationLanguage', translationLanguage);
-      store.setState({ translationLanguage });
+      const lang = btn.dataset.lang;
+      await I18nManager.setLanguage(lang);
+      // Vocabulary translation follows the UI language (ko → ko, else → ru).
+      store.setState({ uiLanguage: lang, translationLanguage: lang === 'ko' ? 'ko' : 'ru' });
     });
   });
 
@@ -887,11 +880,6 @@ function updateUI(state = store.getState()) {
   });
   document.querySelectorAll('[data-lang]').forEach(btn => {
     const active = btn.dataset.lang === state.uiLanguage;
-    btn.classList.toggle('active', active);
-    btn.setAttribute('aria-pressed', String(active));
-  });
-  document.querySelectorAll('[data-translation-lang]').forEach(btn => {
-    const active = btn.dataset.translationLang === state.translationLanguage;
     btn.classList.toggle('active', active);
     btn.setAttribute('aria-pressed', String(active));
   });
