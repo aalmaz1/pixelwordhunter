@@ -163,9 +163,9 @@
   width: 0;
   height: 0;
   left: 10px;
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
-  border-left: 12px solid currentColor;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 16px solid currentColor;
   filter: drop-shadow(0 0 4px currentColor);
   font-size: 0;
 }
@@ -1051,14 +1051,43 @@ html, body {
 }
 
 /* ============================================================
-   Answer-option hover arrow (▸)
-   Korean option buttons already get a comfortably large arrow via
-   their bigger font-size (body.lang-ko .option-btn). English /
-   Russian options use the small base font-size, which makes the
-   inherited arrow nearly invisible — give those a fixed larger size
-   WITHOUT touching the button's own font-size.
+   Interactive-element hover arrows (▸ / ◀)
+   Pseudo-element arrows inherit the button's font-size, which is
+   small on EN/RU UI (Press Start 2P) and makes them hard to see.
+   Fix them to a fixed size WITHOUT touching the button's own
+   font-size. Korean option buttons keep their existing (larger)
+   arrow size inherited from body.lang-ko .option-btn.
    ============================================================ */
-.option-btn:not(.lang-ko):before {
+.option-btn:not(.lang-ko):before,
+.next-btn:before {
+  font-size: 16px;
+}
+
+/* Back button: the ◀ arrow lives in the i18n text and was tiny at the
+   button's 9px font. Move it into a pseudo-element sized independently,
+   and lay the button out as flex so the arrow + label align nicely. */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.back-btn:before {
+  content: "◀";
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* "PRESS HUNT" call-to-action on the menu: the ▸ ◂ arrows used to be
+   part of the i18n text at the small 10px font. Draw them separately
+   so they're as prominent as the other action arrows. */
+.blink:before {
+  content: "▸ ";
+}
+.blink:after {
+  content: " ◂";
+}
+.blink:before,
+.blink:after {
   font-size: 16px;
 }
 
