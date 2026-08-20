@@ -1063,18 +1063,23 @@ html, body {
   font-size: 16px;
 }
 
-/* Back button: the ◀ arrow lives in the i18n text and was tiny at the
-   button's 9px font. Move it into a pseudo-element sized independently,
-   and lay the button out as flex so the arrow + label align nicely. */
+/* Back button: the ◀ arrow used to be a text glyph that rendered tiny in
+   Press Start 2P's fallback font no matter the font-size. Draw it as a
+   CSS border triangle instead — crisp, fixed pixel size, font-independent. */
 .back-btn {
   display: inline-flex;
   align-items: center;
   gap: 7px;
 }
 .back-btn:before {
-  content: "◀";
-  font-size: 16px;
-  line-height: 1;
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-right: 14px solid currentColor;
+  filter: drop-shadow(0 0 4px currentColor);
+  flex-shrink: 0;
 }
 
 /* "PRESS HUNT" call-to-action on the menu: the ▸ ◂ arrows used to be
