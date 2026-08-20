@@ -23,6 +23,7 @@ class Store extends EventTarget {
       masteredCount: 0,
       learningCount: 0,
       reviewCount: 0,
+      dailyStreak: 0,
 
       // Game State
       currentCategory: 'All',

@@ -38,21 +38,43 @@ export function setupXPListener(userId) {
       const data = docSnap.data();
       if (data.xp !== undefined) {
         store.setState({ xp: data.xp });
-        console.log(`[XP Sync] XP updated from server: ${data.xp}`);
+        if (import.meta.env.DEV) console.log(`[XP Sync] XP updated from server: ${data.xp}`);
       }
     }
   }, (error) => {
     console.warn('[XP Sync] Listener error:', error.message);
   });
 
-  console.log('[XP Sync] Real-time listener established for user:', userId);
+  if (import.meta.env.DEV) console.log('[XP Sync] Real-time listener established for user:', userId);
 }
 
 export function cleanupXPListener() {
   if (xpUnsubscribe) {
     xpUnsubscribe();
     xpUnsubscribe = null;
-    console.log('[XP Sync] Real-time listener cleaned up');
+    if (import.meta.env.DEV) console.log('[XP Sync] Real-time listener cleaned up');
+  }
+}
+
+/**
+ * Explicit anonymous sign-in triggered by the TRY button.
+ * Kept out of initFirebase() to avoid ghost auth on plain page loads.
+ */
+export async function signInAnonymouslyOnce() {
+  if (!firebaseAuth) {
+    await initFirebase();
+  }
+  if (!firebaseAuth) return { success: false, error: 'Firebase unavailable' };
+  try {
+    if (!authModuleApi?.signInAnonymously) {
+      authModuleApi = await import('firebase/auth');
+    }
+    const { user } = await authModuleApi.signInAnonymously(firebaseAuth);
+    localStorage.setItem('pixelWordHunter_authMethod', 'anonymous');
+    return { success: true, user };
+  } catch (error) {
+    console.error('Anonymous sign-in failed:', error.code, error.message);
+    return { success: false, error: error.message };
   }
 }
 
@@ -66,7 +88,7 @@ export async function logoutUser() {
     await authModuleApi.signOut(firebaseAuth);
     localStorage.removeItem('pixelWordHunter_authMethod');
     cleanupXPListener();
-    console.log('User signed out successfully');
+    if (import.meta.env.DEV) console.log('User signed out successfully');
   } catch (error) {
     console.error('Logout failed:', error.message);
   }
@@ -103,26 +125,11 @@ export async function initFirebase() {
     });
 
     firebaseAvailable = true;
-    console.log('✅ Firebase initialized (lazy)');
+    if (import.meta.env.DEV) console.log('✅ Firebase initialized (lazy)');
 
-    const storedAuthMethod = localStorage.getItem('pixelWordHunter_authMethod');
-    if (!storedAuthMethod || storedAuthMethod === 'anonymous') {
-      firebaseAuthModule.onAuthStateChanged(firebaseAuth, (user) => {
-        if (user) {
-          console.log('👤 User signed in:', user.uid);
-        } else {
-          console.log('⏳ No user detected, signing in anonymously...');
-          firebaseAuthModule.signInAnonymously(firebaseAuth)
-            .then((result) => {
-              console.log('✅ Anonymous sign-in successful:', result.user.uid);
-              localStorage.setItem('pixelWordHunter_authMethod', 'anonymous');
-            })
-            .catch((error) => {
-              console.error('❌ Anonymous sign-in failed:', error.code, error.message);
-            });
-        }
-      });
-    }
+    // NOTE: no automatic anonymous sign-in here. The "TRY" button
+    // now explicitly requests anonymous auth via signInAnonymouslyOnce().
+    // This prevents ghost auth that used to break the LOGIN/REGISTER/TRY flow.
   } catch (error) {
     console.warn('⚠️ Firebase not available - running in offline mode:', error.message);
     firebaseAvailable = false;
@@ -130,6 +137,8 @@ export async function initFirebase() {
 
   store.setState({ firebaseAvailable });
 
+  // Single auth listener — sets up XP snapshot + emits app-wide event.
+  // app.js listens to this event instead of registering its own onAuthStateChanged.
   if (firebaseAuth && authModuleApi) {
     authModuleApi.onAuthStateChanged(firebaseAuth, (user) => {
       if (user) {
@@ -137,12 +146,9 @@ export async function initFirebase() {
       } else {
         cleanupXPListener();
       }
+      window.dispatchEvent(new CustomEvent('pwh:authStateChanged', { detail: { user } }));
     });
   }
-
-  window.firebaseAuth = firebaseAuth;
-  window.firebaseDb = firebaseDb;
-  window.firebaseAvailable = firebaseAvailable;
 
   return {
     firebaseAuth,

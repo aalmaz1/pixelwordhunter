@@ -66,5 +66,14 @@
   "new_version_available": "New version available! Reload to update?",
   "round_complete": "// ROUND COMPLETE //",
   "score_label": "SCORE:",
-  "status_good": "GOOD"
+  "status_good": "GOOD",
+  "streak": "STREAK",
+  "hard_words": "REVIEW HARD WORDS",
+  "no_hard_words": "No hard words yet — keep playing!",
+  "no_words": "No words available",
+  "search_category": "SEARCH...",
+  "import_success": "Import successful",
+  "import_invalid": "Invalid backup file",
+  "yes": "YES",
+  "no": "NO"
 }

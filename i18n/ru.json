@@ -67,5 +67,14 @@
   "round_complete": "// РАУНД ЗАВЕРШЁН //",
   "score_label": "СЧЁТ:",
   "status_good": "ХОРОШО",
-  "close": "ЗАКРЫТЬ"
+  "close": "ЗАКРЫТЬ",
+  "streak": "СЕРИЯ",
+  "hard_words": "ПОВТОР СЛОЖНЫХ СЛОВ",
+  "no_hard_words": "Пока нет сложных слов — играй дальше!",
+  "no_words": "Нет доступных слов",
+  "search_category": "ПОИСК...",
+  "import_success": "Импорт успешен",
+  "import_invalid": "Неверный файл бэкапа",
+  "yes": "ДА",
+  "no": "НЕТ"
 }

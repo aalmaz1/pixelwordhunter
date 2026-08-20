@@ -9,6 +9,14 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   root: '.',
   base: './',
+  server: {
+    host: '0.0.0.0',
+    allowedHosts: ['.e2b.app', 'localhost']
+  },
+  preview: {
+    host: '0.0.0.0',
+    allowedHosts: ['.e2b.app', 'localhost']
+  },
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
@@ -85,10 +93,9 @@ export default defineConfig({
       }
     },
     {
-      // Emit PWA icon at a STABLE, unhashed path so the manifest's absolute
-      // "/assets/logo.png" reference resolves in production. Vite hashes logo.png
-      // (because index.html references it for apple-touch-icon), which would leave
-      // only "/assets/logo-[hash].png" in the build and break the manifest icon.
+      // Emit PWA icons at STABLE, unhashed paths so the manifest resolves them
+      // in production. Vite would otherwise hash any file referenced from
+      // index.html and break manifest lookups.
       name: 'copy-pwa-assets',
       closeBundle() {
         try {
@@ -96,13 +103,14 @@ export default defineConfig({
           if (!fs.existsSync(destDir)) {
             fs.mkdirSync(destDir, { recursive: true });
           }
-          const logoSrc = path.resolve(__dirname, 'assets/logo.png');
-          const logoDest = path.resolve(destDir, 'logo.png');
-          if (fs.existsSync(logoSrc)) {
-            fs.copyFileSync(logoSrc, logoDest);
-            console.log('✅ logo.png copied to dist/assets/logo.png (stable PWA icon path)');
-          } else {
-            console.warn('⚠️ assets/logo.png not found in source');
+          const files = ['logo.png', 'icon-192.png', 'icon-512.png', 'icon-512-maskable.png'];
+          for (const f of files) {
+            const src = path.resolve(__dirname, 'assets', f);
+            const dst = path.resolve(destDir, f);
+            if (fs.existsSync(src)) {
+              fs.copyFileSync(src, dst);
+              console.log(`✅ ${f} copied to dist/assets/`);
+            }
           }
         } catch (err) {
           console.error('❌ Failed to copy PWA assets:', err);
@@ -123,18 +131,15 @@ export default defineConfig({
         background_color: '#0a0010',
         categories: ['education', 'games'],
         icons: [
-          {
-            src: '/assets/logo.png',
-            sizes: '192x192',
-            type: 'image/png',
-            purpose: 'any'
-          },
-          {
-            src: '/assets/logo.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable'
-          }
+          { src: './assets/icon-192.png',           sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: './assets/icon-512.png',           sizes: '512x512', type: 'image/png', purpose: 'any' },
+          { src: './assets/icon-512-maskable.png',  sizes: '512x512', type: 'image/png', purpose: 'maskable' }
+        ],
+        shortcuts: [
+          { name: 'Quick Round', short_name: 'Quick', url: './?action=quick',
+            icons: [{ src: './assets/icon-192.png', sizes: '192x192' }] },
+          { name: 'Hard Words',  short_name: 'Hard',  url: './?action=hard',
+            icons: [{ src: './assets/icon-192.png', sizes: '192x192' }] }
         ],
         prefer_related_applications: false,
         scope: './'
