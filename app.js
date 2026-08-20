@@ -470,6 +470,10 @@ function setupEventListeners() {
   });
 
   document.getElementById('hunt-btn')?.addEventListener('click', () => toggleScreen('category'));
+  document.getElementById('try-btn')?.addEventListener('click', () => {
+    AudioEngine.playTransition();
+    toggleScreen('category');
+  });
 
   document.getElementById('export-btn')?.addEventListener('click', exportProgress);
   document.getElementById('import-input')?.addEventListener('change', (e) => importProgress(e.target.files[0]));
@@ -531,7 +535,11 @@ function setupEventListeners() {
     else if (!ui.menuScreenElement.classList.contains('hidden')) {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        document.getElementById('hunt-btn')?.click();
+        const huntBtn = document.getElementById('hunt-btn');
+        const menuAction = huntBtn && !huntBtn.classList.contains('hidden')
+          ? huntBtn
+          : document.getElementById('try-btn');
+        menuAction?.click();
       }
     }
   });
