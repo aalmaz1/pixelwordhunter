@@ -23,6 +23,7 @@ let gameData = null;
 let categoriesCache = null;
 let dataLoadPromise = null;
 let wordsById = null; // O(1) lookup index — IDs remain unique across repeated terms
+const WORDS_DATA_REVISION = typeof __WORDS_DATA_REVISION__ === 'string' ? __WORDS_DATA_REVISION__ : '';
 
 function rebuildWordsIndex() {
   if (!gameData) { wordsById = null; return; }
@@ -86,7 +87,12 @@ function getWordsJsonUrl() {
   // Use import.meta.env.BASE_URL for Vite's configured base path.
   const base = import.meta.env.BASE_URL || './';
   const basePath = base.endsWith('/') ? base : base + '/';
-  return `${basePath}words_optimized.json`;
+  const url = `${basePath}words_optimized.json`;
+
+  // Version the request URL so dictionary updates invalidate old caches.
+  // This is especially important for Korean sentence fixes: without a
+  // versioned URL, some installed PWAs can keep serving stale JSON.
+  return WORDS_DATA_REVISION ? `${url}?v=${encodeURIComponent(WORDS_DATA_REVISION)}` : url;
 }
 
 /**
