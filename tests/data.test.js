@@ -149,3 +149,53 @@ describe('word bank Korean examples', () => {
     expect(publicCopy).toBe(source);
   });
 });
+
+describe('generateOptionsForWord fairness', () => {
+  it('never offers a distractor that is also a correct answer (shared translation, reverse mode)', () => {
+    // "convince" and "persuade" both translate to «убеждать»: a reverse-mode
+    // question showing «убеждать» must not offer both English words.
+    const words = [
+      { eng: 'convince', category: 'A', rus: 'убеждать', kor: '설득하다' },
+      { eng: 'persuade', category: 'A', rus: 'убеждать', kor: '설득하다' },
+      { eng: 'offer', category: 'A', rus: 'предлагать', kor: '제안하다' },
+      { eng: 'select', category: 'A', rus: 'выбирать', kor: '선택하다' },
+      { eng: 'gather', category: 'A', rus: 'собирать', kor: '모으다' },
+      { eng: 'attract', category: 'A', rus: 'привлекать', kor: '끌어들이다' }
+    ];
+    dataMod._setGameDataForTests(words);
+    for (let i = 0; i < 300; i++) {
+      const opts = dataMod.generateOptionsForWord(words[0], 'ru', false);
+      expect(opts).toContain('convince');
+      expect(opts).not.toContain('persuade');
+    }
+  });
+
+  it('never offers the same English word from another category as a distractor (forward mode)', () => {
+    // "productive" exists in two categories with slightly different Russian
+    // glosses — the other gloss must not appear as a distractor.
+    const words = [
+      { eng: 'productive', category: 'A', rus: 'продуктивный, результативный', kor: '생산적인' },
+      { eng: 'productive', category: 'B', rus: 'продуктивный', kor: '생산적인' },
+      { eng: 'offer', category: 'A', rus: 'предлагать', kor: '제안하다' },
+      { eng: 'select', category: 'A', rus: 'выбирать', kor: '선택하다' },
+      { eng: 'gather', category: 'A', rus: 'собирать', kor: '모으다' },
+      { eng: 'attract', category: 'A', rus: 'привлекать', kor: '끌어들이다' }
+    ];
+    dataMod._setGameDataForTests(words);
+    for (let i = 0; i < 300; i++) {
+      const opts = dataMod.generateOptionsForWord(words[0], 'ru', true);
+      expect(opts).toContain('продуктивный, результативный');
+      expect(opts).not.toContain('продуктивный');
+    }
+  });
+
+  it('still returns 4 unique options when enough safe words exist', () => {
+    const words = Array.from({ length: 20 }, (_, i) => ({
+      eng: `w${i}`, category: 'A', rus: `слово${i}`, kor: `단어${i}`
+    }));
+    dataMod._setGameDataForTests(words);
+    const opts = dataMod.generateOptionsForWord(words[0], 'ru', true);
+    expect(opts.length).toBe(4);
+    expect(new Set(opts).size).toBe(4);
+  });
+});
