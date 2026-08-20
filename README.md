@@ -133,7 +133,7 @@ building each round:
 ## 📚 Word Bank
 
 The dictionary (`words_optimized.json`) contains **600 contextual learning cards**
-(325 unique English terms; recurring terms are intentionally practiced in multiple
+(458 unique English terms; recurring terms are intentionally practiced in multiple
 categories) with Russian and Korean translations plus example sentences in all
 three languages. Every card has a stable category-aware `id`, so repeated terms
 keep independent mastery and SRS history. Categories are drawn from the classic
