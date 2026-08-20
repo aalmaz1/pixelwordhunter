@@ -118,7 +118,11 @@ export async function initFirebase() {
 
     const app = firebaseAppModule.initializeApp(FIREBASE_CONFIG);
     firebaseAuth = firebaseAuthModule.getAuth(app);
+    // Force HTTP long-polling so Listen streams are not dropped by
+    // proxies/CDNs (Cloudflare Workers, preview iframes, corporate VPNs).
+    // WebChannel streaming otherwise surfaces as Listen 400/404 transport errors.
     firebaseDb = firestoreModule.initializeFirestore(app, {
+      experimentalForceLongPolling: true,
       localCache: firestoreModule.persistentLocalCache({
         tabManager: firestoreModule.persistentMultipleTabManager()
       })
