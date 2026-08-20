@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import { describe, it, expect, beforeEach } from 'vitest';
 import * as dataMod from '../data.js';
 import { UNCONFIRMED_MARKER } from '../sanitize.js';
@@ -118,9 +119,22 @@ describe('vocabulary translations follow the selected language', () => {
 });
 
 describe('word bank Korean examples', () => {
-  it('has no placeholder Korean sentences left in the dictionary', async () => {
+  it('has complete usable Korean translations for every word and example sentence', async () => {
     const words = (await import('../words_optimized.json')).default;
-    const stubs = words.filter(w => (w.exampleKor || '').includes('실제 사용 사례'));
-    expect(stubs.map(w => w.id)).toEqual([]);
+    const unusableWordTranslations = words
+      .filter(w => !dataMod.isUsableKoreanText(w.kor))
+      .map(w => w.id);
+    const unusableExampleTranslations = words
+      .filter(w => !dataMod.isUsableKoreanText(w.exampleKor))
+      .map(w => w.id);
+
+    expect(unusableWordTranslations).toEqual([]);
+    expect(unusableExampleTranslations).toEqual([]);
+  });
+
+  it('keeps the dev/public dictionary in sync with the source dictionary', () => {
+    const source = fs.readFileSync('words_optimized.json', 'utf8');
+    const publicCopy = fs.readFileSync('public/words_optimized.json', 'utf8');
+    expect(publicCopy).toBe(source);
   });
 });

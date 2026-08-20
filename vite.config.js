@@ -2,11 +2,20 @@ import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import fs from 'fs';
 import path from 'path';
+import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const wordsJsonPath = path.resolve(__dirname, 'words_optimized.json');
+const wordsDataRevision = fs.existsSync(wordsJsonPath)
+  ? crypto.createHash('sha256').update(fs.readFileSync(wordsJsonPath)).digest('hex').slice(0, 16)
+  : 'dev';
+const wordsDataUrl = `words_optimized.json?v=${wordsDataRevision}`;
 
 export default defineConfig({
+  define: {
+    __WORDS_DATA_REVISION__: JSON.stringify(wordsDataRevision)
+  },
   root: '.',
   base: './',
   server: {
@@ -150,17 +159,23 @@ export default defineConfig({
         clientsClaim: true,
         skipWaiting: true,
         additionalManifestEntries: [
-          { url: 'words_optimized.json', revision: null }
+          // The vocabulary JSON is fetched at runtime, so include the same
+          // versioned URL in the precache manifest. Its revision/hash changes
+          // whenever words_optimized.json changes, forcing the SW bundle to
+          // update and preventing users from being stuck on stale translations.
+          { url: wordsDataUrl, revision: wordsDataRevision }
         ],
         runtimeCaching: [
           {
-            // Cache the words JSON fetch for offline use and fast reload
-            urlPattern: /words_optimized\.json$/i,
-            handler: 'CacheFirst',
+            // Keep one last-good copy for offline use, but prefer the network
+            // so new sentence translations appear immediately after deployment.
+            urlPattern: /words_optimized\.json(?:\?.*)?$/i,
+            handler: 'NetworkFirst',
             options: {
               cacheName: 'words-data-cache',
+              networkTimeoutSeconds: 3,
               expiration: {
-                maxEntries: 1,
+                maxEntries: 2,
                 maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
               },
               cacheableResponse: {
