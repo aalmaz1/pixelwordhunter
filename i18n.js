@@ -1,6 +1,17 @@
 // i18n - Internationalization module for Pixel Word Hunter
 // Lazy loading implementation for translations
 
+// Build-aware URLs for the two UI webfonts. The `new URL(..., import.meta.url)`
+// pattern is resolved by Vite at build time to the same hashed asset files that
+// the url() references in style.css are rewritten to — so a preload here and
+// the CSS @font-face fetch share ONE cache entry. Never hard-code these paths:
+// the build renames the files (assets/Mulmaru.woff2 → assets/Mulmaru-<hash>.woff2),
+// which is what made the old document.baseURI-based preload 404 in production.
+const UI_FONT_URLS = {
+  ko: new URL('./assets/Mulmaru.woff2', import.meta.url).href,
+  fallback: new URL('./assets/press-start-2p-v16-cyrillic_latin-regular.woff2', import.meta.url).href,
+};
+
 // Helper function to get the base path dynamically
 function getBasePath() {
   // Use window.location.origin to get the protocol, hostname, and port
@@ -48,6 +59,7 @@ const I18nManager = {
   loadedLanguages: new Set(),
   translations: {},
   loadPromises: new Map(),
+  _fontPreloaded: new Set(),
   
   async init() {
     const savedLang = localStorage.getItem('pixelWordHunter_language');
@@ -67,21 +79,24 @@ const I18nManager = {
   },
 
   /**
-   * Warm the Korean-only webfont (Mulmaru) ahead of first paint.
-   * The font is deliberately NOT <link rel="preload">-ed in index.html:
-   * EN/RU visitors would download ~100 KB they never render, and the
-   * browser would flag the resource as "preloaded but not used".
+   * Warm the active language's UI webfont ahead of first paint.
+   * Fonts are deliberately NOT <link rel="preload">-ed in index.html: style.css
+   * forces ONE font per language (lang-ko → Mulmaru, everything else →
+   * Press Start 2P, both !important), so preloading the inactive one either
+   * wastes ~100 KB (Mulmaru for EN/RU visitors) or is never rendered at all
+   * (Press Start 2P under lang-ko) — both trigger the browser's
+   * "preloaded but not used" console warning.
    */
-  _ensureKoreanFontPreloaded() {
-    if (this._koFontPreloaded || document.getElementById('mulmaru-font-preload')) return;
-    this._koFontPreloaded = true;
+  _ensureUIFontPreloaded(lang) {
+    const url = UI_FONT_URLS[lang] || UI_FONT_URLS.fallback;
+    if (this._fontPreloaded.has(url)) return;
+    this._fontPreloaded.add(url);
     const link = document.createElement('link');
-    link.id = 'mulmaru-font-preload';
     link.rel = 'preload';
     link.as = 'font';
     link.type = 'font/woff2';
     link.crossOrigin = '';
-    link.href = new URL('assets/Mulmaru.woff2', document.baseURI).href;
+    link.href = url;
     document.head.appendChild(link);
   },
   
@@ -90,10 +105,9 @@ const I18nManager = {
       throw new Error(`Unsupported language: ${lang}`);
     }
 
-    // Korean text renders in Mulmaru — warm the font as soon as we know
-    // we'll need it (see _ensureKoreanFontPreloaded for why this isn't in
-    // index.html).
-    if (lang === 'ko') this._ensureKoreanFontPreloaded();
+    // Warm the UI font as soon as we know which language will render
+    // (see _ensureUIFontPreloaded for why this isn't in index.html).
+    this._ensureUIFontPreloaded(lang);
 
     if (this.loadedLanguages.has(lang)) return this.translations[lang];
     if (this.loadPromises.has(lang)) return this.loadPromises.get(lang);
