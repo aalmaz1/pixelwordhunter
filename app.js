@@ -368,8 +368,7 @@ async function init() {
     ui = initUI();
     AudioEngine.init();
     registerServiceWorker();
-    // initializeFirebaseServices() будет вызвана только при необходимости
-    // await initializeFirebaseServices(); // Убрали отсюда, чтобы загрузка была ленивой
+    // initializeFirebaseServices() is called lazily on first need.
     await I18nManager.init();
     const uiLanguage = I18nManager.getCurrentLanguage();
     // Vocabulary translation follows the UI language: Korean UI → Korean
@@ -1157,15 +1156,12 @@ function appendWordReviewContent(container, word, lang) {
   container.appendChild(exampleContainer);
 }
 
-function showExplanation(word, questionIsEnglish, isReviewComplete = false) {
+function showExplanation(word) {
   const list = document.getElementById('explanation-list');
   const lang = store.getState().translationLanguage;
   const nextBtn = document.getElementById('next-question-btn');
 
-  // Ensure next button is visible (unless in review mode)
-  if (!isReviewComplete) {
-    nextBtn.style.display = 'inline-block';
-  }
+  nextBtn.style.display = 'inline-block';
 
   list.textContent = '';
   list.setAttribute('role', 'list'); // Add role="list"

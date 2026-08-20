@@ -10,23 +10,17 @@ import { sanitizeToeicData } from './sanitize.js';
 self.onmessage = function (event) {
   const payload = event.data;
 
-  // Primary path: raw JSON string — parse + sanitize entirely in the Worker.
-  if (typeof payload === 'string') {
-    try {
-      const parsed = JSON.parse(payload);
-      const sanitized = sanitizeToeicData(parsed);
-      self.postMessage(sanitized);
-    } catch (err) {
-      self.postMessage({ __error: true, message: err.message });
-    }
+  // The main thread always sends the raw JSON string.
+  if (typeof payload !== 'string') {
+    self.postMessage({ __error: true, message: 'Unknown payload type' });
     return;
   }
 
-  // Backwards-compat: pre-parsed array.
-  if (Array.isArray(payload)) {
-    self.postMessage(sanitizeToeicData(payload));
-    return;
+  try {
+    const parsed = JSON.parse(payload);
+    const sanitized = sanitizeToeicData(parsed);
+    self.postMessage(sanitized);
+  } catch (err) {
+    self.postMessage({ __error: true, message: err.message });
   }
-
-  self.postMessage({ __error: true, message: 'Unknown payload type' });
 };

@@ -149,8 +149,6 @@ export async function initFirebase() {
     firebaseAvailable = false;
   }
 
-  store.setState({ firebaseAvailable });
-
   // Single auth listener — sets up XP snapshot + emits app-wide event.
   // app.js listens to this event instead of registering its own onAuthStateChanged.
   if (firebaseAuth && authModuleApi) {
@@ -176,4 +174,4 @@ export async function initFirebase() {
   };
 }
 
-export { firebaseAuth, firebaseDb, firebaseAvailable };
+export { firebaseAuth, firebaseDb };

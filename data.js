@@ -16,9 +16,6 @@
 import { store } from './store.js';
 import { sanitizeToeicData, UNCONFIRMED_MARKER as SANITIZE_UNCONFIRMED } from './sanitize.js';
 
-// NO static import of words_optimized.json!
-// import wordsData from './words_optimized.json';  ← REMOVED
-
 let gameData = null;
 let categoriesCache = null;
 let dataLoadPromise = null;
@@ -65,17 +62,6 @@ const INTERVALS = {
 function yieldToMain() {
   return new Promise(resolve => setTimeout(resolve, 0));
 }
-
-/**
- * Sanitize data inline (fallback when both Worker and fetch fail).
- * Delegates to the shared sanitizer in ./sanitize.js so both paths stay
- * in sync. Kept as a thin wrapper for backwards compatibility.
- */
-function sanitizeDataInline(rawData) {
-  return sanitizeToeicData(rawData);
-}
-
-
 
 /**
  * Resolve the base path for fetching words_optimized.json.
@@ -171,7 +157,7 @@ async function loadViaDynamicImport() {
   const module = await import('./words_optimized.json');
   const freshData = module.default || module;
   await yieldToMain();
-  return sanitizeDataInline(freshData);
+  return sanitizeToeicData(freshData);
 }
 
 /**
@@ -212,9 +198,6 @@ async function fetchFreshData() {
     // create a 50-100ms blocking long task on the main thread.
     // The data will be re-fetched on next page load (cached by SW).
 
-    // Update Store
-    store.setState({ words: sanitizedData, categories: getCategories() });
-    
     return gameData;
   } catch (err) {
     console.error('[Data] Load failed:', err);
@@ -240,7 +223,6 @@ export async function loadGameData() {
   } catch (err) {
     console.error('[Data] Fresh data load failed, using empty dataset', err);
     gameData = [];
-    store.setState({ words: [], categories: [] });
     return gameData;
   }
 }
