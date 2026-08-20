@@ -112,8 +112,15 @@ async function loadAndSanitizeViaWorker() {
   const jsonText = await response.text(); // async read, no blocking
   
   // Step 2: Send to Worker for parsing + sanitization
-  const workerUrl = new URL('./data.worker.js', import.meta.url);
-  const worker = new Worker(workerUrl, { type: 'module' });
+  // NOTE: the URL must be constructed INLINE inside new Worker(...).
+  // Vite only recognizes the worker-bundling pattern when new URL() is a
+  // direct argument; assigning it to a variable first makes Vite treat
+  // data.worker.js as a generic asset, which (being <4 KB) gets inlined as
+  // a data: URL — blocked by our CSP `worker-src 'self' blob:` and unable
+  // to resolve its './sanitize.js' import anyway. Inlined like this, Vite
+  // emits a proper same-origin worker chunk with sanitize.js bundled in.
+  const worker = new Worker(new URL('./data.worker.js', import.meta.url), { type: 'module' });
+
   
   // Send the raw JSON string. Worker will JSON.parse + sanitize.
   // Structured clone of a 243KB string is very fast (~0.5ms).
@@ -173,7 +180,11 @@ async function fetchFreshData() {
     try {
       sanitizedData = await loadAndSanitizeViaWorker();
     } catch (workerErr) {
-      console.warn('[Data] Worker path failed, trying dynamic import:', workerErr.message);
+      // Worker errors are often bare Events (CSP blocks, load failures) with
+      // no .message — fall back to a readable description instead of logging
+      // a bare "undefined".
+      const reason = workerErr?.message || workerErr?.type || workerErr?.name || 'unknown error';
+      console.warn('[Data] Worker path failed, trying dynamic import:', reason);
       
       // Fallback path: dynamic import (JSON.parse on main thread, but in separate chunk)
       try {

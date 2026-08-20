@@ -65,12 +65,36 @@ const I18nManager = {
     await this.loadLanguage(this.currentLang);
     this.applyLanguage(this.currentLang);
   },
+
+  /**
+   * Warm the Korean-only webfont (Mulmaru) ahead of first paint.
+   * The font is deliberately NOT <link rel="preload">-ed in index.html:
+   * EN/RU visitors would download ~100 KB they never render, and the
+   * browser would flag the resource as "preloaded but not used".
+   */
+  _ensureKoreanFontPreloaded() {
+    if (this._koFontPreloaded || document.getElementById('mulmaru-font-preload')) return;
+    this._koFontPreloaded = true;
+    const link = document.createElement('link');
+    link.id = 'mulmaru-font-preload';
+    link.rel = 'preload';
+    link.as = 'font';
+    link.type = 'font/woff2';
+    link.crossOrigin = '';
+    link.href = new URL('assets/Mulmaru.woff2', document.baseURI).href;
+    document.head.appendChild(link);
+  },
   
   async loadLanguage(lang) {
     if (!this.supportedLanguages.includes(lang)) {
       throw new Error(`Unsupported language: ${lang}`);
     }
-    
+
+    // Korean text renders in Mulmaru — warm the font as soon as we know
+    // we'll need it (see _ensureKoreanFontPreloaded for why this isn't in
+    // index.html).
+    if (lang === 'ko') this._ensureKoreanFontPreloaded();
+
     if (this.loadedLanguages.has(lang)) return this.translations[lang];
     if (this.loadPromises.has(lang)) return this.loadPromises.get(lang);
     
