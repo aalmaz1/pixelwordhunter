@@ -649,17 +649,16 @@ body.lang-ko *,
   font-family: 'Mulmaru', cursive !important;
 }
 
-/* Korean font-size compensation.
-   Mulmaru renders visibly smaller than Press Start 2P at the same px size:
-   its x-height is 0.5em (96/192 units) vs Press Start 2P's 0.75em (750/1000).
-   `font-size-adjust` is inherited, so this ONE rule rescales the *used* font
-   size of every element — including the many fixed px/clamp() sizes above —
-   without touching any layout (widths/padding/margins stay put).
-   0.75 / 0.5 = 1.5× → Hangul x-height now matches English exactly. Press Start
-   2P's own x-height is already 0.75, so English text is unaffected. */
+/* Korean font-size compensation — enlarged for readability.
+   Mulmaru's x-height is 0.5em (96/192 units) vs Press Start 2P's 0.75em (750/1000).
+   0.75 / 0.5 = 1.5× matches English, but Hangul's dense syllable blocks (2-3 jamo
+   stacked) need ~20 % extra for comfortable reading even at that size.
+   0.90 / 0.5 = 1.8× → Hangul appears ~20 % larger than Latin at the same px,
+   dramatically improving readability on desktop and mobile. Layout (widths/padding/
+   margins) stays untouched — only the used glyph size scales. */
 body.lang-ko,
 .lang-ko {
-  font-size-adjust: 0.75;
+  font-size-adjust: 0.90;
 }
 
 /* English vocabulary content keeps Press Start 2P (and its natural size) even
@@ -1031,4 +1030,127 @@ html, body {
   .settings-content { padding: 12px; }
   .settings-label { width: 100%; }
   .word-button { font-size: clamp(18px, 7vw, 28px); }
+}
+
+/* ============================================================
+   Korean typography boost — Hangul readability
+   Pixel sizes 7-11px are crisp for Press Start 2P caps but
+   too small for Hangul's complex syllable blocks. This block
+   bumps every Korean UI text ~28-35% (on top of the 1.8×
+   font-size-adjust above) for comfortably readable Hangul
+   on all screen sizes — without touching layout metrics or
+   English/Russian rendering.
+   ============================================================ */
+
+/* Base UI badges & stats */
+body.lang-ko .edition-badge { font-size: 12px !important; letter-spacing: 3px !important; line-height: 1.8 !important; }
+body.lang-ko .stats-line { font-size: 12px !important; letter-spacing: 1px !important; line-height: 1.8 !important; }
+body.lang-ko .streak-line { font-size: 12px !important; letter-spacing: 1px !important; line-height: 1.8 !important; }
+body.lang-ko .blink { font-size: 13px !important; letter-spacing: 1px !important; line-height: 1.8 !important; }
+body.lang-ko .credits { font-size: 9px !important; letter-spacing: 1px !important; line-height: 1.6 !important; }
+body.lang-ko .reset-button { font-size: 9px !important; line-height: 1.6 !important; }
+
+/* Buttons — menu, auth, settings */
+body.lang-ko .start-btn { font-size: 17px !important; letter-spacing: 2px !important; line-height: 1.6 !important; padding: 16px 32px !important; }
+body.lang-ko .auth-btn { font-size: 16px !important; letter-spacing: 1.5px !important; line-height: 1.6 !important; }
+body.lang-ko .hunt-btn { font-size: 17px !important; }
+body.lang-ko .settings-btn { font-size: 13px !important; letter-spacing: 1px !important; line-height: 1.6 !important; padding: 12px 24px !important; }
+body.lang-ko .back-btn { font-size: 12px !important; letter-spacing: 1px !important; line-height: 1.5 !important; }
+body.lang-ko .theme-btn { font-size: 11px !important; letter-spacing: 0.5px !important; line-height: 1.5 !important; padding: 8px 11px !important; }
+body.lang-ko .sound-toggle-btn { font-size: 11px !important; line-height: 1.5 !important; }
+body.lang-ko .reset-btn { font-size: 13px !important; line-height: 1.6 !important; }
+body.lang-ko .next-btn { font-size: 15px !important; letter-spacing: 2px !important; line-height: 1.6 !important; }
+body.lang-ko .confirm-ok,
+body.lang-ko .confirm-cancel { font-size: 13px !important; line-height: 1.6 !important; }
+
+/* Screen titles & headers */
+body.lang-ko .screen-title { font-size: clamp(15px, 4vw, 22px) !important; letter-spacing: 2px !important; line-height: 1.7 !important; }
+body.lang-ko .modal-title { font-size: clamp(14px, 3.5vw, 18px) !important; letter-spacing: 2px !important; line-height: 1.7 !important; }
+body.lang-ko .stat { font-size: 11px !important; letter-spacing: 0.5px !important; line-height: 1.6 !important; }
+body.lang-ko .settings-label { font-size: 12px !important; letter-spacing: 1px !important; line-height: 1.6 !important; }
+body.lang-ko .category-search { font-size: 13px !important; letter-spacing: 1px !important; line-height: 1.6 !important; }
+
+/* Categories */
+body.lang-ko .category-btn {
+  font-size: clamp(11px, 2.4vw, 14px) !important;
+  letter-spacing: 0.5px !important;
+  line-height: 1.6 !important;
+  padding: 14px 16px 22px !important;
+  white-space: normal !important;
+  text-align: center !important;
+}
+body.lang-ko .category-progress-label { font-size: 9px !important; }
+body.lang-ko .category-progress { height: 5px !important; }
+
+/* Quiz options — the core translation text */
+body.lang-ko .option-btn {
+  font-size: clamp(12px, 3vw, 15px) !important;
+  letter-spacing: 0.5px !important;
+  line-height: 1.75 !important;
+  padding: 16px 18px !important;
+}
+body.lang-ko .question-card .word-button {
+  /* English word stays Press Start 2P — not enlarged by this block */
+  letter-spacing: 3px !important;
+}
+body.lang-ko .round-progress { font-size: 10px !important; line-height: 1.6 !important; }
+body.lang-ko .result-summary { font-size: 12px !important; line-height: 1.7 !important; }
+
+/* Explanation / review modal — Korean translation lines */
+body.lang-ko .explanation-content { font-size: 13px !important; line-height: 1.8 !important; }
+body.lang-ko .explanation-example-ko,
+body.lang-ko .explanation-example-ru {
+  font-size: clamp(12px, 2.8vw, 14px) !important;
+  line-height: 1.75 !important;
+  letter-spacing: 0.3px !important;
+}
+body.lang-ko .explanation-example-en {
+  /* English example sentence stays Press Start 2P */
+  font-size: clamp(10px, 2.5vw, 12px) !important;
+}
+body.lang-ko .explanation-mastery { font-size: clamp(11px, 2.8vw, 13px) !important; line-height: 1.7 !important; }
+body.lang-ko .round-summary-title { font-size: clamp(13px, 3.2vw, 16px) !important; }
+body.lang-ko .round-score { font-size: clamp(16px, 4vw, 20px) !important; }
+body.lang-ko .round-total-xp,
+body.lang-ko .stat-mastered,
+body.lang-ko .stat-learning,
+body.lang-ko .stat-new { font-size: 12px !important; line-height: 1.6 !important; }
+body.lang-ko .round-encouragement { font-size: 10px !important; line-height: 1.6 !important; }
+
+/* Onboarding & confirm & settings */
+body.lang-ko .onboarding-lead { font-size: 14px !important; line-height: 1.85 !important; letter-spacing: 0.3px !important; }
+body.lang-ko .onboarding-list { font-size: 13px !important; line-height: 1.8 !important; letter-spacing: 0.3px !important; }
+body.lang-ko .onboarding-note { font-size: 11px !important; line-height: 1.7 !important; }
+body.lang-ko .confirm-message { font-size: 14px !important; line-height: 1.8 !important; letter-spacing: 0.3px !important; }
+body.lang-ko .settings-user { font-size: 12px !important; line-height: 1.7 !important; }
+body.lang-ko .auth-field label { font-size: 11px !important; line-height: 1.6 !important; }
+body.lang-ko .auth-error,
+body.lang-ko .auth-toggle,
+body.lang-ko .auth-toggle-btn { font-size: 11px !important; line-height: 1.6 !important; }
+body.lang-ko .review-status { font-size: 11px !important; line-height: 1.6 !important; }
+body.lang-ko .notification-text { font-size: 14px !important; line-height: 1.6 !important; }
+body.lang-ko .user-info { font-size: 11px !important; line-height: 1.6 !important; }
+
+/* Mobile — keep Korean comfortably larger even on tiny screens */
+@media (max-width: 374px) {
+  body.lang-ko .edition-badge { font-size: 11px !important; }
+  body.lang-ko .stats-line { font-size: 11px !important; }
+  body.lang-ko .blink { font-size: 12px !important; }
+  body.lang-ko .start-btn { font-size: 15px !important; }
+  body.lang-ko .category-btn { font-size: 11px !important; padding: 12px 12px 20px !important; }
+  body.lang-ko .option-btn { font-size: 11px !important; }
+  body.lang-ko .screen-title { font-size: clamp(13px, 4vw, 18px) !important; }
+  body.lang-ko .stat { font-size: 9px !important; }
+}
+@media (min-width: 375px) and (max-width: 480px) {
+  body.lang-ko .edition-badge { font-size: 11px !important; }
+  body.lang-ko .stats-line { font-size: 11px !important; }
+  body.lang-ko .category-btn { font-size: 12px !important; }
+  body.lang-ko .option-btn { font-size: 12px !important; }
+}
+@media (orientation: landscape) and (max-height: 600px) {
+  body.lang-ko .category-btn { font-size: 11px !important; }
+  body.lang-ko .option-btn { font-size: 11px !important; }
+  body.lang-ko .edition-badge { font-size: 11px !important; }
+  body.lang-ko .stats-line { font-size: 10px !important; }
 }
