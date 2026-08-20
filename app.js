@@ -743,6 +743,11 @@ async function handleAuthSubmit() {
 
   ui.authSubmit.disabled = true;
   ui.authError.textContent = ''; // Clear previous errors
+  if (mode === 'register' && !username.trim()) {
+    ui.authError.textContent = I18nManager.t('username_required');
+    ui.authSubmit.disabled = false;
+    return;
+  }
   let result;
   if (mode === 'register') {
     result = await AuthManager.register(username, email, password);
@@ -752,7 +757,7 @@ async function handleAuthSubmit() {
 
   if (result.success) {
     closeAuthModal();
-    showNotification('Success!');
+    showNotification(I18nManager.t('auth_success'));
   } else {
     ui.authError.textContent = result.error || 'Authentication failed';
   }
@@ -1333,12 +1338,13 @@ function showReviewSession() {
     // Show next button again
     nextBtn.style.display = 'inline-block';
 
-    // Start new round
+    // Start new round — reset score so the next result screen is not 20/10.
     const state = store.getState();
     const roundWords = selectWordsForRound(state.currentCategory, 10);
     store.setState({
       currentRound: roundWords,
-      currentQ: 0
+      currentQ: 0,
+      roundScore: 0
     });
     loadQuestion();
   });

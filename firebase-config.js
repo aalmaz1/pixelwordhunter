@@ -37,7 +37,17 @@ export function setupXPListener(userId) {
     if (docSnap.exists()) {
       const data = docSnap.data();
       if (data.xp !== undefined) {
-        store.setState({ xp: data.xp });
+        const serverXP = Number(data.xp) || 0;
+        // Keep unflushed local increments so the HUD does not jump backwards
+        // for up to XP_FLUSH_INTERVAL_MS after a correct answer.
+        import('./storage.js').then((storage) => {
+          const pending = typeof storage.getPendingXpDelta === 'function'
+            ? storage.getPendingXpDelta()
+            : 0;
+          store.setState({ xp: serverXP + pending });
+        }).catch(() => {
+          store.setState({ xp: serverXP });
+        });
         if (import.meta.env.DEV) console.log(`[XP Sync] XP updated from server: ${data.xp}`);
       }
     }

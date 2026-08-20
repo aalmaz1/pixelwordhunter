@@ -366,6 +366,10 @@ const XP_FLUSH_INTERVAL_MS = 5000;
 let _pendingXpDelta = 0;
 let _xpFlushTimer = null;
 
+export function getPendingXpDelta() {
+  return _pendingXpDelta;
+}
+
 export async function flushPendingXP() {
   if (_pendingXpDelta === 0) return;
   const delta = _pendingXpDelta;
@@ -456,7 +460,7 @@ export function exportProgress() {
     progress: buildProgressData(),
     settings: {
       theme: store.getState().theme,
-      language: store.getState().language,
+      language: store.getState().uiLanguage,
       audio: store.getState().audioEnabled
     }
   };

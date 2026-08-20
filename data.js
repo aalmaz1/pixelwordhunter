@@ -280,6 +280,12 @@ function getWordPriority(word) {
 }
 
 export function selectWordsForRound(category, roundSize = 10) {
+  // Hard-words rounds reuse this helper after CONTINUE / WORD REVIEW.
+  // There is no real "Hard" category in the dictionary — those cards are
+  // selected by struggle score instead of category name.
+  if (category === 'Hard') {
+    return selectHardWords(roundSize);
+  }
   const words = getWordsByCategory(category);
   if (!words.length) return [];
   if (words.length <= roundSize) return shuffle([...words]);

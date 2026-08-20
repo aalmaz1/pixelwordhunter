@@ -37,6 +37,17 @@ describe('selectWordsForRound', () => {
   });
 });
 
+describe('selectWordsForRound Hard category', () => {
+  it('selects struggling words instead of looking up a Hard category', () => {
+    const words = seed(20);
+    words[0].incorrectCount = 5;
+    words[0].correctCount = 1;
+    const round = dataMod.selectWordsForRound('Hard', 10);
+    expect(round.map(w => w.eng)).toContain('w0');
+    expect(round.every(w => w.category === 'A' || w.category === 'B')).toBe(true);
+  });
+});
+
 describe('selectHardWords', () => {
   it('returns only words that are hard (more wrong than right, or seen-low-mastery)', () => {
     const words = seed(20);
