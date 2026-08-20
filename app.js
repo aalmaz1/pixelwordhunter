@@ -1069,7 +1069,9 @@ function loadQuestion() {
 
   options.forEach((opt, index) => {
     const btn = document.createElement('button');
-    btn.className = 'option-btn';
+    // Tag each option with its language so English answers use Press Start 2P
+    // (like the EN UI) while Korean translations use Mulmaru under lang-ko.
+    btn.className = `option-btn lang-${questionData.isEnglish ? translationLanguage : 'en'}`;
     btn.textContent = opt;
     btn.setAttribute('aria-label', `Option ${index + 1}: ${opt}`);
     btn.addEventListener('click', () => checkAnswer(opt, word, btn, questionData.isEnglish));
