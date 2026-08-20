@@ -21,12 +21,15 @@ import {
   loadGameData,
   getGameData,
   selectWordsForRound,
+  selectHardWords,
   generateOptionsForWord,
   updateWordProgress,
   getCategories,
+  getCategoryStats,
   getProgressStats,
   getCorrectTranslation,
-  getQuestionWord
+  getQuestionWord,
+  setWordsIndex
 } from './data.js';
 import {
   saveProgress,
@@ -41,7 +44,7 @@ import {
   exportProgress,
   importProgress
 } from './storage.js';
-import { initUI, renderCategoryButtons, showNotification, getFocusableElements } from './ui.js';
+import { initUI, renderCategoryButtons, wireCategorySearch, showNotification, getFocusableElements, trapFocus } from './ui.js';
 
 // ==================== INP OPTIMIZATION UTILITIES ====================
 
@@ -83,72 +86,64 @@ export function cancelIdle(id) {
   }
 }
 
-// Локальные переменные для Firebase-сервисов и функций
+// Локальные переменные для Firebase-сервисов и функций (заполняются лениво)
 let firebaseAuth, firebaseDb;
-let createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut, onAuthStateChanged;
-let doc, setDoc, getDoc, serverTimestamp, onSnapshot;
+let createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile;
+let doc, setDoc, getDoc, serverTimestamp;
+
+const DEV = import.meta.env.DEV;
 
 /**
- * Динамически импортирует и инициализирует Firebase-сервисы.
- * Вызывается только при необходимости.
+ * Lazy-init Firebase services on first use. The single auth-state listener
+ * lives inside firebase-config.js and emits `pwh:authStateChanged`, which we
+ * subscribe to once from init() below. No `window.*` globals here.
  */
 async function initializeFirebaseServices() {
-  // Динамический импорт firebase-config.js
   const firebaseConfigModule = await import('./firebase-config.js');
-  const initResult = await firebaseConfigModule.initFirebase(); // Инициализируем Firebase-приложение
+  const initResult = await firebaseConfigModule.initFirebase();
 
-  // Use the returned values from initFirebase for immediate access
   firebaseAuth = initResult.firebaseAuth || firebaseConfigModule.firebaseAuth;
   firebaseDb = initResult.firebaseDb || firebaseConfigModule.firebaseDb;
 
-  // Динамический импорт функций аутентификации
-  const authModule = await import('firebase/auth');
+  const [authModule, firestoreModule] = await Promise.all([
+    import('firebase/auth'),
+    import('firebase/firestore')
+  ]);
   createUserWithEmailAndPassword = authModule.createUserWithEmailAndPassword;
   signInWithEmailAndPassword = authModule.signInWithEmailAndPassword;
   updateProfile = authModule.updateProfile;
-  signOut = authModule.signOut;
-  onAuthStateChanged = authModule.onAuthStateChanged;
-
-  // Динамический импорт функций Firestore
-  const firestoreModule = await import('firebase/firestore');
   doc = firestoreModule.doc;
   setDoc = firestoreModule.setDoc;
   getDoc = firestoreModule.getDoc;
   serverTimestamp = firestoreModule.serverTimestamp;
-  onSnapshot = firestoreModule.onSnapshot;
 
-  // Экспортируем функции глобально для доступа из других модулей
-  window.doc = doc;
-  window.getDoc = getDoc;
-  window.setDoc = setDoc;
-  window.serverTimestamp = serverTimestamp;
-
-  // Настраиваем слушатель состояния аутентификации
-  if (firebaseAuth) {
-    onAuthStateChanged(firebaseAuth, async (user) => {
-      console.log('[Auth] Auth state changed:', user ? user.uid : 'null');
-      store.setUser(user);
-      
-      if (user) {
-        // Пользователь вошёл - загружаем данные с сервера
-        console.log('[Auth] User authenticated, loading progress from Firestore...');
-        try {
-          const progress = await loadProgress(firebaseDb, doc, getDoc);
-          applyProgress(progress, true); // true = данные с сервера
-          console.log('[Auth] Progress loaded successfully');
-        } catch (error) {
-          console.error('[Auth] Failed to load progress:', error);
-        }
-      } else {
-        // Пользователь вышел - очищаем состояние
-        console.log('[Auth] User logged out, resetting to local data');
-        const localProgress = await loadProgressWrapper();
-        applyProgress(localProgress, false);
-      }
-    });
-  }
-  
   return { firebaseAuth, firebaseDb };
+}
+
+/**
+ * Handler for the single auth-state event dispatched by firebase-config.js.
+ * Loads server progress on login, falls back to local progress on logout.
+ */
+async function handleAuthStateChanged(user) {
+  if (DEV) console.log('[Auth] state changed:', user ? user.uid : 'null');
+  store.setUser(user);
+
+  // Ensure firestore helpers are loaded so we can pass them into loadProgress.
+  if (!doc || !getDoc) {
+    try { await initializeFirebaseServices(); } catch { /* offline */ }
+  }
+
+  if (user) {
+    try {
+      const progress = await loadProgress(firebaseDb, doc, getDoc);
+      applyProgress(progress, true);
+    } catch (error) {
+      console.error('[Auth] Failed to load progress:', error);
+    }
+  } else {
+    const localProgress = await loadProgressWrapper();
+    applyProgress(localProgress, false);
+  }
 }
 
 // ==================== AUDIO ENGINE ====================
@@ -283,7 +278,7 @@ const AuthManager = {
   async register(username, email, password) {
     // Ensure Firebase services are initialized
     if (!firebaseAuth || !firebaseDb) {
-      console.log('[Auth] Initializing Firebase services for registration...');
+      if (import.meta.env.DEV) console.log('[Auth] Initializing Firebase services for registration...');
       await initializeFirebaseServices();
       // Small delay to ensure Firebase is fully ready
       await new Promise(resolve => setTimeout(resolve, 100));
@@ -306,7 +301,7 @@ const AuthManager = {
   async login(email, password) {
     // Ensure Firebase services are initialized
     if (!firebaseAuth) {
-      console.log('[Auth] Initializing Firebase services for login...');
+      if (import.meta.env.DEV) console.log('[Auth] Initializing Firebase services for login...');
       await initializeFirebaseServices();
       // Small delay to ensure Firebase Auth is fully ready
       await new Promise(resolve => setTimeout(resolve, 100));
@@ -321,12 +316,13 @@ const AuthManager = {
   },
 
   async logout() {
-    if (!firebaseAuth) {
-      await initializeFirebaseServices();
-    }
-    if (firebaseAuth) await signOut(firebaseAuth);
-    // Clear auth method on logout
-    localStorage.removeItem('pixelWordHunter_authMethod');
+    const mod = await import('./firebase-config.js');
+    await mod.logoutUser();
+  },
+
+  async tryAnonymous() {
+    const mod = await import('./firebase-config.js');
+    return mod.signInAnonymouslyOnce();
   }
 };
 
@@ -375,7 +371,8 @@ async function init() {
     ThemeManager.apply(theme);
 
     const categories = ['All', ...getCategories()];
-    renderCategoryButtons(categories, (cat) => startGame(cat));
+    renderCategoryButtons(categories, (cat) => startGame(cat), getCategoryStats());
+    wireCategorySearch('category-search', 'category-list');
 
     // Event Listeners
     setupEventListeners();
@@ -395,11 +392,29 @@ async function init() {
 
     toggleScreen('menu');
 
+    // Global auth event bridge — the ONE listener lives in firebase-config.js.
+    window.addEventListener('pwh:authStateChanged', (e) => {
+      handleAuthStateChanged(e.detail?.user || null);
+    });
+
+    // Update daily streak on app open.
+    updateDailyStreak();
+
+    // Handle PWA shortcut URLs (?action=quick|hard)
+    const params = new URLSearchParams(location.search);
+    const action = params.get('action');
+    if (action === 'quick') {
+      // Start an "All" mixed round immediately
+      requestAnimationFrame(() => startGame('All'));
+    } else if (action === 'hard') {
+      requestAnimationFrame(() => startHardWords());
+    }
+
     // Fallback: Ensure at least one screen is visible after a short delay
     setTimeout(() => {
       const visibleScreen = document.querySelector('.game-container:not(.hidden)');
       if (!visibleScreen) {
-        console.warn('[App] No screen visible, forcing menu screen');
+        if (DEV) console.warn('[App] No screen visible, forcing menu screen');
         toggleScreen('menu');
       }
     }, 500);
@@ -409,7 +424,7 @@ async function init() {
     // tasks during the interaction itself.
     if (localStorage.getItem('pixelWordHunter_authMethod')) {
       scheduleIdle(() => {
-        import('./firebase-config.js').catch(() => {});
+        import('./firebase-config.js').then(m => m.initFirebase?.()).catch(() => {});
       }, { timeout: 3000 });
     }
   } catch (err) {
@@ -453,6 +468,19 @@ function setupEventListeners() {
 
   document.getElementById('auth-submit')?.addEventListener('click', handleAuthSubmit);
 
+  // Click outside the auth dialog closes it.
+  document.getElementById('auth-modal')?.addEventListener('click', (e) => {
+    if (e.target && e.target.id === 'auth-modal') closeAuthModal();
+  });
+
+  // Submit the auth form on Enter inside any of its inputs.
+  document.getElementById('auth-form')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleAuthSubmit();
+    }
+  });
+
   // Settings
   document.querySelectorAll('[data-theme]').forEach(btn => {
     btn.addEventListener('click', () => ThemeManager.apply(btn.dataset.theme));
@@ -470,27 +498,46 @@ function setupEventListeners() {
   });
 
   document.getElementById('hunt-btn')?.addEventListener('click', () => toggleScreen('category'));
-  document.getElementById('try-btn')?.addEventListener('click', () => {
+  document.getElementById('try-btn')?.addEventListener('click', async () => {
     AudioEngine.playTransition();
+    // Explicit anonymous sign-in for guest mode. Falls back to offline play.
+    AuthManager.tryAnonymous?.().catch(() => {});
     toggleScreen('category');
   });
 
+  document.getElementById('hard-words-btn')?.addEventListener('click', () => {
+    AudioEngine.playTransition();
+    startHardWords();
+  });
+
   document.getElementById('export-btn')?.addEventListener('click', exportProgress);
-  document.getElementById('import-input')?.addEventListener('change', (e) => importProgress(e.target.files[0]));
-  document.getElementById('reset-progress-btn')?.addEventListener('click', () => {
-    if (confirm('Reset all progress?')) {
-      resetProgress();
-      location.reload();
+  document.getElementById('import-input')?.addEventListener('change', async (e) => {
+    const result = await importProgress(e.target.files[0]);
+    if (result?.success) {
+      // Rehydrate in-memory data without a full page reload.
+      applyProgress(result.progress || {}, false);
+      renderCategoryButtons(['All', ...getCategories()], (cat) => startGame(cat), getCategoryStats());
+      showNotification(I18nManager.t('import_success') || 'Import successful');
+    } else if (result) {
+      showNotification(I18nManager.t('import_invalid') || 'Invalid backup file');
     }
+    e.target.value = ''; // allow re-importing the same file
+  });
+
+  document.getElementById('reset-progress-btn')?.addEventListener('click', async () => {
+    const ok = await confirmDialog(I18nManager.t('reset_progress_confirm') || 'Reset all progress?');
+    if (!ok) return;
+    resetProgress();
+    applyProgress({}, false);
+    renderCategoryButtons(['All', ...getCategories()], (cat) => startGame(cat), getCategoryStats());
+    showNotification(I18nManager.t('progress_reset') || 'Progress reset');
   });
 
   // Logout button
   document.getElementById('logout-btn')?.addEventListener('click', async () => {
-    // Dynamically import logoutUser from firebase-config
-    const firebaseConfigModule = await import('./firebase-config.js');
-    await firebaseConfigModule.logoutUser();
-    showNotification('Logged out successfully');
-    // Reload to reset state and show login buttons
+    await AuthManager.logout();
+    showNotification(I18nManager.t('logged_out') || 'Logged out successfully');
+    // Reload to fully reset app state and show login buttons
     location.reload();
   });
 
@@ -553,6 +600,7 @@ function setupEventListeners() {
 }
 
 let lastFocusedElement = null;
+let releaseAuthTrap = null;
 
 function showAuthModal(mode) {
   store.setState({ authMode: mode });
@@ -586,6 +634,8 @@ function showAuthModal(mode) {
       ui.authModal.setAttribute('tabindex', '-1');
       ui.authModal.focus();
     }
+    // Keep focus inside the auth modal.
+    releaseAuthTrap = trapFocus(ui.authModal);
   }, { timeout: 100 });
 }
 
@@ -617,7 +667,8 @@ function closeAuthModal() {
   ui.authModal.classList.add('hidden');
   ui.authModal.setAttribute('aria-hidden', 'true');
   ui.authError.textContent = '';
-  
+
+  if (releaseAuthTrap) { releaseAuthTrap(); releaseAuthTrap = null; }
   if (lastFocusedElement && document.body.contains(lastFocusedElement)) {
     lastFocusedElement.focus();
   }
@@ -649,24 +700,32 @@ function applyProgress(progressData, fromServer = false) {
   // Now: Map build O(n) + Object.entries × Map.get = O(n) total
   const wordsByEng = new Map(words.map(w => [w.eng, w]));
 
+  // Save the words-by-eng map on the module so updateWordProgress can reuse it
+  // instead of O(n) .find() on every answer click.
+  setWordsIndex(wordsByEng);
+
   Object.entries(progressData).forEach(([eng, data]) => {
     const word = wordsByEng.get(eng);
     if (word) Object.assign(word, data);
   });
 
   const stats = getProgressStats();
-  
-  // Если данные с сервера - используем XP из сервера, иначе - локальный
-  const xpValue = fromServer ? getUserXP() : getUserXP();
-  
+
+  // Server XP wins over local when we are hydrating from the server.
+  const xpValue = fromServer && typeof progressData.__xp === 'number'
+    ? progressData.__xp
+    : getUserXP();
+
   store.setState({
     xp: xpValue,
     masteredCount: stats.mastered,
     learningCount: stats.learning,
     reviewCount: stats.newWords
   });
-  
-  console.log(`[App] Progress applied: ${Object.keys(progressData).length} words, XP: ${xpValue}`);
+
+  if (import.meta.env.DEV) {
+    if (import.meta.env.DEV) console.log(`[App] Progress applied: ${Object.keys(progressData).length} words, XP: ${xpValue}`);
+  }
 }
 
 function updateUI(state = store.getState()) {
@@ -678,6 +737,19 @@ function updateUI(state = store.getState()) {
 
   // Stats
   if (ui.masteredCountElement) ui.masteredCountElement.textContent = state.masteredCount;
+  if (ui.streakElement) ui.streakElement.textContent = state.dailyStreak || 0;
+
+  // Show identity in settings
+  if (ui.settingsUserElement) {
+    const u = state.user;
+    if (u && (u.email || u.displayName)) {
+      ui.settingsUserElement.textContent = `👤 ${u.displayName || u.email}`;
+      ui.settingsUserElement.classList.remove('hidden');
+    } else {
+      ui.settingsUserElement.textContent = '';
+      ui.settingsUserElement.classList.add('hidden');
+    }
+  }
 
   // Auth - Ensure UI matches actual authentication state
   const authButtons = document.getElementById('auth-buttons');
@@ -708,6 +780,10 @@ const REVIEW_TRIGGER_ROUNDS = 3; // Show review after this many rounds
 function startGame(category) {
   AudioEngine.playTransition();
   const roundWords = selectWordsForRound(category, 10);
+  if (!roundWords.length) {
+    showNotification(I18nManager.t('no_words') || 'No words available');
+    return;
+  }
   store.setState({
     currentCategory: category,
     currentRound: roundWords,
@@ -722,13 +798,133 @@ function startGame(category) {
   loadQuestion();
 }
 
+/**
+ * Start a review round consisting only of "hard" words (more wrong than right,
+ * or seen-but-not-mastered). Falls back with a notification when empty.
+ */
+function startHardWords() {
+  const hard = selectHardWords(10);
+  if (!hard.length) {
+    showNotification(I18nManager.t('no_hard_words') || 'No hard words yet — keep playing!');
+    return;
+  }
+  store.setState({
+    currentCategory: 'Hard',
+    currentRound: hard,
+    currentQ: 0,
+    roundScore: 0,
+    wordStartTime: Date.now(),
+    reviewSessionData: [],
+    completedRoundsCount: 0
+  });
+  toggleScreen('game');
+  loadQuestion();
+}
+
+// ==================== DAILY STREAK ====================
+
+function updateDailyStreak() {
+  const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+  const last = storageGet('pwh_lastPlayed');
+  let streak = parseInt(storageGet('pwh_streak'), 10) || 0;
+
+  if (last === today) {
+    // already counted today
+  } else {
+    const y = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    if (last === y) {
+      streak += 1;
+    } else if (!last) {
+      streak = 1;
+    } else {
+      streak = 1; // missed a day → reset
+    }
+    storageSet('pwh_lastPlayed', today);
+    storageSet('pwh_streak', String(streak));
+  }
+  store.setState({ dailyStreak: streak });
+}
+
+// ==================== SPEECH SYNTHESIS ====================
+
+const Speech = {
+  supported: typeof window !== 'undefined' && 'speechSynthesis' in window,
+  speak(text) {
+    if (!this.supported || !text) return;
+    try {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US';
+      u.rate = 0.95;
+      u.pitch = 1;
+      window.speechSynthesis.speak(u);
+    } catch { /* ignore */ }
+  }
+};
+
+// ==================== CUSTOM CONFIRM MODAL ====================
+
+/**
+ * Themed replacement for window.confirm(). Uses a lightweight in-DOM modal
+ * so it inherits the game aesthetic and stays inside the PWA shell.
+ */
+function confirmDialog(message) {
+  return new Promise((resolve) => {
+    const overlay = document.createElement('div');
+    overlay.className = 'modal confirm-modal';
+    overlay.setAttribute('role', 'alertdialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.innerHTML = `
+      <div class="confirm-box">
+        <p class="confirm-message"></p>
+        <div class="confirm-actions">
+          <button class="option-btn confirm-ok">${I18nManager.t('yes') || 'YES'}</button>
+          <button class="option-btn confirm-cancel">${I18nManager.t('no') || 'NO'}</button>
+        </div>
+      </div>
+    `;
+    overlay.querySelector('.confirm-message').textContent = message;
+    document.body.appendChild(overlay);
+    const cleanup = (val) => {
+      overlay.remove();
+      document.removeEventListener('keydown', onKey);
+      resolve(val);
+    };
+    const onKey = (e) => {
+      if (e.key === 'Escape') cleanup(false);
+      if (e.key === 'Enter') cleanup(true);
+    };
+    document.addEventListener('keydown', onKey);
+    overlay.querySelector('.confirm-ok').addEventListener('click', () => cleanup(true));
+    overlay.querySelector('.confirm-cancel').addEventListener('click', () => cleanup(false));
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) cleanup(false); });
+    overlay.querySelector('.confirm-ok').focus();
+  });
+}
+
 function loadQuestion() {
   const { currentRound, currentQ, language } = store.getState();
   const word = currentRound[currentQ];
   const questionData = getQuestionWord(word, language);
 
-  ui.wordElement.textContent = questionData.text;
+  // Render the word with an optional speak button when the question is English.
+  ui.wordElement.textContent = '';
   ui.wordElement.className = `lang-${language} typewriter`;
+  const textSpan = document.createElement('span');
+  textSpan.textContent = questionData.text;
+  ui.wordElement.appendChild(textSpan);
+  if (questionData.isEnglish && Speech.supported) {
+    const speakBtn = document.createElement('button');
+    speakBtn.type = 'button';
+    speakBtn.className = 'speak-btn';
+    speakBtn.setAttribute('aria-label', 'Pronounce');
+    speakBtn.textContent = '🔊';
+    speakBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      Speech.speak(questionData.text);
+    });
+    ui.wordElement.appendChild(speakBtn);
+  }
 
   const options = generateOptionsForWord(word, language, questionData.isEnglish);
   ui.optionsElement.textContent = '';
@@ -871,6 +1067,10 @@ function showExplanation(word, questionIsEnglish, isReviewComplete = false) {
   list.appendChild(content);
 
   ui.explanationModal.classList.remove('hidden');
+
+  // Auto-pronounce the English word on the explanation screen so the learner
+  // hears the correct pronunciation right after answering.
+  if (word.eng) Speech.speak(word.eng);
 }
 
 function nextQuestion() {
@@ -888,12 +1088,14 @@ function nextQuestion() {
       return;
     }
 
-    // Start new round
+    // Start new round — DO NOT reset completedRoundsCount here.
+    // It must accumulate across rounds until Word Review actually fires
+    // (which resets it via the continue button in showReviewSession).
     const roundWords = selectWordsForRound(state.currentCategory, 10);
     store.setState({
       currentRound: roundWords,
       currentQ: 0,
-      completedRoundsCount: 0 // Reset counter for next batch of 3 rounds
+      roundScore: 0
     });
     loadQuestion();
   } else {

@@ -66,5 +66,14 @@
   "new_version_available": "새 버전 사용 가능! 업데이트하려면 다시 로드하시겠습니까?",
   "round_complete": "// 라운드 완료 //",
   "score_label": "점수:",
-  "status_good": "좋음"
+  "status_good": "좋음",
+  "streak": "연속",
+  "hard_words": "어려운 단어 복습",
+  "no_hard_words": "아직 어려운 단어가 없습니다 — 계속 플레이하세요!",
+  "no_words": "사용 가능한 단어가 없습니다",
+  "search_category": "검색...",
+  "import_success": "가져오기 성공",
+  "import_invalid": "잘못된 백업 파일",
+  "yes": "예",
+  "no": "아니오"
 }

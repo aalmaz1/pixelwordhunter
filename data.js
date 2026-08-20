@@ -14,6 +14,7 @@
  */
 
 import { store } from './store.js';
+import { sanitizeToeicData, UNCONFIRMED_MARKER as SANITIZE_UNCONFIRMED } from './sanitize.js';
 
 // NO static import of words_optimized.json!
 // import wordsData from './words_optimized.json';  ← REMOVED
@@ -21,6 +22,30 @@ import { store } from './store.js';
 let gameData = null;
 let categoriesCache = null;
 let dataLoadPromise = null;
+let wordsByEng = null; // O(1) lookup index — rebuilt whenever gameData changes
+
+function rebuildWordsIndex() {
+  if (!gameData) { wordsByEng = null; return; }
+  wordsByEng = new Map(gameData.map(w => [w.eng, w]));
+}
+
+/**
+ * Allow callers (e.g. app.js.applyProgress) to inject a pre-built
+ * index if they already computed one. Keeps a single source of truth.
+ */
+export function setWordsIndex(map) {
+  if (map instanceof Map) wordsByEng = map;
+}
+
+/**
+ * Test helper — inject a synthetic gameData array without going through fetch.
+ * Only used from Vitest; safe in production since it's a no-op there.
+ */
+export function _setGameDataForTests(arr) {
+  gameData = Array.isArray(arr) ? arr : null;
+  rebuildWordsIndex();
+  categoriesCache = null;
+}
 
 const INTERVALS = {
   0: 0,
@@ -51,43 +76,14 @@ function scheduleIdle(callback, options) {
 
 /**
  * Sanitize data inline (fallback when both Worker and fetch fail).
- * Only used as last resort — the Worker path is preferred.
+ * Delegates to the shared sanitizer in ./sanitize.js so both paths stay
+ * in sync. Kept as a thin wrapper for backwards compatibility.
  */
 function sanitizeDataInline(rawData) {
-  if (!Array.isArray(rawData)) return [];
-  
-  const UNCONFIRMED_MARKER = '미확인';
-  
-  return rawData.map(rawWord => {
-    if (!rawWord || typeof rawWord !== 'object') return null;
-    
-    const eng = typeof rawWord.eng === 'string' ? rawWord.eng.trim() : '';
-    const category = typeof rawWord.category === 'string' ? rawWord.category.trim() : 'General';
-    const rus = typeof rawWord.rus === 'string' && rawWord.rus.trim() ? rawWord.rus.trim() : '';
-    const kor = typeof rawWord.kor === 'string' && rawWord.kor.trim() ? rawWord.kor.trim() : 
-                (typeof rawWord.ko === 'string' && rawWord.ko.trim() ? rawWord.ko.trim() : '');
-    const exampleEng = typeof rawWord.exampleEng === 'string' ? rawWord.exampleEng.trim() : '';
-    const exampleRus = typeof rawWord.exampleRus === 'string' ? rawWord.exampleRus.trim() : '';
-    const exampleKor = typeof rawWord.exampleKor === 'string' && rawWord.exampleKor.trim() ? rawWord.exampleKor.trim() : 
-                      (typeof rawWord.exampleKo === 'string' && rawWord.exampleKo.trim() ? rawWord.exampleKo.trim() : '');
-    
-    if (!eng || (!rus && !kor)) return null;
-    
-    return {
-      eng,
-      category,
-      rus: rus || 'No translation',
-      kor: kor || UNCONFIRMED_MARKER,
-      exampleEng,
-      exampleRus,
-      exampleKor: exampleKor || UNCONFIRMED_MARKER,
-      mastery: Number(rawWord.mastery) || 0,
-      lastSeen: Number(rawWord.lastSeen) || 0,
-      correctCount: Number(rawWord.correctCount) || 0,
-      incorrectCount: Number(rawWord.incorrectCount) || 0
-    };
-  }).filter(Boolean);
+  return sanitizeToeicData(rawData);
 }
+
+
 
 /**
  * Resolve the base path for fetching words_optimized.json.
@@ -214,12 +210,13 @@ async function fetchFreshData() {
     await yieldToMain();
     
     gameData = sanitizedData;
-    
+    rebuildWordsIndex();
+
     // DO NOT write to localStorage — the data is already in memory
     // from the fetch/Worker, and writing 243KB to localStorage would
     // create a 50-100ms blocking long task on the main thread.
     // The data will be re-fetched on next page load (cached by SW).
-    
+
     // Update Store
     store.setState({ words: sanitizedData, categories: getCategories() });
     
@@ -290,28 +287,78 @@ function getWordPriority(word) {
 export function selectWordsForRound(category, roundSize = 10) {
   const words = getWordsByCategory(category);
   if (!words.length) return [];
+  if (words.length <= roundSize) return shuffle([...words]);
 
-  const weightedWords = words.map(word => ({
-    word,
-    priority: getWordPriority(word)
-  }));
+  const weighted = words
+    .map(word => ({ word, priority: getWordPriority(word) }))
+    .sort((a, b) => b.priority - a.priority);
 
-  weightedWords.sort((a, b) => b.priority - a.priority);
+  // 70% top-priority (SRS-due / weak), 30% fresh randoms so the user always
+  // sees some new material and doesn't get stuck on the same 10 words.
+  const topCount = Math.max(1, Math.round(roundSize * 0.7));
+  const randCount = roundSize - topCount;
 
-  // Take top priority words then fill with random ones
-  const selected = weightedWords.slice(0, roundSize).map(w => w.word);
-  
-  // Shuffle the selected words for the round
-  for (let i = selected.length - 1; i > 0; i--) {
+  const topPool = weighted.slice(0, Math.max(topCount * 2, topCount));
+  const top = shuffle(topPool).slice(0, topCount).map(w => w.word);
+
+  const topSet = new Set(top.map(w => w.eng));
+  const restPool = words.filter(w => !topSet.has(w.eng));
+  const rest = shuffle(restPool).slice(0, randCount);
+
+  return shuffle([...top, ...rest]);
+}
+
+/**
+ * Fisher-Yates shuffle (in place, returns the same array for convenience).
+ */
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [selected[i], selected[j]] = [selected[j], selected[i]];
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
+  return arr;
+}
 
-  return selected;
+/**
+ * Return words the user struggles with: more wrong than right, or seen at
+ * least once but mastery still low. Sorted by "how hard" descending.
+ */
+export function selectHardWords(limit = 10) {
+  const words = getGameData();
+  if (!words.length) return [];
+  const hard = words
+    .filter(w => {
+      const wrong = w.incorrectCount || 0;
+      const right = w.correctCount || 0;
+      return wrong > right || (w.lastSeen > 0 && (w.mastery || 0) < 2);
+    })
+    .sort((a, b) => {
+      const scoreA = (a.incorrectCount || 0) - (a.correctCount || 0);
+      const scoreB = (b.incorrectCount || 0) - (b.correctCount || 0);
+      return scoreB - scoreA;
+    })
+    .slice(0, limit);
+  return shuffle(hard);
+}
+
+/**
+ * Per-category progress: mastered/total counts. Used by the category grid.
+ */
+export function getCategoryStats() {
+  const stats = {};
+  for (const w of getGameData()) {
+    const c = w.category || 'General';
+    if (!stats[c]) stats[c] = { total: 0, mastered: 0 };
+    stats[c].total += 1;
+    if ((w.mastery || 0) >= 4) stats[c].mastered += 1;
+  }
+  return stats;
 }
 
 export function updateWordProgress(wordEng, isCorrect) {
-  const word = getGameData().find(w => w.eng === wordEng);
+  // O(1) via Map; falls back to O(n) find on the (unlikely) miss.
+  const word = (wordsByEng && wordsByEng.get(wordEng)) ||
+               getGameData().find(w => w.eng === wordEng);
   if (!word) return;
 
   const now = Date.now();
@@ -354,7 +401,7 @@ export function getMasteryLabel(mastery) {
   return labels[mastery] || labels[0];
 }
 
-const UNCONFIRMED_MARKER = '미확인';
+const UNCONFIRMED_MARKER = SANITIZE_UNCONFIRMED;
 
 // Question & Answer Helpers
 export function getQuestionWord(word, lang = 'en') {

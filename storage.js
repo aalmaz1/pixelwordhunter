@@ -122,15 +122,15 @@ export async function loadProgress(firebaseDb, doc, getDoc) {
               const serverXP = Number(serverData.xp) || 0;
               storageSet(`xp_${user.uid}`, String(serverXP));
               store.setState({ xp: serverXP });
-              console.log(`[Storage] XP loaded from server: ${serverXP}`);
+              if (import.meta.env.DEV) console.log(`[Storage] XP loaded from server: ${serverXP}`);
             }
             
-            console.log('[Storage] Cloud sync successful');
+            if (import.meta.env.DEV) console.log('[Storage] Cloud sync successful');
             return progress;
           }
         } else {
           // Документ не существует - создадим пустой при первом сохранении
-          console.log('[Storage] No user document found, will create on first save');
+          if (import.meta.env.DEV) console.log('[Storage] No user document found, will create on first save');
         }
       }
     } catch (error) {
@@ -144,7 +144,7 @@ export async function loadProgress(firebaseDb, doc, getDoc) {
     try {
       const parsed = JSON.parse(raw);
       if (validateSaveData(parsed)) {
-        console.log('[Storage] Local data loaded');
+        if (import.meta.env.DEV) console.log('[Storage] Local data loaded');
         return parsed;
       }
     } catch {
@@ -243,7 +243,7 @@ export async function saveProgress(firebaseDb, doc, setDoc, serverTimestamp) {
               updatedAt: new Date().toISOString(),
               createdAt: new Date().toISOString()
             }, { merge: true });
-            console.log('[Storage] New user document created in Firestore');
+            if (import.meta.env.DEV) console.log('[Storage] New user document created in Firestore');
           } else {
             // Обновляем существующий документ
             await deps.setDoc(userRef, {
@@ -251,7 +251,7 @@ export async function saveProgress(firebaseDb, doc, setDoc, serverTimestamp) {
               lastSync: deps.serverTimestamp(),
               updatedAt: new Date().toISOString()
             }, { merge: true });
-            console.log('[Storage] Cloud saved');
+            if (import.meta.env.DEV) console.log('[Storage] Cloud saved');
           }
           
           storageRemove(BACKUP_KEY);
@@ -288,64 +288,82 @@ export function getUserXP() {
   return xp;
 }
 
-/**
- * Adds XP using atomic server-side increment to prevent race conditions
- * This ensures XP updates are consistent across multiple tabs/devices
- */
-export async function addXP(points) {
+// ---- Batched XP writes ------------------------------------------------------
+// Previous implementation fired 1–2 Firestore requests on EVERY correct answer
+// (up to ~10× per round). We now accumulate deltas locally and flush at most
+// once every FLUSH_INTERVAL_MS, plus a final flush on beforeunload / logout.
+
+const XP_FLUSH_INTERVAL_MS = 5000;
+let _pendingXpDelta = 0;
+let _xpFlushTimer = null;
+
+async function flushPendingXP() {
+  if (_pendingXpDelta === 0) return;
+  const delta = _pendingXpDelta;
+  _pendingXpDelta = 0;
   const userId = getCurrentUserId();
-  
-  if (!userId || !store.getState().isAuthenticated) {
-    // Offline or guest mode - update locally only
-    const currentXP = getUserXP();
-    const newXP = currentXP + points;
-    setUserXP(newXP);
-    return newXP;
-  }
-  
+  if (!userId || !store.getState().isAuthenticated) return;
   try {
     const deps = await resolveFirebaseSyncDeps();
-    if (!deps.firebaseDb || !deps.doc || !deps.getDoc || !deps.updateDoc || !deps.increment) {
-      throw new Error('Firebase sync unavailable');
-    }
-
+    if (!deps.firebaseDb || !deps.doc || !deps.getDoc || !deps.updateDoc || !deps.increment) return;
     const userRef = deps.doc(deps.firebaseDb, 'users', userId);
-    // Check if document exists, if not create it first
-    const userSnap = await deps.getDoc(userRef);
-    if (!userSnap.exists()) { 
+    const snap = await deps.getDoc(userRef);
+    if (!snap.exists()) {
       await deps.setDoc(userRef, { xp: 0 });
     }
-    // Use atomic increment on server to prevent race conditions
-    await deps.updateDoc(userRef, {
-      xp: deps.increment(points)
-    });
-    console.log(`[XP] Added ${points} XP atomically for user ${userId}`);
-    // Note: The real-time listener in firebase-config.js will update local state
-    return getUserXP() + points;
+    await deps.updateDoc(userRef, { xp: deps.increment(delta) });
+    if (import.meta.env.DEV) console.log(`[XP] Flushed +${delta} XP for user ${userId}`);
   } catch (error) {
-    console.error('[XP] Failed to add XP:', error);
-    // Fallback to local update
-    const currentXP = getUserXP();
-    const newXP = currentXP + points;
-    setUserXP(newXP);
-    return newXP;
+    // Re-queue the delta so we don't lose progress; will retry on next flush.
+    _pendingXpDelta += delta;
+    console.warn('[XP] Flush failed, re-queued:', error.message);
   }
+}
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('beforeunload', () => { flushPendingXP(); });
+}
+
+/**
+ * Add XP. Local state updates immediately for zero-latency UI; the server
+ * write is coalesced across up to 5 seconds so a fast player doesn't spam
+ * Firestore with a request per answer.
+ */
+export async function addXP(points) {
+  const currentXP = getUserXP();
+  const newXP = currentXP + points;
+  setUserXP(newXP);
+
+  const userId = getCurrentUserId();
+  if (!userId || !store.getState().isAuthenticated) return newXP;
+
+  _pendingXpDelta += points;
+  if (_xpFlushTimer) clearTimeout(_xpFlushTimer);
+  _xpFlushTimer = setTimeout(flushPendingXP, XP_FLUSH_INTERVAL_MS);
+  return newXP;
 }
 
 export function resetProgress() {
   storageRemove(STORAGE_KEY);
   storageRemove(BACKUP_KEY);
   const userId = getCurrentUserId();
-  storageRemove(`xp_${userId}`);
-  
+  storageRemove(`xp_${userId || 'guest'}`);
+  // Also clear the "other" bucket so a logged-out session doesn't leak
+  // yesterday's guest XP or vice versa.
+  storageRemove('xp_guest');
+  if (userId) storageRemove(`xp_${userId}`);
+  // Streak data
+  storageRemove('pwh_streak');
+  storageRemove('pwh_lastPlayed');
+
   getGameData().forEach(w => {
     w.mastery = 0;
     w.lastSeen = 0;
     w.correctCount = 0;
     w.incorrectCount = 0;
   });
-  
-  store.setState({ xp: 0 });
+
+  store.setState({ xp: 0, dailyStreak: 0 });
 }
 
 // Export/Import functionality
@@ -371,17 +389,20 @@ export function exportProgress() {
 }
 
 export async function importProgress(file) {
-  if (!file) return;
-  const text = await file.text();
+  if (!file) return { success: false, error: 'no_file' };
   try {
+    const text = await file.text();
     const data = JSON.parse(text);
-    if (data.progress) {
-      storageSet(STORAGE_KEY, JSON.stringify(data.progress));
-      if (data.xp !== undefined) setUserXP(data.xp);
-      alert('Import successful! Reloading...');
-      location.reload();
+    if (!data || typeof data !== 'object' || !data.progress) {
+      return { success: false, error: 'invalid' };
     }
+    if (!validateSaveData(data.progress)) {
+      return { success: false, error: 'invalid' };
+    }
+    storageSet(STORAGE_KEY, JSON.stringify(data.progress));
+    if (data.xp !== undefined) setUserXP(data.xp);
+    return { success: true, progress: data.progress };
   } catch {
-    alert('Invalid backup file');
+    return { success: false, error: 'invalid' };
   }
 }
