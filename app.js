@@ -29,6 +29,8 @@ import {
   getProgressStats,
   getCorrectTranslation,
   getQuestionWord,
+  getWordTranslation,
+  getExampleTranslation,
   setWordsIndex
 } from './data.js';
 import {
@@ -1136,6 +1138,47 @@ function checkAnswer(selected, word, btn, questionIsEnglish) {
   setTimeout(() => showExplanation(word, questionIsEnglish, false), 1000);
 }
 
+/**
+ * Render the English word, its translation, and the example sentence
+ * in the language selected in Settings. Korean UI never shows Russian
+ * (and Russian UI never shows Korean).
+ */
+function appendWordReviewContent(container, word, lang) {
+  const wP = document.createElement('p');
+  wP.className = 'explanation-word';
+  wP.textContent = word.eng;
+  // Pronunciation only on demand: tapping the English word speaks it.
+  makeWordSpeakable(wP, word.eng);
+
+  const dP = document.createElement('p');
+  const defLang = lang === 'ko' ? 'ko' : 'ru';
+  dP.className = `explanation-definition lang-${defLang}`;
+  dP.textContent = getWordTranslation(word, lang) || word.eng;
+
+  container.appendChild(wP);
+  container.appendChild(dP);
+
+  if (!word.exampleEng) return;
+
+  const exampleContainer = document.createElement('div');
+  exampleContainer.className = 'explanation-example-container';
+
+  const exEng = document.createElement('p');
+  exEng.className = 'explanation-example-en';
+  exEng.textContent = word.exampleEng;
+  exampleContainer.appendChild(exEng);
+
+  const example = getExampleTranslation(word, lang);
+  if (example.text) {
+    const exTrans = document.createElement('p');
+    exTrans.className = `explanation-example-${example.usedLang}`;
+    exTrans.textContent = example.text;
+    exampleContainer.appendChild(exTrans);
+  }
+
+  container.appendChild(exampleContainer);
+}
+
 function showExplanation(word, questionIsEnglish, isReviewComplete = false) {
   const list = document.getElementById('explanation-list');
   const lang = store.getState().translationLanguage;
@@ -1151,59 +1194,7 @@ function showExplanation(word, questionIsEnglish, isReviewComplete = false) {
 
   const content = document.createElement('div');
   content.className = 'explanation-content';
-
-  const wP = document.createElement('p');
-  wP.className = 'explanation-word';
-  wP.textContent = word.eng;
-  // Pronunciation only on demand: tapping the English word speaks it.
-  makeWordSpeakable(wP, word.eng);
-
-  const dP = document.createElement('p');
-  dP.className = 'explanation-definition';
-  dP.textContent = lang === 'ko' && word.kor !== '미확인' ? word.kor : word.rus;
-
-  content.appendChild(wP);
-  content.appendChild(dP);
-
-  // Business Case Section
-  if (word.exampleEng) {
-    const exampleContainer = document.createElement('div');
-    exampleContainer.className = 'explanation-example-container';
-
-    const exEng = document.createElement('p');
-    exEng.className = 'explanation-example-en';
-    exEng.textContent = word.exampleEng;
-    exampleContainer.appendChild(exEng);
-
-    // Translated example fallback logic
-    let translatedEx = '';
-    let usedLang = 'ru';
-
-    // Check if exampleKor is a valid translation (not a placeholder)
-    const isValidKoreanExample = word.exampleKor &&
-                                  word.exampleKor !== '미확인' &&
-                                  !word.exampleKor.includes('실제 사용 사례');
-
-    if (lang === 'ko' && isValidKoreanExample) {
-      translatedEx = word.exampleKor;
-      usedLang = 'ko';
-    } else if (word.exampleRus) {
-      translatedEx = word.exampleRus;
-      usedLang = 'ru';
-    } else if (word.exampleKor && word.exampleKor !== '미확인') {
-      translatedEx = word.exampleKor;
-      usedLang = 'ko';
-    }
-
-    if (translatedEx) {
-      const exTrans = document.createElement('p');
-      exTrans.className = `explanation-example-${usedLang}`;
-      exTrans.textContent = translatedEx;
-      exampleContainer.appendChild(exTrans);
-    }
-
-    content.appendChild(exampleContainer);
-  }
+  appendWordReviewContent(content, word, lang);
 
   list.appendChild(content);
 
@@ -1304,6 +1295,7 @@ function showReviewSession() {
 
   } else {
     // Create review cards for ALL words (both correct and incorrect)
+    const target = store.getState().translationLanguage;
     state.reviewSessionData.forEach((item) => {
       const card = document.createElement('div');
       card.setAttribute('role', 'listitem'); // Set role="listitem"
@@ -1312,16 +1304,7 @@ function showReviewSession() {
       // Green card for correct, red for wrong
       card.className = `review-card ${isCorrect ? 'correct' : 'wrong'}`;
 
-      const wordP = document.createElement('p');
-      wordP.className = 'explanation-word';
-      wordP.textContent = item.word.eng;
-      // Pronunciation only on demand: tapping the English word speaks it.
-      makeWordSpeakable(wordP, item.word.eng);
-
-      const defP = document.createElement('p');
-      defP.className = 'explanation-definition';
-      const target = store.getState().translationLanguage;
-      defP.textContent = target === 'ko' && item.word.kor !== '미확인' ? item.word.kor : item.word.rus;
+      appendWordReviewContent(card, item.word, target);
 
       const statusP = document.createElement('p');
       statusP.className = 'review-status';
@@ -1329,8 +1312,6 @@ function showReviewSession() {
         ? `✓ ${I18nManager.t('correct_count')}`
         : `✗ ${I18nManager.t('needs_review')}`;
 
-      card.appendChild(wordP);
-      card.appendChild(defP);
       card.appendChild(statusP);
       list.appendChild(card);
     });

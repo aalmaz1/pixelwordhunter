@@ -391,6 +391,49 @@ export function getMasteryLabel(mastery) {
 }
 
 const UNCONFIRMED_MARKER = SANITIZE_UNCONFIRMED;
+const KOREAN_PLACEHOLDER_SNIPPET = '실제 사용 사례';
+
+/**
+ * True when a Korean string is a real translation, not the unconfirmed
+ * sentinel or the auto-generated "{word}의 실제 사용 사례입니다." stub.
+ */
+export function isUsableKoreanText(text) {
+  return typeof text === 'string'
+    && text.trim() !== ''
+    && text !== UNCONFIRMED_MARKER
+    && !text.includes(KOREAN_PLACEHOLDER_SNIPPET);
+}
+
+/**
+ * Vocabulary translation for the active language.
+ * Korean UI never falls back to Russian (and vice versa) — mixing languages
+ * in 단어 복습 / WORD REVIEW is the bug this helper exists to prevent.
+ */
+export function getWordTranslation(word, lang = 'ru') {
+  if (!word) return '';
+  if (lang === 'ko') {
+    return isUsableKoreanText(word.kor) ? word.kor : '';
+  }
+  return (typeof word.rus === 'string' && word.rus.trim()) ? word.rus : '';
+}
+
+/**
+ * Example-sentence translation for the active language.
+ * Returns { text, usedLang } — usedLang is 'ko' | 'ru' | null.
+ */
+export function getExampleTranslation(word, lang = 'ru') {
+  if (!word) return { text: '', usedLang: null };
+  if (lang === 'ko') {
+    if (isUsableKoreanText(word.exampleKor)) {
+      return { text: word.exampleKor, usedLang: 'ko' };
+    }
+    return { text: '', usedLang: null };
+  }
+  if (typeof word.exampleRus === 'string' && word.exampleRus.trim()) {
+    return { text: word.exampleRus, usedLang: 'ru' };
+  }
+  return { text: '', usedLang: null };
+}
 
 // Question & Answer Helpers
 export function getQuestionWord(word, lang = 'en') {
@@ -399,19 +442,16 @@ export function getQuestionWord(word, lang = 'en') {
 
   if (showEnglish || lang === 'en') {
     return { text: word.eng || '', isEnglish: true };
-  } else {
-    if (lang === 'ko' && word.kor && word.kor !== UNCONFIRMED_MARKER) {
-      return { text: word.kor, isEnglish: false };
-    }
-    return { text: word.rus || word.eng, isEnglish: false };
   }
+  const translation = getWordTranslation(word, lang);
+  if (translation) return { text: translation, isEnglish: false };
+  return { text: word.eng || '', isEnglish: true };
 }
 
 export function getCorrectTranslation(word, lang = 'en', questionIsEnglish = true) {
   if (!word) return '';
   if (questionIsEnglish) {
-    if (lang === 'ko' && word.kor && word.kor !== UNCONFIRMED_MARKER) return word.kor;
-    return word.rus || word.eng;
+    return getWordTranslation(word, lang) || word.eng || '';
   }
   return word.eng;
 }
