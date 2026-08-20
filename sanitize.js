@@ -22,7 +22,12 @@ export function sanitizeToeicWord(rawWord) {
 
   if (!eng || (!rus && !kor)) return null;
 
+  const id = typeof rawWord.id === 'string' && rawWord.id.trim()
+    ? rawWord.id.trim()
+    : `${category.toLowerCase().replace(/[^a-z0-9]+/g, '-')}--${eng.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+
   return {
+    id,
     eng,
     category,
     rus: rus || 'No translation',

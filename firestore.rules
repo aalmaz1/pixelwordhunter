@@ -1,14 +1,31 @@
 rules_version = '2';
 
-// PixelWordHunter Firestore Security Rules.
-// Each user's document is private to that user; nothing else is readable.
-// Anonymous users are allowed as they still have a stable request.auth.uid.
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /users/{uid} {
-      allow read, write: if request.auth != null && request.auth.uid == uid;
+    function owns(uid) {
+      return request.auth != null && request.auth.uid == uid;
     }
-    // Deny everything else by default.
+
+    function validUserDocument() {
+      let d = request.resource.data;
+      return d.keys().hasOnly([
+          'username', 'email', 'xp', 'progress', 'createdAt', 'updatedAt', 'lastSync'
+        ])
+        && (!d.keys().hasAny(['username']) || (d.username is string && d.username.size() <= 80))
+        && (!d.keys().hasAny(['email']) || (d.email is string && d.email.size() <= 254))
+        && (!d.keys().hasAny(['xp']) || (d.xp is int && d.xp >= 0 && d.xp <= 1000000000))
+        && (!d.keys().hasAny(['progress']) || (d.progress is map && d.progress.size() <= 1000))
+        && (!d.keys().hasAny(['updatedAt']) || d.updatedAt is string)
+        && (!d.keys().hasAny(['createdAt']) || d.createdAt is string || d.createdAt is timestamp)
+        && (!d.keys().hasAny(['lastSync']) || d.lastSync is timestamp);
+    }
+
+    match /users/{uid} {
+      allow read: if owns(uid);
+      allow create, update: if owns(uid) && validUserDocument();
+      allow delete: if owns(uid);
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

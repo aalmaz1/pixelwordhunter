@@ -37,7 +37,8 @@ class Store extends EventTarget {
       // Settings
       theme: 'cyberpunk',
       audioEnabled: true,
-      language: 'en', // 'en', 'ru', 'ko'
+      uiLanguage: 'en',
+      translationLanguage: 'ru', // vocabulary direction: Russian or Korean
 
       // Data
       words: [],

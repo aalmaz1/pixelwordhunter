@@ -22,11 +22,11 @@ import { sanitizeToeicData, UNCONFIRMED_MARKER as SANITIZE_UNCONFIRMED } from '.
 let gameData = null;
 let categoriesCache = null;
 let dataLoadPromise = null;
-let wordsByEng = null; // O(1) lookup index — rebuilt whenever gameData changes
+let wordsById = null; // O(1) lookup index — IDs remain unique across repeated terms
 
 function rebuildWordsIndex() {
-  if (!gameData) { wordsByEng = null; return; }
-  wordsByEng = new Map(gameData.map(w => [w.eng, w]));
+  if (!gameData) { wordsById = null; return; }
+  wordsById = new Map(gameData.map(w => [w.id, w]));
 }
 
 /**
@@ -34,7 +34,7 @@ function rebuildWordsIndex() {
  * index if they already computed one. Keeps a single source of truth.
  */
 export function setWordsIndex(map) {
-  if (map instanceof Map) wordsByEng = map;
+  if (map instanceof Map) wordsById = map;
 }
 
 /**
@@ -42,6 +42,7 @@ export function setWordsIndex(map) {
  * Only used from Vitest; safe in production since it's a no-op there.
  */
 export function _setGameDataForTests(arr) {
+  if (Array.isArray(arr)) arr.forEach((word, index) => { word.id ||= `test-${index}-${word.eng}`; });
   gameData = Array.isArray(arr) ? arr : null;
   rebuildWordsIndex();
   categoriesCache = null;
@@ -62,16 +63,6 @@ const INTERVALS = {
  */
 function yieldToMain() {
   return new Promise(resolve => setTimeout(resolve, 0));
-}
-
-/**
- * Schedule a callback during idle time.
- */
-function scheduleIdle(callback, options) {
-  if (typeof requestIdleCallback === 'function') {
-    return requestIdleCallback(callback, options);
-  }
-  return setTimeout(callback, 1);
 }
 
 /**
@@ -168,19 +159,6 @@ async function loadViaDynamicImport() {
   const freshData = module.default || module;
   await yieldToMain();
   return sanitizeDataInline(freshData);
-}
-
-/**
- * Last resort fallback: Load via dynamic import with inline sanitization.
- * Used when both Worker and dynamic import fail.
- */
-async function loadWithInlineFallback() {
-  try {
-    return await loadViaDynamicImport();
-  } catch (importErr) {
-    console.error('[Data] Dynamic import also failed:', importErr.message);
-    return [];
-  }
 }
 
 /**
@@ -301,8 +279,8 @@ export function selectWordsForRound(category, roundSize = 10) {
   const topPool = weighted.slice(0, Math.max(topCount * 2, topCount));
   const top = shuffle(topPool).slice(0, topCount).map(w => w.word);
 
-  const topSet = new Set(top.map(w => w.eng));
-  const restPool = words.filter(w => !topSet.has(w.eng));
+  const topSet = new Set(top.map(w => w.id));
+  const restPool = words.filter(w => !topSet.has(w.id));
   const rest = shuffle(restPool).slice(0, randCount);
 
   return shuffle([...top, ...rest]);
@@ -355,10 +333,10 @@ export function getCategoryStats() {
   return stats;
 }
 
-export function updateWordProgress(wordEng, isCorrect) {
-  // O(1) via Map; falls back to O(n) find on the (unlikely) miss.
-  const word = (wordsByEng && wordsByEng.get(wordEng)) ||
-               getGameData().find(w => w.eng === wordEng);
+export function updateWordProgress(wordId, isCorrect) {
+  // IDs distinguish the same English term used in multiple categories.
+  const word = (wordsById && wordsById.get(wordId)) ||
+               getGameData().find(w => w.id === wordId);
   if (!word) return;
 
   const now = Date.now();

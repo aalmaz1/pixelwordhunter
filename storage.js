@@ -6,17 +6,67 @@
 import { getGameData } from './data.js';
 import { store } from './store.js';
 
-const STORAGE_KEY = 'pixelWordHunter_save_v2';
-const BACKUP_KEY = STORAGE_KEY + '_backup';
+const LEGACY_STORAGE_KEY = 'pixelWordHunter_save_v2';
+const STORAGE_PREFIX = 'pixelWordHunter_save_v3_';
+
+function storageOwner() {
+  const user = store.getState().user;
+  return user && !user.isAnonymous ? user.uid : 'guest';
+}
+
+function progressKey(owner = storageOwner()) {
+  return `${STORAGE_PREFIX}${owner}`;
+}
+
+function backupKey(owner = storageOwner()) {
+  return `${progressKey(owner)}_backup`;
+}
+
+/** Convert the old eng-keyed format to the ID-keyed v3 format. Repeated terms
+ * inherit the old result so no previously earned progress is lost. */
+export function migrateProgress(progress) {
+  if (!progress || typeof progress !== 'object') return {};
+  const words = getGameData();
+  const migrated = {};
+  for (const word of words) {
+    const value = progress[word.id] || progress[word.eng];
+    if (value) migrated[word.id] = { ...value };
+  }
+  return migrated;
+}
+
+export function mergeProgress(a = {}, b = {}) {
+  const result = { ...a };
+  for (const [id, incoming] of Object.entries(b)) {
+    const current = result[id] || {};
+    result[id] = {
+      mastery: Math.max(current.mastery || 0, incoming.mastery || 0),
+      lastSeen: Math.max(current.lastSeen || 0, incoming.lastSeen || 0),
+      correctCount: Math.max(current.correctCount || 0, incoming.correctCount || 0),
+      incorrectCount: Math.max(current.incorrectCount || 0, incoming.incorrectCount || 0)
+    };
+  }
+  return result;
+}
+
+export function getGuestProgress() {
+  try {
+    return migrateProgress(JSON.parse(storageGet(progressKey('guest')) || '{}'));
+  } catch {
+    return {};
+  }
+}
+
+export function clearGuestProgress() {
+  storageRemove(progressKey('guest'));
+  storageRemove(backupKey('guest'));
+}
+
+export function persistCurrentProgress(progress) {
+  storageSet(progressKey(), JSON.stringify(progress));
+}
 
 // ==================== INP OPTIMIZATION ====================
-
-/**
- * Yield to the browser to break long tasks and reduce INP input delay.
- */
-function yieldToMain() {
-  return new Promise(resolve => setTimeout(resolve, 0));
-}
 
 /**
  * Schedule a callback during idle time.
@@ -32,6 +82,12 @@ function scheduleIdle(callback, options) {
 // (e.g. from fast answer clicks) from creating consecutive long tasks.
 let _localSaveTimer = null;
 const LOCAL_SAVE_DEBOUNCE_MS = 500;
+
+function emitSyncStatus(status) {
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('pwh:syncStatus', { detail: { status } }));
+  }
+}
 
 async function resolveFirebaseSyncDeps(firebaseDbArg, docArg, getDocArg, setDocArg, serverTimestampArg, updateDocArg, incrementArg) {
   if (firebaseDbArg && docArg && getDocArg && setDocArg) {
@@ -75,9 +131,13 @@ async function resolveFirebaseSyncDeps(firebaseDbArg, docArg, getDocArg, setDocA
 export function validateSaveData(data) {
   if (!data || typeof data !== 'object') return false;
   
+  if (Object.keys(data).length > 1000) return false;
   for (const [, progress] of Object.entries(data)) {
-    if (typeof progress.mastery !== 'number' || progress.mastery < 0) return false;
-    if (typeof progress.lastSeen !== 'number' || progress.lastSeen < 0) return false;
+    if (!progress || typeof progress !== 'object') return false;
+    if (!Number.isFinite(progress.mastery) || progress.mastery < 0 || progress.mastery > 5) return false;
+    if (!Number.isFinite(progress.lastSeen) || progress.lastSeen < 0) return false;
+    if (progress.correctCount != null && (!Number.isFinite(progress.correctCount) || progress.correctCount < 0)) return false;
+    if (progress.incorrectCount != null && (!Number.isFinite(progress.incorrectCount) || progress.incorrectCount < 0)) return false;
   }
   return true;
 }
@@ -103,7 +163,7 @@ export async function loadProgress(firebaseDb, doc, getDoc) {
   let progress = {};
 
   // 1. Try Firebase if authenticated
-  if (isAuthenticated && user) {
+  if (isAuthenticated && user && !user.isAnonymous) {
     try {
       const deps = await resolveFirebaseSyncDeps(firebaseDb, doc, getDoc);
       if (deps.firebaseDb && deps.doc && deps.getDoc) {
@@ -113,9 +173,9 @@ export async function loadProgress(firebaseDb, doc, getDoc) {
         if (userSnap.exists()) {
           const serverData = userSnap.data();
           if (serverData.progress && validateSaveData(serverData.progress)) {
-            progress = serverData.progress;
-            // Cache for offline use
-            storageSet(STORAGE_KEY, JSON.stringify(progress));
+            progress = migrateProgress(serverData.progress);
+            // Cache only in this user's namespace.
+            storageSet(progressKey(user.uid), JSON.stringify(progress));
             
             // Загружаем XP с сервера и сохраняем локально
             if (serverData.xp !== undefined) {
@@ -138,18 +198,24 @@ export async function loadProgress(firebaseDb, doc, getDoc) {
     }
   }
 
-  // 2. Fallback to LocalStorage
-  const raw = storageGet(STORAGE_KEY);
-  if (raw) {
-    try {
-      const parsed = JSON.parse(raw);
-      if (validateSaveData(parsed)) {
-        if (import.meta.env.DEV) console.log('[Storage] Local data loaded');
-        return parsed;
+  // 2. Fallback to this user's local namespace. For guests only, migrate the
+  // legacy shared v2 key once; account data is never exposed after logout.
+  const owner = user && !user.isAnonymous ? user.uid : 'guest';
+  const raw = storageGet(progressKey(owner));
+  const legacyRaw = owner === 'guest' ? storageGet(LEGACY_STORAGE_KEY) : null;
+  try {
+    const parsed = JSON.parse(raw || legacyRaw || '{}');
+    if (validateSaveData(parsed)) {
+      const migrated = migrateProgress(parsed);
+      if (legacyRaw && !raw) {
+        storageSet(progressKey('guest'), JSON.stringify(migrated));
+        storageRemove(LEGACY_STORAGE_KEY);
       }
-    } catch {
-      console.error('[Storage] Parse error');
+      if (import.meta.env.DEV) console.log('[Storage] Local data loaded');
+      return migrated;
     }
+  } catch {
+    console.error('[Storage] Parse error');
   }
 
   return {};
@@ -173,7 +239,7 @@ function buildProgressData() {
   const progress = {};
   words.forEach((w) => {
     if (w.mastery > 0 || w.lastSeen > 0) {
-      progress[w.eng] = {
+      progress[w.id] = {
         mastery: w.mastery,
         lastSeen: w.lastSeen,
         correctCount: w.correctCount || 0,
@@ -195,9 +261,9 @@ function debouncedLocalSave(progress) {
     scheduleIdle(() => {
       try {
         const newData = JSON.stringify(progress);
-        const oldData = storageGet(STORAGE_KEY);
-        if (oldData) storageSet(BACKUP_KEY, oldData);
-        storageSet(STORAGE_KEY, newData);
+        const oldData = storageGet(progressKey());
+        if (oldData) storageSet(backupKey(), oldData);
+        storageSet(progressKey(), newData);
       } catch (e) {
         console.warn('[Storage] Local save failed:', e.message);
       }
@@ -221,7 +287,8 @@ export async function saveProgress(firebaseDb, doc, setDoc, serverTimestamp) {
   const { user, isAuthenticated, xp } = store.getState();
   // Note: XP is now synced via atomic increments and real-time listeners
   // so we don't need to explicitly save it here anymore
-  if (isAuthenticated && user) {
+  if (isAuthenticated && user && !user.isAnonymous) {
+    emitSyncStatus('syncing');
     const deps = await resolveFirebaseSyncDeps(firebaseDb, doc, undefined, setDoc, serverTimestamp);
     if (deps.firebaseDb && deps.doc && deps.getDoc && deps.setDoc && deps.serverTimestamp) {
       // Use a local timeout variable scoped to this module
@@ -254,8 +321,10 @@ export async function saveProgress(firebaseDb, doc, setDoc, serverTimestamp) {
             if (import.meta.env.DEV) console.log('[Storage] Cloud saved');
           }
           
-          storageRemove(BACKUP_KEY);
+          storageRemove(backupKey());
+          emitSyncStatus('synced');
         } catch (error) {
+          emitSyncStatus('sync_error');
           console.warn('[Storage] Cloud save failed:', error.message);
         }
       }, 2000);
@@ -297,7 +366,7 @@ const XP_FLUSH_INTERVAL_MS = 5000;
 let _pendingXpDelta = 0;
 let _xpFlushTimer = null;
 
-async function flushPendingXP() {
+export async function flushPendingXP() {
   if (_pendingXpDelta === 0) return;
   const delta = _pendingXpDelta;
   _pendingXpDelta = 0;
@@ -343,9 +412,13 @@ export async function addXP(points) {
   return newXP;
 }
 
-export function resetProgress() {
-  storageRemove(STORAGE_KEY);
-  storageRemove(BACKUP_KEY);
+export async function resetProgress({ cloud = false } = {}) {
+  if (_localSaveTimer) { clearTimeout(_localSaveTimer); _localSaveTimer = null; }
+  if (saveProgress._timeout) { clearTimeout(saveProgress._timeout); saveProgress._timeout = null; }
+  if (_xpFlushTimer) { clearTimeout(_xpFlushTimer); _xpFlushTimer = null; }
+  _pendingXpDelta = 0;
+  storageRemove(progressKey());
+  storageRemove(backupKey());
   const userId = getCurrentUserId();
   storageRemove(`xp_${userId || 'guest'}`);
   // Also clear the "other" bucket so a logged-out session doesn't leak
@@ -363,15 +436,24 @@ export function resetProgress() {
     w.incorrectCount = 0;
   });
 
-  store.setState({ xp: 0, dailyStreak: 0 });
+  store.setState({ xp: 0, dailyStreak: 0, masteredCount: 0, learningCount: 0, reviewCount: getGameData().length });
+
+  if (cloud && userId && store.getState().isAuthenticated) {
+    const deps = await resolveFirebaseSyncDeps();
+    if (deps.firebaseDb && deps.doc && deps.setDoc) {
+      await deps.setDoc(deps.doc(deps.firebaseDb, 'users', userId), {
+        progress: {}, xp: 0, updatedAt: new Date().toISOString()
+      }, { merge: true });
+    }
+  }
 }
 
 // Export/Import functionality
 export function exportProgress() {
   const data = {
-    version: 2,
+    version: 3,
     xp: getUserXP(),
-    progress: JSON.parse(storageGet(STORAGE_KEY) || '{}'),
+    progress: buildProgressData(),
     settings: {
       theme: store.getState().theme,
       language: store.getState().language,
@@ -399,9 +481,10 @@ export async function importProgress(file) {
     if (!validateSaveData(data.progress)) {
       return { success: false, error: 'invalid' };
     }
-    storageSet(STORAGE_KEY, JSON.stringify(data.progress));
-    if (data.xp !== undefined) setUserXP(data.xp);
-    return { success: true, progress: data.progress };
+    const progress = migrateProgress(data.progress);
+    storageSet(progressKey(), JSON.stringify(progress));
+    if (data.xp !== undefined && Number.isFinite(Number(data.xp))) setUserXP(Math.max(0, Number(data.xp)));
+    return { success: true, progress };
   } catch {
     return { success: false, error: 'invalid' };
   }

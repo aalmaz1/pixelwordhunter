@@ -868,26 +868,6 @@ html, body {
   text-shadow: 0 0 6px var(--neon-yellow);
 }
 
-/* Speak button next to the question word */
-#word { display: inline-flex; align-items: center; gap: 12px; }
-.speak-btn {
-  font-family: inherit;
-  font-size: 18px;
-  background: transparent;
-  border: 1px solid var(--neon-cyan);
-  color: var(--neon-cyan);
-  cursor: pointer;
-  padding: 4px 10px;
-  min-height: 36px;
-  min-width: 36px;
-  text-shadow: var(--shadow-cyan);
-  transition: all .18s;
-}
-.speak-btn:hover {
-  background: rgba(0, 245, 255, 0.15);
-  box-shadow: 0 0 12px rgba(0, 245, 255, 0.6);
-}
-
 /* Category search input */
 .category-search {
   width: min(340px, 92%);
@@ -990,3 +970,36 @@ html, body {
 /* Hard-words button gets accent color */
 .hard-btn { color: var(--neon-yellow) !important; border-color: var(--neon-yellow) !important; }
 .hard-btn:hover { border-color: var(--neon-yellow) !important; text-shadow: 0 0 6px var(--neon-yellow); box-shadow: 0 0 8px rgba(255, 230, 0, 0.4); }
+
+/* Stabilization pass: clickable pronunciation word, round progress/results */
+.word-button {
+  display: block;
+  width: 100%;
+  padding: 18px 12px;
+  border: 0;
+  background: transparent;
+  color: var(--neon-cyan);
+  font: inherit;
+  font-size: clamp(22px, 6vw, 42px);
+  line-height: 1.45;
+  text-align: center;
+  text-shadow: var(--shadow-cyan);
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.word-button:hover { color: var(--neon-yellow); text-shadow: 0 0 12px var(--neon-yellow); }
+.word-button:active { transform: scale(.98); }
+.word-button:focus-visible { outline: 3px solid var(--neon-green); outline-offset: 4px; }
+.round-progress { width: min(520px, 92%); margin: 8px auto 2px; font-size: 8px; color: var(--text-dim); text-align: right; }
+.round-progress-track { height: 5px; margin-top: 7px; background: rgba(255,255,255,.1); overflow: hidden; }
+#question-progress-fill { height: 100%; width: 10%; background: var(--neon-cyan); box-shadow: var(--shadow-cyan); transition: width .25s ease; }
+.result-box { width: min(440px, 94%); padding: 26px; border: 2px solid var(--neon-purple); background: var(--bg-mid); box-shadow: var(--shadow-purple); }
+.result-summary { display: grid; gap: 12px; margin: 8px 0 24px; color: var(--text-main); font-size: 10px; line-height: 1.6; }
+.result-actions { display: grid; gap: 10px; }
+.result-actions .option-btn { width: 100%; }
+.settings-row { flex-wrap: wrap; }
+@media (max-width: 360px) {
+  .settings-content { padding: 12px; }
+  .settings-label { width: 100%; }
+  .word-button { font-size: clamp(18px, 7vw, 28px); }
+}

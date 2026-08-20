@@ -37,9 +37,13 @@ import {
   loadProgressWrapper,
   storageGet,
   storageSet,
-  setUserXP,
+  getGuestProgress,
+  clearGuestProgress,
+  mergeProgress,
+  persistCurrentProgress,
   getUserXP,
   addXP,
+  flushPendingXP,
   resetProgress,
   exportProgress,
   importProgress
@@ -88,7 +92,7 @@ export function cancelIdle(id) {
 
 // Локальные переменные для Firebase-сервисов и функций (заполняются лениво)
 let firebaseAuth, firebaseDb;
-let createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile;
+let createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, updateProfile;
 let doc, setDoc, getDoc, serverTimestamp;
 
 const DEV = import.meta.env.DEV;
@@ -111,6 +115,7 @@ async function initializeFirebaseServices() {
   ]);
   createUserWithEmailAndPassword = authModule.createUserWithEmailAndPassword;
   signInWithEmailAndPassword = authModule.signInWithEmailAndPassword;
+  sendPasswordResetEmail = authModule.sendPasswordResetEmail;
   updateProfile = authModule.updateProfile;
   doc = firestoreModule.doc;
   setDoc = firestoreModule.setDoc;
@@ -135,8 +140,18 @@ async function handleAuthStateChanged(user) {
 
   if (user) {
     try {
-      const progress = await loadProgress(firebaseDb, doc, getDoc);
+      let progress = await loadProgress(firebaseDb, doc, getDoc);
+      const guestProgress = getGuestProgress();
+      if (!user.isAnonymous && Object.keys(guestProgress).length) {
+        const shouldMerge = await confirmDialog(I18nManager.t('merge_guest_progress'));
+        if (shouldMerge) {
+          progress = mergeProgress(progress, guestProgress);
+          persistCurrentProgress(progress);
+          clearGuestProgress();
+        }
+      }
       applyProgress(progress, true);
+      if (Object.keys(progress).length) saveProgress(firebaseDb, doc, setDoc, serverTimestamp);
     } catch (error) {
       console.error('[Auth] Failed to load progress:', error);
     }
@@ -274,6 +289,17 @@ const ThemeManager = {
 };
 
 // ==================== AUTH MANAGER ====================
+function localizeAuthError(code) {
+  const key = ({
+    'auth/invalid-credential': 'auth_invalid_credentials',
+    'auth/email-already-in-use': 'auth_email_in_use',
+    'auth/weak-password': 'auth_weak_password',
+    'auth/invalid-email': 'auth_invalid_email',
+    'auth/too-many-requests': 'auth_too_many_requests'
+  })[code];
+  return I18nManager.t(key || 'authentication_failed');
+}
+
 const AuthManager = {
   async register(username, email, password) {
     // Ensure Firebase services are initialized
@@ -295,7 +321,7 @@ const AuthManager = {
       // Track auth method to prevent auto anonymous sign-in
       localStorage.setItem('pixelWordHunter_authMethod', 'email');
       return { success: true };
-    } catch (e) { return { success: false, error: e.message }; }
+    } catch (e) { return { success: false, error: localizeAuthError(e.code) }; }
   },
 
   async login(email, password) {
@@ -312,7 +338,18 @@ const AuthManager = {
       // Track auth method to prevent auto anonymous sign-in
       localStorage.setItem('pixelWordHunter_authMethod', 'email');
       return { success: true };
-    } catch (e) { return { success: false, error: e.message }; }
+    } catch (e) { return { success: false, error: localizeAuthError(e.code) }; }
+  },
+
+  async resetPassword(email) {
+    if (!email) return { success: false, error: I18nManager.t('email_required') };
+    try {
+      if (!firebaseAuth) await initializeFirebaseServices();
+      await sendPasswordResetEmail(firebaseAuth, email);
+      return { success: true };
+    } catch {
+      return { success: false, error: I18nManager.t('password_reset_failed') };
+    }
   },
 
   async logout() {
@@ -336,6 +373,12 @@ async function init() {
     // initializeFirebaseServices() будет вызвана только при необходимости
     // await initializeFirebaseServices(); // Убрали отсюда, чтобы загрузка была ленивой
     await I18nManager.init();
+    const uiLanguage = I18nManager.getCurrentLanguage();
+    const savedTranslationLanguage = storageGet('pixelWordHunter_translationLanguage');
+    const translationLanguage = ['ru', 'ko'].includes(savedTranslationLanguage)
+      ? savedTranslationLanguage
+      : (uiLanguage === 'ko' ? 'ko' : 'ru');
+    store.setState({ uiLanguage, translationLanguage });
 
     // Yield to let the browser paint the initial UI and process any
     // pending user interactions before we start heavy data loading.
@@ -397,8 +440,8 @@ async function init() {
       handleAuthStateChanged(e.detail?.user || null);
     });
 
-    // Update daily streak on app open.
-    updateDailyStreak();
+    // Streak is updated on the first answered question, not merely on app open.
+    store.setState({ dailyStreak: parseInt(storageGet('pwh_streak'), 10) || 0 });
 
     // Handle PWA shortcut URLs (?action=quick|hard)
     const params = new URLSearchParams(location.search);
@@ -467,6 +510,12 @@ function setupEventListeners() {
   });
 
   document.getElementById('auth-submit')?.addEventListener('click', handleAuthSubmit);
+  document.getElementById('forgot-password-btn')?.addEventListener('click', async () => {
+    const email = document.getElementById('auth-email').value.trim();
+    const result = await AuthManager.resetPassword(email);
+    if (result.success) showNotification(I18nManager.t('password_reset_sent'));
+    else ui.authError.textContent = result.error;
+  });
 
   // Click outside the auth dialog closes it.
   document.getElementById('auth-modal')?.addEventListener('click', (e) => {
@@ -489,7 +538,15 @@ function setupEventListeners() {
   document.querySelectorAll('[data-lang]').forEach(btn => {
     btn.addEventListener('click', async () => {
       await I18nManager.setLanguage(btn.dataset.lang);
-      store.setState({ language: btn.dataset.lang });
+      store.setState({ uiLanguage: btn.dataset.lang });
+    });
+  });
+
+  document.querySelectorAll('[data-translation-lang]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const translationLanguage = btn.dataset.translationLang;
+      storageSet('pixelWordHunter_translationLanguage', translationLanguage);
+      store.setState({ translationLanguage });
     });
   });
 
@@ -527,7 +584,10 @@ function setupEventListeners() {
   document.getElementById('reset-progress-btn')?.addEventListener('click', async () => {
     const ok = await confirmDialog(I18nManager.t('reset_progress_confirm') || 'Reset all progress?');
     if (!ok) return;
-    resetProgress();
+    const cloud = store.getState().isAuthenticated
+      ? await confirmDialog(I18nManager.t('reset_cloud'))
+      : false;
+    await resetProgress({ cloud });
     applyProgress({}, false);
     renderCategoryButtons(['All', ...getCategories()], (cat) => startGame(cat), getCategoryStats());
     showNotification(I18nManager.t('progress_reset') || 'Progress reset');
@@ -535,6 +595,7 @@ function setupEventListeners() {
 
   // Logout button
   document.getElementById('logout-btn')?.addEventListener('click', async () => {
+    await flushPendingXP();
     await AuthManager.logout();
     showNotification(I18nManager.t('logged_out') || 'Logged out successfully');
     // Reload to fully reset app state and show login buttons
@@ -551,6 +612,11 @@ function setupEventListeners() {
   // Global Keyboard Shortcuts
   window.addEventListener('keydown', (e) => {
     if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+    const resultModal = document.getElementById('result-modal');
+    if (resultModal && !resultModal.classList.contains('hidden')) {
+      if (e.key === 'Escape') document.getElementById('result-exit-btn')?.click();
+      return;
+    }
 
     const state = store.getState();
     const gameScreenActive = !ui.gameScreenElement.classList.contains('hidden');
@@ -591,6 +657,21 @@ function setupEventListeners() {
     }
   });
 
+  window.addEventListener('pwh:syncStatus', (e) => {
+    const status = e.detail?.status;
+    const wrap = document.getElementById('sync-status');
+    const text = document.getElementById('sync-text');
+    const retry = document.getElementById('retry-sync-btn');
+    if (!wrap || !text) return;
+    wrap.classList.remove('hidden');
+    text.textContent = I18nManager.t(status || 'syncing');
+    retry?.classList.toggle('hidden', status !== 'sync_error');
+    if (status === 'synced') setTimeout(() => wrap.classList.add('hidden'), 1800);
+  });
+  document.getElementById('retry-sync-btn')?.addEventListener('click', () => {
+    saveProgress(firebaseDb, doc, setDoc, serverTimestamp);
+  });
+
   // Global Hover Sound Effect
   document.addEventListener('mouseover', (e) => {
     if (e.target.tagName === 'BUTTON' || e.target.closest('.option-btn, .category-btn, .theme-btn')) {
@@ -604,8 +685,6 @@ let releaseAuthTrap = null;
 
 function showAuthModal(mode) {
   store.setState({ authMode: mode });
-  ui.authTitle.textContent = mode === 'login' ? '// LOGIN //' : '// REGISTER //';
-  
   const isLogin = mode === 'login';
   ui.usernameField.style.display = isLogin ? 'none' : 'flex';
   ui.usernameField.setAttribute('aria-hidden', isLogin ? 'true' : 'false');
@@ -616,8 +695,10 @@ function showAuthModal(mode) {
     usernameInput.removeAttribute('tabindex');
   }
   
-  ui.authToggleText.textContent = isLogin ? 'Need an account?' : 'Have an account?';
-  ui.authToggleBtn.textContent = isLogin ? 'REGISTER' : 'LOGIN';
+  ui.authTitle.textContent = I18nManager.t(isLogin ? 'login_title' : 'register_title');
+  ui.authToggleText.textContent = I18nManager.t(isLogin ? 'need_account' : 'have_account');
+  ui.authToggleBtn.textContent = I18nManager.t(isLogin ? 'toggle_register' : 'toggle_login');
+  document.getElementById('forgot-password-btn')?.classList.toggle('hidden', !isLogin);
   ui.authModal.classList.remove('hidden');
   ui.authModal.setAttribute('aria-hidden', 'false');
   
@@ -694,18 +775,23 @@ function toggleScreen(screenId) {
 
 function applyProgress(progressData, fromServer = false) {
   const words = getGameData();
+  // Never leak the previous guest/account state when switching namespaces.
+  words.forEach(word => {
+    word.mastery = 0;
+    word.lastSeen = 0;
+    word.correctCount = 0;
+    word.incorrectCount = 0;
+  });
 
   // Build a Map for O(1) lookups instead of O(n) Array.find()
   // Previously: Object.entries × words.find = O(n²) = 360,000 ops for 600 words
   // Now: Map build O(n) + Object.entries × Map.get = O(n) total
-  const wordsByEng = new Map(words.map(w => [w.eng, w]));
+  const wordsById = new Map(words.map(w => [w.id, w]));
 
-  // Save the words-by-eng map on the module so updateWordProgress can reuse it
-  // instead of O(n) .find() on every answer click.
-  setWordsIndex(wordsByEng);
+  setWordsIndex(wordsById);
 
-  Object.entries(progressData).forEach(([eng, data]) => {
-    const word = wordsByEng.get(eng);
+  Object.entries(progressData).forEach(([id, data]) => {
+    const word = wordsById.get(id);
     if (word) Object.assign(word, data);
   });
 
@@ -771,7 +857,31 @@ function updateUI(state = store.getState()) {
   const soundIcon = document.getElementById('settings-sound-icon');
   const soundLabel = document.getElementById('settings-sound-label');
   if (soundIcon) soundIcon.textContent = state.audioEnabled ? '🔊' : '🔇';
-  if (soundLabel) soundLabel.textContent = state.audioEnabled ? 'ON' : 'OFF';
+  if (soundLabel) soundLabel.textContent = I18nManager.t(state.audioEnabled ? 'on' : 'off');
+  document.getElementById('settings-sound-btn')?.setAttribute('aria-pressed', String(state.audioEnabled));
+
+  document.querySelectorAll('[data-theme]').forEach(btn => {
+    const active = btn.dataset.theme === state.theme;
+    btn.classList.toggle('active', active);
+    btn.setAttribute('aria-pressed', String(active));
+  });
+  document.querySelectorAll('[data-lang]').forEach(btn => {
+    const active = btn.dataset.lang === state.uiLanguage;
+    btn.classList.toggle('active', active);
+    btn.setAttribute('aria-pressed', String(active));
+  });
+  document.querySelectorAll('[data-translation-lang]').forEach(btn => {
+    const active = btn.dataset.translationLang === state.translationLanguage;
+    btn.classList.toggle('active', active);
+    btn.setAttribute('aria-pressed', String(active));
+  });
+
+  const hardBtn = document.getElementById('hard-words-btn');
+  if (hardBtn) {
+    const count = selectHardWords(600).length;
+    hardBtn.disabled = count === 0;
+    hardBtn.textContent = `${I18nManager.t('hard_words')} · ${count}`;
+  }
 }
 
 // ==================== GAME FLOW ====================
@@ -849,12 +959,12 @@ function updateDailyStreak() {
 
 const Speech = {
   supported: typeof window !== 'undefined' && 'speechSynthesis' in window,
-  speak(text) {
+  speak(text, lang = 'en') {
     if (!this.supported || !text) return;
     try {
       window.speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'en-US';
+      u.lang = lang === 'ko' ? 'ko-KR' : lang === 'ru' ? 'ru-RU' : 'en-US';
       u.rate = 0.95;
       u.pitch = 1;
       window.speechSynthesis.speak(u);
@@ -903,30 +1013,32 @@ function confirmDialog(message) {
 }
 
 function loadQuestion() {
-  const { currentRound, currentQ, language } = store.getState();
-  const word = currentRound[currentQ];
-  const questionData = getQuestionWord(word, language);
-
-  // Render the word with an optional speak button when the question is English.
-  ui.wordElement.textContent = '';
-  ui.wordElement.className = `lang-${language} typewriter`;
-  const textSpan = document.createElement('span');
-  textSpan.textContent = questionData.text;
-  ui.wordElement.appendChild(textSpan);
-  if (questionData.isEnglish && Speech.supported) {
-    const speakBtn = document.createElement('button');
-    speakBtn.type = 'button';
-    speakBtn.className = 'speak-btn';
-    speakBtn.setAttribute('aria-label', 'Pronounce');
-    speakBtn.textContent = '🔊';
-    speakBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      Speech.speak(questionData.text);
-    });
-    ui.wordElement.appendChild(speakBtn);
+  const { currentRound, currentQ, translationLanguage } = store.getState();
+  if (!currentRound?.length || !currentRound[currentQ]) {
+    showNotification(I18nManager.t('no_words'));
+    toggleScreen('menu');
+    return;
   }
+  const word = currentRound[currentQ];
+  const questionData = getQuestionWord(word, translationLanguage);
 
-  const options = generateOptionsForWord(word, language, questionData.isEnglish);
+  // The word itself is the pronunciation control: no adjacent speaker icon.
+  ui.wordElement.textContent = questionData.text;
+  ui.wordElement.className = `word-button lang-${questionData.isEnglish ? 'en' : translationLanguage} typewriter`;
+  ui.wordElement.setAttribute('aria-label', `${questionData.text}. ${I18nManager.t('pronounce_hint')}`);
+  ui.wordElement.onclick = () => Speech.speak(
+    questionData.text,
+    questionData.isEnglish ? 'en' : translationLanguage
+  );
+
+  const total = currentRound.length;
+  const progressText = document.getElementById('question-progress-text');
+  const progressFill = document.getElementById('question-progress-fill');
+  if (progressText) progressText.textContent = I18nManager.t('question_progress')
+    .replace('{current}', currentQ + 1).replace('{total}', total);
+  if (progressFill) progressFill.style.width = `${((currentQ + 1) / total) * 100}%`;
+
+  const options = generateOptionsForWord(word, translationLanguage, questionData.isEnglish);
   ui.optionsElement.textContent = '';
 
   options.forEach((opt, index) => {
@@ -947,9 +1059,11 @@ function checkAnswer(selected, word, btn, questionIsEnglish) {
   const state = store.getState();
   if (state.isAnswerLocked) return;
   store.setState({ isAnswerLocked: true });
+  updateDailyStreak();
 
-  const currentLang = store.getState().language;
+  const currentLang = store.getState().translationLanguage;
   const isCorrect = selected === getCorrectTranslation(word, currentLang, questionIsEnglish);
+  Array.from(ui.optionsElement.children).forEach(option => { option.disabled = true; });
 
   // Track word result for review session
   const wordResult = {
@@ -965,12 +1079,13 @@ function checkAnswer(selected, word, btn, questionIsEnglish) {
     const bonus = 10; // Simple scoring
     // Use atomic XP increment for multi-tab synchronization
     addXP(bonus);
-    updateWordProgress(word.eng, true);
+    store.setState({ roundScore: state.roundScore + 1 });
+    updateWordProgress(word.id, true);
   } else {
     btn.classList.add('wrong');
     btn.setAttribute('aria-pressed', 'false');
     AudioEngine.playWrong();
-    updateWordProgress(word.eng, false);
+    updateWordProgress(word.id, false);
 
     // Highlight correct
     const correctAnswer = getCorrectTranslation(word, currentLang, questionIsEnglish);
@@ -999,7 +1114,7 @@ function checkAnswer(selected, word, btn, questionIsEnglish) {
 
 function showExplanation(word, questionIsEnglish, isReviewComplete = false) {
   const list = document.getElementById('explanation-list');
-  const lang = store.getState().language;
+  const lang = store.getState().translationLanguage;
   const nextBtn = document.getElementById('next-question-btn');
 
   // Ensure next button is visible (unless in review mode)
@@ -1019,7 +1134,7 @@ function showExplanation(word, questionIsEnglish, isReviewComplete = false) {
 
   const dP = document.createElement('p');
   dP.className = 'explanation-definition';
-  dP.textContent = getCorrectTranslation(word, lang, questionIsEnglish);
+  dP.textContent = lang === 'ko' && word.kor !== '미확인' ? word.kor : word.rus;
 
   content.appendChild(wP);
   content.appendChild(dP);
@@ -1077,31 +1192,64 @@ function nextQuestion() {
   const state = store.getState();
 
   // Check if round is complete
-  if (state.currentQ >= 9) {
-    // Round complete - increment counter in store
+  if (state.currentQ >= state.currentRound.length - 1) {
     const newCount = state.completedRoundsCount + 1;
     store.setState({ completedRoundsCount: newCount });
-
-    // Check if we should show review session
-    if (newCount >= REVIEW_TRIGGER_ROUNDS && state.reviewSessionData.length > 0) {
-      showReviewSession();
-      return;
-    }
-
-    // Start new round — DO NOT reset completedRoundsCount here.
-    // It must accumulate across rounds until Word Review actually fires
-    // (which resets it via the continue button in showReviewSession).
-    const roundWords = selectWordsForRound(state.currentCategory, 10);
-    store.setState({
-      currentRound: roundWords,
-      currentQ: 0,
-      roundScore: 0
-    });
-    loadQuestion();
+    showRoundResult();
   } else {
     store.setState({ currentQ: state.currentQ + 1 });
     loadQuestion();
   }
+}
+
+function showRoundResult() {
+  const state = store.getState();
+  ui.explanationModal.classList.add('hidden');
+  const modal = document.getElementById('result-modal');
+  const summary = document.getElementById('result-summary');
+  const total = state.currentRound.length;
+  const correct = state.roundScore;
+  const wrong = total - correct;
+  const accuracy = total ? Math.round((correct / total) * 100) : 0;
+  summary.textContent = '';
+  for (const [label, value] of [
+    [I18nManager.t('correct_count'), correct],
+    [I18nManager.t('wrong_count'), wrong],
+    [I18nManager.t('accuracy'), `${accuracy}%`],
+    [I18nManager.t('xp_earned'), correct * 10]
+  ]) {
+    const row = document.createElement('p');
+    row.textContent = `${label}: ${value}`;
+    summary.appendChild(row);
+  }
+  modal.classList.remove('hidden');
+  const releaseTrap = trapFocus(modal);
+  document.getElementById('result-continue-btn').onclick = () => {
+    releaseTrap();
+    modal.classList.add('hidden');
+    const latest = store.getState();
+    if (latest.completedRoundsCount >= REVIEW_TRIGGER_ROUNDS && latest.reviewSessionData.length) {
+      showReviewSession();
+      return;
+    }
+    const roundWords = selectWordsForRound(latest.currentCategory, 10);
+    store.setState({ currentRound: roundWords, currentQ: 0, roundScore: 0 });
+    loadQuestion();
+  };
+  document.getElementById('result-review-btn').onclick = () => {
+    const mistakes = store.getState().reviewSessionData.filter(x => !x.isCorrect).map(x => x.word);
+    if (!mistakes.length) { showNotification(I18nManager.t('no_mistakes')); return; }
+    releaseTrap();
+    modal.classList.add('hidden');
+    store.setState({ currentCategory: 'Hard', currentRound: mistakes, currentQ: 0, roundScore: 0, reviewSessionData: [] });
+    loadQuestion();
+  };
+  document.getElementById('result-exit-btn').onclick = () => {
+    releaseTrap();
+    modal.classList.add('hidden');
+    toggleScreen('menu');
+  };
+  document.getElementById('result-continue-btn').focus();
 }
 
 // Show Word Review session (Quizlet-style)
@@ -1112,7 +1260,7 @@ function showReviewSession() {
   const nextBtn = document.getElementById('next-question-btn');
 
   // Change title to "WORD REVIEW"
-  modalTitle.textContent = '// WORD REVIEW //';
+  modalTitle.textContent = I18nManager.t('word_review');
 
   // Hide next button during review
   nextBtn.style.display = 'none';
@@ -1125,7 +1273,7 @@ function showReviewSession() {
     const perfectMsg = document.createElement('p');
     perfectMsg.className = 'explanation-definition';
     perfectMsg.style.color = 'var(--neon-green)';
-    perfectMsg.textContent = 'PERFECT! ALL WORDS CORRECT!';
+    perfectMsg.textContent = I18nManager.t('perfect');
 
     const listItem = document.createElement('div'); // Create a list item container
     listItem.setAttribute('role', 'listitem'); // Set role="listitem"
@@ -1148,11 +1296,14 @@ function showReviewSession() {
 
       const defP = document.createElement('p');
       defP.className = 'explanation-definition';
-      defP.textContent = getCorrectTranslation(item.word, store.getState().language, item.questionIsEnglish);
+      const target = store.getState().translationLanguage;
+      defP.textContent = target === 'ko' && item.word.kor !== '미확인' ? item.word.kor : item.word.rus;
 
       const statusP = document.createElement('p');
       statusP.className = 'review-status';
-      statusP.textContent = isCorrect ? '✓ CORRECT' : '✗ NEEDS REVIEW';
+      statusP.textContent = isCorrect
+        ? `✓ ${I18nManager.t('correct_count')}`
+        : `✗ ${I18nManager.t('needs_review')}`;
 
       card.appendChild(wordP);
       card.appendChild(defP);
@@ -1165,7 +1316,7 @@ function showReviewSession() {
   const continueBtn = document.createElement('button');
   continueBtn.id = 'continue-after-review-btn';
   continueBtn.className = 'option-btn continue-after-review-btn';
-  continueBtn.textContent = 'CONTINUE';
+  continueBtn.textContent = I18nManager.t('continue');
   continueBtn.setAttribute('aria-label', 'Continue to next round');
   continueBtn.addEventListener('click', () => {
     // Reset review data and start new round using store state
