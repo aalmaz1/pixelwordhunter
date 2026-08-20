@@ -423,9 +423,8 @@ export async function resetProgress({ cloud = false } = {}) {
   storageRemove(progressKey());
   storageRemove(backupKey());
   const userId = getCurrentUserId();
-  storageRemove(`xp_${userId || 'guest'}`);
-  // Also clear the "other" bucket so a logged-out session doesn't leak
-  // yesterday's guest XP or vice versa.
+  // Clear both the guest bucket and the current user's, so a logged-out
+  // session doesn't leak yesterday's guest XP or vice versa.
   storageRemove('xp_guest');
   if (userId) storageRemove(`xp_${userId}`);
   // Streak data
