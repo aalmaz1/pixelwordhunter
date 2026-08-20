@@ -187,7 +187,9 @@ const I18nManager = {
         if (key.startsWith('enter_')) {
           el.placeholder = translation;
         }
-      } else {
+      } else if (el.children.length === 0) {
+        // Skip nodes with markup (e.g. PIXEL<br>WORD<br>HUNTER) so i18n
+        // does not flatten the title into a single line.
         el.textContent = translation;
       }
     });
@@ -219,24 +221,7 @@ const I18nManager = {
   
   getCurrentLanguage() {
     return this.currentLang;
-  },
-  
-  getSupportedLanguages() {
-    return this.supportedLanguages;
-  },
-  
-  isLanguageLoaded(lang) {
-    return this.loadedLanguages.has(lang);
-  },
-  
-  getLoadedLanguages() {
-    return Array.from(this.loadedLanguages);
   }
 };
-
-// Helper function for templates
-export function t(key) {
-  return I18nManager.t(key);
-}
 
 export { I18nManager };

@@ -256,7 +256,7 @@ export function getCategories() {
   return categoriesCache || [];
 }
 
-export function getWordsByCategory(category) {
+function getWordsByCategory(category) {
   if (!gameData) return [];
   if (category === 'All') return gameData;
   return gameData.filter(w => w.category === category);
@@ -280,6 +280,12 @@ function getWordPriority(word) {
 }
 
 export function selectWordsForRound(category, roundSize = 10) {
+  // Hard-words rounds reuse this helper after CONTINUE / WORD REVIEW.
+  // There is no real "Hard" category in the dictionary — those cards are
+  // selected by struggle score instead of category name.
+  if (category === 'Hard') {
+    return selectHardWords(roundSize);
+  }
   const words = getWordsByCategory(category);
   if (!words.length) return [];
   if (words.length <= roundSize) return shuffle([...words]);
@@ -370,30 +376,17 @@ export function updateWordProgress(wordId, isCorrect) {
   // Trigger stats update in store
   const stats = getProgressStats();
   store.setState({
-    masteredCount: stats.mastered,
-    learningCount: stats.learning,
-    reviewCount: stats.newWords
+    masteredCount: stats.mastered
   });
 }
 
 export function getProgressStats() {
   const words = getGameData();
-  const total = words.length;
   let mastered = 0;
-  let learning = 0;
-  
   for (const word of words) {
     if (word.mastery >= 4) mastered++;
-    else if (word.mastery > 0) learning++;
   }
-  
-  return { mastered, learning, newWords: total - mastered - learning, total };
-}
-
-export function getMasteryLevel(word) { return word.mastery || 0; }
-export function getMasteryLabel(mastery) {
-  const labels = ['NEW', 'LEARNING', 'FAMILIAR', 'GOOD', 'STRONG', 'MASTER'];
-  return labels[mastery] || labels[0];
+  return { mastered, total: words.length };
 }
 
 const UNCONFIRMED_MARKER = SANITIZE_UNCONFIRMED;

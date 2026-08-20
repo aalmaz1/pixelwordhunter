@@ -1,20 +1,7 @@
 /**
  * app.js - Main Application Entry Point
- * Refactored to use Store pattern and Bundled Firebase
  */
 
-// Удаляем прямые импорты Firebase
-// import { firebaseAvailable, firebaseAuth, firebaseDb, initFirebase } from './firebase-config.js';
-// import {
-//   createUserWithEmailAndPassword,
-//   signInWithEmailAndPassword,
-//   updateProfile,
-//   signOut,
-//   onAuthStateChanged
-// } from 'firebase/auth';
-// import { doc, setDoc, getDoc } from 'firebase/firestore';
-
-// import './style.css'; // Removed to prevent render-blocking
 import { I18nManager } from './i18n.js';
 import { store } from './store.js';
 import {
@@ -63,7 +50,7 @@ import { initUI, renderCategoryButtons, wireCategorySearch, showNotification, ge
  * a microtask+setTimeout chain that ensures the browser gets a chance
  * to process input events between our work.
  */
-export function yieldToMain() {
+function yieldToMain() {
   if (typeof scheduler !== 'undefined' && typeof scheduler.yield === 'function') {
     return scheduler.yield();
   }
@@ -74,22 +61,11 @@ export function yieldToMain() {
  * Schedule a callback during the browser's idle period.
  * Falls back to setTimeout if requestIdleCallback is unavailable.
  */
-export function scheduleIdle(callback, options) {
+function scheduleIdle(callback, options) {
   if (typeof requestIdleCallback === 'function') {
     return requestIdleCallback(callback, options);
   }
   return setTimeout(callback, 1);
-}
-
-/**
- * Cancel a callback scheduled with scheduleIdle.
- */
-export function cancelIdle(id) {
-  if (typeof cancelIdleCallback === 'function' && typeof id !== 'undefined') {
-    cancelIdleCallback(id);
-  } else {
-    clearTimeout(id);
-  }
 }
 
 // Локальные переменные для Firebase-сервисов и функций (заполняются лениво)
@@ -743,6 +719,11 @@ async function handleAuthSubmit() {
 
   ui.authSubmit.disabled = true;
   ui.authError.textContent = ''; // Clear previous errors
+  if (mode === 'register' && !username.trim()) {
+    ui.authError.textContent = I18nManager.t('username_required');
+    ui.authSubmit.disabled = false;
+    return;
+  }
   let result;
   if (mode === 'register') {
     result = await AuthManager.register(username, email, password);
@@ -752,7 +733,7 @@ async function handleAuthSubmit() {
 
   if (result.success) {
     closeAuthModal();
-    showNotification('Success!');
+    showNotification(I18nManager.t('auth_success'));
   } else {
     ui.authError.textContent = result.error || 'Authentication failed';
   }
@@ -819,14 +800,10 @@ function applyProgress(progressData, fromServer = false) {
 
   store.setState({
     xp: xpValue,
-    masteredCount: stats.mastered,
-    learningCount: stats.learning,
-    reviewCount: stats.newWords
+    masteredCount: stats.mastered
   });
 
-  if (import.meta.env.DEV) {
-    if (import.meta.env.DEV) console.log(`[App] Progress applied: ${Object.keys(progressData).length} words, XP: ${xpValue}`);
-  }
+  if (DEV) console.log(`[App] Progress applied: ${Object.keys(progressData).length} words, XP: ${xpValue}`);
 }
 
 function updateUI(state = store.getState()) {
@@ -909,10 +886,11 @@ function startGame(category) {
     currentRound: roundWords,
     currentQ: 0,
     roundScore: 0,
-    wordStartTime: Date.now(),
-    reviewSessionData: [], // Reset review data on new game
-    completedRoundsCount: 0 // Reset counter on new game session
+    reviewSessionData: [],
+    completedRoundsCount: 0
   });
+  const catEl = document.getElementById('category');
+  if (catEl) catEl.textContent = category;
 
   toggleScreen('game');
   loadQuestion();
@@ -933,10 +911,11 @@ function startHardWords() {
     currentRound: hard,
     currentQ: 0,
     roundScore: 0,
-    wordStartTime: Date.now(),
     reviewSessionData: [],
     completedRoundsCount: 0
   });
+  const catEl = document.getElementById('category');
+  if (catEl) catEl.textContent = 'Hard';
   toggleScreen('game');
   loadQuestion();
 }
@@ -1052,7 +1031,7 @@ function loadQuestion() {
 
   // The word itself is the pronunciation control: no adjacent speaker icon.
   ui.wordElement.textContent = questionData.text;
-  ui.wordElement.className = `word-button lang-${questionData.isEnglish ? 'en' : translationLanguage} typewriter`;
+  ui.wordElement.className = `word-button lang-${questionData.isEnglish ? 'en' : translationLanguage}`;
   ui.wordElement.setAttribute('aria-label', `${questionData.text}. ${I18nManager.t('pronounce_hint')}`);
   ui.wordElement.onclick = () => Speech.speak(
     questionData.text,
@@ -1081,7 +1060,7 @@ function loadQuestion() {
   });
 
   ui.explanationModal.classList.add('hidden');
-  store.setState({ wordStartTime: Date.now(), isAnswerLocked: false });
+  store.setState({ isAnswerLocked: false });
 }
 
 function checkAnswer(selected, word, btn, questionIsEnglish) {
@@ -1097,8 +1076,7 @@ function checkAnswer(selected, word, btn, questionIsEnglish) {
   // Track word result for review session
   const wordResult = {
     word: word,
-    isCorrect: isCorrect,
-    questionIsEnglish: questionIsEnglish
+    isCorrect: isCorrect
   };
 
   if (isCorrect) {
@@ -1135,7 +1113,7 @@ function checkAnswer(selected, word, btn, questionIsEnglish) {
   scheduleIdle(() => {
     saveProgress(firebaseDb, doc, setDoc, serverTimestamp);
   });
-  setTimeout(() => showExplanation(word, questionIsEnglish, false), 1000);
+  setTimeout(() => showExplanation(word), 1000);
 }
 
 /**
@@ -1333,12 +1311,13 @@ function showReviewSession() {
     // Show next button again
     nextBtn.style.display = 'inline-block';
 
-    // Start new round
+    // Start new round — reset score so the next result screen is not 20/10.
     const state = store.getState();
     const roundWords = selectWordsForRound(state.currentCategory, 10);
     store.setState({
       currentRound: roundWords,
-      currentQ: 0
+      currentQ: 0,
+      roundScore: 0
     });
     loadQuestion();
   });

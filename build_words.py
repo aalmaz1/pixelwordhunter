@@ -48,7 +48,6 @@ def card(cat, eng, rus, kor, exEng, exRus, exKor):
         "category": cat,
         "eng": eng,
         "rus": rus,
-        "correct": rus,
         "exampleEng": exEng,
         "exampleRus": exRus,
         "kor": kor,
