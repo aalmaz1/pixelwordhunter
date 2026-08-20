@@ -328,6 +328,13 @@ npm run build
 npx wrangler deploy        # requires Wrangler CLI & a Cloudflare account
 ```
 
+`public/_headers` ships a real HTTP `Content-Security-Policy: frame-ancestors 'none'`
+header (plus `X-Frame-Options: DENY`) — clickjacking protection that the `<meta>`
+CSP in `index.html` cannot provide, because browsers ignore `frame-ancestors`
+delivered via `<meta>`. Cloudflare parses the file at deploy time; it is never
+served as an asset. Other static hosts need the equivalent header configured
+on their side.
+
 ### GitHub Pages
 
 ```bash
