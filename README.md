@@ -237,13 +237,15 @@ For dictionary changes, preserve the 600-card / 50-category structure, required 
 
 ## 📄 License
 
-MIT — see the [`license`](package.json) field in `package.json`.
+This project is licensed under the **MIT License** — see the [`LICENSE`](LICENSE) file for the full text.
+
+Bundled fonts (**Press Start 2P** and **Mulmaru**) are third-party works distributed under the **SIL Open Font License 1.1** — see [`assets/FONT_LICENSES.md`](assets/FONT_LICENSES.md).
 
 ---
 
 <div align="center">
 
-**© 2026 ALMAZ CORP**
+**© 2026 Khudayberdiev Almaz**
 
 *Built with 💜 and pixels. Happy hunting!* 👾
 

@@ -19,7 +19,7 @@
     "pwa",
     "game"
   ],
-  "author": "Almaz Corp",
+  "author": "Khudayberdiev Almaz",
   "license": "MIT",
   "dependencies": {
     "firebase": "^11.0.0"
