@@ -440,20 +440,31 @@ export function getCorrectTranslation(word, lang = 'en', questionIsEnglish = tru
 export function generateOptionsForWord(word, lang, questionIsEnglish) {
   const correctVal = getCorrectTranslation(word, lang, questionIsEnglish);
   const allWords = getGameData();
-  
+
+  const normalize = s => (s || '').toLowerCase().trim();
+  const wordEng = normalize(word.eng);
+  const wordTranslation = normalize(getWordTranslation(word, lang));
+
   const options = new Set([correctVal]);
   const maxOptions = 4;
-  
+
   // Safety break
   let attempts = 0;
   while (options.size < maxOptions && attempts < 100) {
     attempts++;
     const randomWord = allWords[Math.floor(Math.random() * allWords.length)];
+    // Skip candidates that would create a second "correct" answer:
+    // - same English word (e.g. "productive" appears in two categories) or
+    // - same translation (e.g. both "convince" and "persuade" = "убеждать"),
+    // otherwise reverse-mode questions can show two valid English options
+    // and forward-mode questions two valid translations.
+    if (normalize(randomWord.eng) === wordEng) continue;
+    if (normalize(getWordTranslation(randomWord, lang)) === wordTranslation) continue;
     const translation = getCorrectTranslation(randomWord, lang, questionIsEnglish);
     if (translation && translation !== correctVal) {
       options.add(translation);
     }
   }
-  
+
   return Array.from(options).sort(() => Math.random() - 0.5);
 }
