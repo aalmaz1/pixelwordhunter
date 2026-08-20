@@ -182,7 +182,7 @@ Each card has `mastery 0–5`. Correct → level up (max 5), wrong → level dow
 | `RU` | Русский | ✅ | ✅ | ✅ |
 | `KO` | 한국어 | ✅ | ✅ | ✅ |
 
-Translations are lazy `fetch()`ed from `i18n/*.json` (production: `assets/i18n/*.json`) + font preloaded per language (`Press Start 2P` for EN/RU, `Mulmaru` for KO). Adding a language requires a new JSON file, an entry in `I18nManager.supportedLanguages`, and a language button — no framework changes.
+Translations are lazy `fetch()`ed from `i18n/*.json` (production: `assets/i18n/*.json`) and the active UI font is loaded on demand by CSS (`Press Start 2P` for EN/RU, `Mulmaru` for KO). Adding a language requires a new JSON file, an entry in `I18nManager.supportedLanguages`, and a language button — no framework changes.
 
 ### Themes
 
@@ -332,7 +332,7 @@ pixelwordhunter/
 ├── store.js              # Central reactive store (rAF-batched)
 ├── storage.js            # localStorage, Firestore sync, backup/restore, XP batching
 ├── ui.js                 # DOM helpers, category rendering, a11y
-├── i18n.js               # Lazy i18n + per-language font preload
+├── i18n.js               # Lazy i18n + per-language font selection
 ├── firebase-config.js    # Lazy Firebase init, real-time XP listener, logout
 ├── style.css             # 6 themes, components, responsiveness
 ├── words_optimized.json  # 600-card dictionary (source)

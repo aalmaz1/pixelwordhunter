@@ -36,12 +36,11 @@
   <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://identitytoolkit.googleapis.com" crossorigin>
   
-  <!-- UI fonts are preloaded from i18n.js (via `new URL(..., import.meta.url)`)
-       once the active language is known — never statically here. style.css
-       forces one font per language (!important): lang-ko → Mulmaru, else
-       Press Start 2P. A static preload of either would sit unused for half
-       the sessions and trigger "preloaded but not used" console warnings
-       (and hard-coding the unhashed filename 404s after the build hashes it). -->
+  <!-- UI fonts are loaded on demand by the @font-face rules in style.css.
+       The active language is applied by i18n.js before the first screen is
+       shown, so the browser requests only the font that is actually used.
+       Do not add a static preload here: the inactive language's font would
+       be fetched unnecessarily and trigger "preloaded but not used" warnings. -->
 </head>
 <body data-theme="cyberpunk">
   <a href="#main-content" class="skip-link">Skip to main content</a>
