@@ -399,6 +399,7 @@
   letter-spacing: 3px;
   font-size: clamp(14px, 4vw, 20px);
   font-weight: bold;
+  cursor: pointer;
 }
 
 .explanation-definition {
