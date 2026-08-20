@@ -972,6 +972,24 @@ const Speech = {
   }
 };
 
+/**
+ * Makes an element a tap-to-pronounce control. Pronunciation is strictly
+ * on demand — nothing is spoken automatically.
+ */
+function makeWordSpeakable(element, text, lang = 'en') {
+  element.title = I18nManager.t('pronounce_hint');
+  element.setAttribute('role', 'button');
+  element.setAttribute('tabindex', '0');
+  const speak = () => { if (text) Speech.speak(text, lang); };
+  element.addEventListener('click', speak);
+  element.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      speak();
+    }
+  });
+}
+
 // ==================== CUSTOM CONFIRM MODAL ====================
 
 /**
@@ -1131,6 +1149,8 @@ function showExplanation(word, questionIsEnglish, isReviewComplete = false) {
   const wP = document.createElement('p');
   wP.className = 'explanation-word';
   wP.textContent = word.eng;
+  // Pronunciation only on demand: tapping the English word speaks it.
+  makeWordSpeakable(wP, word.eng);
 
   const dP = document.createElement('p');
   dP.className = 'explanation-definition';
@@ -1182,10 +1202,6 @@ function showExplanation(word, questionIsEnglish, isReviewComplete = false) {
   list.appendChild(content);
 
   ui.explanationModal.classList.remove('hidden');
-
-  // Auto-pronounce the English word on the explanation screen so the learner
-  // hears the correct pronunciation right after answering.
-  if (word.eng) Speech.speak(word.eng);
 }
 
 function nextQuestion() {
@@ -1293,6 +1309,8 @@ function showReviewSession() {
       const wordP = document.createElement('p');
       wordP.className = 'explanation-word';
       wordP.textContent = item.word.eng;
+      // Pronunciation only on demand: tapping the English word speaks it.
+      makeWordSpeakable(wordP, item.word.eng);
 
       const defP = document.createElement('p');
       defP.className = 'explanation-definition';
