@@ -17,8 +17,6 @@ export function getFocusableElements(parent = document) {
 export function initUI() {
   return {
     menuScreenElement: document.getElementById('menu-screen'),
-    settingsScreenElement: document.getElementById('settings-screen'),
-    categoryScreenElement: document.getElementById('category-screen'),
     gameScreenElement: document.getElementById('game-screen'),
     wordElement: document.getElementById('word'),
     optionsElement: document.getElementById('options'),
@@ -31,7 +29,6 @@ export function initUI() {
     // Auth elements
     authModal: document.getElementById('auth-modal'),
     authTitle: document.getElementById('auth-title'),
-    authForm: document.getElementById('auth-form'),
     usernameField: document.getElementById('username-field'),
     authToggleText: document.getElementById('auth-toggle-text'),
     authToggleBtn: document.getElementById('auth-toggle-btn'),

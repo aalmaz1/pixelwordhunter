@@ -5,7 +5,7 @@
 
 export const UNCONFIRMED_MARKER = '미확인';
 
-export function sanitizeToeicWord(rawWord) {
+function sanitizeToeicWord(rawWord) {
   if (!rawWord || typeof rawWord !== 'object') return null;
 
   const eng = typeof rawWord.eng === 'string' ? rawWord.eng.trim() : '';

@@ -150,7 +150,7 @@ export function storageSet(key, value) {
   try { localStorage.setItem(key, value); } catch (e) { console.error('[Storage] Set failed', e); }
 }
 
-export function storageRemove(key) {
+function storageRemove(key) {
   try { localStorage.removeItem(key); } catch { /* ignore */ }
 }
 
@@ -225,8 +225,7 @@ export async function loadProgress(firebaseDb, doc, getDoc) {
  * Load progress wrapper for backward compatibility (no args)
  */
 export async function loadProgressWrapper() {
-  const state = store.getState();
-  return loadProgress(state.firebaseDb || window.firebaseDb, window.doc, window.getDoc);
+  return loadProgress();
 }
 
 /**
@@ -335,7 +334,7 @@ export async function saveProgress(firebaseDb, doc, setDoc, serverTimestamp) {
 /**
  * User-specific XP handling with atomic server increments
  */
-export function getCurrentUserId() {
+function getCurrentUserId() {
   const state = store.getState();
   return state.user?.uid || null;
 }
@@ -344,7 +343,7 @@ export function getCurrentUserId() {
  * Sets XP locally and persists to localStorage (for offline/guest users)
  * For authenticated users, XP is synced via real-time listener in firebase-config.js
  */
-export function setUserXP(xp) {
+function setUserXP(xp) {
   const userId = getCurrentUserId();
   storageSet(`xp_${userId || 'guest'}`, String(xp || 0));
   store.setState({ xp: Number(xp) || 0 });
@@ -440,7 +439,7 @@ export async function resetProgress({ cloud = false } = {}) {
     w.incorrectCount = 0;
   });
 
-  store.setState({ xp: 0, dailyStreak: 0, masteredCount: 0, learningCount: 0, reviewCount: getGameData().length });
+  store.setState({ xp: 0, dailyStreak: 0, masteredCount: 0 });
 
   if (cloud && userId && store.getState().isAuthenticated) {
     const deps = await resolveFirebaseSyncDeps();

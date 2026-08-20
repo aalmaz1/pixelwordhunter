@@ -24,7 +24,7 @@ let xpUnsubscribe = null;
 let authModuleApi = null;
 let firestoreModuleApi = null;
 
-export function setupXPListener(userId) {
+function setupXPListener(userId) {
   if (xpUnsubscribe) {
     xpUnsubscribe();
     xpUnsubscribe = null;
@@ -58,7 +58,7 @@ export function setupXPListener(userId) {
   if (import.meta.env.DEV) console.log('[XP Sync] Real-time listener established for user:', userId);
 }
 
-export function cleanupXPListener() {
+function cleanupXPListener() {
   if (xpUnsubscribe) {
     xpUnsubscribe();
     xpUnsubscribe = null;

@@ -21,8 +21,6 @@ class Store extends EventTarget {
       // Progress & Stats
       xp: 0,
       masteredCount: 0,
-      learningCount: 0,
-      reviewCount: 0,
       dailyStreak: 0,
 
       // Game State
@@ -30,9 +28,7 @@ class Store extends EventTarget {
       currentRound: null,
       currentQ: 0,
       roundScore: 0,
-      wordStartTime: null,
       isAnswerLocked: false,
-      difficulty: 'NORMAL', // TACTICAL, INSTINCT
       
       // Settings
       theme: 'cyberpunk',
@@ -89,13 +85,6 @@ class Store extends EventTarget {
         this._pendingNotify.changedKeys.add(k);
       }
     }
-  }
-
-  // Helper actions
-  updateXP(amount) {
-    const newXP = this.state.xp + amount;
-    this.setState({ xp: newXP });
-    return newXP;
   }
 
   setUser(user) {

@@ -221,24 +221,7 @@ const I18nManager = {
   
   getCurrentLanguage() {
     return this.currentLang;
-  },
-  
-  getSupportedLanguages() {
-    return this.supportedLanguages;
-  },
-  
-  isLanguageLoaded(lang) {
-    return this.loadedLanguages.has(lang);
-  },
-  
-  getLoadedLanguages() {
-    return Array.from(this.loadedLanguages);
   }
 };
-
-// Helper function for templates
-export function t(key) {
-  return I18nManager.t(key);
-}
 
 export { I18nManager };
