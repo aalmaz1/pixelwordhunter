@@ -490,14 +490,24 @@ function setupEventListeners() {
     toggleScreen('settings');
   });
 
-  document.getElementById('settings-back-btn')?.addEventListener('click', () => toggleScreen('menu'));
-  document.getElementById('category-back-btn')?.addEventListener('click', () => toggleScreen('menu'));
-  document.getElementById('exit-game-btn')?.addEventListener('click', () => toggleScreen('menu'));
+  document.getElementById('settings-back-btn')?.addEventListener('click', () => {
+    AudioEngine.playTransition();
+    toggleScreen('menu');
+  });
+  document.getElementById('category-back-btn')?.addEventListener('click', () => {
+    AudioEngine.playTransition();
+    toggleScreen('menu');
+  });
+  document.getElementById('exit-game-btn')?.addEventListener('click', () => {
+    AudioEngine.playTransition();
+    toggleScreen('menu');
+  });
 
   // Auth
   document.getElementById('login-modal-btn')?.addEventListener('click', () => showAuthModal('login'));
   document.getElementById('register-modal-btn')?.addEventListener('click', () => showAuthModal('register'));
   document.getElementById('auth-close-btn')?.addEventListener('click', () => {
+    AudioEngine.playTransition();
     closeAuthModal();
   });
   document.getElementById('auth-toggle-btn')?.addEventListener('click', () => {
@@ -544,7 +554,10 @@ function setupEventListeners() {
     store.toggleAudio();
   });
 
-  document.getElementById('hunt-btn')?.addEventListener('click', () => toggleScreen('category'));
+  document.getElementById('hunt-btn')?.addEventListener('click', () => {
+    AudioEngine.playTransition();
+    toggleScreen('category');
+  });
   document.getElementById('try-btn')?.addEventListener('click', async () => {
     AudioEngine.playTransition();
     // Explicit anonymous sign-in for guest mode. Falls back to offline play.
