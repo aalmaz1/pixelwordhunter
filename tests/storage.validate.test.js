@@ -10,8 +10,19 @@ vi.stubGlobal('localStorage', {
   clear() { this._s = {}; }
 });
 
-const { validateSaveData, migrateProgress, mergeProgress, flushLocalProgress } = await import('../storage.js');
+const {
+  validateSaveData,
+  migrateProgress,
+  mergeProgress,
+  flushLocalProgress,
+  getGuestXP,
+  migrateAnonymousXP,
+  clearGuestProgress,
+  importProgress,
+  addXP
+} = await import('../storage.js');
 const dataModule = await import('../data.js');
+const { store } = await import('../store.js');
 
 describe('validateSaveData', () => {
   it('accepts a valid progress map', () => {
@@ -63,5 +74,81 @@ describe('validateSaveData', () => {
     const saved = JSON.parse(localStorage.getItem('pixelWordHunter_save_v3_guest'));
     expect(saved['a--book'].mastery).toBe(2);
     expect(saved['a--book'].lastSeen).toBe(123);
+  });
+
+  it('keeps anonymous TRY XP in the guest namespace', async () => {
+    localStorage.removeItem('xp_guest');
+    localStorage.removeItem('xp_anonymous-user');
+    store.setUser({ uid: 'anonymous-user', isAnonymous: true });
+
+    await addXP(10);
+
+    expect(getGuestXP()).toBe(10);
+    expect(localStorage.getItem('xp_anonymous-user')).toBeNull();
+    store.setUser(null);
+  });
+
+  it('migrates legacy anonymous XP into existing guest XP exactly once', () => {
+    localStorage.setItem('xp_guest', '10');
+    localStorage.setItem('xp_old-anonymous', '25');
+
+    expect(migrateAnonymousXP('old-anonymous')).toBe(35);
+    expect(localStorage.getItem('xp_old-anonymous')).toBeNull();
+    expect(migrateAnonymousXP('old-anonymous')).toBe(35);
+  });
+
+  it('clears guest card progress, backup, and XP together', () => {
+    localStorage.setItem('pixelWordHunter_save_v3_guest', '{}');
+    localStorage.setItem('pixelWordHunter_save_v3_guest_backup', '{}');
+    localStorage.setItem('xp_guest', '30');
+
+    clearGuestProgress();
+
+    expect(localStorage.getItem('pixelWordHunter_save_v3_guest')).toBeNull();
+    expect(localStorage.getItem('pixelWordHunter_save_v3_guest_backup')).toBeNull();
+    expect(localStorage.getItem('xp_guest')).toBeNull();
+  });
+
+  it('returns only validated settings from an imported v3 backup', async () => {
+    dataModule._setGameDataForTests([
+      { id: 'a--book', eng: 'book', mastery: 0, lastSeen: 0 }
+    ]);
+    const file = {
+      text: async () => JSON.stringify({
+        version: 3,
+        xp: 42,
+        progress: {
+          'a--book': { mastery: 3, lastSeen: 123, correctCount: 3, incorrectCount: 0 }
+        },
+        settings: { theme: 'matrix', language: 'ko', audio: false, unexpected: 'ignored' }
+      })
+    };
+
+    const result = await importProgress(file);
+
+    expect(result.success).toBe(true);
+    expect(result.progress['a--book'].mastery).toBe(3);
+    expect(result.settings).toEqual({ theme: 'matrix', language: 'ko', audio: false });
+    expect(result.xp).toBe(42);
+    expect(getGuestXP()).toBe(42);
+  });
+
+  it('ignores unknown theme and language values in imported settings', async () => {
+    dataModule._setGameDataForTests([
+      { id: 'a--book', eng: 'book', mastery: 0, lastSeen: 0 }
+    ]);
+    const file = {
+      text: async () => JSON.stringify({
+        progress: {
+          'a--book': { mastery: 1, lastSeen: 1 }
+        },
+        settings: { theme: 'javascript:bad', language: '../bad', audio: 'yes' }
+      })
+    };
+
+    const result = await importProgress(file);
+
+    expect(result.success).toBe(true);
+    expect(result.settings).toEqual({});
   });
 });

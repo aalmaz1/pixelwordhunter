@@ -82,7 +82,7 @@
   "retry": "다시 시도",
   "auth_success": "완료!",
   "no_mistakes": "복습할 오답이 없습니다",
-  "merge_guest_progress": "게스트 진행도를 이 계정에 합칠까요?",
+  "merge_guest_progress": "게스트 진행도와 XP를 이 계정에 합칠까요?",
   "forgot_password": "비밀번호를 잊으셨나요?",
   "email_required": "먼저 이메일을 입력하세요",
   "password_reset_sent": "비밀번호 재설정 이메일을 보냈습니다",

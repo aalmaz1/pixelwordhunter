@@ -112,7 +112,7 @@ export default defineConfig({
       manifest: {
         short_name: 'WordHunter',
         name: 'Pixel Word Hunter',
-        description: 'TOEIC vocabulary learning game',
+        description: 'TOEIC business English game with 600 contextual cards and adaptive spaced practice',
         start_url: './',
         display: 'standalone',
         orientation: 'any',
@@ -134,7 +134,14 @@ export default defineConfig({
         scope: './'
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        // i18n JSON files are copied into dist/assets/i18n by the plugin above.
+        // Precache them explicitly so a first successful online load guarantees
+        // that every interface language remains available offline. The large
+        // word-bank JSON keeps its separately versioned entry below.
+        globPatterns: [
+          '**/*.{js,css,html,ico,png,svg,woff2}',
+          'assets/i18n/*.json'
+        ],
         cleanupOutdatedCaches: true,
         clientsClaim: true,
         skipWaiting: true,

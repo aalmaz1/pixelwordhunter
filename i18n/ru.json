@@ -82,7 +82,7 @@
   "retry": "ПОВТОРИТЬ",
   "auth_success": "Готово!",
   "no_mistakes": "Нет ошибок для повторения",
-  "merge_guest_progress": "Объединить гостевой прогресс с этим аккаунтом?",
+  "merge_guest_progress": "Объединить гостевой прогресс и XP с этим аккаунтом?",
   "forgot_password": "ЗАБЫЛИ ПАРОЛЬ?",
   "email_required": "Сначала введите email",
   "password_reset_sent": "Письмо для сброса пароля отправлено",

@@ -1,7 +1,7 @@
 {
   "name": "pixelwordhunter",
   "version": "1.0.0",
-  "description": "TOEIC Vocabulary Trainer - Learn 600 business English words with adaptive spaced repetition",
+  "description": "TOEIC business English trainer with 600 contextual cards, adaptive spaced practice, and typed recall",
   "type": "module",
   "scripts": {
     "dev": "vite",
