@@ -191,6 +191,11 @@
           <button type="button" id="word" class="word-button" aria-live="polite" data-i18n-aria="pronounce_hint"></button>
         </div>
         <div class="options-grid" id="options" role="group" aria-label="Answer options"></div>
+        <form id="recall-form" class="recall-form hidden" novalidate>
+          <label for="recall-answer" id="recall-label" data-i18n="recall_prompt">TYPE THE ANSWER FROM MEMORY</label>
+          <input id="recall-answer" type="text" autocomplete="off" spellcheck="false" data-i18n-placeholder="recall_placeholder" placeholder="Type your answer">
+          <button type="submit" id="recall-submit" class="option-btn" data-i18n="check_answer">CHECK</button>
+        </form>
       </div>
       <div id="explanation-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="explanation-title" aria-describedby="explanation-list">
         <h2 class="modal-title" id="explanation-title" data-i18n="word_review">// WORD REVIEW //</h2>

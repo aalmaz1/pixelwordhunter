@@ -914,3 +914,65 @@ body.lang-ko .user-info { font-size: 11px !important; line-height: 1.6 !importan
   z-index: 10000;
   text-align: center;
 }
+
+/* Free-recall questions: retrieval practice without answer choices. */
+.recall-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.recall-form label {
+  color: var(--neon-purple);
+  font-size: 10px;
+  letter-spacing: 1px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.recall-form input {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 14px;
+  background: #000000a6;
+  border: 2px solid var(--neon-purple);
+  color: var(--text-main);
+  font: inherit;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.recall-form input:focus {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 2px;
+  border-color: var(--neon-cyan);
+}
+
+.recall-form input.correct {
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+  box-shadow: 0 0 16px #39ff1466;
+}
+
+.recall-form input.wrong {
+  border-color: var(--neon-pink);
+  color: var(--neon-pink);
+  box-shadow: 0 0 16px #ff2d7866;
+}
+
+.recall-form .option-btn {
+  width: 100%;
+}
+
+body.lang-ko .recall-form label {
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+body.lang-ko .recall-form input {
+  font-family: 'Mulmaru', cursive !important;
+  font-size: 16px;
+}

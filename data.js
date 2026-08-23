@@ -46,13 +46,21 @@ export function _setGameDataForTests(arr) {
   categoriesCache = null;
 }
 
+// Long-term review schedule. Existing saves with mastery 0–5 continue to
+// work; new correct answers can now progress through six-month intervals.
+export const MAX_MASTERY_LEVEL = 9;
+export const MASTERED_MASTERY_LEVEL = 5;
 const INTERVALS = {
   0: 0,
-  1: 60 * 60 * 1000,
-  2: 6 * 60 * 60 * 1000,
-  3: 24 * 60 * 60 * 1000,
-  4: 72 * 60 * 60 * 1000,
-  5: 168 * 60 * 60 * 1000,
+  1: 60 * 60 * 1000,                 // 1 hour
+  2: 6 * 60 * 60 * 1000,              // 6 hours
+  3: 24 * 60 * 60 * 1000,             // 1 day
+  4: 3 * 24 * 60 * 60 * 1000,         // 3 days
+  5: 7 * 24 * 60 * 60 * 1000,         // 7 days
+  6: 14 * 24 * 60 * 60 * 1000,        // 14 days
+  7: 30 * 24 * 60 * 60 * 1000,        // 30 days
+  8: 90 * 24 * 60 * 60 * 1000,        // 90 days
+  9: 180 * 24 * 60 * 60 * 1000,       // 180 days
 };
 
 /**
@@ -232,21 +240,50 @@ function getWordsByCategory(category) {
   return gameData.filter(w => w.category === category);
 }
 
-// SM-2 inspired SRS logic
-function getWordPriority(word) {
-  const now = Date.now();
+// SRS helpers. A word is "new" until it has been answered once; new words
+// are explored randomly, while due or struggling words are never left to luck
+// when there is room for them in the round.
+function getIntervalForMastery(mastery) {
+  const level = Math.max(0, Math.min(MAX_MASTERY_LEVEL, Number(mastery) || 0));
+  return INTERVALS[level];
+}
+
+function isStruggling(word) {
+  const wrong = word.incorrectCount || 0;
+  const right = word.correctCount || 0;
+  return wrong > right || (word.lastSeen > 0 && (word.mastery || 0) < 2);
+}
+
+function isReviewDue(word, now = Date.now()) {
+  // A never-seen word belongs to the new-word queue, not the due queue.
+  if (!word.lastSeen) return false;
+  return now - word.lastSeen >= getIntervalForMastery(word.mastery);
+}
+
+function getWordPriority(word, now = Date.now()) {
   const lastSeen = word.lastSeen || 0;
-  const mastery = word.mastery || 0;
-  const timeSinceLastSeen = now - lastSeen;
+  const mastery = Number(word.mastery) || 0;
+  const timeSinceLastSeen = lastSeen ? Math.max(0, now - lastSeen) : 0;
+  const interval = getIntervalForMastery(mastery);
 
-  const interval = INTERVALS[mastery] || INTERVALS[5];
-  const isDue = timeSinceLastSeen >= interval;
+  if (isStruggling(word)) return 100;
+  if (isReviewDue(word, now)) {
+    // More overdue words win, but keep the value bounded so one old card
+    // cannot permanently crowd every other card out of the queue.
+    const overdueRatio = interval ? Math.max(0, timeSinceLastSeen - interval) / interval : 1;
+    return 90 + Math.min(9, overdueRatio * 9);
+  }
+  if (!lastSeen) return 50; // fresh material: useful exploration, not a review
 
-  if (mastery === 0) return 100;
-  if (word.incorrectCount > word.correctCount) return 90;
-  if (isDue) return 80;
-  
-  return Math.max(10, 70 - (timeSinceLastSeen / interval) * 60);
+  // Words approaching their next interval get a gentle preference.
+  const progress = interval ? timeSinceLastSeen / interval : 0;
+  return Math.max(10, 80 - progress * 30);
+}
+
+function rankWords(words, now = Date.now()) {
+  return words
+    .map(word => ({ word, priority: getWordPriority(word, now) }))
+    .sort((a, b) => b.priority - a.priority);
 }
 
 export function selectWordsForRound(category, roundSize = 10) {
@@ -260,23 +297,35 @@ export function selectWordsForRound(category, roundSize = 10) {
   if (!words.length) return [];
   if (words.length <= roundSize) return shuffle([...words]);
 
-  const weighted = words
-    .map(word => ({ word, priority: getWordPriority(word) }))
-    .sort((a, b) => b.priority - a.priority);
+  const now = Date.now();
+  const selected = [];
+  const selectedIds = new Set();
 
-  // 70% top-priority (SRS-due / weak), 30% fresh randoms so the user always
-  // sees some new material and doesn't get stuck on the same 10 words.
-  const topCount = Math.max(1, Math.round(roundSize * 0.7));
-  const randCount = roundSize - topCount;
+  // Due and struggling cards are mandatory whenever the round can fit them.
+  // This fixes the old behaviour where a 12-word category effectively picked
+  // 10 random cards and could skip the one the learner needed most.
+  const reviewQueue = rankWords(
+    words.filter(word => isReviewDue(word, now) || isStruggling(word)),
+    now
+  );
+  for (const { word } of reviewQueue.slice(0, roundSize)) {
+    selected.push(word);
+    selectedIds.add(word.id);
+  }
 
-  const topPool = weighted.slice(0, Math.max(topCount * 2, topCount));
-  const top = shuffle(topPool).slice(0, topCount).map(w => w.word);
+  const remainingCount = roundSize - selected.length;
+  if (remainingCount <= 0) return shuffle(selected);
 
-  const topSet = new Set(top.map(w => w.id));
-  const restPool = words.filter(w => !topSet.has(w.id));
-  const rest = shuffle(restPool).slice(0, randCount);
+  const available = words.filter(word => !selectedIds.has(word.id));
+  const ranked = rankWords(available, now);
+  const priorityCount = Math.min(remainingCount, Math.ceil(remainingCount * 0.6));
+  const priorityPool = ranked.slice(0, Math.max(priorityCount * 2, priorityCount));
+  const prioritized = shuffle(priorityPool).slice(0, priorityCount).map(entry => entry.word);
+  const chosenIds = new Set(prioritized.map(word => word.id));
+  const exploration = shuffle(available.filter(word => !chosenIds.has(word.id)))
+    .slice(0, remainingCount - prioritized.length);
 
-  return shuffle([...top, ...rest]);
+  return shuffle([...selected, ...prioritized, ...exploration]);
 }
 
 /**
@@ -321,7 +370,7 @@ export function getCategoryStats() {
     const c = w.category || 'General';
     if (!stats[c]) stats[c] = { total: 0, mastered: 0 };
     stats[c].total += 1;
-    if ((w.mastery || 0) >= 4) stats[c].mastered += 1;
+    if ((w.mastery || 0) >= MASTERED_MASTERY_LEVEL) stats[c].mastered += 1;
   }
   return stats;
 }
@@ -337,10 +386,10 @@ export function updateWordProgress(wordId, isCorrect) {
 
   if (isCorrect) {
     word.correctCount = (word.correctCount || 0) + 1;
-    word.mastery = Math.min(word.mastery + 1, 5);
+    word.mastery = Math.min((Number(word.mastery) || 0) + 1, MAX_MASTERY_LEVEL);
   } else {
     word.incorrectCount = (word.incorrectCount || 0) + 1;
-    word.mastery = Math.max(word.mastery - 1, 0);
+    word.mastery = Math.max((Number(word.mastery) || 0) - 1, 0);
   }
   
   // Trigger stats update in store
@@ -354,7 +403,7 @@ export function getProgressStats() {
   const words = getGameData();
   let mastered = 0;
   for (const word of words) {
-    if (word.mastery >= 4) mastered++;
+    if (word.mastery >= MASTERED_MASTERY_LEVEL) mastered++;
   }
   return { mastered, total: words.length };
 }
