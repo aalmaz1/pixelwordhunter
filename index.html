@@ -20,7 +20,10 @@
        Do NOT add a manual link to a root manifest.json — Vite hashes
        HTML-referenced assets into ./assets/, which broke the manifest's
        relative icon paths (/assets/assets/icon-192.png → 404). -->
-  <link rel="icon" href="./assets/favicon.ico">
+  <!-- Favicons: served verbatim from public/ (never hashed by Vite) so the
+       browser tab icon resolves both in dev and in the built app. -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
 
   <!-- Styles: single source of truth in style.css. Vite bundles it into a hashed stylesheet at build time. -->
   <link rel="stylesheet" href="./style.css">
@@ -29,7 +32,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Pixel Word Hunter">
-  <link rel="apple-touch-icon" href="./assets/logo.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
   <!-- Theme Color -->
   <meta name="theme-color" content="#0a0010">
