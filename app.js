@@ -1031,6 +1031,34 @@ function confirmDialog(message) {
   });
 }
 
+const RECALL_QUESTION_RATE = 0.25;
+
+/** Normalize typed answers without making capitalization or punctuation count
+ * as a mistake. For translations containing several comma-separated glosses,
+ * any one accepted gloss is enough in recall mode. */
+function normalizeTypedAnswer(value) {
+  return String(value ?? '')
+    .normalize('NFKC')
+    .toLocaleLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .trim()
+    .replace(/\s+/g, ' ');
+}
+
+function isAnswerCorrect(selected, word, lang, questionIsEnglish, answerMode = 'choice') {
+  const expected = getCorrectTranslation(word, lang, questionIsEnglish);
+  if (answerMode !== 'recall') return selected === expected;
+
+  const actual = normalizeTypedAnswer(selected);
+  if (!actual) return false;
+
+  const accepted = [expected];
+  // The dictionary sometimes contains multiple valid glosses such as
+  // "гарантия, заверение". Do not punish a learner for typing one of them.
+  if (questionIsEnglish) accepted.push(...expected.split(/[,;/|]/));
+  return accepted.some(answer => normalizeTypedAnswer(answer) === actual);
+}
+
 function loadQuestion() {
   const { currentRound, currentQ, translationLanguage } = store.getState();
   if (!currentRound?.length || !currentRound[currentQ]) {
@@ -1040,6 +1068,9 @@ function loadQuestion() {
   }
   const word = currentRound[currentQ];
   const questionData = getQuestionWord(word, translationLanguage);
+  // Free recall is introduced only for words already seen once. New words
+  // still get the easier multiple-choice introduction first.
+  const recallMode = Boolean(word.lastSeen) && Math.random() < RECALL_QUESTION_RATE;
 
   // The word itself is the pronunciation control: no adjacent speaker icon.
   ui.wordElement.textContent = questionData.text;
@@ -1057,33 +1088,59 @@ function loadQuestion() {
     .replace('{current}', currentQ + 1).replace('{total}', total);
   if (progressFill) progressFill.style.width = `${((currentQ + 1) / total) * 100}%`;
 
-  const options = generateOptionsForWord(word, translationLanguage, questionData.isEnglish);
   ui.optionsElement.textContent = '';
+  ui.optionsElement.classList.toggle('hidden', recallMode);
+  ui.recallFormElement?.classList.toggle('hidden', !recallMode);
+  ui.recallAnswerElement?.classList.remove('correct', 'wrong');
 
-  options.forEach((opt, index) => {
-    const btn = document.createElement('button');
-    // Tag each option with its language so English answers use Press Start 2P
-    // (like the EN UI) while Korean translations use Mulmaru under lang-ko.
-    btn.className = `option-btn lang-${questionData.isEnglish ? translationLanguage : 'en'}`;
-    btn.textContent = opt;
-    btn.setAttribute('aria-label', `Option ${index + 1}: ${opt}`);
-    btn.addEventListener('click', () => checkAnswer(opt, word, btn, questionData.isEnglish));
-    ui.optionsElement.appendChild(btn);
-  });
+  if (recallMode) {
+    ui.recallAnswerElement.value = '';
+    ui.recallAnswerElement.disabled = false;
+    ui.recallSubmitElement.disabled = false;
+    ui.recallAnswerElement.setAttribute('aria-label', I18nManager.t('recall_placeholder'));
+    // Focus makes the stronger retrieval mode immediately usable on desktop
+    // and mobile without requiring an extra tap.
+    requestAnimationFrame(() => ui.recallAnswerElement.focus());
+    ui.recallFormElement.onsubmit = (event) => {
+      event.preventDefault();
+      if (!ui.recallAnswerElement.value.trim()) {
+        showNotification(I18nManager.t('answer_required'));
+        ui.recallAnswerElement.focus();
+        return;
+      }
+      checkAnswer(ui.recallAnswerElement.value, word, null, questionData.isEnglish, 'recall');
+    };
+  } else {
+    const options = generateOptionsForWord(word, translationLanguage, questionData.isEnglish);
+    options.forEach((opt, index) => {
+      const btn = document.createElement('button');
+      // Tag each option with its language so English answers use Press Start 2P
+      // (like the EN UI) while Korean translations use Mulmaru under lang-ko.
+      btn.className = `option-btn lang-${questionData.isEnglish ? translationLanguage : 'en'}`;
+      btn.textContent = opt;
+      btn.setAttribute('aria-label', `Option ${index + 1}: ${opt}`);
+      btn.addEventListener('click', () => checkAnswer(opt, word, btn, questionData.isEnglish));
+      ui.optionsElement.appendChild(btn);
+    });
+  }
 
   ui.explanationModal.classList.add('hidden');
   store.setState({ isAnswerLocked: false });
 }
 
-function checkAnswer(selected, word, btn, questionIsEnglish) {
+function checkAnswer(selected, word, btn, questionIsEnglish, answerMode = 'choice') {
   const state = store.getState();
   if (state.isAnswerLocked) return;
   store.setState({ isAnswerLocked: true });
   updateDailyStreak();
 
   const currentLang = store.getState().translationLanguage;
-  const isCorrect = selected === getCorrectTranslation(word, currentLang, questionIsEnglish);
+  const isCorrect = isAnswerCorrect(selected, word, currentLang, questionIsEnglish, answerMode);
   Array.from(ui.optionsElement.children).forEach(option => { option.disabled = true; });
+  if (answerMode === 'recall') {
+    ui.recallAnswerElement.disabled = true;
+    ui.recallSubmitElement.disabled = true;
+  }
 
   // Track word result for review session
   const wordResult = {
@@ -1092,7 +1149,8 @@ function checkAnswer(selected, word, btn, questionIsEnglish) {
   };
 
   if (isCorrect) {
-    btn.classList.add('correct');
+    btn?.classList.add('correct');
+    if (answerMode === 'recall') ui.recallAnswerElement.classList.add('correct');
     AudioEngine.playCorrect();
     const bonus = 10; // Simple scoring
     // Use atomic XP increment for multi-tab synchronization
@@ -1100,7 +1158,8 @@ function checkAnswer(selected, word, btn, questionIsEnglish) {
     store.setState({ roundScore: state.roundScore + 1 });
     updateWordProgress(word.id, true);
   } else {
-    btn.classList.add('wrong');
+    btn?.classList.add('wrong');
+    if (answerMode === 'recall') ui.recallAnswerElement.classList.add('wrong');
     AudioEngine.playWrong();
     updateWordProgress(word.id, false);
 

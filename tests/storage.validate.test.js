@@ -10,7 +10,7 @@ vi.stubGlobal('localStorage', {
   clear() { this._s = {}; }
 });
 
-const { validateSaveData, migrateProgress, mergeProgress } = await import('../storage.js');
+const { validateSaveData, migrateProgress, mergeProgress, flushLocalProgress } = await import('../storage.js');
 const dataModule = await import('../data.js');
 
 describe('validateSaveData', () => {
@@ -24,6 +24,11 @@ describe('validateSaveData', () => {
     expect(validateSaveData(null)).toBe(false);
     expect(validateSaveData('nope')).toBe(false);
     expect(validateSaveData(42)).toBe(false);
+  });
+
+  it('accepts long-term mastery levels and rejects values above the maximum', () => {
+    expect(validateSaveData({ a: { mastery: 9, lastSeen: 0 } })).toBe(true);
+    expect(validateSaveData({ a: { mastery: 10, lastSeen: 0 } })).toBe(false);
   });
 
   it('rejects entries with bad mastery / lastSeen', () => {
@@ -48,5 +53,15 @@ describe('validateSaveData', () => {
       { x: { mastery: 2, lastSeen: 20, correctCount: 5, incorrectCount: 1 } }
     );
     expect(merged.x).toEqual({ mastery: 4, lastSeen: 20, correctCount: 5, incorrectCount: 3 });
+  });
+
+  it('flushes the latest progress immediately when leaving the page', () => {
+    dataModule._setGameDataForTests([
+      { id: 'a--book', eng: 'book', mastery: 2, lastSeen: 123 }
+    ]);
+    flushLocalProgress();
+    const saved = JSON.parse(localStorage.getItem('pixelWordHunter_save_v3_guest'));
+    expect(saved['a--book'].mastery).toBe(2);
+    expect(saved['a--book'].lastSeen).toBe(123);
   });
 });

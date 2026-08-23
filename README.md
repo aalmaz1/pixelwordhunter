@@ -58,7 +58,7 @@ Every card has its own mastery level:
 NEW → LEARNING → FAMILIAR → GOOD → STRONG → MASTER
 ```
 
-Correct answers move a card forward. Wrong answers bring it back into practice. New, struggling and due cards are prioritized, while a random element keeps the wider word bank alive.
+Correct answers move a card forward. Wrong answers bring it back into practice. New, struggling and due cards are prioritized, while a random element keeps the wider word bank alive. Review intervals grow from one hour through six months as a card is recalled correctly. Due and struggling cards are placed into the next round before exploratory words, and previously seen cards occasionally switch to a type-the-answer recall prompt instead of multiple choice.
 
 The result is a short daily loop that feels like a game but behaves like a real study tool:
 

@@ -41,6 +41,19 @@ describe('selectWordsForRound', () => {
     }
     expect(new Set(sets).size).toBeGreaterThan(1);
   });
+
+  it('always includes due and struggling words when the round has room', () => {
+    const words = seed(30);
+    const old = Date.now() - 8 * 24 * 60 * 60 * 1000;
+    words[0].mastery = 5;
+    words[0].lastSeen = old; // due after the seven-day interval
+    words[1].incorrectCount = 3;
+    words[1].correctCount = 1; // struggling, even if not time-due
+
+    const round = dataMod.selectWordsForRound('A', 10);
+    expect(round.map(w => w.eng)).toContain('w0');
+    expect(round.map(w => w.eng)).toContain('w1');
+  });
 });
 
 describe('selectWordsForRound Hard category', () => {
@@ -82,11 +95,24 @@ describe('updateWordProgress', () => {
   });
 });
 
+describe('long-term mastery intervals', () => {
+  it('keeps progressing past one week into long review intervals', () => {
+    const words = seed(5);
+    const word = words[0];
+    for (let i = 0; i < 9; i++) dataMod.updateWordProgress(word.id, true);
+    expect(word.mastery).toBe(9);
+
+    // A wrong answer still moves a mature card back one stage.
+    dataMod.updateWordProgress(word.id, false);
+    expect(word.mastery).toBe(8);
+  });
+});
+
 describe('getCategoryStats', () => {
   it('counts mastered/total per category', () => {
     const words = seed(10);
-    words[0].mastery = 4; // mastered
-    words[1].mastery = 5;
+    words[0].mastery = 5; // mastered after the stable 7-day stage
+    words[1].mastery = 9; // long-term stage
     const stats = dataMod.getCategoryStats();
     expect(stats.A.total).toBe(10); // seeded n=10 all in A because i<15
     expect(stats.A.mastered).toBe(2);

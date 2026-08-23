@@ -3,7 +3,7 @@
  * LocalStorage abstraction and Firestore synchronization
  */
 
-import { getGameData } from './data.js';
+import { getGameData, MAX_MASTERY_LEVEL } from './data.js';
 import { store } from './store.js';
 
 const LEGACY_STORAGE_KEY = 'pixelWordHunter_save_v2';
@@ -134,7 +134,7 @@ export function validateSaveData(data) {
   if (Object.keys(data).length > 1000) return false;
   for (const [, progress] of Object.entries(data)) {
     if (!progress || typeof progress !== 'object') return false;
-    if (!Number.isFinite(progress.mastery) || progress.mastery < 0 || progress.mastery > 5) return false;
+    if (!Number.isFinite(progress.mastery) || progress.mastery < 0 || progress.mastery > MAX_MASTERY_LEVEL) return false;
     if (!Number.isFinite(progress.lastSeen) || progress.lastSeen < 0) return false;
     if (progress.correctCount != null && (!Number.isFinite(progress.correctCount) || progress.correctCount < 0)) return false;
     if (progress.incorrectCount != null && (!Number.isFinite(progress.incorrectCount) || progress.incorrectCount < 0)) return false;
@@ -247,6 +247,22 @@ function buildProgressData() {
     }
   });
   return progress;
+}
+
+/**
+ * Flush the latest progress synchronously when a tab is backgrounded or
+ * closed. Normal answers still use the debounced path below, but a learner
+ * should not lose the final answer just because they close the tab quickly.
+ */
+export function flushLocalProgress() {
+  try {
+    const progress = buildProgressData();
+    const oldData = storageGet(progressKey());
+    if (oldData) storageSet(backupKey(), oldData);
+    storageSet(progressKey(), JSON.stringify(progress));
+  } catch (error) {
+    console.warn('[Storage] Final local save failed:', error.message);
+  }
 }
 
 /**
@@ -393,7 +409,15 @@ export async function flushPendingXP() {
 }
 
 if (typeof window !== 'undefined') {
-  window.addEventListener('beforeunload', () => { flushPendingXP(); });
+  const flushBeforeExit = () => {
+    flushLocalProgress();
+    flushPendingXP();
+  };
+  window.addEventListener('beforeunload', flushBeforeExit);
+  window.addEventListener('pagehide', flushLocalProgress);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') flushLocalProgress();
+  });
 }
 
 /**
