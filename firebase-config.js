@@ -153,7 +153,9 @@ export async function initFirebase() {
   // app.js listens to this event instead of registering its own onAuthStateChanged.
   if (firebaseAuth && authModuleApi) {
     authModuleApi.onAuthStateChanged(firebaseAuth, (user) => {
-      if (user) {
+      // Anonymous TRY sessions use the same local guest XP namespace as card
+      // progress. Cross-device XP listening starts only for email accounts.
+      if (user && !user.isAnonymous) {
         setupXPListener(user.uid);
       } else {
         cleanupXPListener();

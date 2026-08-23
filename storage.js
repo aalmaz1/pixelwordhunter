@@ -57,9 +57,29 @@ export function getGuestProgress() {
   }
 }
 
+export function getGuestXP() {
+  const saved = storageGet('xp_guest');
+  return Math.max(0, parseInt(saved, 10) || 0);
+}
+
+/**
+ * Earlier releases stored anonymous TRY XP under xp_<anonymousUid>. Anonymous
+ * learning now consistently uses the guest namespace, so move that local value
+ * once without losing XP that may already have been earned before auth resolved.
+ */
+export function migrateAnonymousXP(userId) {
+  if (!userId) return getGuestXP();
+  const legacyKey = `xp_${userId}`;
+  const legacyXP = Math.max(0, parseInt(storageGet(legacyKey), 10) || 0);
+  if (legacyXP > 0) storageSet('xp_guest', String(getGuestXP() + legacyXP));
+  storageRemove(legacyKey);
+  return getGuestXP();
+}
+
 export function clearGuestProgress() {
   storageRemove(progressKey('guest'));
   storageRemove(backupKey('guest'));
+  storageRemove('xp_guest');
 }
 
 export function persistCurrentProgress(progress) {
@@ -299,7 +319,7 @@ export async function saveProgress(firebaseDb, doc, setDoc, serverTimestamp) {
   debouncedLocalSave(progress);
 
   // Firestore Sync (Debounced with module-level timeout)
-  const { user, isAuthenticated, xp } = store.getState();
+  const { user, isAuthenticated } = store.getState();
   // Note: XP is now synced via atomic increments and real-time listeners
   // so we don't need to explicitly save it here anymore
   if (isAuthenticated && user && !user.isAnonymous) {
@@ -318,9 +338,13 @@ export async function saveProgress(firebaseDb, doc, setDoc, serverTimestamp) {
           
           if (!userSnap.exists()) {
             // Создаём новый документ с начальными данными
+            // Local XP already includes any queued atomic increments. Seed the
+            // document with only the pre-delta base so flushPendingXP() can add
+            // the queued amount exactly once.
+            const baseXP = Math.max(0, getUserXP() - _pendingXpDelta);
             await deps.setDoc(userRef, {
               progress,
-              xp: xp || 0,
+              xp: baseXP,
               lastSync: deps.serverTimestamp(),
               updatedAt: new Date().toISOString(),
               createdAt: new Date().toISOString()
@@ -351,8 +375,11 @@ export async function saveProgress(firebaseDb, doc, setDoc, serverTimestamp) {
  * User-specific XP handling with atomic server increments
  */
 function getCurrentUserId() {
-  const state = store.getState();
-  return state.user?.uid || null;
+  const user = store.getState().user;
+  // Anonymous TRY sessions intentionally share the local guest namespace.
+  // Only an email account gets a user-specific XP bucket and cloud writes,
+  // matching the way card progress is namespaced in storageOwner().
+  return user && !user.isAnonymous ? user.uid : null;
 }
 
 /**
@@ -439,6 +466,30 @@ export async function addXP(points) {
   return newXP;
 }
 
+/**
+ * Replace account XP with an explicit trusted local value. Normal gameplay
+ * uses atomic increments; an imported backup is the one workflow where an
+ * absolute value is intentional. Guest/anonymous sessions remain local.
+ */
+export async function syncXPToCloud(xp = getUserXP()) {
+  const userId = getCurrentUserId();
+  if (!userId || !store.getState().isAuthenticated) return false;
+
+  try {
+    emitSyncStatus('syncing');
+    const deps = await resolveFirebaseSyncDeps();
+    if (!deps.firebaseDb || !deps.doc || !deps.setDoc) return false;
+    const value = Math.min(1_000_000_000, Math.max(0, Math.trunc(Number(xp) || 0)));
+    await deps.setDoc(deps.doc(deps.firebaseDb, 'users', userId), { xp: value }, { merge: true });
+    emitSyncStatus('synced');
+    return true;
+  } catch (error) {
+    emitSyncStatus('sync_error');
+    console.warn('[XP] Backup value cloud sync failed:', error.message);
+    return false;
+  }
+}
+
 export async function resetProgress({ cloud = false } = {}) {
   if (_localSaveTimer) { clearTimeout(_localSaveTimer); _localSaveTimer = null; }
   if (saveProgress._timeout) { clearTimeout(saveProgress._timeout); saveProgress._timeout = null; }
@@ -509,8 +560,30 @@ export async function importProgress(file) {
     }
     const progress = migrateProgress(data.progress);
     storageSet(progressKey(), JSON.stringify(progress));
-    if (data.xp !== undefined && Number.isFinite(Number(data.xp))) setUserXP(Math.max(0, Number(data.xp)));
-    return { success: true, progress };
+    let importedXP = null;
+    if (data.xp !== undefined && Number.isFinite(Number(data.xp))) {
+      importedXP = Math.min(1_000_000_000, Math.max(0, Math.trunc(Number(data.xp))));
+      // Import is an intentional absolute replacement. Drop any queued gameplay
+      // delta so it cannot be applied a second time after the backup value.
+      if (_xpFlushTimer) { clearTimeout(_xpFlushTimer); _xpFlushTimer = null; }
+      _pendingXpDelta = 0;
+      setUserXP(importedXP);
+    }
+
+    // Backups have included settings since v3. Return only known values so the
+    // application can restore them without allowing arbitrary theme/language
+    // strings from an imported file into DOM attributes or resource paths.
+    const settings = {};
+    const rawSettings = data.settings;
+    if (rawSettings && typeof rawSettings === 'object') {
+      const validThemes = ['cyberpunk', 'midnight', 'matrix', 'sunset', '3310', 'mono'];
+      const validLanguages = ['en', 'ru', 'ko'];
+      if (validThemes.includes(rawSettings.theme)) settings.theme = rawSettings.theme;
+      if (validLanguages.includes(rawSettings.language)) settings.language = rawSettings.language;
+      if (typeof rawSettings.audio === 'boolean') settings.audio = rawSettings.audio;
+    }
+
+    return { success: true, progress, settings, xp: importedXP };
   } catch {
     return { success: false, error: 'invalid' };
   }

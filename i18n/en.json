@@ -82,7 +82,7 @@
   "retry": "RETRY",
   "auth_success": "Success!",
   "no_mistakes": "No mistakes to review",
-  "merge_guest_progress": "Merge guest progress into this account?",
+  "merge_guest_progress": "Merge guest progress and XP into this account?",
   "forgot_password": "FORGOT PASSWORD?",
   "email_required": "Enter your email first",
   "password_reset_sent": "Password reset email sent",
