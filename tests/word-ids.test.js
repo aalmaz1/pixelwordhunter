@@ -1,6 +1,10 @@
+import fs from 'node:fs';
 import { describe, it, expect } from 'vitest';
-import words from '../words_optimized.json';
 import * as data from '../data.js';
+
+const words = JSON.parse(
+  fs.readFileSync('public/words_optimized.json', 'utf8')
+);
 
 describe('v3 word identities', () => {
   it('gives every dictionary record a stable unique id', () => {

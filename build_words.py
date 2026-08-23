@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Rebuild words_optimized.json (and public copy) so every category contains
-EXACTLY the 12 words from Lin Lougheed's "600 Essential Words for the TOEIC"
-(Barron's), with RU/KO translations and EN/RU/KO example sentences.
+"""Rebuild the canonical public/words_optimized.json dictionary.
+
+Every category contains exactly the 12 words from Lin Lougheed's
+"600 Essential Words for the TOEIC" (Barron's), with RU/KO translations and
+EN/RU/KO example sentences.
 """
 import json
 import re
@@ -78,9 +80,8 @@ def main():
         assert w["rus"].strip() and w["kor"].strip(), f"empty translation: {w['id']}"
 
     payload = json.dumps(data, ensure_ascii=False, indent=2)
-    for path in ("words_optimized.json", "public/words_optimized.json"):
-        with open(path, "w", encoding="utf-8") as f:
-            f.write(payload + "\n")
+    with open("public/words_optimized.json", "w", encoding="utf-8") as f:
+        f.write(payload + "\n")
 
     unique_eng = len({w["eng"] for w in data})
     print(f"Total cards: {len(data)}")
