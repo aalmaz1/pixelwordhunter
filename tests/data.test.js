@@ -3,6 +3,12 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import * as dataMod from '../data.js';
 import { UNCONFIRMED_MARKER } from '../sanitize.js';
 
+const dictionaryPath = 'public/words_optimized.json';
+
+function readDictionary() {
+  return JSON.parse(fs.readFileSync(dictionaryPath, 'utf8'));
+}
+
 function seed(n = 30) {
   const words = Array.from({ length: n }, (_, i) => ({
     eng: `w${i}`,
@@ -130,8 +136,8 @@ describe('vocabulary translations follow the selected language', () => {
 });
 
 describe('word bank Korean examples', () => {
-  it('has complete usable Korean translations for every word and example sentence', async () => {
-    const words = (await import('../words_optimized.json')).default;
+  it('has complete usable Korean translations for every word and example sentence', () => {
+    const words = readDictionary();
     const unusableWordTranslations = words
       .filter(w => !dataMod.isUsableKoreanText(w.kor))
       .map(w => w.id);
@@ -143,10 +149,10 @@ describe('word bank Korean examples', () => {
     expect(unusableExampleTranslations).toEqual([]);
   });
 
-  it('keeps the dev/public dictionary in sync with the source dictionary', () => {
-    const source = fs.readFileSync('words_optimized.json', 'utf8');
-    const publicCopy = fs.readFileSync('public/words_optimized.json', 'utf8');
-    expect(publicCopy).toBe(source);
+  it('stores one complete canonical dictionary in public/', () => {
+    const words = readDictionary();
+    expect(words).toHaveLength(600);
+    expect(words.every(word => word.eng && word.rus && word.kor)).toBe(true);
   });
 });
 

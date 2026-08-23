@@ -204,8 +204,8 @@ storage.js             local progress, backups and cloud sync
 ui.js                  DOM rendering and accessibility helpers
 i18n.js                language loading
 style.css              responsive UI and six themes
-words_optimized.json   600-card dictionary
-i18n/                  English, Russian and Korean UI text
+public/words_optimized.json  canonical 600-card dictionary
+i18n/                       English, Russian and Korean UI text
 assets/                fonts, logo, icons and favicon
 tests/                 Vitest/jsdom tests
 firestore.rules        per-user Firestore rules

@@ -6,7 +6,7 @@ import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const wordsJsonPath = path.resolve(__dirname, 'words_optimized.json');
+const wordsJsonPath = path.resolve(__dirname, 'public', 'words_optimized.json');
 const wordsDataRevision = fs.existsSync(wordsJsonPath)
   ? crypto.createHash('sha256').update(fs.readFileSync(wordsJsonPath)).digest('hex').slice(0, 16)
   : 'dev';
@@ -37,8 +37,8 @@ export default defineConfig({
       }
     }
   },
-  // Ensure words_optimized.json is served as a static file in dev mode
-  // so fetch('./words_optimized.json') works during development.
+  // Runtime-only assets in public/ are served as-is in development and copied
+  // to dist/ for production. The dictionary has one canonical copy there.
   publicDir: 'public',
   plugins: [
     {
@@ -84,27 +84,7 @@ export default defineConfig({
       }
     },
     {
-      name: 'copy-words-json',
-      closeBundle() {
-        try {
-          const srcFile = path.resolve(__dirname, 'words_optimized.json');
-          const destFile = path.resolve(__dirname, 'dist/words_optimized.json');
-          
-          if (fs.existsSync(srcFile)) {
-            fs.copyFileSync(srcFile, destFile);
-            console.log('✅ words_optimized.json copied to dist/');
-          } else {
-            console.warn('⚠️ words_optimized.json not found in source');
-          }
-        } catch (err) {
-          console.error('❌ Failed to copy words_optimized.json:', err);
-        }
-      }
-    },
-    {
-      // Emit PWA icons at STABLE, unhashed paths so the manifest resolves them
-      // in production. Vite would otherwise hash any file referenced from
-      // index.html and break manifest lookups.
+      // Emit PWA icons at stable, unhashed paths so the manifest resolves them.
       name: 'copy-pwa-assets',
       closeBundle() {
         try {
@@ -112,7 +92,7 @@ export default defineConfig({
           if (!fs.existsSync(destDir)) {
             fs.mkdirSync(destDir, { recursive: true });
           }
-          const files = ['logo.png', 'icon-192.png', 'icon-512.png', 'icon-512-maskable.png'];
+          const files = ['icon-192.png', 'icon-512.png', 'icon-512-maskable.png'];
           for (const f of files) {
             const src = path.resolve(__dirname, 'assets', f);
             const dst = path.resolve(destDir, f);

@@ -8,9 +8,9 @@
  * creating a 200ms+ long task at module evaluation time that blocked ALL
  * user interactions (INP input delay of 215-235ms).
  *
- * Now the JSON is loaded via fetch() and parsed + sanitized entirely in a
- * Web Worker. The main thread NEVER does JSON.parse(243KB). Total main-
- * thread blocking for data loading: ~5-10ms (structured clone of result).
+ * Now the JSON is loaded via fetch() and parsed + sanitized in a Web Worker.
+ * The main thread only parses it as a compatibility fallback when the Worker
+ * cannot start. Normal-path blocking is limited to the structured clone.
  */
 
 import { store } from './store.js';
@@ -82,28 +82,22 @@ function getWordsJsonUrl() {
 }
 
 /**
- * Load and sanitize word data entirely OFF the main thread.
- *
- * Strategy:
- * 1. fetch() the JSON file as TEXT (async, zero main-thread blocking)
- * 2. Send the raw text to a Web Worker
- * 3. Worker does JSON.parse() + sanitize (off main thread)
- * 4. Worker sends back sanitized data (structured clone ~5-10ms)
- *
- * This eliminates the 200ms+ JSON.parse(243KB) that was previously
- * embedded in the main JS bundle at module level.
+ * Fetch the canonical public dictionary as text. Keeping the raw text lets us
+ * reuse the same response if the Worker is unavailable instead of bundling a
+ * second copy of the complete dictionary as a JavaScript fallback chunk.
  */
-async function loadAndSanitizeViaWorker() {
-  const jsonUrl = getWordsJsonUrl();
-  
-  // Step 1: Fetch JSON as text (completely async, no main-thread blocking)
-  const response = await fetch(jsonUrl);
+async function fetchWordsJsonText() {
+  const response = await fetch(getWordsJsonUrl());
   if (!response.ok) {
     throw new Error(`Failed to fetch words data: ${response.status}`);
   }
-  const jsonText = await response.text(); // async read, no blocking
-  
-  // Step 2: Send to Worker for parsing + sanitization
+  return response.text();
+}
+
+/**
+ * Parse and sanitize word data entirely off the main thread.
+ */
+async function sanitizeViaWorker(jsonText) {
   // NOTE: the URL must be constructed INLINE inside new Worker(...).
   // Vite only recognizes the worker-bundling pattern when new URL() is a
   // direct argument; assigning it to a variable first makes Vite treat
@@ -113,22 +107,18 @@ async function loadAndSanitizeViaWorker() {
   // emits a proper same-origin worker chunk with sanitize.js bundled in.
   const worker = new Worker(new URL('./data.worker.js', import.meta.url), { type: 'module' });
 
-  
-  // Send the raw JSON string. Worker will JSON.parse + sanitize.
-  // Structured clone of a 243KB string is very fast (~0.5ms).
+  // Structured clone of the JSON string is fast; parsing happens in the Worker.
   worker.postMessage(jsonText);
-  
-  const sanitizedData = await new Promise((resolve, reject) => {
+
+  return new Promise((resolve, reject) => {
     const timeout = setTimeout(() => {
       reject(new Error('Worker timeout'));
       worker.terminate();
-    }, 10000); // 10s timeout for large data
-    
-    worker.onmessage = (e) => {
+    }, 10000);
+
+    worker.onmessage = (event) => {
       clearTimeout(timeout);
-      const result = e.data;
-      
-      // Check for Worker-side errors
+      const result = event.data;
       if (result && result.__error) {
         reject(new Error(result.message || 'Worker error'));
       } else {
@@ -136,7 +126,7 @@ async function loadAndSanitizeViaWorker() {
       }
       worker.terminate();
     };
-    
+
     worker.onerror = (err) => {
       clearTimeout(timeout);
       console.error('[Data Worker] Error:', err);
@@ -144,18 +134,16 @@ async function loadAndSanitizeViaWorker() {
       worker.terminate();
     };
   });
-  
-  return sanitizedData;
 }
 
 /**
- * Fallback: Load via dynamic import (Worker failed but fetch works).
- * The dynamic import still does JSON.parse on the main thread, but
- * it's in a separate chunk so it doesn't block the initial module load.
+ * Compatibility fallback for browsers where a module Worker cannot start.
+ * This may briefly block the main thread, but it reuses the fetched text and
+ * avoids shipping another 190+ KB copy of the dictionary in every build.
  */
-async function loadViaDynamicImport() {
-  const module = await import('./words_optimized.json');
-  const freshData = module.default || module;
+async function sanitizeOnMainThread(jsonText) {
+  await yieldToMain();
+  const freshData = JSON.parse(jsonText);
   await yieldToMain();
   return sanitizeToeicData(freshData);
 }
@@ -166,23 +154,23 @@ async function loadViaDynamicImport() {
  */
 async function fetchFreshData() {
   try {
+    const jsonText = await fetchWordsJsonText();
     let sanitizedData;
-    
-    // Primary path: fetch + Worker (zero main-thread blocking for JSON.parse)
+
+    // Primary path: Worker parsing keeps JSON.parse off the main thread.
     try {
-      sanitizedData = await loadAndSanitizeViaWorker();
+      sanitizedData = await sanitizeViaWorker(jsonText);
     } catch (workerErr) {
       // Worker errors are often bare Events (CSP blocks, load failures) with
       // no .message — fall back to a readable description instead of logging
       // a bare "undefined".
       const reason = workerErr?.message || workerErr?.type || workerErr?.name || 'unknown error';
-      console.warn('[Data] Worker path failed, trying dynamic import:', reason);
-      
-      // Fallback path: dynamic import (JSON.parse on main thread, but in separate chunk)
+      console.warn('[Data] Worker path failed, parsing fetched data on the main thread:', reason);
+
       try {
-        sanitizedData = await loadViaDynamicImport();
-      } catch (importErr) {
-        console.warn('[Data] Dynamic import also failed:', importErr.message);
+        sanitizedData = await sanitizeOnMainThread(jsonText);
+      } catch (parseErr) {
+        console.warn('[Data] Main-thread fallback also failed:', parseErr.message);
         return []; // Return empty — app will show error state
       }
     }
