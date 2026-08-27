@@ -30,6 +30,20 @@ describe('sanitizeToeicData', () => {
     expect(w.kor).toBe('엑스');
   });
 
+  it('accepts the compact single-letter key format used by the shipped JSON', () => {
+    const [w] = sanitizeToeicData([
+      { i: 'a--x', c: 'A', e: 'x', r: 'икс', E: 'ex', R: 'пр', k: '엑스', K: '예' }
+    ]);
+    expect(w.id).toBe('a--x');
+    expect(w.eng).toBe('x');
+    expect(w.category).toBe('A');
+    expect(w.rus).toBe('икс');
+    expect(w.exampleEng).toBe('ex');
+    expect(w.exampleRus).toBe('пр');
+    expect(w.kor).toBe('엑스');
+    expect(w.exampleKor).toBe('예');
+  });
+
   it('returns [] for non-array input', () => {
     expect(sanitizeToeicData(null)).toEqual([]);
     expect(sanitizeToeicData('nope')).toEqual([]);

@@ -2,7 +2,7 @@
  * data.js
  * Word data management, sanitization, and SRS logic
  *
- * INP CRITICAL FIX: The words JSON (243KB) is NO LONGER statically imported.
+ * INP CRITICAL FIX: The words JSON (~170KB) is NO LONGER statically imported.
  * Previously, `import wordsData from './words_optimized.json'` caused Vite
  * to inline the entire JSON as a JSON.parse(`...`) call in the main bundle,
  * creating a 200ms+ long task at module evaluation time that blocked ALL
@@ -147,7 +147,7 @@ async function sanitizeViaWorker(jsonText) {
 /**
  * Compatibility fallback for browsers where a module Worker cannot start.
  * This may briefly block the main thread, but it reuses the fetched text and
- * avoids shipping another 190+ KB copy of the dictionary in every build.
+ * avoids shipping another ~170 KB copy of the dictionary in every build.
  */
 async function sanitizeOnMainThread(jsonText) {
   await yieldToMain();
@@ -190,7 +190,7 @@ async function fetchFreshData() {
     rebuildWordsIndex();
 
     // DO NOT write to localStorage — the data is already in memory
-    // from the fetch/Worker, and writing 243KB to localStorage would
+    // from the fetch/Worker, and writing ~170KB to localStorage would
     // create a 50-100ms blocking long task on the main thread.
     // The data will be re-fetched on next page load (cached by SW).
 
@@ -208,7 +208,7 @@ export async function loadGameData() {
 
   // No localStorage cache check — the cache was REDUNDANT because:
   // 1. The JSON data is now loaded via fetch() (cached by HTTP/SW)
-  // 2. localStorage.getItem + JSON.parse of 243KB was a 100-200ms
+  // 2. localStorage.getItem + JSON.parse of the dictionary was a 100-200ms
   //    blocking operation that caused INP input delay
   // 3. The service worker caches the JSON file for offline use
 

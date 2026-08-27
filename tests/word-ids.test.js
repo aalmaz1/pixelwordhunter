@@ -2,9 +2,11 @@ import fs from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import * as data from '../data.js';
 
+// The shipped dictionary uses compact single-letter keys (see build_words.py);
+// map id back to its long name so the assertions read naturally.
 const words = JSON.parse(
   fs.readFileSync('public/words_optimized.json', 'utf8')
-);
+).map(w => ({ ...w, id: w.i }));
 
 describe('v3 word identities', () => {
   it('gives every dictionary record a stable unique id', () => {

@@ -5,26 +5,34 @@
 
 export const UNCONFIRMED_MARKER = '미확인';
 
+// words_optimized.json ships a compact single-letter key format to keep the
+// file small: i=id, c=category, e=eng, r=rus, E=exampleEng, R=exampleRus,
+// k=kor, K=exampleKor. Older/hand-written data may still use the long names
+// (plus the very old ko/exampleKo aliases), so every field reads both.
+const firstString = (values) => {
+  for (const v of values) {
+    if (typeof v === 'string' && v.trim()) return v.trim();
+  }
+  return '';
+};
+
 function sanitizeToeicWord(rawWord) {
   if (!rawWord || typeof rawWord !== 'object') return null;
 
-  const eng = typeof rawWord.eng === 'string' ? rawWord.eng.trim() : '';
-  const category = typeof rawWord.category === 'string' ? rawWord.category.trim() : 'General';
+  const eng = firstString([rawWord.e, rawWord.eng]);
+  const category = firstString([rawWord.c, rawWord.category]) || 'General';
 
-  const rus = typeof rawWord.rus === 'string' && rawWord.rus.trim() ? rawWord.rus.trim() : '';
-  const kor = typeof rawWord.kor === 'string' && rawWord.kor.trim() ? rawWord.kor.trim() :
-              (typeof rawWord.ko === 'string' && rawWord.ko.trim() ? rawWord.ko.trim() : '');
+  const rus = firstString([rawWord.r, rawWord.rus]);
+  const kor = firstString([rawWord.k, rawWord.kor, rawWord.ko]);
 
-  const exampleEng = typeof rawWord.exampleEng === 'string' ? rawWord.exampleEng.trim() : '';
-  const exampleRus = typeof rawWord.exampleRus === 'string' ? rawWord.exampleRus.trim() : '';
-  const exampleKor = typeof rawWord.exampleKor === 'string' && rawWord.exampleKor.trim() ? rawWord.exampleKor.trim() :
-                     (typeof rawWord.exampleKo === 'string' && rawWord.exampleKo.trim() ? rawWord.exampleKo.trim() : '');
+  const exampleEng = firstString([rawWord.E, rawWord.exampleEng]);
+  const exampleRus = firstString([rawWord.R, rawWord.exampleRus]);
+  const exampleKor = firstString([rawWord.K, rawWord.exampleKor, rawWord.exampleKo]);
 
   if (!eng || (!rus && !kor)) return null;
 
-  const id = typeof rawWord.id === 'string' && rawWord.id.trim()
-    ? rawWord.id.trim()
-    : `${category.toLowerCase().replace(/[^a-z0-9]+/g, '-')}--${eng.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+  const id = firstString([rawWord.i, rawWord.id]) ||
+    `${category.toLowerCase().replace(/[^a-z0-9]+/g, '-')}--${eng.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 
   return {
     id,

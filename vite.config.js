@@ -31,9 +31,22 @@ export default defineConfig({
     assetsDir: 'assets',
     minify: 'esbuild',
     sourcemap: false,
+    // The firebase-sdk chunk is ~520 KiB by design (whole Firebase SDK,
+    // loaded only at login and kept out of the PWA precache).
+    chunkSizeWarningLimit: 600,
     rollupOptions: {
       input: {
         main: './index.html'
+      },
+      output: {
+        manualChunks(id) {
+          // The Firebase SDK (auth + firestore) is only loaded dynamically
+          // when the user signs in. Collect it into one deterministically
+          // named chunk so the PWA can keep it out of the precache — see
+          // workbox.globIgnore below. Signing in needs the network anyway,
+          // so this changes nothing for the user.
+          if (/node_modules[\\/](@firebase|firebase)\//.test(id)) return 'firebase-sdk';
+        }
       }
     }
   },
@@ -142,6 +155,12 @@ export default defineConfig({
           '**/*.{js,css,html,ico,png,svg,woff2}',
           'assets/i18n/*.json'
         ],
+        // The Firebase SDK chunk is intentionally NOT precached: it is only
+        // fetched when the user opens login, and login can only succeed with
+        // a network connection to the Firebase APIs. Excluding ~500 KiB of
+        // rarely used JS keeps first installs fast; offline gameplay (the
+        // common case) is fully covered by the precache.
+        globIgnores: ['assets/firebase-sdk-*.js'],
         cleanupOutdatedCaches: true,
         clientsClaim: true,
         skipWaiting: true,
