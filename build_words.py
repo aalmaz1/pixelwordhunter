@@ -79,7 +79,15 @@ def main():
     for w in data:
         assert w["rus"].strip() and w["kor"].strip(), f"empty translation: {w['id']}"
 
-    payload = json.dumps(data, ensure_ascii=False, indent=2)
+    # Ship a compact single-letter key format to keep the dictionary small
+    # (loaded and parsed by the app on every start). sanitize.js reads both
+    # this format and the long key names, so hand-edited data still works.
+    SHORT_KEYS = {
+        "id": "i", "category": "c", "eng": "e", "rus": "r",
+        "exampleEng": "E", "exampleRus": "R", "kor": "k", "exampleKor": "K",
+    }
+    compact = [{SHORT_KEYS[k]: v for k, v in w.items()} for w in data]
+    payload = json.dumps(compact, ensure_ascii=False, separators=(",", ":"))
     with open("public/words_optimized.json", "w", encoding="utf-8") as f:
         f.write(payload + "\n")
 

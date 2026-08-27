@@ -5,8 +5,13 @@ import { UNCONFIRMED_MARKER } from '../sanitize.js';
 
 const dictionaryPath = 'public/words_optimized.json';
 
+// The shipped dictionary uses compact single-letter keys (see build_words.py);
+// map them back to the long names so tests read like the app does.
+const SHORT_KEYS = { i: 'id', c: 'category', e: 'eng', r: 'rus', E: 'exampleEng', R: 'exampleRus', k: 'kor', K: 'exampleKor' };
+
 function readDictionary() {
-  return JSON.parse(fs.readFileSync(dictionaryPath, 'utf8'));
+  const raw = JSON.parse(fs.readFileSync(dictionaryPath, 'utf8'));
+  return raw.map(w => Object.fromEntries(Object.entries(w).map(([k, v]) => [SHORT_KEYS[k] ?? k, v])));
 }
 
 function seed(n = 30) {

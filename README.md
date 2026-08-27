@@ -273,6 +273,8 @@ npm run build
 
 The builder requires exactly 50 known categories, 12 rows per category, six localized fields per row, 600 total cards, non-empty translations, and unique contextual IDs. It overwrites `public/words_optimized.json`.
 
+The generated file ships in a compact single-letter key format to keep it small (`i`=id, `c`=category, `e`=eng, `r`=rus, `E`=exampleEng, `R`=exampleRus, `k`=kor, `K`=exampleKor). `sanitize.js` reads both this format and the long key names, so hand-written long-key data keeps working.
+
 ### Project map
 
 ```text
