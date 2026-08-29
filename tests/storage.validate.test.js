@@ -14,6 +14,7 @@ const {
   validateSaveData,
   migrateProgress,
   mergeProgress,
+  loadProgress,
   flushLocalProgress,
   getGuestXP,
   migrateAnonymousXP,
@@ -21,6 +22,11 @@ const {
   importProgress,
   addXP,
   cancelPendingSync,
+  beginAccountDeletionSync,
+  markAccountDeletionCloudRemovalStarted,
+  abortAccountDeletionSync,
+  finishAccountDeletionSync,
+  isAccountDeletionSyncBlocked,
   clearAccountData,
   getPendingXpDelta
 } = await import('../storage.js');
@@ -124,6 +130,74 @@ describe('validateSaveData', () => {
     cancelPendingSync();
 
     expect(getPendingXpDelta()).toBe(0);
+    store.setUser(null);
+  });
+
+  it('blocks account-scoped local writes during account deletion', async () => {
+    const uid = 'delete-lock-user';
+    dataModule._setGameDataForTests([
+      { id: 'delete-lock--book', eng: 'book', mastery: 3, lastSeen: 123 }
+    ]);
+    store.setUser({ uid, isAnonymous: false });
+    localStorage.removeItem(`pixelWordHunter_save_v3_${uid}`);
+
+    beginAccountDeletionSync(uid);
+    flushLocalProgress();
+
+    expect(isAccountDeletionSyncBlocked(uid)).toBe(true);
+    expect(localStorage.getItem(`pixelWordHunter_save_v3_${uid}`)).toBeNull();
+
+    finishAccountDeletionSync(uid);
+    store.setUser(null);
+  });
+
+  it('keeps pending XP while deletion is prepared, then discards it only on finish', async () => {
+    const uid = 'delete-pending-xp-user';
+    store.setUser({ uid, isAnonymous: false });
+    await addXP(25);
+    expect(getPendingXpDelta()).toBe(25);
+
+    beginAccountDeletionSync(uid);
+
+    expect(isAccountDeletionSyncBlocked(uid)).toBe(true);
+    expect(getPendingXpDelta()).toBe(25);
+
+    finishAccountDeletionSync(uid);
+
+    expect(getPendingXpDelta()).toBe(0);
+    expect(isAccountDeletionSyncBlocked(uid)).toBe(false);
+    store.setUser(null);
+  });
+
+  it('uses a persistent deletion marker only after cloud removal starts', () => {
+    const uid = 'delete-marker-user';
+    const markerKey = `pixelWordHunter_account_delete_pending_${uid}`;
+
+    beginAccountDeletionSync(uid);
+    expect(localStorage.getItem(markerKey)).toBeNull();
+
+    markAccountDeletionCloudRemovalStarted(uid);
+    expect(localStorage.getItem(markerKey)).not.toBeNull();
+    expect(isAccountDeletionSyncBlocked(uid)).toBe(true);
+
+    abortAccountDeletionSync(uid);
+    expect(localStorage.getItem(markerKey)).toBeNull();
+    expect(isAccountDeletionSyncBlocked(uid)).toBe(false);
+  });
+
+  it('does not load account progress while a deletion marker is present', async () => {
+    const uid = 'delete-load-block-user';
+    localStorage.setItem(`pixelWordHunter_save_v3_${uid}`, JSON.stringify({
+      a: { mastery: 4, lastSeen: 10 }
+    }));
+    store.setUser({ uid, isAnonymous: false });
+
+    markAccountDeletionCloudRemovalStarted(uid);
+    const loaded = await loadProgress();
+
+    expect(loaded).toEqual({});
+
+    finishAccountDeletionSync(uid);
     store.setUser(null);
   });
 

@@ -41,6 +41,10 @@ function setupXPListener(userId) {
         // Keep unflushed local increments so the HUD does not jump backwards
         // for up to XP_FLUSH_INTERVAL_MS after a correct answer.
         import('./storage.js').then((storage) => {
+          if (typeof storage.isAccountDeletionSyncBlocked === 'function'
+            && storage.isAccountDeletionSyncBlocked(userId)) {
+            return;
+          }
           const pending = typeof storage.getPendingXpDelta === 'function'
             ? storage.getPendingXpDelta()
             : 0;

@@ -105,5 +105,8 @@
   "delete_word_matches": "✓",
   "delete_account_success": "Account deleted",
   "delete_account_error": "Could not delete the account. Please try again.",
+  "delete_account_sync_busy": "Sync is still finishing. Try again in a moment.",
+  "delete_account_cloud_error": "Cloud progress could not be deleted, so the account was not deleted. Check your connection and try again.",
+  "delete_account_partial_error": "Cloud progress was deleted, but account deletion did not finish. Sign in again and delete the account once more.",
   "auth_requires_recent_login": "Please sign in again and try again"
 }

@@ -37,7 +37,12 @@ import {
   flushPendingXP,
   syncXPToCloud,
   resetProgress,
-  cancelPendingSync,
+  beginAccountDeletionSync,
+  markAccountDeletionCloudRemovalStarted,
+  abortAccountDeletionSync,
+  sealAccountDeletionAfterCloudRemoval,
+  finishAccountDeletionSync,
+  waitForAccountCloudWrites,
   clearAccountData,
   exportProgress,
   importProgress
@@ -77,7 +82,7 @@ function scheduleIdle(callback, options) {
 let firebaseAuth, firebaseDb;
 let createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, updateProfile;
 let deleteUser, EmailAuthProvider, reauthenticateWithCredential;
-let doc, setDoc, getDoc, deleteDoc, serverTimestamp;
+let doc, setDoc, getDoc, writeBatch, serverTimestamp;
 
 const DEV = import.meta.env.DEV;
 
@@ -107,7 +112,7 @@ async function initializeFirebaseServices() {
   doc = firestoreModule.doc;
   setDoc = firestoreModule.setDoc;
   getDoc = firestoreModule.getDoc;
-  deleteDoc = firestoreModule.deleteDoc;
+  writeBatch = firestoreModule.writeBatch;
   serverTimestamp = firestoreModule.serverTimestamp;
 
   return { firebaseAuth, firebaseDb };
@@ -297,6 +302,23 @@ function localizeAuthError(code) {
   return I18nManager.t(key || 'authentication_failed');
 }
 
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function retryAsync(task, { attempts = 3, delayMs = 400 } = {}) {
+  let lastError;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      return await task();
+    } catch (error) {
+      lastError = error;
+      if (attempt < attempts) await wait(delayMs * attempt);
+    }
+  }
+  throw lastError;
+}
+
 const AuthManager = {
   async register(username, email, password) {
     // Ensure Firebase services are initialized
@@ -355,39 +377,95 @@ const AuthManager = {
   },
 
   /**
-   * Permanently delete the current email account: Firestore document first
-   * (rules only allow deleting while signed in), then the Auth user. Firebase
-   * requires recent authentication, so the password is used to re-auth first.
+   * Permanently delete the current email account. The order is deliberate:
+   * 1) re-authenticate first, without touching pending progress;
+   * 2) freeze account sync and wait for any already-started writes to finish;
+   * 3) atomically create a deletion tombstone and delete Firestore data while
+   *    security rules still allow the owner;
+   * 4) delete the Firebase Auth user;
+   * 5) only then clear local account data.
    */
   async deleteAccount(password) {
-    if (!firebaseAuth || !firebaseDb || !deleteUser || !deleteDoc) {
+    if (!firebaseAuth || !firebaseDb || !deleteUser || !writeBatch || !doc) {
       await initializeFirebaseServices();
     }
+
     const user = firebaseAuth?.currentUser;
     if (!user) return { success: false, error: localizeAuthError('auth/requires-recent-login') };
-    if (user.isAnonymous) return { success: false, error: I18nManager.t('authentication_failed') };
+    if (user.isAnonymous || !user.email) return { success: false, error: I18nManager.t('authentication_failed') };
+    if (!firebaseDb || !doc || !writeBatch || !serverTimestamp || !deleteUser || !EmailAuthProvider || !reauthenticateWithCredential) {
+      return { success: false, error: I18nManager.t('delete_account_cloud_error') };
+    }
+
+    const uid = user.uid;
+
+    // Password verification happens before canceling queued saves. A typo must
+    // not cost the learner unsynced XP/progress.
     try {
-      if (user.email && password && EmailAuthProvider && reauthenticateWithCredential) {
-        const credential = EmailAuthProvider.credential(user.email, password);
-        await reauthenticateWithCredential(user, credential);
+      const credential = EmailAuthProvider.credential(user.email, password);
+      await reauthenticateWithCredential(user, credential);
+    } catch (error) {
+      console.error('[Auth] Account re-authentication failed:', error.code || 'unknown', error.message);
+      return { success: false, error: localizeAuthError(error.code) };
+    }
+
+    beginAccountDeletionSync(uid);
+
+    const writesSettled = await waitForAccountCloudWrites(uid);
+    if (!writesSettled) {
+      abortAccountDeletionSync(uid);
+      saveProgress(firebaseDb, doc, setDoc, serverTimestamp).catch(error => {
+        console.warn('[Auth] Failed to reschedule progress sync after delete abort:', error.message);
+      });
+      return { success: false, error: I18nManager.t('delete_account_sync_busy') };
+    }
+
+    // From this point forward, a persistent deletion marker prevents this
+    // client from recreating the user's Firestore document if the page reloads
+    // before Auth deletion completes.
+    markAccountDeletionCloudRemovalStarted(uid);
+
+    try {
+      await retryAsync(() => {
+        const batch = writeBatch(firebaseDb);
+        // The tombstone is intentionally left in Firestore after success. It
+        // makes Security Rules reject late writes from another still-open tab
+        // or device that has not noticed the Auth account was deleted yet.
+        batch.set(doc(firebaseDb, 'deletedUsers', uid), {
+          deletedAt: serverTimestamp()
+        }, { merge: true });
+        batch.delete(doc(firebaseDb, 'users', uid));
+        return batch.commit();
+      });
+    } catch (error) {
+      abortAccountDeletionSync(uid);
+      saveProgress(firebaseDb, doc, setDoc, serverTimestamp).catch(syncError => {
+        console.warn('[Auth] Failed to reschedule progress sync after cloud delete failure:', syncError.message);
+      });
+      console.error('[Auth] Firestore account data deletion failed:', error.code || 'unknown', error.message);
+      return { success: false, error: I18nManager.t('delete_account_cloud_error') };
+    }
+
+    try {
+      await retryAsync(() => deleteUser(user), { attempts: 2, delayMs: 500 });
+      finishAccountDeletionSync(uid);
+      return { success: true, uid };
+    } catch (error) {
+      // Cloud progress is already deleted. Keep the deletion marker and local
+      // cleanup so this browser cannot recreate that Firestore document. The
+      // user can sign in again and retry deleting the remaining Auth record.
+      sealAccountDeletionAfterCloudRemoval(uid);
+      try {
+        const { signOut } = await import('firebase/auth');
+        await signOut(firebaseAuth);
+      } catch (signOutError) {
+        console.warn('[Auth] Sign out after partial account deletion failed:', signOutError.message);
       }
-      // Remove the Firestore document while still authenticated (security rules
-      // only allow the owner to delete it). If doc cleanup fails, still remove
-      // the Auth account — the authoritative deletion — and log the orphan.
-      if (firebaseDb && deleteDoc) {
-        try {
-          await deleteDoc(doc(firebaseDb, 'users', user.uid));
-        } catch (docError) {
-          console.warn('[Auth] Firestore doc cleanup failed:', docError.message);
-        }
-      }
-      await deleteUser(user);
-      return { success: true };
-    } catch (e) {
-      console.error('[Auth] Account deletion failed:', e.code || 'unknown', e.message);
-      return { success: false, error: localizeAuthError(e.code) };
+      console.error('[Auth] Firebase Auth user deletion failed after cloud cleanup:', error.code || 'unknown', error.message);
+      return { success: false, partial: true, error: I18nManager.t('delete_account_partial_error') };
     }
   },
+
 
   async tryAnonymous() {
     const mod = await import('./firebase-config.js');
@@ -961,10 +1039,6 @@ async function handleDeleteAccountConfirm() {
   if (passwordInput) passwordInput.disabled = true;
   confirmBtn.textContent = I18nManager.t('delete_account_deleting');
 
-  // Cancel any queued saves/XP flushes so a late write cannot recreate the
-  // Firestore document after it has been deleted.
-  cancelPendingSync();
-
   const uid = state.user?.uid;
   const result = await AuthManager.deleteAccount(passwordInput.value);
 
@@ -979,6 +1053,18 @@ async function handleDeleteAccountConfirm() {
     closeDeleteAccountModal();
     // Reload to fully reset app state and show the auth buttons.
     setTimeout(() => location.reload(), 1200);
+  } else if (result.partial) {
+    localStorage.removeItem('pixelWordHunter_authMethod');
+    clearAccountData(uid);
+    try {
+      localStorage.removeItem('pwh_streak');
+      localStorage.removeItem('pwh_lastPlayed');
+    } catch { /* ignore */ }
+    showNotification(result.error || I18nManager.t('delete_account_partial_error'));
+    closeDeleteAccountModal();
+    // Auth data is already inconsistent from this device's point of view; a
+    // reload returns to a clean guest state and prevents accidental writes.
+    setTimeout(() => location.reload(), 2500);
   } else {
     confirmBtn.disabled = false;
     if (cancelBtn) cancelBtn.disabled = false;
