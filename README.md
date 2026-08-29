@@ -168,6 +168,18 @@ Local play does not require an account.
 
 Guest learning data is written to `localStorage`. Pressing TRY can create a Firebase anonymous user ID, but it does not require a name or email. Registering an email account stores authentication data in Firebase Auth and stores the username, email, XP, card progress, and synchronization timestamps in that user's Firestore document.
 
+### Account deletion
+
+Email accounts can be deleted from Settings after typing the localized confirmation word and re-entering the account password. Deletion is intentionally strict:
+
+1. The password is verified before any pending progress or XP sync is canceled.
+2. Account sync is then frozen and any cloud writes already in flight are allowed to finish.
+3. Firestore atomically creates a minimal `deletedUsers/{uid}` tombstone and deletes the `users/{uid}` progress document while the user is still authenticated.
+4. Only after cloud progress is removed is the Firebase Auth user deleted.
+5. Local account-scoped progress, XP, and auth markers are cleared last.
+
+If cloud progress cannot be deleted, the Auth account is kept and the user is asked to retry, avoiding orphaned cloud data. The tombstone prevents late writes from another tab or device from recreating the deleted progress document. If Auth deletion fails after cloud progress has already been removed, this browser also keeps a local deletion marker; the user can sign in again and retry deleting the remaining Auth account.
+
 The included Firestore rules restrict each `users/{uid}` document to the matching authenticated user. The Firebase web configuration is public client configuration, not an administrator credential; authorization is enforced by Firebase Auth and Firestore Security Rules.
 
 ## 📱 Install and play offline
