@@ -165,6 +165,11 @@
         <div class="settings-reset">
           <button class="reset-btn logout-btn" id="logout-btn" data-i18n="logout">LOGOUT</button>
         </div>
+
+        <!-- Delete account button (visible for email accounts only) -->
+        <div class="settings-reset hidden" id="delete-account-section">
+          <button class="reset-btn delete-account-btn" id="delete-account-btn" role="button" data-i18n="delete_account">DELETE ACCOUNT</button>
+        </div>
       </div>
     </div>
 
@@ -253,6 +258,28 @@
         </div>
         
         <button class="auth-close" id="auth-close-btn" aria-label="Close">✕</button>
+      </div>
+    </div>
+
+    <!-- ── DELETE ACCOUNT MODAL ────────────────── -->
+    <div id="delete-account-modal" class="modal delete-account-modal hidden" role="alertdialog" aria-modal="true" aria-labelledby="delete-account-title" aria-describedby="delete-account-warning">
+      <div class="delete-account-box">
+        <h2 class="modal-title delete-account-title" id="delete-account-title" data-i18n="delete_account_title">// DELETE ACCOUNT //</h2>
+        <p class="delete-account-warning" id="delete-account-warning" data-i18n="delete_account_warning">This action is permanent! Your account and all cloud progress will be erased forever.</p>
+        <div class="delete-account-field">
+          <label for="delete-confirm-input" data-i18n="delete_account_confirm_hint">Type the word "delete" to confirm:</label>
+          <input type="text" id="delete-confirm-input" data-i18n-placeholder="delete_word" placeholder="delete" autocomplete="off" autocapitalize="none" spellcheck="false">
+          <div id="delete-input-status" class="delete-input-status" aria-live="polite"></div>
+        </div>
+        <div class="delete-account-field">
+          <label for="delete-password-input" data-i18n="delete_account_password">CONFIRM WITH PASSWORD</label>
+          <input type="password" id="delete-password-input" data-i18n-placeholder="enter_password" placeholder="Enter your password" autocomplete="current-password">
+        </div>
+        <div id="delete-account-error" class="delete-account-error" role="alert" aria-live="assertive" aria-atomic="true"></div>
+        <div class="confirm-actions">
+          <button type="button" class="option-btn delete-account-danger" id="delete-confirm-btn" data-i18n="delete_account_confirm" disabled>CONFIRM</button>
+          <button type="button" class="option-btn confirm-cancel" id="delete-cancel-btn" data-i18n="delete_account_cancel">CANCEL</button>
+        </div>
       </div>
     </div>
   </main>

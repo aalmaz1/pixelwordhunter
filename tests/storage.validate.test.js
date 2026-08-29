@@ -19,7 +19,10 @@ const {
   migrateAnonymousXP,
   clearGuestProgress,
   importProgress,
-  addXP
+  addXP,
+  cancelPendingSync,
+  clearAccountData,
+  getPendingXpDelta
 } = await import('../storage.js');
 const dataModule = await import('../data.js');
 const { store } = await import('../store.js');
@@ -95,6 +98,33 @@ describe('validateSaveData', () => {
     expect(migrateAnonymousXP('old-anonymous')).toBe(35);
     expect(localStorage.getItem('xp_old-anonymous')).toBeNull();
     expect(migrateAnonymousXP('old-anonymous')).toBe(35);
+  });
+
+  it('clears only the deleted account-scoped storage, not the guest bucket', () => {
+    localStorage.setItem('pixelWordHunter_save_v3_uid-123', '{}');
+    localStorage.setItem('pixelWordHunter_save_v3_uid-123_backup', '{}');
+    localStorage.setItem('xp_uid-123', '99');
+    localStorage.setItem('pixelWordHunter_save_v3_guest', '{}');
+    localStorage.setItem('xp_guest', '5');
+
+    clearAccountData('uid-123');
+
+    expect(localStorage.getItem('pixelWordHunter_save_v3_uid-123')).toBeNull();
+    expect(localStorage.getItem('pixelWordHunter_save_v3_uid-123_backup')).toBeNull();
+    expect(localStorage.getItem('xp_uid-123')).toBeNull();
+    expect(localStorage.getItem('pixelWordHunter_save_v3_guest')).toBe('{}');
+    expect(localStorage.getItem('xp_guest')).toBe('5');
+  });
+
+  it('cancelPendingSync clears any pending XP delta without throwing', async () => {
+    store.setUser({ uid: 'uid-123', isAnonymous: false });
+    await addXP(50);
+    expect(getPendingXpDelta()).toBe(50);
+
+    cancelPendingSync();
+
+    expect(getPendingXpDelta()).toBe(0);
+    store.setUser(null);
   });
 
   it('clears guest card progress, backup, and XP together', () => {

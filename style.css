@@ -744,6 +744,95 @@ html, body {
 .confirm-ok:hover { background: rgba(255, 45, 120, 0.15); }
 .confirm-cancel:hover { color: var(--neon-cyan); border-color: var(--neon-cyan); }
 
+/* Delete account */
+.delete-account-btn {
+  border-color: #ff2d2d !important;
+  color: #ff2d2d !important;
+  text-shadow: 0 0 8px #ff2d2d;
+}
+.delete-account-btn:hover {
+  background: rgba(255, 45, 45, 0.16) !important;
+  box-shadow: 0 0 16px #ff2d2d99 !important;
+  color: #ff6b6b !important;
+}
+.delete-account-modal { z-index: 10002; }
+.delete-account-box {
+  background: var(--bg-mid);
+  border: 2px solid #ff2d2d;
+  padding: 24px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 45, 45, 0.45);
+}
+.delete-account-title {
+  color: #ff2d2d !important;
+  text-shadow: 0 0 8px #ff2d2d, 0 0 20px rgba(255, 45, 45, 0.5) !important;
+}
+.delete-account-warning {
+  font-size: 10px;
+  color: var(--text-main);
+  margin: 0 0 18px;
+  letter-spacing: 1px;
+  line-height: 1.7;
+}
+.delete-account-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+  text-align: left;
+}
+.delete-account-field label {
+  font-size: 9px;
+  color: var(--neon-purple);
+  text-shadow: var(--shadow-purple);
+  letter-spacing: 1px;
+  line-height: 1.5;
+}
+.delete-account-field input {
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 16px;
+  background: #0009;
+  border: 1px solid var(--text-dim);
+  color: var(--text-main);
+  outline: none;
+  transition: all 0.2s;
+  min-height: 44px;
+}
+.delete-account-field input:focus {
+  border-color: #ff2d2d;
+  box-shadow: 0 0 12px #ff2d2d4d;
+  color: #fff;
+}
+.delete-input-status {
+  min-height: 16px;
+  font-size: 9px;
+  color: var(--neon-green);
+  text-shadow: 0 0 6px var(--neon-green);
+  text-align: left;
+}
+.delete-account-error {
+  min-height: 18px;
+  font-size: 9px;
+  color: var(--neon-pink);
+  text-shadow: var(--shadow-pink);
+  text-align: center;
+  margin-bottom: 12px;
+}
+.delete-account-danger {
+  color: #ff2d2d !important;
+  border-color: #ff2d2d !important;
+  text-shadow: 0 0 8px #ff2d2d !important;
+  text-align: center !important;
+}
+.delete-account-danger:hover {
+  background: rgba(255, 45, 45, 0.15) !important;
+  color: #ff6b6b !important;
+}
+.delete-account-danger:disabled { opacity: 0.5; cursor: not-allowed; }
+
 /* Settings user badge */
 .settings-user {
   font-size: 10px;
@@ -917,6 +1006,14 @@ body.lang-ko .explanation-example-en {
 /* Confirm modal */
 body.lang-ko .confirm-message { font-size: 14px !important; line-height: 1.8 !important; letter-spacing: 0.3px !important; }
 body.lang-ko .settings-user { font-size: 12px !important; line-height: 1.7 !important; }
+
+/* Delete account modal */
+body.lang-ko .delete-account-warning { font-size: 13px !important; line-height: 1.8 !important; letter-spacing: 0.3px !important; }
+body.lang-ko .delete-account-field label { font-size: 12px !important; line-height: 1.6 !important; }
+body.lang-ko .delete-account-field input { font-size: 16px !important; }
+body.lang-ko .delete-input-status,
+body.lang-ko .delete-account-error { font-size: 12px !important; line-height: 1.6 !important; }
+body.lang-ko .delete-account-danger { font-size: 13px !important; line-height: 1.6 !important; }
 body.lang-ko .auth-field label { font-size: 11px !important; line-height: 1.6 !important; }
 body.lang-ko .auth-error,
 body.lang-ko .auth-toggle,

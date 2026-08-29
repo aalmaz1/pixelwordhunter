@@ -91,5 +91,19 @@
   "auth_email_in_use": "This email is already registered",
   "auth_weak_password": "Use a stronger password",
   "auth_invalid_email": "Enter a valid email",
-  "auth_too_many_requests": "Too many attempts. Try again later"
+  "auth_too_many_requests": "Too many attempts. Try again later",
+  "delete_account": "DELETE ACCOUNT",
+  "delete_account_title": "// DELETE ACCOUNT //",
+  "delete_account_warning": "This action is permanent! Your account and all cloud progress will be erased forever.",
+  "delete_account_confirm_hint": "Type the word \"delete\" to confirm:",
+  "delete_word": "delete",
+  "delete_account_password": "CONFIRM WITH PASSWORD",
+  "delete_password_required": "Enter your password",
+  "delete_account_confirm": "CONFIRM",
+  "delete_account_cancel": "CANCEL",
+  "delete_account_deleting": "DELETING…",
+  "delete_word_matches": "✓",
+  "delete_account_success": "Account deleted",
+  "delete_account_error": "Could not delete the account. Please try again.",
+  "auth_requires_recent_login": "Please sign in again and try again"
 }

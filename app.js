@@ -37,6 +37,8 @@ import {
   flushPendingXP,
   syncXPToCloud,
   resetProgress,
+  cancelPendingSync,
+  clearAccountData,
   exportProgress,
   importProgress
 } from './storage.js';
@@ -74,7 +76,8 @@ function scheduleIdle(callback, options) {
 // Локальные переменные для Firebase-сервисов и функций (заполняются лениво)
 let firebaseAuth, firebaseDb;
 let createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, updateProfile;
-let doc, setDoc, getDoc, serverTimestamp;
+let deleteUser, EmailAuthProvider, reauthenticateWithCredential;
+let doc, setDoc, getDoc, deleteDoc, serverTimestamp;
 
 const DEV = import.meta.env.DEV;
 
@@ -98,9 +101,13 @@ async function initializeFirebaseServices() {
   signInWithEmailAndPassword = authModule.signInWithEmailAndPassword;
   sendPasswordResetEmail = authModule.sendPasswordResetEmail;
   updateProfile = authModule.updateProfile;
+  deleteUser = authModule.deleteUser;
+  EmailAuthProvider = authModule.EmailAuthProvider;
+  reauthenticateWithCredential = authModule.reauthenticateWithCredential;
   doc = firestoreModule.doc;
   setDoc = firestoreModule.setDoc;
   getDoc = firestoreModule.getDoc;
+  deleteDoc = firestoreModule.deleteDoc;
   serverTimestamp = firestoreModule.serverTimestamp;
 
   return { firebaseAuth, firebaseDb };
@@ -280,10 +287,12 @@ const ThemeManager = {
 function localizeAuthError(code) {
   const key = ({
     'auth/invalid-credential': 'auth_invalid_credentials',
+    'auth/wrong-password': 'auth_invalid_credentials',
     'auth/email-already-in-use': 'auth_email_in_use',
     'auth/weak-password': 'auth_weak_password',
     'auth/invalid-email': 'auth_invalid_email',
-    'auth/too-many-requests': 'auth_too_many_requests'
+    'auth/too-many-requests': 'auth_too_many_requests',
+    'auth/requires-recent-login': 'auth_requires_recent_login'
   })[code];
   return I18nManager.t(key || 'authentication_failed');
 }
@@ -343,6 +352,41 @@ const AuthManager = {
   async logout() {
     const mod = await import('./firebase-config.js');
     await mod.logoutUser();
+  },
+
+  /**
+   * Permanently delete the current email account: Firestore document first
+   * (rules only allow deleting while signed in), then the Auth user. Firebase
+   * requires recent authentication, so the password is used to re-auth first.
+   */
+  async deleteAccount(password) {
+    if (!firebaseAuth || !firebaseDb || !deleteUser || !deleteDoc) {
+      await initializeFirebaseServices();
+    }
+    const user = firebaseAuth?.currentUser;
+    if (!user) return { success: false, error: localizeAuthError('auth/requires-recent-login') };
+    if (user.isAnonymous) return { success: false, error: I18nManager.t('authentication_failed') };
+    try {
+      if (user.email && password && EmailAuthProvider && reauthenticateWithCredential) {
+        const credential = EmailAuthProvider.credential(user.email, password);
+        await reauthenticateWithCredential(user, credential);
+      }
+      // Remove the Firestore document while still authenticated (security rules
+      // only allow the owner to delete it). If doc cleanup fails, still remove
+      // the Auth account — the authoritative deletion — and log the orphan.
+      if (firebaseDb && deleteDoc) {
+        try {
+          await deleteDoc(doc(firebaseDb, 'users', user.uid));
+        } catch (docError) {
+          console.warn('[Auth] Firestore doc cleanup failed:', docError.message);
+        }
+      }
+      await deleteUser(user);
+      return { success: true };
+    } catch (e) {
+      console.error('[Auth] Account deletion failed:', e.code || 'unknown', e.message);
+      return { success: false, error: localizeAuthError(e.code) };
+    }
   },
 
   async tryAnonymous() {
@@ -653,6 +697,34 @@ function setupEventListeners() {
     location.reload();
   });
 
+  // Delete account
+  document.getElementById('delete-account-btn')?.addEventListener('click', () => {
+    AudioEngine.playTransition();
+    openDeleteAccountModal();
+  });
+
+  document.getElementById('delete-confirm-input')?.addEventListener('input', (e) => {
+    const confirmBtn = document.getElementById('delete-confirm-btn');
+    const statusEl = document.getElementById('delete-input-status');
+    const ok = isDeleteWordTyped(e.target.value);
+    if (confirmBtn) confirmBtn.disabled = !ok;
+    if (statusEl) statusEl.textContent = ok ? I18nManager.t('delete_word_matches') : '';
+  });
+
+  document.getElementById('delete-confirm-btn')?.addEventListener('click', handleDeleteAccountConfirm);
+  document.getElementById('delete-cancel-btn')?.addEventListener('click', () => {
+    AudioEngine.playTransition();
+    closeDeleteAccountModal();
+  });
+
+  // Close on Escape and on a click outside the dialog.
+  document.getElementById('delete-account-modal')?.addEventListener('click', (e) => {
+    if (e.target && e.target.id === 'delete-account-modal') closeDeleteAccountModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDeleteAccountModal();
+  });
+
   // Note: next-question-btn click is now handled within the game flow
   // to properly support Word Review sessions
 
@@ -812,6 +884,112 @@ function closeAuthModal() {
   lastFocusedElement = null;
 }
 
+// ==================== DELETE ACCOUNT FLOW ====================
+let releaseDeleteTrap = null;
+
+/** The word the user must type to confirm deletion, localized per UI language. */
+function getDeleteWord() {
+  return (I18nManager.t('delete_word') || 'delete').trim();
+}
+
+function isDeleteWordTyped(value) {
+  const expected = getDeleteWord().toLocaleLowerCase();
+  return String(value ?? '').trim().toLocaleLowerCase() === expected;
+}
+
+function openDeleteAccountModal() {
+  const modal = document.getElementById('delete-account-modal');
+  const confirmInput = document.getElementById('delete-confirm-input');
+  if (!modal || !confirmInput) return;
+
+  const passwordInput = document.getElementById('delete-password-input');
+  const confirmBtn = document.getElementById('delete-confirm-btn');
+  const cancelBtn = document.getElementById('delete-cancel-btn');
+  const errorEl = document.getElementById('delete-account-error');
+  const statusEl = document.getElementById('delete-input-status');
+
+  confirmInput.value = '';
+  if (passwordInput) passwordInput.value = '';
+  if (confirmBtn) {
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = I18nManager.t('delete_account_confirm');
+  }
+  if (cancelBtn) cancelBtn.disabled = false;
+  if (confirmInput) confirmInput.disabled = false;
+  if (passwordInput) passwordInput.disabled = false;
+  if (errorEl) errorEl.textContent = '';
+  if (statusEl) statusEl.textContent = '';
+  confirmInput.setAttribute('placeholder', getDeleteWord());
+
+  modal.classList.remove('hidden');
+  modal.setAttribute('aria-hidden', 'false');
+  scheduleIdle(() => {
+    confirmInput.focus();
+    releaseDeleteTrap = trapFocus(modal);
+  }, { timeout: 100 });
+}
+
+function closeDeleteAccountModal() {
+  const modal = document.getElementById('delete-account-modal');
+  if (!modal || modal.classList.contains('hidden')) return;
+  modal.classList.add('hidden');
+  modal.setAttribute('aria-hidden', 'true');
+  if (releaseDeleteTrap) { releaseDeleteTrap(); releaseDeleteTrap = null; }
+}
+
+async function handleDeleteAccountConfirm() {
+  const modal = document.getElementById('delete-account-modal');
+  const confirmInput = document.getElementById('delete-confirm-input');
+  const passwordInput = document.getElementById('delete-password-input');
+  const confirmBtn = document.getElementById('delete-confirm-btn');
+  const cancelBtn = document.getElementById('delete-cancel-btn');
+  const errorEl = document.getElementById('delete-account-error');
+  const state = store.getState();
+
+  if (!modal || !confirmInput || !confirmBtn) return;
+  if (!isDeleteWordTyped(confirmInput.value)) return; // Button stays disabled anyway.
+  if (!passwordInput?.value.trim()) {
+    errorEl.textContent = I18nManager.t('delete_password_required');
+    passwordInput.focus();
+    return;
+  }
+
+  errorEl.textContent = '';
+  confirmBtn.disabled = true;
+  if (cancelBtn) cancelBtn.disabled = true;
+  confirmInput.disabled = true;
+  if (passwordInput) passwordInput.disabled = true;
+  confirmBtn.textContent = I18nManager.t('delete_account_deleting');
+
+  // Cancel any queued saves/XP flushes so a late write cannot recreate the
+  // Firestore document after it has been deleted.
+  cancelPendingSync();
+
+  const uid = state.user?.uid;
+  const result = await AuthManager.deleteAccount(passwordInput.value);
+
+  if (result.success) {
+    localStorage.removeItem('pixelWordHunter_authMethod');
+    clearAccountData(uid);
+    try {
+      localStorage.removeItem('pwh_streak');
+      localStorage.removeItem('pwh_lastPlayed');
+    } catch { /* ignore */ }
+    showNotification(I18nManager.t('delete_account_success'));
+    closeDeleteAccountModal();
+    // Reload to fully reset app state and show the auth buttons.
+    setTimeout(() => location.reload(), 1200);
+  } else {
+    confirmBtn.disabled = false;
+    if (cancelBtn) cancelBtn.disabled = false;
+    confirmInput.disabled = false;
+    if (passwordInput) passwordInput.disabled = false;
+    confirmBtn.textContent = I18nManager.t('delete_account_confirm');
+    errorEl.textContent = result.error || I18nManager.t('delete_account_error');
+    passwordInput?.focus();
+  }
+}
+
 function toggleScreen(screenId) {
   const screens = ['menu', 'settings', 'category', 'game'];
   screens.forEach(s => {
@@ -903,6 +1081,13 @@ function updateUI(state = store.getState()) {
   } else {
     authButtons?.classList.remove('hidden');
     huntBtn?.classList.add('hidden');
+  }
+
+  // Account deletion only makes sense for a real email account, not guests.
+  const deleteSection = document.getElementById('delete-account-section');
+  if (deleteSection) {
+    const canDeleteAccount = !!state.user && !state.user.isAnonymous && isActuallyAuthenticated;
+    deleteSection.classList.toggle('hidden', !canDeleteAccount);
   }
 
   // Sound
