@@ -91,5 +91,19 @@
   "auth_email_in_use": "Этот email уже зарегистрирован",
   "auth_weak_password": "Используйте более надёжный пароль",
   "auth_invalid_email": "Введите корректный email",
-  "auth_too_many_requests": "Слишком много попыток. Попробуйте позже"
+  "auth_too_many_requests": "Слишком много попыток. Попробуйте позже",
+  "delete_account": "УДАЛИТЬ АККАУНТ",
+  "delete_account_title": "// УДАЛЕНИЕ АККАУНТА //",
+  "delete_account_warning": "Это действие необратимо! Ваш аккаунт и весь облачный прогресс будут удалены навсегда.",
+  "delete_account_confirm_hint": "Введите слово «удалить», чтобы подтвердить:",
+  "delete_word": "удалить",
+  "delete_account_password": "ПОДТВЕРДИТЕ ПАРОЛЕМ",
+  "delete_password_required": "Введите пароль",
+  "delete_account_confirm": "ПОДТВЕРДИТЬ",
+  "delete_account_cancel": "ОТМЕНА",
+  "delete_account_deleting": "УДАЛЕНИЕ…",
+  "delete_word_matches": "✓",
+  "delete_account_success": "Аккаунт удалён",
+  "delete_account_error": "Не удалось удалить аккаунт. Попробуйте ещё раз.",
+  "auth_requires_recent_login": "Войдите в аккаунт заново и попробуйте снова"
 }

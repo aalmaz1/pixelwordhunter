@@ -490,11 +490,30 @@ export async function syncXPToCloud(xp = getUserXP()) {
   }
 }
 
-export async function resetProgress({ cloud = false } = {}) {
+/**
+ * Cancel every pending debounced local save, cloud save and XP flush so a
+ * deleted account cannot be re-created by a late write.
+ */
+export function cancelPendingSync() {
   if (_localSaveTimer) { clearTimeout(_localSaveTimer); _localSaveTimer = null; }
   if (saveProgress._timeout) { clearTimeout(saveProgress._timeout); saveProgress._timeout = null; }
   if (_xpFlushTimer) { clearTimeout(_xpFlushTimer); _xpFlushTimer = null; }
   _pendingXpDelta = 0;
+}
+
+/**
+ * Remove every localStorage key belonging to a deleted account so no card
+ * progress or XP survives the account deletion.
+ */
+export function clearAccountData(uid) {
+  if (!uid) return;
+  storageRemove(progressKey(uid));
+  storageRemove(backupKey(uid));
+  storageRemove(`xp_${uid}`);
+}
+
+export async function resetProgress({ cloud = false } = {}) {
+  cancelPendingSync();
   storageRemove(progressKey());
   storageRemove(backupKey());
   const userId = getCurrentUserId();

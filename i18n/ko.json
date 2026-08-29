@@ -91,5 +91,19 @@
   "auth_email_in_use": "이미 등록된 이메일입니다",
   "auth_weak_password": "더 강력한 비밀번호를 사용하세요",
   "auth_invalid_email": "올바른 이메일을 입력하세요",
-  "auth_too_many_requests": "시도가 너무 많습니다. 나중에 다시 시도하세요"
+  "auth_too_many_requests": "시도가 너무 많습니다. 나중에 다시 시도하세요",
+  "delete_account": "계정 삭제",
+  "delete_account_title": "// 계정 삭제 //",
+  "delete_account_warning": "이 작업은 되돌릴 수 없습니다! 계정과 모든 클라우드 진행도가 영구적으로 삭제됩니다.",
+  "delete_account_confirm_hint": "확인하려면 «삭제»를 입력하세요:",
+  "delete_word": "삭제",
+  "delete_account_password": "비밀번호로 확인",
+  "delete_password_required": "비밀번호를 입력하세요",
+  "delete_account_confirm": "확인",
+  "delete_account_cancel": "취소",
+  "delete_account_deleting": "삭제 중…",
+  "delete_word_matches": "✓",
+  "delete_account_success": "계정이 삭제되었습니다",
+  "delete_account_error": "계정을 삭제할 수 없습니다. 다시 시도하세요.",
+  "auth_requires_recent_login": "다시 로그인한 후 다시 시도하세요"
 }
