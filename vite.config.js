@@ -55,6 +55,22 @@ export default defineConfig({
   publicDir: 'public',
   plugins: [
     {
+      // Production HTML still shipped with author comments and tag-to-tag
+      // whitespace. Stripping those does not change layout (the UI uses
+      // explicit &nbsp; / <br> where spacing matters) and shaves a few
+      // kilobytes off the first request.
+      name: 'minify-index-html',
+      transformIndexHtml: {
+        order: 'post',
+        handler(html) {
+          return html
+            .replace(/<!--[\s\S]*?-->/g, '')
+            .replace(/>\s+</g, '><')
+            .trim();
+        }
+      }
+    },
+    {
       name: 'copy-robots-txt',
       closeBundle() {
         try {
@@ -122,6 +138,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: null, // Disable auto-injection of registerSW script
+      includeManifestIcons: false, // 512px icons stay in the manifest for install, not the precache
       manifest: {
         short_name: 'WordHunter',
         name: 'Pixel Word Hunter',
@@ -155,12 +172,21 @@ export default defineConfig({
           '**/*.{js,css,html,ico,png,svg,woff2}',
           'assets/i18n/*.json'
         ],
-        // The Firebase SDK chunk is intentionally NOT precached: it is only
-        // fetched when the user opens login, and login can only succeed with
-        // a network connection to the Firebase APIs. Excluding ~500 KiB of
-        // rarely used JS keeps first installs fast; offline gameplay (the
-        // common case) is fully covered by the precache.
-        globIgnores: ['assets/firebase-sdk-*.js'],
+        // Keep the first Service Worker install small without changing the
+        // on-screen UI:
+        // - firebase-sdk is only fetched at login (needs the network anyway)
+        // - 512px PWA icons are used at install time, not during play
+        globIgnores: ['**/firebase-sdk-*.js', '**/node_modules/**/*'],
+        manifestTransforms: [
+          async (entries) => ({
+            manifest: entries.filter((entry) => {
+              const url = entry.url.replace(/\\/g, '/');
+              return !url.includes('firebase-sdk-')
+                && !url.endsWith('icon-512.png')
+                && !url.endsWith('icon-512-maskable.png');
+            })
+          })
+        ],
         cleanupOutdatedCaches: true,
         clientsClaim: true,
         skipWaiting: true,
