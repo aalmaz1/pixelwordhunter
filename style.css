@@ -561,6 +561,111 @@ body.lang-ko .explanation-example-en,
   text-transform: uppercase;
 }
 
+/* Word Review redesign: mistakes get focus, mastered words stay compact. */
+.review-session-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+  padding: 12px !important;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.review-session-list .review-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 16px 18px 14px 20px;
+  border-width: 1px;
+  border-left-width: 4px;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, .28);
+  box-shadow: none;
+  text-align: left;
+}
+
+.review-session-list .review-card::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.review-session-list .review-card.wrong::before {
+  content: '✕';
+  color: var(--wrong-red);
+}
+
+.review-session-list .review-card.correct::before {
+  content: '✓';
+  color: var(--correct-green);
+}
+
+.review-session-list .review-card:hover {
+  transform: none;
+  background: rgba(255,255,255,.04);
+}
+
+.review-session-list .review-status {
+  order: -1;
+  margin: 0 22px 5px 0;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+/* Mastered words are supporting information, not equal-weight cards. */
+.review-session-list .review-card.correct {
+  padding: 9px 14px;
+  border: 0;
+  border-left: 3px solid var(--correct-green);
+  background: rgba(46, 204, 113, .045);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.review-session-list .review-card.correct .review-status {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+  font-size: 7px;
+  white-space: nowrap;
+}
+
+.review-session-list .review-card.correct .explanation-word {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+  font-size: clamp(11px, 3vw, 15px);
+  text-shadow: none;
+}
+
+.review-session-list .review-card.correct .explanation-definition,
+.review-session-list .review-card.correct .explanation-example-container {
+  display: none;
+}
+
+.review-session-list .review-card.wrong .explanation-word {
+  margin-bottom: 2px;
+}
+
+.review-session-list .review-card.wrong .explanation-definition {
+  margin-bottom: 7px;
+}
+
+.review-session-list .review-card.wrong .explanation-example-container {
+  margin-top: 4px;
+  padding: 10px 12px;
+  border-left: 2px solid var(--neon-purple);
+  background: rgba(0, 0, 0, .22);
+}
+
 /* Retry sync button */
 .retry-sync-btn {
   margin-left: 8px;
@@ -1431,4 +1536,58 @@ body.lang-ko .toeic-review-title { font-size: 12px !important; letter-spacing: 1
 @media (max-width: 480px) {
   .toeic-review { max-height: 34vh; }
   .toeic-review-item { font-size: 8px; padding: 8px 10px; }
+}
+
+/* Single-answer Word Review card: make the feedback feel like a real card. */
+#explanation-list:has(.single-review-card) {
+  padding: 0 !important;
+  overflow: visible;
+}
+
+.single-review-card {
+  position: relative;
+  padding: 22px 20px 18px;
+  border: 1px solid var(--neon-cyan);
+  border-left: 5px solid var(--neon-cyan);
+  background: linear-gradient(135deg, rgba(0,245,255,.10), rgba(191,95,255,.08));
+  box-shadow: 0 8px 24px rgba(0,0,0,.28);
+  text-align: left;
+}
+
+.single-review-card::before {
+  content: 'WORD REVIEW';
+  display: block;
+  margin-bottom: 16px;
+  color: var(--neon-cyan);
+  font-size: 8px;
+  letter-spacing: 2px;
+  opacity: .8;
+}
+
+.single-review-card .explanation-word {
+  margin-bottom: 10px;
+  font-size: clamp(18px, 5vw, 26px);
+  letter-spacing: 2px;
+  text-align: left;
+}
+
+.single-review-card .explanation-definition {
+  margin-bottom: 16px;
+  padding: 0 0 14px;
+  border-bottom: 1px solid rgba(0,245,255,.25);
+  text-align: left;
+}
+
+.single-review-card .explanation-example-container {
+  margin-top: 0;
+  padding: 12px 14px;
+  border-left: 2px solid var(--neon-purple);
+  background: rgba(0,0,0,.24);
+}
+
+.single-review-card .explanation-example-en,
+.single-review-card .explanation-example-ru,
+.single-review-card .explanation-example-ko {
+  text-shadow: none !important;
+  box-shadow: none !important;
 }
