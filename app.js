@@ -1108,6 +1108,7 @@ function showExplanation(word) {
   $('next-question-btn').style.display = 'inline-block';
   list.textContent = '';
   list.setAttribute('role', 'list');
+  list.classList.remove('review-session-list');
   const content = mk('div', 'explanation-content');
   appendWordReviewContent(content, word, store.getState().translationLanguage);
   list.appendChild(content);
@@ -1188,6 +1189,7 @@ function showReviewSession() {
   nextBtn.style.display = 'none';
   list.textContent = '';
   list.setAttribute('role', 'list');
+  list.classList.add('review-session-list');
 
   if (reviewSessionData.length === 0) {
     const listItem = mk('div');
