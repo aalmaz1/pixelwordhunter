@@ -514,7 +514,7 @@ async function handleDeleteAccountConfirm() {
 }
 
 // ==================== SCREENS / STATE ====================
-const SCREENS = ['menu', 'settings', 'category', 'game'];
+const SCREENS = ['menu', 'settings', 'category', 'game', 'mode', 'toeic', 'toeicgame'];
 
 function toggleScreen(screenId) {
   for (const s of SCREENS) {
@@ -622,6 +622,170 @@ function startGame(category) {
 function startHardWords() {
   startRound('Hard', selectHardWords(10), t('no_hard_words') || 'No hard words yet — keep playing!');
 }
+
+// ==================== TOEIC TESTS ====================
+// 9 parts x 100 questions from toeic_web_app/toeic_database.json, lazy-loaded
+// via toeic.js (a separate Vite chunk, precached by the SW for offline play).
+// Flow: mode screen → test list → test → result modal. Correct answers add XP.
+const toeic = {
+  data: null,          // TOEIC_DATA once loaded
+  questions: [],       // category questions for the running test
+  index: 0,            // cursor inside questions
+  answers: {},         // index -> selected option (locked once answered)
+  score: 0,            // answered correctly so far
+  typeId: null,
+  categoryName: '',
+};
+const TOEIC_XP_PER_CORRECT = 2; // 100 questions x 2 XP = 200 XP max per test
+
+async function ensureToeicData() {
+  if (!toeic.data) {
+    const mod = await import('./toeic.js');
+    toeic.data = mod.TOEIC_DATA;
+  }
+  return toeic.data;
+}
+
+/** Mode screen → TOEIC test list. Loads the question bank on first visit. */
+async function openToeicTests() {
+  AudioEngine.playTransition();
+  try {
+    await ensureToeicData();
+    showToeicList();
+  } catch (err) {
+    console.error('[TOEIC] Failed to load the question bank:', err);
+    showNotification(t('toeic_load_error') || 'Failed to load TOEIC tests');
+  }
+}
+
+/** Renders the 9 test-parts grid and shows the selection screen. */
+function showToeicList() {
+  const data = toeic.data;
+  if (!data) return toggleScreen('mode'); // bank not loaded yet — no dead end
+  const list = $('toeic-list');
+  list.textContent = '';
+  const counts = new Map();
+  for (const q of data.questions) counts.set(q.type_id, (counts.get(q.type_id) || 0) + 1);
+  for (const cat of data.categories) {
+    const btn = mk('button', 'category-btn toeic-cat-btn');
+    btn.setAttribute('role', 'listitem');
+    btn.appendChild(mk('span', 'toeic-cat-title', cat.name));
+    btn.appendChild(mk('span', 'toeic-cat-badge',
+      `${counts.get(cat.id) || 0} ${t('questions_count') || 'QUESTIONS'}`));
+    btn.addEventListener('click', () => startToeicTest(cat.id, cat.name));
+    list.appendChild(btn);
+  }
+  toggleScreen('toeic');
+}
+
+function startToeicTest(typeId, categoryName) {
+  AudioEngine.playTransition();
+  toeic.questions = toeic.data.questions.filter((q) => q.type_id === typeId);
+  toeic.index = 0;
+  toeic.answers = {};
+  toeic.score = 0;
+  toeic.typeId = typeId;
+  toeic.categoryName = categoryName;
+  setTxt($('toeic-category'), categoryName);
+  toggleScreen('toeicgame');
+  renderToeicQuestion();
+}
+
+function renderToeicQuestion() {
+  const q = toeic.questions[toeic.index];
+  if (!q) { showToeicList(); return; }
+  const total = toeic.questions.length;
+  const questionEl = $('toeic-question');
+  questionEl.textContent = `${toeic.index + 1}. ${q.question}`;
+  questionEl.onclick = () => Speech.speak(q.question, 'en');
+  setTxt($('toeic-progress-text'), `${toeic.index + 1} / ${total}`);
+  const fill = $('toeic-progress-fill');
+  if (fill) fill.style.width = `${((toeic.index + 1) / total) * 100}%`;
+  setTxt($('toeic-xp'), `${store.getState().xp} XP`);
+
+  const letters = ['A', 'B', 'C', 'D'];
+  const selected = toeic.answers[toeic.index];
+  const optionsEl = $('toeic-options');
+  optionsEl.textContent = '';
+  q.options.forEach((opt, i) => {
+    const btn = mk('button', 'option-btn toeic-option');
+    btn.appendChild(mk('span', 'toeic-option-letter', letters[i]));
+    btn.appendChild(mk('span', 'toeic-option-text', opt));
+    if (selected !== undefined) { // already answered → locked, show verdict
+      btn.disabled = true;
+      if (opt === q.correct) btn.classList.add('correct');
+      else if (opt === selected) btn.classList.add('wrong');
+    } else {
+      btn.addEventListener('click', () => answerToeicQuestion(opt));
+    }
+    optionsEl.appendChild(btn);
+  });
+
+  const prevBtn = $('toeic-prev-btn');
+  if (prevBtn) prevBtn.style.visibility = toeic.index === 0 ? 'hidden' : 'visible';
+  setTxt($('toeic-next-btn'), toeic.index === total - 1 ? (t('finish') || 'FINISH') : t('next'));
+}
+
+function answerToeicQuestion(opt) {
+  if (toeic.answers[toeic.index] !== undefined) return; // locked
+  toeic.answers[toeic.index] = opt;
+  const q = toeic.questions[toeic.index];
+  if (opt === q.correct) {
+    toeic.score += 1;
+    addXP(TOEIC_XP_PER_CORRECT); // updates store.xp + schedules cloud sync
+    AudioEngine.playCorrect();
+  } else {
+    AudioEngine.playWrong();
+  }
+  updateDailyStreak();
+  renderToeicQuestion();
+}
+
+function toeicGoNext() {
+  AudioEngine.playTransition();
+  if (toeic.index < toeic.questions.length - 1) {
+    toeic.index += 1;
+    renderToeicQuestion();
+  } else {
+    showToeicResult();
+  }
+}
+
+function toeicGoPrev() {
+  if (toeic.index <= 0) return;
+  AudioEngine.playTransition();
+  toeic.index -= 1;
+  renderToeicQuestion();
+}
+
+function showToeicResult() {
+  AudioEngine.playTransition();
+  const total = toeic.questions.length;
+  const correct = toeic.score;
+  const accuracy = total ? Math.round((correct / total) * 100) : 0;
+
+  const summary = $('toeic-result-summary');
+  summary.textContent = '';
+  for (const [label, value] of [
+    [t('correct_count'), correct],
+    [t('wrong_count'), total - correct],
+    [t('accuracy'), `${accuracy}%`],
+    [t('xp_earned'), correct * TOEIC_XP_PER_CORRECT],
+  ]) {
+    summary.appendChild(mk('p', null, `${label}: ${value}`));
+  }
+
+  const modal = $('toeic-result-modal');
+  modal.classList.remove('hidden');
+  const releaseTrap = trapFocus(modal);
+  const close = () => { releaseTrap(); modal.classList.add('hidden'); };
+
+  $('toeic-result-retry-btn').onclick = () => { close(); startToeicTest(toeic.typeId, toeic.categoryName); };
+  $('toeic-result-tests-btn').onclick = () => { close(); showToeicList(); };
+  $('toeic-result-exit-btn').onclick = () => { close(); toggleScreen('menu'); };
+  $('toeic-result-retry-btn').focus();
+}
+
 
 // ==================== DAILY STREAK ====================
 function updateDailyStreak() {
@@ -974,7 +1138,7 @@ function setupEventListeners() {
   const nav = (id, screen) => on(id, 'click', () => { AudioEngine.playTransition(); toggleScreen(screen); });
   nav('settings-btn', 'settings');
   nav('settings-back-btn', 'menu');
-  nav('category-back-btn', 'menu');
+  nav('category-back-btn', 'mode'); // word quiz is picked from the mode chooser now
   nav('exit-game-btn', 'menu');
 
   // Auth
@@ -1005,19 +1169,33 @@ function setupEventListeners() {
     }));
   on('settings-sound-btn', 'click', () => store.toggleAudio());
 
-  // Menu actions
+  // Menu actions — HUNT / TRY now open the mode chooser (Word Quiz / TOEIC Tests)
   on('hunt-btn', 'click', () => {
     AudioEngine.playTransition();
-    refreshCategoryButtons();
-    toggleScreen('category');
+    toggleScreen('mode');
   });
   on('try-btn', 'click', () => {
     AudioEngine.playTransition();
     // Explicit anonymous sign-in for guest mode. Falls back to offline play.
     AuthManager.tryAnonymous?.().catch(() => {});
+    toggleScreen('mode');
+  });
+
+  // Mode chooser
+  on('mode-back-btn', 'click', () => { AudioEngine.playTransition(); toggleScreen('menu'); });
+  on('mode-word-quiz-btn', 'click', () => {
+    AudioEngine.playTransition();
     refreshCategoryButtons();
     toggleScreen('category');
   });
+  on('mode-toeic-btn', 'click', () => { void openToeicTests(); });
+
+  // TOEIC tests
+  on('toeic-back-btn', 'click', () => { AudioEngine.playTransition(); toggleScreen('mode'); });
+  on('exit-toeic-btn', 'click', () => { AudioEngine.playTransition(); showToeicList(); });
+  on('toeic-prev-btn', 'click', () => toeicGoPrev());
+  on('toeic-next-btn', 'click', () => toeicGoNext());
+
   on('hard-words-btn', 'click', () => { AudioEngine.playTransition(); startHardWords(); });
 
   // Backup / reset

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars -- loaded by index.html via a plain <script> tag (standalone app) */
 const TOEIC_DATA = {
   "categories": [
     {
@@ -1342,7 +1343,7 @@ const TOEIC_DATA = {
       "id": 101,
       "type_id": 2,
       "category": "Incomplete Sentences Part 2",
-      "question": "The foundation�fs director ____________ the scientific operations of the organization.",
+      "question": "The foundation’s director ____________ the scientific operations of the organization.",
       "options": [
         "coexists",
         "contextualizes",
@@ -2252,14 +2253,14 @@ const TOEIC_DATA = {
       "id": 171,
       "type_id": 2,
       "category": "Incomplete Sentences Part 2",
-      "question": "The festival was a disaster because they didn't __________________ such a huge crowd. uestion. 1)\tCorrect\tHer intelligence more than __________________ for her lack of experience.",
+      "question": "Her intelligence more than __________________ for her lack of experience.",
       "options": [
         "compensates",
         "trims",
         "chases",
         "allures"
       ],
-      "correct": "look the new words up"
+      "correct": "compensates"
     },
     {
       "id": 172,
@@ -2356,7 +2357,7 @@ const TOEIC_DATA = {
       "id": 179,
       "type_id": 2,
       "category": "Incomplete Sentences Part 2",
-      "question": "She spoke with __________________ about her life.. \tE",
+      "question": "She spoke with __________________ about her life.",
       "options": [
         "decision",
         "hallucination",
@@ -3201,7 +3202,7 @@ const TOEIC_DATA = {
       "id": 244,
       "type_id": 3,
       "category": "Grammar Part 1",
-      "question": "__________________ a word if you don't understand it. \tExplanationTo look up is to find the meaning of a word in a dictionary.",
+      "question": "__________________ a word if you don't understand it.",
       "options": [
         "Look",
         "Look up",
@@ -3214,7 +3215,7 @@ const TOEIC_DATA = {
       "id": 245,
       "type_id": 3,
       "category": "Grammar Part 1",
-      "question": "__________________ the mistakes in your notebook. \tExplanationTo rub out is to erase mistakes ; remove them using a rubber or eraser.",
+      "question": "__________________ the mistakes in your notebook.",
       "options": [
         "Rub out",
         "Erase out",
@@ -3929,14 +3930,14 @@ const TOEIC_DATA = {
       "id": 300,
       "type_id": 3,
       "category": "Grammar Part 1",
-      "question": "Europe’s economic recovery will last only if________ governments decide to makedeeper economic reforms.",
+      "question": "Europe’s economic recovery will last only if ________ governments decide to make deeper economic reforms.",
       "options": [
         "it",
         "its",
         "their",
         "they"
       ],
-      "correct": "struggled"
+      "correct": "its"
     },
     {
       "id": 301,
@@ -6282,136 +6283,6 @@ const TOEIC_DATA = {
       "id": 481,
       "type_id": 5,
       "category": "Grammar Part 3",
-      "question": "The driver was clearly __________________ when the accident happened.",
-      "options": [
-        "rejuvenating",
-        "corny",
-        "rare",
-        "intoxicated"
-      ],
-      "correct": "intoxicated"
-    },
-    {
-      "id": 482,
-      "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The way the whales are killed is nothing short of __________________.",
-      "options": [
-        "barbaric",
-        "well-bred",
-        "peeled",
-        "exhausted"
-      ],
-      "correct": "barbaric"
-    },
-    {
-      "id": 483,
-      "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Which sentence is correct ?",
-      "options": [
-        "We requested the donor to appear on television who donated a check for ten thousand pesos.",
-        "Locusts pose a problem to farmers which were preying on corn and rice.",
-        "In the corner of the room, there is an ornamental jar which has antique designs painted around its mouth.",
-        "An old woman got on a bus by mistake that was going to Seattle."
-      ],
-      "correct": "In the corner of the room, there is an ornamental jar which has antique designs painted around its mouth."
-    },
-    {
-      "id": 484,
-      "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "______________ girls should learn to cook.",
-      "options": [
-        "Ours",
-        "We're",
-        "Us",
-        "We"
-      ],
-      "correct": "We"
-    },
-    {
-      "id": 485,
-      "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "I __________________ a really good book at the moment. It's about a man who runs away from home.",
-      "options": [
-        "read",
-        "am reading",
-        "have read",
-        "been reading"
-      ],
-      "correct": "am reading"
-    },
-    {
-      "id": 486,
-      "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "I'm sure you are __________________ passing the examination.",
-      "options": [
-        "capable of",
-        "capable with",
-        "capable on",
-        "capable in"
-      ],
-      "correct": "capable of"
-    },
-    {
-      "id": 487,
-      "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Ann is in __________________ ( of this house).",
-      "options": [
-        "a garden",
-        "an garden",
-        "the garden",
-        "garden"
-      ],
-      "correct": "the garden"
-    },
-    {
-      "id": 488,
-      "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Mom bought a kilo of __________________ in the market today.",
-      "options": [
-        "tomatoes",
-        "tomatos",
-        "tomato",
-        "tomatois"
-      ],
-      "correct": "tomatoes"
-    },
-    {
-      "id": 489,
-      "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Which sentence is correct ?",
-      "options": [
-        "I drove there without to stop.",
-        "Where I can buy stamps?",
-        "The life is difficult.",
-        "Is my new office ready?"
-      ],
-      "correct": "Is my new office ready?"
-    },
-    {
-      "id": 490,
-      "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Why are you climbing __________________ the wall ?",
-      "options": [
-        "over",
-        "across",
-        "along",
-        "into"
-      ],
-      "correct": "over"
-    },
-    {
-      "id": 491,
-      "type_id": 5,
-      "category": "Grammar Part 3",
       "question": "Power or capacity to produce a desired effect; effectiveness",
       "options": [
         "magnanimous",
@@ -6422,7 +6293,7 @@ const TOEIC_DATA = {
       "correct": "efficacy"
     },
     {
-      "id": 492,
+      "id": 482,
       "type_id": 5,
       "category": "Grammar Part 3",
       "question": "to represent by or as if by a picture",
@@ -6435,7 +6306,7 @@ const TOEIC_DATA = {
       "correct": "depict"
     },
     {
-      "id": 493,
+      "id": 483,
       "type_id": 5,
       "category": "Grammar Part 3",
       "question": "One of the means or channels of general communication, information, or entertainment in society, as newspapers, radio, or television",
@@ -6448,7 +6319,7 @@ const TOEIC_DATA = {
       "correct": "medium"
     },
     {
-      "id": 494,
+      "id": 484,
       "type_id": 5,
       "category": "Grammar Part 3",
       "question": "A copyright is",
@@ -6461,7 +6332,7 @@ const TOEIC_DATA = {
       "correct": "the exclusive legal right to reproduce, publish, sell, or distribute something"
     },
     {
-      "id": 495,
+      "id": 485,
       "type_id": 5,
       "category": "Grammar Part 3",
       "question": "Magnanimous is",
@@ -6474,7 +6345,7 @@ const TOEIC_DATA = {
       "correct": "showing or suggesting nobility of feeling and generosity of mind"
     },
     {
-      "id": 496,
+      "id": 486,
       "type_id": 5,
       "category": "Grammar Part 3",
       "question": "An infrastructure is",
@@ -6487,7 +6358,7 @@ const TOEIC_DATA = {
       "correct": "the underlying foundation for a system or organization"
     },
     {
-      "id": 497,
+      "id": 487,
       "type_id": 5,
       "category": "Grammar Part 3",
       "question": "An understatement is",
@@ -6500,7 +6371,7 @@ const TOEIC_DATA = {
       "correct": "a representation that is less than actual fact"
     },
     {
-      "id": 498,
+      "id": 488,
       "type_id": 5,
       "category": "Grammar Part 3",
       "question": "Hubris means",
@@ -6513,7 +6384,7 @@ const TOEIC_DATA = {
       "correct": "exaggerated pride or self-confidence"
     },
     {
-      "id": 499,
+      "id": 489,
       "type_id": 5,
       "category": "Grammar Part 3",
       "question": "To provide with factual or substantial support for statements made",
@@ -6526,7 +6397,7 @@ const TOEIC_DATA = {
       "correct": "document"
     },
     {
-      "id": 500,
+      "id": 490,
       "type_id": 5,
       "category": "Grammar Part 3",
       "question": "Joking or jesting often inappropriately",
@@ -6537,6 +6408,136 @@ const TOEIC_DATA = {
         "abstemious"
       ],
       "correct": "facetious"
+    },
+    {
+      "id": 491,
+      "type_id": 5,
+      "category": "Grammar Part 3",
+      "question": "The weather ___________________ for tomorrow is warm and sunny.",
+      "options": [
+        "forecast",
+        "foreword",
+        "forefather",
+        "forehead"
+      ],
+      "correct": "forecast"
+    },
+    {
+      "id": 492,
+      "type_id": 5,
+      "category": "Grammar Part 3",
+      "question": "Passengers are requested to fasten their seat belts during ___________________ and landing.",
+      "options": [
+        "take-in",
+        "take-off",
+        "take-out",
+        "take-over"
+      ],
+      "correct": "take-off"
+    },
+    {
+      "id": 493,
+      "type_id": 5,
+      "category": "Grammar Part 3",
+      "question": "The medicine did not have any ___________________ effect on the patient.",
+      "options": [
+        "benevolent",
+        "benefactor",
+        "beneficial",
+        "beneficiary"
+      ],
+      "correct": "beneficial"
+    },
+    {
+      "id": 494,
+      "type_id": 5,
+      "category": "Grammar Part 3",
+      "question": "His ___________________ knowledge of the subject made everyone doubt his competence.",
+      "options": [
+        "inadequate",
+        "invaluable",
+        "inevitable",
+        "inordinate"
+      ],
+      "correct": "inadequate"
+    },
+    {
+      "id": 495,
+      "type_id": 5,
+      "category": "Grammar Part 3",
+      "question": "The journalist refused to reveal the ___________________ of his information.",
+      "options": [
+        "source",
+        "sauce",
+        "resource",
+        "outsource"
+      ],
+      "correct": "source"
+    },
+    {
+      "id": 496,
+      "type_id": 5,
+      "category": "Grammar Part 3",
+      "question": "Neither the secretary nor the managers ___________________ present at the meeting.",
+      "options": [
+        "was",
+        "is",
+        "were",
+        "has been"
+      ],
+      "correct": "were"
+    },
+    {
+      "id": 497,
+      "type_id": 5,
+      "category": "Grammar Part 3",
+      "question": "It is high time we ___________________ something to protect the environment.",
+      "options": [
+        "do",
+        "did",
+        "have done",
+        "will do"
+      ],
+      "correct": "did"
+    },
+    {
+      "id": 498,
+      "type_id": 5,
+      "category": "Grammar Part 3",
+      "question": "No sooner had the concert begun ___________________ the lights went out.",
+      "options": [
+        "when",
+        "that",
+        "than",
+        "then"
+      ],
+      "correct": "than"
+    },
+    {
+      "id": 499,
+      "type_id": 5,
+      "category": "Grammar Part 3",
+      "question": "She is used to ___________________ up early in the morning.",
+      "options": [
+        "get",
+        "got",
+        "getting",
+        "have got"
+      ],
+      "correct": "getting"
+    },
+    {
+      "id": 500,
+      "type_id": 5,
+      "category": "Grammar Part 3",
+      "question": "The students were looking forward to ___________________ their summer holidays.",
+      "options": [
+        "spend",
+        "spending",
+        "have spent",
+        "spent"
+      ],
+      "correct": "spending"
     },
     {
       "id": 501,
@@ -6659,7 +6660,7 @@ const TOEIC_DATA = {
       "id": 510,
       "type_id": 6,
       "category": "Grammar Part 4",
-      "question": "Symmetry \tE.\tPoverty",
+      "question": "Symmetry",
       "options": [
         "The quality of showing complementary forms",
         "The quality of showing opposite forms",
@@ -6672,7 +6673,7 @@ const TOEIC_DATA = {
       "id": 511,
       "type_id": 6,
       "category": "Grammar Part 4",
-      "question": "symbiotic \tE.\tOf or relating to the universe",
+      "question": "symbiotic",
       "options": [
         "The quality of two dissimilar orgainisms",
         "To be of great importance",
@@ -6711,7 +6712,7 @@ const TOEIC_DATA = {
       "id": 514,
       "type_id": 6,
       "category": "Grammar Part 4",
-      "question": "Surreptitious \tE.\tTo act upon in a selfish way",
+      "question": "Surreptitious",
       "options": [
         "Undertaken in stealth",
         "To be of great importantance",
@@ -6796,7 +6797,7 @@ const TOEIC_DATA = {
         "disciplining",
         "discipline"
       ],
-      "correct": "Of or pertaing to bulls"
+      "correct": "disciplinary"
     },
     {
       "id": 521,
@@ -6958,14 +6959,14 @@ const TOEIC_DATA = {
       "id": 533,
       "type_id": 6,
       "category": "Grammar Part 4",
-      "question": "Blase \tE.\tBored (Correct Answer)",
+      "question": "Blase",
       "options": [
-        "marked by excitement",
-        "To challenge ones self",
+        "Bored, unimpressed",
+        "Marked by excitement",
         "Abnormal",
         "Having the ability to pick up on things quickly"
       ],
-      "correct": "Possessing two sides or poles."
+      "correct": "Bored, unimpressed"
     },
     {
       "id": 534,
@@ -7790,27 +7791,27 @@ const TOEIC_DATA = {
       "id": 597,
       "type_id": 6,
       "category": "Grammar Part 4",
-      "question": "Mr. Krammer is renowned for his ab to develop and maintain relationsh his colleagues that result ________optimum solutions for the good of Corporation. ",
+      "question": "Mr. Krammer is renowned for his ability to develop and maintain relationships with his colleagues that result ________ optimum solutions for the good of the Corporation.",
       "options": [
         "at",
         "in",
         "from",
         "to"
       ],
-      "correct": "disposal"
+      "correct": "in"
     },
     {
       "id": 598,
       "type_id": 6,
       "category": "Grammar Part 4",
-      "question": "The director got the secretary ____all prospective clients and inform th the company’s new products and s",
+      "question": "The director got the secretary ____ all prospective clients and inform them about the company’s new products and services.",
       "options": [
         "contact",
         "contacted",
         "to be contacting",
         "to contact"
       ],
-      "correct": "disposal"
+      "correct": "to contact"
     },
     {
       "id": 599,
@@ -7823,7 +7824,7 @@ const TOEIC_DATA = {
         "too",
         "very"
       ],
-      "correct": "disposal"
+      "correct": "as"
     },
     {
       "id": 600,
@@ -7836,7 +7837,7 @@ const TOEIC_DATA = {
         "specializing",
         "specialization"
       ],
-      "correct": "disposal"
+      "correct": "specializing"
     },
     {
       "id": 601,
@@ -8882,7 +8883,7 @@ const TOEIC_DATA = {
       "id": 681,
       "type_id": 7,
       "category": "Grammar Part 5",
-      "question": "Please contact Maria Alvarez for _________________ in cashing traveler�fs checks. ",
+      "question": "Please contact Maria Alvarez for _________________ in cashing traveler’s checks. ",
       "options": [
         "questions",
         "persistence",
@@ -8921,7 +8922,7 @@ const TOEIC_DATA = {
       "id": 684,
       "type_id": 7,
       "category": "Grammar Part 5",
-      "question": "Next June, Avery Animation will unveil a __________ new video game based on the movie �gWarlords.�h ",
+      "question": "Next June, Avery Animation will unveil a __________ new video game based on the movie “Warlords.” ",
       "options": [
         "fascinate",
         "fascinating",
@@ -8936,7 +8937,7 @@ const TOEIC_DATA = {
       "category": "Grammar Part 5",
       "question": "We promise to send _________ proposed contract to them byWednesday morning. ",
       "options": [
-        "they�fre",
+        "they’re",
         "theirs",
         "their",
         "theirselves"
@@ -8973,7 +8974,7 @@ const TOEIC_DATA = {
       "id": 688,
       "type_id": 7,
       "category": "Grammar Part 5",
-      "question": "An appetizer at Royal Steakhouse costs as much ______ a full meal at McDougal�fs. ",
+      "question": "An appetizer at Royal Steakhouse costs as much ______ a full meal at McDougal’s. ",
       "options": [
         "as",
         "than",
@@ -9025,7 +9026,7 @@ const TOEIC_DATA = {
       "id": 692,
       "type_id": 7,
       "category": "Grammar Part 5",
-      "question": "Highman & Sons�f profits _______________ to increase 15 percent in the next fiscal quarter. ",
+      "question": "Highman & Sons’ profits _______________ to increase 15 percent in the next fiscal quarter. ",
       "options": [
         "are predicted",
         "will predict",
@@ -9064,10 +9065,10 @@ const TOEIC_DATA = {
       "id": 695,
       "type_id": 7,
       "category": "Grammar Part 5",
-      "question": "Due to _____ high degree of liability, the company must exercise caution in assessing client�fs insurance claims. ",
+      "question": "Due to _____ high degree of liability, the company must exercise caution in assessing client’s insurance claims. ",
       "options": [
         "their",
-        "it�fs",
+        "it’s",
         "theirs",
         "its"
       ],
@@ -9103,7 +9104,7 @@ const TOEIC_DATA = {
       "id": 698,
       "type_id": 7,
       "category": "Grammar Part 5",
-      "question": "Felipe Mendoza, a senior manager, suggested a unique fundraiser that has caught the attention of one of the organization�fs wealthiest _____________. ",
+      "question": "Felipe Mendoza, a senior manager, suggested a unique fundraiser that has caught the attention of one of the organization’s wealthiest _____________. ",
       "options": [
         "donors",
         "donor",
@@ -9168,7 +9169,7 @@ const TOEIC_DATA = {
       "id": 703,
       "type_id": 8,
       "category": "Grammar Part 6",
-      "question": "Despite the attorneys�f prolonged negotiations, the terms of the proposed marketing agreement were not satisfactory to _____________ party. ",
+      "question": "Despite the attorneys’ prolonged negotiations, the terms of the proposed marketing agreement were not satisfactory to _____________ party. ",
       "options": [
         "either",
         "neither",
@@ -9389,7 +9390,7 @@ const TOEIC_DATA = {
       "id": 720,
       "type_id": 8,
       "category": "Grammar Part 6",
-      "question": "The economist�fs prediction in the weekly news magazine was _________ about a quick recovery. ",
+      "question": "The economist’s prediction in the weekly news magazine was _________ about a quick recovery. ",
       "options": [
         "cynically",
         "cynic",
@@ -9571,7 +9572,7 @@ const TOEIC_DATA = {
       "id": 734,
       "type_id": 8,
       "category": "Grammar Part 6",
-      "question": " Mark�fs ______________ personality allowed him to climb the corporate ladder very quickly.",
+      "question": " Mark’s ______________ personality allowed him to climb the corporate ladder very quickly.",
       "options": [
         "competition",
         "competitive",
@@ -9662,7 +9663,7 @@ const TOEIC_DATA = {
       "id": 741,
       "type_id": 8,
       "category": "Grammar Part 6",
-      "question": " After attending the seminar on �gThe Power of __________�h the sales team increased their sales by 75%.",
+      "question": " After attending the seminar on “The Power of __________” the sales team increased their sales by 75%.",
       "options": [
         "Allusion",
         "Dreaming",
@@ -9714,7 +9715,7 @@ const TOEIC_DATA = {
       "id": 745,
       "type_id": 8,
       "category": "Grammar Part 6",
-      "question": " The ___________ of not following the client�fs specifications were severe; they lost the million dollar contract.",
+      "question": " The ___________ of not following the client’s specifications were severe; they lost the million dollar contract.",
       "options": [
         "consequence",
         "sequence",
@@ -9870,7 +9871,7 @@ const TOEIC_DATA = {
       "id": 757,
       "type_id": 8,
       "category": "Grammar Part 6",
-      "question": " The owner of the company ________________each employee�fs performance every year. ",
+      "question": " The owner of the company ________________each employee’s performance every year. ",
       "options": [
         "searched",
         "filed",
@@ -11092,7 +11093,7 @@ const TOEIC_DATA = {
       "id": 851,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": " The CEO decided to unveil the company�fs new products in an elaborate ceremony broadcast on TV ________ the Internet. ",
+      "question": " The CEO decided to unveil the company’s new products in an elaborate ceremony broadcast on TV ________ the Internet. ",
       "options": [
         "and",
         "as well",
@@ -11105,7 +11106,7 @@ const TOEIC_DATA = {
       "id": 852,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": " The company�fs Scientific and Technical Advisory Panel is comprised of ________ scientists appointed by the CEO. ",
+      "question": " The company’s Scientific and Technical Advisory Panel is comprised of ________ scientists appointed by the CEO. ",
       "options": [
         "eminent",
         "imminent",
@@ -11131,7 +11132,7 @@ const TOEIC_DATA = {
       "id": 854,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": "The company�fs Director adopted a proactive approach in developing and maintaining a program of lectures which have helped COMBI ________ its objectives. ",
+      "question": "The company’s Director adopted a proactive approach in developing and maintaining a program of lectures which have helped COMBI ________ its objectives. ",
       "options": [
         "be furthering",
         "further",
@@ -11144,7 +11145,7 @@ const TOEIC_DATA = {
       "id": 855,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": "The chief accountant asked to see next year�fs profit ________ so as to start working on the company�fs budget. ",
+      "question": "The chief accountant asked to see next year’s profit ________ so as to start working on the company’s budget. ",
       "options": [
         "profiles",
         "projects",
@@ -11170,7 +11171,7 @@ const TOEIC_DATA = {
       "id": 857,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": "The United Nations Environment Program is recruiting two Program Officers for its Secretariat ________ in UNEP�fs officein Washington, DC. ",
+      "question": "The United Nations Environment Program is recruiting two Program Officers for its Secretariat ________ in UNEP’s officein Washington, DC. ",
       "options": [
         "being located",
         "to locate",
@@ -11196,7 +11197,7 @@ const TOEIC_DATA = {
       "id": 859,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": "The CEO maintains that our company�fs latest ________ will enhance our bottled-water division. ",
+      "question": "The CEO maintains that our company’s latest ________ will enhance our bottled-water division. ",
       "options": [
         "acquiring",
         "acquired",
@@ -11222,7 +11223,7 @@ const TOEIC_DATA = {
       "id": 861,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": "The new secretary ________ some problems which she could not handle without the director�fs assistance.",
+      "question": "The new secretary ________ some problems which she could not handle without the director’s assistance.",
       "options": [
         "ran after",
         "ran for",
@@ -11248,7 +11249,7 @@ const TOEIC_DATA = {
       "id": 863,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": "Investors reacted nervously to the bad news stemming ________ the slowdown in America�fs housing market.",
+      "question": "Investors reacted nervously to the bad news stemming ________ the slowdown in America’s housing market.",
       "options": [
         "by",
         "from",
@@ -11261,7 +11262,7 @@ const TOEIC_DATA = {
       "id": 864,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": "Mr. Delancas�f ________ effective communication skills, coupled with his ability to think on his feet, helped him get promoted quickly.",
+      "question": "Mr. Delancas’ ________ effective communication skills, coupled with his ability to think on his feet, helped him get promoted quickly.",
       "options": [
         "high",
         "higher",
@@ -11274,7 +11275,7 @@ const TOEIC_DATA = {
       "id": 865,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": "The marketing director managed to ________ the target audience�fs awareness with his new advertising campaign. ",
+      "question": "The marketing director managed to ________ the target audience’s awareness with his new advertising campaign. ",
       "options": [
         "augment",
         "influence",
@@ -11287,7 +11288,7 @@ const TOEIC_DATA = {
       "id": 866,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": " After weeks of ________, Alhan�fs CEO formalized his $362 billion offer to Trinto, the global mining giant.",
+      "question": " After weeks of ________, Alhan’s CEO formalized his $362 billion offer to Trinto, the global mining giant.",
       "options": [
         "speculated",
         "speculating",
@@ -11300,7 +11301,7 @@ const TOEIC_DATA = {
       "id": 867,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": "The company�fs CEO is an individual of high integrity with the ability to inspire and motivate ________ employees. ",
+      "question": "The company’s CEO is an individual of high integrity with the ability to inspire and motivate ________ employees. ",
       "options": [
         "another",
         "one another",
@@ -11313,7 +11314,7 @@ const TOEIC_DATA = {
       "id": 868,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": "The Board of Directors was impressed by Mr. Delagua�fs ability to implement necessary changes and his ________ of new business methods to meet new challenges.",
+      "question": "The Board of Directors was impressed by Mr. Delagua’s ability to implement necessary changes and his ________ of new business methods to meet new challenges.",
       "options": [
         "application",
         "applicable",
@@ -11339,7 +11340,7 @@ const TOEIC_DATA = {
       "id": 870,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": " Stockmarkets in America and Europe fell sharply and the dollar continued its slide as a result ________ the slowdown in America�fs housing market.",
+      "question": " Stockmarkets in America and Europe fell sharply and the dollar continued its slide as a result ________ the slowdown in America’s housing market.",
       "options": [
         "by",
         "from",
@@ -11365,7 +11366,7 @@ const TOEIC_DATA = {
       "id": 872,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": " The CEO announced that the company would take firm and ________ action to counter their rival�fs promotional campaign. ",
+      "question": " The CEO announced that the company would take firm and ________ action to counter their rival’s promotional campaign. ",
       "options": [
         "punctual",
         "stability",
@@ -11378,7 +11379,7 @@ const TOEIC_DATA = {
       "id": 873,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": " The board of directors unanimously approved of Mr. Grabbs�f being ________ to chief executive officer. ",
+      "question": " The board of directors unanimously approved of Mr. Grabbs’ being ________ to chief executive officer. ",
       "options": [
         "promoted",
         "promotion",
@@ -11417,108 +11418,17 @@ const TOEIC_DATA = {
       "id": 876,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": "Less developed countries receive ________ from the European Union to finance various development projects. 79)\tCorrectThe new secretary ________ some problems which she could not handle without the director�fs assistance.",
+      "question": "Neither the suppliers nor the distributor _____ responsible for the shipping delay.",
       "options": [
-        "ran after",
-        "ran for",
-        "ran into",
-        "ran through"
+        "are",
+        "is",
+        "have been",
+        "were"
       ],
-      "correct": "ran into"
+      "correct": "is"
     },
     {
       "id": 877,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Shareholders in both companies finally ________ an agreement and decided to proceed with the merger. ",
-      "options": [
-        "approached",
-        "arrived",
-        "consented",
-        "reached"
-      ],
-      "correct": "reached"
-    },
-    {
-      "id": 878,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Investors reacted nervously to the bad news stemming ________ the slowdown in America�fs housing market.",
-      "options": [
-        "by",
-        "from",
-        "of",
-        "off"
-      ],
-      "correct": "from"
-    },
-    {
-      "id": 879,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Mr. Delancas�f ________ effective communication skills, coupled with his ability to think on his feet, helped him get promoted quickly.",
-      "options": [
-        "high",
-        "higher",
-        "highest",
-        "highly"
-      ],
-      "correct": "highly"
-    },
-    {
-      "id": 880,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The marketing director managed to ________ the target audience�fs awareness with his new advertising campaign. ",
-      "options": [
-        "augment",
-        "influence",
-        "raise",
-        "rise"
-      ],
-      "correct": "raise"
-    },
-    {
-      "id": 881,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "After weeks of ________, Alhan�fs CEO formalized his $362 billion offer to Trinto, the global mining giant.",
-      "options": [
-        "speculated",
-        "speculating",
-        "speculation",
-        "speculator"
-      ],
-      "correct": "speculation"
-    },
-    {
-      "id": 882,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The company�fs CEO is an individual of high integrity with the ability to inspire and motivate ________ employees. ",
-      "options": [
-        "another",
-        "one another",
-        "others",
-        "the other"
-      ],
-      "correct": "one another"
-    },
-    {
-      "id": 883,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The Board of Directors was impressed by Mr. Delagua�fs ability to implement necessary changes and his ________ of new business methods to meet new challenges.",
-      "options": [
-        "application",
-        "applicable",
-        "apply",
-        "applying"
-      ],
-      "correct": "application"
-    },
-    {
-      "id": 884,
       "type_id": 9,
       "category": "Grammar Part 7",
       "question": "Some companies cut the price of their products by as much as $100 in America in an ________ to boost their sales. ",
@@ -11531,166 +11441,10 @@ const TOEIC_DATA = {
       "correct": "effort"
     },
     {
-      "id": 885,
+      "id": 878,
       "type_id": 9,
       "category": "Grammar Part 7",
-      "question": "Stockmarkets in America and Europe fell sharply and the dollar continued its slide as a result ________ the slowdown in America�fs housing market.",
-      "options": [
-        "by",
-        "from",
-        "in",
-        "of"
-      ],
-      "correct": "of"
-    },
-    {
-      "id": 886,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The executive manager handed in his resignation ________.",
-      "options": [
-        "notation",
-        "notice",
-        "noticed",
-        "notified"
-      ],
-      "correct": "notice"
-    },
-    {
-      "id": 887,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The CEO announced that the company would take firm and ________ action to counter their rival�fs promotional campaign. ",
-      "options": [
-        "punctual",
-        "stability",
-        "subordinate",
-        "timely"
-      ],
-      "correct": "timely"
-    },
-    {
-      "id": 888,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The board of directors unanimously approved of Mr. Grabbs�f being ________ to chief executive officer. ",
-      "options": [
-        "promoted",
-        "promotion",
-        "promotional",
-        "promoting"
-      ],
-      "correct": "promoted"
-    },
-    {
-      "id": 889,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "More and more companies are beginning ________ surveillance cameras around the office. ",
-      "options": [
-        "being installed",
-        "installing",
-        "to install",
-        "to be installed"
-      ],
-      "correct": "to install"
-    },
-    {
-      "id": 890,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Many companies pay Frostini, a firm known to office workers for ________ web-based e-mail security and spam-sieving technology, a great deal of money. ",
-      "options": [
-        "it",
-        "its",
-        "their",
-        "theirs"
-      ],
-      "correct": "its"
-    },
-    {
-      "id": 891,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The CEO decided to unveil the company�fs new products in an elaborate ceremony broadcast on TV ________ the Internet. ",
-      "options": [
-        "and",
-        "as well",
-        "but",
-        "or"
-      ],
-      "correct": "and"
-    },
-    {
-      "id": 892,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The company�fs Scientific and Technical Advisory Panel is comprised of ________ scientists appointed by the CEO. ",
-      "options": [
-        "eminent",
-        "imminent",
-        "impending",
-        "pertinent"
-      ],
-      "correct": "eminent"
-    },
-    {
-      "id": 893,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Prospective candidates for an executive position must have a ________ command of the English language and exceptional analytical and writing skills.",
-      "options": [
-        "strong",
-        "stronger",
-        "strongly",
-        "more strongly"
-      ],
-      "correct": "strong"
-    },
-    {
-      "id": 894,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The company�fs Director adopted a proactive approach in developing and maintaining a program of lectures which have helped COMBI ________ its objectives. ",
-      "options": [
-        "be furthering",
-        "further",
-        "to have furthered",
-        "to furthering"
-      ],
-      "correct": "further"
-    },
-    {
-      "id": 895,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The chief accountant asked to see next year�fs profit ________ so as to start working on the company�fs budget. ",
-      "options": [
-        "profiles",
-        "projects",
-        "projections",
-        "prosecutions"
-      ],
-      "correct": "projections"
-    },
-    {
-      "id": 896,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The International Financial Institution seeks an outstanding professional to assist ________ a broad range of analytical and advocacy activities.",
-      "options": [
-        "at",
-        "for",
-        "in",
-        "with"
-      ],
-      "correct": "with"
-    },
-    {
-      "id": 897,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The United Nations Environment Program is recruiting two Program Officers for its Secretariat ________ in UNEP�fs office in Washington, DC. ",
+      "question": "The United Nations Environment Program is recruiting two Program Officers for its Secretariat ________ in UNEP’s office in Washington, DC. ",
       "options": [
         "being located",
         "to locate",
@@ -11700,33 +11454,7 @@ const TOEIC_DATA = {
       "correct": "to be located"
     },
     {
-      "id": 898,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "A successful CEO should have the ability to ________ authority to co-workers to perform their assigned functions.",
-      "options": [
-        "delegate",
-        "denounce",
-        "deputize",
-        "detect"
-      ],
-      "correct": "delegate"
-    },
-    {
-      "id": 899,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The CEO maintains that our company�fs latest ________ will enhance our bottled-water division. ",
-      "options": [
-        "acquiring",
-        "acquired",
-        "acquisition",
-        "acquisitive"
-      ],
-      "correct": "acquisition"
-    },
-    {
-      "id": 900,
+      "id": 879,
       "type_id": 9,
       "category": "Grammar Part 7",
       "question": " This university's programs ________ those of Harvard. ",
@@ -11737,6 +11465,279 @@ const TOEIC_DATA = {
         "are in second place from"
       ],
       "correct": "are second only to"
+    },
+    {
+      "id": 880,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "The quarterly sales report must be submitted _____ 5 p.m. on the last Friday of the month.",
+      "options": [
+        "during",
+        "since",
+        "until",
+        "by"
+      ],
+      "correct": "by"
+    },
+    {
+      "id": 881,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "All employees are required to attend the safety seminar, _____ of their position in the company.",
+      "options": [
+        "despite",
+        "instead",
+        "regardless",
+        "ahead"
+      ],
+      "correct": "regardless"
+    },
+    {
+      "id": 882,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "The marketing department has worked on the campaign _____ over three months.",
+      "options": [
+        "since",
+        "for",
+        "by",
+        "from"
+      ],
+      "correct": "for"
+    },
+    {
+      "id": 883,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "Ms. Park was promoted to regional manager _____ her outstanding performance in sales.",
+      "options": [
+        "in spite of",
+        "although",
+        "because of",
+        "whereas"
+      ],
+      "correct": "because of"
+    },
+    {
+      "id": 884,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "Every conference room in the new building is equipped _____ modern video conferencing systems.",
+      "options": [
+        "by",
+        "for",
+        "of",
+        "with"
+      ],
+      "correct": "with"
+    },
+    {
+      "id": 885,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "Customers may exchange any item _____ 30 days of purchase, provided they have a receipt.",
+      "options": [
+        "within",
+        "among",
+        "along",
+        "throughout"
+      ],
+      "correct": "within"
+    },
+    {
+      "id": 886,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "The keynote address was _____ inspiring that the audience requested a second session.",
+      "options": [
+        "such",
+        "too",
+        "so",
+        "very"
+      ],
+      "correct": "so"
+    },
+    {
+      "id": 887,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "The east elevator will remain out of service _____ the maintenance work is completed.",
+      "options": [
+        "when",
+        "during",
+        "since",
+        "until"
+      ],
+      "correct": "until"
+    },
+    {
+      "id": 888,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "The new scheduling software is _____ easier to use than the old one.",
+      "options": [
+        "very",
+        "too",
+        "far",
+        "so"
+      ],
+      "correct": "far"
+    },
+    {
+      "id": 889,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "Production _____ steadily since the factory introduced automated equipment.",
+      "options": [
+        "increased",
+        "has increased",
+        "is increasing",
+        "increases"
+      ],
+      "correct": "has increased"
+    },
+    {
+      "id": 890,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "Applicants should submit their resumes _____ the Human Resources office by the deadline.",
+      "options": [
+        "at",
+        "in",
+        "on",
+        "to"
+      ],
+      "correct": "to"
+    },
+    {
+      "id": 891,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "The annual report offers a comprehensive _____ of the company's financial results.",
+      "options": [
+        "oversight",
+        "overlook",
+        "overview",
+        "overtone"
+      ],
+      "correct": "overview"
+    },
+    {
+      "id": 892,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "Due to rising material costs, the construction will take _____ than originally expected.",
+      "options": [
+        "long",
+        "longest",
+        "lengthy",
+        "longer"
+      ],
+      "correct": "longer"
+    },
+    {
+      "id": 893,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "The manager asked her assistant _____ all the travel arrangements for the trade fair.",
+      "options": [
+        "to arrange",
+        "arranging",
+        "arrange",
+        "arranged"
+      ],
+      "correct": "to arrange"
+    },
+    {
+      "id": 894,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "A notice about the revised vacation policy _____ to all staff members last Friday.",
+      "options": [
+        "sent",
+        "was sent",
+        "has sent",
+        "is sending"
+      ],
+      "correct": "was sent"
+    },
+    {
+      "id": 895,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "Despite _____ best efforts, the sales team could not reach the quarterly target.",
+      "options": [
+        "they",
+        "them",
+        "their",
+        "theirs"
+      ],
+      "correct": "their"
+    },
+    {
+      "id": 896,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "The supervisor recommended that every technician _____ the safety manual before the inspection.",
+      "options": [
+        "reads",
+        "will read",
+        "reading",
+        "read"
+      ],
+      "correct": "read"
+    },
+    {
+      "id": 897,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "Clients can access their account details online _____ they register for the service.",
+      "options": [
+        "unless",
+        "although",
+        "provided",
+        "moreover"
+      ],
+      "correct": "provided"
+    },
+    {
+      "id": 898,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "Bentley & Sons will relocate its headquarters _____ a larger office complex across the river.",
+      "options": [
+        "into",
+        "at",
+        "inside",
+        "to"
+      ],
+      "correct": "to"
+    },
+    {
+      "id": 899,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "All invoices must be settled within 30 days; _____, interest will be charged on overdue balances.",
+      "options": [
+        "moreover",
+        "therefore",
+        "however",
+        "otherwise"
+      ],
+      "correct": "otherwise"
+    },
+    {
+      "id": 900,
+      "type_id": 9,
+      "category": "Grammar Part 7",
+      "question": "Mr. Tanaka's proposal received _____ support from all the board members.",
+      "options": [
+        "favorable",
+        "favorably",
+        "favor",
+        "favoring"
+      ],
+      "correct": "favorable"
     }
   ]
 };

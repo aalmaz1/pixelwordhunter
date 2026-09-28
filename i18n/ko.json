@@ -108,5 +108,19 @@
   "delete_account_sync_busy": "동기화가 아직 끝나는 중입니다. 잠시 후 다시 시도하세요.",
   "delete_account_cloud_error": "클라우드 진행도를 삭제할 수 없어 계정은 삭제되지 않았습니다. 연결을 확인하고 다시 시도하세요.",
   "delete_account_partial_error": "클라우드 진행도는 삭제되었지만 계정 삭제가 완료되지 않았습니다. 다시 로그인한 뒤 계정을 한 번 더 삭제하세요.",
-  "auth_requires_recent_login": "다시 로그인한 후 다시 시도하세요"
+  "auth_requires_recent_login": "다시 로그인한 후 다시 시도하세요",
+  "select_mode": "// 모드 선택 //",
+  "word_quiz": "단어 퀴즈",
+  "word_quiz_sub": "600개 단어 학습",
+  "toeic_tests": "TOEIC 테스트",
+  "toeic_tests_sub": "9개 파트 · 900문항",
+  "select_test": "// 테스트 선택 //",
+  "test_label": "테스트:",
+  "questions_count": "문항",
+  "prev": "이전",
+  "finish": "완료",
+  "test_complete": "// 테스트 완료 //",
+  "retry_test": "다시 하기",
+  "choose_test": "테스트 선택",
+  "toeic_load_error": "TOEIC 테스트를 불러오지 못했습니다"
 }
