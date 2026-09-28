@@ -38,7 +38,7 @@ The interface combines CRT scanlines, six neon and monochrome themes, pixel typo
 - category search, focused **HARD WORDS** practice, and immediate mistake replay;
 - a complete **WORD REVIEW** after continuing from every third round;
 - tap-to-pronounce controls powered by the browser's speech engine;
-- a separate **TOEIC TESTS** mode with 9 x 100 TOEIC Part 5 questions loaded lazily from `toeic_web_app/toeic_database.json`, with both the question order and the answer options shuffled on every attempt;
+- a separate **TOEIC TESTS** mode with 9 x 100 TOEIC Part 5 questions loaded lazily from `toeic_web_app/toeic_database.json`, with both the question order and the answer options shuffled on every attempt, plus mistake review and a MISTAKES set built from the questions missed so far;
 - responsive play on phone, tablet, and desktop;
 - installable PWA support and offline play after the first successful online load.
 
@@ -65,6 +65,14 @@ incomplete sentences** in nine practice sets of 100, served from
 random order and shuffles the four options, so an answer is never remembered by
 its position. Correct answers are worth 2 XP; the result screen shows correct,
 wrong, accuracy, and XP earned, with retry and "choose another set" actions.
+
+**Mistake review.** Wrong answers are remembered (per question, in local
+storage), the result screen lists every missed item with the answer that was
+given and the correct one, and a **REPEAT MISTAKES ONLY (N)** button reruns just
+those items. The test list also grows a **MISTAKES** set with everything missed
+so far, so a later session starts from what needs work. Answering an item
+correctly removes it from the pool; when the pool is empty the extra set
+disappears.
 
 The sets are labelled "Part 5 · Set 1-9" on purpose: the bank trains the Part 5
 skill only (single-sentence items), it contains no text-completion or reading
@@ -279,7 +287,7 @@ npm test
 npm run build
 ```
 
-The current suite checks dictionary size and required data, usable Korean content, contextual word IDs, option fairness, SRS selection and long-term levels, hard-word selection, sanitization, i18n key parity and coverage (every key used in the markup or scripts exists in all three languages), runtime language loading in both the dev and production layouts, storage validation and migration, progress merging, final local saves, and state-update batching.
+The current suite checks dictionary size and required data, usable Korean content, contextual word IDs, option fairness, SRS selection and long-term levels, hard-word selection, sanitization, the TOEIC bank (no duplicates, no repeated or empty options, no glued blanks, honest part names, JSON/JS in sync) and its mistake-review flow (missed items listed, pool cleared by a correct answer, empty pool handled), i18n key parity and coverage (every key used in the markup or scripts exists in all three languages), runtime language loading in both the dev and production layouts, storage validation and migration, progress merging, final local saves, and state-update batching.
 
 The automated suite does not currently perform live Firebase network tests or a full browser installation/offline integration test. A successful production build still verifies that Vite and Workbox can generate the deployable PWA assets.
 

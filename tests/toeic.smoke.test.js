@@ -13,7 +13,13 @@ vi.mock('../i18n.js', () => ({
     init: async () => {},
     // Mirrors the English table closely enough for the smoke test: the
     // category screen renders its "All" filter through the i18n lookup.
-    t: (key) => ({ all_categories: 'All' }[key] ?? key),
+    t: (key) => ({
+      all_categories: 'All',
+      toeic_mistakes: 'MISTAKES',
+      repeat_mistakes: 'REPEAT MISTAKES ONLY',
+      your_answer: 'YOUR ANSWER',
+      correct_answer: 'CORRECT ANSWER',
+    }[key] ?? key),
     getCurrentLanguage: () => 'en',
     setLanguage: async () => {},
   },
@@ -145,18 +151,44 @@ it('runs a full TOEIC test through the real UI (shuffled order)', async () => {
   expect(summary).toContain('accuracy: 50%');
   expect(summary).toContain('xp_earned: 2');
 
-  // RETRY restarts a fresh run (questions re-drawn, options unlocked again).
-  $('toeic-result-retry-btn').click();
-  expect(hidden('toeic-result-modal')).toBe(true);
-  expect($('toeic-question').textContent).toBe('1. Choose ____');
-  expect(options().some((b) => !b.disabled)).toBe(true);
+  // Mistake review: the missed item is listed with both answers, and the wrong
+  // answer is remembered for the next session.
+  const review = $('toeic-result-review');
+  expect(review.textContent).toContain('MISTAKES');
+  expect(review.textContent).toContain('Fill the ____');
+  expect(review.textContent).toContain('YOUR ANSWER: space');
+  expect(review.textContent).toContain('CORRECT ANSWER: gap');
+  expect(review.textContent).not.toContain('Choose ____'); // the correct one is not listed
+  expect(JSON.parse(localStorage.getItem('pixelWordHunter_toeic_mistakes_v1'))).toEqual({ '1': 1 });
+  const mistakesBtn = $('toeic-result-mistakes-btn');
+  expect(hidden('toeic-result-mistakes-btn')).toBe(false);
+  expect(mistakesBtn.textContent).toContain('(1)');
 
-  // FINISH again → CHOOSE TEST → back at the test list → EXIT to menu.
-  $('toeic-next-btn').click();
+  // CHOOSE TEST → the list gained a MISTAKES set holding the missed question.
+  $('toeic-result-tests-btn').click();
+  await waitFor(() => expect($('toeic-list').children.length).toBe(3));
+  const mistakesCard = $('toeic-list').children[0];
+  expect(mistakesCard.textContent).toContain('MISTAKES');
+  expect(mistakesCard.textContent).toContain('1');
+
+  // The MISTAKES set runs only that question; answering it correctly clears it.
+  mistakesCard.click();
+  expect(hidden('toeicgame-screen')).toBe(false);
+  expect($('toeic-question').textContent).toBe('1. Fill the ____');
+  expect($('toeic-progress-text').textContent).toBe('1 / 1');
+  optionByText('gap').click();
+  await waitFor(() => expect(optionByText('gap').classList.contains('correct')).toBe(true));
+  expect(JSON.parse(localStorage.getItem('pixelWordHunter_toeic_mistakes_v1'))).toEqual({});
+
+  // FINISH → result modal without a review block and without the mistakes button;
+  // RETRY falls back to the set list because the pool is empty.
   $('toeic-next-btn').click();
   await waitFor(() => expect(hidden('toeic-result-modal')).toBe(false));
-  $('toeic-result-tests-btn').click();
-  expect(hidden('toeic-screen')).toBe(false);
+  expect($('toeic-result-review').textContent).toBe('');
+  expect(hidden('toeic-result-mistakes-btn')).toBe(true);
+  $('toeic-result-retry-btn').click();
+  await waitFor(() => expect(hidden('toeic-screen')).toBe(false));
+  expect($('toeic-list').children.length).toBe(2); // no MISTAKES set left
   $('toeic-back-btn').click();
   expect(hidden('mode-screen')).toBe(false);
 
