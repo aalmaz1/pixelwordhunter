@@ -10,7 +10,7 @@ The findings below were reviewed and then fixed in full (the plan was approved
 by the maintainer): 509 of the 900 items were rewritten, the rest were repaired
 in place. The bank is regenerated from the original file by
 `toeic_web_app/rebuild_bank.py` (which imports the replacement items from
-`rebuild_items.py` / `rebuild_items_b.py`); the cleaned data is committed as
+`rebuild_items.py` / `rebuild_items_b.py` / `rebuild_items_c.py`); the cleaned data is committed as
 `toeic_database.json` + `toeic_data.js`.
 
 | check | before | now |
@@ -47,6 +47,36 @@ and by `tests/toeic.smoke.test.js` (deterministic shuffle test).
   copies of one sentence) and #869 (empty option) were replaced.
 * Option order of the rewritten items was rotated so the key is spread evenly
   over A/B/C/D; the app additionally shuffles at run time.
+
+### Second review pass (independent sweep)
+
+The clean-up was checked again with tooling the first audit did not have:
+answer-length leak, reuse of option sets, stem length, punctuation and character
+checks, part-of-speech parallelism of the options, plausibility of the
+distractors — plus a manual read-through of every one of the 391 items that
+survived from the original bank. It found:
+
+* **one wrong key** — #695 marked *theirs* in a slot that needs *its*
+  ("Due to **its** high degree of liability, the company must …");
+* **seven items with two defensible answers** — #378 (*heard of* / *heard
+  about*), #856 (*assist in* / *assist with*), #43 (*in three months* / *three
+  months ago*), #714 (*and* / *but*), #448 (*on* / *about*), #57 (*like* /
+  *close to*), #206 (*admittance* / *admission* are both on shop signs);
+* a **near-duplicate pair** — #666 and #706 both asked "flying would have cost…";
+* **eleven off-topic or broken items** — #388 (Italian politics), #397
+  (President Obama), #425 ("is incompetent to govern"), #230 (a 30-word
+  definition sentence), #232 ("Each kind of cells"), #250 (a bus driver asleep
+  in bed), #270 and #276 (school homework), #279, #618, #11 ("home makers");
+* **ten wording defects** — #129 (missing period after "Mr"), #149 ("LTd"),
+  #151 (a stray "--" and "100000 units"), #181 ("objurgated"), #520 (repeats
+  "the company's" twice), #607 ("power-point"), #725 (a statement ending in
+  "?"), #29 ("6.00 PM"), #114 (a stray period inside an option).
+
+All of them are repaired in `rebuild_items_c.py`. After this pass: no option
+set is reused outside normal grammar families (prepositions, pronouns, modals),
+the key is never the longest option more often than chance (17 % of items), the
+stem length stays between 19 and 171 characters, and every option is a real
+English word.
 
 The original audit follows as a record of what was wrong and why it was changed.
 

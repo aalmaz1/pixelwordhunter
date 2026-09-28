@@ -24,8 +24,9 @@ import sys
 sys.path.insert(0, 'toeic_web_app')
 from rebuild_items import REPLACEMENTS  # noqa: E402
 from rebuild_items_b import REST  # noqa: E402
+from rebuild_items_c import REPAIRS  # noqa: E402
 
-_overlap = set(REPLACEMENTS) & set(REST)
+_overlap = (set(REPLACEMENTS) & set(REST)) | (set(REPLACEMENTS) & set(REPAIRS)) | (set(REST) & set(REPAIRS))
 assert not _overlap, 'duplicate replacement ids: %s' % sorted(_overlap)
 REPLACEMENTS.update(REST)
 
@@ -159,6 +160,13 @@ def main():
     for q in bank['questions']:
         qid = q['id']
         q['category'] = PART_NAMES[q['type_id']]
+
+        if qid in REPAIRS:
+            sentence, options, correct = REPAIRS[qid]
+            q['question'] = fix_text(sentence)
+            q['options'] = [fix_text(o) for o in options]
+            q['correct'] = fix_text(correct)
+            continue
 
         if qid in REPLACEMENTS:
             sentence, options, correct = REPLACEMENTS[qid]

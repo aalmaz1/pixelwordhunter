@@ -173,12 +173,12 @@ const TOEIC_DATA = {
       "id": 11,
       "type_id": 1,
       "category": "Part 5 · Set 1",
-      "question": "____ new improvements make these electric products more appealing to home makers.",
+      "question": "____ of the improvements were suggested by the production team.",
       "options": [
-        "Few",
+        "Much",
         "A little",
         "Many",
-        "Much"
+        "A great deal"
       ],
       "correct": "Many"
     },
@@ -407,7 +407,7 @@ const TOEIC_DATA = {
       "id": 29,
       "type_id": 1,
       "category": "Part 5 · Set 1",
-      "question": "The ministers arrived sometime ____ 5:00 and 6.00 PM.",
+      "question": "The ministers arrived sometime ____ 5:00 and 6:00 p.m.",
       "options": [
         "from",
         "at",
@@ -589,14 +589,14 @@ const TOEIC_DATA = {
       "id": 43,
       "type_id": 1,
       "category": "Part 5 · Set 1",
-      "question": "The company began to prepare for the relocation ____.",
+      "question": "The company began to prepare for the relocation six months ____.",
       "options": [
-        "for three months",
-        "in three months",
-        "three months ago",
-        "since two months"
+        "ago",
+        "since",
+        "before",
+        "past"
       ],
-      "correct": "in three months"
+      "correct": "ago"
     },
     {
       "id": 44,
@@ -775,7 +775,7 @@ const TOEIC_DATA = {
       "options": [
         "as",
         "the same",
-        "close to",
+        "such as",
         "like"
       ],
       "correct": "like"
@@ -1517,7 +1517,7 @@ const TOEIC_DATA = {
         "along",
         "independent",
         "freedom",
-        "independence."
+        "independence"
       ],
       "correct": "independent"
     },
@@ -1707,7 +1707,7 @@ const TOEIC_DATA = {
       "id": 129,
       "type_id": 2,
       "category": "Part 5 · Set 2",
-      "question": "The Business Development Manager, Mr Smith said that he was sure the company ____ have opened a branch in China earlier if it was able to find suitable human resources.",
+      "question": "The Business Development Manager, Mr. Smith, said that he was sure the company ____ have opened a branch in China earlier if it had been able to find suitable human resources.",
       "options": [
         "would",
         "will",
@@ -1967,7 +1967,7 @@ const TOEIC_DATA = {
       "id": 149,
       "type_id": 2,
       "category": "Part 5 · Set 2",
-      "question": "Global Support LTd acted ____ in hiring the best human resources for all its subsidiaries.",
+      "question": "Global Support Ltd. acted ____ in hiring the best human resources for all its subsidiaries.",
       "options": [
         "asserts",
         "assertively",
@@ -1993,7 +1993,7 @@ const TOEIC_DATA = {
       "id": 151,
       "type_id": 2,
       "category": "Part 5 · Set 2",
-      "question": "The Singing Doll created a great ____ -- among the customers, and sold 100000 units in the first week after the launch.",
+      "question": "The Singing Doll created a great ____ among the customers and sold 100,000 units in the first week after the launch.",
       "options": [
         "compensation",
         "determination",
@@ -2386,7 +2386,7 @@ const TOEIC_DATA = {
       "question": "Their work permits have been ____.",
       "options": [
         "esteemed",
-        "objurgated",
+        "delayed",
         "conserved",
         "revoked"
       ],
@@ -2711,9 +2711,9 @@ const TOEIC_DATA = {
       "question": "( in a store ) No ____ before 9 A.M.",
       "options": [
         "admonition",
-        "admission",
+        "addition",
         "admittance",
-        "addition"
+        "admiration"
       ],
       "correct": "admittance"
     },
@@ -3020,7 +3020,7 @@ const TOEIC_DATA = {
       "id": 230,
       "type_id": 3,
       "category": "Part 5 · Set 3",
-      "question": "Man as a biological being whose needs for a humane and quality life is ____ dependent on his environment.",
+      "question": "The company's need for a more humane and flexible schedule is ____ dependent on feedback from staff.",
       "options": [
         "largely",
         "possibly",
@@ -3046,12 +3046,12 @@ const TOEIC_DATA = {
       "id": 232,
       "type_id": 3,
       "category": "Part 5 · Set 3",
-      "question": "Each kind of cells has certain ____ in order to keep the plant or animal alive.",
+      "question": "The new machine has several ____ that are described in the manual.",
       "options": [
         "functions",
         "duties",
-        "responsibilities",
-        "obligations"
+        "obligations",
+        "positions"
       ],
       "correct": "functions"
     },
@@ -3280,14 +3280,14 @@ const TOEIC_DATA = {
       "id": 250,
       "type_id": 3,
       "category": "Part 5 · Set 3",
-      "question": "Alex is a bus driver, but now he is in bed asleep. He is not driving a bus, but he ____.",
+      "question": "The night porter ____ the alarm system twice during his shift.",
       "options": [
-        "have driven a bus",
-        "drove a bus",
-        "drives a bus",
-        "is driving a bus"
+        "tests",
+        "tested",
+        "is testing",
+        "has tested"
       ],
-      "correct": "drives a bus"
+      "correct": "tests"
     },
     {
       "id": 251,
@@ -3540,7 +3540,7 @@ const TOEIC_DATA = {
       "id": 270,
       "type_id": 3,
       "category": "Part 5 · Set 3",
-      "question": "I make a weekly timetable for the school work I need to ____.",
+      "question": "Employees are asked to ____ the tasks on the weekly checklist.",
       "options": [
         "accomplish",
         "relax",
@@ -3618,10 +3618,10 @@ const TOEIC_DATA = {
       "id": 276,
       "type_id": 3,
       "category": "Part 5 · Set 3",
-      "question": "I go to tutorials to ____ my school work.",
+      "question": "New hires attend weekly tutorials to ____ their skills.",
       "options": [
-        "challenge",
         "improve",
+        "challenge",
         "reflect",
         "jot down"
       ],
@@ -3657,12 +3657,12 @@ const TOEIC_DATA = {
       "id": 279,
       "type_id": 3,
       "category": "Part 5 · Set 3",
-      "question": "I ____ effort to find out why I need to do a particular task.",
+      "question": "The team leader will ____ pressure on the supplier to meet the deadline.",
       "options": [
+        "exert",
         "explain",
         "determine",
-        "apply",
-        "exert"
+        "apply"
       ],
       "correct": "exert"
     },
@@ -4947,7 +4947,7 @@ const TOEIC_DATA = {
       "question": "Have you ____ the new Thai restaurant downtown?",
       "options": [
         "heard for",
-        "heard of",
+        "heard from",
         "heard about",
         "heard with"
       ],
@@ -5074,12 +5074,12 @@ const TOEIC_DATA = {
       "id": 388,
       "type_id": 4,
       "category": "Part 5 · Set 4",
-      "question": "Ever since Italy became a republic as a result of a plebiscite in 1946, her government has been one of the most ____ in Western Europe.",
+      "question": "Since the new CEO took over, the firm has been one of the most ____ employers in the region.",
       "options": [
+        "stable",
         "altered",
         "imported",
-        "certain",
-        "stable"
+        "certain"
       ],
       "correct": "stable"
     },
@@ -5191,7 +5191,7 @@ const TOEIC_DATA = {
       "id": 397,
       "type_id": 4,
       "category": "Part 5 · Set 4",
-      "question": "____ did President Obama appoint as Secretary of State?",
+      "question": "____ did the board appoint as the new chief executive?",
       "options": [
         "Whose",
         "Who",
@@ -5555,14 +5555,14 @@ const TOEIC_DATA = {
       "id": 425,
       "type_id": 5,
       "category": "Part 5 · Set 5",
-      "question": "The Prime Minister is ____ to govern the country.",
+      "question": "The board considered the candidate ____ to run the company.",
       "options": [
+        "competent",
         "elaborate",
         "stern",
-        "polished",
-        "incompetent"
+        "polished"
       ],
-      "correct": "incompetent"
+      "correct": "competent"
     },
     {
       "id": 426,
@@ -5857,9 +5857,9 @@ const TOEIC_DATA = {
       "question": "I attended a lecture ____ economics at the university.",
       "options": [
         "on",
-        "about",
         "in",
-        "for"
+        "for",
+        "at"
       ],
       "correct": "on"
     },
@@ -6790,7 +6790,7 @@ const TOEIC_DATA = {
       "id": 520,
       "type_id": 6,
       "category": "Part 5 · Set 6",
-      "question": "The company's CEO has implemented the company's ____ procedures for employees in accordance with the law.",
+      "question": "The company's CEO has implemented new ____ procedures for employees in accordance with the law.",
       "options": [
         "disciplinary",
         "disciplined",
@@ -7921,7 +7921,7 @@ const TOEIC_DATA = {
       "id": 607,
       "type_id": 7,
       "category": "Part 5 · Set 7",
-      "question": "Mrs. Summers complained that the CEO's power-point presentation on the history of modern architecture was ____.",
+      "question": "Mrs. Summers complained that the CEO's PowerPoint presentation on the history of modern architecture was ____.",
       "options": [
         "boring",
         "bored",
@@ -8064,14 +8064,14 @@ const TOEIC_DATA = {
       "id": 618,
       "type_id": 7,
       "category": "Part 5 · Set 7",
-      "question": "Though not a sworn vegetarian, Health.com Chairman Harold Hopper ____ eats meat.",
+      "question": "Not only is Ms. Feld a sworn vegetarian, ____ she also avoids dairy products.",
       "options": [
-        "often",
-        "seldom",
-        "occasionally",
-        "sometimes"
+        "but",
+        "and",
+        "so",
+        "or"
       ],
-      "correct": "seldom"
+      "correct": "but"
     },
     {
       "id": 619,
@@ -9065,14 +9065,14 @@ const TOEIC_DATA = {
       "id": 695,
       "type_id": 7,
       "category": "Part 5 · Set 7",
-      "question": "Due to ____ high degree of liability, the company must exercise caution in assessing client’s insurance claims.",
+      "question": "Due to ____ high degree of liability, the company must exercise caution in assessing clients' insurance claims.",
       "options": [
         "their",
-        "it’s",
+        "it's",
         "theirs",
         "its"
       ],
-      "correct": "theirs"
+      "correct": "its"
     },
     {
       "id": 696,
@@ -9208,12 +9208,12 @@ const TOEIC_DATA = {
       "id": 706,
       "type_id": 8,
       "category": "Part 5 · Set 8",
-      "question": "Flying first class would have ____ twice as much as flying economy class.",
+      "question": "The client asked how much the express delivery would ____.",
       "options": [
         "cost",
-        "spent",
-        "paid",
-        "lasted"
+        "spend",
+        "pay",
+        "charge"
       ],
       "correct": "cost"
     },
@@ -9314,10 +9314,10 @@ const TOEIC_DATA = {
       "category": "Part 5 · Set 8",
       "question": "Cathy's Coffee has cheap prices, ____ the quality of its drinks is surprisingly high.",
       "options": [
-        "but",
         "and",
         "because",
-        "between"
+        "between",
+        "so"
       ],
       "correct": "and"
     },
@@ -9455,7 +9455,7 @@ const TOEIC_DATA = {
       "id": 725,
       "type_id": 8,
       "category": "Part 5 · Set 8",
-      "question": "After much confusion, the Internet service ____ decided to renew our contract?",
+      "question": "After much confusion, the Internet service ____ decided to renew our contract.",
       "options": [
         "provider",
         "provision",
@@ -11162,7 +11162,7 @@ const TOEIC_DATA = {
       "options": [
         "at",
         "for",
-        "in",
+        "of",
         "with"
       ],
       "correct": "with"
