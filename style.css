@@ -1591,3 +1591,287 @@ body.lang-ko .toeic-review-title { font-size: 12px !important; letter-spacing: 1
   text-shadow: none !important;
   box-shadow: none !important;
 }
+
+/* ============================================================
+   MOBILE HARDENING — smartphone screens & browsers
+   One cascade-safe block (later rules win, no minified code
+   touched). Covers: iOS auto-zoom, dynamic viewport, safe-area,
+   tap highlight, text inflation, touch action, color-mix
+   fallbacks for pre-2023 browsers.
+   ============================================================ */
+
+/* ── 1. iOS auto-zoom guard ───────────────────────────────
+   Safari zooms the page on focus whenever an input's font is
+   < 16px. Auth/delete fields already use 16px; search + recall
+   did not (recall is tapped on EVERY typed question). */
+.category-search,
+.recall-form input {
+  font-size: 16px;
+}
+body.lang-ko .category-search {
+  /* Overrides the 13px Hangul-boost rule above (higher specifity). */
+  font-size: 16px !important;
+}
+/* body.lang-ko .recall-form input is already 16px — no override needed. */
+
+/* ── 2. Dynamic viewport ──────────────────────────────────
+   100vh includes the browser chrome on iOS Safari / Android
+   Chrome: content hides under the toolbar and jumps on scroll.
+   100dvh tracks the visible area; the 100vh line stays as a
+   fallback for browsers without dynamic units. */
+.game-container {
+  height: 100vh;
+  height: 100dvh;
+}
+#game-screen {
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+}
+#toeicgame-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
+}
+@media (max-width: 480px) {
+  #settings-screen {
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+  }
+}
+/* #settings-screen/#category-screen base already uses 100dvh. */
+
+/* ── 3. Full safe-area coverage ───────────────────────────
+   Only left/right insets were handled. Bottom inset keeps NEXT,
+   result actions and credits clear of the home indicator /
+   gesture bar; top inset keeps fixed headers clear of the notch
+   in standalone PWA mode (0 in normal browser view = no change). */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .game-container {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+  #toeicgame-screen {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+  .modal {
+    padding-bottom: calc(24px + env(safe-area-inset-bottom));
+  }
+  .credits {
+    bottom: calc(18px + env(safe-area-inset-bottom));
+  }
+  #game-screen header {
+    height: calc(50px + env(safe-area-inset-top)) !important;
+  }
+  #toeicgame-screen header {
+    height: calc(50px + env(safe-area-inset-top));
+  }
+}
+@media (max-width: 374px) {
+  @supports (padding: env(safe-area-inset-bottom)) {
+    .modal {
+      padding-bottom: calc(16px + env(safe-area-inset-bottom));
+    }
+  }
+}
+@media (min-width: 375px) and (max-width: 480px) {
+  @supports (padding: env(safe-area-inset-bottom)) {
+    .modal {
+      padding-bottom: calc(20px + env(safe-area-inset-bottom));
+    }
+  }
+}
+@media (orientation: landscape) and (max-height: 600px) {
+  @supports (padding: env(safe-area-inset-bottom)) {
+    .modal {
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    }
+  }
+}
+
+/* ── 4. Exit button back to 44px on phones ────────────────
+   The ≤480px rule shrank #game-screen ✕ to 32px with
+   !important, beating the 48px coarse-pointer rule and missing
+   Apple's 44px minimum. 44px still fits the 50px header. */
+@media (max-width: 480px) {
+  #game-screen .icon-btn {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    width: 44px !important;
+    height: 44px !important;
+  }
+  #settings-screen .back-btn {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+}
+
+/* ── 5. Tap, text-inflation & double-tap guards ─────────── */
+html {
+  /* iOS inflates tiny text (ours is 7–9px pixel font) on rotate;
+     100% keeps the author's sizes without blocking user zoom. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  /* Kill the grey Android tap flash; :active scale states remain. */
+  -webkit-tap-highlight-color: transparent;
+}
+button, a, input, label, summary {
+  /* No double-tap-zoom delay; scrolling/pinch still work. */
+  touch-action: manipulation;
+}
+
+/* ── 6. color-mix() fallbacks ─────────────────────────────
+   Safari < 16.2 / Chrome < 111 drop color-mix declarations.
+   Without a fallback the modal backdrop became transparent.
+   Pattern: flat rgba first, color-mix second (old browsers keep
+   the first line, modern ones use the theme-aware second). */
+.modal {
+  background: rgba(10, 0, 16, 0.88);
+  background: color-mix(in srgb, var(--bg-deep) 85%, transparent);
+}
+[data-theme="matrix"] .modal {
+  background: rgba(0, 8, 0, 0.88);
+  background: color-mix(in srgb, var(--bg-deep) 85%, transparent);
+}
+[data-theme="midnight"] .modal {
+  background: rgba(10, 10, 18, 0.88);
+  background: color-mix(in srgb, var(--bg-deep) 85%, transparent);
+}
+[data-theme="sunset"] .modal {
+  background: rgba(26, 10, 46, 0.88);
+  background: color-mix(in srgb, var(--bg-deep) 85%, transparent);
+}
+[data-theme="3310"] .modal {
+  background: rgba(199, 207, 185, 0.92);
+  background: color-mix(in srgb, var(--bg-deep) 85%, transparent);
+}
+[data-theme="mono"] .modal {
+  background: rgba(0, 0, 0, 0.88);
+  background: color-mix(in srgb, var(--bg-deep) 85%, transparent);
+}
+.auth-btn:hover {
+  background: rgba(0, 245, 255, 0.15);
+  background: color-mix(in srgb, var(--neon-cyan) 15%, transparent);
+  box-shadow: 0 0 24px rgba(0, 245, 255, 0.8), inset 0 0 20px rgba(0, 245, 255, 0.2);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--neon-cyan) 80%, transparent),
+    inset 0 0 20px color-mix(in srgb, var(--neon-cyan) 20%, transparent);
+}
+.register-btn:hover {
+  background: rgba(191, 95, 255, 0.15);
+  background: color-mix(in srgb, var(--neon-purple) 15%, transparent);
+  box-shadow: 0 0 24px rgba(191, 95, 255, 0.8), inset 0 0 20px rgba(191, 95, 255, 0.2);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--neon-purple) 80%, transparent),
+    inset 0 0 20px color-mix(in srgb, var(--neon-purple) 20%, transparent);
+}
+/* Bonus drive-by: the base .auth-btn/.register-btn box-shadows used
+   `var(--neon-cyan-rgb, 0,245,255, .5)` — invalid syntax, so every
+   browser dropped the resting glow the design clearly intends
+   (compare .try-btn). Restore it with plain hex. */
+.auth-btn {
+  box-shadow: 0 0 12px #00f5ff80, inset 0 0 12px #00f5ff14;
+}
+.register-btn {
+  box-shadow: 0 0 12px #bf5fff80, inset 0 0 12px #bf5fff14;
+}
+
+/* ── 7. PWA install row (Settings) ──────────────────────── */
+#install-app-btn {
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+}
+#install-app-btn:hover {
+  border-color: var(--neon-green);
+  color: #fff;
+  background: rgba(57, 255, 20, 0.15);
+  text-shadow: 0 0 6px var(--neon-green);
+}
+.install-hint {
+  font-size: 8px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  line-height: 1.7;
+}
+body.lang-ko .install-hint {
+  font-size: 11px !important;
+  line-height: 1.7 !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* ── 8. Category search empty state ─────────────────────── */
+.category-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 28px 16px;
+  text-align: center;
+}
+.category-empty-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+.category-empty-text {
+  font-size: 10px;
+  color: var(--neon-purple);
+  text-shadow: var(--shadow-purple);
+  letter-spacing: 2px;
+  line-height: 1.7;
+}
+.category-empty-query {
+  font-size: 11px;
+  color: var(--neon-cyan);
+  text-shadow: var(--shadow-cyan);
+  letter-spacing: 1px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+body.lang-ko .category-empty-text {
+  font-size: 13px !important;
+  letter-spacing: 1px !important;
+  line-height: 1.8 !important;
+}
+body.lang-ko .category-empty-query {
+  font-size: 14px !important;
+  line-height: 1.7 !important;
+}
+
+/* ── 9. Password visibility toggle ──────────────────────── */
+.password-wrap {
+  position: relative;
+  width: 100%;
+}
+.password-wrap input {
+  width: 100%;
+  padding-right: 52px;
+}
+.password-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 48px;
+  min-height: 44px;
+  background: transparent;
+  border: none;
+  border-left: 1px solid var(--text-dim);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .18s;
+}
+.password-toggle:hover {
+  background: #00f5ff14;
+}
+.password-toggle:focus-visible {
+  outline: 3px solid var(--neon-green);
+  outline-offset: -3px;
+}

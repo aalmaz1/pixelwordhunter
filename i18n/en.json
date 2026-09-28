@@ -127,5 +127,14 @@
   "toeic_mistakes": "MISTAKES",
   "repeat_mistakes": "REPEAT MISTAKES ONLY",
   "your_answer": "YOUR ANSWER",
-  "correct_answer": "CORRECT ANSWER"
+  "correct_answer": "CORRECT ANSWER",
+  "app_label": "APP",
+  "install_app": "📲 INSTALL",
+  "install_ios_hint": "SHARE → ADD TO HOME SCREEN",
+  "update_available": "NEW VERSION READY — RELOAD TO UPDATE",
+  "app_installed": "APP INSTALLED — SEE YOU ON THE HOME SCREEN",
+  "no_categories_found": "NO CATEGORIES FOUND",
+  "clear_search": "CLEAR",
+  "show_password": "Show password",
+  "hide_password": "Hide password"
 }
