@@ -38,6 +38,7 @@ The interface combines CRT scanlines, six neon and monochrome themes, pixel typo
 - category search, focused **HARD WORDS** practice, and immediate mistake replay;
 - a complete **WORD REVIEW** after continuing from every third round;
 - tap-to-pronounce controls powered by the browser's speech engine;
+- a separate **TOEIC TESTS** mode with 9 x 100 multiple-choice questions loaded lazily from `toeic_web_app/toeic_database.json`;
 - responsive play on phone, tablet, and desktop;
 - installable PWA support and offline play after the first successful online load.
 
@@ -55,6 +56,16 @@ Standard category and mixed hunts contain ten prompts. A hard-word round or a mi
 8. Continuing after every third completed round opens a recap of all cards answered during those rounds.
 
 The **TRY** button attempts an anonymous Firebase sign-in and immediately opens guest play. If Firebase is unavailable, the game continues with local browser storage. Email registration is optional and is only needed for cross-device synchronization.
+
+### TOEIC TESTS mode
+
+After HUNT/TRY the mode chooser offers a second drill: 900 four-option questions
+(9 groups x 100) served from `toeic_web_app/toeic_database.json`. The bank is a
+community dataset, and it is **not as clean as it looks** — see
+[`toeic_web_app/BANK_AUDIT.md`](toeic_web_app/BANK_AUDIT.md) for the full audit
+(duplicates, misspelled keys, non-TOEIC item types, missing text-completion and
+reading passages). The in-app labels ("Grammar Part 1-7", "Incomplete Sentences
+Part 1-2") are the bank's own and do not mirror the real exam parts.
 
 ## 🧠 Adaptive practice and mastery
 
@@ -308,6 +319,8 @@ firebase.json                 Firebase CLI rules configuration
 public/words_optimized.json   canonical generated 600-card dictionary
 public/_headers               deployed anti-framing security headers
 i18n/                         English, Russian, and Korean interface strings
+toeic.js                      lazy bridge to the TOEIC question bank
+toeic_web_app/                TOEIC bank (JSON/JS), standalone page, and its audit report
 assets/                       fonts, licenses, logo, icons, and favicon
 build_words.py                dictionary validator and generator
 build_data_[a-d].py           editable localized dictionary source rows
