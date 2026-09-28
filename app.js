@@ -425,6 +425,25 @@ const hideModal = (modal) => { modal.classList.add('hidden'); modal.setAttribute
 let lastFocusedElement = null;
 let releaseAuthTrap = null;
 
+/** Shared show/hide logic for the auth and delete-account password fields. */
+function setPasswordVisible(inputId, btnId, visible) {
+  const input = $(inputId);
+  const btn = $(btnId);
+  if (!input || !btn) return;
+  input.type = visible ? 'text' : 'password';
+  btn.textContent = visible ? '🙈' : '👁';
+  btn.setAttribute('aria-pressed', String(visible));
+  // Keep the i18n key in sync so a later language switch labels the live state.
+  const key = visible ? 'hide_password' : 'show_password';
+  btn.setAttribute('data-i18n-aria', key);
+  btn.setAttribute('aria-label', t(key));
+}
+
+/** Visibility always resets to hidden when a dialog opens — never remembered. */
+function resetPasswordToggle(inputId, btnId) {
+  setPasswordVisible(inputId, btnId, false);
+}
+
 function showAuthModal(mode) {
   store.setState({ authMode: mode });
   const isLogin = mode === 'login';
@@ -438,6 +457,9 @@ function showAuthModal(mode) {
   ui.authToggleText.textContent = t(isLogin ? 'need_account' : 'have_account');
   ui.authToggleBtn.textContent = t(isLogin ? 'toggle_register' : 'toggle_login');
   $('forgot-password-btn')?.classList.toggle('hidden', !isLogin);
+  // Password managers: offer to fill on login, to save a new one on register.
+  $('auth-password')?.setAttribute('autocomplete', isLogin ? 'current-password' : 'new-password');
+  resetPasswordToggle('auth-password', 'auth-password-toggle');
   showModal(ui.authModal);
 
   lastFocusedElement = document.activeElement;
@@ -503,6 +525,7 @@ function openDeleteAccountModal() {
   if (cancelBtn) cancelBtn.disabled = false;
   confirmInput.disabled = false;
   if (passwordInput) passwordInput.disabled = false;
+  resetPasswordToggle('delete-password-input', 'delete-password-toggle');
   setTxt($('delete-account-error'), '');
   setTxt($('delete-input-status'), '');
   confirmInput.setAttribute('placeholder', getDeleteWord());
@@ -1306,6 +1329,21 @@ function setupEventListeners() {
   on('auth-close-btn', 'click', () => { AudioEngine.playTransition(); closeAuthModal(); });
   on('auth-toggle-btn', 'click', () => showAuthModal(store.getState().authMode === 'login' ? 'register' : 'login'));
   on('auth-submit', 'click', handleAuthSubmit);
+  // Password visibility toggles (auth + delete-account share one helper).
+  for (const [inputId, btnId] of [
+    ['auth-password', 'auth-password-toggle'],
+    ['delete-password-input', 'delete-password-toggle'],
+  ]) {
+    on(btnId, 'click', () => {
+      const input = $(inputId);
+      if (!input) return;
+      AudioEngine.playTransition();
+      setPasswordVisible(inputId, btnId, input.type !== 'text');
+      // Keep the caret in the field so typing can continue uninterrupted.
+      input.focus();
+      try { input.setSelectionRange(input.value.length, input.value.length); } catch { /* noop */ }
+    });
+  }
   on('forgot-password-btn', 'click', async () => {
     const result = await AuthManager.resetPassword($('auth-email').value.trim());
     if (result.success) showNotification(t('password_reset_sent'));

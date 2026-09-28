@@ -124,12 +124,33 @@ export function wireCategorySearch(inputId, containerId) {
   const input = document.getElementById(inputId);
   const container = document.getElementById(containerId);
   if (!input || !container) return;
-  input.addEventListener('input', () => {
+  const empty = document.getElementById('category-empty');
+  const queryEl = document.getElementById('category-empty-query');
+  const applyFilter = () => {
     const q = input.value.trim().toLowerCase();
+    let visible = 0;
     container.querySelectorAll('.category-btn').forEach(btn => {
       const name = btn.dataset.category || '';
-      btn.style.display = (!q || name.includes(q)) ? '' : 'none';
+      const show = (!q || name.includes(q));
+      btn.style.display = show ? '' : 'none';
+      if (show) visible += 1;
     });
+    // Empty state: only when a non-empty query matches nothing, so the grid
+    // never flashes "not found" while simply browsing with an empty field.
+    if (empty) {
+      const showEmpty = q !== '' && visible === 0;
+      empty.classList.toggle('hidden', !showEmpty);
+      if (showEmpty && queryEl) queryEl.textContent = `“${input.value.trim()}”`;
+    }
+  };
+  input.addEventListener('input', applyFilter);
+  // The native type=search ✕ fires `search` (not `input`) in some browsers —
+  // without this the empty state could stick after a native clear.
+  input.addEventListener('search', applyFilter);
+  document.getElementById('category-clear-btn')?.addEventListener('click', () => {
+    input.value = '';
+    applyFilter();
+    input.focus();
   });
 }
 

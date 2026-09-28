@@ -1801,3 +1801,77 @@ body.lang-ko .install-hint {
   line-height: 1.7 !important;
   letter-spacing: 0.5px !important;
 }
+
+/* ── 8. Category search empty state ─────────────────────── */
+.category-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 28px 16px;
+  text-align: center;
+}
+.category-empty-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+.category-empty-text {
+  font-size: 10px;
+  color: var(--neon-purple);
+  text-shadow: var(--shadow-purple);
+  letter-spacing: 2px;
+  line-height: 1.7;
+}
+.category-empty-query {
+  font-size: 11px;
+  color: var(--neon-cyan);
+  text-shadow: var(--shadow-cyan);
+  letter-spacing: 1px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+body.lang-ko .category-empty-text {
+  font-size: 13px !important;
+  letter-spacing: 1px !important;
+  line-height: 1.8 !important;
+}
+body.lang-ko .category-empty-query {
+  font-size: 14px !important;
+  line-height: 1.7 !important;
+}
+
+/* ── 9. Password visibility toggle ──────────────────────── */
+.password-wrap {
+  position: relative;
+  width: 100%;
+}
+.password-wrap input {
+  width: 100%;
+  padding-right: 52px;
+}
+.password-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 48px;
+  min-height: 44px;
+  background: transparent;
+  border: none;
+  border-left: 1px solid var(--text-dim);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .18s;
+}
+.password-toggle:hover {
+  background: #00f5ff14;
+}
+.password-toggle:focus-visible {
+  outline: 3px solid var(--neon-green);
+  outline-offset: -3px;
+}

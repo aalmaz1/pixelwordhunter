@@ -132,5 +132,9 @@
   "install_app": "📲 УСТАНОВИТЬ",
   "install_ios_hint": "ПОДЕЛИТЬСЯ → НА ЭКРАН «ДОМОЙ»",
   "update_available": "ВЫШЛА НОВАЯ ВЕРСИЯ — ОБНОВИТЕ СТРАНИЦУ",
-  "app_installed": "ПРИЛОЖЕНИЕ УСТАНОВЛЕНО"
+  "app_installed": "ПРИЛОЖЕНИЕ УСТАНОВЛЕНО",
+  "no_categories_found": "НИЧЕГО НЕ НАЙДЕНО",
+  "clear_search": "ОЧИСТИТЬ",
+  "show_password": "Показать пароль",
+  "hide_password": "Скрыть пароль"
 }

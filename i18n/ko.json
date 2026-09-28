@@ -132,5 +132,9 @@
   "install_app": "📲 설치",
   "install_ios_hint": "공유 → 홈 화면에 추가",
   "update_available": "새 버전 준비됨 — 새로고침하세요",
-  "app_installed": "앱이 설치됐습니다"
+  "app_installed": "앱이 설치됐습니다",
+  "no_categories_found": "검색 결과 없음",
+  "clear_search": "지우기",
+  "show_password": "비밀번호 보기",
+  "hide_password": "비밀번호 숨기기"
 }

@@ -207,6 +207,12 @@
       <h2 class="screen-title" data-i18n="select_category">// SELECT CATEGORY //</h2>
       <input type="search" id="category-search" class="category-search" autocapitalize="off" autocorrect="off" enterkeyhint="search" data-i18n-placeholder="search_category" placeholder="SEARCH...">
       <div id="category-list" class="category-grid" role="list"></div>
+      <div id="category-empty" class="category-empty hidden" role="status">
+        <span class="category-empty-icon" aria-hidden="true">👾</span>
+        <p class="category-empty-text" data-i18n="no_categories_found">NO CATEGORIES FOUND</p>
+        <p class="category-empty-query" id="category-empty-query"></p>
+        <button class="theme-btn" id="category-clear-btn" data-i18n="clear_search">CLEAR</button>
+      </div>
     </div>
 
     <!-- ── TOEIC SCREEN (test selection) ──────── -->
@@ -318,7 +324,10 @@
           
           <div class="auth-field">
             <label for="auth-password" data-i18n="password">PASSWORD</label>
-            <input type="password" id="auth-password" data-i18n-placeholder="enter_password" placeholder="Enter password" autocomplete="current-password" required>
+            <div class="password-wrap">
+              <input type="password" id="auth-password" data-i18n-placeholder="enter_password" placeholder="Enter password" autocomplete="current-password" required>
+              <button type="button" class="password-toggle" id="auth-password-toggle" aria-label="Show password" data-i18n-aria="show_password" aria-pressed="false">👁</button>
+            </div>
           </div>
           
           <div id="auth-error" class="auth-error" role="alert" aria-live="assertive" aria-atomic="true"></div>
@@ -348,7 +357,10 @@
         </div>
         <div class="delete-account-field">
           <label for="delete-password-input" data-i18n="delete_account_password">CONFIRM WITH PASSWORD</label>
-          <input type="password" id="delete-password-input" data-i18n-placeholder="enter_password" placeholder="Enter your password" autocomplete="current-password">
+          <div class="password-wrap">
+            <input type="password" id="delete-password-input" data-i18n-placeholder="enter_password" placeholder="Enter your password" autocomplete="current-password">
+            <button type="button" class="password-toggle" id="delete-password-toggle" aria-label="Show password" data-i18n-aria="show_password" aria-pressed="false">👁</button>
+          </div>
         </div>
         <div id="delete-account-error" class="delete-account-error" role="alert" aria-live="assertive" aria-atomic="true"></div>
         <div class="confirm-actions">
