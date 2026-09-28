@@ -1109,7 +1109,7 @@ function showExplanation(word) {
   list.textContent = '';
   list.setAttribute('role', 'list');
   list.classList.remove('review-session-list');
-  const content = mk('div', 'explanation-content');
+  const content = mk('div', 'explanation-content single-review-card');
   appendWordReviewContent(content, word, store.getState().translationLanguage);
   list.appendChild(content);
   ui.explanationModal.classList.remove('hidden');

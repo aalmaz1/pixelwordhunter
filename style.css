@@ -1537,3 +1537,57 @@ body.lang-ko .toeic-review-title { font-size: 12px !important; letter-spacing: 1
   .toeic-review { max-height: 34vh; }
   .toeic-review-item { font-size: 8px; padding: 8px 10px; }
 }
+
+/* Single-answer Word Review card: make the feedback feel like a real card. */
+#explanation-list:has(.single-review-card) {
+  padding: 0 !important;
+  overflow: visible;
+}
+
+.single-review-card {
+  position: relative;
+  padding: 22px 20px 18px;
+  border: 1px solid var(--neon-cyan);
+  border-left: 5px solid var(--neon-cyan);
+  background: linear-gradient(135deg, rgba(0,245,255,.10), rgba(191,95,255,.08));
+  box-shadow: 0 8px 24px rgba(0,0,0,.28);
+  text-align: left;
+}
+
+.single-review-card::before {
+  content: 'WORD REVIEW';
+  display: block;
+  margin-bottom: 16px;
+  color: var(--neon-cyan);
+  font-size: 8px;
+  letter-spacing: 2px;
+  opacity: .8;
+}
+
+.single-review-card .explanation-word {
+  margin-bottom: 10px;
+  font-size: clamp(18px, 5vw, 26px);
+  letter-spacing: 2px;
+  text-align: left;
+}
+
+.single-review-card .explanation-definition {
+  margin-bottom: 16px;
+  padding: 0 0 14px;
+  border-bottom: 1px solid rgba(0,245,255,.25);
+  text-align: left;
+}
+
+.single-review-card .explanation-example-container {
+  margin-top: 0;
+  padding: 12px 14px;
+  border-left: 2px solid var(--neon-purple);
+  background: rgba(0,0,0,.24);
+}
+
+.single-review-card .explanation-example-en,
+.single-review-card .explanation-example-ru,
+.single-review-card .explanation-example-ko {
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
