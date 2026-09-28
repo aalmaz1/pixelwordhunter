@@ -630,7 +630,7 @@ function startHardWords() {
 // Flow: mode screen → test list → test → result modal. Correct answers add XP.
 const toeic = {
   data: null,          // TOEIC_DATA once loaded
-  questions: [],       // category questions for the running test
+  questions: [],       // shuffled category questions for the running test
   index: 0,            // cursor inside questions
   answers: {},         // index -> selected option (locked once answered)
   score: 0,            // answered correctly so far
@@ -638,6 +638,24 @@ const toeic = {
   categoryName: '',
 };
 const TOEIC_XP_PER_CORRECT = 2; // 100 questions x 2 XP = 200 XP max per test
+
+// Fisher-Yates shuffle; returns a new array so the shared bank stays untouched.
+function shuffleArray(items) {
+  const out = items.slice();
+  for (let i = out.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
+// A run draws its questions in random order and shuffles the options of every
+// question, so the answer is never memorised by position (Part 5 sets are
+// practice material and the user asked for both to be mixed).
+function buildToeicRun(typeId) {
+  return shuffleArray(toeic.data.questions.filter((q) => q.type_id === typeId))
+    .map((q) => ({ ...q, options: shuffleArray(q.options) }));
+}
 
 async function ensureToeicData() {
   if (!toeic.data) {
@@ -681,7 +699,7 @@ function showToeicList() {
 
 function startToeicTest(typeId, categoryName) {
   AudioEngine.playTransition();
-  toeic.questions = toeic.data.questions.filter((q) => q.type_id === typeId);
+  toeic.questions = buildToeicRun(typeId);
   toeic.index = 0;
   toeic.answers = {};
   toeic.score = 0;

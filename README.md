@@ -38,7 +38,7 @@ The interface combines CRT scanlines, six neon and monochrome themes, pixel typo
 - category search, focused **HARD WORDS** practice, and immediate mistake replay;
 - a complete **WORD REVIEW** after continuing from every third round;
 - tap-to-pronounce controls powered by the browser's speech engine;
-- a separate **TOEIC TESTS** mode with 9 x 100 multiple-choice questions loaded lazily from `toeic_web_app/toeic_database.json`;
+- a separate **TOEIC TESTS** mode with 9 x 100 TOEIC Part 5 questions loaded lazily from `toeic_web_app/toeic_database.json`, with both the question order and the answer options shuffled on every attempt;
 - responsive play on phone, tablet, and desktop;
 - installable PWA support and offline play after the first successful online load.
 
@@ -59,13 +59,22 @@ The **TRY** button attempts an anonymous Firebase sign-in and immediately opens 
 
 ### TOEIC TESTS mode
 
-After HUNT/TRY the mode chooser offers a second drill: 900 four-option questions
-(9 groups x 100) served from `toeic_web_app/toeic_database.json`. The bank is a
-community dataset, and it is **not as clean as it looks** — see
-[`toeic_web_app/BANK_AUDIT.md`](toeic_web_app/BANK_AUDIT.md) for the full audit
-(duplicates, misspelled keys, non-TOEIC item types, missing text-completion and
-reading passages). The in-app labels ("Grammar Part 1-7", "Incomplete Sentences
-Part 1-2") are the bank's own and do not mirror the real exam parts.
+After HUNT/TRY the mode chooser offers a second drill: **900 TOEIC Part 5
+incomplete sentences** in nine practice sets of 100, served from
+`toeic_web_app/toeic_database.json`. Every attempt draws the questions in a
+random order and shuffles the four options, so an answer is never remembered by
+its position. Correct answers are worth 2 XP; the result screen shows correct,
+wrong, accuracy, and XP earned, with retry and "choose another set" actions.
+
+The sets are labelled "Part 5 · Set 1-9" on purpose: the bank trains the Part 5
+skill only (single-sentence items), it contains no text-completion or reading
+passages, so it does not pretend to mirror the full exam. The data started as a
+community dataset and was cleaned up in full — duplicates, misspellings, glued
+blanks, empty options, dictionary-definition quizzes and "Which sentence is
+correct ?" drills were removed or rewritten as business-context items. See
+[`toeic_web_app/BANK_AUDIT.md`](toeic_web_app/BANK_AUDIT.md) for the audit and
+the status table; `toeic_web_app/rebuild_bank.py` documents and reproduces the
+clean-up from the original file.
 
 ## 🧠 Adaptive practice and mastery
 
@@ -320,7 +329,7 @@ public/words_optimized.json   canonical generated 600-card dictionary
 public/_headers               deployed anti-framing security headers
 i18n/                         English, Russian, and Korean interface strings
 toeic.js                      lazy bridge to the TOEIC question bank
-toeic_web_app/                TOEIC bank (JSON/JS), standalone page, and its audit report
+toeic_web_app/                TOEIC bank (JSON/JS), standalone page, audit report, and the clean-up script
 assets/                       fonts, licenses, logo, icons, and favicon
 build_words.py                dictionary validator and generator
 build_data_[a-d].py           editable localized dictionary source rows

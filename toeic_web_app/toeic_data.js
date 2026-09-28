@@ -3,60 +3,60 @@ const TOEIC_DATA = {
   "categories": [
     {
       "id": 1,
-      "name": "Incomplete Sentences Part 1"
+      "name": "Part 5 · Set 1"
     },
     {
       "id": 2,
-      "name": "Incomplete Sentences Part 2"
+      "name": "Part 5 · Set 2"
     },
     {
       "id": 3,
-      "name": "Grammar Part 1"
+      "name": "Part 5 · Set 3"
     },
     {
       "id": 4,
-      "name": "Grammar Part 2"
+      "name": "Part 5 · Set 4"
     },
     {
       "id": 5,
-      "name": "Grammar Part 3"
+      "name": "Part 5 · Set 5"
     },
     {
       "id": 6,
-      "name": "Grammar Part 4"
+      "name": "Part 5 · Set 6"
     },
     {
       "id": 7,
-      "name": "Grammar Part 5"
+      "name": "Part 5 · Set 7"
     },
     {
       "id": 8,
-      "name": "Grammar Part 6"
+      "name": "Part 5 · Set 8"
     },
     {
       "id": 9,
-      "name": "Grammar Part 7"
+      "name": "Part 5 · Set 9"
     }
   ],
   "questions": [
     {
       "id": 1,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Keen insight; shrewdness",
+      "category": "Part 5 · Set 1",
+      "question": "The consultant's report was praised for its ____ analysis of the market.",
       "options": [
-        "facetious",
-        "adamant",
-        "abstemious",
-        "acumen"
+        "insightful",
+        "insight",
+        "insightfully",
+        "insights"
       ],
-      "correct": "acumen"
+      "correct": "insightful"
     },
     {
       "id": 2,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The manager of the group was a brilliant man____________ only weakness was that he hated to accept defeat.",
+      "category": "Part 5 · Set 1",
+      "question": "The manager of the group was a brilliant man ____ only weakness was that he hated to accept defeat.",
       "options": [
         "whose",
         "who",
@@ -68,8 +68,8 @@ const TOEIC_DATA = {
     {
       "id": 3,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The girl looked____________ of the small window in the school.",
+      "category": "Part 5 · Set 1",
+      "question": "The supervisor looked ____ of the office window at the delivery van.",
       "options": [
         "into",
         "back",
@@ -81,8 +81,8 @@ const TOEIC_DATA = {
     {
       "id": 4,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The field of endocrinology____________ to research that could reduce the probability of cardiac failure.",
+      "category": "Part 5 · Set 1",
+      "question": "The field of endocrinology ____ to research that could reduce the probability of cardiac failure.",
       "options": [
         "had led",
         "leading",
@@ -94,34 +94,34 @@ const TOEIC_DATA = {
     {
       "id": 5,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The men stopped near a river to observe the ____________ birds flying nearby.",
+      "category": "Part 5 · Set 1",
+      "question": "The travel agency's brochure features ____ photographs of the island resorts.",
       "options": [
+        "coloring",
         "color",
         "colored",
-        "colorful",
-        "coloring"
+        "colorful"
       ],
       "correct": "colorful"
     },
     {
       "id": 6,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Those people are ____________ dependable and trustworthy as the sunrise.",
+      "category": "Part 5 · Set 1",
+      "question": "The new accounting software is ____ reliable as the system we replaced.",
       "options": [
-        "like",
         "as",
         "so",
-        "too"
+        "too",
+        "like"
       ],
       "correct": "as"
     },
     {
       "id": 7,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The production manager did everything he ____________ to avoid a deterioration in quality.",
+      "category": "Part 5 · Set 1",
+      "question": "The production manager did everything he ____ to avoid a deterioration in quality.",
       "options": [
         "can",
         "would",
@@ -133,8 +133,8 @@ const TOEIC_DATA = {
     {
       "id": 8,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The man was ____________ ashamed of the mistake he made during the conference.",
+      "category": "Part 5 · Set 1",
+      "question": "The man was ____ ashamed of the mistake he made during the conference.",
       "options": [
         "awful",
         "terribly",
@@ -146,8 +146,8 @@ const TOEIC_DATA = {
     {
       "id": 9,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": " ____________increased as their proposals were rejected by the multinational company over and over again.",
+      "category": "Part 5 · Set 1",
+      "question": "____ increased as their proposals were rejected by the multinational company over and over again.",
       "options": [
         "Disappoint",
         "Disappointing",
@@ -159,21 +159,21 @@ const TOEIC_DATA = {
     {
       "id": 10,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "As the people watched carefully, the man ____________ the wall and fled his pursuers.",
+      "category": "Part 5 · Set 1",
+      "question": "The technician ____ the safety fence to reach the faulty control panel.",
       "options": [
-        "hopped",
-        "walked",
-        "jumped over",
-        "jumped across"
+        "climbed on",
+        "climbed over",
+        "climbed",
+        "climbed up"
       ],
-      "correct": "jumped over"
+      "correct": "climbed over"
     },
     {
       "id": 11,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "____________ new improvements make these electric products more appealing to home makers.",
+      "category": "Part 5 · Set 1",
+      "question": "____ new improvements make these electric products more appealing to home makers.",
       "options": [
         "Few",
         "A little",
@@ -185,8 +185,8 @@ const TOEIC_DATA = {
     {
       "id": 12,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The drink's ____________ formula has been patented in 120 countries.",
+      "category": "Part 5 · Set 1",
+      "question": "The beverage company holds a patent on its ____ formula for the sports drink.",
       "options": [
         "special",
         "especial",
@@ -198,21 +198,21 @@ const TOEIC_DATA = {
     {
       "id": 13,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "____________ power failure, change the batteries once in six months.",
+      "category": "Part 5 · Set 1",
+      "question": "____ unexpected power failures, the data centre is equipped with two backup generators.",
       "options": [
+        "Avoid",
         "Having avoided",
         "Avoiding",
-        "To avoid",
-        "Avoid"
+        "To avoid"
       ],
       "correct": "To avoid"
     },
     {
       "id": 14,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Customers have expressed satisfaction ____________  this product, which has lead to an increase in the employees motivation.",
+      "category": "Part 5 · Set 1",
+      "question": "Customers have expressed satisfaction ____ this product, which has lead to an increase in the employees motivation.",
       "options": [
         "to",
         "with",
@@ -224,8 +224,8 @@ const TOEIC_DATA = {
     {
       "id": 15,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "You should modernize your IT systems for greater ____________.",
+      "category": "Part 5 · Set 1",
+      "question": "You should modernize your IT systems for greater ____.",
       "options": [
         "efficient",
         "efficiency",
@@ -237,8 +237,8 @@ const TOEIC_DATA = {
     {
       "id": 16,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "After moving to another state, the children ____________ wrote to their parents.",
+      "category": "Part 5 · Set 1",
+      "question": "After his transfer to the regional office, Mr. Amos ____ visits the head office.",
       "options": [
         "hardly",
         "hardly never",
@@ -250,8 +250,8 @@ const TOEIC_DATA = {
     {
       "id": 17,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Our company gives a limited warranty____________ damage from cargo handling.",
+      "category": "Part 5 · Set 1",
+      "question": "Our company gives a limited warranty ____ damage from cargo handling.",
       "options": [
         "to",
         "against",
@@ -263,8 +263,8 @@ const TOEIC_DATA = {
     {
       "id": 18,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "These lights offer a cheap and effective method ____________ the quality of your residence.",
+      "category": "Part 5 · Set 1",
+      "question": "These lights offer a cheap and effective method ____ the quality of your residence.",
       "options": [
         "improving",
         "to improve",
@@ -276,34 +276,34 @@ const TOEIC_DATA = {
     {
       "id": 19,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Last week, he____________ a strict warning from his father.",
+      "category": "Part 5 · Set 1",
+      "question": "Last week, the supplier ____ a written warning about the late deliveries.",
       "options": [
-        "receives",
-        "received",
         "was receiving",
-        "had to receive"
+        "had to receive",
+        "receives",
+        "received"
       ],
       "correct": "received"
     },
     {
       "id": 20,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "His self-confidence, values ____________ sense of responsibility enabled him to achieve success.",
+      "category": "Part 5 · Set 1",
+      "question": "Her technical skills, experience ____ attention to detail make Ms. Ito an ideal candidate.",
       "options": [
+        "but",
         "or",
         "and",
-        "also",
-        "but"
+        "also"
       ],
       "correct": "and"
     },
     {
       "id": 21,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The weather forecast stated that it would ____________ snow in the evening.The woman said that she could not remember the ____________.",
+      "category": "Part 5 · Set 1",
+      "question": "The supervisor reported the safety ____ to the plant manager in the evening.",
       "options": [
         "happened",
         "incident",
@@ -315,8 +315,8 @@ const TOEIC_DATA = {
     {
       "id": 22,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The people gathered to ____________the government's new tax increase.",
+      "category": "Part 5 · Set 1",
+      "question": "The people gathered to ____ the government's new tax increase.",
       "options": [
         "protest",
         "detest",
@@ -328,21 +328,21 @@ const TOEIC_DATA = {
     {
       "id": 23,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The children greatly ____________ the parent's understanding.",
+      "category": "Part 5 · Set 1",
+      "question": "The director greatly ____ the extra hours the team put in last week.",
       "options": [
-        "thank",
         "appreciate",
         "grateful",
-        "thankful"
+        "thankful",
+        "thank"
       ],
       "correct": "appreciate"
     },
     {
       "id": 24,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "It will be difficult ____________ a new marketing manager.",
+      "category": "Part 5 · Set 1",
+      "question": "It will be difficult ____ a new marketing manager.",
       "options": [
         "get",
         "having to get",
@@ -354,8 +354,8 @@ const TOEIC_DATA = {
     {
       "id": 25,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "She worked in the accounting section ____________ 5 years.",
+      "category": "Part 5 · Set 1",
+      "question": "She worked in the accounting section ____ 5 years.",
       "options": [
         "ago",
         "since",
@@ -367,8 +367,8 @@ const TOEIC_DATA = {
     {
       "id": 26,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "People do not like to express how they ____________ about the new corporate policy.",
+      "category": "Part 5 · Set 1",
+      "question": "People do not like to express how they ____ about the new corporate policy.",
       "options": [
         "say",
         "feel",
@@ -380,21 +380,21 @@ const TOEIC_DATA = {
     {
       "id": 27,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "This prosthesis will support many children who thought they could ____________ lead productive lives.",
+      "category": "Part 5 · Set 1",
+      "question": "Without the new software, the audit team could ____ have finished on time.",
       "options": [
-        "no",
-        "never",
         "ever",
-        "sometimes"
+        "sometimes",
+        "no",
+        "never"
       ],
       "correct": "never"
     },
     {
       "id": 28,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The small sofa was a lot ____________ than the large one.",
+      "category": "Part 5 · Set 1",
+      "question": "The new conference chairs are a lot ____ than the old ones.",
       "options": [
         "more comfortable",
         "comfortable",
@@ -406,8 +406,8 @@ const TOEIC_DATA = {
     {
       "id": 29,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The ministers arrived sometime ____________5:00 and 6.00 PM.",
+      "category": "Part 5 · Set 1",
+      "question": "The ministers arrived sometime ____ 5:00 and 6.00 PM.",
       "options": [
         "from",
         "at",
@@ -419,34 +419,34 @@ const TOEIC_DATA = {
     {
       "id": 30,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The workers could not see ____________ in the field.",
+      "category": "Part 5 · Set 1",
+      "question": "The receptionist could not see ____ at the front desk this morning.",
       "options": [
+        "who",
         "nobody",
         "somebody",
-        "anybody",
-        "who"
+        "anybody"
       ],
       "correct": "anybody"
     },
     {
       "id": 31,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "A side ____________ of globalization is environmental pollution.",
+      "category": "Part 5 · Set 1",
+      "question": "A side ____ of the new trade policy was a sharp rise in shipping costs.",
       "options": [
-        "effect",
-        "affect",
         "result",
-        "factor"
+        "factor",
+        "effect",
+        "affect"
       ],
       "correct": "effect"
     },
     {
       "id": 32,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The manager said that he would return to the company ____________ 2 PM.",
+      "category": "Part 5 · Set 1",
+      "question": "The manager said that he would return to the company ____ 2 PM.",
       "options": [
         "on",
         "by",
@@ -458,21 +458,21 @@ const TOEIC_DATA = {
     {
       "id": 33,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Please remember to ____________ the lights when you are leaving the room.",
+      "category": "Part 5 · Set 1",
+      "question": "Please remember to turn ____ the lights in the meeting room when you leave.",
       "options": [
-        "in",
-        "off",
         "under",
-        "over"
+        "over",
+        "in",
+        "off"
       ],
       "correct": "off"
     },
     {
       "id": 34,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The businessman made a good ____________ on his suppliers.",
+      "category": "Part 5 · Set 1",
+      "question": "The businessman made a good ____ on his suppliers.",
       "options": [
         "feeling",
         "idea",
@@ -484,8 +484,8 @@ const TOEIC_DATA = {
     {
       "id": 35,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The travel guide will provide you all the information you ____________.",
+      "category": "Part 5 · Set 1",
+      "question": "The travel guide will provide you all the information you ____.",
       "options": [
         "needs",
         "need",
@@ -497,8 +497,8 @@ const TOEIC_DATA = {
     {
       "id": 36,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The device is ____________ to fit in a small wallet.",
+      "category": "Part 5 · Set 1",
+      "question": "The device is ____ to fit in a small wallet.",
       "options": [
         "very compact",
         "not enough",
@@ -510,8 +510,8 @@ const TOEIC_DATA = {
     {
       "id": 37,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The defendant was told to follow his lawyer's ____________.",
+      "category": "Part 5 · Set 1",
+      "question": "The defendant was told to follow his lawyer's ____.",
       "options": [
         "words",
         "advice",
@@ -523,21 +523,21 @@ const TOEIC_DATA = {
     {
       "id": 38,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The girl decided to work ____________ than previously.",
+      "category": "Part 5 · Set 1",
+      "question": "Since her promotion, Ms. Park has worked ____ than her colleagues.",
       "options": [
+        "hardly",
         "hard",
         "harder",
-        "hardest",
-        "hardly"
+        "hardest"
       ],
       "correct": "harder"
     },
     {
       "id": 39,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "People who suffer from hypertension should give ____________ a good rest.",
+      "category": "Part 5 · Set 1",
+      "question": "Employees who feel unwell should give ____ a day of rest.",
       "options": [
         "theirs",
         "themselves",
@@ -549,8 +549,8 @@ const TOEIC_DATA = {
     {
       "id": 40,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The purchasing manager said ____________ he would send them no more reports.",
+      "category": "Part 5 · Set 1",
+      "question": "The purchasing manager said ____ he would send them no more reports.",
       "options": [
         "how",
         "that",
@@ -562,21 +562,21 @@ const TOEIC_DATA = {
     {
       "id": 41,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "There is a chance they ____________ be telling the truth.",
+      "category": "Part 5 · Set 1",
+      "question": "There is a chance the shipment ____ be delayed by the storm.",
       "options": [
-        "can",
         "may",
         "are",
-        "should"
+        "should",
+        "can"
       ],
       "correct": "may"
     },
     {
       "id": 42,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Please ____________ your name and telephone number and one of our sales staff will contact you.",
+      "category": "Part 5 · Set 1",
+      "question": "Please ____ your name and telephone number and one of our sales staff will contact you.",
       "options": [
         "will leave",
         "leave",
@@ -588,8 +588,8 @@ const TOEIC_DATA = {
     {
       "id": 43,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The company began to prepare for the relocation  ____________.",
+      "category": "Part 5 · Set 1",
+      "question": "The company began to prepare for the relocation ____.",
       "options": [
         "for three months",
         "in three months",
@@ -601,21 +601,21 @@ const TOEIC_DATA = {
     {
       "id": 44,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "He is going to ____________ to New York next month.",
+      "category": "Part 5 · Set 1",
+      "question": "The sales director is going to ____ to Singapore next month.",
       "options": [
-        "traveling",
-        "take a trip",
         "taking a trip",
-        "take a travel"
+        "take a travel",
+        "traveling",
+        "take a trip"
       ],
       "correct": "take a trip"
     },
     {
       "id": 45,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Even though he once worked at our company, Mr. Green is____________ working here.",
+      "category": "Part 5 · Set 1",
+      "question": "Even though he once worked at our company, Mr. Green is ____ working here.",
       "options": [
         "yet",
         "no longer",
@@ -627,8 +627,8 @@ const TOEIC_DATA = {
     {
       "id": 46,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The manager can speak four languages ____________.",
+      "category": "Part 5 · Set 1",
+      "question": "The manager can speak four languages ____.",
       "options": [
         "fluently",
         "good",
@@ -640,21 +640,21 @@ const TOEIC_DATA = {
     {
       "id": 47,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Those years were not ____________ enjoyable as many people think.",
+      "category": "Part 5 · Set 1",
+      "question": "The first quarter was not ____ profitable as the board had expected.",
       "options": [
-        "that",
-        "so",
         "as",
-        "very"
+        "very",
+        "that",
+        "so"
       ],
       "correct": "as"
     },
     {
       "id": 48,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Mr. and Mrs. Peters moved ____________ a new house on the 3rd of last month.",
+      "category": "Part 5 · Set 1",
+      "question": "The company moved ____ its new headquarters on the 3rd of last month.",
       "options": [
         "at",
         "into",
@@ -666,21 +666,21 @@ const TOEIC_DATA = {
     {
       "id": 49,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The invention was considered extremely ____________.",
+      "category": "Part 5 · Set 1",
+      "question": "The keynote speaker's presentation was extremely ____.",
       "options": [
+        "interesting",
         "interests",
         "interested",
-        "interestingly",
-        "interesting"
+        "interestingly"
       ],
       "correct": "interesting"
     },
     {
       "id": 50,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The lawyer was not ____________ that the accused person was telling the truth.",
+      "category": "Part 5 · Set 1",
+      "question": "The lawyer was not ____ that the accused person was telling the truth.",
       "options": [
         "convince",
         "convinced",
@@ -692,8 +692,8 @@ const TOEIC_DATA = {
     {
       "id": 51,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "He joined another company immediately ____________ resigning from our enterprise.",
+      "category": "Part 5 · Set 1",
+      "question": "He joined another company immediately ____ resigning from our enterprise.",
       "options": [
         "upon",
         "before",
@@ -705,8 +705,8 @@ const TOEIC_DATA = {
     {
       "id": 52,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The capital is ____________ city in the country.",
+      "category": "Part 5 · Set 1",
+      "question": "The capital is ____ city in the country.",
       "options": [
         "the larger",
         "the largest",
@@ -718,34 +718,34 @@ const TOEIC_DATA = {
     {
       "id": 53,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The shrine in the forest is over two hundred____________.",
+      "category": "Part 5 · Set 1",
+      "question": "The firm's oldest factory is over eighty ____.",
       "options": [
-        "old years",
-        "years old",
         "years ancient",
-        "year aged"
+        "year aged",
+        "old years",
+        "years old"
       ],
       "correct": "years old"
     },
     {
       "id": 54,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Life in the modern times is very ____________ from that of the previous times.",
+      "category": "Part 5 · Set 1",
+      "question": "The company's policy on remote work is very ____ from the one in our branch.",
       "options": [
+        "differentiate",
         "differ",
         "different",
-        "differing",
-        "differentiate"
+        "differing"
       ],
       "correct": "different"
     },
     {
       "id": 55,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Do not call my mobile number ____________ it is an emergency.",
+      "category": "Part 5 · Set 1",
+      "question": "Staff should not contact clients directly ____ the account manager approves it.",
       "options": [
         "besides",
         "unless",
@@ -757,8 +757,8 @@ const TOEIC_DATA = {
     {
       "id": 56,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "This device ____________ not be left unattended.",
+      "category": "Part 5 · Set 1",
+      "question": "This device ____ not be left unattended.",
       "options": [
         "would",
         "could",
@@ -770,8 +770,8 @@ const TOEIC_DATA = {
     {
       "id": 57,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The minister's French is so good that he sounds almost____________ a native speaker.",
+      "category": "Part 5 · Set 1",
+      "question": "The minister's French is so good that he sounds almost ____ a native speaker.",
       "options": [
         "as",
         "the same",
@@ -783,21 +783,21 @@ const TOEIC_DATA = {
     {
       "id": 58,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "It was____________ long seminar that the employees missed their flight.",
+      "category": "Part 5 · Set 1",
+      "question": "The seminar was ____ long that several participants left early.",
       "options": [
         "too",
         "very",
-        "such a",
-        "soo"
+        "so",
+        "such"
       ],
-      "correct": "such a"
+      "correct": "so"
     },
     {
       "id": 59,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "When traveling overseas, there are many places worth____________.",
+      "category": "Part 5 · Set 1",
+      "question": "When traveling overseas, there are many places worth ____.",
       "options": [
         "to see",
         "seeing",
@@ -809,8 +809,8 @@ const TOEIC_DATA = {
     {
       "id": 60,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Nothing seems to ____________ to the new manager.",
+      "category": "Part 5 · Set 1",
+      "question": "Nothing seems to ____ to the new manager.",
       "options": [
         "important",
         "significant",
@@ -822,8 +822,8 @@ const TOEIC_DATA = {
     {
       "id": 61,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "____________ with similar equipment, this one provides better quality at a reduced price.",
+      "category": "Part 5 · Set 1",
+      "question": "____ with similar equipment, this one provides better quality at a reduced price.",
       "options": [
         "Compare",
         "Compared",
@@ -835,21 +835,21 @@ const TOEIC_DATA = {
     {
       "id": 62,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "People say that if you want a task ____________ right, you have to do it yourself.",
+      "category": "Part 5 · Set 1",
+      "question": "Managers know that if they want a task ____ properly, they must delegate it clearly.",
       "options": [
-        "have done",
-        "done",
         "to do",
-        "did"
+        "did",
+        "have done",
+        "done"
       ],
       "correct": "done"
     },
     {
       "id": 63,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "According to the agreement, ____________ deposits must be directly sent to the bank.",
+      "category": "Part 5 · Set 1",
+      "question": "According to the agreement, ____ deposits must be directly sent to the bank.",
       "options": [
         "all",
         "all of",
@@ -861,21 +861,21 @@ const TOEIC_DATA = {
     {
       "id": 64,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Jenny enjoys shopping, skiing and ____________.",
+      "category": "Part 5 · Set 1",
+      "question": "Ms. Bell's duties at the agency include planning events, drafting letters and ____ clients.",
       "options": [
-        "to skate",
-        "skating",
-        "skated",
-        "playing skating"
+        "greets",
+        "to greet",
+        "greeting",
+        "greeted"
       ],
-      "correct": "skating"
+      "correct": "greeting"
     },
     {
       "id": 65,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "In order to comprehend ____________ a corporate client needs, you must listen to his viewpoints.",
+      "category": "Part 5 · Set 1",
+      "question": "In order to comprehend ____ a corporate client needs, you must listen to his viewpoints.",
       "options": [
         "which",
         "what",
@@ -887,21 +887,21 @@ const TOEIC_DATA = {
     {
       "id": 66,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "It is ____________ said that nobody wins an argument.",
+      "category": "Part 5 · Set 1",
+      "question": "It is ____ said that customers remember good service longer than low prices.",
       "options": [
-        "many",
-        "much",
         "usual",
-        "often"
+        "often",
+        "many",
+        "much"
       ],
       "correct": "often"
     },
     {
       "id": 67,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "They had three sons, but waited untill their ____________ son married, before moving to the suburbs.",
+      "category": "Part 5 · Set 1",
+      "question": "The founder waited until his ____ son had joined the firm before retiring.",
       "options": [
         "young",
         "younger",
@@ -913,8 +913,8 @@ const TOEIC_DATA = {
     {
       "id": 68,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "This is the best time to plan for future growth and ____________.",
+      "category": "Part 5 · Set 1",
+      "question": "The board agreed that this is the best time to invest in research and ____.",
       "options": [
         "develop",
         "developed",
@@ -926,8 +926,8 @@ const TOEIC_DATA = {
     {
       "id": 69,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Effective resource management ____________ the key to economic stability.",
+      "category": "Part 5 · Set 1",
+      "question": "Effective resource management ____ the key to economic stability.",
       "options": [
         "is",
         "to be",
@@ -939,21 +939,21 @@ const TOEIC_DATA = {
     {
       "id": 70,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Considering the economic issues of the country, borrowing money at fixed rates is more____________.",
+      "category": "Part 5 · Set 1",
+      "question": "Considering the economic issues of the country, borrowing money at fixed rates is more ____.",
       "options": [
         "desire",
         "desirable",
         "to be desired",
-        "desirable"
+        "desirably"
       ],
       "correct": "desirable"
     },
     {
       "id": 71,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Our mission is to find the financial opportunities that best ____________ your budget.",
+      "category": "Part 5 · Set 1",
+      "question": "Our mission is to find the financial opportunities that best ____ your budget.",
       "options": [
         "suits",
         "suited to",
@@ -965,21 +965,21 @@ const TOEIC_DATA = {
     {
       "id": 72,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "____________ you are like a normal person, you require eight hour's sleep every day.",
+      "category": "Part 5 · Set 1",
+      "question": "____ the client confirms the order today, the goods will be shipped on Monday.",
       "options": [
+        "As if",
         "As",
         "If",
-        "Probably",
-        "As if"
+        "Probably"
       ],
       "correct": "If"
     },
     {
       "id": 73,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The tax____________  has benefitted lower-income families.",
+      "category": "Part 5 · Set 1",
+      "question": "The tax ____ has benefitted lower-income families.",
       "options": [
         "reforms",
         "reform",
@@ -991,8 +991,8 @@ const TOEIC_DATA = {
     {
       "id": 74,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The company's goal is to increase production by 50 percent____________ the next two years.",
+      "category": "Part 5 · Set 1",
+      "question": "The company's goal is to increase production by 50 percent ____ the next two years.",
       "options": [
         "throughout",
         "about",
@@ -1004,8 +1004,8 @@ const TOEIC_DATA = {
     {
       "id": 75,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The directors voted to have the old offices____________.",
+      "category": "Part 5 · Set 1",
+      "question": "The directors voted to have the old offices ____.",
       "options": [
         "as remodeled",
         "remodeled",
@@ -1017,8 +1017,8 @@ const TOEIC_DATA = {
     {
       "id": 76,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "____________ having recruited additional supervisors, the quality continued to worsen.",
+      "category": "Part 5 · Set 1",
+      "question": "____ having recruited additional supervisors, the quality continued to worsen.",
       "options": [
         "Although",
         "Due to",
@@ -1030,8 +1030,8 @@ const TOEIC_DATA = {
     {
       "id": 77,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The IT department was asked when the new computers ____________.",
+      "category": "Part 5 · Set 1",
+      "question": "The IT department was asked when the new computers ____.",
       "options": [
         "arrive",
         "would arriving",
@@ -1043,47 +1043,47 @@ const TOEIC_DATA = {
     {
       "id": 78,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The man ____________ shirt had been torn was very upset.",
+      "category": "Part 5 · Set 1",
+      "question": "The manager ____ proposal won the contract was praised by the board.",
       "options": [
-        "whom",
-        "who",
         "which",
-        "whose"
+        "whose",
+        "whom",
+        "who"
       ],
       "correct": "whose"
     },
     {
       "id": 79,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "____________ cottage in the village was known to everybody.",
+      "category": "Part 5 · Set 1",
+      "question": "The ____ office on the corner was known to everyone in the neighbourhood.",
       "options": [
+        "The small green",
         "Small green",
         "A green small",
-        "The green small",
-        "The small green"
+        "The green small"
       ],
       "correct": "The small green"
     },
     {
       "id": 80,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The soccer team always performs a ____________ warm-up excercises before starting the game.",
+      "category": "Part 5 · Set 1",
+      "question": "Only ____ of the applicants had previous experience in logistics.",
       "options": [
-        "some",
-        "few",
-        "little",
-        "many"
+        "every",
+        "a few",
+        "a little",
+        "much"
       ],
-      "correct": "few"
+      "correct": "a few"
     },
     {
       "id": 81,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "With the arrival of the new financial controller, hopes for the company's growth have ____________ greatly.",
+      "category": "Part 5 · Set 1",
+      "question": "With the arrival of the new financial controller, hopes for the company's growth have ____ greatly.",
       "options": [
         "raised",
         "rose",
@@ -1095,8 +1095,8 @@ const TOEIC_DATA = {
     {
       "id": 82,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Some people  ____________ the most   important element in any business is excellent customer  service.",
+      "category": "Part 5 · Set 1",
+      "question": "Some people ____ the most important element in any business is excellent customer service.",
       "options": [
         "tell",
         "say",
@@ -1108,21 +1108,21 @@ const TOEIC_DATA = {
     {
       "id": 83,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "____________ his calls come from foreign countries.",
+      "category": "Part 5 · Set 1",
+      "question": "____ the enquiries we receive come from overseas clients.",
       "options": [
-        "Much",
         "Almost of",
         "Almost",
-        "Most of"
+        "Most of",
+        "Much"
       ],
       "correct": "Most of"
     },
     {
       "id": 84,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The increasing cost of advertising ____________ the corporate profitablity.",
+      "category": "Part 5 · Set 1",
+      "question": "The increasing cost of advertising ____ the corporate profitability.",
       "options": [
         "low",
         "lowers",
@@ -1134,21 +1134,21 @@ const TOEIC_DATA = {
     {
       "id": 85,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Ten  years ago, few people experienced the ____________ technological development that has occured.",
+      "category": "Part 5 · Set 1",
+      "question": "Few analysts predicted the ____ growth of the online retail market.",
       "options": [
+        "dramatically",
         "drama",
         "dramatical",
-        "dramatic",
-        "dramatically"
+        "dramatic"
       ],
       "correct": "dramatic"
     },
     {
       "id": 86,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "In spite of experiencing many challeges, the company made____________ overall showing.",
+      "category": "Part 5 · Set 1",
+      "question": "In spite of experiencing many challenges, the company made ____ overall showing.",
       "options": [
         "a good",
         "good",
@@ -1160,8 +1160,8 @@ const TOEIC_DATA = {
     {
       "id": 87,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The production assistant's ____________ will keep him out for at least another three days.",
+      "category": "Part 5 · Set 1",
+      "question": "The production assistant's ____ will keep him out for at least another three days.",
       "options": [
         "ill",
         "illness",
@@ -1173,8 +1173,8 @@ const TOEIC_DATA = {
     {
       "id": 88,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "After a foreign trip, one always has____________ foreign coins in one's pocket.",
+      "category": "Part 5 · Set 1",
+      "question": "After a foreign trip, one always has ____ foreign coins in one's pocket.",
       "options": [
         "a lot",
         "a few of",
@@ -1186,8 +1186,8 @@ const TOEIC_DATA = {
     {
       "id": 89,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Public transportation is ____________ for the people living in the town.",
+      "category": "Part 5 · Set 1",
+      "question": "Public transportation is ____ for the people living in the town.",
       "options": [
         "neither",
         "need",
@@ -1199,8 +1199,8 @@ const TOEIC_DATA = {
     {
       "id": 90,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The news reporter stated that the ____________ has improved immensy in the past few years.",
+      "category": "Part 5 · Set 1",
+      "question": "The news reporter stated that the ____ has improved immensely in the past few years.",
       "options": [
         "finance",
         "financial",
@@ -1212,21 +1212,21 @@ const TOEIC_DATA = {
     {
       "id": 91,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "She would not talk in that manner if she ____________ not the owner's daughter.",
+      "category": "Part 5 · Set 1",
+      "question": "The client would not have complained if the invoice ____ correct.",
       "options": [
-        "will",
+        "had been",
+        "will be",
         "was",
-        "should",
-        "were"
+        "should be"
       ],
-      "correct": "was"
+      "correct": "had been"
     },
     {
       "id": 92,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "In this industry, a person must keep a ____________ of humor.",
+      "category": "Part 5 · Set 1",
+      "question": "In this industry, a person must keep a ____ of humor.",
       "options": [
         "sensing",
         "sense",
@@ -1238,21 +1238,21 @@ const TOEIC_DATA = {
     {
       "id": 93,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "There are not ____________ people who dislike chocolates.",
+      "category": "Part 5 · Set 1",
+      "question": "There are not ____ employees who are willing to work night shifts.",
       "options": [
+        "a lot",
         "many",
         "much",
-        "a few",
-        "a lot"
+        "a few"
       ],
       "correct": "many"
     },
     {
       "id": 94,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The Prime Minister will come, but says his family will not come with ____________.",
+      "category": "Part 5 · Set 1",
+      "question": "The Prime Minister will come, but says his family will not come with ____.",
       "options": [
         "he",
         "him",
@@ -1264,8 +1264,8 @@ const TOEIC_DATA = {
     {
       "id": 95,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "They introduced the new system ____________ his second year with the company.",
+      "category": "Part 5 · Set 1",
+      "question": "They introduced the new system ____ his second year with the company.",
       "options": [
         "over",
         "while",
@@ -1277,8 +1277,8 @@ const TOEIC_DATA = {
     {
       "id": 96,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The passengers were advised to ____________ a long delay.",
+      "category": "Part 5 · Set 1",
+      "question": "The passengers were advised to ____ a long delay.",
       "options": [
         "accept",
         "except",
@@ -1290,21 +1290,21 @@ const TOEIC_DATA = {
     {
       "id": 97,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Children are taught to have respect ____________ elderly people.",
+      "category": "Part 5 · Set 1",
+      "question": "All staff are expected to show respect ____ the company's clients.",
       "options": [
-        "to",
-        "through",
         "for",
-        "at"
+        "at",
+        "to",
+        "through"
       ],
       "correct": "for"
     },
     {
       "id": 98,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "In contemporary society, more women hold jobs in management ____________ before.",
+      "category": "Part 5 · Set 1",
+      "question": "In contemporary society, more women hold jobs in management ____ before.",
       "options": [
         "comparing",
         "than ever",
@@ -1316,21 +1316,21 @@ const TOEIC_DATA = {
     {
       "id": 99,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "The dancers exhibited complete ____________.",
+      "category": "Part 5 · Set 1",
+      "question": "The investors showed complete ____ in the new management team.",
       "options": [
+        "confidential",
         "confident",
         "competent",
-        "confidence",
-        "confidential"
+        "confidence"
       ],
       "correct": "confidence"
     },
     {
       "id": 100,
       "type_id": 1,
-      "category": "Incomplete Sentences Part 1",
-      "question": "Many people ____________ depend on newspapers for much of their information.",
+      "category": "Part 5 · Set 1",
+      "question": "Many people ____ depend on newspapers for much of their information.",
       "options": [
         "yet",
         "keep",
@@ -1342,8 +1342,8 @@ const TOEIC_DATA = {
     {
       "id": 101,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The foundation’s director ____________ the scientific operations of the organization.",
+      "category": "Part 5 · Set 2",
+      "question": "The foundation’s director ____ the scientific operations of the organization.",
       "options": [
         "coexists",
         "contextualizes",
@@ -1355,12 +1355,12 @@ const TOEIC_DATA = {
     {
       "id": 102,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The article ____________ by  a renowned doctor.",
+      "category": "Part 5 · Set 2",
+      "question": "The press release ____ by the communications manager.",
       "options": [
+        "were written",
         "wrote",
         "was written",
-        "was writing",
         "was writing"
       ],
       "correct": "was written"
@@ -1368,34 +1368,34 @@ const TOEIC_DATA = {
     {
       "id": 103,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "When their owners leave, pets always wait for ____________ to return.",
+      "category": "Part 5 · Set 2",
+      "question": "When customers submit a request, our agents always get back to ____ within one day.",
       "options": [
-        "them",
         "him",
         "their",
-        "they"
+        "they",
+        "them"
       ],
       "correct": "them"
     },
     {
       "id": 104,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Although she lives alone, she ____________ not know how to do the laundry.",
+      "category": "Part 5 · Set 2",
+      "question": "Although the branch opens late, it ____ not stay open on Sundays.",
       "options": [
-        "do",
         "does",
         "can",
-        "did"
+        "did",
+        "do"
       ],
       "correct": "does"
     },
     {
       "id": 105,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The assistant manager was just ____________ to manager.",
+      "category": "Part 5 · Set 2",
+      "question": "The assistant manager was just ____ to manager.",
       "options": [
         "elected",
         "promoted",
@@ -1407,21 +1407,21 @@ const TOEIC_DATA = {
     {
       "id": 106,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The man ____________ wanted to visit Spain, but never had an opportunity.",
+      "category": "Part 5 · Set 2",
+      "question": "The warehouse team ____ delivers within 24 hours, so customers rarely complain.",
       "options": [
+        "rarely",
         "always",
-        "usually",
-        "seldom",
-        "never"
+        "never",
+        "hardly"
       ],
       "correct": "always"
     },
     {
       "id": 107,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "He lived in a small village ____________ moving to the city.",
+      "category": "Part 5 · Set 2",
+      "question": "He lived in a small village ____ moving to the city.",
       "options": [
         "that",
         "until",
@@ -1433,21 +1433,21 @@ const TOEIC_DATA = {
     {
       "id": 108,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "It was so cold in the room ____________ nobody could work.",
+      "category": "Part 5 · Set 2",
+      "question": "The training session was so long ____ several participants left before the end.",
       "options": [
-        "so",
-        "as",
         "that",
-        "then"
+        "then",
+        "so",
+        "as"
       ],
       "correct": "that"
     },
     {
       "id": 109,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "It takes ____________ time to receive  the products from them that customers have stopped placing orders.",
+      "category": "Part 5 · Set 2",
+      "question": "It takes ____ time to receive the products from them that customers have stopped placing orders.",
       "options": [
         "so much",
         "too much",
@@ -1459,34 +1459,34 @@ const TOEIC_DATA = {
     {
       "id": 110,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "They asked ____________they could take the visitors for dinner.",
+      "category": "Part 5 · Set 2",
+      "question": "The visitors asked ____ they could leave their luggage during the tour.",
       "options": [
+        "what",
         "for",
         "why",
-        "where",
-        "what"
+        "where"
       ],
       "correct": "where"
     },
     {
       "id": 111,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Many people become ____________ when asked to speak before a group.",
+      "category": "Part 5 · Set 2",
+      "question": "Many candidates become ____ when asked to speak before a panel.",
       "options": [
+        "nervous",
         "nervously",
         "nervy",
-        "nervousness",
-        "nervous"
+        "nervousness"
       ],
       "correct": "nervous"
     },
     {
       "id": 112,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The woman did not like the dish she ordered and demanded a ____________ one.",
+      "category": "Part 5 · Set 2",
+      "question": "The woman did not like the dish she ordered and demanded a ____ one.",
       "options": [
         "same",
         "differed",
@@ -1498,8 +1498,8 @@ const TOEIC_DATA = {
     {
       "id": 113,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Employees are told they ____________ arrive late to the company.",
+      "category": "Part 5 · Set 2",
+      "question": "Employees are told they ____ arrive late to the company.",
       "options": [
         "must not",
         "will not",
@@ -1511,8 +1511,8 @@ const TOEIC_DATA = {
     {
       "id": 114,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The managers started a new company because they wanted to be ____________.",
+      "category": "Part 5 · Set 2",
+      "question": "The managers started a new company because they wanted to be ____.",
       "options": [
         "along",
         "independent",
@@ -1524,8 +1524,8 @@ const TOEIC_DATA = {
     {
       "id": 115,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Some children feel they must always disagree ____________their parents.",
+      "category": "Part 5 · Set 2",
+      "question": "Some employees feel they must always disagree ____ their supervisors.",
       "options": [
         "against",
         "about",
@@ -1537,8 +1537,8 @@ const TOEIC_DATA = {
     {
       "id": 116,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Management does not want workers ____________ extended lunch breaks.",
+      "category": "Part 5 · Set 2",
+      "question": "Management does not want workers ____ extended lunch breaks.",
       "options": [
         "to make",
         "to take",
@@ -1550,21 +1550,21 @@ const TOEIC_DATA = {
     {
       "id": 117,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "____________ his job, the man has no other hobbies.",
+      "category": "Part 5 · Set 2",
+      "question": "____ his main job, Mr. Adeyemi runs a small delivery business.",
       "options": [
-        "Aside",
         "Part of",
         "Beside",
-        "Besides"
+        "Besides",
+        "Aside"
       ],
       "correct": "Besides"
     },
     {
       "id": 118,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Receiving driving instructions ____________the woman feel more confident behind the wheel.",
+      "category": "Part 5 · Set 2",
+      "question": "Receiving clear instructions ____ the new intern feel more confident at the counter.",
       "options": [
         "forced",
         "made",
@@ -1576,8 +1576,8 @@ const TOEIC_DATA = {
     {
       "id": 119,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The signboard outside states the house ____________ is for sale.",
+      "category": "Part 5 · Set 2",
+      "question": "The sign outside states that the office ____ is available for lease.",
       "options": [
         "around",
         "far",
@@ -1589,8 +1589,8 @@ const TOEIC_DATA = {
     {
       "id": 120,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "____________depends mostly on one's focus.",
+      "category": "Part 5 · Set 2",
+      "question": "____ of the safety rules is part of the induction week for new staff.",
       "options": [
         "Memories",
         "Remember",
@@ -1602,21 +1602,21 @@ const TOEIC_DATA = {
     {
       "id": 121,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "He requested for an album of the singer's most ____________songs.",
+      "category": "Part 5 · Set 2",
+      "question": "The agency requested an album of the designer's most ____ work.",
       "options": [
-        "new",
+        "lately",
+        "later",
         "latest",
-        "recent",
-        "recently"
+        "late"
       ],
-      "correct": "recent"
+      "correct": "latest"
     },
     {
       "id": 122,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "ABC Corporation's new pharmaceutical products can be sold in pharmacies after ____________ over a period of months certifies that they are safe for people.",
+      "category": "Part 5 · Set 2",
+      "question": "ABC Corporation's new pharmaceutical products can be sold in pharmacies after ____ over a period of months certifies that they are safe for people.",
       "options": [
         "test",
         "to test",
@@ -1628,8 +1628,8 @@ const TOEIC_DATA = {
     {
       "id": 123,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Prof. Smith's expertise in Forensic Medicine earned him an ____________ reputation in his field.",
+      "category": "Part 5 · Set 2",
+      "question": "Prof. Smith's expertise in Forensic Medicine earned him an ____ reputation in his field.",
       "options": [
         "unintentional",
         "unwarranted",
@@ -1641,8 +1641,8 @@ const TOEIC_DATA = {
     {
       "id": 124,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Vegetarian dishes at Healthy Living Restaurant are becoming ____________ popular, as people realize the benefits of eating nutritious food.",
+      "category": "Part 5 · Set 2",
+      "question": "Vegetarian dishes at Healthy Living Restaurant are becoming ____ popular, as people realize the benefits of eating nutritious food.",
       "options": [
         "increase",
         "increasing",
@@ -1654,8 +1654,8 @@ const TOEIC_DATA = {
     {
       "id": 125,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Mrs. Green is our Global Sales Manager, with special ____________ for the Asian region.",
+      "category": "Part 5 · Set 2",
+      "question": "Mrs. Green is our Global Sales Manager, with special ____ for the Asian region.",
       "options": [
         "control",
         "burden",
@@ -1667,8 +1667,8 @@ const TOEIC_DATA = {
     {
       "id": 126,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "At the meeting, the CEO Mr. Petterson spoke ____________ about sustaining the current high level of growth untill well into the next term. ",
+      "category": "Part 5 · Set 2",
+      "question": "At the meeting, the CEO, Mr. Petterson, spoke ____ about sustaining the current high level of growth until well into the next term.",
       "options": [
         "confidence",
         "confidently",
@@ -1680,8 +1680,8 @@ const TOEIC_DATA = {
     {
       "id": 127,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Fashion Star is a corporation____________ has been able to tap into the multibillion dollar fashion industry by designing a variety of fashion products directly to the consumers.",
+      "category": "Part 5 · Set 2",
+      "question": "Fashion Star is a corporation ____ has been able to tap into the multibillion dollar fashion industry by designing a variety of fashion products directly to the consumers.",
       "options": [
         "whose",
         "who",
@@ -1693,8 +1693,8 @@ const TOEIC_DATA = {
     {
       "id": 128,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The success of Regent High Hotel ____________ by its low vacancy rate of only about 2% almost the whole year.",
+      "category": "Part 5 · Set 2",
+      "question": "The success of Regent High Hotel ____ by its low vacancy rate of only about 2% almost the whole year.",
       "options": [
         "is determining",
         "to be determined",
@@ -1706,8 +1706,8 @@ const TOEIC_DATA = {
     {
       "id": 129,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The Business Development Manager, Mr Smith said that he was sure the company____________ have opened a branch in China earlier if it was able to find suitable human resources.",
+      "category": "Part 5 · Set 2",
+      "question": "The Business Development Manager, Mr Smith said that he was sure the company ____ have opened a branch in China earlier if it was able to find suitable human resources.",
       "options": [
         "would",
         "will",
@@ -1719,8 +1719,8 @@ const TOEIC_DATA = {
     {
       "id": 130,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The public relations department____________ the company's publicity, both domestic and in foreign countries.",
+      "category": "Part 5 · Set 2",
+      "question": "The public relations department ____ the company's publicity, both domestic and in foreign countries.",
       "options": [
         "monitors",
         "renovates",
@@ -1732,21 +1732,21 @@ const TOEIC_DATA = {
     {
       "id": 131,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The French businessman predicted no ____________ in profits for the year, inspite of a decrease in consumer spending.",
+      "category": "Part 5 · Set 2",
+      "question": "The French businessman predicted no ____ in profits for the year, in spite of a decrease in consumer spending.",
       "options": [
         "deteriorate",
         "deteriorating",
         "deterioration",
-        "dteriorated"
+        "deteriorated"
       ],
       "correct": "deterioration"
     },
     {
       "id": 132,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "ABC Corporation's $ 2.5 million donation to the charity reflects its ____________strong social responsibility to the society.",
+      "category": "Part 5 · Set 2",
+      "question": "ABC Corporation's $ 2.5 million donation to the charity reflects its ____ strong social responsibility to the society.",
       "options": [
         "especially",
         "allowably",
@@ -1758,8 +1758,8 @@ const TOEIC_DATA = {
     {
       "id": 133,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The marketing manager was known for his excellent analytical skills and ____________ approach to new business development.",
+      "category": "Part 5 · Set 2",
+      "question": "The marketing manager was known for his excellent analytical skills and ____ approach to new business development.",
       "options": [
         "opened",
         "open",
@@ -1771,8 +1771,8 @@ const TOEIC_DATA = {
     {
       "id": 134,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Trendy Fashions Corporation is ____________ biggger than its domestic competitors, which gives the company a greater financial flexibility.",
+      "category": "Part 5 · Set 2",
+      "question": "Trendy Fashions Corporation is ____ bigger than its domestic competitors, which gives the company greater financial flexibility.",
       "options": [
         "consequently",
         "consecutively",
@@ -1784,8 +1784,8 @@ const TOEIC_DATA = {
     {
       "id": 135,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The expansion of XYZ Corporation's branches in India ____________ as part of its objective of increasing production from its facilities in the area.",
+      "category": "Part 5 · Set 2",
+      "question": "The expansion of XYZ Corporation's branches in India ____ as part of its objective of increasing production from its facilities in the area.",
       "options": [
         "would see",
         "is seeing",
@@ -1797,8 +1797,8 @@ const TOEIC_DATA = {
     {
       "id": 136,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Many customers are hurrying to buy the electronic device, leaving retailers ____________ to fullfill the demand.",
+      "category": "Part 5 · Set 2",
+      "question": "Many customers are hurrying to buy the electronic device, leaving retailers ____ to fulfill the demand.",
       "options": [
         "targeting",
         "struggling",
@@ -1810,8 +1810,8 @@ const TOEIC_DATA = {
     {
       "id": 137,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The Human Resources Manager made many ____________ comments after the performance appraisal of the new staff.",
+      "category": "Part 5 · Set 2",
+      "question": "The Human Resources Manager made many ____ comments after the performance appraisal of the new staff.",
       "options": [
         "construction",
         "construct",
@@ -1823,8 +1823,8 @@ const TOEIC_DATA = {
     {
       "id": 138,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "If the musical show is cancelled, ticket holders will ____________ the whole value of their tickets.",
+      "category": "Part 5 · Set 2",
+      "question": "If the musical show is cancelled, ticket holders will ____ the whole value of their tickets.",
       "options": [
         "entitle",
         "receive",
@@ -1836,8 +1836,8 @@ const TOEIC_DATA = {
     {
       "id": 139,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Valley High Corporation has moved from strength ____________ to strength since launching their new IT system.",
+      "category": "Part 5 · Set 2",
+      "question": "Valley High Corporation has moved from strength ____ to strength since launching their new IT system.",
       "options": [
         "in",
         "on",
@@ -1849,10 +1849,10 @@ const TOEIC_DATA = {
     {
       "id": 140,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Gerber Corporation emerged as the most ____________ brand in a research, with 97% of respondents expressing their satisfaction with the products of the company.",
+      "category": "Part 5 · Set 2",
+      "question": "Gerber Corporation emerged as the most ____ brand in a recent survey, with 97% of respondents expressing their satisfaction with the products of the company.",
       "options": [
-        "reliablity",
+        "reliability",
         "thanked",
         "trusted",
         "grateful"
@@ -1862,8 +1862,8 @@ const TOEIC_DATA = {
     {
       "id": 141,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The managers at Smith Corporation reacted ____________ to the idea of acquiring an offshore company as an attempt to achieve business revitalization.",
+      "category": "Part 5 · Set 2",
+      "question": "The managers at Smith Corporation reacted ____ to the idea of acquiring an offshore company as an attempt to achieve business revitalization.",
       "options": [
         "positive",
         "positively",
@@ -1875,8 +1875,8 @@ const TOEIC_DATA = {
     {
       "id": 142,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Much of Valley High Inc's succcess can be____________ to the entrepreneurial mindset of its CEO, Ms. Green.",
+      "category": "Part 5 · Set 2",
+      "question": "Much of Valley High Inc's success can be ____ to the entrepreneurial mindset of its CEO, Ms. Green.",
       "options": [
         "attribute",
         "attributed",
@@ -1888,8 +1888,8 @@ const TOEIC_DATA = {
     {
       "id": 143,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Experts have discovered that shopping online for food has ____________ changed the overall supermarket experience.",
+      "category": "Part 5 · Set 2",
+      "question": "Analysts say that online sales have ____ changed the way retailers reach customers.",
       "options": [
         "accusingly",
         "dramatically",
@@ -1901,8 +1901,8 @@ const TOEIC_DATA = {
     {
       "id": 144,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Aim High Inc won a contract to build a point of sale system in Eastern China, ____________ in a 20% increase in sales.",
+      "category": "Part 5 · Set 2",
+      "question": "Aim High Inc won a contract to build a point of sale system in Eastern China, ____ in a 20% increase in sales.",
       "options": [
         "resulting",
         "to result",
@@ -1914,8 +1914,8 @@ const TOEIC_DATA = {
     {
       "id": 145,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "All the employees on the building site must ____________ badges and show their identifications at the main entrance.",
+      "category": "Part 5 · Set 2",
+      "question": "All the employees on the building site must ____ badges and show their identifications at the main entrance.",
       "options": [
         "wearing",
         "to wear",
@@ -1927,8 +1927,8 @@ const TOEIC_DATA = {
     {
       "id": 146,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Although Comfy Inn has lost some market share in the past year, it is still ____________ than its competitors.",
+      "category": "Part 5 · Set 2",
+      "question": "Although Comfy Inn has lost some market share in the past year, it is still ____ than its competitors.",
       "options": [
         "most established",
         "more established",
@@ -1940,8 +1940,8 @@ const TOEIC_DATA = {
     {
       "id": 147,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The ____________ advantage of Mrs. Smith's business model was justified after it accurately forecasted the sales for the quarter.",
+      "category": "Part 5 · Set 2",
+      "question": "The ____ advantage of Mrs. Smith's business model was justified after it accurately forecasted the sales for the quarter.",
       "options": [
         "relation",
         "relative",
@@ -1953,8 +1953,8 @@ const TOEIC_DATA = {
     {
       "id": 148,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The software____________with the notebook computer fascilitates people to create documents and calculations.",
+      "category": "Part 5 · Set 2",
+      "question": "The software ____ with the notebook computer enables people to create documents and calculations.",
       "options": [
         "sold",
         "will sell",
@@ -1966,21 +1966,21 @@ const TOEIC_DATA = {
     {
       "id": 149,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Global Support LTd acted ____________ in hiring the best human resources for all its subsidiaries.",
+      "category": "Part 5 · Set 2",
+      "question": "Global Support LTd acted ____ in hiring the best human resources for all its subsidiaries.",
       "options": [
         "asserts",
         "assertively",
         "asserting",
-        "asserts"
+        "assertion"
       ],
       "correct": "assertively"
     },
     {
       "id": 150,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The customer ____________ us do many revisions to the specfications that took a very long time.",
+      "category": "Part 5 · Set 2",
+      "question": "The customer ____ us do many revisions to the specifications that took a very long time.",
       "options": [
         "did",
         "permit",
@@ -1992,8 +1992,8 @@ const TOEIC_DATA = {
     {
       "id": 151,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The Singing Doll created a great ____________-- among the customers, and sold 100000 units in the first week after the launch.",
+      "category": "Part 5 · Set 2",
+      "question": "The Singing Doll created a great ____ -- among the customers, and sold 100000 units in the first week after the launch.",
       "options": [
         "compensation",
         "determination",
@@ -2005,21 +2005,21 @@ const TOEIC_DATA = {
     {
       "id": 152,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The peace __________________ ends nearly four years of violence.",
+      "category": "Part 5 · Set 2",
+      "question": "The new trade ____ between the two countries takes effect in January.",
       "options": [
-        "treaty",
-        "amenity",
         "aid",
-        "mitigation"
+        "mitigation",
+        "treaty",
+        "amenity"
       ],
       "correct": "treaty"
     },
     {
       "id": 153,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "She is __________________ what she sees.",
+      "category": "Part 5 · Set 2",
+      "question": "Investors were ____ the sudden drop in share prices.",
       "options": [
         "horrified with",
         "horrified of",
@@ -2031,86 +2031,86 @@ const TOEIC_DATA = {
     {
       "id": 154,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "In their __________________ to catch drug dealers, police have ignored citizens' basic civil rights.",
+      "category": "Part 5 · Set 2",
+      "question": "In their ____ to cut costs, managers ignored the impact on staff morale.",
       "options": [
+        "alleviation",
         "harmony",
         "zeal",
-        "accord",
-        "alleviation"
+        "accord"
       ],
       "correct": "zeal"
     },
     {
       "id": 155,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Still _________________ , he walks five miles to his house.",
+      "category": "Part 5 · Set 2",
+      "question": "The security guard found the night porter ____ at his desk.",
       "options": [
-        "fast asleep",
         "quick asleep",
         "run asleep",
-        "big asleep"
+        "big asleep",
+        "fast asleep"
       ],
       "correct": "fast asleep"
     },
     {
       "id": 156,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Try and __________________ 2 or 3 hours a day to revision.",
+      "category": "Part 5 · Set 2",
+      "question": "Managers should ____ at least two hours a week to staff training.",
       "options": [
+        "allot",
         "provoke",
         "excite",
-        "relieve",
-        "allot"
+        "relieve"
       ],
       "correct": "allot"
     },
     {
       "id": 157,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "___________________ passing the test.",
+      "category": "Part 5 · Set 2",
+      "question": "____ landing the biggest contract of the year!",
       "options": [
+        "Congratulations in",
         "Congratulations on",
         "Congratulations for",
-        "Congratulations with",
-        "Congratulations in"
+        "Congratulations with"
       ],
       "correct": "Congratulations on"
     },
     {
       "id": 158,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Cabbage can be eaten __________________.",
+      "category": "Part 5 · Set 2",
+      "question": "The chef explained that the tuna is served ____ and must be kept at very low temperatures.",
       "options": [
+        "mean",
         "tentative",
         "raw",
-        "bounteous",
-        "mean"
+        "bounteous"
       ],
       "correct": "raw"
     },
     {
       "id": 159,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "I hope I __________________ this cold soon.",
+      "category": "Part 5 · Set 2",
+      "question": "It took the company three years to ____ the effects of the recession.",
       "options": [
+        "get out",
         "get away",
         "get off",
-        "get over",
-        "get out"
+        "get over"
       ],
       "correct": "get over"
     },
     {
       "id": 160,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "You'll have __________________ time for questions later.",
+      "category": "Part 5 · Set 2",
+      "question": "There will be ____ time for questions after the presentation.",
       "options": [
         "cramped",
         "spacious",
@@ -2122,86 +2122,86 @@ const TOEIC_DATA = {
     {
       "id": 161,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "His illness is __________________.",
+      "category": "Part 5 · Set 2",
+      "question": "The staffing shortage at the factory is ____.",
       "options": [
-        "losing it",
         "turning on",
         "getting worse and worse",
-        "taking a look at"
+        "taking a look at",
+        "losing it"
       ],
       "correct": "getting worse and worse"
     },
     {
       "id": 162,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "I understand your concern, Linda, but I have to __________________ Maria on this matter.",
+      "category": "Part 5 · Set 2",
+      "question": "I understand your concern, Ms. Lee, but I have to ____ the board on this matter.",
       "options": [
-        "give in",
-        "feel up to",
         "go along with",
-        "pull through"
+        "pull through",
+        "give in",
+        "feel up to"
       ],
       "correct": "go along with"
     },
     {
       "id": 163,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Bryan really ______________ any kind of outdoor activity.",
+      "category": "Part 5 · Set 2",
+      "question": "The agency ____ any project that involves sustainable design.",
       "options": [
-        "goes along with",
-        "goes in for",
-        "feel up to",
-        "put up with"
+        "takes up",
+        "takes on",
+        "takes in",
+        "takes over"
       ],
-      "correct": "goes in for"
+      "correct": "takes on"
     },
     {
       "id": 164,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Her neighbors have loud parties every night, but she doesn't complain. She just __________________.",
+      "category": "Part 5 · Set 2",
+      "question": "The support team receives complaints all day, but they never argue. They just ____.",
       "options": [
-        "feels up to it",
-        "gets over with it",
-        "goes along with it",
-        "puts up with it"
+        "put up with it",
+        "feel up to it",
+        "get over with it",
+        "go along with it"
       ],
-      "correct": "puts up with it"
+      "correct": "put up with it"
     },
     {
       "id": 165,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "I __________________ an opportunity to meet you in person.",
+      "category": "Part 5 · Set 2",
+      "question": "We ____ an opportunity to discuss the proposal in person.",
       "options": [
+        "put up with",
         "look forward to",
         "screw out of",
-        "go in for",
-        "put up with"
+        "go in for"
       ],
       "correct": "look forward to"
     },
     {
       "id": 166,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "That con man __________________ my life savings.",
+      "category": "Part 5 · Set 2",
+      "question": "The vendor ____ the firm out of a large deposit and then disappeared.",
       "options": [
-        "got me over with",
-        "went along with",
-        "put me up with",
-        "screwed me out of"
+        "looked",
+        "backed",
+        "cheated",
+        "turned"
       ],
-      "correct": "screwed me out of"
+      "correct": "cheated"
     },
     {
       "id": 167,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "I was furious about the way he __________________ me.",
+      "category": "Part 5 · Set 2",
+      "question": "The manager never ____ his staff, even when they made mistakes.",
       "options": [
         "felt up to",
         "talked down to",
@@ -2213,99 +2213,99 @@ const TOEIC_DATA = {
     {
       "id": 168,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Sarah filed for divorce after she caught George __________________ her.",
+      "category": "Part 5 · Set 2",
+      "question": "The supplier was accused of ____ its customers by overcharging for spare parts.",
       "options": [
-        "cheating to",
-        "cheating with",
-        "cheating for",
-        "cheating on"
+        "cheat",
+        "cheats",
+        "cheating",
+        "cheated"
       ],
-      "correct": "cheating on"
+      "correct": "cheating"
     },
     {
       "id": 169,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "A policeman saw him stealing the car and __________________ him.",
+      "category": "Part 5 · Set 2",
+      "question": "The security guard ____ the intruder and caught him near the gate.",
       "options": [
+        "went on",
         "went after",
-        "went for",
-        "went to",
-        "went with"
+        "went off",
+        "went by"
       ],
       "correct": "went after"
     },
     {
       "id": 170,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The teacher told the students to ___________________ in a dictionary.",
+      "category": "Part 5 · Set 2",
+      "question": "New employees are encouraged to look ____ unfamiliar terms in the company glossary.",
       "options": [
-        "look the new words after",
-        "look the new words for",
-        "look the new words up",
-        "look the new words"
+        "up",
+        "into",
+        "after",
+        "for"
       ],
-      "correct": "look the new words up"
+      "correct": "up"
     },
     {
       "id": 171,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Her intelligence more than __________________ for her lack of experience.",
+      "category": "Part 5 · Set 2",
+      "question": "Her extensive experience more than ____ for her lack of formal qualifications.",
       "options": [
-        "compensates",
         "trims",
         "chases",
-        "allures"
+        "allures",
+        "compensates"
       ],
       "correct": "compensates"
     },
     {
       "id": 172,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Uncle Ted's chair __________________ under his weight.",
+      "category": "Part 5 · Set 2",
+      "question": "The old shelving unit ____ under the weight of the boxes.",
       "options": [
+        "collapsed",
         "crawled",
         "craved",
-        "crammed",
-        "collapsed"
+        "crammed"
       ],
       "correct": "collapsed"
     },
     {
       "id": 173,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The court found him __________________ and he was released.",
+      "category": "Part 5 · Set 2",
+      "question": "The court found the former treasurer ____ of all charges.",
       "options": [
-        "unlawful",
         "crisp",
         "innocent",
-        "hoarse"
+        "hoarse",
+        "unlawful"
       ],
       "correct": "innocent"
     },
     {
       "id": 174,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "There are many African countries __________________ by famine.",
+      "category": "Part 5 · Set 2",
+      "question": "The region's farmers were ____ by drought for three seasons.",
       "options": [
+        "cruised",
         "crucified",
         "afflicted",
-        "killed",
-        "cruised"
+        "killed"
       ],
       "correct": "afflicted"
     },
     {
       "id": 175,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "We need a journalist with an extremely __________________ mind.",
+      "category": "Part 5 · Set 2",
+      "question": "We need a journalist with an extremely ____ mind.",
       "options": [
         "sharp",
         "curative",
@@ -2317,73 +2317,73 @@ const TOEIC_DATA = {
     {
       "id": 176,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Her clothes had all been __________________.",
+      "category": "Part 5 · Set 2",
+      "question": "Several pages had been ____ out of the confidential file.",
       "options": [
+        "mowed",
         "sliced",
         "diced",
-        "ripped",
-        "mowed"
+        "ripped"
       ],
       "correct": "ripped"
     },
     {
       "id": 177,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Water from the Great Lakes is pumped to ___________________.",
+      "category": "Part 5 · Set 2",
+      "question": "Water from the reservoirs is pumped to the ____ farmland in the south.",
       "options": [
-        "soaked regions",
-        "arid regions",
-        "drenched regions",
-        "water-logged regions"
+        "arid",
+        "drenched",
+        "water-logged",
+        "soaked"
       ],
-      "correct": "arid regions"
+      "correct": "arid"
     },
     {
       "id": 178,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "If it is not treated correctly, the condition can prove __________________.",
+      "category": "Part 5 · Set 2",
+      "question": "If the wiring fault is not repaired, the consequences can prove ____.",
       "options": [
+        "resplendent",
         "fatal",
         "obsolete",
-        "alive",
-        "resplendent"
+        "alive"
       ],
       "correct": "fatal"
     },
     {
       "id": 179,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "She spoke with __________________ about her life.",
+      "category": "Part 5 · Set 2",
+      "question": "The CEO spoke with surprising ____ about the company's losses.",
       "options": [
-        "decision",
         "hallucination",
         "fitness",
-        "candor"
+        "candor",
+        "decision"
       ],
       "correct": "candor"
     },
     {
       "id": 180,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "White vinegar is great for removing __________________.",
+      "category": "Part 5 · Set 2",
+      "question": "This detergent is excellent for removing ink ____ from cotton shirts.",
       "options": [
+        "etiquettes",
         "anagrams",
         "decorations",
-        "stains",
-        "etiquettes"
+        "stains"
       ],
       "correct": "stains"
     },
     {
       "id": 181,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Their work permits have been __________________.",
+      "category": "Part 5 · Set 2",
+      "question": "Their work permits have been ____.",
       "options": [
         "esteemed",
         "objurgated",
@@ -2395,34 +2395,34 @@ const TOEIC_DATA = {
     {
       "id": 182,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "She bought __________________.",
+      "category": "Part 5 · Set 2",
+      "question": "The band rented ____ for the evening performance at the hotel.",
       "options": [
-        "an amplified guitar",
-        "an engrossed guitar",
         "an abnegated guitar",
-        "an exposed guitar"
+        "an exposed guitar",
+        "an amplified guitar",
+        "an engrossed guitar"
       ],
       "correct": "an amplified guitar"
     },
     {
       "id": 183,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "I don't like him. He is __________________ little man.",
+      "category": "Part 5 · Set 2",
+      "question": "The staff complained about the ____ behaviour of the new supervisor.",
       "options": [
-        "an intrinsic",
-        "an innate",
-        "an odious",
-        "an extolling"
+        "innate",
+        "odious",
+        "extolling",
+        "intrinsic"
       ],
-      "correct": "an odious"
+      "correct": "odious"
     },
     {
       "id": 184,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Inspector Marshall was __________________ for his professional attitude.",
+      "category": "Part 5 · Set 2",
+      "question": "Inspector Marshall was ____ for his professional attitude.",
       "options": [
         "designed",
         "commended",
@@ -2434,138 +2434,138 @@ const TOEIC_DATA = {
     {
       "id": 185,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "She's always __________________ on the latest dogmas of feminism.",
+      "category": "Part 5 · Set 2",
+      "question": "The keynote speaker spent an hour ____ on the benefits of green energy.",
       "options": [
-        "stocking",
         "adorning",
         "accounting",
-        "expounding"
+        "expounding",
+        "stocking"
       ],
       "correct": "expounding"
     },
     {
       "id": 186,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "It was a __________________ room with one small window.",
+      "category": "Part 5 · Set 2",
+      "question": "The visitors were shown a ____ meeting room with one small window.",
       "options": [
+        "covetous",
         "passive",
         "pungent",
-        "gloomy",
-        "covetous"
+        "gloomy"
       ],
       "correct": "gloomy"
     },
     {
       "id": 187,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "A __________________ wind blew down from the hills.",
+      "category": "Part 5 · Set 2",
+      "question": "A ____ wind blew across the construction site all afternoon.",
       "options": [
-        "biting",
-        "savory",
         "caustic",
-        "cranky"
+        "cranky",
+        "biting",
+        "savory"
       ],
       "correct": "biting"
     },
     {
       "id": 188,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "He __________________ his energies to writing films.",
+      "category": "Part 5 · Set 2",
+      "question": "The engineer ____ her career to developing safer machinery.",
       "options": [
-        "bent",
         "coupled",
         "devoted",
-        "associated"
+        "associated",
+        "bent"
       ],
       "correct": "devoted"
     },
     {
       "id": 189,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "He lives in a a __________________ border town.",
+      "category": "Part 5 · Set 2",
+      "question": "The company built its new plant in a ____ border town.",
       "options": [
-        "permissible",
         "removed",
         "parted",
-        "remote"
+        "remote",
+        "permissible"
       ],
       "correct": "remote"
     },
     {
       "id": 190,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "A crowd of 300 supporters warmly __________________ her speech.",
+      "category": "Part 5 · Set 2",
+      "question": "An audience of 300 clients warmly ____ the CEO's closing speech.",
       "options": [
-        "applauded",
         "adopted",
         "naturalized",
-        "loaded"
+        "loaded",
+        "applauded"
       ],
       "correct": "applauded"
     },
     {
       "id": 191,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "He can't help making __________________ comments.",
+      "category": "Part 5 · Set 2",
+      "question": "Colleagues complained that his ____ comments lowered morale in the office.",
       "options": [
-        "sarcastic",
-        "arctic",
         "charitable",
-        "avid"
+        "avid",
+        "sarcastic",
+        "arctic"
       ],
       "correct": "sarcastic"
     },
     {
       "id": 192,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Having bought the house, they couldn't afford to __________________ it.",
+      "category": "Part 5 · Set 2",
+      "question": "Having leased the office, the start-up could not afford to ____ it.",
       "options": [
+        "follow",
         "furnish",
         "recline",
-        "slump",
-        "follow"
+        "slump"
       ],
       "correct": "furnish"
     },
     {
       "id": 193,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The beef was __________________.",
+      "category": "Part 5 · Set 2",
+      "question": "The chef apologized that the beef was ____ and offered to bring a new dish.",
       "options": [
-        "cutesy",
         "quaint",
         "insincere",
-        "overdone"
+        "overdone",
+        "cutesy"
       ],
       "correct": "overdone"
     },
     {
       "id": 194,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "Sarah __________________ her brother's offer of help.",
+      "category": "Part 5 · Set 2",
+      "question": "The committee ____ the supplier's first offer as too expensive.",
       "options": [
-        "rejected",
         "swallowed",
         "submitted",
-        "yielded"
+        "yielded",
+        "rejected"
       ],
       "correct": "rejected"
     },
     {
       "id": 195,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The children are __________________ of the danger of taking drugs.",
+      "category": "Part 5 · Set 2",
+      "question": "All new staff are made ____ of the safety regulations during induction.",
       "options": [
         "keen",
         "attentive",
@@ -2577,47 +2577,47 @@ const TOEIC_DATA = {
     {
       "id": 196,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "These are pure silks embroidered with __________________ patterns.",
+      "category": "Part 5 · Set 2",
+      "question": "The gift shop sells silk scarves embroidered with ____ patterns.",
       "options": [
+        "acrid",
         "elaborate",
         "severe",
-        "sober",
-        "acrid"
+        "sober"
       ],
       "correct": "elaborate"
     },
     {
       "id": 197,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "New evidence has __________________ the first witness's story.",
+      "category": "Part 5 · Set 2",
+      "question": "New documents have ____ the second witness's account of the accident.",
       "options": [
-        "confessed",
-        "asserted",
         "confirmed",
-        "owned"
+        "owned",
+        "confessed",
+        "asserted"
       ],
       "correct": "confirmed"
     },
     {
       "id": 198,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "He __________________ his pursuers by escaping into a river.",
+      "category": "Part 5 · Set 2",
+      "question": "The accountant ____ his pursuers by escaping through a service exit.",
       "options": [
-        "eluded",
         "backed off",
         "regressed",
-        "returned"
+        "returned",
+        "eluded"
       ],
       "correct": "eluded"
     },
     {
       "id": 199,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The patient's condition has now __________________.",
+      "category": "Part 5 · Set 2",
+      "question": "The patient's condition has now ____.",
       "options": [
         "elected",
         "stabilized",
@@ -2629,60 +2629,60 @@ const TOEIC_DATA = {
     {
       "id": 200,
       "type_id": 2,
-      "category": "Incomplete Sentences Part 2",
-      "question": "The crowd went __________________ as soon as the singer stepped onto the stage.",
+      "category": "Part 5 · Set 2",
+      "question": "The crowd went ____ as soon as the winner stepped onto the stage.",
       "options": [
+        "wild",
         "ornate",
         "tasteless",
-        "sane",
-        "wild"
+        "sane"
       ],
       "correct": "wild"
     },
     {
       "id": 201,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "You haven't seen Kate today, __________________ ?",
+      "category": "Part 5 · Set 3",
+      "question": "The invoices have already been sent to the client, ____?",
       "options": [
-        "haven't you",
-        "do you",
-        "have you",
-        "don't you"
+        "haven't they",
+        "do they",
+        "have they",
+        "don't they"
       ],
-      "correct": "have you"
+      "correct": "haven't they"
     },
     {
       "id": 202,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Lisa __________________ yesterday",
+      "category": "Part 5 · Set 3",
+      "question": "Ms. Ferris ____ by the IT team at the new branch office yesterday.",
       "options": [
-        "repaired the roof",
-        "had repaired the roof",
-        "had the roof repaired",
-        "was repairing"
+        "repaired her laptop",
+        "was repaired her laptop",
+        "has her laptop repaired",
+        "had her laptop repaired"
       ],
-      "correct": "had the roof repaired"
+      "correct": "had her laptop repaired"
     },
     {
       "id": 203,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "William Gates ___________________ wealth by founding Microsoft.",
+      "category": "Part 5 · Set 3",
+      "question": "The group ____ its main competitor for $2 billion last year.",
       "options": [
+        "acquired",
         "procured",
         "obtained",
-        "possessed",
-        "acquired"
+        "possessed"
       ],
       "correct": "acquired"
     },
     {
       "id": 204,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Jacob can ___________________ to a new office system quickly.",
+      "category": "Part 5 · Set 3",
+      "question": "Jacob can ____ to a new office system quickly.",
       "options": [
         "adapt",
         "adopt",
@@ -2694,21 +2694,21 @@ const TOEIC_DATA = {
     {
       "id": 205,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "The suspect succumbed to blows ___________________ by the police.",
+      "category": "Part 5 · Set 3",
+      "question": "The employee received compensation for the injuries ____ by the faulty machine.",
       "options": [
-        "administered",
+        "dealt",
+        "inflicted",
         "given",
-        "taken",
-        "dealt"
+        "taken"
       ],
-      "correct": "dealt"
+      "correct": "inflicted"
     },
     {
       "id": 206,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "( in a store ) No __________________ before 9 A.M.",
+      "category": "Part 5 · Set 3",
+      "question": "( in a store ) No ____ before 9 A.M.",
       "options": [
         "admonition",
         "admission",
@@ -2720,8 +2720,8 @@ const TOEIC_DATA = {
     {
       "id": 207,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "My __________________ was endorsed by the council.",
+      "category": "Part 5 · Set 3",
+      "question": "My ____ was endorsed by the council.",
       "options": [
         "advice",
         "advise",
@@ -2733,8 +2733,8 @@ const TOEIC_DATA = {
     {
       "id": 208,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Many of our welfare programs _______________ people's lives positively.",
+      "category": "Part 5 · Set 3",
+      "question": "Many of our welfare programs ____ people's lives positively.",
       "options": [
         "effect",
         "affect",
@@ -2746,60 +2746,60 @@ const TOEIC_DATA = {
     {
       "id": 209,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "His poor health was ___________________ by his drinking.",
+      "category": "Part 5 · Set 3",
+      "question": "The delay was ____ by the sudden shortage of raw materials.",
       "options": [
         "aggravated",
         "irritated",
         "annoyed",
-        "angred"
+        "angered"
       ],
       "correct": "aggravated"
     },
     {
       "id": 210,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Breakfast was ___________________ by 7 A.M.",
+      "category": "Part 5 · Set 3",
+      "question": "The marketing materials were ____ for the trade show by 6 a.m.",
       "options": [
-        "already",
-        "allready",
-        "all ready",
-        "al ready"
+        "readily",
+        "readiness",
+        "readied",
+        "ready"
       ],
-      "correct": "all ready"
+      "correct": "ready"
     },
     {
       "id": 211,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Mom bought _______________ of apples yesterday.",
+      "category": "Part 5 · Set 3",
+      "question": "The purchase order covers ____ of premium coffee beans.",
       "options": [
+        "one and a half kilos",
         "one and half kilo",
         "one and a half kilo",
-        "one and half kilos",
-        "one and a half kilos"
+        "one and half kilos"
       ],
       "correct": "one and a half kilos"
     },
     {
       "id": 212,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "There was ________________ time for consultation.",
+      "category": "Part 5 · Set 3",
+      "question": "There was ____ time for consultation before the deadline.",
       "options": [
+        "a few",
         "little",
         "a little",
-        "few",
-        "a few"
+        "few"
       ],
       "correct": "little"
     },
     {
       "id": 213,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "He was dismissed on the 13th. __________________ the factory went on fire.",
+      "category": "Part 5 · Set 3",
+      "question": "He was dismissed on the 13th. ____ the factory went on fire.",
       "options": [
         "This night",
         "That night",
@@ -2811,8 +2811,8 @@ const TOEIC_DATA = {
     {
       "id": 214,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "The ship struck an iceberg which tore a huge hole in _________________.",
+      "category": "Part 5 · Set 3",
+      "question": "The ship struck an iceberg which tore a huge hole in ____.",
       "options": [
         "it's side",
         "his side",
@@ -2824,34 +2824,34 @@ const TOEIC_DATA = {
     {
       "id": 215,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Our team __________________ the best.",
+      "category": "Part 5 · Set 3",
+      "question": "Our department ____ responsible for all overseas accounts.",
       "options": [
-        "are",
         "were",
         "has",
-        "is"
+        "is",
+        "are"
       ],
       "correct": "is"
     },
     {
       "id": 216,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Your nephew is __________________.",
+      "category": "Part 5 · Set 3",
+      "question": "The firm hired ____ to manage the front desk.",
       "options": [
-        "a little nice boy",
-        "a nice little boy",
-        "a boy nice and little",
-        "a boy little and nice"
+        "a little nice assistant",
+        "a nice little assistant",
+        "an assistant nice and little",
+        "an assistant little and nice"
       ],
-      "correct": "a nice little boy"
+      "correct": "a nice little assistant"
     },
     {
       "id": 217,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "__________________ supplies will soon be available.",
+      "category": "Part 5 · Set 3",
+      "question": "____ details will be available after the contract is signed.",
       "options": [
         "Far",
         "Farther",
@@ -2863,8 +2863,8 @@ const TOEIC_DATA = {
     {
       "id": 218,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "He is older than __________________.",
+      "category": "Part 5 · Set 3",
+      "question": "Mr. Todd has been with the firm longer than ____.",
       "options": [
         "mine",
         "me",
@@ -2876,21 +2876,21 @@ const TOEIC_DATA = {
     {
       "id": 219,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "The weather is getting __________________.",
+      "category": "Part 5 · Set 3",
+      "question": "Competition in the smartphone market is getting ____.",
       "options": [
-        "cold and cold",
-        "colder and colder",
-        "more and more cold",
-        "coldest and coldest"
+        "strongest and strongest",
+        "strong and strong",
+        "stronger and stronger",
+        "more and more strong"
       ],
-      "correct": "colder and colder"
+      "correct": "stronger and stronger"
     },
     {
       "id": 220,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "The accident was my fault, so I had to pay for the __________________ the other car.",
+      "category": "Part 5 · Set 3",
+      "question": "The accident was my fault, so I had to pay for the ____ the other car.",
       "options": [
         "damage to",
         "damage in",
@@ -2902,21 +2902,21 @@ const TOEIC_DATA = {
     {
       "id": 221,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "The train was late, but nobody knew the __________________ the delay.",
+      "category": "Part 5 · Set 3",
+      "question": "The airline issued a statement explaining the ____ the delay.",
       "options": [
-        "reason of",
-        "reason in",
         "reason with",
-        "reason for"
+        "reason for",
+        "reason of",
+        "reason in"
       ],
       "correct": "reason for"
     },
     {
       "id": 222,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "The company closed down because there wasn't enough__________ its product.",
+      "category": "Part 5 · Set 3",
+      "question": "The company closed down because there wasn't enough ____ its product.",
       "options": [
         "demand with",
         "demand in",
@@ -2928,99 +2928,99 @@ const TOEIC_DATA = {
     {
       "id": 223,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Rachel showed me some __________________ her family.",
+      "category": "Part 5 · Set 3",
+      "question": "The designer showed the board some ____ the new packaging.",
       "options": [
+        "photographs of",
         "photographs with",
         "photographs on",
-        "photographs by",
-        "photographs of"
+        "photographs by"
       ],
       "correct": "photographs of"
     },
     {
       "id": 224,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "There has been an __________________ the number of road accidents recently.",
+      "category": "Part 5 · Set 3",
+      "question": "There has been a sharp ____ the number of online orders this year.",
       "options": [
-        "increase on",
-        "increase in",
         "increase by",
-        "increase with"
+        "increase with",
+        "increase on",
+        "increase in"
       ],
       "correct": "increase in"
     },
     {
       "id": 225,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "The __________________ the explosion is unknown.",
+      "category": "Part 5 · Set 3",
+      "question": "The ____ the fire at the warehouse is still unknown.",
       "options": [
-        "cause with",
-        "cause for",
         "cause of",
-        "cause on"
+        "cause on",
+        "cause with",
+        "cause for"
       ],
       "correct": "cause of"
     },
     {
       "id": 226,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "The __________________ living alone is that you can do what you like.",
+      "category": "Part 5 · Set 3",
+      "question": "The main ____ working from home is the time saved on commuting.",
       "options": [
-        "advantage of",
         "advantage in",
         "advantage with",
-        "advantage on"
+        "advantage on",
+        "advantage of"
       ],
       "correct": "advantage of"
     },
     {
       "id": 227,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "They sent me a _______________ $ 150.",
+      "category": "Part 5 · Set 3",
+      "question": "The vendor sent us a ____ the outstanding balance.",
       "options": [
-        "check of",
         "check for",
         "check on",
-        "check with"
+        "check with",
+        "check of"
       ],
       "correct": "check for"
     },
     {
       "id": 228,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Do you have a good __________________ your parents ?",
+      "category": "Part 5 · Set 3",
+      "question": "Our firm has built a strong ____ its overseas suppliers.",
       "options": [
-        "relationship to",
-        "relationship with",
         "relationship by",
-        "relationship in"
+        "relationship in",
+        "relationship to",
+        "relationship with"
       ],
       "correct": "relationship with"
     },
     {
       "id": 229,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "I had a __________________ the town, so I was able to find my way around.",
+      "category": "Part 5 · Set 3",
+      "question": "The intern was given a detailed ____ the production facility.",
       "options": [
-        "map with",
         "map in",
-        "map with",
-        "map of"
+        "map at",
+        "map of",
+        "map with"
       ],
       "correct": "map of"
     },
     {
       "id": 230,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Man as a biological being whose needs for a humane and quality life is _________ dependent on his environment.",
+      "category": "Part 5 · Set 3",
+      "question": "Man as a biological being whose needs for a humane and quality life is ____ dependent on his environment.",
       "options": [
         "largely",
         "possibly",
@@ -3032,21 +3032,21 @@ const TOEIC_DATA = {
     {
       "id": 231,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "__________________ a hole through the middle card about the size of a twenty-five cent coin.",
+      "category": "Part 5 · Set 3",
+      "question": "____ two holes in the top left corner of each form.",
       "options": [
-        "Do",
-        "Drill",
         "Bore",
-        "Punch"
+        "Punch",
+        "Do",
+        "Drill"
       ],
       "correct": "Punch"
     },
     {
       "id": 232,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Each kind of cells has certain __________________ in order to keep the plant or animal alive.",
+      "category": "Part 5 · Set 3",
+      "question": "Each kind of cells has certain ____ in order to keep the plant or animal alive.",
       "options": [
         "functions",
         "duties",
@@ -3058,8 +3058,8 @@ const TOEIC_DATA = {
     {
       "id": 233,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Dr. Jones is cited for his __________________ research leadership in the promotion of natural products of chemistry and biotechnology.",
+      "category": "Part 5 · Set 3",
+      "question": "Dr. Jones is cited for his ____ research leadership in the promotion of natural products of chemistry and biotechnology.",
       "options": [
         "terrible",
         "awful",
@@ -3071,8 +3071,8 @@ const TOEIC_DATA = {
     {
       "id": 234,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Be __________________ to participate in saving the earth's wonders and treasures.",
+      "category": "Part 5 · Set 3",
+      "question": "Employees are ____ to suggest improvements to the safety procedures.",
       "options": [
         "intimidated",
         "feared",
@@ -3084,99 +3084,99 @@ const TOEIC_DATA = {
     {
       "id": 235,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Have you ever __________________ how important your bones are for your body ?",
+      "category": "Part 5 · Set 3",
+      "question": "Have you ever ____ how much the new booking system has cut waiting times?",
       "options": [
-        "dreamed",
-        "realized",
         "seen",
-        "theorized"
+        "theorized",
+        "dreamed",
+        "realized"
       ],
       "correct": "realized"
     },
     {
       "id": 236,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "__________________ your arm in a circle.",
+      "category": "Part 5 · Set 3",
+      "question": "____ the lever clockwise to raise the loading platform.",
       "options": [
-        "Break",
         "Fold",
         "Swing",
-        "Twist"
+        "Turn",
+        "Break"
       ],
-      "correct": "Swing"
+      "correct": "Turn"
     },
     {
       "id": 237,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Do not move the __________________ person more than necessary.",
+      "category": "Part 5 · Set 3",
+      "question": "Do not move the ____ passenger until the paramedics arrive.",
       "options": [
-        "widowed",
-        "damaged",
         "victimized",
-        "injured"
+        "injured",
+        "widowed",
+        "damaged"
       ],
       "correct": "injured"
     },
     {
       "id": 238,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Food is broken down into smaller parts. It is changed to simple parts or forms so that it can be __________________ to different parts of the body.",
+      "category": "Part 5 · Set 3",
+      "question": "Goods are packed at the warehouse and then ____ to the retail outlets.",
       "options": [
+        "transported",
         "mailed",
         "ferried",
-        "airlifted",
-        "transported"
+        "airlifted"
       ],
       "correct": "transported"
     },
     {
       "id": 239,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Add a __________________ of salt to your soup.",
+      "category": "Part 5 · Set 3",
+      "question": "Add a ____ of salt to the sauce before serving.",
       "options": [
-        "finger",
-        "pinch",
         "drop",
-        "squeeze"
+        "squeeze",
+        "finger",
+        "pinch"
       ],
       "correct": "pinch"
     },
     {
       "id": 240,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Are you __________________ working for us ?",
+      "category": "Part 5 · Set 3",
+      "question": "Are you ____ joining our team as a part-time analyst?",
       "options": [
-        "interested to",
         "interested with",
         "interested on",
-        "interested in"
+        "interested in",
+        "interested to"
       ],
       "correct": "interested in"
     },
     {
       "id": 241,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "She gave me a __________________ smile.",
+      "category": "Part 5 · Set 3",
+      "question": "She greeted the clients with a ____ smile.",
       "options": [
-        "big",
         "strong",
         "large",
-        "massive"
+        "massive",
+        "big"
       ],
       "correct": "big"
     },
     {
       "id": 242,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "She __________________ her leg.",
+      "category": "Part 5 · Set 3",
+      "question": "The delivery driver ____ his arm while unloading the van.",
       "options": [
         "ruined",
         "degraded",
@@ -3188,8 +3188,8 @@ const TOEIC_DATA = {
     {
       "id": 243,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Yesterday, we called a __________________ to have our sink fixed.",
+      "category": "Part 5 · Set 3",
+      "question": "Yesterday we called a ____ to fix the leak in the staff kitchen.",
       "options": [
         "carpenter",
         "mechanic",
@@ -3201,34 +3201,34 @@ const TOEIC_DATA = {
     {
       "id": 244,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "__________________ a word if you don't understand it.",
+      "category": "Part 5 · Set 3",
+      "question": "____ a word in the glossary if you do not understand it.",
       "options": [
+        "Look for",
         "Look",
         "Look up",
-        "Look after",
-        "Look for"
+        "Look after"
       ],
       "correct": "Look up"
     },
     {
       "id": 245,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "__________________ the mistakes in your notebook.",
+      "category": "Part 5 · Set 3",
+      "question": "____ the incorrect figures and write the new ones above them.",
       "options": [
-        "Rub out",
         "Erase out",
         "Delete out",
-        "Kick out"
+        "Kick out",
+        "Cross out"
       ],
-      "correct": "Rub out"
+      "correct": "Cross out"
     },
     {
       "id": 246,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "We __________________ for half an hour just to buy a ticket.",
+      "category": "Part 5 · Set 3",
+      "question": "We ____ for half an hour just to buy a ticket.",
       "options": [
         "packed",
         "jeered",
@@ -3240,25 +3240,25 @@ const TOEIC_DATA = {
     {
       "id": 247,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "You must be very __________________ when you drive in wet weather.",
+      "category": "Part 5 · Set 3",
+      "question": "Drivers must be especially ____ when the roads are wet.",
       "options": [
-        "careful",
-        "creative",
         "reliable",
-        "suitable"
+        "suitable",
+        "careful",
+        "creative"
       ],
       "correct": "careful"
     },
     {
       "id": 248,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "I locked the door when I left, but I lost the key, so I couldn't __________________ it when I got back.",
+      "category": "Part 5 · Set 3",
+      "question": "I locked the office door, but I lost the key, so I could not ____ it the next morning.",
       "options": [
-        "delock",
-        "dislock",
-        "mislock",
+        "unfold",
+        "uncover",
+        "unpack",
         "unlock"
       ],
       "correct": "unlock"
@@ -3266,21 +3266,21 @@ const TOEIC_DATA = {
     {
       "id": 249,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Sarah is in her car. She is on her way to work. She __________________.",
+      "category": "Part 5 · Set 3",
+      "question": "Ms. Alvarez is in her car on the way to the conference. She ____.",
       "options": [
-        "has driven to work",
-        "is driving to work",
-        "drives to work",
-        "drove to work"
+        "drove to the conference",
+        "has driven to the conference",
+        "is driving to the conference",
+        "drives to the conference"
       ],
-      "correct": "is driving to work"
+      "correct": "is driving to the conference"
     },
     {
       "id": 250,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Alex is a bus driver, but now he is in bed asleep. He is not driving a bus, but he __________________.",
+      "category": "Part 5 · Set 3",
+      "question": "Alex is a bus driver, but now he is in bed asleep. He is not driving a bus, but he ____.",
       "options": [
         "have driven a bus",
         "drove a bus",
@@ -3292,34 +3292,34 @@ const TOEIC_DATA = {
     {
       "id": 251,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "We are studying the time __________________.",
+      "category": "Part 5 · Set 3",
+      "question": "The report examines the time ____ the company first entered the Asian market.",
       "options": [
-        "on how the Industrial Revolution began",
-        "when the Industrial Revolution began",
-        "where the Industrial Revolution began",
-        "why the Industrial Revolution began"
+        "on how",
+        "when",
+        "where",
+        "why"
       ],
-      "correct": "when the Industrial Revolution began"
+      "correct": "when"
     },
     {
       "id": 252,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "__________________ of constant change.",
+      "category": "Part 5 · Set 3",
+      "question": "Business ____ constant change.",
       "options": [
-        "Life was series",
-        "Life were series",
-        "Life are a series",
-        "Life is a series"
+        "is a series of",
+        "was series of",
+        "were series of",
+        "are a series of"
       ],
-      "correct": "Life is a series"
+      "correct": "is a series of"
     },
     {
       "id": 253,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Catherine's written reports __________________ a precise description of the experimental procedure.",
+      "category": "Part 5 · Set 3",
+      "question": "Catherine's written reports ____ a precise description of the experimental procedure.",
       "options": [
         "gives",
         "give",
@@ -3331,8 +3331,8 @@ const TOEIC_DATA = {
     {
       "id": 254,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "__________________ nominated Vincent.",
+      "category": "Part 5 · Set 3",
+      "question": "____ nominated Ms. Cho as the new sales director.",
       "options": [
         "Them",
         "Their",
@@ -3344,8 +3344,8 @@ const TOEIC_DATA = {
     {
       "id": 255,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "The festivals don't attract many tourists, __________________ ?",
+      "category": "Part 5 · Set 3",
+      "question": "Our new stores do not attract many tourists, ____?",
       "options": [
         "do they",
         "don't they",
@@ -3357,47 +3357,47 @@ const TOEIC_DATA = {
     {
       "id": 256,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "One can't sing ____________________ when he has a bad cold.",
+      "category": "Part 5 · Set 3",
+      "question": "The presenter could not speak ____ because of a sore throat.",
       "options": [
+        "best",
         "good",
         "better",
-        "well",
-        "best"
+        "well"
       ],
       "correct": "well"
     },
     {
       "id": 257,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "The trees __________________.",
+      "category": "Part 5 · Set 3",
+      "question": "The warehouse ____.",
       "options": [
-        "stood on a hill, wilted and bare",
-        ", wilted and bare, stood on a hill",
-        "wilted and bare stood on a hill",
-        "stood on a hill wilted and bare"
+        "new and empty stood on the hill",
+        "stood on the hill new and empty",
+        "stood on the hill, new and empty",
+        ", new and empty, stood on the hill"
       ],
-      "correct": ", wilted and bare, stood on a hill"
+      "correct": "stood on the hill, new and empty"
     },
     {
       "id": 258,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 3",
+      "question": "The head of the department asked ____ the final report on Friday.",
       "options": [
-        "The weather is fine in May :",
-        "The weather is fine in May",
-        "The weather is fine in may.",
-        "The weather is fine in May."
+        "of",
+        "for",
+        "to",
+        "at"
       ],
-      "correct": "The weather is fine in May."
+      "correct": "for"
     },
     {
       "id": 259,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "We hadn't arranged to meet. We met __________________.",
+      "category": "Part 5 · Set 3",
+      "question": "We met the supplier ____ at the trade fair, not by arrangement.",
       "options": [
         "by chance",
         "through chance",
@@ -3409,8 +3409,8 @@ const TOEIC_DATA = {
     {
       "id": 260,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Last year was a bad one for the company. There was a big fall __________________.",
+      "category": "Part 5 · Set 3",
+      "question": "Last year was a bad one for the company. There was a big fall ____.",
       "options": [
         "with sales",
         "to sales",
@@ -3422,21 +3422,21 @@ const TOEIC_DATA = {
     {
       "id": 261,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Did you get an __________________ the party ?",
+      "category": "Part 5 · Set 3",
+      "question": "Did you receive an ____ the supplier's annual dinner?",
       "options": [
-        "invitation to",
         "invitation for",
         "invitation with",
-        "invitation on"
+        "invitation on",
+        "invitation to"
       ],
       "correct": "invitation to"
     },
     {
       "id": 262,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "The police want to question a man in __________________ the robbery.",
+      "category": "Part 5 · Set 3",
+      "question": "The auditors want to question a manager in ____ the missing funds.",
       "options": [
         "connection to",
         "connection about",
@@ -3448,47 +3448,47 @@ const TOEIC_DATA = {
     {
       "id": 263,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "There's no excuse for behavior like that. There's no __________________ it.",
+      "category": "Part 5 · Set 3",
+      "question": "There is no ____ a second approval for orders under $500.",
       "options": [
+        "need about",
         "need for",
         "need with",
-        "need to",
-        "need about"
+        "need to"
       ],
       "correct": "need for"
     },
     {
       "id": 264,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "I hope we will find a __________________the problem.",
+      "category": "Part 5 · Set 3",
+      "question": "The engineers hope to find a ____ the production problem.",
       "options": [
+        "solution for",
         "solution on",
         "solution to",
-        "solution in",
-        "solution for"
+        "solution in"
       ],
       "correct": "solution to"
     },
     {
       "id": 265,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "There are some __________________ British and American English.",
+      "category": "Part 5 · Set 3",
+      "question": "The report describes some ____ the two accounting systems.",
       "options": [
+        "differences on",
         "differences with",
         "differences in",
-        "differences between",
-        "differences on"
+        "differences between"
       ],
       "correct": "differences between"
     },
     {
       "id": 266,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "I was surprised at her __________________ my suggestion.",
+      "category": "Part 5 · Set 3",
+      "question": "Management was surprised at her ____ the proposal.",
       "options": [
         "reaction in",
         "reaction on",
@@ -3500,34 +3500,34 @@ const TOEIC_DATA = {
     {
       "id": 267,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Thank you. It was very __________________ to help me.",
+      "category": "Part 5 · Set 3",
+      "question": "Thank you for the reference. It was very ____ to help me.",
       "options": [
+        "kind in you",
         "kind of you",
         "kind to you",
-        "kind with you",
-        "kind in you"
+        "kind with you"
       ],
       "correct": "kind of you"
     },
     {
       "id": 268,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "His __________________his job is very negative.",
+      "category": "Part 5 · Set 3",
+      "question": "His ____ his new duties is very positive.",
       "options": [
-        "attitude with",
         "attitude on",
         "attitude in",
-        "attitude to"
+        "attitude to",
+        "attitude with"
       ],
       "correct": "attitude to"
     },
     {
       "id": 269,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "It's stupid to get __________________ things that don't matter.",
+      "category": "Part 5 · Set 3",
+      "question": "It is unprofessional to get ____ minor setbacks.",
       "options": [
         "angry at",
         "angry about",
@@ -3539,8 +3539,8 @@ const TOEIC_DATA = {
     {
       "id": 270,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "I make a weekly timetable for the school work I need to __________________.",
+      "category": "Part 5 · Set 3",
+      "question": "I make a weekly timetable for the school work I need to ____.",
       "options": [
         "accomplish",
         "relax",
@@ -3552,8 +3552,8 @@ const TOEIC_DATA = {
     {
       "id": 271,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "I am __________________ to do the work I do not enjoy because I see it as important.",
+      "category": "Part 5 · Set 3",
+      "question": "I am ____ to do the work I do not enjoy because I see it as important.",
       "options": [
         "willing",
         "enable",
@@ -3565,34 +3565,34 @@ const TOEIC_DATA = {
     {
       "id": 272,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "I have ways of __________________ with distractions.",
+      "category": "Part 5 · Set 3",
+      "question": "The support team has effective ways of ____ difficult complaints.",
       "options": [
+        "dealing",
         "writing",
         "learning",
-        "including",
-        "dealing"
+        "including"
       ],
       "correct": "dealing"
     },
     {
       "id": 273,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "I am able to __________________ my concentration and does not let my mind 'drift away'.",
+      "category": "Part 5 · Set 3",
+      "question": "Ms. Nolan is able to ____ her concentration during long negotiations.",
       "options": [
+        "have",
         "keep",
         "make",
-        "do",
-        "have"
+        "do"
       ],
       "correct": "keep"
     },
     {
       "id": 274,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "I __________________ myself when I work.",
+      "category": "Part 5 · Set 3",
+      "question": "Good managers ____ staff who exceed their targets.",
       "options": [
         "reward",
         "find",
@@ -3604,8 +3604,8 @@ const TOEIC_DATA = {
     {
       "id": 275,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "I ___________________ all my homework on time.",
+      "category": "Part 5 · Set 3",
+      "question": "All employees must ____ their timesheets on time.",
       "options": [
         "prioritize",
         "submit",
@@ -3617,8 +3617,8 @@ const TOEIC_DATA = {
     {
       "id": 276,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "I go to tutorials to __________________ my school work.",
+      "category": "Part 5 · Set 3",
+      "question": "I go to tutorials to ____ my school work.",
       "options": [
         "challenge",
         "improve",
@@ -3630,34 +3630,34 @@ const TOEIC_DATA = {
     {
       "id": 277,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "I seek __________________ from the teacher about her expectations and standards.",
+      "category": "Part 5 · Set 3",
+      "question": "I asked my supervisor for ____ about the new expense policy.",
       "options": [
+        "clarification",
         "discussion",
         "companion",
-        "facilitation",
-        "clarification"
+        "facilitation"
       ],
       "correct": "clarification"
     },
     {
       "id": 278,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "I see to it that I give myself ___________________ breaks from work.",
+      "category": "Part 5 · Set 3",
+      "question": "Employees are encouraged to take ____ breaks during long shifts.",
       "options": [
-        "easy",
         "serious",
         "regular",
-        "faithful"
+        "faithful",
+        "easy"
       ],
       "correct": "regular"
     },
     {
       "id": 279,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "I __________________ effort to find out why I need to do a particular task.",
+      "category": "Part 5 · Set 3",
+      "question": "I ____ effort to find out why I need to do a particular task.",
       "options": [
         "explain",
         "determine",
@@ -3669,51 +3669,51 @@ const TOEIC_DATA = {
     {
       "id": 280,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Korean literature and arts __________________ during the reign of Silla.",
+      "category": "Part 5 · Set 3",
+      "question": "Trade ____ in the region after the new port opened.",
       "options": [
+        "proclaimed",
         "occupied",
         "flourished",
-        "invented",
-        "proclaimed"
+        "invented"
       ],
       "correct": "flourished"
     },
     {
       "id": 281,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "The water __________________. Can you turn if off ?",
+      "category": "Part 5 · Set 3",
+      "question": "The water ____. Could you turn off the machine?",
       "options": [
+        "boiled",
         "has boil",
         "boils",
-        "is boiling",
-        "boiled"
+        "is boiling"
       ],
       "correct": "is boiling"
     },
     {
       "id": 282,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "The Koreans are a __________________ people with their own language and culture.",
+      "category": "Part 5 · Set 3",
+      "question": "The company has a ____ corporate culture with its own rituals and language.",
       "options": [
-        "distinct",
-        "tempting",
         "temperate",
-        "wild"
+        "wild",
+        "distinct",
+        "tempting"
       ],
       "correct": "distinct"
     },
     {
       "id": 283,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "I'm hungry. I __________________ something to eat.",
+      "category": "Part 5 · Set 3",
+      "question": "Our clients ____ faster service at a lower price.",
       "options": [
         "have wanted",
         "wanting",
-        "am wanting",
+        "are wanting",
         "want"
       ],
       "correct": "want"
@@ -3721,21 +3721,21 @@ const TOEIC_DATA = {
     {
       "id": 284,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "The Koreans originated from a racial blending of the Manchurians, the Malays, and the Chinese who __________________ to the peninsula in ancient times.",
+      "category": "Part 5 · Set 3",
+      "question": "Many engineers ____ to the region to work in the new technology hub.",
       "options": [
-        "cultivated",
-        "filled",
         "immigrated",
-        "deposited"
+        "deposited",
+        "cultivated",
+        "filled"
       ],
       "correct": "immigrated"
     },
     {
       "id": 285,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "I work in a travel agency now. Before that I __________________ in a department store.",
+      "category": "Part 5 · Set 3",
+      "question": "I work in a travel agency now. Before that I ____ in a department store.",
       "options": [
         "worked",
         "was working",
@@ -3747,73 +3747,73 @@ const TOEIC_DATA = {
     {
       "id": 286,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "According to Korean traditions, the first ruler of Korea was Tan Gun whose ___________________ began in 2 333 B.C.",
+      "category": "Part 5 · Set 3",
+      "question": "The company enjoyed a long ____ under its founding chairman.",
       "options": [
-        "prize",
-        "resources",
         "climate",
-        "reign"
+        "reign",
+        "prize",
+        "resources"
       ],
       "correct": "reign"
     },
     {
       "id": 287,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Yesterday Karen and Jim played tennis. They began at 10 o'clock and finished at 11.30. So, at 10.30 they __________________.",
+      "category": "Part 5 · Set 3",
+      "question": "At 10.30 yesterday the board ____ the quarterly figures.",
       "options": [
-        "played tennis",
-        "were playing tennis",
-        "have been playing tennis",
-        "had been playing tennis"
+        "was discussing",
+        "were discussing",
+        "has discussed",
+        "discussed"
       ],
-      "correct": "were playing tennis"
+      "correct": "was discussing"
     },
     {
       "id": 288,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Tan Gun's __________________ is said to have ruled until 112 B.C. when a Chinese sage, Ki Tse, with 5 000 followers immigrated to Korea and overthrew the ruler.",
+      "category": "Part 5 · Set 3",
+      "question": "The family ____ has controlled the group for four generations.",
       "options": [
-        "democracy",
         "communism",
         "dynasty",
-        "location"
+        "location",
+        "democracy"
       ],
       "correct": "dynasty"
     },
     {
       "id": 289,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Tom is looking for his key. He can't find it. He __________________.",
+      "category": "Part 5 · Set 3",
+      "question": "Mr. Bright is looking for his badge. He cannot find it. He ____ it.",
       "options": [
-        "lost his key",
-        "was losing his key",
-        "had lost his key",
-        "has lost his key"
+        "was losing",
+        "had lost",
+        "has lost",
+        "lost"
       ],
-      "correct": "has lost his key"
+      "correct": "has lost"
     },
     {
       "id": 290,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "They arrived __________________ 5 o'clock.",
+      "category": "Part 5 · Set 3",
+      "question": "The plant manager arrived ____ 5 o'clock to inspect the production line.",
       "options": [
-        "at",
         "in",
         "on",
-        "by"
+        "by",
+        "at"
       ],
       "correct": "at"
     },
     {
       "id": 291,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Ki Tse __________________ a dynasty which ruled Korea until 193 B.C.",
+      "category": "Part 5 · Set 3",
+      "question": "Mr. Cardoso ____ a logistics company that now operates in six countries.",
       "options": [
         "bounded",
         "positioned",
@@ -3825,47 +3825,47 @@ const TOEIC_DATA = {
     {
       "id": 292,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "They arrived __________________ Friday.",
+      "category": "Part 5 · Set 3",
+      "question": "The audit team arrived ____ Friday.",
       "options": [
+        "from",
         "on",
         "in",
-        "at",
-        "from"
+        "at"
       ],
       "correct": "on"
     },
     {
       "id": 293,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "In the years that followed Chinese influence became strong in Korea, and Confucianism became the __________________ religion among the Koreans.",
+      "category": "Part 5 · Set 3",
+      "question": "After the merger, English became the ____ language of the group.",
       "options": [
-        "united",
         "strong",
         "high",
-        "chief"
+        "chief",
+        "united"
       ],
       "correct": "chief"
     },
     {
       "id": 294,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "They arrived __________________ October.",
+      "category": "Part 5 · Set 3",
+      "question": "The new warehouse opened ____ October.",
       "options": [
-        "since",
-        "at",
         "on",
-        "in"
+        "in",
+        "since",
+        "at"
       ],
       "correct": "in"
     },
     {
       "id": 295,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "In the last decade of the sixteenth century, the Japanese __________________, Hideyoshi, after unifying Japan, dreamed of establishing an Asian empire.",
+      "category": "Part 5 · Set 3",
+      "question": "The founder ran the company like a ____, ignoring all advice.",
       "options": [
         "actor",
         "priest",
@@ -3877,60 +3877,60 @@ const TOEIC_DATA = {
     {
       "id": 296,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "They arrived __________________ 1968.",
+      "category": "Part 5 · Set 3",
+      "question": "The firm was founded ____ 1968.",
       "options": [
-        "on",
-        "in",
         "at",
-        "for"
+        "for",
+        "on",
+        "in"
       ],
       "correct": "in"
     },
     {
       "id": 297,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "In the hearts of Koreans was planted __________________ hatred for the Japanese which endured for centuries.",
+      "category": "Part 5 · Set 3",
+      "question": "There is ____ competition for qualified engineers in the region.",
       "options": [
-        "an imperial",
-        "a perfect",
         "an intense",
-        "a brilliant"
+        "a brilliant",
+        "an imperial",
+        "a perfect"
       ],
       "correct": "an intense"
     },
     {
       "id": 298,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "I don't like going out __________________.",
+      "category": "Part 5 · Set 3",
+      "question": "The cleaning staff work ____, when the offices are empty.",
       "options": [
-        "from night",
-        "in night",
         "on night",
-        "at night"
+        "at night",
+        "from night",
+        "in night"
       ],
       "correct": "at night"
     },
     {
       "id": 299,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "China, Japan, and Russia __________________ to control Korea.",
+      "category": "Part 5 · Set 3",
+      "question": "Several firms ____ to control the local delivery market.",
       "options": [
-        "placed",
         "struggled",
         "brought",
-        "recognized"
+        "recognized",
+        "placed"
       ],
       "correct": "struggled"
     },
     {
       "id": 300,
       "type_id": 3,
-      "category": "Grammar Part 1",
-      "question": "Europe’s economic recovery will last only if ________ governments decide to make deeper economic reforms.",
+      "category": "Part 5 · Set 3",
+      "question": "Europe’s economic recovery will last only if ____ governments decide to make deeper economic reforms.",
       "options": [
         "it",
         "its",
@@ -3942,21 +3942,21 @@ const TOEIC_DATA = {
     {
       "id": 301,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Were you ___________________ your exam results ?",
+      "category": "Part 5 · Set 4",
+      "question": "The client was not ____ the quality of the first shipment.",
       "options": [
         "happy with",
-        "happy about",
         "happy for",
-        "happy in"
+        "happy of",
+        "happy at"
       ],
       "correct": "happy with"
     },
     {
       "id": 302,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Lisa is __________________ not being invited to the party.",
+      "category": "Part 5 · Set 4",
+      "question": "Several staff members are ____ the change in shift patterns.",
       "options": [
         "upset with",
         "upset about",
@@ -3968,60 +3968,60 @@ const TOEIC_DATA = {
     {
       "id": 303,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "I was ___________________ the present you gave me.",
+      "category": "Part 5 · Set 4",
+      "question": "The director was ____ the results of the pilot project.",
       "options": [
-        "delighted about",
+        "delighted to",
         "delighted of",
         "delighted with",
-        "delighted to"
+        "delighted in"
       ],
       "correct": "delighted with"
     },
     {
       "id": 304,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Are you __________________ going away next week ?",
+      "category": "Part 5 · Set 4",
+      "question": "The staff are ____ the launch of the new product line.",
       "options": [
-        "excited in",
         "excited on",
         "excited about",
-        "excited with"
+        "excited with",
+        "excited in"
       ],
       "correct": "excited about"
     },
     {
       "id": 305,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Are you __________________ ?",
+      "category": "Part 5 · Set 4",
+      "question": "The supervisor was ____ me for delaying the report.",
       "options": [
-        "annoyed to me for being late",
-        "annoyed with me at being late",
-        "annoyed at me in being late",
-        "annoyed with me for being late"
+        "annoyed with me at",
+        "annoyed at me in",
+        "annoyed with me for",
+        "annoyed to me for"
       ],
-      "correct": "annoyed with me for being late"
+      "correct": "annoyed with me for"
     },
     {
       "id": 306,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "They have always been __________________.",
+      "category": "Part 5 · Set 4",
+      "question": "The new team leader has always been ____.",
       "options": [
-        "nice to me",
         "nice of me",
         "nice with me",
-        "nice for me"
+        "nice for me",
+        "nice to me"
       ],
       "correct": "nice to me"
     },
     {
       "id": 307,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "It is __________________ to go out without a coat in such cold weather.",
+      "category": "Part 5 · Set 4",
+      "question": "It was ____ to send the invitation without checking the address.",
       "options": [
         "stupid for me",
         "stupid to me",
@@ -4033,11 +4033,11 @@ const TOEIC_DATA = {
     {
       "id": 308,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Everybody was _____________________ the news.",
+      "category": "Part 5 · Set 4",
+      "question": "The shareholders were ____ the size of the dividend.",
       "options": [
         "surprised on",
-        "surprised about",
+        "surprised of",
         "surprised with",
         "surprised at"
       ],
@@ -4046,307 +4046,307 @@ const TOEIC_DATA = {
     {
       "id": 309,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "I'm very __________________ her English. It's very good.",
+      "category": "Part 5 · Set 4",
+      "question": "The client said she was ____ the presentation.",
       "options": [
-        "impressed about",
-        "impressed for",
         "impressed with",
-        "impressed in"
+        "impressed in",
+        "impressed about",
+        "impressed for"
       ],
       "correct": "impressed with"
     },
     {
       "id": 310,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "I'm __________________ the mess. I'll clear it up later.",
+      "category": "Part 5 · Set 4",
+      "question": "We are ____ the delay in processing your claim.",
       "options": [
-        "sorry about",
         "sorry with",
-        "sorry for",
-        "sorry on"
+        "sorry of",
+        "sorry on",
+        "sorry about"
       ],
       "correct": "sorry about"
     },
     {
       "id": 311,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "The new assistant manager is responsible ____ training the summer interns.",
       "options": [
-        "Two professors Dr. Johnson and Dr. Jeliffe, survey world literature in alternate semesters.",
-        "Two professors, Dr. Johnson and Dr. Jeliffe survey world literature in alternate semesters.",
-        "Two professors Dr. Johnson and Dr. Jeliffe survey world literature in alternate semesters.",
-        "Two professors, Dr. Johnson and Dr. Jeliffe, survey world literature in alternate semesters."
+        "to",
+        "with",
+        "for",
+        "of"
       ],
-      "correct": "Two professors, Dr. Johnson and Dr. Jeliffe, survey world literature in alternate semesters."
+      "correct": "for"
     },
     {
       "id": 312,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "Ms. Chen has worked in the accounting department ____ 2019.",
       "options": [
-        "Through the lens of the camera was seen the scenic view of the old mansion.",
-        "Seen the scenic view of the old mansion was through the lens of the camera.",
-        "The camera through its lens the scenic view of the old mansion was seen.",
-        "The old mansion's scenic view through the lens of the camera was seen"
+        "during",
+        "since",
+        "for",
+        "from"
       ],
-      "correct": "Through the lens of the camera was seen the scenic view of the old mansion."
+      "correct": "since"
     },
     {
       "id": 313,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "All staff members are required to ____ their identification badges.",
       "options": [
-        "Elizabeth studying data processing.",
-        "Data processing studied by Elizabeth.",
-        "Studying data processing Elizabeth.",
-        "Elizabeth is studying data processing."
+        "wear",
+        "wearing",
+        "wore",
+        "worn"
       ],
-      "correct": "Elizabeth is studying data processing."
+      "correct": "wear"
     },
     {
       "id": 314,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "The shipment will be delivered ____ the end of the week.",
       "options": [
-        "Helplessly fell across the wet stage.",
-        "The actress helplessly fell across the wet stage.",
-        "Across the wet stage the actress helplessly fell.",
-        "Fell helplessly across the wet stage the actress"
+        "until",
+        "since",
+        "during",
+        "by"
       ],
-      "correct": "The actress helplessly fell across the wet stage."
+      "correct": "by"
     },
     {
       "id": 315,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "Neither the manager nor the assistants ____ available for the conference call.",
       "options": [
-        "The apple pie smells good tempting.",
-        "Smells good and tempting the apple pie is.",
-        "Good and tempting the apple pie smells.",
-        "The apple pie smells good and tempting."
+        "is",
+        "has been",
+        "were",
+        "was"
       ],
-      "correct": "The apple pie smells good and tempting."
+      "correct": "were"
     },
     {
       "id": 316,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "The company's profits have grown ____ since the new CEO took over.",
       "options": [
-        "The man looks bored with a long pipe.",
-        "The man with a long pipe looks bored.",
-        "Bored is the man with long pipe.",
-        "Long pipe is the man who looks bored"
+        "considerate",
+        "considerably",
+        "considerable",
+        "consideration"
       ],
-      "correct": "The man with a long pipe looks bored."
+      "correct": "considerably"
     },
     {
       "id": 317,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "Please ____ your laptop and put it in your bag before leaving the meeting room.",
       "options": [
-        "Have you seen a flyer fish ?",
-        "Have you seen a flown fish ?",
-        "Have you seen a flying fish ?",
-        "Have you seen a fly fish ?"
+        "shut down",
+        "shut in",
+        "shut out",
+        "shut away"
       ],
-      "correct": "Have you seen a flying fish ?"
+      "correct": "shut down"
     },
     {
       "id": 318,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "The invoice must be paid within 30 days; ____, a late fee will be charged.",
       "options": [
-        "The students rushed into the room, when the bell rang.",
-        "When the bell rang the students rushed into the room.",
-        "The students, rushed into the room when the bell rang.",
-        "When the bell rang, the students rushed into the room."
+        "therefore",
+        "moreover",
+        "likewise",
+        "otherwise"
       ],
-      "correct": "When the bell rang, the students rushed into the room."
+      "correct": "otherwise"
     },
     {
       "id": 319,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "Ms. Rivera is the only employee ____ has access to the client database.",
       "options": [
-        "The piano has ivory keys that belonged to my grandmother.",
-        "The piano that belonged to my grandmother has ivory keys.",
-        "The ivory keys that belonged to my grandmother has a piano.",
-        "The ivory keys has a piano that belonged to my grandmother."
+        "which",
+        "whose",
+        "who",
+        "whom"
       ],
-      "correct": "The piano that belonged to my grandmother has ivory keys."
+      "correct": "who"
     },
     {
       "id": 320,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "The training session was ____ useful that the company scheduled a second one.",
       "options": [
-        "I was marked absent by the teacher sleeping during art class.",
-        "The teacher, sleeping during art class, marked me absent.",
-        "Sleeping during art class, the teacher marked me absent.",
-        "Sleeping during art class, I was marked absent by the teacher."
+        "very",
+        "so",
+        "such",
+        "too"
       ],
-      "correct": "Sleeping during art class, I was marked absent by the teacher."
+      "correct": "so"
     },
     {
       "id": 321,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Tomorrow is __________________.",
+      "category": "Part 5 · Set 4",
+      "question": "The board approved ____ plan to expand into Europe.",
       "options": [
-        "a half holiday",
-        "a half-holiday",
-        "half holiday",
-        "half-holiday"
+        "a five-year",
+        "five-year",
+        "the five-years",
+        "a five-years"
       ],
-      "correct": "a half-holiday"
+      "correct": "a five-year"
     },
     {
       "id": 322,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "__________________ is round.",
+      "category": "Part 5 · Set 4",
+      "question": "____ Asia-Pacific region accounts for half of our sales.",
       "options": [
-        "Earth",
-        "An Earth",
-        "The Earth",
-        "Earths"
+        "A",
+        "An",
+        "-",
+        "The"
       ],
-      "correct": "The Earth"
+      "correct": "The"
     },
     {
       "id": 323,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "What __________________ !",
+      "category": "Part 5 · Set 4",
+      "question": "What ____ our clients expect!",
       "options": [
-        "pretty girls",
-        "a pretty girls",
-        "pretty girl",
-        "the pretty girls"
+        "highs standards",
+        "the high standard",
+        "high standards",
+        "a high standards"
       ],
-      "correct": "pretty girls"
+      "correct": "high standards"
     },
     {
       "id": 324,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "__________________ was quite empty last year.",
+      "category": "Part 5 · Set 4",
+      "question": "____ warehouse was quite empty last month.",
       "options": [
-        "This beach",
-        "This beaches",
-        "These beach",
-        "These beaches"
+        "These warehouse",
+        "This",
+        "These",
+        "This warehouses"
       ],
-      "correct": "This beach"
+      "correct": "This"
     },
     {
       "id": 325,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "We have _______________________.",
+      "category": "Part 5 · Set 4",
+      "question": "The technicians went back to ____ after the alarm was cancelled.",
       "options": [
-        "some breakfast at eight",
-        "the breakfast at eight",
-        "a breakfast at eight",
-        "breakfast at eight"
+        "work",
+        "works",
+        "the work",
+        "a work"
       ],
-      "correct": "breakfast at eight"
+      "correct": "work"
     },
     {
       "id": 326,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Scotland lost many of __________________bravest men in two great rebellions.",
+      "category": "Part 5 · Set 4",
+      "question": "The company lost many of ____ most experienced technicians in the restructuring.",
       "options": [
-        "its",
         "it's",
-        "his",
-        "her"
+        "their",
+        "hers",
+        "its"
       ],
-      "correct": "her"
+      "correct": "its"
     },
     {
       "id": 327,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "One night there __________________.",
+      "category": "Part 5 · Set 4",
+      "question": "One night there ____ a serious fire at the distribution centre.",
       "options": [
-        "is a terrible storm",
-        "has been a terrible storm",
-        "was a terrible storm",
-        "had been a terrible storm"
+        "is a serious fire",
+        "has been a serious fire",
+        "was a serious fire",
+        "had been a serious fire"
       ],
-      "correct": "was a terrible storm"
+      "correct": "was a serious fire"
     },
     {
       "id": 328,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "My mother works __________________.",
+      "category": "Part 5 · Set 4",
+      "question": "My brother is a ____ of our family business.",
       "options": [
-        "as an actor in our country",
-        "as a conductor",
-        "as a waiter in a local restaurant",
-        "a manageress of our family business"
+        "managing",
+        "manager",
+        "manage",
+        "management"
       ],
-      "correct": "a manageress of our family business"
+      "correct": "manager"
     },
     {
       "id": 329,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "A: \"Sugar? \"   B: \" __________________, please.\"",
+      "category": "Part 5 · Set 4",
+      "question": "A: 'Would you like some coffee?' B: ' ____, please.'",
       "options": [
-        "A little",
-        "Little",
         "A few",
-        "Few"
+        "Few",
+        "A little",
+        "Little"
       ],
       "correct": "A little"
     },
     {
       "id": 330,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "__________________ are worn in Japan.",
+      "category": "Part 5 · Set 4",
+      "question": "____ are sold in the hotel gift shop.",
       "options": [
+        "Kimoni",
         "Kimono",
         "Kimonoes",
-        "Kimonos",
-        "Kimoni"
+        "Kimonos"
       ],
       "correct": "Kimonos"
     },
     {
       "id": 331,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Do you have any __________________ experience of this type of work?",
+      "category": "Part 5 · Set 4",
+      "question": "Do you have any ____ experience of this type of work?",
       "options": [
+        "previous",
         "contemporary",
         "instant",
-        "modern",
-        "previous"
+        "modern"
       ],
       "correct": "previous"
     },
     {
       "id": 332,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "The plane had to __________________ from its normal flight path.",
+      "category": "Part 5 · Set 4",
+      "question": "The plane had to ____ from its normal flight path.",
       "options": [
         "deviate",
         "err",
@@ -4358,21 +4358,21 @@ const TOEIC_DATA = {
     {
       "id": 333,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "What's for supper? I'm ___________________.",
+      "category": "Part 5 · Set 4",
+      "question": "The team worked through lunch, so by three o'clock everyone was ____.",
       "options": [
-        "notable",
         "realistic",
         "famished",
-        "conventional"
+        "conventional",
+        "notable"
       ],
       "correct": "famished"
     },
     {
       "id": 334,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "They __________________ the profits on expensive cars.",
+      "category": "Part 5 · Set 4",
+      "question": "They ____ the profits on expensive cars.",
       "options": [
         "polished",
         "squandered",
@@ -4384,8 +4384,8 @@ const TOEIC_DATA = {
     {
       "id": 335,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Sorry to __________________ you, but I have an urgent message.",
+      "category": "Part 5 · Set 4",
+      "question": "Sorry to ____ you, but the client is waiting on line two.",
       "options": [
         "disturb",
         "try",
@@ -4397,8 +4397,8 @@ const TOEIC_DATA = {
     {
       "id": 336,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Car sales have __________________ by a quarter.",
+      "category": "Part 5 · Set 4",
+      "question": "Car sales have ____ by a quarter.",
       "options": [
         "adored",
         "demoted",
@@ -4410,8 +4410,8 @@ const TOEIC_DATA = {
     {
       "id": 337,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "The strap is __________________ leather.",
+      "category": "Part 5 · Set 4",
+      "question": "The strap on the sample bag is made of ____ leather.",
       "options": [
         "nominal",
         "genuine",
@@ -4423,8 +4423,8 @@ const TOEIC_DATA = {
     {
       "id": 338,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "He had no special __________________ and was treated just like every other prisoner.",
+      "category": "Part 5 · Set 4",
+      "question": "Full members enjoy special ____ such as free airport parking.",
       "options": [
         "confidence",
         "principles",
@@ -4436,21 +4436,21 @@ const TOEIC_DATA = {
     {
       "id": 339,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Survivors of the crash were __________________ by helicopter.",
+      "category": "Part 5 · Set 4",
+      "question": "The workers trapped in the mine were ____ by helicopter.",
       "options": [
-        "restricted",
         "restated",
         "rescued",
-        "restored"
+        "restored",
+        "restricted"
       ],
       "correct": "rescued"
     },
     {
       "id": 340,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "She was taken to hospital with serious head __________________.",
+      "category": "Part 5 · Set 4",
+      "question": "She was taken to hospital with serious head ____.",
       "options": [
         "diseases",
         "injuries",
@@ -4462,138 +4462,138 @@ const TOEIC_DATA = {
     {
       "id": 341,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Listen to those people. What language ___________________ ?",
+      "category": "Part 5 · Set 4",
+      "question": "Listen to that conversation in the lobby. What language ____?",
       "options": [
+        "have they spoken",
         "did they speak",
         "are they speaking",
-        "do they speak",
-        "have they spoken"
+        "do they speak"
       ],
       "correct": "are they speaking"
     },
     {
       "id": 342,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "The __________________ pleasures are the wicked ones.",
+      "category": "Part 5 · Set 4",
+      "question": "The magazine criticized the ____ images used in the advertising campaign.",
       "options": [
-        "sensuous",
-        "sensitive",
         "sensational",
-        "sensual"
+        "sensual",
+        "sensuous",
+        "sensitive"
       ],
       "correct": "sensual"
     },
     {
       "id": 343,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "If the flight ____ delayed, we will hold the meeting online.",
       "options": [
-        "Please drink your milk before it spills",
-        "Please drink your milk before it spills.",
-        "Please drink your milk before it spills,",
-        "Please drink your milk before it spills:"
+        "being",
+        "were",
+        "is",
+        "will be"
       ],
-      "correct": "Please drink your milk before it spills."
+      "correct": "is"
     },
     {
       "id": 344,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "She complained of her boss's inappropriate __________________ towards her.",
+      "category": "Part 5 · Set 4",
+      "question": "She complained of her manager's inappropriate ____ towards the staff.",
       "options": [
+        "being",
         "behavior",
         "mindset",
-        "demand",
-        "being"
+        "demand"
       ],
       "correct": "behavior"
     },
     {
       "id": 345,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Yes, I'm __________________ them.",
+      "category": "Part 5 · Set 4",
+      "question": "Many candidates are ____ speaking in public.",
       "options": [
-        "terrified to",
         "terrified with",
         "terrified in",
-        "terrified of"
+        "terrified of",
+        "terrified to"
       ],
       "correct": "terrified of"
     },
     {
       "id": 346,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "I've put your name on the list and I don't __________________ any problems.",
+      "category": "Part 5 · Set 4",
+      "question": "We have put your name on the waiting list and I do not ____ any problems.",
       "options": [
+        "argue",
         "certify",
         "appease",
-        "foresee",
-        "argue"
+        "foresee"
       ],
       "correct": "foresee"
     },
     {
       "id": 347,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is not correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "The board of directors decided to ____ the merger until further notice.",
       "options": [
-        "Go home before the storm comes.",
-        "Because he is persistent.",
-        "Run for your life!",
-        "He grabbed the jewelry box before he jumped from the burning building."
+        "put on",
+        "put out",
+        "put off",
+        "put up"
       ],
-      "correct": "Because he is persistent."
+      "correct": "put off"
     },
     {
       "id": 348,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "I didn't see your car, so I __________________ you'd gone out.",
+      "category": "Part 5 · Set 4",
+      "question": "I did not see your car in the lot, so I ____ you had already left.",
       "options": [
+        "conditioned",
         "assumed",
         "forged",
-        "trailed",
-        "conditioned"
+        "trailed"
       ],
       "correct": "assumed"
     },
     {
       "id": 349,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "I was invited to __________________ given to welcome the new ambassador.",
+      "category": "Part 5 · Set 4",
+      "question": "The chamber of commerce hosted ____ to welcome the new ambassador.",
       "options": [
+        "dinners",
         "dinner",
         "a dinner",
-        "the dinner",
-        "dinners"
+        "the dinner"
       ],
       "correct": "a dinner"
     },
     {
       "id": 350,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "__________________ is the world's second largest ocean.",
+      "category": "Part 5 · Set 4",
+      "question": "____ division posted the strongest growth this quarter.",
       "options": [
-        "The Atlantic Ocean",
-        "Atlantic Ocean",
-        "A Atlantic Ocean",
-        "An Atlantic Ocean"
+        "A European",
+        "An European",
+        "European",
+        "The European"
       ],
-      "correct": "The Atlantic Ocean"
+      "correct": "The European"
     },
     {
       "id": 351,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Anna bought five __________________ in the supermarket this morning.",
+      "category": "Part 5 · Set 4",
+      "question": "The cafeteria ordered five ____ of bread for the breakfast service.",
       "options": [
         "loafs",
         "loves",
@@ -4605,86 +4605,86 @@ const TOEIC_DATA = {
     {
       "id": 352,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "The play was __________________.",
+      "category": "Part 5 · Set 4",
+      "question": "The training video was ____, so most participants lost interest.",
       "options": [
-        "bored",
         "bore",
         "boring",
-        "bores"
+        "bores",
+        "bored"
       ],
       "correct": "boring"
     },
     {
       "id": 353,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "The day was __________________.",
+      "category": "Part 5 · Set 4",
+      "question": "The store introduced a ____ return policy for online purchases.",
       "options": [
-        "cold, wet and windy",
-        "cold, wet, and windy",
-        "cold and wet and windy",
-        "cold, wet, windy"
+        "30 day's",
+        "30 day",
+        "30-day",
+        "30-days"
       ],
-      "correct": "cold, wet and windy"
+      "correct": "30-day"
     },
     {
       "id": 354,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "He showed me __________________.",
+      "category": "Part 5 · Set 4",
+      "question": "The technician asked for ____.",
       "options": [
-        "a knife long and sharp",
-        "a knife sharp and long",
         "a sharp long knife",
-        "a long sharp knife"
+        "a long sharp knife",
+        "a knife long and sharp",
+        "a knife sharp and long"
       ],
       "correct": "a long sharp knife"
     },
     {
       "id": 355,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "York is __________________ than Lincoln or Selby.",
+      "category": "Part 5 · Set 4",
+      "question": "The new depot is ____ from the port than the old one.",
       "options": [
-        "far",
         "farther",
         "furthest",
-        "farthest"
+        "farthest",
+        "far"
       ],
       "correct": "farther"
     },
     {
       "id": 356,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "Mr. Okafor ____ the sales figures when the client called.",
       "options": [
-        "A boy of sixteen is often as tall as his father.",
-        "A boy of sixteen is often tall as his father.",
-        "A boy of sixteen is often as tall his father.",
-        "A boy of sixteen is often as tall than his father."
+        "has reviewed",
+        "was reviewing",
+        "review",
+        "reviews"
       ],
-      "correct": "A boy of sixteen is often as tall as his father."
+      "correct": "was reviewing"
     },
     {
       "id": 357,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "This is the best beer that __________________.",
+      "category": "Part 5 · Set 4",
+      "question": "This is the most efficient system that ____.",
       "options": [
-        "I have ever drank",
-        "I ever drank",
-        "I ever drink",
-        "I have ever drunk"
+        "we have ever installed",
+        "we ever installed",
+        "we ever install",
+        "we have ever installing"
       ],
-      "correct": "I have ever drunk"
+      "correct": "we have ever installed"
     },
     {
       "id": 358,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "A: \"Do you want a big house?\"  B: \"Yes, __________________\".",
+      "category": "Part 5 · Set 4",
+      "question": "A: 'Do you want a larger office?' B: 'Yes, ____.'",
       "options": [
         "the big the good",
         "the bigger the better",
@@ -4696,21 +4696,21 @@ const TOEIC_DATA = {
     {
       "id": 359,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "I earn less than __________________.",
+      "category": "Part 5 · Set 4",
+      "question": "Our team earns less than ____.",
       "options": [
-        "him",
         "he does",
         "his",
-        "he is"
+        "he is",
+        "him"
       ],
       "correct": "he does"
     },
     {
       "id": 360,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "These seats are for __________________.",
+      "category": "Part 5 · Set 4",
+      "question": "The new lifts are designed for ____.",
       "options": [
         "a disable",
         "the disable",
@@ -4722,203 +4722,203 @@ const TOEIC_DATA = {
     {
       "id": 361,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "The office ____ on the fifth floor of the Meridian Building.",
       "options": [
-        "I phone you when I arrive.",
-        "I will phone you when I will arrive.",
-        "I phone you when I will arrive.",
-        "I will phone you when I arrive."
+        "is located",
+        "locates",
+        "locating",
+        "is locating"
       ],
-      "correct": "I will phone you when I arrive."
+      "correct": "is located"
     },
     {
       "id": 362,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "By the time the auditors arrived, the staff ____ all the documents.",
       "options": [
-        "We have been living here since April.",
-        "We live here since April.",
-        "We are living here since April.",
-        "We have live here since April."
+        "prepare",
+        "have prepared",
+        "prepares",
+        "had prepared"
       ],
-      "correct": "We have been living here since April."
+      "correct": "had prepared"
     },
     {
       "id": 363,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "We would appreciate it if you ____ the contract by Friday.",
       "options": [
-        "I was seeing Louis yesterday.",
-        "I had seen Louis yesterday.",
-        "I have seen Louis yesterday",
-        "I saw Louis yesterday."
+        "will sign",
+        "sign",
+        "could sign",
+        "can signing"
       ],
-      "correct": "I saw Louis yesterday."
+      "correct": "could sign"
     },
     {
       "id": 364,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "Neither of the two proposals ____ the requirements of the tender.",
       "options": [
-        "When I was 20 I smoked.",
-        "When I was 20 I was smoking.",
-        "When I was 20 I use to smoke.",
-        "When I was 20 I was used to smoking."
+        "have met",
+        "meets",
+        "meet",
+        "are meeting"
       ],
-      "correct": "When I was 20 I smoked."
+      "correct": "meets"
     },
     {
       "id": 365,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "The department store is larger than ____ in the shopping district.",
       "options": [
-        "Look - it rained",
-        "Look - it rains.",
-        "Look - it's raining",
-        "Look - it rain"
+        "any other store",
+        "any store",
+        "any stores",
+        "other store"
       ],
-      "correct": "Look - it's raining"
+      "correct": "any other store"
     },
     {
       "id": 366,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "All travel expenses must be approved ____ the trip takes place.",
       "options": [
-        "I born in Chicago.",
-        "I was born in Chicago.",
-        "I am born in Chicago.",
-        "I bore in Chicago."
+        "until",
+        "while",
+        "during",
+        "before"
       ],
-      "correct": "I was born in Chicago."
+      "correct": "before"
     },
     {
       "id": 367,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "The marketing manager suggested ____ the advertising campaign online.",
       "options": [
-        "My sister 15 years.",
-        "My sister has 15 years.",
-        "My sister is 15 years.",
-        "My sister is having 15 years."
+        "to launch",
+        "launched",
+        "launching",
+        "launch"
       ],
-      "correct": "My sister is 15 years."
+      "correct": "launching"
     },
     {
       "id": 368,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "Hardly ____ the announcement when the employees started applauding.",
       "options": [
-        "I cold in this house.",
-        "I have cold in this house.",
-        "I am cold in this house.",
-        "I am having in this house."
+        "did the CEO make",
+        "had the CEO made",
+        "the CEO had made",
+        "the CEO made"
       ],
-      "correct": "I am cold in this house."
+      "correct": "had the CEO made"
     },
     {
       "id": 369,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "The new software is designed to help employees ____ their tasks more efficiently.",
       "options": [
-        "I had to see the dentist yesterday.",
-        "I must see the dentist yesterday.",
-        "I have had to see the dentist yesterday.",
-        "I should see the dentist yesterday."
+        "complete",
+        "completing",
+        "completed",
+        "completion"
       ],
-      "correct": "I had to see the dentist yesterday."
+      "correct": "complete"
     },
     {
       "id": 370,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 4",
+      "question": "The customer service team handles ____ complaints every day.",
       "options": [
-        "I am wanting go home.",
-        "I am wanting to go home.",
-        "I want go home.",
-        "I want to go home."
+        "hundred of",
+        "hundreds",
+        "a hundred of",
+        "hundreds of"
       ],
-      "correct": "I want to go home."
+      "correct": "hundreds of"
     },
     {
       "id": 371,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "I __________________.",
+      "category": "Part 5 · Set 4",
+      "question": "Visitors must ____ their shoes off before entering the clean room.",
       "options": [
-        "called my shoes off",
-        "put my shoes off",
-        "took my shoes off",
-        "did my shoes off"
+        "call",
+        "put",
+        "take",
+        "do"
       ],
-      "correct": "took my shoes off"
+      "correct": "take"
     },
     {
       "id": 372,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Mike __________________ Alaska, so he's used to cold weather.",
+      "category": "Part 5 · Set 4",
+      "question": "Ms. Renault ____ Lyon, so she is used to long commutes.",
       "options": [
+        "comes on",
         "comes from",
         "comes in",
-        "comes to",
-        "comes on"
+        "comes to"
       ],
       "correct": "comes from"
     },
     {
       "id": 373,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Ali was driving too fast, and he __________________ a telephone pole.",
+      "category": "Part 5 · Set 4",
+      "question": "The delivery van was driving too fast and ____ a lamp post.",
       "options": [
-        "ran in",
         "ran off",
         "ran on",
-        "ran into"
+        "ran into",
+        "ran in"
       ],
       "correct": "ran into"
     },
     {
       "id": 374,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "I was supposed to meet my sister for lunch, but she hasn't __________________ yet.",
+      "category": "Part 5 · Set 4",
+      "question": "The candidate was supposed to come for an interview, but she has not ____ yet.",
       "options": [
-        "shown out",
-        "shown in",
         "shown by",
-        "shown up"
+        "shown up",
+        "shown out",
+        "shown in"
       ],
       "correct": "shown up"
     },
     {
       "id": 375,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "I went to a movie last night, but it was so boring I __________________.",
+      "category": "Part 5 · Set 4",
+      "question": "The seminar was so dull that two participants ____.",
       "options": [
-        "dozed out",
         "dozed off",
         "dozed away",
-        "dozed by"
+        "dozed by",
+        "dozed out"
       ],
       "correct": "dozed off"
     },
     {
       "id": 376,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "I feel like an idiot. The salesman promised me it was a real diamond, not glass, and I __________________ it.",
+      "category": "Part 5 · Set 4",
+      "question": "I feel like an idiot. The salesman promised me it was a real diamond, not glass, and I ____ it.",
       "options": [
         "fell for",
         "fell out of",
@@ -4930,8 +4930,8 @@ const TOEIC_DATA = {
     {
       "id": 377,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "My son drove me crazy asking me to buy him a new bicycle, and I finally __________________.",
+      "category": "Part 5 · Set 4",
+      "question": "The supplier kept refusing to lower the price, but finally ____.",
       "options": [
         "gave off",
         "gave away",
@@ -4943,8 +4943,8 @@ const TOEIC_DATA = {
     {
       "id": 378,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Have you __________________ the new Thai restaurant downtown ?",
+      "category": "Part 5 · Set 4",
+      "question": "Have you ____ the new Thai restaurant downtown?",
       "options": [
         "heard for",
         "heard of",
@@ -4956,34 +4956,34 @@ const TOEIC_DATA = {
     {
       "id": 379,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "The doctor didn't think his chances were very good, but he __________________.",
+      "category": "Part 5 · Set 4",
+      "question": "The doctor did not think the patient's chances were good, but he ____.",
       "options": [
+        "pulled on",
         "pulled in",
         "pulled through",
-        "pulled out",
-        "pulled on"
+        "pulled out"
       ],
       "correct": "pulled through"
     },
     {
       "id": 380,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "You kids can play in the living room, but _________________ the Persian rug.",
+      "category": "Part 5 · Set 4",
+      "question": "You may use the lounge, but please ____ the Persian rug.",
       "options": [
-        "staff off",
-        "stay by",
         "stay in",
-        "stay on"
+        "stay off",
+        "staff off",
+        "stay by"
       ],
-      "correct": "staff off"
+      "correct": "stay off"
     },
     {
       "id": 381,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "After World War II a fresh ___________________ was made to bring the people of the earth together in peaceful cooperation and co-existence through the United Nations.",
+      "category": "Part 5 · Set 4",
+      "question": "After the failed merger, a fresh ____ was made to enter the European market.",
       "options": [
         "birth",
         "expression",
@@ -4995,8 +4995,8 @@ const TOEIC_DATA = {
     {
       "id": 382,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "From the time that the United Nations was __________________, many other nations have joined the original members.",
+      "category": "Part 5 · Set 4",
+      "question": "From the time that the agency was ____, many smaller firms have joined as partners.",
       "options": [
         "fulfilled",
         "stated",
@@ -5008,8 +5008,8 @@ const TOEIC_DATA = {
     {
       "id": 383,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Current events include all __________________ happenings in our country and in the world.",
+      "category": "Part 5 · Set 4",
+      "question": "The newsletter summarizes all ____ developments in the industry.",
       "options": [
         "recent",
         "interpretative",
@@ -5021,21 +5021,21 @@ const TOEIC_DATA = {
     {
       "id": 384,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Because we have been so used to think, speak, and read freely, we cannot imagine how we can live in a society where the freedom of speech and of the press is ___________________.",
+      "category": "Part 5 · Set 4",
+      "question": "The new budget rules have ____ the travel allowances of senior staff.",
       "options": [
-        "serviced",
-        "based",
         "informed",
-        "curtailed"
+        "curtailed",
+        "serviced",
+        "based"
       ],
       "correct": "curtailed"
     },
     {
       "id": 385,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "The two most powerful countries of the world, the United States and Russia, are the top newsmakers of the world. Their __________________ and well-developed resources have enabled them to lead in scientific and technological progress and in many other fields of endeavor.",
+      "category": "Part 5 · Set 4",
+      "question": "The corporation's ____ resources allowed it to lead in research and development.",
       "options": [
         "divided",
         "continuous",
@@ -5047,10 +5047,10 @@ const TOEIC_DATA = {
     {
       "id": 386,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "The first successful satellite __________________ by the United States into outer space was made on January 31, 1958.",
+      "category": "Part 5 · Set 4",
+      "question": "The first satellite ____ by the agency was placed in orbit in 2019.",
       "options": [
-        "orbitted",
+        "orbited",
         "boarded",
         "returned",
         "launched"
@@ -5060,8 +5060,8 @@ const TOEIC_DATA = {
     {
       "id": 387,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Outside the United States and Russia, news of importance generally __________________ from the activities in Western Europe. This region has always been the crossroads of history and it remains so today.",
+      "category": "Part 5 · Set 4",
+      "question": "Most of our revenue ____ from the activities of the European branch.",
       "options": [
         "generates",
         "inspires",
@@ -5073,8 +5073,8 @@ const TOEIC_DATA = {
     {
       "id": 388,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Ever since Italy became a republic as a result of a plebiscite in 1946, her government has been one of the most __________________ in Western Europe.",
+      "category": "Part 5 · Set 4",
+      "question": "Ever since Italy became a republic as a result of a plebiscite in 1946, her government has been one of the most ____ in Western Europe.",
       "options": [
         "altered",
         "imported",
@@ -5086,60 +5086,60 @@ const TOEIC_DATA = {
     {
       "id": 389,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "There are __________________ deposits of coal and iron ore in China.",
+      "category": "Part 5 · Set 4",
+      "question": "The region has ____ deposits of lithium, which attracted several battery makers.",
       "options": [
-        "abundant",
         "long",
         "progressive",
-        "geographic"
+        "geographic",
+        "abundant"
       ],
       "correct": "abundant"
     },
     {
       "id": 390,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Canada used to be a British __________________.",
+      "category": "Part 5 · Set 4",
+      "question": "The company started as a ____ of a larger American group before it became independent.",
       "options": [
-        "capital",
         "colony",
         "population",
-        "inhabitants"
+        "inhabitants",
+        "capital"
       ],
       "correct": "colony"
     },
     {
       "id": 391,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "__________________ is known about the side effects of this drug.",
+      "category": "Part 5 · Set 4",
+      "question": "____ is known about the side effects of the new drug.",
       "options": [
-        "Few",
         "A few",
         "Little",
-        "A little"
+        "A little",
+        "Few"
       ],
       "correct": "Little"
     },
     {
       "id": 392,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "__________________ looks calm today.",
+      "category": "Part 5 · Set 4",
+      "question": "____ looks calm today, so the ferry should run on time.",
       "options": [
-        "Sea",
         "A sea",
         "An sea",
-        "The sea"
+        "The sea",
+        "Sea"
       ],
       "correct": "The sea"
     },
     {
       "id": 393,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "__________________ come from that hotel over there.",
+      "category": "Part 5 · Set 4",
+      "question": "____ come from that hotel over there.",
       "options": [
         "These people",
         "This people",
@@ -5151,47 +5151,47 @@ const TOEIC_DATA = {
     {
       "id": 394,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "The work was __________________.",
+      "category": "Part 5 · Set 4",
+      "question": "The journey was ____, so the team went straight to the hotel.",
       "options": [
-        "tiring",
         "tired",
         "tires",
-        "tire"
+        "tire",
+        "tiring"
       ],
       "correct": "tiring"
     },
     {
       "id": 395,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "We have a little house __________________ the lake.",
+      "category": "Part 5 · Set 4",
+      "question": "We rented a small office ____ the lake.",
       "options": [
-        "above",
-        "over",
         "up",
-        "in"
+        "in",
+        "above",
+        "over"
       ],
       "correct": "above"
     },
     {
       "id": 396,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "You __________________ right.",
+      "category": "Part 5 · Set 4",
+      "question": "The figures in the draft report ____ incorrect, so please verify them.",
       "options": [
-        "maybe",
+        "probably",
         "may be",
-        "mightbe",
-        "might been"
+        "maybe",
+        "perhaps"
       ],
       "correct": "may be"
     },
     {
       "id": 397,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "___________________ did President Obama appoint as Secretary of State ?",
+      "category": "Part 5 · Set 4",
+      "question": "____ did President Obama appoint as Secretary of State?",
       "options": [
         "Whose",
         "Who",
@@ -5203,34 +5203,34 @@ const TOEIC_DATA = {
     {
       "id": 398,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "Everyone in the class __________________ quiet.",
+      "category": "Part 5 · Set 4",
+      "question": "Everyone in the department ____ required to attend the briefing.",
       "options": [
+        "were",
         "am",
         "is",
-        "are",
-        "were"
+        "are"
       ],
       "correct": "is"
     },
     {
       "id": 399,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "A: \"Where's Mark?\"  B: \"He __________________.\"",
+      "category": "Part 5 · Set 4",
+      "question": "A: 'Where is Mr. Wells?' B: 'He ____ after his flight.'",
       "options": [
-        "has a shower",
-        "had a shower",
         "has had a shower",
-        "is having a shower"
+        "is having a shower",
+        "has a shower",
+        "had a shower"
       ],
       "correct": "is having a shower"
     },
     {
       "id": 400,
       "type_id": 4,
-      "category": "Grammar Part 2",
-      "question": "There is a label __________________ the bottle.",
+      "category": "Part 5 · Set 4",
+      "question": "There is a label ____ the bottle.",
       "options": [
         "on",
         "in",
@@ -5242,60 +5242,60 @@ const TOEIC_DATA = {
     {
       "id": 401,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Let's go out now. It __________________.",
+      "category": "Part 5 · Set 5",
+      "question": "Do not enter the laboratory. The engineers ____ a test on the new motor.",
       "options": [
-        "doesn't rain",
-        "isn't raining",
-        "hasn't rained",
-        "didn't rain"
+        "isn't running",
+        "hasn't run",
+        "aren't running",
+        "doesn't run"
       ],
-      "correct": "isn't raining"
+      "correct": "aren't running"
     },
     {
       "id": 402,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "We are all ___________________ Julie losing her job.",
+      "category": "Part 5 · Set 5",
+      "question": "The staff are all ____ the merger with the rival firm.",
       "options": [
+        "with",
         "of",
         "for",
-        "about",
-        "with"
+        "about"
       ],
       "correct": "about"
     },
     {
       "id": 403,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 5",
+      "question": "The seminar will be held ____ the second floor of the conference centre.",
       "options": [
-        "I don't believe him.",
-        "I'm not believing him.",
-        "I haven't believe him.",
-        "I believe him not."
+        "at",
+        "by",
+        "on",
+        "in"
       ],
-      "correct": "I don't believe him."
+      "correct": "on"
     },
     {
       "id": 404,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Portugal is __________________.",
+      "category": "Part 5 · Set 5",
+      "question": "The Netherlands is ____ in the European Union.",
       "options": [
-        "a EU country",
-        "an EU country",
         "the EU country",
-        "EU country"
+        "EU country",
+        "a EU country",
+        "an EU country"
       ],
       "correct": "an EU country"
     },
     {
       "id": 405,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "She __________________ a blanket.",
+      "category": "Part 5 · Set 5",
+      "question": "She ____ a hard hat before entering the construction site.",
       "options": [
         "put on",
         "put in",
@@ -5307,60 +5307,60 @@ const TOEIC_DATA = {
     {
       "id": 406,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The huge kite seems to be in a __________________ position.",
+      "category": "Part 5 · Set 5",
+      "question": "The conveyor belt must be ____ before the safety guard is removed.",
       "options": [
-        "stationary",
         "stationery",
         "static",
-        "statistical"
+        "statistical",
+        "stationary"
       ],
       "correct": "stationary"
     },
     {
       "id": 407,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The tree is __________________ to be at least 700 years old.",
+      "category": "Part 5 · Set 5",
+      "question": "The loss from the fire is ____ to be at least two million dollars.",
       "options": [
+        "estimated",
         "comforted",
         "attested",
-        "rated",
-        "estimated"
+        "rated"
       ],
       "correct": "estimated"
     },
     {
       "id": 408,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 5",
+      "question": "The sales figures for April were ____ than those for March.",
       "options": [
-        "Mario a handicap received an award for his heroism.",
-        "Mario, a handicap received an award for his heroism.",
-        "Mario a handicap, received an award for his heroism.",
-        "Mario, a handicap, received an award for his heroism."
+        "highly",
+        "higher",
+        "high",
+        "highest"
       ],
-      "correct": "Mario, a handicap, received an award for his heroism."
+      "correct": "higher"
     },
     {
       "id": 409,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Libraries __________________ us good stories or novels for leisurely reading.",
+      "category": "Part 5 · Set 5",
+      "question": "The new catalogue ____ customers a wider range of office furniture.",
       "options": [
         "offers",
         "offer",
         "offering",
         "is offered"
       ],
-      "correct": "offer"
+      "correct": "offers"
     },
     {
       "id": 410,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "I wish I ______________ a lawyer.",
+      "category": "Part 5 · Set 5",
+      "question": "I wish I ____ the manager, so I could approve the budget myself.",
       "options": [
         "was",
         "were",
@@ -5372,8 +5372,8 @@ const TOEIC_DATA = {
     {
       "id": 411,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The stolen car was found in the __________________ of the station.",
+      "category": "Part 5 · Set 5",
+      "question": "The stolen car was found in the ____ of the station.",
       "options": [
         "acceptance",
         "pleasure",
@@ -5385,47 +5385,47 @@ const TOEIC_DATA = {
     {
       "id": 412,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Which sentence is grammatically incorrect ?",
+      "category": "Part 5 · Set 5",
+      "question": "Each department must submit ____ quarterly report by the fifth of the month.",
       "options": [
-        "Any car must be insured.",
-        "I need visa.",
-        "It was an earthquake.",
-        "He is an actor."
+        "it's",
+        "they're",
+        "its",
+        "their"
       ],
-      "correct": "I need visa."
+      "correct": "its"
     },
     {
       "id": 413,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "I felt __________________, shy and awkward at the party.",
+      "category": "Part 5 · Set 5",
+      "question": "The trainee felt ____, shy and awkward at her first client meeting.",
       "options": [
+        "sincere",
         "clumsy",
         "attracted",
-        "versatile",
-        "sincere"
+        "versatile"
       ],
       "correct": "clumsy"
     },
     {
       "id": 414,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "He __________________ expected to find himself in prison.",
+      "category": "Part 5 · Set 5",
+      "question": "The manager showed ____ interest in the proposal and rejected it.",
       "options": [
-        "few",
-        "a few",
         "little",
-        "a little"
+        "a little",
+        "few",
+        "a few"
       ],
       "correct": "little"
     },
     {
       "id": 415,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The bridge's architect was sued for criminal __________________.",
+      "category": "Part 5 · Set 5",
+      "question": "The bridge's architect was sued for criminal ____.",
       "options": [
         "kindliness",
         "honor",
@@ -5437,99 +5437,99 @@ const TOEIC_DATA = {
     {
       "id": 416,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "__________________ is very bright tonight.",
+      "category": "Part 5 · Set 5",
+      "question": "____ in the new conference room is very bright.",
       "options": [
-        "The sky",
-        "Sky",
-        "A sky",
-        "Skies"
+        "Light",
+        "A light",
+        "Lights",
+        "The light"
       ],
-      "correct": "The sky"
+      "correct": "The light"
     },
     {
       "id": 417,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "I saw a ragged child with ___________________ feet.",
+      "category": "Part 5 · Set 5",
+      "question": "The inspectors found workers standing on ____ floors without safety boots.",
       "options": [
-        "simple",
         "bare",
         "somber",
-        "light"
+        "light",
+        "simple"
       ],
       "correct": "bare"
     },
     {
       "id": 418,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 5",
+      "question": "The delivery truck ____ at the warehouse at 7 a.m. every morning.",
       "options": [
-        "What does that notice say ?",
-        "What do that notice say ?",
-        "What does these notice say ?",
-        "What do those notice say ?"
+        "is arrive",
+        "arrives",
+        "arrive",
+        "arriving"
       ],
-      "correct": "What does that notice say ?"
+      "correct": "arrives"
     },
     {
       "id": 419,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "French cooking, she __________________, is the best in the world.",
+      "category": "Part 5 · Set 5",
+      "question": "The CEO ____ that the company had no plans to move its headquarters.",
       "options": [
-        "endowed",
         "waked",
         "escaped",
-        "asserted"
+        "asserted",
+        "endowed"
       ],
       "correct": "asserted"
     },
     {
       "id": 420,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Gerald was 38, and a confirmed __________________.",
+      "category": "Part 5 · Set 5",
+      "question": "The candidate has a ____ degree in economics from Seoul National University.",
       "options": [
-        "old maid",
-        "spinster",
         "bachelor",
-        "old man"
+        "bachelor's",
+        "bachelors",
+        "bachelorship"
       ],
-      "correct": "bachelor"
+      "correct": "bachelor's"
     },
     {
       "id": 421,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Her boyfriend gave her a __________________ of roses on Valentines Day.",
+      "category": "Part 5 · Set 5",
+      "question": "The conference host gave each speaker a ____ of local flowers.",
       "options": [
-        "twig",
         "bouquet",
         "compilation",
-        "pack"
+        "pack",
+        "twig"
       ],
       "correct": "bouquet"
     },
     {
       "id": 422,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Which sentence is the most correct ?",
+      "category": "Part 5 · Set 5",
+      "question": "The committee will announce the winner ____ the awards dinner.",
       "options": [
-        "The coffee was so sweet.",
-        "The coffee was so sweet that it was undrinkable.",
-        "The coffee was so sweet to drink.",
-        "The coffee was so sweet for me."
+        "between",
+        "during",
+        "while",
+        "among"
       ],
-      "correct": "The coffee was so sweet that it was undrinkable."
+      "correct": "during"
     },
     {
       "id": 423,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "During the primary elections, McCain was Bush's leading __________________.",
+      "category": "Part 5 · Set 5",
+      "question": "In the race for the chairmanship, Ms. Fischer was Mr. Duval's leading ____.",
       "options": [
         "opponent",
         "auxiliary",
@@ -5541,21 +5541,21 @@ const TOEIC_DATA = {
     {
       "id": 424,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 5",
+      "question": "Mr. Dubois is ____ for negotiating contracts with overseas suppliers.",
       "options": [
-        "The scientists gave the public the result.",
-        "The scientists the result the public.",
-        "The scientists to the result the public.",
-        "The scientists gave the public to the result."
+        "responsibility",
+        "responsibly",
+        "responsive",
+        "responsible"
       ],
-      "correct": "The scientists gave the public the result."
+      "correct": "responsible"
     },
     {
       "id": 425,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The Prime Minister is __________________ to govern the country.",
+      "category": "Part 5 · Set 5",
+      "question": "The Prime Minister is ____ to govern the country.",
       "options": [
         "elaborate",
         "stern",
@@ -5567,125 +5567,125 @@ const TOEIC_DATA = {
     {
       "id": 426,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "We consider the results __________________.s",
+      "category": "Part 5 · Set 5",
+      "question": "The auditors described the state of the accounts as ____.",
       "options": [
+        "shocking",
         "shock",
         "shocks",
-        "shocked",
-        "shocking"
+        "shocked"
       ],
       "correct": "shocking"
     },
     {
       "id": 427,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "His only __________________ are drinking beer and watching football.",
+      "category": "Part 5 · Set 5",
+      "question": "The company's wellness programme offers a range of ____, from yoga to hiking.",
       "options": [
+        "sympathies",
         "recreations",
         "expansions",
-        "enmities",
-        "sympathies"
+        "enmities"
       ],
       "correct": "recreations"
     },
     {
       "id": 428,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 5",
+      "question": "The maintenance crew ____ the air conditioners twice a year.",
       "options": [
-        "In the distance wailed a low siren mournful.",
-        "A mournful low siren wailed in the distance.",
-        "A low mournful siren wailed in the distance.",
-        "Mournful and low the siren in the distance wailed."
+        "inspects",
+        "inspection",
+        "inspector",
+        "inspected"
       ],
-      "correct": "A low mournful siren wailed in the distance."
+      "correct": "inspects"
     },
     {
       "id": 429,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "What __________________ me is why his books are so popular.",
+      "category": "Part 5 · Set 5",
+      "question": "What ____ the auditors is why the invoices are dated next year.",
       "options": [
-        "puzzles",
         "tests",
         "searches",
-        "weighs"
+        "weighs",
+        "puzzles"
       ],
       "correct": "puzzles"
     },
     {
       "id": 430,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 5",
+      "question": "The proposal was rejected ____ it exceeded the department's budget.",
       "options": [
-        "The man, energetic and young, at the cafeteria very often ate dinner",
-        "Very often at the cafeteria the energetic young man ate dinner.",
-        "Young and energetic, the man very often ate dinner at the cafeteria",
-        "The energetic young man very often ate dinner at the cafeteria."
+        "unless",
+        "despite",
+        "because",
+        "although"
       ],
-      "correct": "The energetic young man very often ate dinner at the cafeteria."
+      "correct": "because"
     },
     {
       "id": 431,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Some of our courses __________________ over two years.",
+      "category": "Part 5 · Set 5",
+      "question": "The warranty on the new machines ____ for three years.",
       "options": [
-        "expand",
-        "increase",
-        "extend",
-        "enlarge"
+        "increases",
+        "extends",
+        "enlarges",
+        "expands"
       ],
-      "correct": "extend"
+      "correct": "extends"
     },
     {
       "id": 432,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Joe's so hostile all the time. I can't __________________.",
+      "category": "Part 5 · Set 5",
+      "question": "I cannot ____ why the system keeps rejecting valid orders.",
       "options": [
-        "figure him over",
-        "figure him off",
-        "figure him out",
-        "figure him with"
+        "figure out",
+        "figure over",
+        "figure off",
+        "figure with"
       ],
-      "correct": "figure him out"
+      "correct": "figure out"
     },
     {
       "id": 433,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Try not to __________________ the other students.",
+      "category": "Part 5 · Set 5",
+      "question": "Please turn off your phone so as not to ____ the other candidates.",
       "options": [
-        "dispense",
-        "engross",
         "absorb",
-        "distract"
+        "distract",
+        "dispense",
+        "engross"
       ],
       "correct": "distract"
     },
     {
       "id": 434,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Can I use your pen? I'll __________________ after the test.",
+      "category": "Part 5 · Set 5",
+      "question": "Can I borrow your stapler? I will ____ after the meeting.",
       "options": [
-        "give it back",
-        "give it out",
         "give it away",
-        "give it in"
+        "give it in",
+        "give it back",
+        "give it out"
       ],
       "correct": "give it back"
     },
     {
       "id": 435,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The Senator's __________________ is being investigated by the Ethics Committee.",
+      "category": "Part 5 · Set 5",
+      "question": "The Senator's ____ is being investigated by the Ethics Committee.",
       "options": [
         "outset",
         "conduct",
@@ -5697,8 +5697,8 @@ const TOEIC_DATA = {
     {
       "id": 436,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "I need to go on a diet. I've been __________________ a lot of weight lately.",
+      "category": "Part 5 · Set 5",
+      "question": "The factory has been ____ extra staff to meet the Christmas demand.",
       "options": [
         "putting off",
         "putting out",
@@ -5710,112 +5710,112 @@ const TOEIC_DATA = {
     {
       "id": 437,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "His mother's death __________________ his loneliness.",
+      "category": "Part 5 · Set 5",
+      "question": "The new regulations ____ the pressure on small exporters.",
       "options": [
+        "ravaged",
         "slandered",
         "intensified",
-        "topped",
-        "ravaged"
+        "topped"
       ],
       "correct": "intensified"
     },
     {
       "id": 438,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "I think he has the flu because you don't usually __________________ when you have a cold.",
+      "category": "Part 5 · Set 5",
+      "question": "Do not ____ the packing slip before the order has been checked.",
       "options": [
         "throw off",
         "throw away",
         "throw out",
         "throw up"
       ],
-      "correct": "throw up"
+      "correct": "throw away"
     },
     {
       "id": 439,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "His breathing was becoming __________________.",
+      "category": "Part 5 · Set 5",
+      "question": "The machine's ____ performance has worried the maintenance team.",
       "options": [
-        "devious",
         "erratic",
         "mischievous",
-        "crooked"
+        "crooked",
+        "devious"
       ],
       "correct": "erratic"
     },
     {
       "id": 440,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "I'm sorry to cancel, but I don't __________________ going dancing tonight.",
+      "category": "Part 5 · Set 5",
+      "question": "I am sorry to postpone, but I do not ____ attending the dinner tonight.",
       "options": [
+        "feel up in",
         "feel up to",
         "feel up with",
-        "feel up on",
-        "feel up in"
+        "feel up on"
       ],
       "correct": "feel up to"
     },
     {
       "id": 441,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "( at a party ) Hello, Jane. __________________ the party ?",
+      "category": "Part 5 · Set 5",
+      "question": "( at the conference ) Hello, Jane. ____ the conference?",
       "options": [
+        "Did you enjoy",
         "Do you enjoy",
         "Are you enjoying",
-        "Have you enjoy",
-        "Did you enjoy"
+        "Have you enjoy"
       ],
       "correct": "Are you enjoying"
     },
     {
       "id": 442,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "I __________________ at weekends.",
+      "category": "Part 5 · Set 5",
+      "question": "The sales manager usually ____ on business trips at weekends.",
       "options": [
-        "usually go away",
-        "am usually going away",
-        "have usually gone away",
-        "usually went away"
+        "go away",
+        "goes away",
+        "is going away",
+        "has gone away"
       ],
-      "correct": "usually go away"
+      "correct": "goes away"
     },
     {
       "id": 443,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Why are you always so __________________ other people ?",
+      "category": "Part 5 · Set 5",
+      "question": "Why are you always so ____ your colleagues' success?",
       "options": [
+        "jealous of",
         "jealous in",
         "jealous about",
-        "jealous with",
-        "jealous of"
+        "jealous with"
       ],
       "correct": "jealous of"
     },
     {
       "id": 444,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "I'm not very __________________ repairing things.",
+      "category": "Part 5 · Set 5",
+      "question": "Our team is not very ____ repairing the older machines.",
       "options": [
-        "good in",
         "good about",
         "good at",
-        "good with"
+        "good with",
+        "good in"
       ],
       "correct": "good at"
     },
     {
       "id": 445,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "My contract was for a __________________ term of five years.",
+      "category": "Part 5 · Set 5",
+      "question": "My contract was for a ____ term of five years.",
       "options": [
         "tried",
         "confident",
@@ -5827,34 +5827,34 @@ const TOEIC_DATA = {
     {
       "id": 446,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "She suffered from minor cuts and __________________ because of the car accident.",
+      "category": "Part 5 · Set 5",
+      "question": "The worker suffered minor cuts and ____ when the pallet fell.",
       "options": [
-        "openings",
         "slits",
         "forms",
-        "bruises"
+        "bruises",
+        "openings"
       ],
       "correct": "bruises"
     },
     {
       "id": 447,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 5",
+      "question": "Ms. Kim will ____ the client at the airport tomorrow morning.",
       "options": [
-        "I can to swim.",
-        "I can swimming.",
-        "I can swim.",
-        "I can swims."
+        "meets",
+        "met",
+        "meeting",
+        "meet"
       ],
-      "correct": "I can swim."
+      "correct": "meet"
     },
     {
       "id": 448,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "I attended a lecture __________________ economics at the university.",
+      "category": "Part 5 · Set 5",
+      "question": "I attended a lecture ____ economics at the university.",
       "options": [
         "on",
         "about",
@@ -5866,34 +5866,34 @@ const TOEIC_DATA = {
     {
       "id": 449,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "You have to be __________________ 18 to see this film.",
+      "category": "Part 5 · Set 5",
+      "question": "You have to be ____ 18 to work night shifts in this plant.",
       "options": [
-        "over",
-        "above",
         "up",
-        "more"
+        "more",
+        "over",
+        "above"
       ],
       "correct": "over"
     },
     {
       "id": 450,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "I __________________to meet them here.",
+      "category": "Part 5 · Set 5",
+      "question": "The supplier ____ to deliver the goods by Friday.",
       "options": [
+        "seemed",
         "agreed",
         "accepted",
-        "inclined",
-        "seemed"
+        "inclined"
       ],
       "correct": "agreed"
     },
     {
       "id": 451,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "It's __________________ that the poor should pay such high taxes.",
+      "category": "Part 5 · Set 5",
+      "question": "It is ____ that customers should pay such high delivery charges.",
       "options": [
         "outrageous",
         "opaque",
@@ -5905,47 +5905,47 @@ const TOEIC_DATA = {
     {
       "id": 452,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The river is __________________ today.",
+      "category": "Part 5 · Set 5",
+      "question": "The river is too ____ here for heavy barges.",
       "options": [
-        "insane",
-        "damned",
         "capable",
-        "shallow"
+        "shallow",
+        "insane",
+        "damned"
       ],
       "correct": "shallow"
     },
     {
       "id": 453,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "She will be __________________.",
+      "category": "Part 5 · Set 5",
+      "question": "Ms. Ito will be the ____ at the product launch.",
       "options": [
-        "the dancer",
-        "a dancer",
-        "an dancer",
-        "dancer"
+        "an presenter",
+        "presenters",
+        "presenter",
+        "a presenter"
       ],
-      "correct": "a dancer"
+      "correct": "presenter"
     },
     {
       "id": 454,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Jane had a difficult childhood. She __________________ a broken home.",
+      "category": "Part 5 · Set 5",
+      "question": "Mr. Hall ____ a family of shopkeepers and now runs his own chain.",
       "options": [
-        "came to",
         "came by",
         "came from",
-        "came in"
+        "came in",
+        "came to"
       ],
       "correct": "came from"
     },
     {
       "id": 455,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "All members must agree to __________________ the club regulations.",
+      "category": "Part 5 · Set 5",
+      "question": "All members must agree to ____ the club regulations.",
       "options": [
         "be over and above",
         "beat about",
@@ -5957,8 +5957,8 @@ const TOEIC_DATA = {
     {
       "id": 456,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Someone has __________________ my credit cards.",
+      "category": "Part 5 · Set 5",
+      "question": "Someone has ____ my credit cards.",
       "options": [
         "kidnapped",
         "arrested",
@@ -5970,8 +5970,8 @@ const TOEIC_DATA = {
     {
       "id": 457,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The boys scaled the mountains, ___________________ ?",
+      "category": "Part 5 · Set 5",
+      "question": "The auditors checked all the ledgers, ____?",
       "options": [
         "didn't they",
         "wasn't they",
@@ -5983,34 +5983,34 @@ const TOEIC_DATA = {
     {
       "id": 458,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "What's all that noise ? What __________________ ?",
+      "category": "Part 5 · Set 5",
+      "question": "What is all that noise in the corridor? What ____?",
       "options": [
-        "has gone on",
-        "went on",
         "goes on",
-        "is going on"
+        "is going on",
+        "has gone on",
+        "went on"
       ],
       "correct": "is going on"
     },
     {
       "id": 459,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Alex is very __________________ what he said.",
+      "category": "Part 5 · Set 5",
+      "question": "Ms. Yates is very ____ the confusion caused by the invoice.",
       "options": [
-        "sorry for",
-        "sorry in",
         "sorry with",
-        "sorry by"
+        "sorry by",
+        "sorry for",
+        "sorry in"
       ],
       "correct": "sorry for"
     },
     {
       "id": 460,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The judge __________________ the accused for the murder of the company guard.",
+      "category": "Part 5 · Set 5",
+      "question": "The judge ____ the accused for the murder of the company guard.",
       "options": [
         "injected",
         "indited",
@@ -6022,60 +6022,60 @@ const TOEIC_DATA = {
     {
       "id": 461,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "I __________________ to pack my suitcase before she came back.",
+      "category": "Part 5 · Set 5",
+      "question": "The staff ____ to finish the presentation before the client arrived.",
       "options": [
-        "dated",
-        "rushed",
         "wooed",
-        "bullied"
+        "bullied",
+        "dated",
+        "rushed"
       ],
       "correct": "rushed"
     },
     {
       "id": 462,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The earth __________________ round the sun.",
+      "category": "Part 5 · Set 5",
+      "question": "The company ____ donations to the local school every year.",
       "options": [
-        "is going",
-        "went",
-        "has gone",
-        "goes"
+        "gave",
+        "has given",
+        "gives",
+        "is giving"
       ],
-      "correct": "goes"
+      "correct": "gives"
     },
     {
       "id": 463,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "He didn't trust me. He was __________________ my intentions.",
+      "category": "Part 5 · Set 5",
+      "question": "The board was ____ the sudden rise in the supplier's prices.",
       "options": [
-        "suspicious of",
         "suspicious with",
         "suspicious for",
-        "suspicious by"
+        "suspicious by",
+        "suspicious of"
       ],
       "correct": "suspicious of"
     },
     {
       "id": 464,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The hostess received glowing __________________ on the lavish dinner she had prepared for her guests.",
+      "category": "Part 5 · Set 5",
+      "question": "The chef received glowing ____ on the banquet he prepared for the guests.",
       "options": [
-        "compliments",
-        "complements",
         "completion",
-        "completeness"
+        "completeness",
+        "compliments",
+        "complements"
       ],
       "correct": "compliments"
     },
     {
       "id": 465,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The architect of that mansion is __________________.",
+      "category": "Part 5 · Set 5",
+      "question": "The architect of that mansion is ____.",
       "options": [
         "she",
         "her",
@@ -6087,21 +6087,21 @@ const TOEIC_DATA = {
     {
       "id": 466,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "I __________________ the table.",
+      "category": "Part 5 · Set 5",
+      "question": "She ____ the table before the meeting started.",
       "options": [
-        "took the book away",
-        "took the book out",
-        "took the book off",
-        "took the book over"
+        "took the papers out",
+        "took the papers off",
+        "took the papers over",
+        "took the papers away"
       ],
-      "correct": "took the book off"
+      "correct": "took the papers off"
     },
     {
       "id": 467,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Here's ______________________ of wrapping paper.",
+      "category": "Part 5 · Set 5",
+      "question": "Here is ____ wrapping paper for the samples.",
       "options": [
         "a bit of",
         "bit of",
@@ -6113,34 +6113,34 @@ const TOEIC_DATA = {
     {
       "id": 468,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "One winter the snow __________________ early.",
+      "category": "Part 5 · Set 5",
+      "question": "Sales ____ sharply in the first winter after the launch.",
       "options": [
-        "fell",
         "felt",
         "falls",
-        "was falling"
+        "was falling",
+        "fell"
       ],
       "correct": "fell"
     },
     {
       "id": 469,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The Philippines lies near __________________.",
+      "category": "Part 5 · Set 5",
+      "question": "The research station lies five degrees north of ____.",
       "options": [
+        "the equator",
         "equator",
         "a equator",
-        "an equator",
-        "the equator"
+        "an equator"
       ],
       "correct": "the equator"
     },
     {
       "id": 470,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Candy will __________________ your teeth.",
+      "category": "Part 5 · Set 5",
+      "question": "Leaving the produce in the heat will ____ it within a day.",
       "options": [
         "quarrel",
         "defile",
@@ -6152,8 +6152,8 @@ const TOEIC_DATA = {
     {
       "id": 471,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The driver was clearly __________________ when the accident happened.",
+      "category": "Part 5 · Set 5",
+      "question": "The driver was clearly ____ when the accident happened.",
       "options": [
         "rejuvenating",
         "corny",
@@ -6165,8 +6165,8 @@ const TOEIC_DATA = {
     {
       "id": 472,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The way the whales are killed is nothing short of __________________.",
+      "category": "Part 5 · Set 5",
+      "question": "The commission described the treatment of the workers as nothing short of ____.",
       "options": [
         "barbaric",
         "well-bred",
@@ -6178,47 +6178,47 @@ const TOEIC_DATA = {
     {
       "id": 473,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 5",
+      "question": "The staff was reminded ____ the safety procedures at all times.",
       "options": [
-        "We requested the donor to appear on television who donated a check for ten thousand pesos.",
-        "Locusts pose a problem to farmers which were preying on corn and rice.",
-        "In the corner of the room, there is an ornamental jar which has antique designs painted around its mouth.",
-        "An old woman got on a bus by mistake that was going to Seattle."
+        "follow",
+        "following",
+        "followed",
+        "to follow"
       ],
-      "correct": "In the corner of the room, there is an ornamental jar which has antique designs painted around its mouth."
+      "correct": "to follow"
     },
     {
       "id": 474,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "______________ girls should learn to cook.",
+      "category": "Part 5 · Set 5",
+      "question": "____ should all complete the safety training before Friday.",
       "options": [
+        "We",
         "Ours",
         "We're",
-        "Us",
-        "We"
+        "Us"
       ],
       "correct": "We"
     },
     {
       "id": 475,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "I __________________ a really good book at the moment. It's about a man who runs away from home.",
+      "category": "Part 5 · Set 5",
+      "question": "I ____ a very useful book on negotiation at the moment.",
       "options": [
-        "read",
-        "am reading",
         "have read",
-        "been reading"
+        "been reading",
+        "read",
+        "am reading"
       ],
       "correct": "am reading"
     },
     {
       "id": 476,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "I'm sure you are __________________ passing the examination.",
+      "category": "Part 5 · Set 5",
+      "question": "The team is ____ meeting the deadline if extra staff are hired.",
       "options": [
         "capable of",
         "capable with",
@@ -6230,47 +6230,47 @@ const TOEIC_DATA = {
     {
       "id": 477,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Ann is in __________________ ( of this house).",
+      "category": "Part 5 · Set 5",
+      "question": "The guests are waiting in ____ of the restaurant.",
       "options": [
+        "garden",
         "a garden",
         "an garden",
-        "the garden",
-        "garden"
+        "the garden"
       ],
       "correct": "the garden"
     },
     {
       "id": 478,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Mom bought a kilo of __________________ in the market today.",
+      "category": "Part 5 · Set 5",
+      "question": "The caterer ordered fresh ____ for the company lunch.",
       "options": [
-        "tomatoes",
-        "tomatos",
-        "tomato",
-        "tomatois"
+        "vegetated",
+        "vegetating",
+        "vegetables",
+        "vegetable"
       ],
-      "correct": "tomatoes"
+      "correct": "vegetables"
     },
     {
       "id": 479,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Which sentence is correct ?",
+      "category": "Part 5 · Set 5",
+      "question": "The hotel offers a shuttle service ____ guests to the convention centre.",
       "options": [
-        "I drove there without to stop.",
-        "Where I can buy stamps?",
-        "The life is difficult.",
-        "Is my new office ready?"
+        "take",
+        "taking",
+        "takes",
+        "took"
       ],
-      "correct": "Is my new office ready?"
+      "correct": "taking"
     },
     {
       "id": 480,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Why are you climbing __________________ the wall ?",
+      "category": "Part 5 · Set 5",
+      "question": "The crane lifted the container ____ the fence.",
       "options": [
         "over",
         "across",
@@ -6282,151 +6282,151 @@ const TOEIC_DATA = {
     {
       "id": 481,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Power or capacity to produce a desired effect; effectiveness",
+      "category": "Part 5 · Set 5",
+      "question": "The ____ of the new advertising campaign will be measured next quarter.",
       "options": [
-        "magnanimous",
-        "efficacy",
-        "hubris",
-        "medium"
+        "effective",
+        "effectively",
+        "effects",
+        "effectiveness"
       ],
-      "correct": "efficacy"
+      "correct": "effectiveness"
     },
     {
       "id": 482,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "to represent by or as if by a picture",
+      "category": "Part 5 · Set 5",
+      "question": "The designer used a chart to ____ the sales trend for the board.",
       "options": [
-        "document",
-        "hubris",
+        "depiction",
+        "depicting",
         "depict",
-        "medium"
+        "depicts"
       ],
       "correct": "depict"
     },
     {
       "id": 483,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "One of the means or channels of general communication, information, or entertainment in society, as newspapers, radio, or television",
+      "category": "Part 5 · Set 5",
+      "question": "Television remains an important ____ for reaching older customers.",
       "options": [
-        "copyright",
+        "medley",
         "medium",
-        "document",
-        "acumen"
+        "media",
+        "median"
       ],
       "correct": "medium"
     },
     {
       "id": 484,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "A copyright is",
+      "category": "Part 5 · Set 5",
+      "question": "The publisher holds the ____ to all articles printed in the magazine.",
       "options": [
-        "a representation that is less than actual fact",
-        "the exclusive legal right to reproduce, publish, sell, or distribute something",
-        "the underlying foundation for a system or organization",
-        "showing or suggesting nobility of feeling and generosity of mind"
+        "copyright",
+        "copywriter",
+        "copyrighted",
+        "copying"
       ],
-      "correct": "the exclusive legal right to reproduce, publish, sell, or distribute something"
+      "correct": "copyright"
     },
     {
       "id": 485,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Magnanimous is",
+      "category": "Part 5 · Set 5",
+      "question": "The chairman's ____ donation funded the new research laboratory.",
       "options": [
-        "showing or suggesting nobility of feeling and generosity of mind",
-        "the underlying foundation for a system or organization",
-        "the exclusive legal right to reproduce, publish, sell, or distribute something",
-        "a representation that is less than actual fact"
+        "magnanimity",
+        "magnanimously",
+        "magnate",
+        "magnanimous"
       ],
-      "correct": "showing or suggesting nobility of feeling and generosity of mind"
+      "correct": "magnanimous"
     },
     {
       "id": 486,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "An infrastructure is",
+      "category": "Part 5 · Set 5",
+      "question": "The city invested heavily in ____ such as roads and power lines.",
       "options": [
-        "a representation that is less than actual fact",
-        "the exclusive legal right to reproduce, publish, sell, or distribute something",
-        "the underlying foundation for a system or organization",
-        "showing or suggesting nobility of feeling and generosity of mind"
+        "instructive",
+        "instrumental",
+        "infrastructure",
+        "infrastructural"
       ],
-      "correct": "the underlying foundation for a system or organization"
+      "correct": "infrastructure"
     },
     {
       "id": 487,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "An understatement is",
+      "category": "Part 5 · Set 5",
+      "question": "Describing the loss as a small setback was a clear ____.",
       "options": [
-        "showing or suggesting nobility of feeling and generosity of mind",
-        "the underlying foundation for a system or organization",
-        "the exclusive legal right to reproduce, publish, sell, or distribute something",
-        "a representation that is less than actual fact"
+        "undertaking",
+        "understatement",
+        "understated",
+        "understanding"
       ],
-      "correct": "a representation that is less than actual fact"
+      "correct": "understatement"
     },
     {
       "id": 488,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Hubris means",
+      "category": "Part 5 · Set 5",
+      "question": "Analysts blamed the CEO's ____ for the failed expansion.",
       "options": [
-        "the exclusive legal right to reproduce, publish, sell, or distribute the matter and form of something",
-        "exaggerated pride or self-confidence",
-        "marked by restraint especially in the consumption of food or alcohol",
-        "a personal and sometimes unreasoned judgment"
+        "hubris",
+        "humility",
+        "humour",
+        "hurdle"
       ],
-      "correct": "exaggerated pride or self-confidence"
+      "correct": "hubris"
     },
     {
       "id": 489,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "To provide with factual or substantial support for statements made",
+      "category": "Part 5 · Set 5",
+      "question": "Please ____ all expenses with original receipts.",
       "options": [
-        "abstemious",
-        "depict",
-        "document",
-        "understatement"
+        "documentary",
+        "documentation",
+        "documented",
+        "document"
       ],
       "correct": "document"
     },
     {
       "id": 490,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Joking or jesting often inappropriately",
+      "category": "Part 5 · Set 5",
+      "question": "The presenter's ____ remarks made the audience laugh during the briefing.",
       "options": [
+        "facetiousness",
+        "factious",
         "facetious",
-        "adamant",
-        "acuman",
-        "abstemious"
+        "facetiously"
       ],
       "correct": "facetious"
     },
     {
       "id": 491,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The weather ___________________ for tomorrow is warm and sunny.",
+      "category": "Part 5 · Set 5",
+      "question": "The sales ____ for the next quarter looks encouraging.",
       "options": [
+        "forehead",
         "forecast",
         "foreword",
-        "forefather",
-        "forehead"
+        "forefather"
       ],
       "correct": "forecast"
     },
     {
       "id": 492,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Passengers are requested to fasten their seat belts during ___________________ and landing.",
+      "category": "Part 5 · Set 5",
+      "question": "Passengers are requested to fasten their seat belts during ____ and landing.",
       "options": [
         "take-in",
         "take-off",
@@ -6438,8 +6438,8 @@ const TOEIC_DATA = {
     {
       "id": 493,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The medicine did not have any ___________________ effect on the patient.",
+      "category": "Part 5 · Set 5",
+      "question": "The medicine did not have any ____ effect on the patient.",
       "options": [
         "benevolent",
         "benefactor",
@@ -6451,8 +6451,8 @@ const TOEIC_DATA = {
     {
       "id": 494,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "His ___________________ knowledge of the subject made everyone doubt his competence.",
+      "category": "Part 5 · Set 5",
+      "question": "His ____ knowledge of the local market made the board doubt his competence.",
       "options": [
         "inadequate",
         "invaluable",
@@ -6464,8 +6464,8 @@ const TOEIC_DATA = {
     {
       "id": 495,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The journalist refused to reveal the ___________________ of his information.",
+      "category": "Part 5 · Set 5",
+      "question": "The journalist refused to reveal the ____ of his information.",
       "options": [
         "source",
         "sauce",
@@ -6477,8 +6477,8 @@ const TOEIC_DATA = {
     {
       "id": 496,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "Neither the secretary nor the managers ___________________ present at the meeting.",
+      "category": "Part 5 · Set 5",
+      "question": "Neither the secretary nor the managers ____ present at the meeting.",
       "options": [
         "was",
         "is",
@@ -6490,21 +6490,21 @@ const TOEIC_DATA = {
     {
       "id": 497,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "It is high time we ___________________ something to protect the environment.",
+      "category": "Part 5 · Set 5",
+      "question": "It is high time we ____ the outdated booking system.",
       "options": [
-        "do",
-        "did",
-        "have done",
-        "will do"
+        "replace",
+        "replaced",
+        "have replaced",
+        "will replace"
       ],
-      "correct": "did"
+      "correct": "replaced"
     },
     {
       "id": 498,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "No sooner had the concert begun ___________________ the lights went out.",
+      "category": "Part 5 · Set 5",
+      "question": "No sooner had the meeting begun ____ the fire alarm went off.",
       "options": [
         "when",
         "that",
@@ -6516,281 +6516,281 @@ const TOEIC_DATA = {
     {
       "id": 499,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "She is used to ___________________ up early in the morning.",
+      "category": "Part 5 · Set 5",
+      "question": "She is used to ____ up early for the weekly conference call.",
       "options": [
-        "get",
         "got",
         "getting",
-        "have got"
+        "have got",
+        "get"
       ],
       "correct": "getting"
     },
     {
       "id": 500,
       "type_id": 5,
-      "category": "Grammar Part 3",
-      "question": "The students were looking forward to ___________________ their summer holidays.",
+      "category": "Part 5 · Set 5",
+      "question": "The interns are looking forward to ____ a day at the design studio.",
       "options": [
+        "spent",
         "spend",
         "spending",
-        "have spent",
-        "spent"
+        "have spent"
       ],
       "correct": "spending"
     },
     {
       "id": 501,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Unshakable or insistent especially in maintaining a position or opinion",
+      "category": "Part 5 · Set 6",
+      "question": "The company will ____ its new product line at the international trade fair in May.",
       "options": [
-        "facetious",
-        "adamant",
-        "acument",
-        "abstemious"
+        "unveil",
+        "unfold",
+        "unload",
+        "unwind"
       ],
-      "correct": "adamant"
+      "correct": "unveil"
     },
     {
       "id": 502,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "A personal and sometimes unreasoned  judgment",
+      "category": "Part 5 · Set 6",
+      "question": "Employees who wish to ____ their working hours must speak with their supervisor.",
       "options": [
-        "hubris",
-        "efficacy",
-        "bias",
-        "depict"
+        "adopt",
+        "adore",
+        "advise",
+        "adjust"
       ],
-      "correct": "bias"
+      "correct": "adjust"
     },
     {
       "id": 503,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Marked by restraint especially in the consumption of food or alcohol",
+      "category": "Part 5 · Set 6",
+      "question": "The supplier promised to ____ the order within three business days.",
       "options": [
-        "facetious",
-        "adamant",
-        "abstemious",
-        "acumen"
+        "declare",
+        "defend",
+        "deliver",
+        "decide"
       ],
-      "correct": "abstemious"
+      "correct": "deliver"
     },
     {
       "id": 504,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "The monetary unit of the European Union",
+      "category": "Part 5 · Set 6",
+      "question": "Please ____ the attached form and return it to the human resources department.",
       "options": [
-        "euro",
-        "hubris",
-        "abrogate",
-        "efficacy"
+        "complain",
+        "complete",
+        "compete",
+        "compute"
       ],
-      "correct": "euro"
+      "correct": "complete"
     },
     {
       "id": 505,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Austere",
+      "category": "Part 5 · Set 6",
+      "question": "The receptionist will ____ visitors at the front desk and give them a temporary badge.",
       "options": [
-        "Severe in appearance or nature",
-        "Noticibly differnt than first appearance",
-        "To take kind to",
-        "Marked by selflessness"
+        "greet",
+        "grate",
+        "grasp",
+        "grind"
       ],
-      "correct": "Severe in appearance or nature"
+      "correct": "greet"
     },
     {
       "id": 506,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "audacious",
+      "category": "Part 5 · Set 6",
+      "question": "The accounting department is responsible for the ____ of all expense reports.",
       "options": [
-        "scared",
-        "fearless",
-        "to be gentle with",
-        "anoying"
+        "reviewer",
+        "revelation",
+        "reversal",
+        "review"
       ],
-      "correct": "fearless"
+      "correct": "review"
     },
     {
       "id": 507,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Assiduously",
+      "category": "Part 5 · Set 6",
+      "question": "Management decided to ____ the annual conference because of the new travel restrictions.",
       "options": [
-        "To quit beyond meaning",
-        "Constantly",
-        "To be unsure",
-        "confident"
+        "consult",
+        "convert",
+        "cancel",
+        "connect"
       ],
-      "correct": "Constantly"
+      "correct": "cancel"
     },
     {
       "id": 508,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "synopsis",
+      "category": "Part 5 · Set 6",
+      "question": "The warranty does not ____ damage caused by improper use of the equipment.",
       "options": [
-        "A summary",
-        "A detailed description explaing every detail",
-        "A concluding statement of the matter at hand",
-        "To express"
+        "cease",
+        "cover",
+        "carve",
+        "cater"
       ],
-      "correct": "A summary"
+      "correct": "cover"
     },
     {
       "id": 509,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "synonym",
+      "category": "Part 5 · Set 6",
+      "question": "All job ____ must be submitted through the company website.",
       "options": [
-        "A word opposite in meaning to another word",
-        "A word equivilant in meaning to another word",
-        "A word with only one meaning",
-        "A word relating to the poetic language"
+        "applications",
+        "appliances",
+        "appointments",
+        "appraisals"
       ],
-      "correct": "A word equivilant in meaning to another word"
+      "correct": "applications"
     },
     {
       "id": 510,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Symmetry",
+      "category": "Part 5 · Set 6",
+      "question": "The finance team will ____ the budget for the next fiscal year.",
       "options": [
-        "The quality of showing complementary forms",
-        "The quality of showing opposite forms",
-        "To share",
-        "To act as one"
+        "prevent",
+        "preserve",
+        "presume",
+        "prepare"
       ],
-      "correct": "The quality of showing complementary forms"
+      "correct": "prepare"
     },
     {
       "id": 511,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "symbiotic",
+      "category": "Part 5 · Set 6",
+      "question": "Full-time employees are entitled to a range of ____, including health insurance and paid vacation.",
       "options": [
-        "The quality of two dissimilar orgainisms",
-        "To be of great importance",
-        "To have a different meaning than appeard",
-        "To ponder upon"
+        "policies",
+        "incomes",
+        "benefits",
+        "beneficiaries"
       ],
-      "correct": "The quality of two dissimilar orgainisms"
+      "correct": "benefits"
     },
     {
       "id": 512,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "syllogism",
+      "category": "Part 5 · Set 6",
+      "question": "The sales team exceeded its ____ for the third quarter by almost ten percent.",
       "options": [
-        "A form of logical arguement that features three propositions and finishes with a conclusion",
-        "A type of poem",
-        "To be uniform throughout",
-        "To be adjacent to"
+        "task",
+        "target",
+        "ticket",
+        "talent"
       ],
-      "correct": "A form of logical arguement that features three propositions and finishes with a conclusion"
+      "correct": "target"
     },
     {
       "id": 513,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Sycophant",
+      "category": "Part 5 · Set 6",
+      "question": "Please ____ the invoice before sending it back to the vendor.",
       "options": [
-        "one who is humble",
-        "One who is secretive",
-        "One who is an ambitious flatterer",
-        "Another word for goat"
+        "approve",
+        "approach",
+        "apply",
+        "appoint"
       ],
-      "correct": "One who is an ambitious flatterer"
+      "correct": "approve"
     },
     {
       "id": 514,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Surreptitious",
+      "category": "Part 5 · Set 6",
+      "question": "The airline agreed to ____ passengers for the long delay.",
       "options": [
-        "Undertaken in stealth",
-        "To be of great importantance",
-        "To have a meaningful relationship",
-        "To be of no importance"
+        "compete",
+        "compile",
+        "complain",
+        "compensate"
       ],
-      "correct": "Undertaken in stealth"
+      "correct": "compensate"
     },
     {
       "id": 515,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Teetotaler",
+      "category": "Part 5 · Set 6",
+      "question": "The new employee was asked to ____ the safety guidelines before starting work.",
       "options": [
-        "One who breaks the law",
-        "A drug atic",
-        "One who refuses to drink alcohol",
-        "Addiction to shell fish"
+        "reveal",
+        "reverse",
+        "review",
+        "reserve"
       ],
-      "correct": "One who refuses to drink alcohol"
+      "correct": "review"
     },
     {
       "id": 516,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Technocracy",
+      "category": "Part 5 · Set 6",
+      "question": "The factory will ____ production until the new safety system is installed.",
       "options": [
-        "Government by the minority",
-        "Government by god",
-        "Government by lower class",
-        "Government by skilled members in society"
+        "suppose",
+        "suspend",
+        "supply",
+        "support"
       ],
-      "correct": "Government by skilled members in society"
+      "correct": "suspend"
     },
     {
       "id": 517,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Taxonomy",
+      "category": "Part 5 · Set 6",
+      "question": "Customers may ____ their purchase within 30 days for a full refund.",
       "options": [
-        "The taxation of the government",
-        "The science of formal classification and naming",
-        "To exploit ones weaknesses",
-        "Marked by bitterness"
+        "return",
+        "relate",
+        "remain",
+        "repair"
       ],
-      "correct": "The science of formal classification and naming"
+      "correct": "return"
     },
     {
       "id": 518,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Tautology",
+      "category": "Part 5 · Set 6",
+      "question": "The manager asked the team to ____ the report before the client meeting.",
       "options": [
-        "The study of literature",
-        "The study of philosophy",
-        "To act upon quickly",
-        "Unnecessary repetition in different words of an already stated idea"
+        "finance",
+        "furnish",
+        "facilitate",
+        "finalize"
       ],
-      "correct": "Unnecessary repetition in different words of an already stated idea"
+      "correct": "finalize"
     },
     {
       "id": 519,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Taurine",
+      "category": "Part 5 · Set 6",
+      "question": "The company will ____ the old office equipment with more efficient models.",
       "options": [
-        "Of or pertaining to cows",
-        "Of or pertaing to horses",
-        "Of or pertaing to bulls",
-        "The mexican word for leader"
+        "reply",
+        "repel",
+        "replace",
+        "replay"
       ],
-      "correct": "Of or pertaing to bulls"
+      "correct": "replace"
     },
     {
       "id": 520,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "The company’s CEO has implemented the company’s ________ procedures for employees in accordance with the Law. ",
+      "category": "Part 5 · Set 6",
+      "question": "The company's CEO has implemented the company's ____ procedures for employees in accordance with the law.",
       "options": [
         "disciplinary",
         "disciplined",
@@ -6802,8 +6802,8 @@ const TOEIC_DATA = {
     {
       "id": 521,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Scandinavian inflation has been ________ in the last couple of months and its governments are taking further measures to keep inflation numbers down.",
+      "category": "Part 5 · Set 6",
+      "question": "Scandinavian inflation has been ____ in the last couple of months and its governments are taking further measures to keep inflation numbers down.",
       "options": [
         "enhanced",
         "overturned",
@@ -6815,892 +6815,892 @@ const TOEIC_DATA = {
     {
       "id": 522,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Tactile",
+      "category": "Part 5 · Set 6",
+      "question": "The quarterly ____ showed a steady increase in online sales.",
       "options": [
-        "Of or pertaining to the sense of hearing",
-        "Of or pertaining to the sense of touch",
-        "maked by wisdom",
-        "To deminish"
+        "fixtures",
+        "figures",
+        "features",
+        "futures"
       ],
-      "correct": "Of or pertaining to the sense of touch"
+      "correct": "figures"
     },
     {
       "id": 523,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Aspersion",
+      "category": "Part 5 · Set 6",
+      "question": "Please keep your ____ in a safe place, as the tickets cannot be reissued.",
       "options": [
-        "To be truthful",
-        "Of or pertaining to the government",
-        "False accusation",
-        "Having characteristics of a knight"
+        "receipt",
+        "recipe",
+        "recipient",
+        "reception"
       ],
-      "correct": "False accusation"
+      "correct": "receipt"
     },
     {
       "id": 524,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "ascribe",
+      "category": "Part 5 · Set 6",
+      "question": "The marketing team will ____ the results of the survey at next week's meeting.",
       "options": [
-        "To attribute or assign casual responsibility to a person or thing",
-        "To write down",
-        "An ancient indian tribe",
-        "Marked by foolishness"
+        "preserve",
+        "prevent",
+        "pretend",
+        "present"
       ],
-      "correct": "To attribute or assign casual responsibility to a person or thing"
+      "correct": "present"
     },
     {
       "id": 525,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Assertion",
+      "category": "Part 5 · Set 6",
+      "question": "The company has decided to ____ the deadline by two weeks.",
       "options": [
-        "To be negative towards a situation",
-        "A positive statement or claim",
-        "To lie",
-        "To be untrustworthy"
+        "expend",
+        "expose",
+        "extend",
+        "expand"
       ],
-      "correct": "A positive statement or claim"
+      "correct": "extend"
     },
     {
       "id": 526,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Ardent",
+      "category": "Part 5 · Set 6",
+      "question": "Passengers are advised to ____ at the airport two hours before departure.",
       "options": [
-        "relaxation",
-        "intense, passionate",
-        "carefree",
-        "Marked by penetration"
+        "arouse",
+        "arrive",
+        "arrange",
+        "arise"
       ],
-      "correct": "intense, passionate"
+      "correct": "arrive"
     },
     {
       "id": 527,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Apprise",
+      "category": "Part 5 · Set 6",
+      "question": "The new branch office will ____ next month in the city centre.",
       "options": [
-        "The lack of knowledge",
-        "Marked by ignorance",
-        "easy going; friendly",
-        "To supply notice to"
+        "open",
+        "offer",
+        "order",
+        "obey"
       ],
-      "correct": "To supply notice to"
+      "correct": "open"
     },
     {
       "id": 528,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Apprehension",
+      "category": "Part 5 · Set 6",
+      "question": "The supervisor ____ the trainees on how to operate the new machine.",
       "options": [
-        "To be care free",
-        "Uneasiness about the future",
-        "makred by lonleyness",
-        "Marked by seclusion"
+        "insisted",
+        "installed",
+        "invested",
+        "instructed"
       ],
-      "correct": "Uneasiness about the future"
+      "correct": "instructed"
     },
     {
       "id": 529,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Apparation",
+      "category": "Part 5 · Set 6",
+      "question": "Our supplier has ____ the delivery date twice this month.",
       "options": [
-        "A title or name",
-        "marked by aggression",
-        "A spirit or ghost",
-        "The greek word for viking"
+        "promoted",
+        "prohibited",
+        "postponed",
+        "proposed"
       ],
-      "correct": "A spirit or ghost"
+      "correct": "postponed"
     },
     {
       "id": 530,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Bludgeon",
+      "category": "Part 5 · Set 6",
+      "question": "The customer asked for a ____ on the final price.",
       "options": [
-        "The act of kindness",
-        "To beat",
-        "Lacking social skills",
-        "The exposure to light"
+        "disaster",
+        "discount",
+        "disclosure",
+        "discourse"
       ],
-      "correct": "To beat"
+      "correct": "discount"
     },
     {
       "id": 531,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Blather",
+      "category": "Part 5 · Set 6",
+      "question": "The personnel department will ____ the applications next week.",
       "options": [
-        "To gabble or talk ridiculously",
-        "One who is self relient",
-        "Marked by silence",
-        "Marked by a profuse amount"
+        "evaluate",
+        "evacuate",
+        "evaporate",
+        "evade"
       ],
-      "correct": "To gabble or talk ridiculously"
+      "correct": "evaluate"
     },
     {
       "id": 532,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Bipolar",
+      "category": "Part 5 · Set 6",
+      "question": "The company plans to ____ its operations into the Southeast Asian market.",
       "options": [
-        "One who is always aggrivated",
-        "One with out a care",
-        "Possessing two sides or poles.",
-        "Possessing the same side or pole"
+        "expend",
+        "expire",
+        "expel",
+        "expand"
       ],
-      "correct": "Possessing two sides or poles."
+      "correct": "expand"
     },
     {
       "id": 533,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Blase",
+      "category": "Part 5 · Set 6",
+      "question": "The client was ____ with the quality of the sample products.",
       "options": [
-        "Bored, unimpressed",
-        "Marked by excitement",
-        "Abnormal",
-        "Having the ability to pick up on things quickly"
+        "satisfaction",
+        "satisfy",
+        "satisfied",
+        "satisfying"
       ],
-      "correct": "Bored, unimpressed"
+      "correct": "satisfied"
     },
     {
       "id": 534,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Bilk",
+      "category": "Part 5 · Set 6",
+      "question": "The auditor asked the staff to ____ all the receipts for the last quarter.",
       "options": [
-        "Marked by honesty",
-        "To cheat",
-        "Of or pertaining to beasts",
-        "The quality of work"
+        "return",
+        "retain",
+        "retire",
+        "retreat"
       ],
-      "correct": "To cheat"
+      "correct": "retain"
     },
     {
       "id": 535,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Bereaved",
+      "category": "Part 5 · Set 6",
+      "question": "Ms. Watanabe was ____ of the change in the delivery schedule.",
       "options": [
-        "In a state of mourning",
-        "To live on the edge",
-        "Of or pertaining to beavers",
-        "To be in a state of joy"
+        "notified",
+        "noticing",
+        "noticeable",
+        "notion"
       ],
-      "correct": "In a state of mourning"
+      "correct": "notified"
     },
     {
       "id": 536,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Bestial",
+      "category": "Part 5 · Set 6",
+      "question": "The warehouse manager keeps a careful ____ of all incoming goods.",
       "options": [
-        "Of or pertaining to kindness",
-        "Of or pertaing to beasts",
-        "The act of cheating",
-        "In the state of happiness"
+        "recorder",
+        "recording",
+        "recorded",
+        "record"
       ],
-      "correct": "Of or pertaing to beasts"
+      "correct": "record"
     },
     {
       "id": 537,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Benighted",
+      "category": "Part 5 · Set 6",
+      "question": "The firm's ____ of the local market helped it win the contract.",
       "options": [
-        "Humble",
-        "arrogant",
-        "Ignorant",
-        "extreme exaggeration"
+        "knowingly",
+        "known",
+        "knowledge",
+        "knowledgeable"
       ],
-      "correct": "Ignorant"
+      "correct": "knowledge"
     },
     {
       "id": 538,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Bequeath",
+      "category": "Part 5 · Set 6",
+      "question": "The new system will ____ the time needed to process each claim.",
       "options": [
-        "Bestow by means of a will",
-        "A harsh death",
-        "Having to ability to fix things",
-        "One who is charasmatic"
+        "produce",
+        "reduce",
+        "deduce",
+        "induce"
       ],
-      "correct": "Bestow by means of a will"
+      "correct": "reduce"
     },
     {
       "id": 539,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Tenure",
+      "category": "Part 5 · Set 6",
+      "question": "The manager offered the team a ____ on how to handle difficult clients.",
       "options": [
-        "The holding of a post or property",
-        "Having animal like qualities",
-        "A special award",
-        "Marked by brightness"
+        "workshop",
+        "worksheet",
+        "workload",
+        "workflow"
       ],
-      "correct": "The holding of a post or property"
+      "correct": "workshop"
     },
     {
       "id": 540,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Tenuous",
+      "category": "Part 5 · Set 6",
+      "question": "All employees are asked to ____ the new safety rules by next Monday.",
       "options": [
-        "Matter in the state of a liquid",
-        "Substantial",
-        "Not solid, insubstantial",
-        "Marked by aging or decaying"
+        "comply to",
+        "comply for",
+        "comply in",
+        "comply with"
       ],
-      "correct": "Not solid, insubstantial"
+      "correct": "comply with"
     },
     {
       "id": 541,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Tenet",
+      "category": "Part 5 · Set 6",
+      "question": "The accountant found a small ____ in the monthly statement.",
       "options": [
-        "To lie or cheat",
-        "A principle",
-        "A head leader in any position",
-        "To act on immediatley"
+        "discovery",
+        "discussion",
+        "discrepancy",
+        "discretion"
       ],
-      "correct": "A principle"
+      "correct": "discrepancy"
     },
     {
       "id": 542,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Tenacious",
+      "category": "Part 5 · Set 6",
+      "question": "The airline will ____ the tickets to the travel agent tomorrow.",
       "options": [
-        "Hasty, Imulsive",
-        "Stubborn",
-        "Marked by violence",
-        "bitter"
+        "issued",
+        "issue",
+        "issuing",
+        "issuance"
       ],
-      "correct": "Stubborn"
+      "correct": "issue"
     },
     {
       "id": 543,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Teleprompter",
+      "category": "Part 5 · Set 6",
+      "question": "The plant's ____ has increased since the robots were installed.",
       "options": [
-        "The supposed ability to read minds or communicate mentally",
-        "An aotomated machine used for actors to communicate to one another",
-        "An automated machine means of displaying lines to be read by actors",
-        "An easy to use phone"
+        "output",
+        "outcome",
+        "outlet",
+        "outlook"
       ],
-      "correct": "An automated machine means of displaying lines to be read by actors"
+      "correct": "output"
     },
     {
       "id": 544,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Temerity",
+      "category": "Part 5 · Set 6",
+      "question": "The firm offers a ____ bonus to employees who stay for five years.",
       "options": [
-        "recklessness",
-        "Rashness",
-        "good behavior; to do good works",
-        "Stubborn"
+        "retained",
+        "retentive",
+        "retaining",
+        "retention"
       ],
-      "correct": "Rashness"
+      "correct": "retention"
     },
     {
       "id": 545,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Telepathy",
+      "category": "Part 5 · Set 6",
+      "question": "Please ____ your password if you cannot access the customer database.",
       "options": [
-        "The supposed ability to read minds or communicate mentally",
-        "The supposed ability to communicate with aliens outside this world",
-        "The supposed ability to move objects by means of mental energy",
-        "The establishment of a language"
+        "resettle",
+        "restate",
+        "reset",
+        "resit"
       ],
-      "correct": "The supposed ability to read minds or communicate mentally"
+      "correct": "reset"
     },
     {
       "id": 546,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Tetragrammaton",
+      "category": "Part 5 · Set 6",
+      "question": "The director will ____ the progress of the project every Monday.",
       "options": [
-        "The written Christian word for devil",
-        "The written Christian word for god",
-        "The written Hebrew word for God",
-        "The written hebrew word for devil"
+        "overtake",
+        "oversee",
+        "overlook",
+        "overcome"
       ],
-      "correct": "The written Hebrew word for God"
+      "correct": "oversee"
     },
     {
       "id": 547,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Tertiary",
+      "category": "Part 5 · Set 6",
+      "question": "The company's new policy takes ____ on 1 September.",
       "options": [
-        "Second in succesion",
-        "Third in succession",
-        "A meeting in which two people meet face to face",
-        "Land in which is owned by the government"
+        "effect",
+        "affect",
+        "effort",
+        "effective"
       ],
-      "correct": "Third in succession"
+      "correct": "effect"
     },
     {
       "id": 548,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Terra cotta",
+      "category": "Part 5 · Set 6",
+      "question": "Customers who return the item will receive a full ____.",
       "options": [
-        "a reddish clay modeling compound that hardens when exposed to heat",
-        "a term used in music when notes increase in sound",
-        "A type of dog which originated in Germany",
-        "A type of dirt that can be compacted to make houses"
+        "refusal",
+        "refinery",
+        "refuge",
+        "refund"
       ],
-      "correct": "a reddish clay modeling compound that hardens when exposed to heat"
+      "correct": "refund"
     },
     {
       "id": 549,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "temblor",
+      "category": "Part 5 · Set 6",
+      "question": "The sales representative will ____ the order to the regional office.",
       "options": [
-        "hurricane",
-        "rain storm",
-        "wind storm",
-        "earthquake"
+        "forwarding",
+        "forwards",
+        "forward",
+        "forwarded"
       ],
-      "correct": "earthquake"
+      "correct": "forward"
     },
     {
       "id": 550,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "theocracy",
+      "category": "Part 5 · Set 6",
+      "question": "The committee reviewed the ____ of the previous meeting.",
       "options": [
-        "multiple leaders",
-        "one single ruler",
-        "a person who is selfish",
-        "government by religious leaders"
+        "minutiae",
+        "minutes",
+        "minute",
+        "minuteness"
       ],
-      "correct": "government by religious leaders"
+      "correct": "minutes"
     },
     {
       "id": 551,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "testatrix",
+      "category": "Part 5 · Set 6",
+      "question": "The manager will ____ the new intern with the payroll system.",
       "options": [
-        "a women hater",
-        "a type of doctor",
-        "a female athlete",
-        "a female who sets out wishes in a legal will"
+        "familiarize",
+        "familiarity",
+        "familiar",
+        "familiarly"
       ],
-      "correct": "a female who sets out wishes in a legal will"
+      "correct": "familiarize"
     },
     {
       "id": 552,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "testator",
+      "category": "Part 5 · Set 6",
+      "question": "The company's annual report will be ____ to all shareholders.",
       "options": [
-        "a man hater",
-        "a female who sets out wishes in a legal will",
-        "a man who sets out his wishes in a legal will",
-        "a person who is good at taking tests"
+        "distributing",
+        "distribution",
+        "distribute",
+        "distributed"
       ],
-      "correct": "a man who sets out his wishes in a legal will"
+      "correct": "distributed"
     },
     {
       "id": 553,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "theraputic",
+      "category": "Part 5 · Set 6",
+      "question": "The clinic's new ____ equipment was installed last week.",
       "options": [
-        "making sick",
-        "breaking the law",
-        "reckless",
-        "cures illness"
+        "therapist",
+        "therapies",
+        "therapeutic",
+        "therapy"
       ],
-      "correct": "cures illness"
+      "correct": "therapeutic"
     },
     {
       "id": 554,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "theocentric",
+      "category": "Part 5 · Set 6",
+      "question": "Management expects a ____ improvement in sales next quarter.",
       "options": [
-        "a possitve statement",
-        "placing God in the center",
-        "stubborn",
-        "placing god out of your life"
+        "positioned",
+        "positive",
+        "positively",
+        "position"
       ],
-      "correct": "placing God in the center"
+      "correct": "positive"
     },
     {
       "id": 555,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "auspices",
+      "category": "Part 5 · Set 6",
+      "question": "The team leader offered ____ to the staff after the difficult week.",
       "options": [
-        "to be of benefit",
-        "reduce a size",
-        "encouragment",
-        "emotional"
+        "encouragement",
+        "encouraged",
+        "encouraging",
+        "encourage"
       ],
-      "correct": "encouragment"
+      "correct": "encouragement"
     },
     {
       "id": 556,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "augmentation",
+      "category": "Part 5 · Set 6",
+      "question": "The hotel manager apologized for the ____ in the reservation system.",
       "options": [
-        "to make smaller",
-        "intense emotion",
-        "false start",
-        "to make bigger"
+        "era",
+        "erase",
+        "erroneous",
+        "error"
       ],
-      "correct": "to make bigger"
+      "correct": "error"
     },
     {
       "id": 557,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "annunciate",
+      "category": "Part 5 · Set 6",
+      "question": "The board will ____ the annual budget at its next meeting.",
       "options": [
-        "to be of use",
-        "annoying",
-        "great affection",
-        "to announce"
+        "approved",
+        "approving",
+        "approve",
+        "approval"
       ],
-      "correct": "to announce"
+      "correct": "approve"
     },
     {
       "id": 558,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "ancillary",
+      "category": "Part 5 · Set 6",
+      "question": "All visitors must ____ at the security desk before entering the plant.",
       "options": [
-        "secondary",
-        "hardworking",
-        "to supply notice to",
-        "a title"
+        "registrar",
+        "register",
+        "registration",
+        "registered"
       ],
-      "correct": "secondary"
+      "correct": "register"
     },
     {
       "id": 559,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "surrogate",
+      "category": "Part 5 · Set 6",
+      "question": "The company has been ____ with the same law firm for over a decade.",
       "options": [
-        "annoying",
-        "caregiver",
-        "one who acts in the place of another",
-        "replaceable"
+        "working",
+        "work",
+        "worked",
+        "works"
       ],
-      "correct": "one who acts in the place of another"
+      "correct": "working"
     },
     {
       "id": 560,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "bete noire",
+      "category": "Part 5 · Set 6",
+      "question": "The new marketing strategy proved highly ____ in the first month.",
       "options": [
-        "extremely fearful",
-        "dangerous",
-        "showing excitment",
-        "Reckless"
+        "effect",
+        "effectively",
+        "effectiveness",
+        "effective"
       ],
-      "correct": "extremely fearful"
+      "correct": "effective"
     },
     {
       "id": 561,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "bluster",
+      "category": "Part 5 · Set 6",
+      "question": "The director asked for a ____ of the latest sales figures.",
       "options": [
-        "to threaten",
-        "harsh",
-        "bored",
-        "lacking manners"
+        "summarized",
+        "summarily",
+        "summary",
+        "summarize"
       ],
-      "correct": "to threaten"
+      "correct": "summary"
     },
     {
       "id": 562,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "blithe",
+      "category": "Part 5 · Set 6",
+      "question": "The shipping department will ____ the goods by air freight.",
       "options": [
-        "unhappy",
-        "genuine",
-        "cheerful",
-        "sarcastic"
+        "transporter",
+        "transport",
+        "transportation",
+        "transported"
       ],
-      "correct": "cheerful"
+      "correct": "transport"
     },
     {
       "id": 563,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "balderdash",
+      "category": "Part 5 · Set 6",
+      "question": "The staff meeting was ____ to Tuesday because of the holiday.",
       "options": [
-        "safe",
-        "to confuse",
-        "to make better",
-        "nonsense"
+        "rescheduled",
+        "rescheduling",
+        "reschedule",
+        "reschedules"
       ],
-      "correct": "nonsense"
+      "correct": "rescheduled"
     },
     {
       "id": 564,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "babbitt",
+      "category": "Part 5 · Set 6",
+      "question": "The company offers free ____ to all new employees.",
       "options": [
-        "Genuine",
-        "narrow-minded",
-        "lacking humor",
-        "fearless"
+        "orient",
+        "oriented",
+        "oriental",
+        "orientation"
       ],
-      "correct": "narrow-minded"
+      "correct": "orientation"
     },
     {
       "id": 565,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "belated",
+      "category": "Part 5 · Set 6",
+      "question": "The consultant will ____ the findings of the survey to the board.",
       "options": [
-        "early on",
-        "extremely harmful",
-        "caring",
-        "late"
+        "summarized",
+        "summarily",
+        "summarize",
+        "summary"
       ],
-      "correct": "late"
+      "correct": "summarize"
     },
     {
       "id": 566,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "benevolent",
+      "category": "Part 5 · Set 6",
+      "question": "The airline offers a ____ meal on all long-haul flights.",
       "options": [
-        "agressive",
-        "good wishes towards others",
-        "harsh",
-        "a formal blessing"
+        "complimented",
+        "complimentary",
+        "complementary",
+        "compliment"
       ],
-      "correct": "good wishes towards others"
+      "correct": "complimentary"
     },
     {
       "id": 567,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "bestow",
+      "category": "Part 5 · Set 6",
+      "question": "The company's ____ of the defective parts was praised by the inspectors.",
       "options": [
-        "agressive",
-        "to confuse",
-        "to give",
-        "expression of good wishes"
+        "disposal",
+        "dispose",
+        "disposed",
+        "disposable"
       ],
-      "correct": "to give"
+      "correct": "disposal"
     },
     {
       "id": 568,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "avant-garde",
+      "category": "Part 5 · Set 6",
+      "question": "The gallery will ____ works by local artists next month.",
       "options": [
-        "relating trends in the world of art",
-        "operating in a dependent manner",
-        "stubborn",
-        "to supply notice to"
+        "exhibition",
+        "exhibited",
+        "exhibiting",
+        "exhibit"
       ],
-      "correct": "relating trends in the world of art"
+      "correct": "exhibit"
     },
     {
       "id": 569,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "avail",
+      "category": "Part 5 · Set 6",
+      "question": "The firm ____ its first overseas office twenty years ago.",
       "options": [
-        "to be of benefit or use",
-        "promising",
-        "daring",
-        "passionate"
+        "establishment",
+        "establishing",
+        "established",
+        "establish"
       ],
-      "correct": "to be of benefit or use"
+      "correct": "established"
     },
     {
       "id": 570,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "telekinesis",
+      "category": "Part 5 · Set 6",
+      "question": "The technician will ____ the printer before the office reopens.",
       "options": [
-        "ability to move objects by mental energy",
-        "genuine",
-        "unyielding",
-        "ability to read minds"
+        "reparation",
+        "repair",
+        "repaired",
+        "repairing"
       ],
-      "correct": "ability to move objects by mental energy"
+      "correct": "repair"
     },
     {
       "id": 571,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "antipathy",
+      "category": "Part 5 · Set 6",
+      "question": "The new contract is ____ to both parties under the current terms.",
       "options": [
-        "assurance",
-        "a principle",
-        "a feeling of strong dislike",
-        "stubborn"
+        "favourable",
+        "favour",
+        "favourably",
+        "favourite"
       ],
-      "correct": "a feeling of strong dislike"
+      "correct": "favourable"
     },
     {
       "id": 572,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "appelation",
+      "category": "Part 5 · Set 6",
+      "question": "The company was ____ for its excellent customer service.",
       "options": [
-        "a spirit or ghost",
-        "title or name",
-        "secondary or subordinate",
-        "intense hostility"
+        "recognition",
+        "recognizing",
+        "recognizable",
+        "recognized"
       ],
-      "correct": "title or name"
+      "correct": "recognized"
     },
     {
       "id": 573,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "boorish",
+      "category": "Part 5 · Set 6",
+      "question": "The warehouse is fully ____ with automated sorting equipment.",
       "options": [
-        "lacking manners",
-        "touchable",
-        "a summary",
-        "unconventional"
+        "equipping",
+        "equip",
+        "equipped",
+        "equipment"
       ],
-      "correct": "lacking manners"
+      "correct": "equipped"
     },
     {
       "id": 574,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "tangible",
+      "category": "Part 5 · Set 6",
+      "question": "The manager's ____ to the proposal was obvious from her tone.",
       "options": [
-        "real",
-        "fake",
-        "Ignorant",
-        "formal blessing"
+        "objectively",
+        "objection",
+        "object",
+        "objected"
       ],
-      "correct": "real"
+      "correct": "objection"
     },
     {
       "id": 575,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "bygone",
+      "category": "Part 5 · Set 6",
+      "question": "The airline will ____ boarding thirty minutes before departure.",
       "options": [
-        "honesty",
-        "something gone by",
-        "overpowering",
-        "cheap"
+        "commence",
+        "commencement",
+        "commenced",
+        "commencing"
       ],
-      "correct": "something gone by"
+      "correct": "commence"
     },
     {
       "id": 576,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "boorish",
+      "category": "Part 5 · Set 6",
+      "question": "The report ____ three possible locations for the new plant.",
       "options": [
-        "well kept",
-        "lacking manners",
-        "acting poliete",
-        "to threaten"
+        "identification",
+        "identical",
+        "identically",
+        "identifies"
       ],
-      "correct": "lacking manners"
+      "correct": "identifies"
     },
     {
       "id": 577,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "brunt",
+      "category": "Part 5 · Set 6",
+      "question": "The supervisor praised the staff for their ____ to the project.",
       "options": [
-        "boldness",
-        "mixed feelings",
-        "primary impact of a blow",
-        "object of fear"
+        "contributing",
+        "contributor",
+        "contribution",
+        "contribute"
       ],
-      "correct": "primary impact of a blow"
+      "correct": "contribution"
     },
     {
       "id": 578,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "bovine",
+      "category": "Part 5 · Set 6",
+      "question": "All equipment must be ____ before it leaves the factory.",
       "options": [
-        "dull",
-        "harsh",
-        "happy",
-        "cheap"
+        "inspect",
+        "inspected",
+        "inspection",
+        "inspector"
       ],
-      "correct": "dull"
+      "correct": "inspected"
     },
     {
       "id": 579,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "autonomous",
+      "category": "Part 5 · Set 6",
+      "question": "The company's profits are expected to ____ next year.",
       "options": [
-        "operating in an independent manner",
-        "operating with a group",
-        "homeless; poor",
-        "one means of transportation"
+        "increase",
+        "increasing",
+        "increased",
+        "increasingly"
       ],
-      "correct": "operating in an independent manner"
+      "correct": "increase"
     },
     {
       "id": 580,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "bombast",
+      "category": "Part 5 · Set 6",
+      "question": "The buyer asked for a ____ of the delivery schedule in writing.",
       "options": [
-        "Haughty",
-        "Having characteristics of the enemy",
-        "Marked by outrage",
-        "To take offense to"
+        "confirm",
+        "confirmed",
+        "confirming",
+        "confirmation"
       ],
-      "correct": "Haughty"
+      "correct": "confirmation"
     },
     {
       "id": 581,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "bona fide",
+      "category": "Part 5 · Set 6",
+      "question": "The documents were ____ by the legal department yesterday.",
       "options": [
-        "Cheap",
-        "actualy, genuine",
-        "displayed by arrogance",
-        "To take everything literal"
+        "authentic",
+        "authentically",
+        "authenticated",
+        "authentication"
       ],
-      "correct": "actualy, genuine"
+      "correct": "authenticated"
     },
     {
       "id": 582,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Botanical",
+      "category": "Part 5 · Set 6",
+      "question": "The growing demand for plant-based products ____ the market rapidly.",
       "options": [
-        "Of or pertaining to animal life",
-        "Of or pertaing to plant life",
-        "Of or pertaing to human life",
-        "Of or pertaing to life outside this world"
+        "were changing",
+        "is changing",
+        "change",
+        "have changed"
       ],
-      "correct": "Of or pertaing to plant life"
+      "correct": "is changing"
     },
     {
       "id": 583,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Braggadicio",
+      "category": "Part 5 · Set 6",
+      "question": "The director refused to ____ the details of the pending deal.",
       "options": [
-        "modesty",
-        "Bragging",
-        "Marked by silence",
-        "Leadership"
+        "disclose",
+        "disclosure",
+        "disclosed",
+        "disclosing"
       ],
-      "correct": "Bragging"
+      "correct": "disclose"
     },
     {
       "id": 584,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Brandish",
+      "category": "Part 5 · Set 6",
+      "question": "The hotel has ____ its room rates for the holiday season.",
       "options": [
-        "To flourish or shake menacingly",
-        "Dull or slow",
-        "Of or pertaining to cows",
-        "The primary target"
+        "reduction",
+        "reducing",
+        "reduce",
+        "reduced"
       ],
-      "correct": "To flourish or shake menacingly"
+      "correct": "reduced"
     },
     {
       "id": 585,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Brash",
+      "category": "Part 5 · Set 6",
+      "question": "The new employees received a thorough ____ of the safety rules.",
       "options": [
-        "Impudent; hasty",
-        "bankrupt",
-        "an overblow of excitement",
-        "To challenge ones self"
+        "explained",
+        "explaining",
+        "explanation",
+        "explain"
       ],
-      "correct": "Impudent; hasty"
+      "correct": "explanation"
     },
     {
       "id": 586,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Brassy",
+      "category": "Part 5 · Set 6",
+      "question": "The company is seeking ____ for the vacant regional manager post.",
       "options": [
-        "Expensive, elegant",
-        "Cheap, showy",
-        "troublesome",
-        "To be aware of"
+        "candidate",
+        "candidates",
+        "candidacy",
+        "candidly"
       ],
-      "correct": "Cheap, showy"
+      "correct": "candidates"
     },
     {
       "id": 587,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "brevity",
+      "category": "Part 5 · Set 6",
+      "question": "The shipment arrived ____ despite the severe weather conditions.",
       "options": [
-        "exceedingly long",
-        "Shortness",
-        "To talk in a persuasive way",
-        "one who gets to the point"
+        "safely",
+        "safe",
+        "safety",
+        "safeness"
       ],
-      "correct": "Shortness"
+      "correct": "safely"
     },
     {
       "id": 588,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Brusque",
+      "category": "Part 5 · Set 6",
+      "question": "The board will ____ the quarterly results with the shareholders tomorrow.",
       "options": [
-        "One who talks on and on",
-        "Short; abrupt",
-        "To do the same thing for a long period of time",
-        "Unable to committ"
+        "discussion",
+        "discussed",
+        "discussing",
+        "discuss"
       ],
-      "correct": "Short; abrupt"
+      "correct": "discuss"
     },
     {
       "id": 589,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "bugaboo",
+      "category": "Part 5 · Set 6",
+      "question": "The audit revealed that all transactions were properly ____.",
       "options": [
-        "A name for a baby",
-        "An object of fear",
-        "The ancient weapon of the Aztecs",
-        "To be concrete"
+        "recording",
+        "recorder",
+        "recorded",
+        "record"
       ],
-      "correct": "An object of fear"
+      "correct": "recorded"
     },
     {
       "id": 590,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": " ________ signs that Mr. Francos was oftening his stance towards the protesting employees. ",
+      "category": "Part 5 · Set 6",
+      "question": "____ signs that Mr. Francos was softening his stance towards the protesting employees.",
       "options": [
         "Having shown",
         "It was the",
@@ -7712,8 +7712,8 @@ const TOEIC_DATA = {
     {
       "id": 591,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "The International Energy Agency’s ________ on the supply of oil and natural gas was pessimistic because of slow production among non-OPEC countries. ",
+      "category": "Part 5 · Set 6",
+      "question": "The International Energy Agency’s ____ on the supply of oil and natural gas was pessimistic because of slow production among non-OPEC countries.",
       "options": [
         "outlet",
         "outline",
@@ -7725,8 +7725,8 @@ const TOEIC_DATA = {
     {
       "id": 592,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Following the ________ of a new Chief Executive last spring, there is a sense of fresh direction and energy in our corporation.",
+      "category": "Part 5 · Set 6",
+      "question": "Following the ____ of a new Chief Executive last spring, there is a sense of fresh direction and energy in our corporation.",
       "options": [
         "appointed",
         "appointee",
@@ -7738,8 +7738,8 @@ const TOEIC_DATA = {
     {
       "id": 593,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "RDA Ltd. ________ applications for position of System Coordinator. For detailed position announcement, visit our website.",
+      "category": "Part 5 · Set 6",
+      "question": "RDA Ltd. ____ applications for the position of System Coordinator. For a detailed position announcement, visit our website.",
       "options": [
         "incites",
         "infringes",
@@ -7751,8 +7751,8 @@ const TOEIC_DATA = {
     {
       "id": 594,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Surprisingly, Gertz Ltd., ________ is established company, got a govern contract.",
+      "category": "Part 5 · Set 6",
+      "question": "Surprisingly, Gertz Ltd., ____ is an established company, got a government contract.",
       "options": [
         "that",
         "where",
@@ -7764,8 +7764,8 @@ const TOEIC_DATA = {
     {
       "id": 595,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "________ the graphic designer call him I’m tied up today and that I wil tomorrow.",
+      "category": "Part 5 · Set 6",
+      "question": "____ the graphic designer call, please tell him that I am tied up today and that I will call back tomorrow.",
       "options": [
         "If",
         "Provided",
@@ -7777,8 +7777,8 @@ const TOEIC_DATA = {
     {
       "id": 596,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "The department’s secretariat will be________ should you need any hel",
+      "category": "Part 5 · Set 6",
+      "question": "The department's secretariat will be at your ____ should you need any assistance.",
       "options": [
         "convenience",
         "disposal",
@@ -7790,8 +7790,8 @@ const TOEIC_DATA = {
     {
       "id": 597,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Mr. Krammer is renowned for his ability to develop and maintain relationships with his colleagues that result ________ optimum solutions for the good of the Corporation.",
+      "category": "Part 5 · Set 6",
+      "question": "Mr. Krammer is renowned for his ability to develop and maintain relationships with his colleagues that result ____ optimum solutions for the good of the Corporation.",
       "options": [
         "at",
         "in",
@@ -7803,7 +7803,7 @@ const TOEIC_DATA = {
     {
       "id": 598,
       "type_id": 6,
-      "category": "Grammar Part 4",
+      "category": "Part 5 · Set 6",
       "question": "The director got the secretary ____ all prospective clients and inform them about the company’s new products and services.",
       "options": [
         "contact",
@@ -7816,8 +7816,8 @@ const TOEIC_DATA = {
     {
       "id": 599,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Financial analysts advocate that balancing the needs of producers and consumers is ________ crucial as increasing the supply and curbing energy demand. ",
+      "category": "Part 5 · Set 6",
+      "question": "Financial analysts advocate that balancing the needs of producers and consumers is ____ crucial as increasing the supply and curbing energy demand.",
       "options": [
         "as",
         "so",
@@ -7829,8 +7829,8 @@ const TOEIC_DATA = {
     {
       "id": 600,
       "type_id": 6,
-      "category": "Grammar Part 4",
-      "question": "Duncan, a food company, agreed to buy a Dutch company ________ in baby food and clinical nutrition for the sick and the elderly. ",
+      "category": "Part 5 · Set 6",
+      "question": "Duncan, a food company, agreed to buy a Dutch company ____ in baby food and clinical nutrition for the sick and the elderly.",
       "options": [
         "special",
         "specialty",
@@ -7842,8 +7842,8 @@ const TOEIC_DATA = {
     {
       "id": 601,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Employees who wish to take the day after Thanksgiving as a personal day off _____ to get managerial approval. ",
+      "category": "Part 5 · Set 7",
+      "question": "Employees who wish to take the day after Thanksgiving as a personal day off ____ to get managerial approval.",
       "options": [
         "must",
         "should",
@@ -7855,8 +7855,8 @@ const TOEIC_DATA = {
     {
       "id": 602,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Mr. Hernandez _____ to Switzerland on a business trip, but messages can be relayed to him through his secretary, Ms. Constantinople. ",
+      "category": "Part 5 · Set 7",
+      "question": "Mr. Hernandez ____ to Switzerland on a business trip, but messages can be relayed to him through his secretary, Ms. Constantinople.",
       "options": [
         "has gone",
         "had left",
@@ -7868,8 +7868,8 @@ const TOEIC_DATA = {
     {
       "id": 603,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "After several days of negotiations, Turner Associates finallymade a marketing _____ with Ignatius Imports. ",
+      "category": "Part 5 · Set 7",
+      "question": "After several days of negotiations, Turner Associates finally made a marketing ____ with Ignatius Imports.",
       "options": [
         "recommendation",
         "package",
@@ -7881,8 +7881,8 @@ const TOEIC_DATA = {
     {
       "id": 604,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "In Mr. Carter's absence, inquiries should be directed to his _____, Mr. Zimbrowski. ",
+      "category": "Part 5 · Set 7",
+      "question": "In Mr. Carter's absence, inquiries should be directed to his ____, Mr. Zimbrowski.",
       "options": [
         "association",
         "associates",
@@ -7894,8 +7894,8 @@ const TOEIC_DATA = {
     {
       "id": 605,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Wilson Electronics announced Tuesday that 500 workers will be _____ off next month due to the slumping economy. ",
+      "category": "Part 5 · Set 7",
+      "question": "Wilson Electronics announced Tuesday that 500 workers will be ____ off next month due to the slumping economy.",
       "options": [
         "cut",
         "laid",
@@ -7907,8 +7907,8 @@ const TOEIC_DATA = {
     {
       "id": 606,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "The post office is located _____ the end of the block, next to Charlestown Dry Cleaners. ",
+      "category": "Part 5 · Set 7",
+      "question": "The post office is located ____ the end of the block, next to Charlestown Dry Cleaners.",
       "options": [
         "in",
         "at",
@@ -7920,8 +7920,8 @@ const TOEIC_DATA = {
     {
       "id": 607,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Mrs. Summers complained that the CEO's power-point presentation on the history of modern architecture was _____. ",
+      "category": "Part 5 · Set 7",
+      "question": "Mrs. Summers complained that the CEO's power-point presentation on the history of modern architecture was ____.",
       "options": [
         "boring",
         "bored",
@@ -7933,8 +7933,8 @@ const TOEIC_DATA = {
     {
       "id": 608,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Mr. Hawkins is a hard worker who usually performs quite _____ under pressure. ",
+      "category": "Part 5 · Set 7",
+      "question": "Mr. Hawkins is a hard worker who usually performs quite ____ under pressure.",
       "options": [
         "good",
         "superb",
@@ -7946,8 +7946,8 @@ const TOEIC_DATA = {
     {
       "id": 609,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Because of _____ exceptional durability, IXC chips are in high demand for the new QC operating systems. ",
+      "category": "Part 5 · Set 7",
+      "question": "Because of ____ exceptional durability, IXC chips are in high demand for the new QC operating systems.",
       "options": [
         "their",
         "its",
@@ -7959,8 +7959,8 @@ const TOEIC_DATA = {
     {
       "id": 610,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "The Daily Times reports that the bubble has burst on the _____ housing market, sending home prices spiraling sharply downward. ",
+      "category": "Part 5 · Set 7",
+      "question": "The Daily Times reports that the bubble has burst on the ____ housing market, sending home prices spiraling sharply downward.",
       "options": [
         "locally",
         "locals",
@@ -7972,8 +7972,8 @@ const TOEIC_DATA = {
     {
       "id": 611,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Two delays, a thunderstorm and a missed connection combined to make Mr. Cox's cross country flight _____ miserable. ",
+      "category": "Part 5 · Set 7",
+      "question": "Two delays, a thunderstorm and a missed connection combined to make Mr. Cox's cross country flight ____ miserable.",
       "options": [
         "exceptional",
         "exception",
@@ -7985,8 +7985,8 @@ const TOEIC_DATA = {
     {
       "id": 612,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "\"Customers come first\" has always been one of the key business _____ at M & M Mortgages. ",
+      "category": "Part 5 · Set 7",
+      "question": "\"Customers come first\" has always been one of the key business ____ at M & M Mortgages.",
       "options": [
         "principal",
         "principles",
@@ -7998,8 +7998,8 @@ const TOEIC_DATA = {
     {
       "id": 613,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "_____ clients should be apprised of purchasing arrangements before they commit to a long-term contract. ",
+      "category": "Part 5 · Set 7",
+      "question": "____ clients should be apprised of purchasing arrangements before they commit to a long-term contract.",
       "options": [
         "Prospective",
         "Perspective",
@@ -8011,8 +8011,8 @@ const TOEIC_DATA = {
     {
       "id": 614,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "The Xerxes Corporation plans _____ next year with the opening of branch offices in Zurich, Amsterdam and Tokyo. ",
+      "category": "Part 5 · Set 7",
+      "question": "The Xerxes Corporation plans ____ next year with the opening of branch offices in Zurich, Amsterdam and Tokyo.",
       "options": [
         "expand",
         "expanding",
@@ -8024,8 +8024,8 @@ const TOEIC_DATA = {
     {
       "id": 615,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "_____ heavy rain, this afternoon's baseball game has been rescheduled for Friday. ",
+      "category": "Part 5 · Set 7",
+      "question": "____ heavy rain, this afternoon's site inspection has been rescheduled for Friday.",
       "options": [
         "Due to",
         "Because",
@@ -8037,8 +8037,8 @@ const TOEIC_DATA = {
     {
       "id": 616,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "During the meeting, Zeke Grabowski made _____ loud and clear about his position on the firm's proposed acquisition of Penny Pharmaceuticals. ",
+      "category": "Part 5 · Set 7",
+      "question": "During the meeting, Zeke Grabowski made ____ loud and clear about his position on the firm's proposed acquisition of Penny Pharmaceuticals.",
       "options": [
         "him",
         "he",
@@ -8050,8 +8050,8 @@ const TOEIC_DATA = {
     {
       "id": 617,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "To be valid under state law, the contract requires the _____ of the company's CFO as well as its chairman. ",
+      "category": "Part 5 · Set 7",
+      "question": "To be valid under state law, the contract requires the ____ of the company's CFO as well as its chairman.",
       "options": [
         "name",
         "signature",
@@ -8063,8 +8063,8 @@ const TOEIC_DATA = {
     {
       "id": 618,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Though not a sworn vegetarian, Health.com Chairman Harold Hopper _____ eats meat. ",
+      "category": "Part 5 · Set 7",
+      "question": "Though not a sworn vegetarian, Health.com Chairman Harold Hopper ____ eats meat.",
       "options": [
         "often",
         "seldom",
@@ -8076,8 +8076,8 @@ const TOEIC_DATA = {
     {
       "id": 619,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "After speeding to the airport and sprinting across the terminal, the PelCro Corp. executives arrived just _____ time to catch their flight. ",
+      "category": "Part 5 · Set 7",
+      "question": "After speeding to the airport and sprinting across the terminal, the PelCro Corp. executives arrived just ____ time to catch their flight.",
       "options": [
         "on",
         "at",
@@ -8089,8 +8089,8 @@ const TOEIC_DATA = {
     {
       "id": 620,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "We cannot overemphasize the _____ of delivering the shipment by no later than noon on Friday the 13th. ",
+      "category": "Part 5 · Set 7",
+      "question": "We cannot overemphasize the ____ of delivering the shipment by no later than noon on Friday the 13th.",
       "options": [
         "important",
         "import",
@@ -8102,8 +8102,8 @@ const TOEIC_DATA = {
     {
       "id": 621,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Mr. Zenter explained that he _____ couldn't justify thecapital expenditure required to finance Ms.Ruble's start-up company. ",
+      "category": "Part 5 · Set 7",
+      "question": "Mr. Zenter explained that he ____ couldn't justify the capital expenditure required to finance Ms. Ruble's start-up company.",
       "options": [
         "simply",
         "simplify",
@@ -8115,8 +8115,8 @@ const TOEIC_DATA = {
     {
       "id": 622,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Ms. Mertenson will be unavailable next week _____ you have made a previous appointment. ",
+      "category": "Part 5 · Set 7",
+      "question": "Ms. Mertenson will be unavailable next week ____ you have made a previous appointment.",
       "options": [
         "until",
         "unless",
@@ -8128,21 +8128,21 @@ const TOEIC_DATA = {
     {
       "id": 623,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Channel 2's weather forecasts are more reliable than Channel 7's, because its meteorologists have better credentials and are more _____. ",
+      "category": "Part 5 · Set 7",
+      "question": "Our logistics partner is more reliable than its rivals, because its drivers have better training and are more ____.",
       "options": [
-        "experience",
-        "experiencing",
         "experiential",
-        "experienced"
+        "experienced",
+        "experience",
+        "experiencing"
       ],
       "correct": "experienced"
     },
     {
       "id": 624,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Rucker Limited's second-quarter earnings were significantly affected by a _____ economy, which has led to rising unemployment and threat of increased inflation. ",
+      "category": "Part 5 · Set 7",
+      "question": "Rucker Limited's second-quarter earnings were significantly affected by a ____ economy, which has led to rising unemployment and threat of increased inflation.",
       "options": [
         "stable",
         "rapid",
@@ -8154,8 +8154,8 @@ const TOEIC_DATA = {
     {
       "id": 625,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Since the restaurant had _____ out of lobster, it gave us a discount on prawns and chips. ",
+      "category": "Part 5 · Set 7",
+      "question": "Since the restaurant had ____ out of lobster, it gave us a discount on prawns and chips.",
       "options": [
         "run",
         "been",
@@ -8167,8 +8167,8 @@ const TOEIC_DATA = {
     {
       "id": 626,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "If the intended _____ is not at home, leave notification that the package may be picked up at the post office during regular business hours. ",
+      "category": "Part 5 · Set 7",
+      "question": "If the intended ____ is not at home, leave notification that the package may be picked up at the post office during regular business hours.",
       "options": [
         "receiver",
         "receptionist",
@@ -8180,8 +8180,8 @@ const TOEIC_DATA = {
     {
       "id": 627,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Research director Tom Montgomery said he can't predict when the new arthritis drug will be ready, but he assured the board that his department is _____ making progress. ",
+      "category": "Part 5 · Set 7",
+      "question": "Research director Tom Montgomery said he can't predict when the new arthritis drug will be ready, but he assured the board that his department is ____ making progress.",
       "options": [
         "definite",
         "definition",
@@ -8193,8 +8193,8 @@ const TOEIC_DATA = {
     {
       "id": 628,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Mrs. Hammersmith asked Ms. Cotton to fax her _____ layout for the new advertisement as soon as possible, because deadline was approaching. ",
+      "category": "Part 5 · Set 7",
+      "question": "Mrs. Hammersmith asked Ms. Cotton to fax her ____ layout for the new advertisement as soon as possible, because deadline was approaching.",
       "options": [
         "his",
         "her",
@@ -8206,8 +8206,8 @@ const TOEIC_DATA = {
     {
       "id": 629,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Ms. Griffiths was eliminated as a candidate when she answered yes to the question, \"Have you ever _____ anything from a previous employer?\" ",
+      "category": "Part 5 · Set 7",
+      "question": "Ms. Griffiths was eliminated as a candidate when she answered yes to the question, \"Have you ever ____ anything from a previous employer?\"",
       "options": [
         "stolen",
         "stealing",
@@ -8219,8 +8219,8 @@ const TOEIC_DATA = {
     {
       "id": 630,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Each employee has an important _____ to play in ensuring the success of our business model. ",
+      "category": "Part 5 · Set 7",
+      "question": "Each employee has an important ____ to play in ensuring the success of our business model.",
       "options": [
         "work",
         "part",
@@ -8232,8 +8232,8 @@ const TOEIC_DATA = {
     {
       "id": 631,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "History demonstrates that the most efficient way to grow money is through ______ interest, rather than reinvesting dividends in multiple stocks. ",
+      "category": "Part 5 · Set 7",
+      "question": "History demonstrates that the most efficient way to grow money is through ____ interest, rather than reinvesting dividends in multiple stocks.",
       "options": [
         "compound",
         "unstable",
@@ -8245,8 +8245,8 @@ const TOEIC_DATA = {
     {
       "id": 632,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "There were ominous black clouds in the sky, _____ theytook umbrellas with them in case it rained. ",
+      "category": "Part 5 · Set 7",
+      "question": "The shipment was delayed, ____ the client was informed immediately.",
       "options": [
         "and",
         "because",
@@ -8258,21 +8258,21 @@ const TOEIC_DATA = {
     {
       "id": 633,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Ms. Balfour is a talented singer and songwriter, but playing piano is her ____________. ",
+      "category": "Part 5 · Set 7",
+      "question": "Ms. Balfour is a talented accountant, but corporate tax law is her ____.",
       "options": [
-        "specialties",
         "special",
         "specialty",
-        "specializes"
+        "specializes",
+        "specialties"
       ],
       "correct": "specialty"
     },
     {
       "id": 634,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "The CEO of VitaTech announced that the company's fourth quarter earnings forecast will be _________ to the press today. ",
+      "category": "Part 5 · Set 7",
+      "question": "The CEO of VitaTech announced that the company's fourth quarter earnings forecast will be ____ to the press today.",
       "options": [
         "published",
         "exchanged",
@@ -8284,8 +8284,8 @@ const TOEIC_DATA = {
     {
       "id": 635,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "The waiter did not deliver our _______ drinks until long after the appetizers had been eaten. ",
+      "category": "Part 5 · Set 7",
+      "question": "The waiter did not deliver our ____ drinks until long after the appetizers had been eaten.",
       "options": [
         "targeted",
         "requested",
@@ -8297,8 +8297,8 @@ const TOEIC_DATA = {
     {
       "id": 636,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Some workers still need _______ of the rules pertaining tocommon courtesy among colleagues in the workplace. ",
+      "category": "Part 5 · Set 7",
+      "question": "Some workers still need ____ of the rules pertaining to common courtesy among colleagues in the workplace.",
       "options": [
         "to be reminded",
         "remind",
@@ -8310,8 +8310,8 @@ const TOEIC_DATA = {
     {
       "id": 637,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "________ Mr. Crowder and Ms. Brighton, the manager suggests that we hire the one with the most experience. ",
+      "category": "Part 5 · Set 7",
+      "question": "____ Mr. Crowder and Ms. Brighton, the manager suggests that we hire the one with the most experience.",
       "options": [
         "Of",
         "Between",
@@ -8323,8 +8323,8 @@ const TOEIC_DATA = {
     {
       "id": 638,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "When they are competing against brand-name chains, stores relying ________ on word-of-mouth referrals should consider purchasing a print advertisement. ",
+      "category": "Part 5 · Set 7",
+      "question": "When they are competing against brand-name chains, stores relying ____ on word-of-mouth referrals should consider purchasing a print advertisement.",
       "options": [
         "otherwise",
         "further",
@@ -8336,8 +8336,8 @@ const TOEIC_DATA = {
     {
       "id": 639,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Mr. Reynolds _____ his secretary, Miss Stamolis, to pick up his dry cleaning by promising to give her Friday afternoon off. ",
+      "category": "Part 5 · Set 7",
+      "question": "Mr. Reynolds ____ his secretary, Miss Stamolis, to pick up his dry cleaning by promising to give her Friday afternoon off.",
       "options": [
         "had",
         "let",
@@ -8349,8 +8349,8 @@ const TOEIC_DATA = {
     {
       "id": 640,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Vacation request forms must be submitted to Ms. Hykoles in Human Resources _____ 5 p.m. Thursday. ",
+      "category": "Part 5 · Set 7",
+      "question": "Vacation request forms must be submitted to Ms. Hykoles in Human Resources ____ 5 p.m. Thursday.",
       "options": [
         "at",
         "by",
@@ -8362,8 +8362,8 @@ const TOEIC_DATA = {
     {
       "id": 641,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "The new prices are _____ on March 1st. ",
+      "category": "Part 5 · Set 7",
+      "question": "The new prices are ____ on March 1st.",
       "options": [
         "effect",
         "effective",
@@ -8375,21 +8375,21 @@ const TOEIC_DATA = {
     {
       "id": 642,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Martin and Scott will give _____ presentation tomorrow. ",
+      "category": "Part 5 · Set 7",
+      "question": "Mr. Doyle and Ms. Reyes will give ____ presentation tomorrow.",
       "options": [
-        "his",
-        "its",
         "their",
-        "theirselves"
+        "theirselves",
+        "his",
+        "its"
       ],
       "correct": "their"
     },
     {
       "id": 643,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Orders for banquet tickets will be _____ this afternoon. ",
+      "category": "Part 5 · Set 7",
+      "question": "Orders for banquet tickets will be ____ this afternoon.",
       "options": [
         "taken",
         "given",
@@ -8401,8 +8401,8 @@ const TOEIC_DATA = {
     {
       "id": 644,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Will the last person leaving the office please remember to _____ the lights? ",
+      "category": "Part 5 · Set 7",
+      "question": "Will the last person leaving the office please remember to ____ the lights?",
       "options": [
         "shut down",
         "close",
@@ -8414,8 +8414,8 @@ const TOEIC_DATA = {
     {
       "id": 645,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "The Butler Building is _____ the corner of Fifth and Vine. ",
+      "category": "Part 5 · Set 7",
+      "question": "The Butler Building is ____ the corner of Fifth and Vine.",
       "options": [
         "in",
         "against",
@@ -8427,8 +8427,8 @@ const TOEIC_DATA = {
     {
       "id": 646,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "All our steaks are seared in the oven, and then seasoned to _____. ",
+      "category": "Part 5 · Set 7",
+      "question": "All dishes in the hotel restaurant are seasoned to ____.",
       "options": [
         "prediction",
         "perfection",
@@ -8440,34 +8440,34 @@ const TOEIC_DATA = {
     {
       "id": 647,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Would you mind _____ me the phone, please. ",
+      "category": "Part 5 · Set 7",
+      "question": "Would you mind ____ me the file before the meeting?",
       "options": [
-        "to bring",
         "bringing",
         "brought",
-        "brings"
+        "brings",
+        "to bring"
       ],
       "correct": "bringing"
     },
     {
       "id": 648,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "The play's long run on Broadway will _____ come to an end tonight. ",
+      "category": "Part 5 · Set 7",
+      "question": "The company's long-standing partnership with the supplier will ____ come to an end this year.",
       "options": [
         "totally",
         "very",
         "temporarily",
         "finally"
       ],
-      "correct": "very"
+      "correct": "finally"
     },
     {
       "id": 649,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "The bank is closed now, _____ you will have to wait until tomorrow to make the deposit. ",
+      "category": "Part 5 · Set 7",
+      "question": "The bank is closed now, ____ you will have to wait until tomorrow to make the deposit.",
       "options": [
         "so",
         "as",
@@ -8479,8 +8479,8 @@ const TOEIC_DATA = {
     {
       "id": 650,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Could I see your driver's _____ please? ",
+      "category": "Part 5 · Set 7",
+      "question": "Could I see your driver's ____ please?",
       "options": [
         "card",
         "permit",
@@ -8492,8 +8492,8 @@ const TOEIC_DATA = {
     {
       "id": 651,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "We're _____ copy paper. Could you please order some more? ",
+      "category": "Part 5 · Set 7",
+      "question": "We're ____ copy paper. Could you please order some more?",
       "options": [
         "through with",
         "down to",
@@ -8505,8 +8505,8 @@ const TOEIC_DATA = {
     {
       "id": 652,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Lowman Bros. Inc. cordially ____ you to its annual fund-raising dinner. ",
+      "category": "Part 5 · Set 7",
+      "question": "Lowman Bros. Inc. cordially ____ you to its annual fund-raising dinner.",
       "options": [
         "invited",
         "invites",
@@ -8518,8 +8518,8 @@ const TOEIC_DATA = {
     {
       "id": 653,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "The contract _____ on Dec. 31st. ",
+      "category": "Part 5 · Set 7",
+      "question": "The contract ____ on Dec. 31st.",
       "options": [
         "expunges",
         "finishes",
@@ -8531,8 +8531,8 @@ const TOEIC_DATA = {
     {
       "id": 654,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "If my flight is on time, I should be _____ your officeby 2 o'clock. ",
+      "category": "Part 5 · Set 7",
+      "question": "If my flight is on time, I should be ____ your office by 2 o'clock.",
       "options": [
         "at",
         "near",
@@ -8544,8 +8544,8 @@ const TOEIC_DATA = {
     {
       "id": 655,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Ace Architecture was honored for its commitment to green,_____ development. ",
+      "category": "Part 5 · Set 7",
+      "question": "Ace Architecture was honored for its commitment to green, ____ development.",
       "options": [
         "sustaining",
         "sustained",
@@ -8557,8 +8557,8 @@ const TOEIC_DATA = {
     {
       "id": 656,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Knowledge of computers is a ______ for this position. ",
+      "category": "Part 5 · Set 7",
+      "question": "Knowledge of computers is a ____ for this position.",
       "options": [
         "credential",
         "requirement",
@@ -8570,8 +8570,8 @@ const TOEIC_DATA = {
     {
       "id": 657,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Juan had just finished ______ the project when Keith walked in. ",
+      "category": "Part 5 · Set 7",
+      "question": "Juan had just finished ____ the project when Keith walked in.",
       "options": [
         "to review",
         "reviewing",
@@ -8583,8 +8583,8 @@ const TOEIC_DATA = {
     {
       "id": 658,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Unlike our competitors, who opened too many stores last year, we need to expand ______. ",
+      "category": "Part 5 · Set 7",
+      "question": "Unlike our competitors, who opened too many stores last year, we need to expand ____.",
       "options": [
         "quickly",
         "exponentially",
@@ -8596,8 +8596,8 @@ const TOEIC_DATA = {
     {
       "id": 659,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "______ the economy improves soon, we will have to have another round of layoffs. ",
+      "category": "Part 5 · Set 7",
+      "question": "____ the economy improves soon, we will have to have another round of layoffs.",
       "options": [
         "Unless",
         "Until",
@@ -8609,21 +8609,21 @@ const TOEIC_DATA = {
     {
       "id": 660,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Have you ever ______ to Geneva? ",
+      "category": "Part 5 · Set 7",
+      "question": "Have you ever ____ to the Frankfurt trade fair?",
       "options": [
-        "gone",
-        "come",
         "been",
-        "went"
+        "went",
+        "gone",
+        "come"
       ],
       "correct": "been"
     },
     {
       "id": 661,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Increased sales of its new smart phone application have put the firm in the ______ this quarter. ",
+      "category": "Part 5 · Set 7",
+      "question": "Increased sales of its new smart phone application have put the firm in the ____ this quarter.",
       "options": [
         "red",
         "green",
@@ -8635,8 +8635,8 @@ const TOEIC_DATA = {
     {
       "id": 662,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "You can exchange your item for something of equal or lesser value, provided you have the original ______.",
+      "category": "Part 5 · Set 7",
+      "question": "You can exchange your item for something of equal or lesser value, provided you have the original ____.",
       "options": [
         "recipe",
         "reception",
@@ -8648,8 +8648,8 @@ const TOEIC_DATA = {
     {
       "id": 663,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Sampson & Sons Inc. will issue ______ annual report on the 19th. ",
+      "category": "Part 5 · Set 7",
+      "question": "Sampson & Sons Inc. will issue ____ annual report on the 19th.",
       "options": [
         "their",
         "its",
@@ -8661,21 +8661,21 @@ const TOEIC_DATA = {
     {
       "id": 664,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "I ______ while you were working out. ",
+      "category": "Part 5 · Set 7",
+      "question": "I ____ when the courier arrived with the documents.",
       "options": [
-        "was sleeping",
         "had been sleeping",
         "slept",
-        "sleep"
+        "sleep",
+        "was sleeping"
       ],
       "correct": "was sleeping"
     },
     {
       "id": 665,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Please fill out the form and return it at your ______ convenience. ",
+      "category": "Part 5 · Set 7",
+      "question": "Please fill out the form and return it at your ____ convenience.",
       "options": [
         "soonest",
         "least",
@@ -8687,8 +8687,8 @@ const TOEIC_DATA = {
     {
       "id": 666,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Flying would have ______ almost twice as much as taking the train. ",
+      "category": "Part 5 · Set 7",
+      "question": "Flying would have ____ almost twice as much as taking the train.",
       "options": [
         "spent",
         "cost",
@@ -8700,21 +8700,21 @@ const TOEIC_DATA = {
     {
       "id": 667,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "I'll have the estimate for the painting ready for you in a ______ more days. ",
+      "category": "Part 5 · Set 7",
+      "question": "The estimate for the office painting will be ready in a ____ more days.",
       "options": [
-        "little",
         "few",
         "several",
-        "short"
+        "short",
+        "little"
       ],
       "correct": "few"
     },
     {
       "id": 668,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Congratulations on your _____ to senior vice president. ",
+      "category": "Part 5 · Set 7",
+      "question": "Congratulations on your ____ to senior vice president.",
       "options": [
         "raise",
         "qualification",
@@ -8726,8 +8726,8 @@ const TOEIC_DATA = {
     {
       "id": 669,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "We did not hire John Delany due to ______ lack of previous experience. ",
+      "category": "Part 5 · Set 7",
+      "question": "We did not hire John Delany due to ____ lack of previous experience.",
       "options": [
         "her",
         "their",
@@ -8739,8 +8739,8 @@ const TOEIC_DATA = {
     {
       "id": 670,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "If Kevin's Cleaners ______ be willing to lower their fees by 10 percent, I'd be willing to contract with them. ",
+      "category": "Part 5 · Set 7",
+      "question": "If Kevin's Cleaners ____ be willing to lower their fees by 10 percent, I'd be willing to contract with them.",
       "options": [
         "would",
         "should",
@@ -8752,21 +8752,21 @@ const TOEIC_DATA = {
     {
       "id": 671,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "We named him Washington, ______ the father of our country. ",
+      "category": "Part 5 · Set 7",
+      "question": "The new wing of the hospital was named ____ the company's founder.",
       "options": [
-        "beside",
-        "after",
         "over",
-        "before"
+        "before",
+        "beside",
+        "after"
       ],
       "correct": "after"
     },
     {
       "id": 672,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "We believe that demand is driven largely by ______. ",
+      "category": "Part 5 · Set 7",
+      "question": "We believe that demand is driven largely by ____.",
       "options": [
         "scarcity",
         "scariness",
@@ -8778,47 +8778,47 @@ const TOEIC_DATA = {
     {
       "id": 673,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Are you ready ______ ? ",
+      "category": "Part 5 · Set 7",
+      "question": "Are you ready ____ the new equipment now?",
       "options": [
-        "ordering",
-        "orders",
         "to order",
-        "ordered"
+        "ordered",
+        "ordering",
+        "orders"
       ],
       "correct": "to order"
     },
     {
       "id": 674,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Could I have tea ______ coffee? ",
+      "category": "Part 5 · Set 7",
+      "question": "Could I have tea ____ coffee at the briefing?",
       "options": [
-        "rather for",
-        "prefer to",
         "better than",
-        "instead of"
+        "instead of",
+        "rather for",
+        "prefer to"
       ],
       "correct": "instead of"
     },
     {
       "id": 675,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "The company's board of directors rejected ACJ's hostile ______ bid. ",
+      "category": "Part 5 · Set 7",
+      "question": "The company's board of directors rejected ACJ's hostile ____ bid.",
       "options": [
         "makeup",
         "takeover",
         "takeoff",
-        "pulldown"
+        "makeover"
       ],
       "correct": "takeover"
     },
     {
       "id": 676,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Bonus pay is ______ upon the quality of your performance. ",
+      "category": "Part 5 · Set 7",
+      "question": "Bonus pay is ____ upon the quality of your performance.",
       "options": [
         "depending",
         "dependent",
@@ -8830,8 +8830,8 @@ const TOEIC_DATA = {
     {
       "id": 677,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Mr. Morgan is out of the office right now, ______ I expecthim back shortly. ",
+      "category": "Part 5 · Set 7",
+      "question": "Mr. Morgan is out of the office right now, ____ I expect him back shortly.",
       "options": [
         "but",
         "and",
@@ -8843,8 +8843,8 @@ const TOEIC_DATA = {
     {
       "id": 678,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "A federal ______ prevented Mega Bank's financial failure.",
+      "category": "Part 5 · Set 7",
+      "question": "A federal ____ prevented Mega Bank's financial failure.",
       "options": [
         "deposit",
         "contribution",
@@ -8856,8 +8856,8 @@ const TOEIC_DATA = {
     {
       "id": 679,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "The bond will mature on Dec. 31st, 2020, or the holder's 60th birthday, ______ comes first. ",
+      "category": "Part 5 · Set 7",
+      "question": "The bond will mature on Dec. 31st, 2020, or the holder's 60th birthday, ____ comes first.",
       "options": [
         "whenever",
         "whatever",
@@ -8869,8 +8869,8 @@ const TOEIC_DATA = {
     {
       "id": 680,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Because the firm was losing money, Susan was ______ from her management position. ",
+      "category": "Part 5 · Set 7",
+      "question": "Because the firm was losing money, Susan was ____ from her management position.",
       "options": [
         "put out",
         "pushed down",
@@ -8882,8 +8882,8 @@ const TOEIC_DATA = {
     {
       "id": 681,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Please contact Maria Alvarez for _________________ in cashing traveler’s checks. ",
+      "category": "Part 5 · Set 7",
+      "question": "Please contact Maria Alvarez for ____ in cashing traveler’s checks.",
       "options": [
         "questions",
         "persistence",
@@ -8895,8 +8895,8 @@ const TOEIC_DATA = {
     {
       "id": 682,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Secretarial interviews will be ___________ at 8:30 a.m. on Oct. 3rd. ",
+      "category": "Part 5 · Set 7",
+      "question": "Secretarial interviews will be ____ at 8:30 a.m. on Oct. 3rd.",
       "options": [
         "stationed",
         "given",
@@ -8908,8 +8908,8 @@ const TOEIC_DATA = {
     {
       "id": 683,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "After ITC LTD. bought Banana Computers, its brand ____________ increased threefold. ",
+      "category": "Part 5 · Set 7",
+      "question": "After ITC LTD. bought Banana Computers, its brand ____ increased threefold.",
       "options": [
         "recognition",
         "recognized",
@@ -8921,8 +8921,8 @@ const TOEIC_DATA = {
     {
       "id": 684,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Next June, Avery Animation will unveil a __________ new video game based on the movie “Warlords.” ",
+      "category": "Part 5 · Set 7",
+      "question": "Next June, Avery Animation will unveil a ____ new video game based on the movie “Warlords.”",
       "options": [
         "fascinate",
         "fascinating",
@@ -8934,8 +8934,8 @@ const TOEIC_DATA = {
     {
       "id": 685,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "We promise to send _________ proposed contract to them byWednesday morning. ",
+      "category": "Part 5 · Set 7",
+      "question": "We promise to send ____ proposed contract to them by Wednesday morning.",
       "options": [
         "they’re",
         "theirs",
@@ -8947,8 +8947,8 @@ const TOEIC_DATA = {
     {
       "id": 686,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Satisfaction is __________ or your money back when you order color prints from Technichrome Inc. ",
+      "category": "Part 5 · Set 7",
+      "question": "Satisfaction is ____ or your money back when you order color prints from Technichrome Inc.",
       "options": [
         "happened",
         "guaranteed",
@@ -8960,8 +8960,8 @@ const TOEIC_DATA = {
     {
       "id": 687,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Since being promoted last summer, Brenda in marketing has been __________ boasting about her new boat. ",
+      "category": "Part 5 · Set 7",
+      "question": "Since being promoted last summer, Brenda in marketing has been ____ boasting about her new boat.",
       "options": [
         "finally",
         "consecutively",
@@ -8973,8 +8973,8 @@ const TOEIC_DATA = {
     {
       "id": 688,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "An appetizer at Royal Steakhouse costs as much ______ a full meal at McDougal’s. ",
+      "category": "Part 5 · Set 7",
+      "question": "An appetizer at Royal Steakhouse costs as much ____ a full meal at McDougal’s.",
       "options": [
         "as",
         "than",
@@ -8986,21 +8986,21 @@ const TOEIC_DATA = {
     {
       "id": 689,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Because Chicago is in the Midwestern United States, it canexperience a wide ______ of weather in any 24-hour period. ",
+      "category": "Part 5 · Set 7",
+      "question": "Because the factory runs three shifts, it can experience a wide ____ of demand in any 24-hour period.",
       "options": [
+        "range",
         "type",
         "varieties",
-        "distinctness",
-        "range"
+        "distinctness"
       ],
       "correct": "range"
     },
     {
       "id": 690,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "The Uncommon Townhouses are ______ located to providefor all your living needs. ",
+      "category": "Part 5 · Set 7",
+      "question": "The Uncommon Townhouses are ____ located to provide for all your living needs.",
       "options": [
         "center",
         "central",
@@ -9012,8 +9012,8 @@ const TOEIC_DATA = {
     {
       "id": 691,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "_____ English had been his first language, Mr. Li might nothave misunderstood the sales representative from the Australian corporation. ",
+      "category": "Part 5 · Set 7",
+      "question": "____ English had been his first language, Mr. Li might not have misunderstood the sales representative from the Australian corporation.",
       "options": [
         "Unless",
         "If",
@@ -9025,8 +9025,8 @@ const TOEIC_DATA = {
     {
       "id": 692,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Highman & Sons’ profits _______________ to increase 15 percent in the next fiscal quarter. ",
+      "category": "Part 5 · Set 7",
+      "question": "Highman & Sons’ profits ____ to increase 15 percent in the next fiscal quarter.",
       "options": [
         "are predicted",
         "will predict",
@@ -9038,8 +9038,8 @@ const TOEIC_DATA = {
     {
       "id": 693,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "The ___________ e-mail from corporate headquarters said that personal phone calls will no longer be allowed at the office. ",
+      "category": "Part 5 · Set 7",
+      "question": "The ____ e-mail from corporate headquarters said that personal phone calls will no longer be allowed at the office.",
       "options": [
         "latest",
         "most early",
@@ -9051,8 +9051,8 @@ const TOEIC_DATA = {
     {
       "id": 694,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "The R & D Department will __________ try to have the beta product on the market by the end of next month. ",
+      "category": "Part 5 · Set 7",
+      "question": "The R & D Department will ____ try to have the beta product on the market by the end of next month.",
       "options": [
         "certain",
         "certifiably",
@@ -9064,8 +9064,8 @@ const TOEIC_DATA = {
     {
       "id": 695,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Due to _____ high degree of liability, the company must exercise caution in assessing client’s insurance claims. ",
+      "category": "Part 5 · Set 7",
+      "question": "Due to ____ high degree of liability, the company must exercise caution in assessing client’s insurance claims.",
       "options": [
         "their",
         "it’s",
@@ -9077,8 +9077,8 @@ const TOEIC_DATA = {
     {
       "id": 696,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "People who buy alcohol are _______________ to have proper identificatio ",
+      "category": "Part 5 · Set 7",
+      "question": "People who buy alcohol are ____ to have proper identification.",
       "options": [
         "require",
         "requiring",
@@ -9090,8 +9090,8 @@ const TOEIC_DATA = {
     {
       "id": 697,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Markowitz Inc. blames its ___________ in quarterly sales on a steady rise in retail gas prices. ",
+      "category": "Part 5 · Set 7",
+      "question": "Markowitz Inc. blames its ____ in quarterly sales on a steady rise in retail gas prices.",
       "options": [
         "increase",
         "decline",
@@ -9103,8 +9103,8 @@ const TOEIC_DATA = {
     {
       "id": 698,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Felipe Mendoza, a senior manager, suggested a unique fundraiser that has caught the attention of one of the organization’s wealthiest _____________. ",
+      "category": "Part 5 · Set 7",
+      "question": "Felipe Mendoza, a senior manager, suggested a unique fundraiser that has caught the attention of one of the organization’s wealthiest ____.",
       "options": [
         "donors",
         "donor",
@@ -9116,8 +9116,8 @@ const TOEIC_DATA = {
     {
       "id": 699,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Atco Aviation has __________ shut down production of its newest model L-101 planes in the wake of disappointing advance orders. ",
+      "category": "Part 5 · Set 7",
+      "question": "Atco Aviation has ____ shut down production of its newest model L-101 planes in the wake of disappointing advance orders.",
       "options": [
         "fluently",
         "vicariously",
@@ -9129,8 +9129,8 @@ const TOEIC_DATA = {
     {
       "id": 700,
       "type_id": 7,
-      "category": "Grammar Part 5",
-      "question": "Please note that this rider is optional in nature and does not supersede or __________ the original contract. ",
+      "category": "Part 5 · Set 7",
+      "question": "Please note that this rider is optional in nature and does not supersede or ____ the original contract.",
       "options": [
         "alters",
         "alter",
@@ -9142,8 +9142,8 @@ const TOEIC_DATA = {
     {
       "id": 701,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "All computer programmers are required to be back ____ their desks by five minutes after one. ",
+      "category": "Part 5 · Set 8",
+      "question": "All computer programmers are required to be back ____ their desks by five minutes after one.",
       "options": [
         "on",
         "for",
@@ -9155,8 +9155,8 @@ const TOEIC_DATA = {
     {
       "id": 702,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Upon entering, proceed to the sign-in table and present your __________________ form to one of the conference administrators. ",
+      "category": "Part 5 · Set 8",
+      "question": "Upon entering, proceed to the sign-in table and present your ____ form to one of the conference administrators.",
       "options": [
         "registering",
         "registration",
@@ -9168,8 +9168,8 @@ const TOEIC_DATA = {
     {
       "id": 703,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Despite the attorneys’ prolonged negotiations, the terms of the proposed marketing agreement were not satisfactory to _____________ party. ",
+      "category": "Part 5 · Set 8",
+      "question": "Despite the attorneys’ prolonged negotiations, the terms of the proposed marketing agreement were not satisfactory to ____ party.",
       "options": [
         "either",
         "neither",
@@ -9181,8 +9181,8 @@ const TOEIC_DATA = {
     {
       "id": 704,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "The counselor noted that potential police officers mustbe _____ in regard to working hours and conditions. ",
+      "category": "Part 5 · Set 8",
+      "question": "The counselor noted that shift workers must be ____ in regard to working hours and conditions.",
       "options": [
         "flexible",
         "flexibility",
@@ -9194,21 +9194,21 @@ const TOEIC_DATA = {
     {
       "id": 705,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Please ________ your children in the amusement park. ",
+      "category": "Part 5 · Set 8",
+      "question": "Please ____ the temperature of the cold store every four hours.",
       "options": [
-        "monitoring",
-        "monitered",
         "monitors",
-        "monitor"
+        "monitor",
+        "monitoring",
+        "monitored"
       ],
       "correct": "monitor"
     },
     {
       "id": 706,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Flying first class would have _____ twice as much as flying economy class. ",
+      "category": "Part 5 · Set 8",
+      "question": "Flying first class would have ____ twice as much as flying economy class.",
       "options": [
         "cost",
         "spent",
@@ -9220,8 +9220,8 @@ const TOEIC_DATA = {
     {
       "id": 707,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Trumpet Inc. launched an innovative advertising _______ last week targeting middle-class, bilingual mothers with multiple school-age children. ",
+      "category": "Part 5 · Set 8",
+      "question": "Trumpet Inc. launched an innovative advertising ____ last week targeting middle-class, bilingual mothers with multiple school-age children.",
       "options": [
         "design",
         "rating",
@@ -9233,8 +9233,8 @@ const TOEIC_DATA = {
     {
       "id": 708,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "As the sales seminar ran longer than we expected, we had only a _____ period of time to brief the potential clients. ",
+      "category": "Part 5 · Set 8",
+      "question": "As the sales seminar ran longer than we expected, we had only a ____ period of time to brief the potential clients.",
       "options": [
         "some",
         "few",
@@ -9246,8 +9246,8 @@ const TOEIC_DATA = {
     {
       "id": 709,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "The chairman of the Macrosoft Board of Directors shall retain the power to resolve _____ tie decisions. ",
+      "category": "Part 5 · Set 8",
+      "question": "The chairman of the Macrosoft Board of Directors shall retain the power to resolve ____ tie decisions.",
       "options": [
         "every",
         "all",
@@ -9259,8 +9259,8 @@ const TOEIC_DATA = {
     {
       "id": 710,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "In business, like sports, every employee has an important_____ to play in our success. ",
+      "category": "Part 5 · Set 8",
+      "question": "In business, like sports, every employee has an important ____ to play in our success.",
       "options": [
         "game",
         "role",
@@ -9272,8 +9272,8 @@ const TOEIC_DATA = {
     {
       "id": 711,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "When you invest in an IRA, your money grows tax-free _____compound interest. ",
+      "category": "Part 5 · Set 8",
+      "question": "When you invest in an IRA, your money grows tax-free ____ compound interest.",
       "options": [
         "through",
         "of",
@@ -9285,8 +9285,8 @@ const TOEIC_DATA = {
     {
       "id": 712,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Calico Couriers Ltd. is proud to offer _______ fringe benefits to its long-term employees. ",
+      "category": "Part 5 · Set 8",
+      "question": "Calico Couriers Ltd. is proud to offer ____ fringe benefits to its long-term employees.",
       "options": [
         "much",
         "very",
@@ -9298,8 +9298,8 @@ const TOEIC_DATA = {
     {
       "id": 713,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Tell Mr. Reynolds that Mrs. Nelson will receive _____ payment after she has faxed us a signed contract. ",
+      "category": "Part 5 · Set 8",
+      "question": "Tell Mr. Reynolds that Mrs. Nelson will receive ____ payment after she has faxed us a signed contract.",
       "options": [
         "his",
         "their",
@@ -9311,8 +9311,8 @@ const TOEIC_DATA = {
     {
       "id": 714,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Cathy's Coffee has cheap prices, _____ the quality of its drinks is surprisingly high. ",
+      "category": "Part 5 · Set 8",
+      "question": "Cathy's Coffee has cheap prices, ____ the quality of its drinks is surprisingly high.",
       "options": [
         "but",
         "and",
@@ -9324,8 +9324,8 @@ const TOEIC_DATA = {
     {
       "id": 715,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " Our _____ flight to Phoenix has been delayed for an hour, because the plane is having mechanical difficulties.",
+      "category": "Part 5 · Set 8",
+      "question": "Our ____ flight to Phoenix has been delayed for an hour, because the plane is having mechanical difficulties.",
       "options": [
         "scheduled",
         "targeted",
@@ -9337,8 +9337,8 @@ const TOEIC_DATA = {
     {
       "id": 716,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "I'm sorry, but Dr. Klinger and Dr. Moore will not _____ newpatients at this time. ",
+      "category": "Part 5 · Set 8",
+      "question": "I'm sorry, but Dr. Klinger and Dr. Moore will not ____ new patients at this time.",
       "options": [
         "to accept",
         "have accepted",
@@ -9350,21 +9350,21 @@ const TOEIC_DATA = {
     {
       "id": 717,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Please choose _____ the following alternatives: green, blue, white, or purple. ",
+      "category": "Part 5 · Set 8",
+      "question": "Please choose ____ the following delivery options: standard, express, same-day, or pickup.",
       "options": [
-        "between",
         "among",
         "along",
-        "either of"
+        "either of",
+        "between"
       ],
       "correct": "among"
     },
     {
       "id": 718,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "The _____ for today calls for morning clouds, burning off into sunshine and a high of 70 by this afternoon. ",
+      "category": "Part 5 · Set 8",
+      "question": "The sales ____ for the coming quarter calls for modest growth in the retail division.",
       "options": [
         "reporter",
         "condition",
@@ -9376,8 +9376,8 @@ const TOEIC_DATA = {
     {
       "id": 719,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Paradise Airlines promises that its frequent-flier discountwill remain in effect until the purchaser has recorded 3,000 miles, _______ that date may be. ",
+      "category": "Part 5 · Set 8",
+      "question": "Paradise Airlines promises that its frequent-flier discount will remain in effect until the purchaser has recorded 3,000 miles, ____ that date may be.",
       "options": [
         "whenever",
         "whichever",
@@ -9389,8 +9389,8 @@ const TOEIC_DATA = {
     {
       "id": 720,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "The economist’s prediction in the weekly news magazine was _________ about a quick recovery. ",
+      "category": "Part 5 · Set 8",
+      "question": "The economist’s prediction in the weekly news magazine was ____ about a quick recovery.",
       "options": [
         "cynically",
         "cynic",
@@ -9402,8 +9402,8 @@ const TOEIC_DATA = {
     {
       "id": 721,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The two partners came to an ________________ and decided to share the profits.",
+      "category": "Part 5 · Set 8",
+      "question": "The two partners came to an ____ and decided to share the profits.",
       "options": [
         "agreed",
         "agreeable",
@@ -9415,8 +9415,8 @@ const TOEIC_DATA = {
     {
       "id": 722,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " Since 1998, Mr. Smith has abided ____ a commitment to raise employee salaries each year by 10%.",
+      "category": "Part 5 · Set 8",
+      "question": "Since 1998, Mr. Smith has abided ____ a commitment to raise employee salaries each year by 10%.",
       "options": [
         "to",
         "for",
@@ -9428,8 +9428,8 @@ const TOEIC_DATA = {
     {
       "id": 723,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The little girl that raised money for cancer research was an ______________to the business owners. ",
+      "category": "Part 5 · Set 8",
+      "question": "The little girl that raised money for cancer research was an ____ to the business owners.",
       "options": [
         "inspiration",
         "awesome",
@@ -9441,8 +9441,8 @@ const TOEIC_DATA = {
     {
       "id": 724,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The owner of the store _____________ to clean out his files by the end of the month. ",
+      "category": "Part 5 · Set 8",
+      "question": "The owner of the store ____ to clean out his files by the end of the month.",
       "options": [
         "resolve",
         "resolved",
@@ -9454,8 +9454,8 @@ const TOEIC_DATA = {
     {
       "id": 725,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " After much confusion, the Internet service ________________ decided to renew our contract?",
+      "category": "Part 5 · Set 8",
+      "question": "After much confusion, the Internet service ____ decided to renew our contract?",
       "options": [
         "provider",
         "provision",
@@ -9467,8 +9467,8 @@ const TOEIC_DATA = {
     {
       "id": 726,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The owners of the factory have an ___________________ to provide a safe work environment. ",
+      "category": "Part 5 · Set 8",
+      "question": "The owners of the factory have an ____ to provide a safe work environment.",
       "options": [
         "obligate",
         "obligation",
@@ -9480,8 +9480,8 @@ const TOEIC_DATA = {
     {
       "id": 727,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " After reading the contract, I was able to _______________who will be responsible for the shipping charges.",
+      "category": "Part 5 · Set 8",
+      "question": "After reading the contract, I was able to ____ who will be responsible for the shipping charges.",
       "options": [
         "solve",
         "remember",
@@ -9493,8 +9493,8 @@ const TOEIC_DATA = {
     {
       "id": 728,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " My boss ___________ me that I would receive a promotion within 3 months.",
+      "category": "Part 5 · Set 8",
+      "question": "My boss ____ me that I would receive a promotion within 3 months.",
       "options": [
         "assured",
         "reported",
@@ -9506,8 +9506,8 @@ const TOEIC_DATA = {
     {
       "id": 729,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The __________________of her flight caused her to miss a very important meeting.",
+      "category": "Part 5 · Set 8",
+      "question": "The ____ of her flight caused her to miss a very important meeting.",
       "options": [
         "promise",
         "cancelled",
@@ -9519,8 +9519,8 @@ const TOEIC_DATA = {
     {
       "id": 730,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The judge ordered both ____________ to settle the matter quickly.",
+      "category": "Part 5 · Set 8",
+      "question": "The judge ordered both ____ to settle the matter quickly.",
       "options": [
         "parties",
         "members",
@@ -9532,8 +9532,8 @@ const TOEIC_DATA = {
     {
       "id": 731,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " Before _____________ in a new business deal, it is important to read the contract thoroughly.",
+      "category": "Part 5 · Set 8",
+      "question": "Before ____ in a new business deal, it is important to read the contract thoroughly.",
       "options": [
         "engaged",
         "engaging",
@@ -9545,8 +9545,8 @@ const TOEIC_DATA = {
     {
       "id": 732,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " They increased their advertisement on TV in order to ______________ more customers.",
+      "category": "Part 5 · Set 8",
+      "question": "They increased their advertisement on TV in order to ____ more customers.",
       "options": [
         "promote",
         "please",
@@ -9558,21 +9558,21 @@ const TOEIC_DATA = {
     {
       "id": 733,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " After ___________ the two CD players, she made her decision easily. ",
+      "category": "Part 5 · Set 8",
+      "question": "After ____ the two suppliers' quotes, she made her decision easily.",
       "options": [
-        "looking",
         "side-by-side",
         "advertising",
-        "comparing"
+        "comparing",
+        "looking"
       ],
       "correct": "comparing"
     },
     {
       "id": 734,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " Mark’s ______________ personality allowed him to climb the corporate ladder very quickly.",
+      "category": "Part 5 · Set 8",
+      "question": "Mark’s ____ personality allowed him to climb the corporate ladder very quickly.",
       "options": [
         "competition",
         "competitive",
@@ -9584,8 +9584,8 @@ const TOEIC_DATA = {
     {
       "id": 735,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The copy machine downstairs _____________ more ink than the one upstairs.",
+      "category": "Part 5 · Set 8",
+      "question": "The copy machine downstairs ____ more ink than the one upstairs.",
       "options": [
         "consumes",
         "marks",
@@ -9597,8 +9597,8 @@ const TOEIC_DATA = {
     {
       "id": 736,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The young salesman was very good at ___________his customers to buy the most expensive model.",
+      "category": "Part 5 · Set 8",
+      "question": "The young salesman was very good at ____ his customers to buy the most expensive model.",
       "options": [
         "supplying",
         "satisfying",
@@ -9610,8 +9610,8 @@ const TOEIC_DATA = {
     {
       "id": 737,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " We are_______________ examining different options for our new business model.",
+      "category": "Part 5 · Set 8",
+      "question": "We are ____ examining different options for our new business model.",
       "options": [
         "right now",
         "surely",
@@ -9623,8 +9623,8 @@ const TOEIC_DATA = {
     {
       "id": 738,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The real estate _____________ is forecasted to improve next year.",
+      "category": "Part 5 · Set 8",
+      "question": "The real estate ____ is forecasted to improve next year.",
       "options": [
         "homes",
         "portion",
@@ -9636,8 +9636,8 @@ const TOEIC_DATA = {
     {
       "id": 739,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The customer did not ____________which portion of the phone bill he did not understand.",
+      "category": "Part 5 · Set 8",
+      "question": "The customer did not ____ which portion of the phone bill he did not understand.",
       "options": [
         "specific",
         "specify",
@@ -9649,8 +9649,8 @@ const TOEIC_DATA = {
     {
       "id": 740,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " When Joseph received his__________all of his supervisors praised him for his hard work.",
+      "category": "Part 5 · Set 8",
+      "question": "When Joseph received his ____ all of his supervisors praised him for his hard work.",
       "options": [
         "inspiration",
         "conspiration",
@@ -9662,8 +9662,8 @@ const TOEIC_DATA = {
     {
       "id": 741,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " After attending the seminar on “The Power of __________” the sales team increased their sales by 75%.",
+      "category": "Part 5 · Set 8",
+      "question": "After attending the seminar on “The Power of ____ ” the sales team increased their sales by 75%.",
       "options": [
         "Allusion",
         "Dreaming",
@@ -9675,8 +9675,8 @@ const TOEIC_DATA = {
     {
       "id": 742,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " Ming goes to work early every day because she is much more _____________ in the morning than in the afternoon.",
+      "category": "Part 5 · Set 8",
+      "question": "Ming goes to work early every day because she is much more ____ in the morning than in the afternoon.",
       "options": [
         "happily",
         "optimistic",
@@ -9688,8 +9688,8 @@ const TOEIC_DATA = {
     {
       "id": 743,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " Your ______________ is guaranteed, or we will refund your money 100%.",
+      "category": "Part 5 · Set 8",
+      "question": "Your ____ is guaranteed, or we will refund your money 100%.",
       "options": [
         "satisfy",
         "satisfactory",
@@ -9701,8 +9701,8 @@ const TOEIC_DATA = {
     {
       "id": 744,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The three companies competed _________ each other for the contract.",
+      "category": "Part 5 · Set 8",
+      "question": "The three companies competed ____ each other for the contract.",
       "options": [
         "for",
         "with",
@@ -9714,8 +9714,8 @@ const TOEIC_DATA = {
     {
       "id": 745,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The ___________ of not following the client’s specifications were severe; they lost the million dollar contract.",
+      "category": "Part 5 · Set 8",
+      "question": "The ____ of not following the client’s specifications were severe; they lost the million dollar contract.",
       "options": [
         "consequence",
         "sequence",
@@ -9727,8 +9727,8 @@ const TOEIC_DATA = {
     {
       "id": 746,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " Sara will only _____________ appliances that are energy-efficient.",
+      "category": "Part 5 · Set 8",
+      "question": "Sara will only ____ appliances that are energy-efficient.",
       "options": [
         "purchasing",
         "purchase",
@@ -9740,8 +9740,8 @@ const TOEIC_DATA = {
     {
       "id": 747,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The customer considered ____________ the DVD player but decided that he did get a good deal after all.",
+      "category": "Part 5 · Set 8",
+      "question": "The customer considered ____ the DVD player but decided that he did get a good deal after all.",
       "options": [
         "playing",
         "winning",
@@ -9753,8 +9753,8 @@ const TOEIC_DATA = {
     {
       "id": 748,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " Please protect yourself from internet scams_________getting detailed information about the seller.",
+      "category": "Part 5 · Set 8",
+      "question": "Please protect yourself from internet scams ____ getting detailed information about the seller.",
       "options": [
         "whereby",
         "until",
@@ -9766,8 +9766,8 @@ const TOEIC_DATA = {
     {
       "id": 749,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " After _________the three warranty options, Henry decided to go with the 5 year plan.",
+      "category": "Part 5 · Set 8",
+      "question": "After ____ the three warranty options, Henry decided to go with the 5 year plan.",
       "options": [
         "considering",
         "consideration",
@@ -9779,8 +9779,8 @@ const TOEIC_DATA = {
     {
       "id": 750,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " My health insurance policy did not ___________ my surgery.",
+      "category": "Part 5 · Set 8",
+      "question": "My health insurance policy did not ____ my surgery.",
       "options": [
         "protect",
         "cover",
@@ -9792,8 +9792,8 @@ const TOEIC_DATA = {
     {
       "id": 751,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " What is the ___________date on this milk? It tastes sour.",
+      "category": "Part 5 · Set 8",
+      "question": "What is the ____ date on this milk? It tastes sour.",
       "options": [
         "expiration",
         "good",
@@ -9805,8 +9805,8 @@ const TOEIC_DATA = {
     {
       "id": 752,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The owner _________ visits other stores to see how they display their products.",
+      "category": "Part 5 · Set 8",
+      "question": "The owner ____ visits other stores to see how they display their products.",
       "options": [
         "blankly",
         "abidingly",
@@ -9818,8 +9818,8 @@ const TOEIC_DATA = {
     {
       "id": 753,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " If your TV breaks down within 30 days of your purchase, the store is_____________to give you your money back.",
+      "category": "Part 5 · Set 8",
+      "question": "If your TV breaks down within 30 days of your purchase, the store is ____ to give you your money back.",
       "options": [
         "requirement",
         "requires",
@@ -9831,8 +9831,8 @@ const TOEIC_DATA = {
     {
       "id": 754,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The new business plan ___________________ the needs of the community.",
+      "category": "Part 5 · Set 8",
+      "question": "The new business plan ____ the needs of the community.",
       "options": [
         "proposes",
         "explains",
@@ -9844,8 +9844,8 @@ const TOEIC_DATA = {
     {
       "id": 755,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " We will try to avoid filing for bankruptcy at all _________________.",
+      "category": "Part 5 · Set 8",
+      "question": "We will try to avoid filing for bankruptcy at all ____.",
       "options": [
         "reasons",
         "costs",
@@ -9857,8 +9857,8 @@ const TOEIC_DATA = {
     {
       "id": 756,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The business plan did not address how the company was going to ________new products.",
+      "category": "Part 5 · Set 8",
+      "question": "The business plan did not address how the company was going to ____ new products.",
       "options": [
         "develop",
         "development",
@@ -9870,8 +9870,8 @@ const TOEIC_DATA = {
     {
       "id": 757,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The owner of the company ________________each employee’s performance every year. ",
+      "category": "Part 5 · Set 8",
+      "question": "The owner of the company ____ each employee’s performance every year.",
       "options": [
         "searched",
         "filed",
@@ -9883,8 +9883,8 @@ const TOEIC_DATA = {
     {
       "id": 758,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " After three unsuccessful bids, our fourth bid ________ accepted by the fortune 500 company.",
+      "category": "Part 5 · Set 8",
+      "question": "After three unsuccessful bids, our fourth bid ____ accepted by the fortune 500 company.",
       "options": [
         "is",
         "was",
@@ -9896,8 +9896,8 @@ const TOEIC_DATA = {
     {
       "id": 759,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " I will _______________ how to operate this new shredding machine.",
+      "category": "Part 5 · Set 8",
+      "question": "I will ____ how to operate this new shredding machine.",
       "options": [
         "demonstrated",
         "demonstration",
@@ -9909,8 +9909,8 @@ const TOEIC_DATA = {
     {
       "id": 760,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": " The seminar presented different ___________________ to reach a new market.",
+      "category": "Part 5 · Set 8",
+      "question": "The seminar presented different ____ to reach a new market.",
       "options": [
         "roles",
         "substitute",
@@ -9922,8 +9922,8 @@ const TOEIC_DATA = {
     {
       "id": 761,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Your appointment is _____ for 2 p.m. on the 18th. ",
+      "category": "Part 5 · Set 8",
+      "question": "Your appointment is ____ for 2 p.m. on the 18th.",
       "options": [
         "to be",
         "ready",
@@ -9935,8 +9935,8 @@ const TOEIC_DATA = {
     {
       "id": 762,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Are we still _____ for four today? ",
+      "category": "Part 5 · Set 8",
+      "question": "Are we still ____ for four today?",
       "options": [
         "at",
         "on",
@@ -9948,21 +9948,21 @@ const TOEIC_DATA = {
     {
       "id": 763,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "I _____ working on my Photoshop skills a lot recently. ",
+      "category": "Part 5 · Set 8",
+      "question": "I ____ updating the client database a lot recently.",
       "options": [
+        "was to be",
         "am to be",
         "was being",
-        "have been",
-        "was to be"
+        "have been"
       ],
       "correct": "have been"
     },
     {
       "id": 764,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "At CDI Corporation, price is second _____ to quality. ",
+      "category": "Part 5 · Set 8",
+      "question": "At CDI Corporation, price is second ____ to quality.",
       "options": [
         "only",
         "especially",
@@ -9974,21 +9974,21 @@ const TOEIC_DATA = {
     {
       "id": 765,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "That vacation was the _____ time I've ever had. ",
+      "category": "Part 5 · Set 8",
+      "question": "That trade fair was the ____ event of the year.",
       "options": [
+        "most enjoyable",
         "funnest",
         "funniest",
-        "enjoyable",
-        "most fun"
+        "enjoyable"
       ],
-      "correct": "most fun"
+      "correct": "most enjoyable"
     },
     {
       "id": 766,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Tell him we'll commit _____ $4 million to the project. ",
+      "category": "Part 5 · Set 8",
+      "question": "Tell him we'll commit ____ $4 million to the project.",
       "options": [
         "as few as",
         "up to",
@@ -10000,21 +10000,21 @@ const TOEIC_DATA = {
     {
       "id": 767,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "A storm surge is a _____ rise in the water level of the ocean. ",
+      "category": "Part 5 · Set 8",
+      "question": "The ____ rise in fuel costs caught the industry by surprise.",
       "options": [
-        "gradual",
         "typical",
         "sudden",
-        "minor"
+        "minor",
+        "gradual"
       ],
       "correct": "sudden"
     },
     {
       "id": 768,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "What kind of _____did Ms. Aherns give you on your proposal?",
+      "category": "Part 5 · Set 8",
+      "question": "What kind of ____ did Ms. Aherns give you on your proposal?",
       "options": [
         "feed",
         "opinions",
@@ -10026,8 +10026,8 @@ const TOEIC_DATA = {
     {
       "id": 769,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "The styles of architecture in Rome _____ from ancient to modern. ",
+      "category": "Part 5 · Set 8",
+      "question": "The services offered by the agency ____ from basic bookkeeping to full audits.",
       "options": [
         "range",
         "ranges",
@@ -10039,8 +10039,8 @@ const TOEIC_DATA = {
     {
       "id": 770,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "To be successful in the future, this company has to _____ its old image and embrace a new one. ",
+      "category": "Part 5 · Set 8",
+      "question": "To be successful in the future, this company has to ____ its old image and embrace a new one.",
       "options": [
         "disguise",
         "repair",
@@ -10052,8 +10052,8 @@ const TOEIC_DATA = {
     {
       "id": 771,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "This page has good information, but I don't like its _____. ",
+      "category": "Part 5 · Set 8",
+      "question": "This page has good information, but I don't like its ____.",
       "options": [
         "overview",
         "layer",
@@ -10065,8 +10065,8 @@ const TOEIC_DATA = {
     {
       "id": 772,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Startup companies _____ to contend with many hazards. ",
+      "category": "Part 5 · Set 8",
+      "question": "Startup companies ____ to contend with many hazards.",
       "options": [
         "must",
         "have",
@@ -10078,8 +10078,8 @@ const TOEIC_DATA = {
     {
       "id": 773,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "There isn't a gas station _____ five miles of here. ",
+      "category": "Part 5 · Set 8",
+      "question": "There isn't a gas station ____ five miles of here.",
       "options": [
         "within",
         "for",
@@ -10091,8 +10091,8 @@ const TOEIC_DATA = {
     {
       "id": 774,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "That photo was _____ 10 years ago. ",
+      "category": "Part 5 · Set 8",
+      "question": "That photograph was ____ at the opening of the new branch.",
       "options": [
         "took",
         "taken",
@@ -10104,8 +10104,8 @@ const TOEIC_DATA = {
     {
       "id": 775,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "They had the most beautiful office I had _____ seen.",
+      "category": "Part 5 · Set 8",
+      "question": "They had the most beautiful office I had ____ seen.",
       "options": [
         "never",
         "always",
@@ -10117,21 +10117,21 @@ const TOEIC_DATA = {
     {
       "id": 776,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "They were equally qualified for the job, but John just_____ Jake out. ",
+      "category": "Part 5 · Set 8",
+      "question": "They were equally qualified, but Mr. Yoon just ____ Ms. Park out for the post.",
       "options": [
+        "nosed",
         "handed",
         "kneed",
-        "eyed",
-        "nosed"
+        "eyed"
       ],
       "correct": "nosed"
     },
     {
       "id": 777,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "My Web search turned ______ 10,000 hits. ",
+      "category": "Part 5 · Set 8",
+      "question": "My Web search turned ____ 10,000 hits.",
       "options": [
         "out",
         "up",
@@ -10143,8 +10143,8 @@ const TOEIC_DATA = {
     {
       "id": 778,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Our customer ______consists mostly of blue-collar workers. ",
+      "category": "Part 5 · Set 8",
+      "question": "Our customer ____ consists mostly of blue-collar workers.",
       "options": [
         "base",
         "basis",
@@ -10156,8 +10156,8 @@ const TOEIC_DATA = {
     {
       "id": 779,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "The company president ______ to answer questions. ",
+      "category": "Part 5 · Set 8",
+      "question": "The company president ____ to answer questions.",
       "options": [
         "decried",
         "derided",
@@ -10169,8 +10169,8 @@ const TOEIC_DATA = {
     {
       "id": 780,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Our goal is to increase profits 10 percent ______ the end of next year. ",
+      "category": "Part 5 · Set 8",
+      "question": "Our goal is to increase profits 10 percent ____ the end of next year.",
       "options": [
         "at",
         "by",
@@ -10182,8 +10182,8 @@ const TOEIC_DATA = {
     {
       "id": 781,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "I hadn't ______ that our revenues were declining so quickly. ",
+      "category": "Part 5 · Set 8",
+      "question": "I hadn't ____ that our revenues were declining so quickly.",
       "options": [
         "been realizing",
         "have realized",
@@ -10195,8 +10195,8 @@ const TOEIC_DATA = {
     {
       "id": 782,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "I'm afraid our new software doesn't ______ up to the competition. ",
+      "category": "Part 5 · Set 8",
+      "question": "I'm afraid our new software doesn't ____ up to the competition.",
       "options": [
         "measure",
         "work",
@@ -10208,8 +10208,8 @@ const TOEIC_DATA = {
     {
       "id": 783,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "He was late to the sales presentation ______ the traffic. ",
+      "category": "Part 5 · Set 8",
+      "question": "He was late to the sales presentation ____ the traffic.",
       "options": [
         "because",
         "since",
@@ -10221,8 +10221,8 @@ const TOEIC_DATA = {
     {
       "id": 784,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "If they ______ me the position, I would probably take it. ",
+      "category": "Part 5 · Set 8",
+      "question": "If they ____ me the position, I would probably take it.",
       "options": [
         "offer",
         "offered",
@@ -10234,8 +10234,8 @@ const TOEIC_DATA = {
     {
       "id": 785,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "We are looking to hire a new sales ______ as soon as possible. ",
+      "category": "Part 5 · Set 8",
+      "question": "We are looking to hire a new sales ____ as soon as possible.",
       "options": [
         "rap",
         "rope",
@@ -10247,8 +10247,8 @@ const TOEIC_DATA = {
     {
       "id": 786,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "I don' t mind if you take a longer lunch, ______ you're back by two for the meeting. ",
+      "category": "Part 5 · Set 8",
+      "question": "I don' t mind if you take a longer lunch, ____ you're back by two for the meeting.",
       "options": [
         "as long as",
         "unless",
@@ -10260,8 +10260,8 @@ const TOEIC_DATA = {
     {
       "id": 787,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "You can pay now, or we can ______ you later. ",
+      "category": "Part 5 · Set 8",
+      "question": "You can pay now, or we can ____ you later.",
       "options": [
         "charge",
         "remind",
@@ -10273,21 +10273,21 @@ const TOEIC_DATA = {
     {
       "id": 788,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Winds were reportedly gusting ______ to 100 miles per hour. ",
+      "category": "Part 5 · Set 8",
+      "question": "Prices were reported to be ____ to 20 percent higher than last year.",
       "options": [
+        "in",
         "up",
         "of",
-        "out",
-        "in"
+        "out"
       ],
       "correct": "up"
     },
     {
       "id": 789,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "The LTX and RDS models are virtually the same, with no ______ differences. ",
+      "category": "Part 5 · Set 8",
+      "question": "The LTX and RDS models are virtually the same, with no ____ differences.",
       "options": [
         "incremental",
         "substantial",
@@ -10299,8 +10299,8 @@ const TOEIC_DATA = {
     {
       "id": 790,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Clint knew Tom Durham would not really leave to jointhe rival firm, so he called his employees' ______. ",
+      "category": "Part 5 · Set 8",
+      "question": "Clint knew Tom Durham would not really leave to join the rival firm, so he called his employees' ____.",
       "options": [
         "hunch",
         "bluff",
@@ -10312,8 +10312,8 @@ const TOEIC_DATA = {
     {
       "id": 791,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Customers are typically willing to pay a ______ price for food that is certified organic. ",
+      "category": "Part 5 · Set 8",
+      "question": "Customers are typically willing to pay a ____ price for food that is certified organic.",
       "options": [
         "premature",
         "prevalent",
@@ -10325,8 +10325,8 @@ const TOEIC_DATA = {
     {
       "id": 792,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Wait a few more minutes; I'll be ______ your way shortly. ",
+      "category": "Part 5 · Set 8",
+      "question": "Wait a few more minutes; I'll be ____ your way shortly.",
       "options": [
         "going",
         "leaving",
@@ -10338,8 +10338,8 @@ const TOEIC_DATA = {
     {
       "id": 793,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "I wouldn't do that if I ______ you. ",
+      "category": "Part 5 · Set 8",
+      "question": "I wouldn't do that if I ____ you.",
       "options": [
         "were",
         "was",
@@ -10351,8 +10351,8 @@ const TOEIC_DATA = {
     {
       "id": 794,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Products of this type are typically exempt ______ taxes. ",
+      "category": "Part 5 · Set 8",
+      "question": "Products of this type are typically exempt ____ taxes.",
       "options": [
         "of",
         "from",
@@ -10364,8 +10364,8 @@ const TOEIC_DATA = {
     {
       "id": 795,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "______ his best efforts, Mr. Chamberlain could not convince Ms. Schell to do business with him. ",
+      "category": "Part 5 · Set 8",
+      "question": "____ his best efforts, Mr. Chamberlain could not convince Ms. Schell to do business with him.",
       "options": [
         "Despite",
         "Although",
@@ -10377,8 +10377,8 @@ const TOEIC_DATA = {
     {
       "id": 796,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "I'll have to ask my financial ______ about investing in gold. ",
+      "category": "Part 5 · Set 8",
+      "question": "I'll have to ask my financial ____ about investing in gold.",
       "options": [
         "council",
         "counselor",
@@ -10390,8 +10390,8 @@ const TOEIC_DATA = {
     {
       "id": 797,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "It's never too soon to start your ______ planning. ",
+      "category": "Part 5 · Set 8",
+      "question": "It's never too soon to start your ____ planning.",
       "options": [
         "retired",
         "old-age",
@@ -10403,8 +10403,8 @@ const TOEIC_DATA = {
     {
       "id": 798,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Belinda wanted this job so much, she took a pay ______to come here. ",
+      "category": "Part 5 · Set 8",
+      "question": "Belinda wanted this job so much, she took a pay ____ to come here.",
       "options": [
         "back",
         "out",
@@ -10416,8 +10416,8 @@ const TOEIC_DATA = {
     {
       "id": 799,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "Shortly after arriving, he ______ a merger with a rival bank. ",
+      "category": "Part 5 · Set 8",
+      "question": "Shortly after arriving, he ____ a merger with a rival bank.",
       "options": [
         "expressed",
         "executed",
@@ -10429,8 +10429,8 @@ const TOEIC_DATA = {
     {
       "id": 800,
       "type_id": 8,
-      "category": "Grammar Part 6",
-      "question": "The company's ______ include an office building, twocars, and 10 personal computers. ",
+      "category": "Part 5 · Set 8",
+      "question": "The company's ____ include an office building, two cars, and 10 personal computers.",
       "options": [
         "assets",
         "assessments",
@@ -10442,73 +10442,73 @@ const TOEIC_DATA = {
     {
       "id": 801,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Linda is __________________ an American.",
+      "category": "Part 5 · Set 9",
+      "question": "The new warehouse is ____ to the main plant.",
       "options": [
-        "married from",
-        "married with",
-        "married by",
-        "married to"
+        "adjacent with",
+        "adjacent by",
+        "adjacent to",
+        "adjacent from"
       ],
-      "correct": "married to"
+      "correct": "adjacent to"
     },
     {
       "id": 802,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Are you __________________ art ?",
+      "category": "Part 5 · Set 9",
+      "question": "Are you ____ attending the industry conference in Busan?",
       "options": [
-        "interested in",
         "interested of",
         "interested by",
-        "interested on"
+        "interested on",
+        "interested in"
       ],
       "correct": "interested in"
     },
     {
       "id": 803,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "It is __________________ to go out without a coat in such cold weather.",
+      "category": "Part 5 · Set 9",
+      "question": "The intern was asked to ____ the meeting minutes and circulate them.",
       "options": [
-        "stupid me",
-        "stupid of me",
-        "stupid to me",
-        "stupid at me"
+        "taking",
+        "took",
+        "take",
+        "takes"
       ],
-      "correct": "stupid of me"
+      "correct": "take"
     },
     {
       "id": 804,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Why were you so __________________ Lucy ?",
+      "category": "Part 5 · Set 9",
+      "question": "The receptionist was ____ the visitors, so the manager apologized.",
       "options": [
+        "unfriendly in",
         "unfriendly to",
         "unfriendly at",
-        "unfriendly on",
-        "unfriendly in"
+        "unfriendly on"
       ],
       "correct": "unfriendly to"
     },
     {
       "id": 805,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "I'm __________________ shouting at you yesterday.",
+      "category": "Part 5 · Set 9",
+      "question": "We are ____ the mistake in your invoice and will issue a credit note.",
       "options": [
-        "sorry in",
         "sorry on",
         "sorry to",
-        "sorry for"
+        "sorry for",
+        "sorry in"
       ],
       "correct": "sorry for"
     },
     {
       "id": 806,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "A : \"Did you know he was married ?\"  B: \"No, I wasn't __________________ that.\"",
+      "category": "Part 5 · Set 9",
+      "question": "The staff were not ____ the change in the delivery schedule.",
       "options": [
         "aware to",
         "aware of",
@@ -10520,8 +10520,8 @@ const TOEIC_DATA = {
     {
       "id": 807,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The letter I wrote was __________________ mistakes.",
+      "category": "Part 5 · Set 9",
+      "question": "The letter I wrote was ____ mistakes.",
       "options": [
         "full with",
         "full of",
@@ -10533,21 +10533,21 @@ const TOEIC_DATA = {
     {
       "id": 808,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "I don't want to be __________________ anybody.",
+      "category": "Part 5 · Set 9",
+      "question": "The factory is heavily ____ a single supplier of microchips.",
       "options": [
-        "dependent with",
         "dependent on",
         "dependent by",
-        "dependent to"
+        "dependent to",
+        "dependent with"
       ],
       "correct": "dependent on"
     },
     {
       "id": 809,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The Italian city of Florence is __________________ its art treasures.",
+      "category": "Part 5 · Set 9",
+      "question": "The Italian city of Florence is ____ its art treasures.",
       "options": [
         "famous by",
         "famous with",
@@ -10559,34 +10559,34 @@ const TOEIC_DATA = {
     {
       "id": 810,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Who was ___________________ all that noise last night ?",
+      "category": "Part 5 · Set 9",
+      "question": "Who was ____ the delay in the shipment?",
       "options": [
+        "responsible by",
         "responsible for",
         "responsible in",
-        "responsible on",
-        "responsible by"
+        "responsible on"
       ],
       "correct": "responsible for"
     },
     {
       "id": 811,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Andy has gone away. He will be back __________________ a week.",
+      "category": "Part 5 · Set 9",
+      "question": "The new manager will take up her post ____ a week.",
       "options": [
-        "on",
-        "by",
         "in",
-        "to"
+        "to",
+        "on",
+        "by"
       ],
       "correct": "in"
     },
     {
       "id": 812,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Mr. Benn is busy __________________ the moment.",
+      "category": "Part 5 · Set 9",
+      "question": "Mr. Benn is busy ____ the moment.",
       "options": [
         "in",
         "at",
@@ -10598,73 +10598,73 @@ const TOEIC_DATA = {
     {
       "id": 813,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "I'll see you __________________ Friday morning.",
+      "category": "Part 5 · Set 9",
+      "question": "The interview is scheduled ____ Friday morning.",
       "options": [
+        "at",
         "to",
         "in",
-        "on",
-        "at"
+        "on"
       ],
       "correct": "on"
     },
     {
       "id": 814,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The train will be leaving __________________ a few minutes.",
-      "options": [
-        "on",
-        "in",
-        "at",
-        "by"
-      ],
-      "correct": "in"
-    },
-    {
-      "id": 815,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Do you give each other presents __________________ Christmas ?",
+      "category": "Part 5 · Set 9",
+      "question": "The train to the trade fair will be leaving ____ a few minutes.",
       "options": [
         "in",
         "at",
         "by",
         "on"
       ],
+      "correct": "in"
+    },
+    {
+      "id": 815,
+      "type_id": 9,
+      "category": "Part 5 · Set 9",
+      "question": "The office is closed ____ Christmas.",
+      "options": [
+        "by",
+        "on",
+        "in",
+        "at"
+      ],
       "correct": "at"
     },
     {
       "id": 816,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Do you work __________________ the evenings ?",
+      "category": "Part 5 · Set 9",
+      "question": "Do you work ____ the evenings?",
       "options": [
-        "by",
         "at",
         "on",
-        "in"
+        "in",
+        "by"
       ],
       "correct": "in"
     },
     {
       "id": 817,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "They're getting married __________________ six months' time.",
+      "category": "Part 5 · Set 9",
+      "question": "The new plant will be operational ____ six months' time.",
       "options": [
-        "at",
-        "on",
         "by",
-        "in"
+        "in",
+        "at",
+        "on"
       ],
       "correct": "in"
     },
     {
       "id": 818,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Emily and I arrived __________________ the same time.",
+      "category": "Part 5 · Set 9",
+      "question": "Mr. Feld and I arrived ____ the same time.",
       "options": [
         "in",
         "on",
@@ -10676,34 +10676,34 @@ const TOEIC_DATA = {
     {
       "id": 819,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Will you be here __________________ the weekend ?",
+      "category": "Part 5 · Set 9",
+      "question": "Will you be in the office ____ the weekend?",
       "options": [
+        "on",
         "at",
         "in",
-        "to",
-        "on"
+        "to"
       ],
       "correct": "at"
     },
     {
       "id": 820,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "I'll see you __________________ the morning.",
+      "category": "Part 5 · Set 9",
+      "question": "The courier will deliver the samples ____ the morning.",
       "options": [
-        "by",
         "at",
         "on",
-        "in"
+        "in",
+        "by"
       ],
       "correct": "in"
     },
     {
       "id": 821,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The girl ___________________ we were referring to was not around .",
+      "category": "Part 5 · Set 9",
+      "question": "The consultant ____ we were referring to has left the company.",
       "options": [
         "who",
         "whom",
@@ -10715,21 +10715,21 @@ const TOEIC_DATA = {
     {
       "id": 822,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Do you know __________________ won the grand prize ?",
+      "category": "Part 5 · Set 9",
+      "question": "Do you know ____ won the contract for the new terminal?",
       "options": [
-        "who",
-        "whom",
         "who's",
-        "whose"
+        "whose",
+        "who",
+        "whom"
       ],
       "correct": "who"
     },
     {
       "id": 823,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "I wonder __________________ the teachers recommended to be this year's speaker.",
+      "category": "Part 5 · Set 9",
+      "question": "I wonder ____ the committee recommended as the next chairman.",
       "options": [
         "who's",
         "who",
@@ -10741,86 +10741,86 @@ const TOEIC_DATA = {
     {
       "id": 824,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Mrs. Hall is the woman __________________ I believe commands the respect of music critics.",
+      "category": "Part 5 · Set 9",
+      "question": "Ms. Hall is the analyst ____ I believe commands the respect of the whole department.",
       "options": [
+        "who's",
         "who",
         "whom",
-        "whose",
-        "who's"
+        "whose"
       ],
       "correct": "whom"
     },
     {
       "id": 825,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "I am pretty sure __________________ the thief is.",
+      "category": "Part 5 · Set 9",
+      "question": "I am pretty sure ____ the new supervisor is.",
       "options": [
-        "who's",
-        "whose",
         "whom",
-        "who"
-      ],
-      "correct": "who"
-    },
-    {
-      "id": 826,
-      "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "John is the boy __________________ everybody is crazy about.",
-      "options": [
         "who",
-        "whom",
         "who's",
         "whose"
       ],
       "correct": "who"
     },
     {
-      "id": 827,
+      "id": 826,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "He is the man __________________ I'd love to be seen with.",
+      "category": "Part 5 · Set 9",
+      "question": "Mr. Ellis is the accountant ____ everybody trusts.",
       "options": [
-        "who",
+        "who's",
         "whose",
         "whom",
-        "who's"
+        "who"
+      ],
+      "correct": "whom"
+    },
+    {
+      "id": 827,
+      "type_id": 9,
+      "category": "Part 5 · Set 9",
+      "question": "He is the manager ____ I would like to work with.",
+      "options": [
+        "whose",
+        "whom",
+        "who's",
+        "who"
       ],
       "correct": "whom"
     },
     {
       "id": 828,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "__________________ do you think wrote the hieroglyphics at my doorstep ?",
+      "category": "Part 5 · Set 9",
+      "question": "____ do you think drafted the new safety policy?",
       "options": [
-        "Who's",
         "Whose",
         "Whom",
-        "Who"
+        "Who",
+        "Who's"
       ],
       "correct": "Who"
     },
     {
       "id": 829,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "We gave it to __________________ was deserving.",
+      "category": "Part 5 · Set 9",
+      "question": "The bonus will be given to ____ deserves it most.",
       "options": [
         "whomever",
         "whoever",
         "whosoever",
         "whatever"
       ],
-      "correct": "whomever"
+      "correct": "whoever"
     },
     {
       "id": 830,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Do you know __________________ the visitors are.",
+      "category": "Part 5 · Set 9",
+      "question": "Do you know ____ the new sales representatives are?",
       "options": [
         "whom",
         "whose",
@@ -10832,8 +10832,8 @@ const TOEIC_DATA = {
     {
       "id": 831,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "__________________finally granted their request.",
+      "category": "Part 5 · Set 9",
+      "question": "____ finally granted the employees' request for flexible hours.",
       "options": [
         "Ours",
         "Us",
@@ -10845,8 +10845,8 @@ const TOEIC_DATA = {
     {
       "id": 832,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "__________________ and her sister are planning a surprise party.",
+      "category": "Part 5 · Set 9",
+      "question": "____ and her assistant are planning the product launch.",
       "options": [
         "She",
         "Her",
@@ -10858,8 +10858,8 @@ const TOEIC_DATA = {
     {
       "id": 833,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The advocates of this program are __________________.",
+      "category": "Part 5 · Set 9",
+      "question": "The advocates of this program are ____.",
       "options": [
         "them",
         "theirs",
@@ -10871,8 +10871,8 @@ const TOEIC_DATA = {
     {
       "id": 834,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "It was __________________.",
+      "category": "Part 5 · Set 9",
+      "question": "It was ____ who authorized the payment.",
       "options": [
         "me",
         "I",
@@ -10884,8 +10884,8 @@ const TOEIC_DATA = {
     {
       "id": 835,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Two students, __________________, will receive awards for good behavior.",
+      "category": "Part 5 · Set 9",
+      "question": "Two of our engineers, ____, will attend the conference in Berlin.",
       "options": [
         "him and me",
         "his and mine",
@@ -10897,47 +10897,47 @@ const TOEIC_DATA = {
     {
       "id": 836,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "__________________ girls must have more drive in life.",
+      "category": "Part 5 · Set 9",
+      "question": "____ managers must complete the compliance course by June.",
       "options": [
+        "We're",
         "We",
         "Us",
-        "Ours",
-        "We're"
+        "Ours"
       ],
       "correct": "We"
     },
     {
       "id": 837,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The top students are two girls, Mary and __________________.",
+      "category": "Part 5 · Set 9",
+      "question": "The top performers this quarter are Ms. Nam and ____.",
       "options": [
-        "mine",
-        "me",
         "I",
-        "I'm"
+        "I'm",
+        "mine",
+        "me"
       ],
       "correct": "I"
     },
     {
       "id": 838,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Mother summoned Marc and __________________.",
+      "category": "Part 5 · Set 9",
+      "question": "The director summoned the two auditors and ____.",
       "options": [
-        "mine",
-        "my",
         "I",
-        "me"
+        "me",
+        "mine",
+        "my"
       ],
       "correct": "me"
     },
     {
       "id": 839,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Mrs. Duncan invited the boys and __________________.",
+      "category": "Part 5 · Set 9",
+      "question": "The director invited the auditors and ____ to the briefing.",
       "options": [
         "our",
         "ours",
@@ -10949,21 +10949,21 @@ const TOEIC_DATA = {
     {
       "id": 840,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The chef served Linda and __________________ a sumptuous dinner.",
+      "category": "Part 5 · Set 9",
+      "question": "The chef served the guests and ____ a six-course dinner.",
       "options": [
+        "mine",
         "me",
         "I",
-        "my",
-        "mine"
+        "my"
       ],
       "correct": "me"
     },
     {
       "id": 841,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "All business flight ___________ must be approved by the Accounts Department at least one week in advance.",
+      "category": "Part 5 · Set 9",
+      "question": "All business flight ____ must be approved by the Accounts Department at least one week in advance.",
       "options": [
         "plans",
         "arrangements",
@@ -10975,8 +10975,8 @@ const TOEIC_DATA = {
     {
       "id": 842,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "As of this academic year all students will ____________ register for classes online.",
+      "category": "Part 5 · Set 9",
+      "question": "As of this academic year all students will ____ register for classes online.",
       "options": [
         "be required",
         "be able to",
@@ -10988,8 +10988,8 @@ const TOEIC_DATA = {
     {
       "id": 843,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "It is important to understand what is included in a life insurance _________ before you make the final choice.",
+      "category": "Part 5 · Set 9",
+      "question": "It is important to understand what is included in a life insurance ____ before you make the final choice.",
       "options": [
         "agreement",
         "contract",
@@ -11001,47 +11001,47 @@ const TOEIC_DATA = {
     {
       "id": 844,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "These days the average life ____________ for men is 85 years.",
+      "category": "Part 5 · Set 9",
+      "question": "The average ____ of the equipment is five years, according to the manufacturer.",
       "options": [
-        "length",
-        "prediction",
-        "expected",
-        "expectancy"
+        "life span",
+        "life-span",
+        "lifetime",
+        "live span"
       ],
-      "correct": "expectancy"
+      "correct": "life span"
     },
     {
       "id": 845,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Firefighters and police officers are dangerous professions that have a lot of occupational _________.",
+      "category": "Part 5 · Set 9",
+      "question": "Construction and mining are dangerous industries that have a lot of occupational ____.",
       "options": [
-        "risks",
-        "dangers",
         "problems",
-        "hazards"
+        "hazards",
+        "risks",
+        "dangers"
       ],
       "correct": "hazards"
     },
     {
       "id": 846,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "A strong dollar was ______________ in driving first quarter profits.",
+      "category": "Part 5 · Set 9",
+      "question": "Analysts said the strong dollar was mainly ____ for the fall in exports.",
       "options": [
-        "playing a big role",
-        "instrumental",
         "responsible",
-        "important"
+        "instrumental",
+        "important",
+        "essential"
       ],
-      "correct": "instrumental"
+      "correct": "responsible"
     },
     {
       "id": 847,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Stress ______________ around 60 per cent of employee sick days.",
+      "category": "Part 5 · Set 9",
+      "question": "Stress ____ around 60 per cent of employee sick days.",
       "options": [
         "accounts for",
         "is responsible",
@@ -11053,8 +11053,8 @@ const TOEIC_DATA = {
     {
       "id": 848,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "All the orders ____________ on schedule.",
+      "category": "Part 5 · Set 9",
+      "question": "All the orders ____ on schedule.",
       "options": [
         "were dispatched",
         "to be delivered",
@@ -11066,21 +11066,21 @@ const TOEIC_DATA = {
     {
       "id": 849,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The new executive is looking forward to __________________ the new role and its increased responsibilities.",
+      "category": "Part 5 · Set 9",
+      "question": "The new executive is looking forward to ____ the new role and its increased responsibilities.",
       "options": [
-        "taking up",
         "taking on",
-        "take up",
-        "have taken on"
+        "take on",
+        "takes on",
+        "taken on"
       ],
       "correct": "taking on"
     },
     {
       "id": 850,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The new product was predicted to be a huge success __________ few customers purchased it.",
+      "category": "Part 5 · Set 9",
+      "question": "The new product was predicted to be a huge success ____ few customers purchased it.",
       "options": [
         "when",
         "yet",
@@ -11092,8 +11092,8 @@ const TOEIC_DATA = {
     {
       "id": 851,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": " The CEO decided to unveil the company’s new products in an elaborate ceremony broadcast on TV ________ the Internet. ",
+      "category": "Part 5 · Set 9",
+      "question": "The CEO decided to unveil the company’s new products in an elaborate ceremony broadcast on TV ____ the Internet.",
       "options": [
         "and",
         "as well",
@@ -11105,8 +11105,8 @@ const TOEIC_DATA = {
     {
       "id": 852,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": " The company’s Scientific and Technical Advisory Panel is comprised of ________ scientists appointed by the CEO. ",
+      "category": "Part 5 · Set 9",
+      "question": "The company’s Scientific and Technical Advisory Panel is comprised of ____ scientists appointed by the CEO.",
       "options": [
         "eminent",
         "imminent",
@@ -11118,8 +11118,8 @@ const TOEIC_DATA = {
     {
       "id": 853,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Prospective candidates for an executive position must have a ________ command of the English language and exceptional analytical and writing skills.",
+      "category": "Part 5 · Set 9",
+      "question": "Prospective candidates for an executive position must have a ____ command of the English language and exceptional analytical and writing skills.",
       "options": [
         "strong",
         "stronger",
@@ -11131,8 +11131,8 @@ const TOEIC_DATA = {
     {
       "id": 854,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The company’s Director adopted a proactive approach in developing and maintaining a program of lectures which have helped COMBI ________ its objectives. ",
+      "category": "Part 5 · Set 9",
+      "question": "The company’s Director adopted a proactive approach in developing and maintaining a program of lectures which have helped COMBI ____ its objectives.",
       "options": [
         "be furthering",
         "further",
@@ -11144,8 +11144,8 @@ const TOEIC_DATA = {
     {
       "id": 855,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The chief accountant asked to see next year’s profit ________ so as to start working on the company’s budget. ",
+      "category": "Part 5 · Set 9",
+      "question": "The chief accountant asked to see next year’s profit ____ so as to start working on the company’s budget.",
       "options": [
         "profiles",
         "projects",
@@ -11157,8 +11157,8 @@ const TOEIC_DATA = {
     {
       "id": 856,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The International Financial Institution seeks an outstanding professional to assist ________ a broad range of analytical and advocacy activities.",
+      "category": "Part 5 · Set 9",
+      "question": "The International Financial Institution seeks an outstanding professional to assist ____ a broad range of analytical and advocacy activities.",
       "options": [
         "at",
         "for",
@@ -11170,21 +11170,21 @@ const TOEIC_DATA = {
     {
       "id": 857,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The United Nations Environment Program is recruiting two Program Officers for its Secretariat ________ in UNEP’s officein Washington, DC. ",
+      "category": "Part 5 · Set 9",
+      "question": "The new recruits will ____ a two-week training programme in July.",
       "options": [
-        "being located",
-        "to locate",
-        "to be located",
-        "to be locating"
+        "attending",
+        "attendance",
+        "attend",
+        "attends"
       ],
-      "correct": "to be located"
+      "correct": "attend"
     },
     {
       "id": 858,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "A successful CEO should have the ability to ________ authority to co-workers to perform their assigned functions.",
+      "category": "Part 5 · Set 9",
+      "question": "A successful CEO should have the ability to ____ authority to co-workers to perform their assigned functions.",
       "options": [
         "delegate",
         "denounce",
@@ -11196,8 +11196,8 @@ const TOEIC_DATA = {
     {
       "id": 859,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The CEO maintains that our company’s latest ________ will enhance our bottled-water division. ",
+      "category": "Part 5 · Set 9",
+      "question": "The CEO maintains that our company’s latest ____ will enhance our bottled-water division.",
       "options": [
         "acquiring",
         "acquired",
@@ -11209,8 +11209,8 @@ const TOEIC_DATA = {
     {
       "id": 860,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Less developed countries receive ________ from the European Union to finance various development projects. ",
+      "category": "Part 5 · Set 9",
+      "question": "Less developed countries receive ____ from the European Union to finance various development projects.",
       "options": [
         "allowances",
         "bonds",
@@ -11222,8 +11222,8 @@ const TOEIC_DATA = {
     {
       "id": 861,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The new secretary ________ some problems which she could not handle without the director’s assistance.",
+      "category": "Part 5 · Set 9",
+      "question": "The new secretary ____ some problems which she could not handle without the director’s assistance.",
       "options": [
         "ran after",
         "ran for",
@@ -11235,8 +11235,8 @@ const TOEIC_DATA = {
     {
       "id": 862,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": " Shareholders in both companies finally ________ an agreement and decided to proceed with the merger. ",
+      "category": "Part 5 · Set 9",
+      "question": "Shareholders in both companies finally ____ an agreement and decided to proceed with the merger.",
       "options": [
         "approached",
         "arrived",
@@ -11248,8 +11248,8 @@ const TOEIC_DATA = {
     {
       "id": 863,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Investors reacted nervously to the bad news stemming ________ the slowdown in America’s housing market.",
+      "category": "Part 5 · Set 9",
+      "question": "Investors reacted nervously to the bad news stemming ____ the slowdown in America’s housing market.",
       "options": [
         "by",
         "from",
@@ -11261,8 +11261,8 @@ const TOEIC_DATA = {
     {
       "id": 864,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Mr. Delancas’ ________ effective communication skills, coupled with his ability to think on his feet, helped him get promoted quickly.",
+      "category": "Part 5 · Set 9",
+      "question": "Mr. Delancas’ ____ effective communication skills, coupled with his ability to think on his feet, helped him get promoted quickly.",
       "options": [
         "high",
         "higher",
@@ -11274,8 +11274,8 @@ const TOEIC_DATA = {
     {
       "id": 865,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The marketing director managed to ________ the target audience’s awareness with his new advertising campaign. ",
+      "category": "Part 5 · Set 9",
+      "question": "The marketing director managed to ____ the target audience’s awareness with his new advertising campaign.",
       "options": [
         "augment",
         "influence",
@@ -11287,8 +11287,8 @@ const TOEIC_DATA = {
     {
       "id": 866,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": " After weeks of ________, Alhan’s CEO formalized his $362 billion offer to Trinto, the global mining giant.",
+      "category": "Part 5 · Set 9",
+      "question": "After weeks of ____, Alhan’s CEO formalized his $362 billion offer to Trinto, the global mining giant.",
       "options": [
         "speculated",
         "speculating",
@@ -11300,8 +11300,8 @@ const TOEIC_DATA = {
     {
       "id": 867,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The company’s CEO is an individual of high integrity with the ability to inspire and motivate ________ employees. ",
+      "category": "Part 5 · Set 9",
+      "question": "The company’s CEO is an individual of high integrity with the ability to inspire and motivate ____ employees.",
       "options": [
         "another",
         "one another",
@@ -11313,8 +11313,8 @@ const TOEIC_DATA = {
     {
       "id": 868,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The Board of Directors was impressed by Mr. Delagua’s ability to implement necessary changes and his ________ of new business methods to meet new challenges.",
+      "category": "Part 5 · Set 9",
+      "question": "The Board of Directors was impressed by Mr. Delagua’s ability to implement necessary changes and his ____ of new business methods to meet new challenges.",
       "options": [
         "application",
         "applicable",
@@ -11326,21 +11326,21 @@ const TOEIC_DATA = {
     {
       "id": 869,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": " Some companies cut the price of their products by as much as $100 in America in an ________ to boost their sales. A. commission",
+      "category": "Part 5 · Set 9",
+      "question": "The board approved a generous ____ for the retiring director.",
       "options": [
-        "",
-        "effort",
-        "undertaking",
-        "venture"
+        "several package",
+        "severance package",
+        "severance packaged",
+        "severing package"
       ],
-      "correct": "effort"
+      "correct": "severance package"
     },
     {
       "id": 870,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": " Stockmarkets in America and Europe fell sharply and the dollar continued its slide as a result ________ the slowdown in America’s housing market.",
+      "category": "Part 5 · Set 9",
+      "question": "Stockmarkets in America and Europe fell sharply and the dollar continued its slide as a result ____ the slowdown in America’s housing market.",
       "options": [
         "by",
         "from",
@@ -11352,8 +11352,8 @@ const TOEIC_DATA = {
     {
       "id": 871,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": " The executive manager handed in his resignation ________.",
+      "category": "Part 5 · Set 9",
+      "question": "The executive manager handed in his resignation ____.",
       "options": [
         "notation",
         "notice",
@@ -11365,8 +11365,8 @@ const TOEIC_DATA = {
     {
       "id": 872,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": " The CEO announced that the company would take firm and ________ action to counter their rival’s promotional campaign. ",
+      "category": "Part 5 · Set 9",
+      "question": "The CEO announced that the company would take firm and ____ action to counter their rival’s promotional campaign.",
       "options": [
         "punctual",
         "stability",
@@ -11378,8 +11378,8 @@ const TOEIC_DATA = {
     {
       "id": 873,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": " The board of directors unanimously approved of Mr. Grabbs’ being ________ to chief executive officer. ",
+      "category": "Part 5 · Set 9",
+      "question": "The board of directors unanimously approved of Mr. Grabbs’ being ____ to chief executive officer.",
       "options": [
         "promoted",
         "promotion",
@@ -11391,8 +11391,8 @@ const TOEIC_DATA = {
     {
       "id": 874,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "More and more companies are beginning ________ surveillance cameras around the office. ",
+      "category": "Part 5 · Set 9",
+      "question": "More and more companies are beginning ____ surveillance cameras around the office.",
       "options": [
         "being installed",
         "installing",
@@ -11404,8 +11404,8 @@ const TOEIC_DATA = {
     {
       "id": 875,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Many companies pay Frostini, a firm known to office workers for ________ web-based e-mail security and spam-sieving technology, a great deal of money. ",
+      "category": "Part 5 · Set 9",
+      "question": "Many companies pay Frostini, a firm known to office workers for ____ web-based e-mail security and spam-sieving technology, a great deal of money.",
       "options": [
         "it",
         "its",
@@ -11417,8 +11417,8 @@ const TOEIC_DATA = {
     {
       "id": 876,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Neither the suppliers nor the distributor _____ responsible for the shipping delay.",
+      "category": "Part 5 · Set 9",
+      "question": "Neither the suppliers nor the distributor ____ responsible for the shipping delay.",
       "options": [
         "are",
         "is",
@@ -11430,8 +11430,8 @@ const TOEIC_DATA = {
     {
       "id": 877,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Some companies cut the price of their products by as much as $100 in America in an ________ to boost their sales. ",
+      "category": "Part 5 · Set 9",
+      "question": "Some companies cut the price of their products by as much as $100 in America in an ____ to boost their sales.",
       "options": [
         "commission",
         "effort",
@@ -11443,8 +11443,8 @@ const TOEIC_DATA = {
     {
       "id": 878,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The United Nations Environment Program is recruiting two Program Officers for its Secretariat ________ in UNEP’s office in Washington, DC. ",
+      "category": "Part 5 · Set 9",
+      "question": "The United Nations Environment Program is recruiting two Program Officers for its Secretariat ____ in UNEP’s office in Washington, DC.",
       "options": [
         "being located",
         "to locate",
@@ -11456,8 +11456,8 @@ const TOEIC_DATA = {
     {
       "id": 879,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": " This university's programs ________ those of Harvard. ",
+      "category": "Part 5 · Set 9",
+      "question": "This university's programs ____ those of Harvard.",
       "options": [
         "come second after",
         "are second only to",
@@ -11469,8 +11469,8 @@ const TOEIC_DATA = {
     {
       "id": 880,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The quarterly sales report must be submitted _____ 5 p.m. on the last Friday of the month.",
+      "category": "Part 5 · Set 9",
+      "question": "The quarterly sales report must be submitted ____ 5 p.m. on the last Friday of the month.",
       "options": [
         "during",
         "since",
@@ -11482,8 +11482,8 @@ const TOEIC_DATA = {
     {
       "id": 881,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "All employees are required to attend the safety seminar, _____ of their position in the company.",
+      "category": "Part 5 · Set 9",
+      "question": "All employees are required to attend the safety seminar, ____ of their position in the company.",
       "options": [
         "despite",
         "instead",
@@ -11495,8 +11495,8 @@ const TOEIC_DATA = {
     {
       "id": 882,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The marketing department has worked on the campaign _____ over three months.",
+      "category": "Part 5 · Set 9",
+      "question": "The marketing department has worked on the campaign ____ over three months.",
       "options": [
         "since",
         "for",
@@ -11508,8 +11508,8 @@ const TOEIC_DATA = {
     {
       "id": 883,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Ms. Park was promoted to regional manager _____ her outstanding performance in sales.",
+      "category": "Part 5 · Set 9",
+      "question": "Ms. Park was promoted to regional manager ____ her outstanding performance in sales.",
       "options": [
         "in spite of",
         "although",
@@ -11521,8 +11521,8 @@ const TOEIC_DATA = {
     {
       "id": 884,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Every conference room in the new building is equipped _____ modern video conferencing systems.",
+      "category": "Part 5 · Set 9",
+      "question": "Every conference room in the new building is equipped ____ modern video conferencing systems.",
       "options": [
         "by",
         "for",
@@ -11534,8 +11534,8 @@ const TOEIC_DATA = {
     {
       "id": 885,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Customers may exchange any item _____ 30 days of purchase, provided they have a receipt.",
+      "category": "Part 5 · Set 9",
+      "question": "Customers may exchange any item ____ 30 days of purchase, provided they have a receipt.",
       "options": [
         "within",
         "among",
@@ -11547,8 +11547,8 @@ const TOEIC_DATA = {
     {
       "id": 886,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The keynote address was _____ inspiring that the audience requested a second session.",
+      "category": "Part 5 · Set 9",
+      "question": "The keynote address was ____ inspiring that the audience requested a second session.",
       "options": [
         "such",
         "too",
@@ -11560,8 +11560,8 @@ const TOEIC_DATA = {
     {
       "id": 887,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The east elevator will remain out of service _____ the maintenance work is completed.",
+      "category": "Part 5 · Set 9",
+      "question": "The east elevator will remain out of service ____ the maintenance work is completed.",
       "options": [
         "when",
         "during",
@@ -11573,8 +11573,8 @@ const TOEIC_DATA = {
     {
       "id": 888,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The new scheduling software is _____ easier to use than the old one.",
+      "category": "Part 5 · Set 9",
+      "question": "The new scheduling software is ____ easier to use than the old one.",
       "options": [
         "very",
         "too",
@@ -11586,8 +11586,8 @@ const TOEIC_DATA = {
     {
       "id": 889,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Production _____ steadily since the factory introduced automated equipment.",
+      "category": "Part 5 · Set 9",
+      "question": "Production ____ steadily since the factory introduced automated equipment.",
       "options": [
         "increased",
         "has increased",
@@ -11599,8 +11599,8 @@ const TOEIC_DATA = {
     {
       "id": 890,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Applicants should submit their resumes _____ the Human Resources office by the deadline.",
+      "category": "Part 5 · Set 9",
+      "question": "Applicants should submit their resumes ____ the Human Resources office by the deadline.",
       "options": [
         "at",
         "in",
@@ -11612,8 +11612,8 @@ const TOEIC_DATA = {
     {
       "id": 891,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The annual report offers a comprehensive _____ of the company's financial results.",
+      "category": "Part 5 · Set 9",
+      "question": "The annual report offers a comprehensive ____ of the company's financial results.",
       "options": [
         "oversight",
         "overlook",
@@ -11625,8 +11625,8 @@ const TOEIC_DATA = {
     {
       "id": 892,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Due to rising material costs, the construction will take _____ than originally expected.",
+      "category": "Part 5 · Set 9",
+      "question": "Due to rising material costs, the construction will take ____ than originally expected.",
       "options": [
         "long",
         "longest",
@@ -11638,8 +11638,8 @@ const TOEIC_DATA = {
     {
       "id": 893,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The manager asked her assistant _____ all the travel arrangements for the trade fair.",
+      "category": "Part 5 · Set 9",
+      "question": "The manager asked her assistant ____ all the travel arrangements for the trade fair.",
       "options": [
         "to arrange",
         "arranging",
@@ -11651,8 +11651,8 @@ const TOEIC_DATA = {
     {
       "id": 894,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "A notice about the revised vacation policy _____ to all staff members last Friday.",
+      "category": "Part 5 · Set 9",
+      "question": "A notice about the revised vacation policy ____ to all staff members last Friday.",
       "options": [
         "sent",
         "was sent",
@@ -11664,8 +11664,8 @@ const TOEIC_DATA = {
     {
       "id": 895,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Despite _____ best efforts, the sales team could not reach the quarterly target.",
+      "category": "Part 5 · Set 9",
+      "question": "Despite ____ best efforts, the sales team could not reach the quarterly target.",
       "options": [
         "they",
         "them",
@@ -11677,8 +11677,8 @@ const TOEIC_DATA = {
     {
       "id": 896,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "The supervisor recommended that every technician _____ the safety manual before the inspection.",
+      "category": "Part 5 · Set 9",
+      "question": "The supervisor recommended that every technician ____ the safety manual before the inspection.",
       "options": [
         "reads",
         "will read",
@@ -11690,8 +11690,8 @@ const TOEIC_DATA = {
     {
       "id": 897,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Clients can access their account details online _____ they register for the service.",
+      "category": "Part 5 · Set 9",
+      "question": "Clients can access their account details online ____ they register for the service.",
       "options": [
         "unless",
         "although",
@@ -11703,8 +11703,8 @@ const TOEIC_DATA = {
     {
       "id": 898,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Bentley & Sons will relocate its headquarters _____ a larger office complex across the river.",
+      "category": "Part 5 · Set 9",
+      "question": "Bentley & Sons will relocate its headquarters ____ a larger office complex across the river.",
       "options": [
         "into",
         "at",
@@ -11716,8 +11716,8 @@ const TOEIC_DATA = {
     {
       "id": 899,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "All invoices must be settled within 30 days; _____, interest will be charged on overdue balances.",
+      "category": "Part 5 · Set 9",
+      "question": "All invoices must be settled within 30 days; ____, interest will be charged on overdue balances.",
       "options": [
         "moreover",
         "therefore",
@@ -11729,8 +11729,8 @@ const TOEIC_DATA = {
     {
       "id": 900,
       "type_id": 9,
-      "category": "Grammar Part 7",
-      "question": "Mr. Tanaka's proposal received _____ support from all the board members.",
+      "category": "Part 5 · Set 9",
+      "question": "Mr. Tanaka's proposal received ____ support from all the board members.",
       "options": [
         "favorable",
         "favorably",

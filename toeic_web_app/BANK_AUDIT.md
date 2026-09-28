@@ -1,8 +1,58 @@
-# TOEIC question bank — audit
+# TOEIC question bank — audit and clean-up
 
 Audit of `toeic_web_app/toeic_database.json` — the 900 questions played in the
-**TOEIC TESTS** mode of the app (9 "parts" x 100).
-Date: 2026-09-28 · revision `247fac2`.
+**TOEIC TESTS** mode of the app (9 sets x 100).
+Date: 2026-09-28.
+
+## Status: cleaned up
+
+The findings below were reviewed and then fixed in full (the plan was approved
+by the maintainer): 509 of the 900 items were rewritten, the rest were repaired
+in place. The bank is regenerated from the original file by
+`toeic_web_app/rebuild_bank.py` (which imports the replacement items from
+`rebuild_items.py` / `rebuild_items_b.py`); the cleaned data is committed as
+`toeic_database.json` + `toeic_data.js`.
+
+| check | before | now |
+|---|---|---|
+| item type | 767 fill-in, 35 "which sentence", 98 dictionary definitions | **900 / 900** single-sentence Part 5 items with a `____` blank |
+| workplace / business scenario | 213 (24 %) | **704 (78 %)** carry an explicit business noun, the rest are professional or consumer scenarios — no dictionary or general-knowledge items remain |
+| duplicated question+options | 4 pairs | **0** |
+| option repeated inside a question | 5 | **0** |
+| key duplicated (two green buttons) | 1 (#70) | **0** |
+| empty option | 1 (#869) | **0** |
+| blank glued to a word (`man____________ only`) | 55 | **0** |
+| stray leading/trailing spaces, space before punctuation | 224 + 75 fields | **0** |
+| misspelled stems / options / keys | 35 / 40 / 8 | **0** (all rewritten or repaired) |
+| part labels | "Incomplete Sentences Part 1-2", "Grammar Part 1-7" | **Part 5 · Set 1-9** (honest: the bank trains Part 5 only) |
+| answer positions, part 1 | A 11 / B 47 / C 23 / D 19 ("always B" = 47 %) | A 18 / B 36 / C 22 / D 24, and the app now **shuffles questions and options** |
+
+Covered by `tests/toeic.bank.quality.test.js` (zero-tolerance guards: no
+repeated option, no duplicated key, no duplicate question, no glued blank, no
+stray space, every item a blank sentence, honest part names, JSON/JS in sync)
+and by `tests/toeic.smoke.test.js` (deterministic shuffle test).
+
+### What was rewritten
+
+* **98 dictionary definitions** ("boorish" -> "lacking manners") and **35
+  "Which sentence is correct ?"** drills — the two item types that do not exist
+  in the TOEIC test — became business-context Part 5 items.
+* **376 further items** were general-English / personal-life material (weather,
+  pets, cooking, Korean history, school life) plus the broken and duplicated
+  items listed below; they were rewritten as workplace scenarios.
+* **The 4 duplicates** (#803 of #307, #576 of #573, #857 of #878, #869 of #877),
+  the items with mangled options (#70 key twice, #102, #149, #229, #248
+  `delock/dislock/mislock`, #396 `mightbe`, #478 `tomatois`, #515 `A drug atic`,
+  #58 `soo`, #210 `allready`, #675 `pulldown`), #426 (trailing `.s`), #258 (four
+  copies of one sentence) and #869 (empty option) were replaced.
+* Option order of the rewritten items was rotated so the key is spread evenly
+  over A/B/C/D; the app additionally shuffles at run time.
+
+The original audit follows as a record of what was wrong and why it was changed.
+
+---
+
+# Original audit (pre-clean-up)
 
 ## Verdict
 
@@ -200,7 +250,7 @@ grammar): `soo` #58, `allready` #210, `mightbe` #396, `tomatois` #478,
 * Answer keys spot-checked by reading ~80 items: no flagrant wrong key found, but
   **#3** ("The girl looked ___ of the small window") accepts both `out` and `into`.
 
-## 8. Recommended order of work
+## 8. Recommended order of work (all seven steps were carried out — see the status table above)
 
 1. Fix the 8 misspelled keys and the duplicated-key question (#70, plus the #258 case pair).
 2. Repair the 35 stem typos and the glued words around blanks.

@@ -350,6 +350,17 @@
   let userAnswers = {}; // questionIndex -> selectedOption
   let currentCategoryName = "";
 
+  // Fisher-Yates shuffle: a run draws its questions in random order and mixes
+  // the options of every question, so answers are not memorised by position.
+  function shuffleArray(items) {
+    const out = items.slice();
+    for (let i = out.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [out[i], out[j]] = [out[j], out[i]];
+    }
+    return out;
+  }
+
   // Initialize Category Cards
   function initCategories() {
     const listEl = document.getElementById('categoryList');
@@ -372,7 +383,8 @@
 
   // Start Quiz for Selected Category
   function startQuiz(typeId, categoryName) {
-    currentQuestions = TOEIC_DATA.questions.filter(q => q.type_id === typeId);
+    currentQuestions = shuffleArray(TOEIC_DATA.questions.filter(q => q.type_id === typeId))
+      .map(q => ({ ...q, options: shuffleArray(q.options) }));
     currentIndex = 0;
     userAnswers = {};
     currentCategoryName = categoryName;
