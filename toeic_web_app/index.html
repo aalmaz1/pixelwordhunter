@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOEIC Test & Practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4F46E5;
+      --primary-hover: #4338CA;
+      --primary-light: #EEF2FF;
+      --success: #10B981;
+      --success-light: #D1FAE5;
+      --error: #EF4444;
+      --error-light: #FEE2E2;
+      --bg: #F9FAFB;
+      --card-bg: #FFFFFF;
+      --text-main: #1F2937;
+      --text-muted: #6B7280;
+      --border: #E5E7EB;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    /* Category Selection */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .category-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .category-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px -2px rgba(79, 70, 229, 0.12);
+    }
+
+    .category-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .category-card .badge {
+      display: inline-block;
+      font-size: 12px;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 500;
+      align-self: flex-start;
+    }
+
+    /* Quiz Area */
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .back-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .back-btn:hover { color: var(--primary); }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .question-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      padding: 14px 18px;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .option-btn .letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #F3F4F6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    /* Answer States */
+    .option-btn.correct {
+      border-color: var(--success) !important;
+      background: var(--success-light) !important;
+      color: #065F46;
+      font-weight: 600;
+    }
+
+    .option-btn.correct .letter {
+      background: var(--success);
+      color: white;
+    }
+
+    .option-btn.wrong {
+      border-color: var(--error) !important;
+      background: var(--error-light) !important;
+      color: #991B1B;
+    }
+
+    .option-btn.wrong .letter {
+      background: var(--error);
+      color: white;
+    }
+
+    .nav-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 24px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover { background: var(--primary-hover); }
+
+    .btn-secondary {
+      background: #F3F4F6;
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover { background: #E5E7EB; }
+
+    /* Results */
+    .results-card {
+      text-align: center;
+      padding: 40px 24px;
+    }
+
+    .score-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .score-circle .number {
+      font-size: 32px;
+      font-weight: 700;
+    }
+
+    .score-circle .label {
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>TOEIC Practice Online</h1>
+    <p>Подготовка к грамматике и словарному запасу TOEIC (900 вопросов)</p>
+  </header>
+
+  <!-- CATEGORIES SCREEN -->
+  <div id="categoryScreen">
+    <div class="category-grid" id="categoryList"></div>
+  </div>
+
+  <!-- QUIZ SCREEN -->
+  <div id="quizScreen" class="hidden">
+    <div class="card">
+      <div class="quiz-header">
+        <button class="back-btn" onclick="showCategories()">← К разделам</button>
+        <span id="quizCategoryTitle" style="font-weight: 600; font-size: 14px; color: var(--primary);"></span>
+        <span id="questionCounter" style="font-weight: 600; font-size: 14px; color: var(--text-muted);">1 / 100</span>
+      </div>
+
+      <div class="progress-bar-container">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="question-title" id="questionText">Loading...</div>
+
+      <div class="options-list" id="optionsList"></div>
+
+      <div class="nav-actions">
+        <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()">Назад</button>
+        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Далее</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div id="resultScreen" class="hidden">
+    <div class="card results-card">
+      <h2>Тест завершен!</h2>
+      <p style="color: var(--text-muted); margin-bottom: 24px;">Ваш результат прохождения раздела</p>
+
+      <div class="score-circle">
+        <span class="number" id="scorePercent">0%</span>
+        <span class="label">Баллы</span>
+      </div>
+
+      <p id="scoreText" style="font-size: 16px; margin-bottom: 24px; font-weight: 500;"></p>
+
+      <button class="btn btn-primary" onclick="showCategories()">Выбрать другой раздел</button>
+    </div>
+  </div>
+</div>
+
+<!-- EMBEDDED DATA FILE -->
+<script src="toeic_data.js"></script>
+
+<script>
+  let currentQuestions = [];
+  let currentIndex = 0;
+  let userAnswers = {}; // questionIndex -> selectedOption
+  let currentCategoryName = "";
+
+  // Initialize Category Cards
+  function initCategories() {
+    const listEl = document.getElementById('categoryList');
+    listEl.innerHTML = '';
+
+    TOEIC_DATA.categories.forEach(cat => {
+      const catQuestions = TOEIC_DATA.questions.filter(q => q.type_id === cat.id);
+
+      const card = document.createElement('div');
+      card.className = 'category-card';
+      card.onclick = () => startQuiz(cat.id, cat.name);
+
+      card.innerHTML = `
+        <h3>${cat.name}</h3>
+        <span class="badge">${catQuestions.length} вопросов</span>
+      `;
+      listEl.appendChild(card);
+    });
+  }
+
+  // Start Quiz for Selected Category
+  function startQuiz(typeId, categoryName) {
+    currentQuestions = TOEIC_DATA.questions.filter(q => q.type_id === typeId);
+    currentIndex = 0;
+    userAnswers = {};
+    currentCategoryName = categoryName;
+
+    document.getElementById('quizCategoryTitle').innerText = categoryName;
+    document.getElementById('categoryScreen').classList.add('hidden');
+    document.getElementById('resultScreen').classList.add('hidden');
+    document.getElementById('quizScreen').classList.remove('hidden');
+
+    renderQuestion();
+  }
+
+  // Render Current Question
+  function renderQuestion() {
+    const q = currentQuestions[currentIndex];
+    document.getElementById('questionCounter').innerText = `${currentIndex + 1} / ${currentQuestions.length}`;
+    document.getElementById('progressFill').style.width = `${((currentIndex + 1) / currentQuestions.length) * 100}%`;
+    document.getElementById('questionText').innerText = `${currentIndex + 1}. ${q.question}`;
+
+    const optionsList = document.getElementById('optionsList');
+    optionsList.innerHTML = '';
+
+    const letters = ['A', 'B', 'C', 'D'];
+    const selected = userAnswers[currentIndex];
+
+    q.options.forEach((opt, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+
+      if (selected !== undefined) {
+        btn.disabled = true;
+        if (opt === q.correct) {
+          btn.classList.add('correct');
+        } else if (opt === selected) {
+          btn.classList.add('wrong');
+        }
+      }
+
+      btn.onclick = () => selectOption(opt);
+
+      btn.innerHTML = `
+        <span class="letter">${letters[idx]}</span>
+        <span>${opt}</span>
+      `;
+      optionsList.appendChild(btn);
+    });
+
+    document.getElementById('prevBtn').style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
+    document.getElementById('nextBtn').innerText = currentIndex === currentQuestions.length - 1 ? 'Завершить' : 'Далее';
+  }
+
+  // Select Option
+  function selectOption(opt) {
+    if (userAnswers[currentIndex] !== undefined) return;
+    userAnswers[currentIndex] = opt;
+    renderQuestion();
+  }
+
+  // Navigation
+  function nextQuestion() {
+    if (currentIndex < currentQuestions.length - 1) {
+      currentIndex++;
+      renderQuestion();
+    } else {
+      showResults();
+    }
+  }
+
+  function prevQuestion() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      renderQuestion();
+    }
+  }
+
+  // Show Results
+  function showResults() {
+    let correctCount = 0;
+    currentQuestions.forEach((q, idx) => {
+      if (userAnswers[idx] === q.correct) {
+        correctCount++;
+      }
+    });
+
+    const percent = Math.round((correctCount / currentQuestions.length) * 100);
+
+    document.getElementById('scorePercent').innerText = `${percent}%`;
+    document.getElementById('scoreText').innerText = `Вы правильно ответили на ${correctCount} из ${currentQuestions.length} вопросов.`;
+
+    document.getElementById('quizScreen').classList.add('hidden');
+    document.getElementById('resultScreen').classList.remove('hidden');
+  }
+
+  // Show Categories
+  function showCategories() {
+    document.getElementById('quizScreen').classList.add('hidden');
+    document.getElementById('resultScreen').classList.add('hidden');
+    document.getElementById('categoryScreen').classList.remove('hidden');
+  }
+
+  // Initialize on load
+  initCategories();
+</script>
+</body>
+</html>
