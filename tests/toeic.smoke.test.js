@@ -11,7 +11,9 @@ import fs from 'node:fs';
 vi.mock('../i18n.js', () => ({
   I18nManager: {
     init: async () => {},
-    t: (key) => key,
+    // Mirrors the English table closely enough for the smoke test: the
+    // category screen renders its "All" filter through the i18n lookup.
+    t: (key) => ({ all_categories: 'All' }[key] ?? key),
     getCurrentLanguage: () => 'en',
     setLanguage: async () => {},
   },

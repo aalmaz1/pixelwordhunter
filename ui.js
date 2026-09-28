@@ -2,6 +2,7 @@
  * ui.js
  * UI initialization and common rendering functions
  */
+import { I18nManager } from './i18n.js';
 
 /**
  * Returns an array of focusable elements within the given parent.
@@ -79,7 +80,9 @@ export function renderCategoryButtons(categories, onSelect, stats = {}) {
 
     const nameEl = document.createElement('span');
     nameEl.className = 'category-name';
-    nameEl.textContent = category;
+    // "All" is a UI filter, not a dictionary category — show it translated.
+    // Category names themselves stay English (they come from the word bank).
+    nameEl.textContent = category === 'All' ? I18nManager.t('all_categories') : category;
     btn.appendChild(nameEl);
 
     // Optional progress bar

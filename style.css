@@ -1343,3 +1343,39 @@ body.lang-ko .recall-form input {
   .toeic-question-card { margin: 10px 0 10px; }
   .toeic-nav-actions { margin-top: 10px; }
 }
+
+/* ============================================================
+   Korean typography boost — mode chooser & TOEIC screens
+   These screens arrived after the Hangul readability block above,
+   so their labels still used the raw Press Start 2P pixel sizes
+   (13px / 7px) instead of the ~30% Korean boost every other
+   screen gets. Without this, 단어 퀴즈 / TOEIC 테스트 look
+   broken next to the rest of the Korean UI.
+   ============================================================ */
+body.lang-ko .mode-btn {
+  font-size: 17px !important;
+  letter-spacing: 1.5px !important;
+  line-height: 1.6 !important;
+}
+body.lang-ko .mode-btn .mode-label {
+  font-size: 17px !important;
+  letter-spacing: 1.5px !important;
+  line-height: 1.6 !important;
+}
+body.lang-ko .mode-btn .mode-sub {
+  font-size: 10px !important;
+  letter-spacing: 1px !important;
+  line-height: 1.7 !important;
+}
+body.lang-ko .mode-icon { font-size: 28px !important; }
+body.lang-ko .toeic-cat-badge {
+  font-size: 10px !important;
+  letter-spacing: 1px !important;
+  line-height: 1.6 !important;
+}
+
+@media (max-width: 480px) {
+  body.lang-ko .mode-btn .mode-label { font-size: 15px !important; }
+  body.lang-ko .mode-btn .mode-sub { font-size: 9px !important; }
+  body.lang-ko .toeic-cat-badge { font-size: 9px !important; }
+}

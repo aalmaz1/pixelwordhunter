@@ -608,7 +608,8 @@ function startRound(category, words, emptyMessage) {
     reviewSessionData: [],
     completedRoundsCount: 0,
   });
-  setTxt($('category'), category);
+  // "All" is a UI filter label; dictionary category names stay as they are.
+  setTxt($('category'), category === 'All' ? t('all_categories') : category);
   toggleScreen('game');
   loadQuestion();
 }

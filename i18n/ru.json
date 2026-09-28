@@ -1,7 +1,7 @@
 {
   "toEIC_edition": "// TOEIC ВЕРСИЯ //",
   "mastered": "ИЗУЧЕНО",
-  "press_hunt": "НАЖМИТЕ ОХОТА",
+  "press_hunt": "НАЧАТЬ ОХОТУ",
   "login": "ВОЙТИ",
   "register": "РЕГИСТРАЦИЯ",
   "try": "ПОПРОБОВАТЬ",
@@ -17,6 +17,7 @@
   "reset_progress": "СБРОСИТЬ ПРОГРЕСС",
   "select_category": "// ВЫБЕРИТЕ КАТЕГОРИЮ //",
   "category_label": "КАТ:",
+  "all_categories": "ВСЕ",
   "xp_label": "ОПЫТ:",
   "exit": "✕",
   "word_review": "// ПОВТОРЕНИЕ СЛОВА //",

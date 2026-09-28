@@ -130,7 +130,9 @@ The main interface is localized in three languages. The active interface languag
 | **Русский** | English ↔ Russian | Press Start 2P |
 | **한국어** | English ↔ Korean | Mulmaru |
 
-The initial language follows a supported browser language when no preference has been saved. Change it from Settings at any time; the choice is remembered locally. Category names and English vocabulary terms remain in English in every interface mode.
+The initial language follows a supported browser language when no preference has been saved. Change it from Settings at any time; the choice is remembered locally. Category names and English vocabulary terms remain in English in every interface mode (the "All" category filter is a UI control and is translated).
+
+Strings are fetched lazily per language — `i18n/<lang>.json` in development, `assets/i18n/<lang>.json` in the build — and the service worker precaches them for offline use. A response that is not valid JSON (for example an SPA fallback page) is treated as a miss so the other location is tried, a failed language is never cached as "loaded", and when nothing can be fetched the UI keeps its built-in English labels instead of showing raw keys such as `select_mode`.
 
 ## 🎨 Themes, sound, and pronunciation
 
@@ -257,7 +259,7 @@ npm test
 npm run build
 ```
 
-The current suite checks dictionary size and required data, usable Korean content, contextual word IDs, option fairness, SRS selection and long-term levels, hard-word selection, sanitization, i18n key parity, storage validation and migration, progress merging, final local saves, and state-update batching.
+The current suite checks dictionary size and required data, usable Korean content, contextual word IDs, option fairness, SRS selection and long-term levels, hard-word selection, sanitization, i18n key parity and coverage (every key used in the markup or scripts exists in all three languages), runtime language loading in both the dev and production layouts, storage validation and migration, progress merging, final local saves, and state-update batching.
 
 The automated suite does not currently perform live Firebase network tests or a full browser installation/offline integration test. A successful production build still verifies that Vite and Workbox can generate the deployable PWA assets.
 
