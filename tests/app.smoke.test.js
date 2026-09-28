@@ -75,8 +75,10 @@ it('boots, plays a full round, and reaches the result screen', async () => {
   expect($('hard-words-btn').disabled).toBe(true); // no hard words yet
   expect($('category-list').children[0].textContent).toContain('All');
 
-  // Enter the category screen and start an "All" round.
+  // HUNT opens the mode chooser; WORD QUIZ leads to the category screen.
   $('hunt-btn').click();
+  expect(hidden('mode-screen')).toBe(false);
+  $('mode-word-quiz-btn').click();
   expect(hidden('category-screen')).toBe(false);
   $('category-list').children[0].click();
   expect(hidden('game-screen')).toBe(false);

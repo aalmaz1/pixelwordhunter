@@ -1123,3 +1123,223 @@ body.lang-ko .recall-form input {
   font-family: 'Mulmaru', cursive !important;
   font-size: 16px;
 }
+
+/* ==================== MODE SELECT & TOEIC TESTS ==================== */
+/* Mode chooser: shown after pressing HUNT / TRY. */
+.mode-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: min(360px, 88vw);
+}
+
+.mode-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 22px 18px;
+  font-family: inherit;
+  background: transparent;
+  cursor: pointer;
+  letter-spacing: 3px;
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+  -webkit-clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  min-height: 44px;
+  contain: layout style paint;
+}
+
+.mode-btn .mode-icon { font-size: 26px; line-height: 1; }
+.mode-btn .mode-label { font-size: 13px; }
+.mode-btn .mode-sub { font-size: 7px; letter-spacing: 2px; opacity: .75; }
+
+.mode-btn.mode-quiz {
+  border: 2px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  text-shadow: var(--shadow-cyan);
+  box-shadow: 0 0 12px #00f5ff40, inset 0 0 12px #00f5ff12;
+}
+
+.mode-btn.mode-quiz:hover {
+  background: #00f5ff1f;
+  box-shadow: 0 0 24px #00f5ff99, inset 0 0 20px #00f5ff26;
+  color: #fff;
+}
+
+.mode-btn.mode-test {
+  border: 2px solid var(--neon-yellow);
+  color: var(--neon-yellow);
+  text-shadow: 0 0 8px var(--neon-yellow);
+  box-shadow: 0 0 12px #ffe60040, inset 0 0 12px #ffe60012;
+}
+
+.mode-btn.mode-test:hover {
+  background: #ffe6001f;
+  box-shadow: 0 0 24px #ffe60099, inset 0 0 20px #ffe60026;
+  color: #fff;
+}
+
+.mode-btn:active { transform: scale(.97); }
+
+@media (min-width: 640px) {
+  .mode-grid { flex-direction: row; justify-content: center; width: auto; }
+  .mode-btn { width: 240px; }
+}
+
+/* TOEIC test list — reuses .category-grid/.category-btn, with a few adapts. */
+.toeic-cat-btn {
+  white-space: normal;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 170px;
+  max-width: 220px;
+  padding: 12px 14px;
+  line-height: 1.5;
+}
+
+.toeic-cat-badge {
+  font-size: 7px;
+  color: var(--neon-green);
+  text-shadow: 0 0 6px var(--neon-green);
+  letter-spacing: 2px;
+  opacity: .9;
+}
+
+/* TOEIC game screen — scrollable like #game-screen. */
+#toeicgame-screen {
+  justify-content: flex-start;
+  padding: 55px 20px 20px;
+  min-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+#toeicgame-screen header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 50px;
+  min-height: 50px;
+  z-index: 100;
+}
+
+#toeic-quiz-box {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0 24px;
+}
+
+#toeic-progress-fill {
+  height: 100%;
+  width: 0;
+  background: var(--neon-cyan);
+  box-shadow: var(--shadow-cyan);
+  transition: width .25s ease;
+}
+
+/* Long TOEIC sentences stay readable: terminal mono instead of the pixel font. */
+.toeic-question-card {
+  margin: 18px 0 16px;
+  width: 100%;
+}
+
+.toeic-question {
+  display: block;
+  width: 100%;
+  padding: 16px 18px;
+  background: #00000080;
+  border: 1px solid var(--neon-purple);
+  box-shadow: 0 0 10px #bf5fff33, inset 0 0 14px #bf5fff0d;
+  color: var(--text-main);
+  font-family: "Courier New", ui-monospace, Menlo, Consolas, monospace;
+  font-weight: 700;
+  font-size: clamp(14px, 2vw, 17px);
+  line-height: 1.7;
+  letter-spacing: .3px;
+  text-align: left;
+  cursor: pointer;
+  transition: all .2s;
+  overflow-wrap: break-word;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.toeic-question:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 14px #00f5ff4d, inset 0 0 14px #00f5ff12;
+}
+
+#toeic-options { align-self: stretch; max-width: 620px; }
+
+.toeic-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  font-family: "Courier New", ui-monospace, Menlo, Consolas, monospace;
+  font-weight: 700;
+  font-size: clamp(13px, 1.9vw, 16px);
+  line-height: 1.5;
+  letter-spacing: .2px;
+  text-align: left;
+  white-space: normal;
+  width: 100%;
+}
+
+.toeic-option-letter {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: .85;
+}
+
+.toeic-nav-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  max-width: 620px;
+  margin-top: 20px;
+}
+
+.toeic-nav-actions .next-btn { min-width: 110px; }
+
+@media (max-width: 480px) {
+  #toeicgame-screen header {
+    flex-wrap: nowrap;
+    padding: 6px 8px;
+    gap: 4px;
+  }
+  #toeicgame-screen header .stat:first-child {
+    font-size: 7px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .toeic-nav-actions .next-btn { min-width: 84px; padding: 10px 14px; font-size: 9px; }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  #toeicgame-screen { padding-top: 45px; }
+  .toeic-question-card { margin: 10px 0 10px; }
+  .toeic-nav-actions { margin-top: 10px; }
+}

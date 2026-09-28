@@ -108,5 +108,19 @@
   "delete_account_sync_busy": "Sync is still finishing. Try again in a moment.",
   "delete_account_cloud_error": "Cloud progress could not be deleted, so the account was not deleted. Check your connection and try again.",
   "delete_account_partial_error": "Cloud progress was deleted, but account deletion did not finish. Sign in again and delete the account once more.",
-  "auth_requires_recent_login": "Please sign in again and try again"
+  "auth_requires_recent_login": "Please sign in again and try again",
+  "select_mode": "// SELECT MODE //",
+  "word_quiz": "WORD QUIZ",
+  "word_quiz_sub": "LEARN 600 WORDS",
+  "toeic_tests": "TOEIC TESTS",
+  "toeic_tests_sub": "9 PARTS · 900 QUESTIONS",
+  "select_test": "// SELECT TEST //",
+  "test_label": "TEST:",
+  "questions_count": "QUESTIONS",
+  "prev": "PREV",
+  "finish": "FINISH",
+  "test_complete": "// TEST COMPLETE //",
+  "retry_test": "RETRY",
+  "choose_test": "CHOOSE TEST",
+  "toeic_load_error": "Failed to load TOEIC tests"
 }
