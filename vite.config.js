@@ -140,6 +140,7 @@ export default defineConfig({
       injectRegister: null, // Disable auto-injection of registerSW script
       includeManifestIcons: false, // 512px icons stay in the manifest for install, not the precache
       manifest: {
+        id: './',
         short_name: 'WordHunter',
         name: 'Pixel Word Hunter',
         description: 'TOEIC business English game with 600 contextual cards and adaptive spaced practice',
@@ -190,6 +191,12 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         clientsClaim: true,
         skipWaiting: true,
+        // SPA fallback: serve index.html for navigations the precache does not
+        // match — notably the PWA shortcut launches (./?action=quick|hard),
+        // whose query string otherwise misses the precached entry and fails
+        // offline. File URLs and /_/ internals keep falling through.
+        navigateFallback: 'index.html',
+        navigateFallbackDenylist: [/^\/_/, /\/[^/?]+\.[^/]+$/],
         additionalManifestEntries: [
           // The vocabulary JSON is fetched at runtime, so include the same
           // versioned URL in the precache manifest. Its revision/hash changes

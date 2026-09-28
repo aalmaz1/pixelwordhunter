@@ -127,5 +127,10 @@
   "toeic_mistakes": "오답",
   "repeat_mistakes": "오답만 다시 풀기",
   "your_answer": "내 답",
-  "correct_answer": "정답"
+  "correct_answer": "정답",
+  "app_label": "앱",
+  "install_app": "📲 설치",
+  "install_ios_hint": "공유 → 홈 화면에 추가",
+  "update_available": "새 버전 준비됨 — 새로고침하세요",
+  "app_installed": "앱이 설치됐습니다"
 }

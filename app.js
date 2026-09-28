@@ -347,12 +347,74 @@ function refreshCategoryButtons() {
  *  so registration happens here from same-origin code — without this there is no offline mode. */
 function registerServiceWorker() {
   if (!import.meta.env.PROD || !('serviceWorker' in navigator)) return;
+  // With autoUpdate + skipWaiting + clientsClaim a newly deployed SW takes over
+  // mid-session. A controller change AFTER boot means exactly that — tell the
+  // user a reload picks the new version up. (On first install there is no
+  // previous controller, so no toast — hadController guards that.)
+  const hadController = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (hadController) showNotification(t('update_available'), 5000);
+  });
   window.addEventListener('load', () => {
     const swUrl = new URL(`${import.meta.env.BASE_URL || './'}sw.js`, location.href).href;
-    navigator.serviceWorker.register(swUrl).catch((err) => {
+    navigator.serviceWorker.register(swUrl).then((reg) => {
+      // Hourly update check for long-lived sessions (navigations check anyway).
+      setInterval(() => reg.update().catch(() => {}), 60 * 60 * 1000);
+    }).catch((err) => {
       console.warn('[App] Service worker registration failed:', err?.message || err);
     });
   });
+}
+
+// ==================== PWA INSTALL ====================
+// Holds the install prompt so Settings can offer a one-tap INSTALL button.
+// iOS has no beforeinstallprompt — there we show a manual hint instead.
+let deferredInstallPrompt = null;
+
+const isStandaloneApp = () =>
+  (typeof window.matchMedia === 'function' &&
+    window.matchMedia('(display-mode: standalone)').matches) ||
+  navigator.standalone === true;
+
+const isIOSDevice = () =>
+  /iphone|ipad|ipod/i.test(navigator.userAgent) ||
+  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+/** Shows the install row only when there is something actionable to show. */
+function updateInstallUI() {
+  const row = $('install-row');
+  const btn = $('install-app-btn');
+  const hint = $('install-ios-hint');
+  if (!row || !btn || !hint) return;
+  if (isStandaloneApp()) {
+    row.classList.add('hidden'); // already installed — nothing to offer
+    return;
+  }
+  if (deferredInstallPrompt) {
+    btn.classList.remove('hidden');
+    hint.classList.add('hidden');
+    row.classList.remove('hidden');
+  } else if (isIOSDevice()) {
+    btn.classList.add('hidden');
+    hint.classList.remove('hidden');
+    row.classList.remove('hidden');
+  } else {
+    row.classList.add('hidden'); // prompt not ready yet (pre-engagement visit)
+  }
+}
+
+function wireInstallPrompt() {
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault(); // hold it until the user taps INSTALL
+    deferredInstallPrompt = e;
+    updateInstallUI();
+  });
+  window.addEventListener('appinstalled', () => {
+    deferredInstallPrompt = null;
+    showNotification(t('app_installed'));
+    updateInstallUI();
+  });
+  updateInstallUI(); // iOS hint / installed state need no event
 }
 
 // ==================== MODAL SHOW/HIDE ====================
@@ -1429,6 +1491,7 @@ async function init() {
     ui = initUI();
     AudioEngine.init();
     registerServiceWorker();
+    wireInstallPrompt();
     // initializeFirebaseServices() runs lazily on first need.
     await I18nManager.init();
     const uiLanguage = I18nManager.getCurrentLanguage();

@@ -30,6 +30,7 @@
 
   <!-- iOS PWA Support -->
   <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Pixel Word Hunter">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -144,6 +145,15 @@
           </button>
         </div>
         
+        <!-- Install app (PWA): unhidden by updateInstallUI() only when there is
+             something actionable — the install prompt on Chromium, or the manual
+             Add-to-Home-Screen hint on iOS. Hidden when already installed. -->
+        <div class="settings-row hidden" id="install-row">
+          <span class="settings-label" data-i18n="app_label">APP</span>
+          <button id="install-app-btn" class="theme-btn install-btn hidden" role="button" data-i18n="install_app">📲 INSTALL</button>
+          <span id="install-ios-hint" class="install-hint hidden" data-i18n="install_ios_hint">SHARE → ADD TO HOME SCREEN</span>
+        </div>
+
         <!-- Backup/Restore -->
         <div class="settings-row">
           <span class="settings-label" data-i18n="backup">BACKUP</span>
@@ -195,7 +205,7 @@
     <div id="category-screen" class="game-container hidden" role="region" aria-label="Category selection">
       <button class="back-btn" id="category-back-btn" role="button" data-i18n="back">BACK</button>
       <h2 class="screen-title" data-i18n="select_category">// SELECT CATEGORY //</h2>
-      <input type="search" id="category-search" class="category-search" data-i18n-placeholder="search_category" placeholder="SEARCH...">
+      <input type="search" id="category-search" class="category-search" autocapitalize="off" autocorrect="off" enterkeyhint="search" data-i18n-placeholder="search_category" placeholder="SEARCH...">
       <div id="category-list" class="category-grid" role="list"></div>
     </div>
 
@@ -251,7 +261,7 @@
         <div class="options-grid" id="options" role="group" aria-label="Answer options"></div>
         <form id="recall-form" class="recall-form hidden" novalidate>
           <label for="recall-answer" id="recall-label" data-i18n="recall_prompt">TYPE THE ANSWER FROM MEMORY</label>
-          <input id="recall-answer" type="text" autocomplete="off" spellcheck="false" data-i18n-placeholder="recall_placeholder" placeholder="Type your answer">
+          <input id="recall-answer" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" data-i18n-placeholder="recall_placeholder" placeholder="Type your answer">
           <button type="submit" id="recall-submit" class="option-btn" data-i18n="check_answer">CHECK</button>
         </form>
       </div>
@@ -339,6 +349,19 @@
         <div class="delete-account-field">
           <label for="delete-password-input" data-i18n="delete_account_password">CONFIRM WITH PASSWORD</label>
           <input type="password" id="delete-password-input" data-i18n-placeholder="enter_password" placeholder="Enter your password" autocomplete="current-password">
+        </div>
+        <div id="delete-account-error" class="delete-account-error" role="alert" aria-live="assertive" aria-atomic="true"></div>
+        <div class="confirm-actions">
+          <button type="button" class="option-btn delete-account-danger" id="delete-confirm-btn" data-i18n="delete_account_confirm" disabled>CONFIRM</button>
+          <button type="button" class="option-btn confirm-cancel" id="delete-cancel-btn" data-i18n="delete_account_cancel">CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <script type="module" src="/app.js"></script>
+</body>
+</html>ord">
         </div>
         <div id="delete-account-error" class="delete-account-error" role="alert" aria-live="assertive" aria-atomic="true"></div>
         <div class="confirm-actions">

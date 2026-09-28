@@ -127,5 +127,10 @@
   "toeic_mistakes": "ОШИБКИ",
   "repeat_mistakes": "ПОВТОРИТЬ ТОЛЬКО ОШИБКИ",
   "your_answer": "ВАШ ОТВЕТ",
-  "correct_answer": "ПРАВИЛЬНЫЙ ОТВЕТ"
+  "correct_answer": "ПРАВИЛЬНЫЙ ОТВЕТ",
+  "app_label": "ПРИЛОЖЕНИЕ",
+  "install_app": "📲 УСТАНОВИТЬ",
+  "install_ios_hint": "ПОДЕЛИТЬСЯ → НА ЭКРАН «ДОМОЙ»",
+  "update_available": "ВЫШЛА НОВАЯ ВЕРСИЯ — ОБНОВИТЕ СТРАНИЦУ",
+  "app_installed": "ПРИЛОЖЕНИЕ УСТАНОВЛЕНО"
 }
