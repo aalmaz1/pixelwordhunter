@@ -1,7 +1,7 @@
 {
   "toEIC_edition": "// TOEIC ВЕРСИЯ //",
   "mastered": "ИЗУЧЕНО",
-  "press_hunt": "НАЖМИТЕ ОХОТА",
+  "press_hunt": "НАЧАТЬ ОХОТУ",
   "login": "ВОЙТИ",
   "register": "РЕГИСТРАЦИЯ",
   "try": "ПОПРОБОВАТЬ",
@@ -17,6 +17,7 @@
   "reset_progress": "СБРОСИТЬ ПРОГРЕСС",
   "select_category": "// ВЫБЕРИТЕ КАТЕГОРИЮ //",
   "category_label": "КАТ:",
+  "all_categories": "ВСЕ",
   "xp_label": "ОПЫТ:",
   "exit": "✕",
   "word_review": "// ПОВТОРЕНИЕ СЛОВА //",
@@ -113,7 +114,7 @@
   "word_quiz": "КВИЗ СЛОВ",
   "word_quiz_sub": "ИЗУЧИ 600 СЛОВ",
   "toeic_tests": "ТЕСТЫ TOEIC",
-  "toeic_tests_sub": "9 ЧАСТЕЙ · 900 ВОПРОСОВ",
+  "toeic_tests_sub": "9 НАБОРОВ · 900 ВОПРОСОВ",
   "select_test": "// ВЫБЕРИТЕ ТЕСТ //",
   "test_label": "ТЕСТ:",
   "questions_count": "ВОПРОСОВ",
@@ -122,5 +123,9 @@
   "test_complete": "// ТЕСТ ЗАВЕРШЁН //",
   "retry_test": "ЗАНОВО",
   "choose_test": "ВЫБРАТЬ ТЕСТ",
-  "toeic_load_error": "Не удалось загрузить тесты TOEIC"
+  "toeic_load_error": "Не удалось загрузить тесты TOEIC",
+  "toeic_mistakes": "ОШИБКИ",
+  "repeat_mistakes": "ПОВТОРИТЬ ТОЛЬКО ОШИБКИ",
+  "your_answer": "ВАШ ОТВЕТ",
+  "correct_answer": "ПРАВИЛЬНЫЙ ОТВЕТ"
 }

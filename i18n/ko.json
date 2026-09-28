@@ -17,6 +17,7 @@
   "reset_progress": "진행도 초기화",
   "select_category": "// 카테고리 선택 //",
   "category_label": "분류:",
+  "all_categories": "전체",
   "xp_label": "경험치:",
   "exit": "✕",
   "word_review": "// 단어 복습 //",
@@ -113,7 +114,7 @@
   "word_quiz": "단어 퀴즈",
   "word_quiz_sub": "600개 단어 학습",
   "toeic_tests": "TOEIC 테스트",
-  "toeic_tests_sub": "9개 파트 · 900문항",
+  "toeic_tests_sub": "9개 세트 · 900문항",
   "select_test": "// 테스트 선택 //",
   "test_label": "테스트:",
   "questions_count": "문항",
@@ -122,5 +123,9 @@
   "test_complete": "// 테스트 완료 //",
   "retry_test": "다시 하기",
   "choose_test": "테스트 선택",
-  "toeic_load_error": "TOEIC 테스트를 불러오지 못했습니다"
+  "toeic_load_error": "TOEIC 테스트를 불러오지 못했습니다",
+  "toeic_mistakes": "오답",
+  "repeat_mistakes": "오답만 다시 풀기",
+  "your_answer": "내 답",
+  "correct_answer": "정답"
 }

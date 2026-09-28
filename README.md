@@ -38,6 +38,7 @@ The interface combines CRT scanlines, six neon and monochrome themes, pixel typo
 - category search, focused **HARD WORDS** practice, and immediate mistake replay;
 - a complete **WORD REVIEW** after continuing from every third round;
 - tap-to-pronounce controls powered by the browser's speech engine;
+- a separate **TOEIC TESTS** mode with 9 x 100 TOEIC Part 5 questions loaded lazily from `toeic_web_app/toeic_database.json`, with both the question order and the answer options shuffled on every attempt, plus mistake review and a MISTAKES set built from the questions missed so far;
 - responsive play on phone, tablet, and desktop;
 - installable PWA support and offline play after the first successful online load.
 
@@ -55,6 +56,33 @@ Standard category and mixed hunts contain ten prompts. A hard-word round or a mi
 8. Continuing after every third completed round opens a recap of all cards answered during those rounds.
 
 The **TRY** button attempts an anonymous Firebase sign-in and immediately opens guest play. If Firebase is unavailable, the game continues with local browser storage. Email registration is optional and is only needed for cross-device synchronization.
+
+### TOEIC TESTS mode
+
+After HUNT/TRY the mode chooser offers a second drill: **900 TOEIC Part 5
+incomplete sentences** in nine practice sets of 100, served from
+`toeic_web_app/toeic_database.json`. Every attempt draws the questions in a
+random order and shuffles the four options, so an answer is never remembered by
+its position. Correct answers are worth 2 XP; the result screen shows correct,
+wrong, accuracy, and XP earned, with retry and "choose another set" actions.
+
+**Mistake review.** Wrong answers are remembered (per question, in local
+storage), the result screen lists every missed item with the answer that was
+given and the correct one, and a **REPEAT MISTAKES ONLY (N)** button reruns just
+those items. The test list also grows a **MISTAKES** set with everything missed
+so far, so a later session starts from what needs work. Answering an item
+correctly removes it from the pool; when the pool is empty the extra set
+disappears.
+
+The sets are labelled "Part 5 · Set 1-9" on purpose: the bank trains the Part 5
+skill only (single-sentence items), it contains no text-completion or reading
+passages, so it does not pretend to mirror the full exam. The data started as a
+community dataset and was cleaned up in full — duplicates, misspellings, glued
+blanks, empty options, dictionary-definition quizzes and "Which sentence is
+correct ?" drills were removed or rewritten as business-context items. See
+[`toeic_web_app/BANK_AUDIT.md`](toeic_web_app/BANK_AUDIT.md) for the audit and
+the status table; `toeic_web_app/rebuild_bank.py` documents and reproduces the
+clean-up from the original file.
 
 ## 🧠 Adaptive practice and mastery
 
@@ -130,7 +158,9 @@ The main interface is localized in three languages. The active interface languag
 | **Русский** | English ↔ Russian | Press Start 2P |
 | **한국어** | English ↔ Korean | Mulmaru |
 
-The initial language follows a supported browser language when no preference has been saved. Change it from Settings at any time; the choice is remembered locally. Category names and English vocabulary terms remain in English in every interface mode.
+The initial language follows a supported browser language when no preference has been saved. Change it from Settings at any time; the choice is remembered locally. Category names and English vocabulary terms remain in English in every interface mode (the "All" category filter is a UI control and is translated).
+
+Strings are fetched lazily per language — `i18n/<lang>.json` in development, `assets/i18n/<lang>.json` in the build — and the service worker precaches them for offline use. A response that is not valid JSON (for example an SPA fallback page) is treated as a miss so the other location is tried, a failed language is never cached as "loaded", and when nothing can be fetched the UI keeps its built-in English labels instead of showing raw keys such as `select_mode`.
 
 ## 🎨 Themes, sound, and pronunciation
 
@@ -257,7 +287,7 @@ npm test
 npm run build
 ```
 
-The current suite checks dictionary size and required data, usable Korean content, contextual word IDs, option fairness, SRS selection and long-term levels, hard-word selection, sanitization, i18n key parity, storage validation and migration, progress merging, final local saves, and state-update batching.
+The current suite checks dictionary size and required data, usable Korean content, contextual word IDs, option fairness, SRS selection and long-term levels, hard-word selection, sanitization, the TOEIC bank (no duplicates, no repeated or empty options, no glued blanks, honest part names, JSON/JS in sync) and its mistake-review flow (missed items listed, pool cleared by a correct answer, empty pool handled), i18n key parity and coverage (every key used in the markup or scripts exists in all three languages), runtime language loading in both the dev and production layouts, storage validation and migration, progress merging, final local saves, and state-update batching.
 
 The automated suite does not currently perform live Firebase network tests or a full browser installation/offline integration test. A successful production build still verifies that Vite and Workbox can generate the deployable PWA assets.
 
@@ -306,6 +336,8 @@ firebase.json                 Firebase CLI rules configuration
 public/words_optimized.json   canonical generated 600-card dictionary
 public/_headers               deployed anti-framing security headers
 i18n/                         English, Russian, and Korean interface strings
+toeic.js                      lazy bridge to the TOEIC question bank
+toeic_web_app/                TOEIC bank (JSON/JS), standalone page, audit report, and the clean-up script
 assets/                       fonts, licenses, logo, icons, and favicon
 build_words.py                dictionary validator and generator
 build_data_[a-d].py           editable localized dictionary source rows

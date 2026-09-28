@@ -17,6 +17,7 @@
   "reset_progress": "RESET PROGRESS",
   "select_category": "// SELECT CATEGORY //",
   "category_label": "CAT:",
+  "all_categories": "ALL",
   "xp_label": "XP:",
   "exit": "✕",
   "word_review": "// WORD REVIEW //",
@@ -113,7 +114,7 @@
   "word_quiz": "WORD QUIZ",
   "word_quiz_sub": "LEARN 600 WORDS",
   "toeic_tests": "TOEIC TESTS",
-  "toeic_tests_sub": "9 PARTS · 900 QUESTIONS",
+  "toeic_tests_sub": "9 SETS · 900 QUESTIONS",
   "select_test": "// SELECT TEST //",
   "test_label": "TEST:",
   "questions_count": "QUESTIONS",
@@ -122,5 +123,9 @@
   "test_complete": "// TEST COMPLETE //",
   "retry_test": "RETRY",
   "choose_test": "CHOOSE TEST",
-  "toeic_load_error": "Failed to load TOEIC tests"
+  "toeic_load_error": "Failed to load TOEIC tests",
+  "toeic_mistakes": "MISTAKES",
+  "repeat_mistakes": "REPEAT MISTAKES ONLY",
+  "your_answer": "YOUR ANSWER",
+  "correct_answer": "CORRECT ANSWER"
 }

@@ -608,7 +608,8 @@ function startRound(category, words, emptyMessage) {
     reviewSessionData: [],
     completedRoundsCount: 0,
   });
-  setTxt($('category'), category);
+  // "All" is a UI filter label; dictionary category names stay as they are.
+  setTxt($('category'), category === 'All' ? t('all_categories') : category);
   toggleScreen('game');
   loadQuestion();
 }
@@ -629,14 +630,62 @@ function startHardWords() {
 // Flow: mode screen → test list → test → result modal. Correct answers add XP.
 const toeic = {
   data: null,          // TOEIC_DATA once loaded
-  questions: [],       // category questions for the running test
+  questions: [],       // shuffled category questions for the running test
   index: 0,            // cursor inside questions
   answers: {},         // index -> selected option (locked once answered)
   score: 0,            // answered correctly so far
   typeId: null,
   categoryName: '',
+  source: 'part',      // 'part' = a Part 5 set, 'mistakes' = the saved mistake pool
 };
 const TOEIC_XP_PER_CORRECT = 2; // 100 questions x 2 XP = 200 XP max per test
+// Wrong answers are remembered across sessions (id -> how many times missed) so
+// the MISTAKES set and the "repeat only my mistakes" button have a pool to work
+// with. A question leaves the pool as soon as it is answered correctly.
+const TOEIC_MISTAKES_KEY = 'pixelWordHunter_toeic_mistakes_v1';
+
+// Fisher-Yates shuffle; returns a new array so the shared bank stays untouched.
+function shuffleArray(items) {
+  const out = items.slice();
+  for (let i = out.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
+function loadToeicMistakes() {
+  try {
+    const raw = JSON.parse(storageGet(TOEIC_MISTAKES_KEY) || '{}');
+    return raw && typeof raw === 'object' ? raw : {};
+  } catch { return {}; }
+}
+
+function saveToeicMistakes(map) {
+  storageSet(TOEIC_MISTAKES_KEY, JSON.stringify(map));
+}
+
+function recordToeicAnswer(question, selected) {
+  const map = loadToeicMistakes();
+  const key = String(question.id);
+  if (selected === question.correct) delete map[key];
+  else map[key] = (map[key] || 0) + 1;
+  saveToeicMistakes(map);
+}
+
+/** Questions the user got wrong before and has not answered correctly since. */
+function toeicMistakePool() {
+  if (!toeic.data) return [];
+  const map = loadToeicMistakes();
+  return toeic.data.questions.filter((q) => map[String(q.id)]);
+}
+
+// A run draws its questions in random order and shuffles the options of every
+// question, so the answer is never memorised by position (Part 5 sets are
+// practice material and the user asked for both to be mixed).
+function buildToeicRun(questions) {
+  return shuffleArray(questions).map((q) => ({ ...q, options: shuffleArray(q.options) }));
+}
 
 async function ensureToeicData() {
   if (!toeic.data) {
@@ -666,6 +715,16 @@ function showToeicList() {
   list.textContent = '';
   const counts = new Map();
   for (const q of data.questions) counts.set(q.type_id, (counts.get(q.type_id) || 0) + 1);
+  const mistakes = toeicMistakePool();
+  if (mistakes.length) {
+    const btn = mk('button', 'category-btn toeic-cat-btn toeic-cat-mistakes');
+    btn.setAttribute('role', 'listitem');
+    btn.appendChild(mk('span', 'toeic-cat-title', t('toeic_mistakes')));
+    btn.appendChild(mk('span', 'toeic-cat-badge',
+      `${mistakes.length} ${t('questions_count') || 'QUESTIONS'}`));
+    btn.addEventListener('click', () => startToeicTest(null, t('toeic_mistakes'), 'mistakes'));
+    list.appendChild(btn);
+  }
   for (const cat of data.categories) {
     const btn = mk('button', 'category-btn toeic-cat-btn');
     btn.setAttribute('role', 'listitem');
@@ -678,13 +737,18 @@ function showToeicList() {
   toggleScreen('toeic');
 }
 
-function startToeicTest(typeId, categoryName) {
+function startToeicTest(typeId, categoryName, source = 'part') {
+  const pool = source === 'mistakes'
+    ? toeicMistakePool()
+    : toeic.data.questions.filter((q) => q.type_id === typeId);
+  if (!pool.length) { showToeicList(); return; } // nothing left to practise — no dead end
   AudioEngine.playTransition();
-  toeic.questions = toeic.data.questions.filter((q) => q.type_id === typeId);
+  toeic.questions = buildToeicRun(pool);
   toeic.index = 0;
   toeic.answers = {};
   toeic.score = 0;
   toeic.typeId = typeId;
+  toeic.source = source;
   toeic.categoryName = categoryName;
   setTxt($('toeic-category'), categoryName);
   toggleScreen('toeicgame');
@@ -730,6 +794,7 @@ function answerToeicQuestion(opt) {
   if (toeic.answers[toeic.index] !== undefined) return; // locked
   toeic.answers[toeic.index] = opt;
   const q = toeic.questions[toeic.index];
+  recordToeicAnswer(q, opt);
   if (opt === q.correct) {
     toeic.score += 1;
     addXP(TOEIC_XP_PER_CORRECT); // updates store.xp + schedules cloud sync
@@ -775,15 +840,45 @@ function showToeicResult() {
     summary.appendChild(mk('p', null, `${label}: ${value}`));
   }
 
+  // Mistake review: every item of this run that was not answered correctly,
+  // with the answer the user gave and the right one.
+  const review = $('toeic-result-review');
+  review.textContent = '';
+  const missed = [];
+  toeic.questions.forEach((q, i) => {
+    if (toeic.answers[i] !== q.correct) missed.push({ q, selected: toeic.answers[i] });
+  });
+  if (missed.length) {
+    review.appendChild(mk('h3', 'toeic-review-title', t('toeic_mistakes')));
+    for (const { q, selected } of missed) {
+      const item = mk('div', 'toeic-review-item');
+      item.appendChild(mk('p', 'toeic-review-question', q.question));
+      item.appendChild(mk('p', 'toeic-review-line', `${t('your_answer')}: ${selected ?? '—'}`));
+      item.appendChild(mk('p', 'toeic-review-line toeic-review-right',
+        `${t('correct_answer')}: ${q.correct}`));
+      review.appendChild(item);
+    }
+  }
+
   const modal = $('toeic-result-modal');
   modal.classList.remove('hidden');
   const releaseTrap = trapFocus(modal);
   const close = () => { releaseTrap(); modal.classList.add('hidden'); };
 
-  $('toeic-result-retry-btn').onclick = () => { close(); startToeicTest(toeic.typeId, toeic.categoryName); };
+  // The pool shrinks as mistakes are cleared, so the count is read live.
+  const mistakesBtn = $('toeic-result-mistakes-btn');
+  const pool = toeicMistakePool().length;
+  if (mistakesBtn) {
+    setTxt(mistakesBtn, `${t('repeat_mistakes')} (${pool})`);
+    mistakesBtn.classList.toggle('hidden', pool === 0);
+    mistakesBtn.onclick = () => { close(); startToeicTest(null, t('toeic_mistakes'), 'mistakes'); };
+  }
+
+  $('toeic-result-retry-btn').onclick = () => { close(); startToeicTest(toeic.typeId, toeic.categoryName, toeic.source); };
   $('toeic-result-tests-btn').onclick = () => { close(); showToeicList(); };
   $('toeic-result-exit-btn').onclick = () => { close(); toggleScreen('menu'); };
-  $('toeic-result-retry-btn').focus();
+  if (mistakesBtn && !mistakesBtn.classList.contains('hidden')) mistakesBtn.focus();
+  else $('toeic-result-retry-btn').focus();
 }
 
 
