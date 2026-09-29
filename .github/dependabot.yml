@@ -1,0 +1,39 @@
+version: 2
+updates:
+  # npm-зависимости
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Etc/UTC"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(deps-dev)"
+    groups:
+      # Объединяем минорные и патч-обновления в один PR,
+      # чтобы не получать 10 отдельных пул-реквестов в неделю
+      minor-and-patch:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      # Держим firebase на 11.x, пока tree-shaking в 12.x не починят
+      - dependency-name: "firebase"
+        update-types: ["version-update:semver-major"]
+
+  # GitHub Actions (если когда-нибудь добавишь workflow)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "ci"
