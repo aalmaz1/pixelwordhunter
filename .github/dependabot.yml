@@ -26,14 +26,3 @@ updates:
       # Держим firebase на 11.x, пока tree-shaking в 12.x не починят
       - dependency-name: "firebase"
         update-types: ["version-update:semver-major"]
-
-  # GitHub Actions (если когда-нибудь добавишь workflow)
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "github-actions"
-    commit-message:
-      prefix: "ci"
