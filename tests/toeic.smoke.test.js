@@ -16,6 +16,7 @@ vi.mock('../i18n.js', () => ({
     t: (key) => ({
       all_categories: 'All',
       toeic_mistakes: 'MISTAKES',
+      toeic_mistakes_title: 'TOEIC MISTAKES',
       repeat_mistakes: 'REPEAT MISTAKES ONLY',
       your_answer: 'YOUR ANSWER',
       correct_answer: 'CORRECT ANSWER',
@@ -168,7 +169,7 @@ it('runs a full TOEIC test through the real UI (shuffled order)', async () => {
   $('toeic-result-tests-btn').click();
   await waitFor(() => expect($('toeic-list').children.length).toBe(3));
   const mistakesCard = $('toeic-list').children[0];
-  expect(mistakesCard.textContent).toContain('MISTAKES');
+  expect(mistakesCard.textContent).toContain('TOEIC MISTAKES');
   expect(mistakesCard.textContent).toContain('1');
 
   // The MISTAKES set runs only that question; answering it correctly clears it.

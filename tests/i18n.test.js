@@ -11,7 +11,7 @@ const languages = { en, ru, ko };
 
 // Values that are legitimately the same in every language (branding, symbols,
 // theme codes and the confirmation word check, which matches what the user types).
-const SAME_AS_ENGLISH = ['credits', 'exit', 'email', 'theme_3310', 'delete_word_matches'];
+const SAME_AS_ENGLISH = ['credits', 'exit', 'email', 'theme_3310', 'delete_word_matches', 'toeic_mistakes_title'];
 
 /** Keys referenced from the markup: data-i18n, -placeholder, -title, -aria. */
 function keysFromHtml() {

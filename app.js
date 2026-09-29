@@ -337,6 +337,23 @@ let ui = null;
 
 function refreshCategoryButtons() {
   renderCategoryButtons(['All', ...getCategories()], (category) => startGame(category), getCategoryStats());
+
+  // Keep hard-word review alongside the Word Quiz categories, like the
+  // TOEIC MISTAKES entry in the TOEIC test list.
+  const hardWords = selectHardWords(600);
+  if (hardWords.length) {
+    const btn = mk('button', 'category-btn toeic-cat-btn category-review-btn');
+    btn.setAttribute('role', 'listitem');
+    btn.dataset.category = 'review hard words hard';
+    btn.appendChild(mk('span', 'toeic-cat-title', t('hard_words')));
+    btn.appendChild(mk('span', 'toeic-cat-badge', `${hardWords.length} ${t('words') || 'WORDS'}`));
+    btn.addEventListener('click', () => {
+      AudioEngine.playTransition();
+      startHardWords();
+    });
+    $('category-list')?.prepend(btn);
+  }
+
   // Preserve an active category filter when fresh progress bars are rendered.
   const search = $('category-search');
   if (search?.value) search.dispatchEvent(new Event('input'));
@@ -670,13 +687,6 @@ function updateUI(state = store.getState()) {
       btn.setAttribute('aria-pressed', String(active));
     });
   }
-
-  const hardBtn = $('hard-words-btn');
-  if (hardBtn) {
-    const count = selectHardWords(600).length;
-    hardBtn.disabled = count === 0;
-    hardBtn.textContent = `${t('hard_words')} · ${count}`;
-  }
 }
 
 // ==================== GAME FLOW ====================
@@ -804,10 +814,10 @@ function showToeicList() {
   if (mistakes.length) {
     const btn = mk('button', 'category-btn toeic-cat-btn toeic-cat-mistakes');
     btn.setAttribute('role', 'listitem');
-    btn.appendChild(mk('span', 'toeic-cat-title', t('toeic_mistakes')));
+    btn.appendChild(mk('span', 'toeic-cat-title', t('toeic_mistakes_title')));
     btn.appendChild(mk('span', 'toeic-cat-badge',
-      `${mistakes.length} ${t('questions_count') || 'QUESTIONS'}`));
-    btn.addEventListener('click', () => startToeicTest(null, t('toeic_mistakes'), 'mistakes'));
+      `${mistakes.length} ${t('questions') || 'QUESTIONS'}`));
+    btn.addEventListener('click', () => startToeicTest(null, t('toeic_mistakes_title'), 'mistakes'));
     list.appendChild(btn);
   }
   for (const cat of data.categories) {
@@ -815,7 +825,7 @@ function showToeicList() {
     btn.setAttribute('role', 'listitem');
     btn.appendChild(mk('span', 'toeic-cat-title', cat.name));
     btn.appendChild(mk('span', 'toeic-cat-badge',
-      `${counts.get(cat.id) || 0} ${t('questions_count') || 'QUESTIONS'}`));
+      `${counts.get(cat.id) || 0} ${t('questions') || 'QUESTIONS'}`));
     btn.addEventListener('click', () => startToeicTest(cat.id, cat.name));
     list.appendChild(btn);
   }
@@ -1392,8 +1402,6 @@ function setupEventListeners() {
   on('exit-toeic-btn', 'click', () => { AudioEngine.playTransition(); showToeicList(); });
   on('toeic-prev-btn', 'click', () => toeicGoPrev());
   on('toeic-next-btn', 'click', () => toeicGoNext());
-
-  on('hard-words-btn', 'click', () => { AudioEngine.playTransition(); startHardWords(); });
 
   // Backup / reset
   on('export-btn', 'click', exportProgress);

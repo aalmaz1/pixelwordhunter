@@ -12,7 +12,11 @@ vi.mock('../i18n.js', () => ({
     init: async () => {},
     // Mirrors the English table closely enough for the smoke test: the
     // category screen renders its "All" filter through the i18n lookup.
-    t: (key) => ({ all_categories: 'All' }[key] ?? key),
+    t: (key) => ({
+      all_categories: 'All',
+      hard_words: 'REVIEW HARD WORDS',
+      words: 'WORDS',
+    }[key] ?? key),
     getCurrentLanguage: () => 'en',
     setLanguage: async () => {},
   },
@@ -34,7 +38,7 @@ vi.mock('../data.js', () => {
       Logistics: { mastered: 0, total: 1 },
     }),
     selectWordsForRound: () => [byId.w1, byId.w2],
-    selectHardWords: () => [],
+    selectHardWords: vi.fn(() => []),
     generateOptionsForWord: (word) => [word.trans, 'wrong option'],
     updateWordProgress: vi.fn((id, isCorrect) => {
       byId[id].lastSeen = 1;
@@ -74,14 +78,29 @@ it('boots, plays a full round, and reaches the result screen', async () => {
   await waitFor(() => expect($('category-list').children.length).toBe(3));
   expect(hidden('menu-screen')).toBe(false);
   expect(hidden('game-screen')).toBe(true);
-  expect($('hard-words-btn').disabled).toBe(true); // no hard words yet
+  expect($('hard-words-btn')).toBeNull(); // hard-word review lives under WORD QUIZ
   expect($('category-list').children[0].textContent).toContain('All');
 
-  // HUNT opens the mode chooser; WORD QUIZ leads to the category screen.
+  // HUNT opens the mode chooser; WORD QUIZ includes hard-word review when
+  // there are words to practise, alongside the regular categories.
   $('hunt-btn').click();
   expect(hidden('mode-screen')).toBe(false);
+  const data = await import('../data.js');
+  data.selectHardWords.mockReturnValue([
+    { id: 'w3', eng: 'freight', trans: 'фрахт', category: 'Logistics' },
+  ]);
   $('mode-word-quiz-btn').click();
   expect(hidden('category-screen')).toBe(false);
+  expect($('category-list').children[0].textContent).toContain('REVIEW HARD WORDS');
+  $('category-list').children[0].click();
+  expect(hidden('game-screen')).toBe(false);
+  expect($('word').textContent).toBe('freight');
+
+  // Return to the category picker and continue with All.
+  $('exit-game-btn').click();
+  data.selectHardWords.mockReturnValue([]);
+  $('hunt-btn').click();
+  $('mode-word-quiz-btn').click();
   $('category-list').children[0].click();
   expect(hidden('game-screen')).toBe(false);
 
