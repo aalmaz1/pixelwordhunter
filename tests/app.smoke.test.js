@@ -16,6 +16,8 @@ vi.mock('../i18n.js', () => ({
       all_categories: 'All',
       hard_words: 'REVIEW HARD WORDS',
       words: 'WORDS',
+      words_one: 'WORD',
+      words_other: 'WORDS',
     }[key] ?? key),
     getCurrentLanguage: () => 'en',
     setLanguage: async () => {},
@@ -92,6 +94,7 @@ it('boots, plays a full round, and reaches the result screen', async () => {
   $('mode-word-quiz-btn').click();
   expect(hidden('category-screen')).toBe(false);
   expect($('category-list').children[0].textContent).toContain('REVIEW HARD WORDS');
+  expect($('category-list').children[0].querySelector('.toeic-cat-badge').textContent).toBe('1 WORD');
   $('category-list').children[0].click();
   expect(hidden('game-screen')).toBe(false);
   expect($('word').textContent).toBe('freight');

@@ -85,6 +85,20 @@ describe('translations', () => {
     }
   });
 
+  it('uses the correct Russian forms for counted nouns', () => {
+    const forms = {
+      one: ['ВОПРОС', 'СЛОВО', 'ОШИБКА'],
+      few: ['ВОПРОСА', 'СЛОВА', 'ОШИБКИ'],
+      many: ['ВОПРОСОВ', 'СЛОВ', 'ОШИБОК'],
+    };
+    for (const count of [1, 2, 5, 21, 22, 25]) {
+      const category = new Intl.PluralRules('ru').select(count);
+      expect([ru[`questions_${category}`], ru[`words_${category}`], ru[`wrong_count_${category}`]])
+        .toEqual(forms[category]);
+    }
+    expect(ru.word_review).toBe('// ПОВТОРЕНИЕ СЛОВ //');
+  });
+
   it('does not silently fall back to English', () => {
     for (const [lang, table] of Object.entries(languages)) {
       if (lang === 'en') continue;

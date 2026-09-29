@@ -17,6 +17,9 @@ vi.mock('../i18n.js', () => ({
       all_categories: 'All',
       toeic_mistakes: 'MISTAKES',
       toeic_mistakes_title: 'TOEIC MISTAKES',
+      questions_one: 'QUESTION',
+      questions_other: 'QUESTIONS',
+      wrong_count_one: 'wrong_count',
       repeat_mistakes: 'REPEAT MISTAKES ONLY',
       your_answer: 'YOUR ANSWER',
       correct_answer: 'CORRECT ANSWER',
@@ -102,7 +105,9 @@ it('runs a full TOEIC test through the real UI (shuffled order)', async () => {
   expect(hidden('toeic-screen')).toBe(false);
   expect($('toeic-list').children[0].textContent).toContain('Part 5 · Set 1');
   expect($('toeic-list').children[0].textContent).toContain('2');
+  expect($('toeic-list').children[0].querySelector('.toeic-cat-badge').textContent).toBe('2 QUESTIONS');
   expect($('toeic-list').children[1].textContent).toContain('1'); // 1 question in set 2
+  expect($('toeic-list').children[1].querySelector('.toeic-cat-badge').textContent).toBe('1 QUESTION');
 
   // Start set 1 → the questions are shuffled, so "Choose ____" comes first.
   $('toeic-list').children[0].click();
