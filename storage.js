@@ -255,7 +255,6 @@ function storageRemove(key) {
  */
 export async function loadProgress(firebaseDb, doc, getDoc) {
   const { user, isAuthenticated } = store.getState();
-  let progress = {};
 
   // If a previous deletion was interrupted after cloud data removal began,
   // never reload or recreate account-scoped progress from this client.
@@ -274,7 +273,7 @@ export async function loadProgress(firebaseDb, doc, getDoc) {
         if (userSnap.exists()) {
           const serverData = userSnap.data();
           if (serverData.progress && validateSaveData(serverData.progress)) {
-            progress = migrateProgress(serverData.progress);
+            const progress = migrateProgress(serverData.progress);
             // Cache only in this user's namespace.
             storageSet(progressKey(user.uid), JSON.stringify(progress));
             
