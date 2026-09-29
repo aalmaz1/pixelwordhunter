@@ -11,7 +11,7 @@ const languages = { en, ru, ko };
 
 // Values that are legitimately the same in every language (branding, symbols,
 // theme codes and the confirmation word check, which matches what the user types).
-const SAME_AS_ENGLISH = ['credits', 'exit', 'email', 'theme_3310', 'delete_word_matches'];
+const SAME_AS_ENGLISH = ['credits', 'exit', 'email', 'theme_3310', 'delete_word_matches', 'toeic_mistakes_title'];
 
 /** Keys referenced from the markup: data-i18n, -placeholder, -title, -aria. */
 function keysFromHtml() {
@@ -83,6 +83,20 @@ describe('translations', () => {
       expect(ru[key], `ru.${key} must not be English`).not.toBe(en[key]);
       expect(ko[key], `ko.${key} must not be English`).not.toBe(en[key]);
     }
+  });
+
+  it('uses the correct Russian forms for counted nouns', () => {
+    const forms = {
+      one: ['ВОПРОС', 'СЛОВО', 'ОШИБКА'],
+      few: ['ВОПРОСА', 'СЛОВА', 'ОШИБКИ'],
+      many: ['ВОПРОСОВ', 'СЛОВ', 'ОШИБОК'],
+    };
+    for (const count of [1, 2, 5, 21, 22, 25]) {
+      const category = new Intl.PluralRules('ru').select(count);
+      expect([ru[`questions_${category}`], ru[`words_${category}`], ru[`wrong_count_${category}`]])
+        .toEqual(forms[category]);
+    }
+    expect(ru.word_review).toBe('// ПОВТОРЕНИЕ СЛОВ //');
   });
 
   it('does not silently fall back to English', () => {
