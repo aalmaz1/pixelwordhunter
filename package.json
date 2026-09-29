@@ -33,7 +33,7 @@
     "jsdom": "^25.0.1",
     "vite": "^8.3.1",
     "vite-plugin-pwa": "^1.3.0",
-    "vitest": "^4.1.11"
+    "vitest": "^5.0.2"
   },
   "allowScripts": {
     "protobufjs@7.6.5": true,
