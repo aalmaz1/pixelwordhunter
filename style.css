@@ -834,6 +834,17 @@ html, body {
   gap: 12px;
   justify-content: center;
 }
+
+/* Prevent modal-related elements from affecting document height when modal is closed */
+#delete-account-modal .confirm-actions,
+#delete-account-error {
+  display: none;
+}
+
+#delete-account-modal:not(.hidden) .confirm-actions,
+#delete-account-modal:not(.hidden) #delete-account-error {
+  display: block;
+}
 .confirm-ok, .confirm-cancel {
   padding: 10px 20px;
   font-family: inherit;
@@ -1880,4 +1891,11 @@ body.lang-ko .category-empty-query {
 .password-toggle:focus-visible {
   outline: 3px solid var(--neon-green);
   outline-offset: -3px;
+}
+
+/* Prevent vertical overflow from modal-related elements.
+   Ensures body doesn't create unwanted scrollbar when modal is hidden. */
+html, body {
+  overflow: hidden !important;
+  height: 100dvh;
 }
