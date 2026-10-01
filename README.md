@@ -250,13 +250,27 @@ The application keeps the learning loop understandable and avoids a heavy front-
 
 ## ⌨️ Keyboard controls
 
+The whole game is playable without a mouse: every screen moves focus into
+itself when it opens, so `Tab` never restarts from the top of the page. Press
+`?` — or tap the `⌨ KEYS` button on the menu — at any time to see the same list
+inside the app.
+
 | Key | Action |
 |:---:|---|
-| `1` – `4` | Select a multiple-choice answer when choices are visible |
-| `Enter` | Submit typed recall or authentication forms; activate a focused control |
-| `Enter` / `Space` | Start from the menu or continue after an answered question |
-| `Esc` | Close an open dialog; from round results, return to the menu |
-| `Tab` / `Shift+Tab` | Move through controls; focus remains inside supported open dialogs |
+| `1` – `4` | Answer a Word Quiz question |
+| `1` – `4` / `A` – `D` | Answer a TOEIC question |
+| `↑` `↓` | Move between the answer options |
+| `←` `→` | Previous / next question inside a TOEIC test |
+| `Enter` / `Space` | Start from the menu, activate the focused control, continue after a review |
+| `Tab` / `Shift+Tab` | Move through controls; focus remains inside open dialogs |
+| `Esc` | Close the open dialog, then step back a screen (round → menu, tests → test list) |
+| `/` | Jump to the category search field |
+| `1` / `2` | Pick a mode on the mode-chooser screen |
+| `M` | Sound on / off |
+| `?` | Show the shortcut list |
+
+Typed recall and auth forms keep their text fields untouched: shortcuts stay
+out of the way whenever a field has focus, except `Esc`.
 
 ## 🧪 For developers
 
@@ -287,7 +301,7 @@ npm test
 npm run build
 ```
 
-The current suite checks dictionary size and required data, usable Korean content, contextual word IDs, option fairness, SRS selection and long-term levels, hard-word selection, sanitization, the TOEIC bank (no duplicates, no repeated or empty options, no glued blanks, honest part names, JSON/JS in sync) and its mistake-review flow (missed items listed, pool cleared by a correct answer, empty pool handled), i18n key parity and coverage (every key used in the markup or scripts exists in all three languages), runtime language loading in both the dev and production layouts, storage validation and migration, progress merging, final local saves, and state-update batching.
+The current suite checks dictionary size and required data, usable Korean content, contextual word IDs, option fairness, SRS selection and long-term levels, hard-word selection, sanitization, the TOEIC bank (no duplicates, no repeated or empty options, no glued blanks, honest part names, JSON/JS in sync) and its mistake-review flow (missed items listed, pool cleared by a correct answer, empty pool handled), i18n key parity and coverage (every key used in the markup or scripts exists in all three languages), runtime language loading in both the dev and production layouts, storage validation and migration, progress merging, final local saves, state-update batching, and the keyboard flow (focus lands inside each new screen, digits and arrows drive a round, `Esc` steps back, and `Enter` never fires a focused button twice).
 
 The automated suite does not currently perform live Firebase network tests or a full browser installation/offline integration test. A successful production build still verifies that Vite and Workbox can generate the deployable PWA assets.
 

@@ -88,8 +88,9 @@
         <button class="auth-btn try-btn" id="try-btn" data-i18n="try">TRY</button>
       </div>
       <!-- Hunt Button (после логина) -->
-      <button class="start-btn hunt-btn hidden" id="hunt-btn" role="button"><span data-i18n="hunt">HUNT</span></button>
+      <button class="start-btn hunt-btn hidden" id="hunt-btn" role="button" aria-keyshortcuts="Enter" data-i18n-aria="hunt_keys_hint" aria-label="Start a hunt (Enter)"><span data-i18n="hunt">HUNT</span></button>
       <button class="settings-btn" id="settings-btn" role="button" data-i18n="settings">SETTINGS</button>
+      <button class="settings-btn keys-btn" id="keyboard-help-btn" role="button" aria-keyshortcuts="?" data-i18n="keyboard_keys" data-i18n-title="keyboard_keys_hint" title="Keyboard shortcuts (?)">⌨ KEYS</button>
       <div class="credits" data-i18n="credits">© 2026 KHUDAYBERDIEV ALMAZ</div>
     </div>
 
@@ -186,7 +187,7 @@
     <div id="mode-screen" class="game-container hidden" role="region" aria-label="Mode selection">
       <button class="back-btn" id="mode-back-btn" role="button" data-i18n="back">BACK</button>
       <h2 class="screen-title" data-i18n="select_mode">// SELECT MODE //</h2>
-      <div class="mode-grid">
+      <div class="mode-grid" role="group" aria-label="Game modes">
         <button class="mode-btn mode-quiz" id="mode-word-quiz-btn" role="button">
           <span class="mode-icon" aria-hidden="true">📚</span>
           <span class="mode-label" data-i18n="word_quiz">WORD QUIZ</span>
@@ -227,7 +228,7 @@
         <div class="stat"><span data-i18n="test_label">TEST:</span>&nbsp;<span id="toeic-category">—</span></div>
         <div class="header-actions">
           <div class="stat header-xp"><span data-i18n="xp_label">XP:</span>&nbsp;<span id="toeic-xp" aria-live="polite">0</span></div>
-          <button class="icon-btn exit-icon-btn" id="exit-toeic-btn" role="button" data-i18n-title="exit" title="Exit" aria-label="Exit to test list">✕</button>
+          <button class="icon-btn exit-icon-btn" id="exit-toeic-btn" role="button" aria-keyshortcuts="Escape" data-i18n-title="exit" title="Exit" aria-label="Exit to test list">✕</button>
         </div>
       </header>
       <div class="round-progress" aria-live="polite">
@@ -240,8 +241,8 @@
         </div>
         <div class="options-grid" id="toeic-options" role="group" aria-label="Answer options"></div>
         <div class="toeic-nav-actions">
-          <button class="next-btn" id="toeic-prev-btn" role="button" data-i18n="prev">PREV</button>
-          <button class="next-btn" id="toeic-next-btn" role="button" data-i18n="next">NEXT</button>
+          <button class="next-btn" id="toeic-prev-btn" role="button" aria-keyshortcuts="ArrowLeft" data-i18n="prev">PREV</button>
+          <button class="next-btn" id="toeic-next-btn" role="button" aria-keyshortcuts="ArrowRight" data-i18n="next">NEXT</button>
         </div>
       </div>
     </div>
@@ -252,7 +253,7 @@
         <div class="stat"><span data-i18n="category_label">CAT:</span>&nbsp;<span id="category">ALL</span></div>
         <div class="header-actions">
           <div class="stat header-xp"><span data-i18n="xp_label">XP:</span>&nbsp;<span id="game-xp" aria-live="polite">0</span></div>
-          <button class="icon-btn exit-icon-btn" id="exit-game-btn" role="button" data-i18n-title="exit" title="Exit to menu" aria-label="Exit to menu">✕</button>
+          <button class="icon-btn exit-icon-btn" id="exit-game-btn" role="button" aria-keyshortcuts="Escape" data-i18n-title="exit" title="Exit to menu" aria-label="Exit to menu">✕</button>
         </div>
       </header>
       <div class="round-progress" aria-live="polite">
@@ -302,6 +303,26 @@
           <button class="option-btn" id="toeic-result-tests-btn" data-i18n="choose_test">CHOOSE TEST</button>
           <button class="option-btn" id="toeic-result-exit-btn" data-i18n="exit_menu">EXIT</button>
         </div>
+      </div>
+    </div>
+
+    <!-- ── KEYBOARD SHORTCUTS ─────────────────── -->
+    <div id="keyboard-help-modal" class="modal kb-help-modal hidden" role="dialog" aria-modal="true" aria-labelledby="keyboard-help-title">
+      <div class="result-box kb-help-box">
+        <h2 class="modal-title" id="keyboard-help-title" data-i18n="keyboard_title">// KEYBOARD //</h2>
+        <dl class="kb-help-list">
+          <div class="kb-help-row"><dt class="kb-key">1 2 3 4</dt><dd data-i18n="keyboard_answer">PICK AN ANSWER</dd></div>
+          <div class="kb-help-row"><dt class="kb-key">A B C D</dt><dd data-i18n="keyboard_answer_letters">PICK AN ANSWER IN TOEIC TESTS</dd></div>
+          <div class="kb-help-row"><dt class="kb-key">↑ ↓ ← →</dt><dd data-i18n="keyboard_move">MOVE BETWEEN CHOICES</dd></div>
+          <div class="kb-help-row"><dt class="kb-key">← →</dt><dd data-i18n="keyboard_questions">PREVIOUS OR NEXT QUESTION IN TOEIC TESTS</dd></div>
+          <div class="kb-help-row"><dt class="kb-key">TAB</dt><dd data-i18n="keyboard_tab">MOVE THROUGH ALL CONTROLS</dd></div>
+          <div class="kb-help-row"><dt class="kb-key">ENTER</dt><dd data-i18n="keyboard_next">CONFIRM, CONTINUE, OR START</dd></div>
+          <div class="kb-help-row"><dt class="kb-key">ESC</dt><dd data-i18n="keyboard_back">BACK, CLOSE A WINDOW, OR EXIT A ROUND</dd></div>
+          <div class="kb-help-row"><dt class="kb-key">/</dt><dd data-i18n="keyboard_search">JUMP TO CATEGORY SEARCH</dd></div>
+          <div class="kb-help-row"><dt class="kb-key">M</dt><dd data-i18n="keyboard_sound">SOUND ON / OFF</dd></div>
+          <div class="kb-help-row"><dt class="kb-key">?</dt><dd data-i18n="keyboard_help">SHOW THIS LIST</dd></div>
+        </dl>
+        <button class="next-btn" id="keyboard-help-close-btn" data-i18n="close">CLOSE</button>
       </div>
     </div>
 
@@ -360,19 +381,6 @@
             <input type="password" id="delete-password-input" data-i18n-placeholder="enter_password" placeholder="Enter your password" autocomplete="current-password">
             <button type="button" class="password-toggle" id="delete-password-toggle" aria-label="Show password" data-i18n-aria="show_password" aria-pressed="false">👁</button>
           </div>
-        </div>
-        <div id="delete-account-error" class="delete-account-error" role="alert" aria-live="assertive" aria-atomic="true"></div>
-        <div class="confirm-actions">
-          <button type="button" class="option-btn delete-account-danger" id="delete-confirm-btn" data-i18n="delete_account_confirm" disabled>CONFIRM</button>
-          <button type="button" class="option-btn confirm-cancel" id="delete-cancel-btn" data-i18n="delete_account_cancel">CANCEL</button>
-        </div>
-      </div>
-    </div>
-  </main>
-  
-  <script type="module" src="/app.js"></script>
-</body>
-</html>ord">
         </div>
         <div id="delete-account-error" class="delete-account-error" role="alert" aria-live="assertive" aria-atomic="true"></div>
         <div class="confirm-actions">

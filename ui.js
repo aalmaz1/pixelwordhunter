@@ -15,6 +15,59 @@ export function getFocusableElements(parent = document) {
   ));
 }
 
+/**
+ * True when the event target is a text field (or a contenteditable host), i.e.
+ * a place where bare letters and digits must stay ordinary characters. Global
+ * shortcuts call this first so typing "1" into a recall answer never picks an
+ * option or opens a dialog.
+ */
+export function isTypingTarget(target) {
+  if (!target || typeof target.tagName !== 'string') return false;
+  return target.tagName === 'INPUT'
+    || target.tagName === 'TEXTAREA'
+    || target.tagName === 'SELECT'
+    || target.isContentEditable === true;
+}
+
+/**
+ * True when a bare Enter/Space keypress on this element already produces a
+ * click natively (button / role="button" / link). Shortcuts that "click" a
+ * control must skip those, otherwise the browser fires the same action twice
+ * and, for example, Enter on NEXT skips a whole question.
+ */
+export function isActivatableTarget(target) {
+  return Boolean(target?.closest?.('button, [role="button"], a[href], summary'));
+}
+
+/**
+ * Move focus by `direction` (+1 / -1) inside a container of controls, wrapping
+ * around at both ends. With nothing focused yet, focus lands on the first
+ * (direction > 0) or last item, so arrow keys work right after a re-render.
+ * Returns false when the container has nothing focusable, letting callers fall
+ * through to their own handling.
+ */
+export function moveFocusWithin(container, direction) {
+  if (!container) return false;
+  const items = getFocusableElements(container)
+    .filter((el) => !el.disabled && !el.closest('.hidden'));
+  if (!items.length) return false;
+  const current = items.indexOf(document.activeElement);
+  const next = current === -1
+    ? (direction > 0 ? 0 : items.length - 1)
+    : (current + direction + items.length) % items.length;
+  items[next].focus();
+  return true;
+}
+
+/**
+ * True when the element is actually rendered: not itself hidden and not inside
+ * a `.hidden` subtree (a modal inside an inactive screen must not answer
+ * keyboard shortcuts).
+ */
+export function isRendered(element) {
+  return Boolean(element) && !element.closest('.hidden');
+}
+
 export function initUI() {
   return {
     menuScreenElement: document.getElementById('menu-screen'),

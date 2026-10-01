@@ -17,7 +17,10 @@ import {
   markAccountDeletionCloudRemovalStarted, abortAccountDeletionSync, sealAccountDeletionAfterCloudRemoval,
   finishAccountDeletionSync, waitForAccountCloudWrites, clearAccountData, exportProgress, importProgress
 } from './storage.js';
-import { initUI, renderCategoryButtons, wireCategorySearch, showNotification, getFocusableElements, trapFocus } from './ui.js';
+import {
+  initUI, renderCategoryButtons, wireCategorySearch, showNotification, getFocusableElements,
+  trapFocus, isTypingTarget, isActivatableTarget, moveFocusWithin, isRendered
+} from './ui.js';
 
 // ==================== SMALL HELPERS ====================
 const DEV = import.meta.env.DEV;
@@ -453,6 +456,7 @@ const hideModal = (modal) => { modal.classList.add('hidden'); modal.setAttribute
 // ==================== AUTH MODAL ====================
 let lastFocusedElement = null;
 let releaseAuthTrap = null;
+let releaseExplanationTrap = null;
 
 /** Shared show/hide logic for the auth and delete-account password fields. */
 function setPasswordVisible(inputId, btnId, visible) {
@@ -570,6 +574,8 @@ function closeDeleteAccountModal() {
   if (!modal || modal.classList.contains('hidden')) return;
   hideModal(modal);
   if (releaseDeleteTrap) { releaseDeleteTrap(); releaseDeleteTrap = null; }
+  // Give the keyboard back to the control that opened the dialog.
+  $('delete-account-btn')?.focus({ preventScroll: true });
 }
 
 async function handleDeleteAccountConfirm() {
@@ -629,6 +635,7 @@ async function handleDeleteAccountConfirm() {
 
 // ==================== SCREENS / STATE ====================
 const SCREENS = ['menu', 'settings', 'category', 'game', 'mode', 'toeic', 'toeicgame'];
+const visibleScreen = () => SCREENS.find((s) => isRendered($(`${s}-screen`))) || null;
 
 function toggleScreen(screenId) {
   for (const s of SCREENS) {
@@ -636,6 +643,14 @@ function toggleScreen(screenId) {
     if (!el) continue;
     el.classList.toggle('hidden', s !== screenId);
     el.style.display = s === screenId ? 'flex' : ''; // force display for the active screen
+  }
+  // Keyboard users tab from the top of the document by default, and a mouse
+  // click can leave focus on a control that was just hidden. Focusing the
+  // screen itself (tabindex="-1") restarts the Tab order inside it.
+  const active = $(`${screenId}-screen`);
+  if (active) {
+    if (!active.hasAttribute('tabindex')) active.setAttribute('tabindex', '-1');
+    active.focus({ preventScroll: true });
   }
 }
 
@@ -893,8 +908,19 @@ function renderToeicQuestion() {
   });
 
   const prevBtn = $('toeic-prev-btn');
-  if (prevBtn) prevBtn.style.visibility = toeic.index === 0 ? 'hidden' : 'visible';
+  if (prevBtn) {
+    const atStart = toeic.index === 0;
+    prevBtn.style.visibility = atStart ? 'hidden' : 'visible';
+    // visibility:hidden still keeps a control in the Tab order — disable it too.
+    prevBtn.disabled = atStart;
+  }
   setTxt($('toeic-next-btn'), toeic.index === total - 1 ? (t('finish') || 'FINISH') : t('next'));
+
+  // Keyboard players: the first answer (or NEXT once the question is locked).
+  if (keyboardUser) {
+    const firstEnabled = [...optionsEl.querySelectorAll('.option-btn')].find((btn) => !btn.disabled);
+    (firstEnabled || $('toeic-next-btn'))?.focus({ preventScroll: true });
+  }
 }
 
 function answerToeicQuestion(opt) {
@@ -1147,9 +1173,16 @@ function loadQuestion() {
     });
   }
 
-  ui.explanationModal.classList.add('hidden');
+  hideExplanationModal();
   store.setState({ isAnswerLocked: false });
+  // Keyboard players land on the first option, so 1–4 / arrows / Enter all work
+  // without a Tab round-trip. Mouse and touch users are left alone.
+  if (keyboardUser) enabledOptions()[0]?.focus({ preventScroll: true });
 }
+
+/** Enabled answer buttons of the current Word Quiz question, in display order. */
+const enabledOptions = () => [...ui.optionsElement.querySelectorAll('.option-btn')]
+  .filter((btn) => !btn.disabled);
 
 function checkAnswer(selected, word, btn, questionIsEnglish, answerMode = 'choice') {
   const state = store.getState();
@@ -1210,16 +1243,33 @@ function appendWordReviewContent(container, word, lang) {
   container.appendChild(box);
 }
 
+/** Shows the Word Review dialog; while open, Tab stays inside it. */
+function openExplanationModal() {
+  ui.explanationModal.classList.remove('hidden');
+  if (!releaseExplanationTrap) releaseExplanationTrap = trapFocus(ui.explanationModal);
+}
+
+/** Hides it and releases the focus trap (no-op when already hidden). */
+function hideExplanationModal() {
+  releaseExplanationTrap?.();
+  releaseExplanationTrap = null;
+  ui.explanationModal.classList.add('hidden');
+}
+
 function showExplanation(word) {
   const list = $('explanation-list');
-  $('next-question-btn').style.display = 'inline-block';
+  const nextBtn = $('next-question-btn');
+  nextBtn.style.display = 'inline-block';
   list.textContent = '';
   list.setAttribute('role', 'list');
   list.classList.remove('review-session-list');
   const content = mk('div', 'explanation-content single-review-card');
   appendWordReviewContent(content, word, store.getState().translationLanguage);
   list.appendChild(content);
-  ui.explanationModal.classList.remove('hidden');
+  openExplanationModal();
+  // The answer buttons are disabled while the review is up, so without this
+  // Tab (and Enter/Space) would have nothing to continue from.
+  if (isRendered(ui.explanationModal)) nextBtn.focus({ preventScroll: true });
 }
 
 function nextQuestion() {
@@ -1235,7 +1285,7 @@ function nextQuestion() {
 
 function showRoundResult() {
   const state = store.getState();
-  ui.explanationModal.classList.add('hidden');
+  hideExplanationModal();
   const modal = $('result-modal');
   const summary = $('result-summary');
   const total = state.currentRound.length;
@@ -1333,7 +1383,259 @@ function showReviewSession() {
     loadQuestion();
   });
   list.appendChild(continueBtn);
-  ui.explanationModal.classList.remove('hidden');
+  openExplanationModal();
+  if (isRendered(ui.explanationModal)) continueBtn.focus({ preventScroll: true });
+}
+
+// ==================== KEYBOARD / SHORTCUTS ====================
+// One ordered dispatcher instead of scattered keydown listeners. Layers, in
+// order: open dialogs (they own the keyboard) → global keys → the active
+// screen's keys. Nothing is intercepted while a text field has focus, except
+// Escape, so typed answers keep every character they need.
+const ARROW_KEYS = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
+const isForwardArrow = (key) => key === 'ArrowDown' || key === 'ArrowRight';
+
+/** Escape steps one level up the navigation stack on these screens. */
+const SCREEN_BACK = {
+  settings: () => toggleScreen('menu'),
+  mode: () => toggleScreen('menu'),
+  category: () => toggleScreen('mode'),
+  game: () => toggleScreen('menu'),
+  toeic: () => toggleScreen('mode'),
+  toeicgame: () => showToeicList(),
+};
+
+/** True while the last interaction came from the keyboard — re-renders then
+ *  move focus to the new controls instead of leaving it on a removed element. */
+let keyboardUser = false;
+let keyboardHelpReturnFocus = null;
+let releaseKeyboardHelpTrap = null;
+
+function openKeyboardHelp() {
+  const modal = $('keyboard-help-modal');
+  if (!modal || isRendered(modal)) return;
+  keyboardHelpReturnFocus = document.activeElement;
+  AudioEngine.playTransition();
+  showModal(modal);
+  releaseKeyboardHelpTrap = trapFocus(modal);
+  $('keyboard-help-close-btn')?.focus({ preventScroll: true });
+}
+
+function closeKeyboardHelp() {
+  const modal = $('keyboard-help-modal');
+  if (!modal || !isRendered(modal)) return;
+  AudioEngine.playTransition();
+  releaseKeyboardHelpTrap?.();
+  releaseKeyboardHelpTrap = null;
+  hideModal(modal);
+  const back = keyboardHelpReturnFocus;
+  keyboardHelpReturnFocus = null;
+  if (back && document.contains(back) && isRendered(back)) back.focus({ preventScroll: true });
+  else $(`${visibleScreen()}-screen`)?.focus({ preventScroll: true });
+}
+
+/** The speaker button and the `M` shortcut share this. */
+function toggleSound() {
+  store.toggleAudio();
+  showNotification(t(store.getState().audioEnabled ? 'sound_on' : 'sound_off'));
+}
+
+/** First category button the search filter has not hidden. */
+const firstVisibleCategory = () => [...($('category-list')?.querySelectorAll('.category-btn') || [])]
+  .find((btn) => btn.style.display !== 'none');
+
+/** Menu: Enter/Space starts a hunt (the HUNT button when signed in, TRY otherwise). */
+function handleMenuKeys(e, key, target) {
+  if ((key === 'Enter' || key === ' ') && !isActivatableTarget(target)) {
+    e.preventDefault();
+    (isRendered($('hunt-btn')) ? $('hunt-btn') : $('try-btn'))?.click();
+  }
+}
+
+/** Mode chooser: 1/2 pick a mode, arrows move inside the mode grid. */
+function handleModeKeys(e, key) {
+  if (key === '1' || key === '2') {
+    e.preventDefault();
+    $(key === '1' ? 'mode-word-quiz-btn' : 'mode-toeic-btn')?.click();
+  }
+}
+
+/** Category / TOEIC lists: arrows walk the buttons, "/" jumps to the search box. */
+function handleListKeys(e, key, target, screen) {
+  if (screen === 'category') {
+    if (target?.id === 'category-search') {
+      // Down (or Enter) leaves the search field for the filtered results.
+      if (key === 'ArrowDown' || key === 'Enter') {
+        const first = firstVisibleCategory();
+        if (first) {
+          e.preventDefault();
+          first.focus();
+          if (key === 'Enter') first.click();
+        }
+      }
+      return;
+    }
+    if (key === '/') { e.preventDefault(); $('category-search')?.focus(); return; }
+  }
+  if (ARROW_KEYS.includes(key)) {
+    e.preventDefault();
+    moveFocusWithin($(screen === 'category' ? 'category-list' : 'toeic-list'), isForwardArrow(key) ? 1 : -1);
+  }
+}
+
+/** Word Quiz round: 1–4 answer, arrows move between options, Enter continues. */
+function handleGameKeys(e, key, target) {
+  const options = [...ui.optionsElement.querySelectorAll('.option-btn')];
+  const enabled = options.filter((btn) => !btn.disabled);
+
+  if (store.getState().isAnswerLocked) {
+    // The review dialog is usually open (layer 4 handles it); when the player
+    // closed it with Escape, Enter/Space still moves the round along.
+    if (isRendered($('explanation-modal'))) return;
+    if ((key === 'Enter' || key === ' ') && !isActivatableTarget(target)) {
+      e.preventDefault();
+      $('next-question-btn')?.click();
+    }
+    return;
+  }
+
+  if (/^[1-4]$/.test(key)) {
+    e.preventDefault();
+    enabled[Number(key) - 1]?.click();
+    return;
+  }
+  if (ARROW_KEYS.includes(key)) {
+    if (moveFocusWithin(ui.optionsElement, isForwardArrow(key) ? 1 : -1)) e.preventDefault();
+    return;
+  }
+  if ((key === 'Enter' || key === ' ') && !isActivatableTarget(target)) {
+    // Focus sits on the screen itself (not on a control) — answer with the first option.
+    if (enabled[0]) { e.preventDefault(); enabled[0].click(); }
+  }
+}
+
+/** TOEIC test: 1–4 or A–D answer, ↑/↓ pick, ←/→ walk the questions, Enter goes on. */
+function handleToeicGameKeys(e, key, target) {
+  if (!toeic.questions[toeic.index]) return;
+
+  // ← / → page through the questions, the way the PREV/NEXT buttons do.
+  if (key === 'ArrowRight') { e.preventDefault(); toeicGoNext(); return; }
+  if (key === 'ArrowLeft') { e.preventDefault(); toeicGoPrev(); return; }
+
+  if (toeic.answers[toeic.index] !== undefined) {
+    // Focused PREV/NEXT activate natively; don't fire them a second time here.
+    if ((key === 'Enter' || key === ' ') && !isActivatableTarget(target)) {
+      e.preventDefault();
+      toeicGoNext();
+    }
+    return;
+  }
+
+  if (key === 'ArrowUp' || key === 'ArrowDown') {
+    if (moveFocusWithin($('toeic-options'), key === 'ArrowDown' ? 1 : -1)) e.preventDefault();
+    return;
+  }
+
+  const letterIndex = { a: 0, b: 1, c: 2, d: 3 }[key.toLowerCase()];
+  const index = /^[1-4]$/.test(key) ? Number(key) - 1 : letterIndex;
+  if (index !== undefined) {
+    e.preventDefault();
+    const btn = $('toeic-options')?.querySelectorAll('.option-btn')[index];
+    if (btn && !btn.disabled) btn.click();
+  }
+}
+
+function handleGlobalKeydown(e) {
+  const key = e.key;
+  const target = e.target instanceof Element ? e.target : null;
+  const typing = isTypingTarget(target) || isTypingTarget(document.activeElement);
+
+  // ── 1. The confirm dialog and the shortcut sheet own the keyboard ──
+  if (document.querySelector('.confirm-modal')) return; // window.confirm() replacement
+  if (isRendered($('keyboard-help-modal'))) {
+    if (key === 'Escape' || key === '?' || key === 'Enter' || key === ' ') {
+      e.preventDefault();
+      closeKeyboardHelp();
+    }
+    return;
+  }
+
+  // ── 2. Open dialogs (topmost first). Escape closes, nothing else leaks through ──
+  if (isRendered($('auth-modal'))) {
+    if (key === 'Escape') { e.preventDefault(); closeAuthModal(); }
+    return;
+  }
+  if (isRendered($('delete-account-modal'))) {
+    if (key === 'Escape') { e.preventDefault(); closeDeleteAccountModal(); }
+    return;
+  }
+  if (isRendered($('result-modal'))) {
+    if (key === 'Escape') { e.preventDefault(); $('result-exit-btn')?.click(); }
+    return;
+  }
+  if (isRendered($('toeic-result-modal'))) {
+    if (key === 'Escape') { e.preventDefault(); $('toeic-result-exit-btn')?.click(); }
+    return;
+  }
+
+  // ── 3. Shortcuts available everywhere ──
+  // Any modifier means the browser's own shortcut (⌘M, Ctrl+Enter, …) — leave it.
+  const plainKey = !e.ctrlKey && !e.metaKey && !e.altKey;
+  if (!typing && plainKey) {
+    if (key === '?') { e.preventDefault(); openKeyboardHelp(); return; }
+    if (e.code === 'KeyM') { toggleSound(); return; }
+  }
+
+  const screen = visibleScreen();
+
+  if (key === 'Escape') {
+    // The Word Review dialog closes first; a second Escape leaves the round.
+    if (isRendered($('explanation-modal'))) {
+      e.preventDefault();
+      hideExplanationModal();
+      $(`${visibleScreen()}-screen`)?.focus({ preventScroll: true });
+      return;
+    }
+    if (screen && SCREEN_BACK[screen]) {
+      e.preventDefault();
+      AudioEngine.playTransition();
+      SCREEN_BACK[screen]();
+    }
+    return;
+  }
+
+  if (!plainKey) return;
+
+  // ── 4. Word Review: Enter/Space continues to the next question ──
+  if (isRendered($('explanation-modal'))) {
+    // Focused NEXT activates natively — clicking it here too would skip a question.
+    if ((key === 'Enter' || key === ' ') && !isActivatableTarget(target)) {
+      e.preventDefault();
+      $('next-question-btn')?.click();
+    }
+    return;
+  }
+
+  // ── 5. Arrows inside a labelled control group (theme, language, answer grids) ──
+  if (!typing && ARROW_KEYS.includes(key)) {
+    const group = target?.closest('[role="group"]');
+    const inGame = group?.closest('#game-screen, #toeicgame-screen');
+    if (group && !inGame && moveFocusWithin(group, isForwardArrow(key) ? 1 : -1)) {
+      e.preventDefault();
+      return;
+    }
+  }
+
+  // ── 6. The active screen ──
+  switch (screen) {
+    case 'menu': handleMenuKeys(e, key, target); break;
+    case 'mode': handleModeKeys(e, key); break;
+    case 'category':
+    case 'toeic': handleListKeys(e, key, target, screen); break;
+    case 'game': handleGameKeys(e, key, target); break;
+    case 'toeicgame': handleToeicGameKeys(e, key, target); break;
+    default: break;
+  }
 }
 
 // ==================== EVENT LISTENERS ====================
@@ -1483,43 +1785,17 @@ function setupEventListeners() {
   on('delete-confirm-btn', 'click', handleDeleteAccountConfirm);
   on('delete-cancel-btn', 'click', () => { AudioEngine.playTransition(); closeDeleteAccountModal(); });
   on('delete-account-modal', 'click', (e) => { if (e.target?.id === 'delete-account-modal') closeDeleteAccountModal(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDeleteAccountModal(); });
-
   // next-question-btn is also the Enter/Space target while the answer is locked
   on('next-question-btn', 'click', nextQuestion);
 
-  // Global keyboard shortcuts
-  window.addEventListener('keydown', (e) => {
-    if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
-    const resultModal = $('result-modal');
-    if (resultModal && !resultModal.classList.contains('hidden')) {
-      if (e.key === 'Escape') $('result-exit-btn')?.click();
-      return;
-    }
-
-    const state = store.getState();
-    if (!ui.gameScreenElement.classList.contains('hidden')) {
-      if (!state.isAnswerLocked) {
-        if (e.key >= '1' && e.key <= '4') {
-          const options = ui.optionsElement.querySelectorAll('.option-btn');
-          options[Number(e.key) - 1]?.click();
-        }
-      } else if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        $('next-question-btn')?.click();
-      }
-    }
-
-    if (e.key === 'Escape') { // close open modals
-      if (!ui.authModal.classList.contains('hidden')) ui.authModal.classList.add('hidden');
-      else if (!ui.explanationModal.classList.contains('hidden')) ui.explanationModal.classList.add('hidden');
-    } else if (!ui.menuScreenElement.classList.contains('hidden') && (e.key === 'Enter' || e.key === ' ')) {
-      e.preventDefault();
-      const huntBtn = $('hunt-btn');
-      const menuAction = huntBtn && !huntBtn.classList.contains('hidden') ? huntBtn : $('try-btn');
-      menuAction?.click();
-    }
-  });
+  // Keyboard: one dispatcher (see handleGlobalKeydown) plus the device tracker
+  // that decides whether a re-render should move focus for the user.
+  window.addEventListener('keydown', handleGlobalKeydown);
+  window.addEventListener('keydown', () => { keyboardUser = true; }, true);
+  document.addEventListener('pointerdown', () => { keyboardUser = false; }, true);
+  on('keyboard-help-btn', 'click', openKeyboardHelp);
+  on('keyboard-help-close-btn', 'click', closeKeyboardHelp);
+  on('keyboard-help-modal', 'click', (e) => { if (e.target?.id === 'keyboard-help-modal') closeKeyboardHelp(); });
 
   // Cloud sync status chip
   window.addEventListener('pwh:syncStatus', (e) => {
