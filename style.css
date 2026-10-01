@@ -742,14 +742,37 @@ html, body {
   user-select: none;
   -webkit-user-select: none;
 }
-/* Allow scroll inside long screens */
+/* Long screens (settings, categories) scroll inside themselves.
+   `height: auto` let the screen grow taller than the window while the body
+   clips everything (`overflow: hidden !important`), so once the content did not
+   fit — e.g. Settings at 100% zoom on a 720px-tall window — the LOGOUT button
+   sat below the fold with no way to reach it at all. Pinning the screen to the
+   viewport height keeps `overflow-y: auto` in charge, so the content scrolls. */
 #settings-screen, #category-screen {
   overflow-y: auto;
   justify-content: flex-start;
   padding-top: 60px;
   padding-bottom: 40px;
-  height: auto;
+  height: 100dvh;
   min-height: 100dvh;
+  /* A `position: fixed` child (the BACK button) only pins to the viewport when
+     no ancestor creates a containing block for it. `.game-container` does that
+     three different ways: an identity `transform`, `content-visibility: auto`
+     (which implies paint containment) and `contain: layout`. These two screens
+     give up those three optimisations — they are small and rarely offscreen —
+     so BACK stays visible while the list scrolls. */
+  transform: none;
+  content-visibility: visible;
+  contain: style;
+}
+
+/* Scrollable screens keep their BACK button on screen; otherwise it scrolls out
+   of view and strands a user at the bottom of Settings. The solid background
+   stops the content underneath from showing through the button. */
+#settings-screen .back-btn,
+#category-screen .back-btn {
+  position: fixed;
+  background: var(--bg-deep);
 }
 
 /* Daily streak line under stats */
