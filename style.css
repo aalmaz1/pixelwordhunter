@@ -1958,18 +1958,27 @@ html, body {
   margin: 0 auto;
 }
 
-/* Focus rings that survive `clip-path`. The slanted answer/category buttons
-   clip a normal outline away, so the visible ring is drawn with an inset
-   shadow on top of the outline (kept for browsers without clip-path). */
+/* Focus rings that survive `clip-path` AND the themes' `!important` glows.
+   The slanted answer/category/mode buttons clip an outline away, and several
+   rules (category colours, correct/wrong verdicts) force box-shadow with
+   `!important`. Without a ring that wins both fights, arrow-key navigation in
+   the category and SELECT TEST lists looks like it does nothing at all. */
 .option-btn:focus-visible,
 .category-btn:focus-visible,
 .mode-btn:focus-visible,
 .start-btn:focus-visible,
 .auth-btn:focus-visible,
 .next-btn:focus-visible {
-  outline: 3px solid var(--neon-green);
+  outline: 3px solid var(--neon-green) !important;
   outline-offset: 2px;
-  box-shadow: inset 0 0 0 3px var(--neon-green), 0 0 14px rgba(57, 255, 20, .5);
+  box-shadow: inset 0 0 0 3px var(--neon-green), 0 0 14px rgba(57, 255, 20, .5) !important;
+}
+/* An answered option keeps its verdict colour while it holds focus. */
+.option-btn.correct:focus-visible {
+  box-shadow: inset 0 0 0 3px var(--correct-green), 0 0 20px var(--correct-green) !important;
+}
+.option-btn.wrong:focus-visible {
+  box-shadow: inset 0 0 0 3px var(--wrong-red), 0 0 20px var(--wrong-red) !important;
 }
 .mode-btn:focus-visible {
   outline-offset: 3px;

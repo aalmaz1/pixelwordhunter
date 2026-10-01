@@ -169,5 +169,6 @@
   "sound_off": "SOUND OFF",
   "keyboard_questions": "PREVIOUS OR NEXT QUESTION IN TOEIC TESTS",
   "help": "HELP",
-  "keyboard_mode": "PICK A MODE ON THE SELECT MODE SCREEN"
+  "keyboard_mode": "PICK A MODE ON THE SELECT MODE SCREEN",
+  "keyboard_list": "PICK A CATEGORY OR TEST FROM THE LIST"
 }

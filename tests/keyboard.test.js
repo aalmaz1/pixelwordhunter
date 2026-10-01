@@ -231,9 +231,11 @@ it('plays the whole app from the keyboard', async () => {
   press('2');
   await waitFor(() => expect($('toeic-list').children.length).toBe(1));
   expect(hidden('toeic-screen')).toBe(false);
+  // Arrows move (and the ring is now visible), but a numbered list also answers
+  // to its digits: "1" starts the first visible test.
   press('ArrowRight');
   expect(document.activeElement.classList.contains('category-btn')).toBe(true);
-  document.activeElement.click(); // native Enter activation happens in the browser
+  press('1');
   expect(hidden('toeicgame-screen')).toBe(false);
 
   await waitFor(() => expect(toeicOptions().length).toBe(4));

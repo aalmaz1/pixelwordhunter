@@ -1500,9 +1500,22 @@ function handleListKeys(e, key, target, screen) {
     }
     if (isSlashKey(e)) { e.preventDefault(); $('category-search')?.focus(); return; }
   }
+  const container = $(screen === 'category' ? 'category-list' : 'toeic-list');
   if (ARROW_KEYS.includes(key)) {
     e.preventDefault();
-    moveFocusWithin($(screen === 'category' ? 'category-list' : 'toeic-list'), isForwardArrow(key) ? 1 : -1);
+    moveFocusWithin(container, isForwardArrow(key) ? 1 : -1);
+    return;
+  }
+  // 1–9 start the n-th visible entry — the lists are numbered menus of big
+  // buttons, and reaching for the mouse just to pick "Part 5 · Set 3" is silly.
+  for (let n = 1; n <= 9; n += 1) {
+    if (isDigitKey(e, n)) {
+      e.preventDefault();
+      const items = [...(container?.querySelectorAll('.category-btn') || [])]
+        .filter((btn) => btn.style.display !== 'none');
+      items[n - 1]?.click();
+      return;
+    }
   }
 }
 

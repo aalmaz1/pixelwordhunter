@@ -262,6 +262,7 @@ inside the app.
 | `↑` `↓` `←` `→` | Move between the answer options, list buttons, and screen controls |
 | `←` `→` | Previous / next question inside a TOEIC test |
 | `1` / `2` | Pick a mode on the mode-chooser screen |
+| `1` – `9` | Pick a category or test from the list |
 | `Enter` / `Space` | Start from the menu, activate the focused control, continue after a review |
 | `Tab` / `Shift+Tab` | Move through controls; focus remains inside open dialogs |
 | `Esc` | Close the open dialog, then step back a screen (round → menu, tests → test list) |
