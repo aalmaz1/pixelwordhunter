@@ -32,6 +32,22 @@ const rulesFor = (selector) => {
 };
 
 describe('focus visibility', () => {
+  it('gives every interactive element a ring, including plain inputs', () => {
+    const universal = rulesFor('button:focus-visible').find((b) => /outline/.test(b));
+    expect(universal, 'button:focus-visible must exist').toBeTruthy();
+    expect(universal).toMatch(/3px solid var\(--neon-green\)/);
+    expect(universal).toMatch(/!important/);
+    // `[tabindex]:not([tabindex="-1"])` — the screen containers are focused
+    // programmatically and must not get a ring.
+    expect(css).toContain('[tabindex]:not([tabindex="-1"]):focus-visible');
+    expect(rulesFor('input:focus-visible').join()).toMatch(/outline/);
+  });
+
+  it('reveals the skip link when it takes focus', () => {
+    const rule = rulesFor('.skip-link:focus').join(' ');
+    expect(rule).toMatch(/top:\s*0\s*!important/);
+  });
+
   it.each(['.category-btn:focus-visible', '.option-btn:focus-visible', '.mode-btn:focus-visible'])(
     '%s paints an inset ring that beats the theme glows',
     (selector) => {

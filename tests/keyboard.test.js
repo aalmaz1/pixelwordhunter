@@ -140,6 +140,16 @@ it('plays the whole app from the keyboard', async () => {
   expect(hidden('keyboard-help-modal')).toBe(true);
   expect(document.activeElement).toBe($('menu-screen'));
 
+  // ── Theme switching must not leak ARIA state onto <body>: a bare
+  // `[data-theme]` query also matched the body element itself, which gave it
+  // `aria-pressed="true"` and a click handler of its own.
+  document.querySelector('button[data-theme="matrix"]').click();
+  expect(document.body.dataset.theme).toBe('matrix');
+  expect(document.body.hasAttribute('aria-pressed')).toBe(false);
+  expect(document.body.classList.contains('active')).toBe(false);
+  document.querySelector('button[data-theme="cyberpunk"]').click();
+  expect(document.body.dataset.theme).toBe('cyberpunk');
+
   // ── "M" toggles sound, matched by physical key ("ь" on a Russian layout) ──
   const audioBefore = store.getState().audioEnabled;
   press('m', { code: 'KeyM' });

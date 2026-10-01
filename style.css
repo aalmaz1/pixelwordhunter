@@ -1958,11 +1958,25 @@ html, body {
   margin: 0 auto;
 }
 
-/* Focus rings that survive `clip-path` AND the themes' `!important` glows.
-   The slanted answer/category/mode buttons clip an outline away, and several
-   rules (category colours, correct/wrong verdicts) force box-shadow with
-   `!important`. Without a ring that wins both fights, arrow-key navigation in
-   the category and SELECT TEST lists looks like it does nothing at all. */
+/* One visible focus ring for every interactive element, in every theme.
+   `!important` because the pixel-art themes set their own glows with it, and
+   because rules like `.auth-field input { outline: none }` come later in the
+   file. `[tabindex]:not([tabindex="-1"])` deliberately skips the screen and
+   dialog containers: they are focused programmatically by the keyboard
+   dispatcher and are not controls. */
+button:focus-visible,
+a[href]:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: 3px solid var(--neon-green) !important;
+  outline-offset: 2px;
+}
+
+/* The slanted pixel-art shapes clip an outline away, so they also paint the
+   ring as an inset shadow (which is immune to `clip-path`). */
 .option-btn:focus-visible,
 .category-btn:focus-visible,
 .mode-btn:focus-visible,
@@ -1982,4 +1996,25 @@ html, body {
 }
 .mode-btn:focus-visible {
   outline-offset: 3px;
+}
+
+/* "Skip to main content" is parked above the viewport; `top: 0` needs
+   `!important` to beat the shorthand `top: -40px` rule, or the link stays
+   invisible even while focused. */
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: 0 !important;
+  outline: 3px solid var(--neon-green) !important;
+  outline-offset: 2px;
+}
+
+/* The review word is a <button> (real button semantics for assistive tech);
+   these resets keep its pixel-art look identical to the old <p>. */
+button.explanation-word {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  text-align: left;
 }

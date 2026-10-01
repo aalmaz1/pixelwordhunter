@@ -711,7 +711,9 @@ function updateUI(state = store.getState()) {
   setTxt($('settings-sound-label'), t(soundOn ? 'on' : 'off'));
   $('settings-sound-btn')?.setAttribute('aria-pressed', String(soundOn));
 
-  for (const [selector, field] of [['[data-theme]', 'theme'], ['[data-lang]', 'uiLanguage']]) {
+  // button[...] — <body data-theme="..."> matches a bare [data-theme] too, and it
+  // must never receive aria-pressed or a toggle handler.
+  for (const [selector, field] of [['button[data-theme]', 'theme'], ['button[data-lang]', 'uiLanguage']]) {
     document.querySelectorAll(selector).forEach((btn) => {
       const active = btn.dataset[field] === state[field];
       btn.classList.toggle('active', active);
@@ -1052,10 +1054,12 @@ const Speech = {
 /** Turns an element into a tap-to-pronounce control. Nothing is spoken automatically. */
 function makeWordSpeakable(element, text, lang = 'en') {
   element.title = t('pronounce_hint');
-  element.setAttribute('role', 'button');
-  element.setAttribute('tabindex', '0');
   const speak = () => { if (text) Speech.speak(text, lang); };
   element.addEventListener('click', speak);
+  if (element.tagName === 'BUTTON') return; // native activation already works
+  // Fallback for any non-button host: emulate button semantics by hand.
+  element.setAttribute('role', 'button');
+  element.setAttribute('tabindex', '0');
   element.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); speak(); }
   });
@@ -1233,7 +1237,8 @@ function checkAnswer(selected, word, btn, questionIsEnglish, answerMode = 'choic
 /** Renders the English word, its translation, and the example sentence in the
  *  selected language. Korean UI never shows Russian (and vice versa). */
 function appendWordReviewContent(container, word, lang) {
-  const wP = mk('p', 'explanation-word', word.eng);
+  const wP = mk('button', 'explanation-word', word.eng);
+  wP.type = 'button';
   makeWordSpeakable(wP, word.eng); // pronunciation only on demand
   container.appendChild(wP);
   container.appendChild(mk('p', `explanation-definition lang-${lang === 'ko' ? 'ko' : 'ru'}`,
@@ -1736,9 +1741,9 @@ function setupEventListeners() {
   });
 
   // Settings
-  document.querySelectorAll('[data-theme]').forEach((btn) =>
+  document.querySelectorAll('button[data-theme]').forEach((btn) =>
     btn.addEventListener('click', () => ThemeManager.apply(btn.dataset.theme)));
-  document.querySelectorAll('[data-lang]').forEach((btn) =>
+  document.querySelectorAll('button[data-lang]').forEach((btn) =>
     btn.addEventListener('click', async () => {
       const lang = btn.dataset.lang;
       await I18nManager.setLanguage(lang);
