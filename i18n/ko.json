@@ -157,15 +157,17 @@
   "keyboard_title": "// 키보드 //",
   "keyboard_answer": "정답 선택",
   "keyboard_answer_letters": "TOEIC 테스트에서 정답 선택",
-  "keyboard_move": "선택지 사이 이동",
+  "keyboard_move": "선택지 또는 버튼 사이 이동",
   "keyboard_tab": "모든 요소로 이동",
   "keyboard_next": "확인, 다음 또는 시작",
-  "keyboard_back": "뒤로, 창 닫기 또는 라운드 나가기",
+  "keyboard_back": "창을 닫고 이전 화면으로 이동",
   "keyboard_search": "카테고리 검색으로 이동",
   "keyboard_sound": "소리 켜기 / 끄기",
   "keyboard_help": "이 목록 열기",
   "close": "닫기",
   "sound_on": "소리 켜짐",
   "sound_off": "소리 꺼짐",
-  "keyboard_questions": "TOEIC에서 이전 문제 또는 다음 문제"
+  "keyboard_questions": "TOEIC에서 이전 문제 또는 다음 문제",
+  "help": "도움말",
+  "keyboard_mode": "모드 선택 화면에서 모드 고르기"
 }

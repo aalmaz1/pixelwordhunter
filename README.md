@@ -252,25 +252,30 @@ The application keeps the learning loop understandable and avoids a heavy front-
 
 The whole game is playable without a mouse: every screen moves focus into
 itself when it opens, so `Tab` never restarts from the top of the page. Press
-`?` — or tap the `⌨ KEYS` button on the menu — at any time to see the same list
+`?` — or open Settings and tap `⌨ KEYS` — at any time to see the same list
 inside the app.
 
 | Key | Action |
 |:---:|---|
 | `1` – `4` | Answer a Word Quiz question |
 | `1` – `4` / `A` – `D` | Answer a TOEIC question |
-| `↑` `↓` | Move between the answer options |
+| `↑` `↓` `←` `→` | Move between the answer options, list buttons, and screen controls |
 | `←` `→` | Previous / next question inside a TOEIC test |
+| `1` / `2` | Pick a mode on the mode-chooser screen |
 | `Enter` / `Space` | Start from the menu, activate the focused control, continue after a review |
 | `Tab` / `Shift+Tab` | Move through controls; focus remains inside open dialogs |
 | `Esc` | Close the open dialog, then step back a screen (round → menu, tests → test list) |
 | `/` | Jump to the category search field |
-| `1` / `2` | Pick a mode on the mode-chooser screen |
 | `M` | Sound on / off |
 | `?` | Show the shortcut list |
 
-Typed recall and auth forms keep their text fields untouched: shortcuts stay
-out of the way whenever a field has focus, except `Esc`.
+Shortcuts are matched by physical key position as well as by character, so
+`A` – `D`, `M`, `/`, and `?` keep working on a Russian or Korean keyboard
+layout, where those keys type `ф`, `ь`, `.`, and `Shift`+`7` instead. Typed
+recall and auth forms keep their text fields untouched: shortcuts stay out of
+the way whenever a field has focus, except `Esc`, and `Enter`/`Space` never
+answers by itself — it moves focus onto the first option, and the next press
+picks it.
 
 ## 🧪 For developers
 

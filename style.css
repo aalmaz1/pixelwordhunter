@@ -1911,10 +1911,11 @@ html, body {
   outline: none;
 }
 
-/* Shortcut-sheet trigger on the menu, under SETTINGS. */
+/* Shortcut-sheet trigger in the Settings screen (HELP row). */
 .keys-btn {
-  font-size: 9px;
+  font-size: 8px;
   letter-spacing: 1px;
+  flex: 0 0 auto;
 }
 
 /* ── Shortcut sheet (? / ⌨ KEYS) ─────────────────────────── */
@@ -1930,7 +1931,7 @@ html, body {
 }
 .kb-help-row {
   display: grid;
-  grid-template-columns: 96px 1fr;
+  grid-template-columns: 124px 1fr;
   gap: 10px;
   align-items: center;
 }
@@ -1939,6 +1940,8 @@ html, body {
   font-size: 8px;
   text-align: center;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--neon-cyan);
   border: 1px solid var(--neon-cyan);
   box-shadow: 0 0 8px #00f5ff33, inset 0 0 6px #00f5ff0a;

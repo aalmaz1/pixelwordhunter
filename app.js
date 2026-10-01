@@ -636,6 +636,9 @@ async function handleDeleteAccountConfirm() {
 // ==================== SCREENS / STATE ====================
 const SCREENS = ['menu', 'settings', 'category', 'game', 'mode', 'toeic', 'toeicgame'];
 const visibleScreen = () => SCREENS.find((s) => isRendered($(`${s}-screen`))) || null;
+// Screens that open as a short menu of big buttons: a keyboard player should
+// land on the first one, so Enter picks it and arrows move between them.
+const SCREEN_PRIMARY = { mode: 'mode-word-quiz-btn' };
 
 function toggleScreen(screenId) {
   for (const s of SCREENS) {
@@ -650,7 +653,8 @@ function toggleScreen(screenId) {
   const active = $(`${screenId}-screen`);
   if (active) {
     if (!active.hasAttribute('tabindex')) active.setAttribute('tabindex', '-1');
-    active.focus({ preventScroll: true });
+    const primary = keyboardUser ? $(SCREEN_PRIMARY[screenId]) : null;
+    (primary || active).focus({ preventScroll: true });
   }
 }
 
@@ -1395,6 +1399,20 @@ function showReviewSession() {
 const ARROW_KEYS = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
 const isForwardArrow = (key) => key === 'ArrowDown' || key === 'ArrowRight';
 
+// Shortcuts that mean a *physical* key must match `e.code`, not `e.key`: on a
+// Russian layout the A key reports "ф" and the slash key reports ".", so
+// key-based matching silently did nothing for those users. Letters additionally
+// ignore Shift so Shift+A stays a capital letter.
+const isDigitKey = (e, n) => e.code === `Digit${n}` || e.code === `Numpad${n}` || e.key === String(n);
+const isLetterKey = (e, letter) => !e.shiftKey
+  && (e.code === `Key${letter.toUpperCase()}` || e.key.toLowerCase() === letter);
+const isSlashKey = (e) => e.code === 'Slash' || e.key === '/';
+const isQuestionKey = (e) => e.key === '?' || (e.code === 'Slash' && e.shiftKey);
+
+/** Screens where an unhandled arrow walks every control on the screen. The
+ *  game screens are excluded: there the arrows belong to the answer options. */
+const ARROW_SCREENS = ['menu', 'settings', 'mode', 'category', 'toeic'];
+
 /** Escape steps one level up the navigation stack on these screens. */
 const SCREEN_BACK = {
   settings: () => toggleScreen('menu'),
@@ -1411,10 +1429,12 @@ let keyboardUser = false;
 let keyboardHelpReturnFocus = null;
 let releaseKeyboardHelpTrap = null;
 
-function openKeyboardHelp() {
+function openKeyboardHelp(trigger = document.activeElement) {
   const modal = $('keyboard-help-modal');
   if (!modal || isRendered(modal)) return;
-  keyboardHelpReturnFocus = document.activeElement;
+  // Remembered explicitly: not every browser focuses a button on click, and the
+  // "?" path may start from the screen itself.
+  keyboardHelpReturnFocus = trigger;
   AudioEngine.playTransition();
   showModal(modal);
   releaseKeyboardHelpTrap = trapFocus(modal);
@@ -1452,11 +1472,14 @@ function handleMenuKeys(e, key, target) {
   }
 }
 
-/** Mode chooser: 1/2 pick a mode, arrows move inside the mode grid. */
-function handleModeKeys(e, key) {
-  if (key === '1' || key === '2') {
-    e.preventDefault();
-    $(key === '1' ? 'mode-word-quiz-btn' : 'mode-toeic-btn')?.click();
+/** Mode chooser: 1/2 pick a mode (arrows are handled by the shared layers). */
+function handleModeKeys(e) {
+  for (const n of [1, 2]) {
+    if (isDigitKey(e, n)) {
+      e.preventDefault();
+      $(n === 1 ? 'mode-word-quiz-btn' : 'mode-toeic-btn')?.click();
+      return;
+    }
   }
 }
 
@@ -1475,7 +1498,7 @@ function handleListKeys(e, key, target, screen) {
       }
       return;
     }
-    if (key === '/') { e.preventDefault(); $('category-search')?.focus(); return; }
+    if (isSlashKey(e)) { e.preventDefault(); $('category-search')?.focus(); return; }
   }
   if (ARROW_KEYS.includes(key)) {
     e.preventDefault();
@@ -1499,18 +1522,22 @@ function handleGameKeys(e, key, target) {
     return;
   }
 
-  if (/^[1-4]$/.test(key)) {
-    e.preventDefault();
-    enabled[Number(key) - 1]?.click();
-    return;
+  for (const n of [1, 2, 3, 4]) {
+    if (isDigitKey(e, n)) {
+      e.preventDefault();
+      enabled[n - 1]?.click();
+      return;
+    }
   }
   if (ARROW_KEYS.includes(key)) {
     if (moveFocusWithin(ui.optionsElement, isForwardArrow(key) ? 1 : -1)) e.preventDefault();
     return;
   }
-  if ((key === 'Enter' || key === ' ') && !isActivatableTarget(target)) {
-    // Focus sits on the screen itself (not on a control) — answer with the first option.
-    if (enabled[0]) { e.preventDefault(); enabled[0].click(); }
+  if (key === 'Enter' || key === ' ') {
+    // Focus is on the round itself, not on a control: move it to the first
+    // option instead of answering blind — the next Enter picks that answer.
+    if (isActivatableTarget(target)) return;
+    if (enabled[0]) { e.preventDefault(); enabled[0].focus({ preventScroll: true }); }
   }
 }
 
@@ -1536,9 +1563,19 @@ function handleToeicGameKeys(e, key, target) {
     return;
   }
 
-  const letterIndex = { a: 0, b: 1, c: 2, d: 3 }[key.toLowerCase()];
-  const index = /^[1-4]$/.test(key) ? Number(key) - 1 : letterIndex;
-  if (index !== undefined) {
+  if (key === 'Enter' || key === ' ') {
+    // Same rule as the Word Quiz: park focus on the first option, never answer.
+    if (isActivatableTarget(target)) return;
+    const first = [...($('toeic-options')?.querySelectorAll('.option-btn') || [])]
+      .find((btn) => !btn.disabled);
+    if (first) { e.preventDefault(); first.focus({ preventScroll: true }); }
+    return;
+  }
+
+  const letters = ['a', 'b', 'c', 'd'];
+  let index = letters.findIndex((letter) => isLetterKey(e, letter));
+  if (index === -1) index = [1, 2, 3, 4].find((n) => isDigitKey(e, n)) - 1;
+  if (index >= 0) {
     e.preventDefault();
     const btn = $('toeic-options')?.querySelectorAll('.option-btn')[index];
     if (btn && !btn.disabled) btn.click();
@@ -1582,8 +1619,8 @@ function handleGlobalKeydown(e) {
   // Any modifier means the browser's own shortcut (⌘M, Ctrl+Enter, …) — leave it.
   const plainKey = !e.ctrlKey && !e.metaKey && !e.altKey;
   if (!typing && plainKey) {
-    if (key === '?') { e.preventDefault(); openKeyboardHelp(); return; }
-    if (e.code === 'KeyM') { toggleSound(); return; }
+    if (isQuestionKey(e)) { e.preventDefault(); openKeyboardHelp(); return; }
+    if (isLetterKey(e, 'm')) { toggleSound(); return; }
   }
 
   const screen = visibleScreen();
@@ -1629,12 +1666,19 @@ function handleGlobalKeydown(e) {
   // ── 6. The active screen ──
   switch (screen) {
     case 'menu': handleMenuKeys(e, key, target); break;
-    case 'mode': handleModeKeys(e, key); break;
+    case 'mode': handleModeKeys(e); break;
     case 'category':
     case 'toeic': handleListKeys(e, key, target, screen); break;
     case 'game': handleGameKeys(e, key, target); break;
     case 'toeicgame': handleToeicGameKeys(e, key, target); break;
     default: break;
+  }
+
+  // ── 7. Arrows on a screen of plain buttons (menu, settings, mode) walk its
+  // controls, so "↑ ↓ ← → move between choices" holds everywhere.
+  if (!typing && !e.defaultPrevented && ARROW_KEYS.includes(key)
+    && ARROW_SCREENS.includes(screen)) {
+    if (moveFocusWithin($(`${screen}-screen`), isForwardArrow(key) ? 1 : -1)) e.preventDefault();
   }
 }
 
@@ -1793,7 +1837,8 @@ function setupEventListeners() {
   window.addEventListener('keydown', handleGlobalKeydown);
   window.addEventListener('keydown', () => { keyboardUser = true; }, true);
   document.addEventListener('pointerdown', () => { keyboardUser = false; }, true);
-  on('keyboard-help-btn', 'click', openKeyboardHelp);
+  // Settings row (the "?" key is handled inside the dispatcher).
+  on('keyboard-help-btn', 'click', () => openKeyboardHelp($('keyboard-help-btn')));
   on('keyboard-help-close-btn', 'click', closeKeyboardHelp);
   on('keyboard-help-modal', 'click', (e) => { if (e.target?.id === 'keyboard-help-modal') closeKeyboardHelp(); });
 

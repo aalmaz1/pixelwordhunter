@@ -115,25 +115,44 @@ it('plays the whole app from the keyboard', async () => {
   expect(hidden('menu-screen')).toBe(false);
   expect(document.activeElement).toBe($('menu-screen'));
 
-  // ── "?" opens the shortcut sheet; Escape closes it and gives focus back ──
-  press('?');
+  // ── The shortcut sheet lives in Settings, not on the menu ──
+  expect($('keyboard-help-btn')).not.toBeNull();
+  expect($('keyboard-help-btn').closest('#settings-screen')).not.toBeNull();
+  expect($('menu-screen').querySelector('#keyboard-help-btn')).toBeNull();
+  $('settings-btn').click();
+  expect(hidden('settings-screen')).toBe(false);
+  $('keyboard-help-btn').click();
   expect(hidden('keyboard-help-modal')).toBe(false);
   expect(document.activeElement).toBe($('keyboard-help-close-btn'));
   press('Escape');
   expect(hidden('keyboard-help-modal')).toBe(true);
+  // Focus comes back to the control that opened the sheet.
+  expect(document.activeElement).toBe($('keyboard-help-btn'));
+  press('Escape'); // Settings → menu
+  expect(hidden('menu-screen')).toBe(false);
   expect(document.activeElement).toBe($('menu-screen'));
 
-  // ── "M" toggles sound ──
+  // ── "?" opens the same sheet from anywhere, on any keyboard layout ──
+  // On a Russian layout "?" is Shift+7, so the physical key is Digit7.
+  press('?', { code: 'Digit7', shiftKey: true });
+  expect(hidden('keyboard-help-modal')).toBe(false);
+  press('Escape');
+  expect(hidden('keyboard-help-modal')).toBe(true);
+  expect(document.activeElement).toBe($('menu-screen'));
+
+  // ── "M" toggles sound, matched by physical key ("ь" on a Russian layout) ──
   const audioBefore = store.getState().audioEnabled;
   press('m', { code: 'KeyM' });
   expect(store.getState().audioEnabled).toBe(!audioBefore);
-  press('m', { code: 'KeyM' });
+  press('ь', { code: 'KeyM' });
   expect(store.getState().audioEnabled).toBe(audioBefore);
 
-  // ── Enter on the menu starts a hunt ──
+  // ── Enter on the menu starts a hunt; the mode chooser focuses its first mode ──
   press('Enter');
   expect(hidden('mode-screen')).toBe(false);
-  expect(document.activeElement).toBe($('mode-screen'));
+  expect(document.activeElement).toBe($('mode-word-quiz-btn'));
+  press('ArrowDown');
+  expect(document.activeElement).toBe($('mode-toeic-btn'));
 
   // ── "1" picks WORD QUIZ ──
   press('1');
@@ -145,8 +164,9 @@ it('plays the whole app from the keyboard', async () => {
   expect(document.activeElement.classList.contains('category-btn')).toBe(true);
   const firstCategory = document.activeElement.textContent;
 
-  // ── "/" jumps to the search field; Enter starts the first match ──
-  press('/');
+  // ── "/" jumps to the search field (by physical key: it types "." in Russian);
+  // Enter starts the first match ──
+  press('.', { code: 'Slash' });
   const search = $('category-search');
   expect(document.activeElement).toBe(search);
   search.value = 'tech';
@@ -167,6 +187,11 @@ it('plays the whole app from the keyboard', async () => {
   press('ArrowLeft');
   expect(document.activeElement).toBe(options()[1]);
   press('ArrowUp');
+  expect(document.activeElement).toBe(options()[0]);
+
+  // ── Space with focus on the round only parks focus on the first option ──
+  press(' ', { target: $('game-screen') });
+  expect(store.getState().isAnswerLocked).toBe(false);
   expect(document.activeElement).toBe(options()[0]);
 
   // ── "1" answers with the first option (the correct one in this mock) ──
@@ -220,8 +245,9 @@ it('plays the whole app from the keyboard', async () => {
   press('ArrowUp');
   expect(document.activeElement).toBe(toeicOptions()[0]);
 
-  // ── "A" (or "1") answers; the question locks and focus moves to NEXT ──
-  press('a');
+  // ── "A" answers (matched by physical key: it reports "ф" in Russian); the
+  // question locks and focus moves to NEXT ──
+  press('ф', { code: 'KeyA' });
   expect([...toeicOptions()].every((btn) => btn.disabled)).toBe(true);
   expect(document.activeElement).toBe($('toeic-next-btn'));
 

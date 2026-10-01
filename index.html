@@ -90,7 +90,6 @@
       <!-- Hunt Button (после логина) -->
       <button class="start-btn hunt-btn hidden" id="hunt-btn" role="button" aria-keyshortcuts="Enter" data-i18n-aria="hunt_keys_hint" aria-label="Start a hunt (Enter)"><span data-i18n="hunt">HUNT</span></button>
       <button class="settings-btn" id="settings-btn" role="button" data-i18n="settings">SETTINGS</button>
-      <button class="settings-btn keys-btn" id="keyboard-help-btn" role="button" aria-keyshortcuts="?" data-i18n="keyboard_keys" data-i18n-title="keyboard_keys_hint" title="Keyboard shortcuts (?)">⌨ KEYS</button>
       <div class="credits" data-i18n="credits">© 2026 KHUDAYBERDIEV ALMAZ</div>
     </div>
 
@@ -148,6 +147,12 @@
         <!-- Install app (PWA): unhidden by updateInstallUI() only when there is
              something actionable — the install prompt on Chromium, or the manual
              Add-to-Home-Screen hint on iOS. Hidden when already installed. -->
+        <!-- Keyboard shortcut sheet (also opens with the "?" key anywhere) -->
+        <div class="settings-row">
+          <span class="settings-label" data-i18n="help">HELP</span>
+          <button id="keyboard-help-btn" class="theme-btn keys-btn" role="button" aria-keyshortcuts="?" data-i18n="keyboard_keys" data-i18n-title="keyboard_keys_hint" title="Keyboard shortcuts (?)">⌨ KEYS</button>
+        </div>
+
         <div class="settings-row hidden" id="install-row">
           <span class="settings-label" data-i18n="app_label">APP</span>
           <button id="install-app-btn" class="theme-btn install-btn hidden" role="button" data-i18n="install_app">📲 INSTALL</button>
@@ -313,11 +318,12 @@
         <dl class="kb-help-list">
           <div class="kb-help-row"><dt class="kb-key">1 2 3 4</dt><dd data-i18n="keyboard_answer">PICK AN ANSWER</dd></div>
           <div class="kb-help-row"><dt class="kb-key">A B C D</dt><dd data-i18n="keyboard_answer_letters">PICK AN ANSWER IN TOEIC TESTS</dd></div>
-          <div class="kb-help-row"><dt class="kb-key">↑ ↓ ← →</dt><dd data-i18n="keyboard_move">MOVE BETWEEN CHOICES</dd></div>
+          <div class="kb-help-row"><dt class="kb-key">1 / 2</dt><dd data-i18n="keyboard_mode">PICK A MODE ON THE SELECT MODE SCREEN</dd></div>
+          <div class="kb-help-row"><dt class="kb-key">↑ ↓ ← →</dt><dd data-i18n="keyboard_move">MOVE BETWEEN THE CHOICES OR BUTTONS</dd></div>
           <div class="kb-help-row"><dt class="kb-key">← →</dt><dd data-i18n="keyboard_questions">PREVIOUS OR NEXT QUESTION IN TOEIC TESTS</dd></div>
           <div class="kb-help-row"><dt class="kb-key">TAB</dt><dd data-i18n="keyboard_tab">MOVE THROUGH ALL CONTROLS</dd></div>
-          <div class="kb-help-row"><dt class="kb-key">ENTER</dt><dd data-i18n="keyboard_next">CONFIRM, CONTINUE, OR START</dd></div>
-          <div class="kb-help-row"><dt class="kb-key">ESC</dt><dd data-i18n="keyboard_back">BACK, CLOSE A WINDOW, OR EXIT A ROUND</dd></div>
+          <div class="kb-help-row"><dt class="kb-key">ENTER / SPACE</dt><dd data-i18n="keyboard_next">CONFIRM, CONTINUE, OR START</dd></div>
+          <div class="kb-help-row"><dt class="kb-key">ESC</dt><dd data-i18n="keyboard_back">CLOSE A WINDOW, THEN STEP BACK A SCREEN</dd></div>
           <div class="kb-help-row"><dt class="kb-key">/</dt><dd data-i18n="keyboard_search">JUMP TO CATEGORY SEARCH</dd></div>
           <div class="kb-help-row"><dt class="kb-key">M</dt><dd data-i18n="keyboard_sound">SOUND ON / OFF</dd></div>
           <div class="kb-help-row"><dt class="kb-key">?</dt><dd data-i18n="keyboard_help">SHOW THIS LIST</dd></div>

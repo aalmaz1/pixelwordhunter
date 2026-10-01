@@ -157,15 +157,17 @@
   "keyboard_title": "// KEYBOARD //",
   "keyboard_answer": "PICK AN ANSWER",
   "keyboard_answer_letters": "PICK AN ANSWER IN TOEIC TESTS",
-  "keyboard_move": "MOVE BETWEEN CHOICES",
+  "keyboard_move": "MOVE BETWEEN THE CHOICES OR BUTTONS",
   "keyboard_tab": "MOVE THROUGH ALL CONTROLS",
   "keyboard_next": "CONFIRM, CONTINUE, OR START",
-  "keyboard_back": "BACK, CLOSE A WINDOW, OR EXIT A ROUND",
+  "keyboard_back": "CLOSE A WINDOW, THEN STEP BACK A SCREEN",
   "keyboard_search": "JUMP TO CATEGORY SEARCH",
   "keyboard_sound": "SOUND ON / OFF",
   "keyboard_help": "SHOW THIS LIST",
   "close": "CLOSE",
   "sound_on": "SOUND ON",
   "sound_off": "SOUND OFF",
-  "keyboard_questions": "PREVIOUS OR NEXT QUESTION IN TOEIC TESTS"
+  "keyboard_questions": "PREVIOUS OR NEXT QUESTION IN TOEIC TESTS",
+  "help": "HELP",
+  "keyboard_mode": "PICK A MODE ON THE SELECT MODE SCREEN"
 }
