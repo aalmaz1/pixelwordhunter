@@ -742,14 +742,37 @@ html, body {
   user-select: none;
   -webkit-user-select: none;
 }
-/* Allow scroll inside long screens */
+/* Long screens (settings, categories) scroll inside themselves.
+   `height: auto` let the screen grow taller than the window while the body
+   clips everything (`overflow: hidden !important`), so once the content did not
+   fit — e.g. Settings at 100% zoom on a 720px-tall window — the LOGOUT button
+   sat below the fold with no way to reach it at all. Pinning the screen to the
+   viewport height keeps `overflow-y: auto` in charge, so the content scrolls. */
 #settings-screen, #category-screen {
   overflow-y: auto;
   justify-content: flex-start;
   padding-top: 60px;
   padding-bottom: 40px;
-  height: auto;
+  height: 100dvh;
   min-height: 100dvh;
+  /* A `position: fixed` child (the BACK button) only pins to the viewport when
+     no ancestor creates a containing block for it. `.game-container` does that
+     three different ways: an identity `transform`, `content-visibility: auto`
+     (which implies paint containment) and `contain: layout`. These two screens
+     give up those three optimisations — they are small and rarely offscreen —
+     so BACK stays visible while the list scrolls. */
+  transform: none;
+  content-visibility: visible;
+  contain: style;
+}
+
+/* Scrollable screens keep their BACK button on screen; otherwise it scrolls out
+   of view and strands a user at the bottom of Settings. The solid background
+   stops the content underneath from showing through the button. */
+#settings-screen .back-btn,
+#category-screen .back-btn {
+  position: fixed;
+  background: var(--bg-deep);
 }
 
 /* Daily streak line under stats */
@@ -1898,4 +1921,123 @@ body.lang-ko .category-empty-query {
 html, body {
   overflow: hidden !important;
   height: 100dvh;
+}
+
+/* ============================================================
+   KEYBOARD SUPPORT
+   ============================================================ */
+
+/* Screens receive focus programmatically on every navigation (tabindex="-1")
+   so Tab restarts inside them; the container is not a control, so no ring. */
+.game-container:focus,
+.game-container:focus-visible {
+  outline: none;
+}
+
+/* Shortcut-sheet trigger in the Settings screen (HELP row). */
+.keys-btn {
+  font-size: 8px;
+  letter-spacing: 1px;
+  flex: 0 0 auto;
+}
+
+/* ── Shortcut sheet (? / ⌨ KEYS) ─────────────────────────── */
+.kb-help-box {
+  width: min(460px, 94%);
+  max-height: 86vh;
+  overflow-y: auto;
+}
+.kb-help-list {
+  display: grid;
+  gap: 10px;
+  margin: 4px 0 22px;
+}
+.kb-help-row {
+  display: grid;
+  grid-template-columns: 124px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+.kb-key {
+  padding: 6px 8px;
+  font-size: 8px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--neon-cyan);
+  border: 1px solid var(--neon-cyan);
+  box-shadow: 0 0 8px #00f5ff33, inset 0 0 6px #00f5ff0a;
+  letter-spacing: 1px;
+}
+.kb-help-row dd {
+  font-size: 9px;
+  line-height: 1.6;
+  letter-spacing: 1px;
+  color: var(--text-main);
+}
+.kb-help-box .next-btn {
+  display: block;
+  margin: 0 auto;
+}
+
+/* One visible focus ring for every interactive element, in every theme.
+   `!important` because the pixel-art themes set their own glows with it, and
+   because rules like `.auth-field input { outline: none }` come later in the
+   file. `[tabindex]:not([tabindex="-1"])` deliberately skips the screen and
+   dialog containers: they are focused programmatically by the keyboard
+   dispatcher and are not controls. */
+button:focus-visible,
+a[href]:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: 3px solid var(--neon-green) !important;
+  outline-offset: 2px;
+}
+
+/* The slanted pixel-art shapes clip an outline away, so they also paint the
+   ring as an inset shadow (which is immune to `clip-path`). */
+.option-btn:focus-visible,
+.category-btn:focus-visible,
+.mode-btn:focus-visible,
+.start-btn:focus-visible,
+.auth-btn:focus-visible,
+.next-btn:focus-visible {
+  outline: 3px solid var(--neon-green) !important;
+  outline-offset: 2px;
+  box-shadow: inset 0 0 0 3px var(--neon-green), 0 0 14px rgba(57, 255, 20, .5) !important;
+}
+/* An answered option keeps its verdict colour while it holds focus. */
+.option-btn.correct:focus-visible {
+  box-shadow: inset 0 0 0 3px var(--correct-green), 0 0 20px var(--correct-green) !important;
+}
+.option-btn.wrong:focus-visible {
+  box-shadow: inset 0 0 0 3px var(--wrong-red), 0 0 20px var(--wrong-red) !important;
+}
+.mode-btn:focus-visible {
+  outline-offset: 3px;
+}
+
+/* "Skip to main content" is parked above the viewport; `top: 0` needs
+   `!important` to beat the shorthand `top: -40px` rule, or the link stays
+   invisible even while focused. */
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: 0 !important;
+  outline: 3px solid var(--neon-green) !important;
+  outline-offset: 2px;
+}
+
+/* The review word is a <button> (real button semantics for assistive tech);
+   these resets keep its pixel-art look identical to the old <p>. */
+button.explanation-word {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  text-align: left;
 }
