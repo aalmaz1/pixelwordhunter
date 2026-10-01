@@ -173,6 +173,12 @@ export default defineConfig({
           '**/*.{js,css,html,ico,png,svg,woff2}',
           'assets/i18n/*.json'
         ],
+        // Vite's default /^assets\// rule strips revisions from everything under
+        // assets/, which left unhashed files (assets/i18n/*.json, assets/icon-192.png)
+        // with revision: null in the precache manifest and prevented Service Worker
+        // updates when translations changed. Only skip revisioning for actual
+        // content-hashed bundle files.
+        dontCacheBustURLsMatching: /^assets\/[^/]+-[A-Za-z0-9_-]{8}\.[a-z0-9]+$/i,
         // Keep the first Service Worker install small without changing the
         // on-screen UI:
         // - firebase-sdk is only fetched at login (needs the network anyway)
