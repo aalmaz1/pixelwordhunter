@@ -33,8 +33,12 @@ const mk = (tag, className, text) => {
   return el;
 };
 const pluralCategory = (count) => new Intl.PluralRules(I18nManager.getCurrentLanguage()).select(count);
-const formatCount = (count, key) => `${count} ${t(`${key}_${pluralCategory(count)}`) || t(key)}`;
-const formatCountLabel = (key, count) => t(`${key}_${pluralCategory(count)}`) || t(key);
+const formatCountLabel = (key, count) => {
+  const pluralKey = `${key}_${pluralCategory(count)}`;
+  const plural = t(pluralKey);
+  return plural && plural !== pluralKey ? plural : t(key);
+};
+const formatCount = (count, key) => `${count} ${formatCountLabel(key, count)}`;
 
 // ==================== INP OPTIMIZATION ====================
 // Yield control to the browser between work chunks so pending input/paint can run.
@@ -372,8 +376,13 @@ function registerServiceWorker() {
   // user a reload picks the new version up. (On first install there is no
   // previous controller, so no toast — hadController guards that.)
   const hadController = !!navigator.serviceWorker.controller;
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (hadController) showNotification(t('update_available'), 5000);
+  navigator.serviceWorker.addEventListener('controllerchange', async () => {
+    if (hadController) {
+      I18nManager.loadedLanguages.clear();
+      await I18nManager.loadLanguage(I18nManager.getCurrentLanguage());
+      I18nManager.applyLanguage(I18nManager.getCurrentLanguage());
+      showNotification(t('update_available'), 5000);
+    }
   });
   window.addEventListener('load', () => {
     const swUrl = new URL(`${import.meta.env.BASE_URL || './'}sw.js`, location.href).href;

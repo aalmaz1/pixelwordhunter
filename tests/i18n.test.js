@@ -24,8 +24,10 @@ function keysFromHtml() {
 }
 
 /**
- * String literals passed to t(...) in the modules — `t('next')`, but also the
- * conditional lookups such as `t(soundOn ? 'on' : 'off')`.
+ * String literals passed to t(...), formatCount(...) and formatCountLabel(...)
+ * in the modules — `t('next')`, conditional lookups such as
+ * `t(soundOn ? 'on' : 'off')`, and pluralized base keys with their CLDR
+ * categories (`_one`, `_few`, `_many`, `_other`).
  */
 function keysFromModule(file) {
   const js = fs.readFileSync(path.join(root, file), 'utf8');
@@ -33,6 +35,15 @@ function keysFromModule(file) {
   for (const call of js.matchAll(/(?<![A-Za-z0-9_$])t\(([^()]*)\)/g)) {
     for (const literal of call[1].matchAll(/'([^']+)'/g)) {
       if (/^[a-z0-9_]+$/i.test(literal[1])) keys.add(literal[1]);
+    }
+  }
+  for (const call of js.matchAll(/\bformatCount(?:Label)?\(([^()]*)\)/g)) {
+    for (const literal of call[1].matchAll(/'([^']+)'/g)) {
+      if (/^[a-z0-9_]+$/i.test(literal[1])) {
+        const base = literal[1];
+        keys.add(base);
+        for (const cat of ['one', 'few', 'many', 'other']) keys.add(`${base}_${cat}`);
+      }
     }
   }
   return keys;
