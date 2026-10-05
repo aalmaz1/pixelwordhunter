@@ -22,10 +22,10 @@
   "author": "Khudayberdiev Almaz",
   "license": "MIT",
   "engines": {
-  	"node": ">=22.22.2"
+    "node": ">=22.22.2"
   },
   "dependencies": {
-    "firebase": "^11.10.0"
+    "firebase": "^12.19.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
