@@ -49,7 +49,7 @@ export function _setGameDataForTests(arr) {
 // Long-term review schedule. Existing saves with mastery 0–5 continue to
 // work; new correct answers can now progress through six-month intervals.
 export const MAX_MASTERY_LEVEL = 9;
-export const MASTERED_MASTERY_LEVEL = 5;
+const MASTERED_MASTERY_LEVEL = 5;
 const INTERVALS = {
   0: 0,
   1: 60 * 60 * 1000,                 // 1 hour
