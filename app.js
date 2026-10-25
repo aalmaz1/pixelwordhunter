@@ -22,6 +22,7 @@ import {
   trapFocus, isTypingTarget, isActivatableTarget, moveFocusWithin, isRendered
 } from './ui.js';
 import { sanitizeDescriptionHtml } from './sanitize.js';
+import { getPart5SimplifiedExplanation } from './part5_explanations.js';
 
 // ==================== SMALL HELPERS ====================
 const DEV = import.meta.env.DEV;
@@ -1298,15 +1299,27 @@ function renderFullQuestion({ playAudio = true } = {}) {
     optionsEl.appendChild(btn);
   });
 
-  // Explanation (EN + KO) appears once the question is answered.
+  // Explanation appears once the question is answered.
+  // Part 5: use simplified plain-language EN + RU translation.
+  // Other parts: show original EN + KO.
   const expBox = $('full-explanation');
+  const isPart5 = fullToeic.part?.part === 5;
   if (selected !== undefined) {
     expBox.classList.remove('hidden');
-    setTxt($('full-explanation-en'), q.explanation?.en || '');
-    setTxt($('full-explanation-ko'), q.explanation?.ko || '');
+    if (isPart5) {
+      const simplified = getPart5SimplifiedExplanation(q.explanation?.en || '');
+      setTxt($('full-explanation-en'), simplified.en);
+      setTxt($('full-explanation-ru'), simplified.ru);
+      setTxt($('full-explanation-ko'), '');
+    } else {
+      setTxt($('full-explanation-en'), q.explanation?.en || '');
+      setTxt($('full-explanation-ru'), '');
+      setTxt($('full-explanation-ko'), q.explanation?.ko || '');
+    }
   } else {
     expBox.classList.add('hidden');
     setTxt($('full-explanation-en'), '');
+    setTxt($('full-explanation-ru'), '');
     setTxt($('full-explanation-ko'), '');
   }
 

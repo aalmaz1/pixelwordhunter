@@ -1694,35 +1694,86 @@ body.lang-ko .toeic-review-title { font-size: 12px !important; letter-spacing: 1
 /* Explanation panel after answering. */
 .full-explanation {
   width: 100%;
-  max-width: 640px;
-  padding: 12px 16px;
-  border: 1px solid var(--neon-green);
-  border-left: 5px solid var(--neon-green);
-  background: linear-gradient(135deg, rgba(57,255,20,.08), rgba(0,245,255,.05));
-  box-shadow: 0 0 12px rgba(57,255,20,.15);
+  max-width: 700px;
+  padding: 22px 20px 18px;
+  border: 1px solid var(--neon-cyan);
+  border-left: 5px solid var(--neon-cyan);
+  background: linear-gradient(135deg, rgba(0,245,255,.10), rgba(191,95,255,.08));
+  box-shadow: 0 8px 24px rgba(0,0,0,.28);
   text-align: left;
 }
 
 .exp-label {
-  font-size: 10px;
+  font-size: 8px;
   letter-spacing: 2px;
-  color: var(--neon-green);
-  margin-bottom: 6px;
+  color: var(--neon-cyan);
+  opacity: .8;
+  margin-bottom: 16px;
 }
 
-.full-explanation-body {
+.full-explanation-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.full-explanation-en {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-main);
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(0,245,255,.25);
+}
+
+.full-explanation-en::before {
+  content: 'EN';
+  display: inline-block;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--neon-cyan);
+  opacity: .7;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.full-explanation-ru {
   font-size: 13px;
   line-height: 1.7;
   color: var(--text-main);
+  padding: 12px 14px;
+  border-left: 2px solid var(--neon-purple);
+  background: rgba(0,0,0,.24);
 }
+
+.full-explanation-ru::before {
+  content: 'RU';
+  display: inline-block;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--neon-purple);
+  opacity: .7;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.full-explanation-ru:empty { display: none; }
 
 .full-explanation-ko {
   font-size: 12px;
   line-height: 1.7;
   color: var(--text-dim);
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px solid rgba(191,95,255,.25);
+  margin-top: 4px;
+}
+
+.full-explanation-ko::before {
+  content: 'KO';
+  display: inline-block;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--neon-purple);
+  opacity: .5;
+  margin-right: 8px;
+  vertical-align: middle;
 }
 
 .full-explanation-ko:empty { display: none; }
@@ -1730,7 +1781,8 @@ body.lang-ko .toeic-review-title { font-size: 12px !important; letter-spacing: 1
 @media (max-width: 480px) {
   #fulltoeicgame-screen header .stat:first-child { font-size: 9px; }
   .full-part-title { font-size: 9px; }
-  .full-transcript, .full-description, .full-explanation-body { font-size: 11px; }
+  .full-transcript, .full-description, .full-explanation-en { font-size: 11px; }
+  .full-explanation-ru { font-size: 11px; }
   .full-explanation-ko { font-size: 10px; }
   .toeic-nav-actions .next-btn { min-width: 84px; padding: 10px 14px; font-size: 9px; }
 }
