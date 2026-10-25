@@ -15,6 +15,7 @@ vi.mock('../i18n.js', () => ({
     // category screen renders its "All" filter through the i18n lookup.
     t: (key) => ({
       all_categories: 'All',
+      full_toeic_tests: 'FULL TOEIC TESTS',
       toeic_mistakes: 'MISTAKES',
       toeic_mistakes_title: 'TOEIC MISTAKES',
       questions_one: 'QUESTION',
@@ -67,6 +68,44 @@ vi.mock('../toeic.js', () => ({
   },
 }));
 
+// Small deterministic stand-in for the full-test bank (real file: toeic_full_tests.json).
+vi.mock('../toeic_full.js', () => ({
+  FULL_TOEIC_DATA: {
+    tests: [{
+      id: 'smoke_test',
+      name: 'Smoke Full Test',
+      targetScore: '700-900',
+      parts: [
+        {
+          part: 2,
+          type: 'listening',
+          items: [{
+            audio: 'Where is the meeting?',
+            questions: [{
+              question: 'Where is the meeting?',
+              options: ['Room 3', 'Room 5', 'Room 7'],
+              correct: 'Room 5',
+              explanation: { en: '', ko: '회의는 어디입니까?' },
+            }],
+          }],
+        },
+        {
+          part: 5,
+          type: 'reading',
+          items: [{
+            questions: [{
+              question: 'Fill the ____',
+              options: ['gap', 'hole', 'space', 'void'],
+              correct: 'gap',
+              explanation: { en: 'The blank needs a gap.', ko: '빈칸에는 gap.' },
+            }],
+          }],
+        },
+      ],
+    }],
+  },
+}));
+
 const $ = (id) => document.getElementById(id);
 const hidden = (id) => $(id).classList.contains('hidden');
 const waitFor = async (fn, ms = 4000) => {
@@ -99,18 +138,19 @@ it('runs a full TOEIC test through the real UI (shuffled order)', async () => {
   $('hunt-btn').click();
   expect(hidden('mode-screen')).toBe(false);
 
-  // TOEIC TESTS → test list with both sets and question counts.
+  // TOEIC TESTS → test list: FULL TESTS entry, then both sets with counts.
   $('mode-toeic-btn').click();
-  await waitFor(() => expect($('toeic-list').children.length).toBe(2));
+  await waitFor(() => expect($('toeic-list').children.length).toBe(3));
   expect(hidden('toeic-screen')).toBe(false);
-  expect($('toeic-list').children[0].textContent).toContain('Part 5 · Set 1');
-  expect($('toeic-list').children[0].textContent).toContain('2');
-  expect($('toeic-list').children[0].querySelector('.toeic-cat-badge').textContent).toBe('2 QUESTIONS');
-  expect($('toeic-list').children[1].textContent).toContain('1'); // 1 question in set 2
-  expect($('toeic-list').children[1].querySelector('.toeic-cat-badge').textContent).toBe('1 QUESTION');
+  expect($('toeic-list').children[0].textContent).toContain('FULL TOEIC TESTS');
+  expect($('toeic-list').children[1].textContent).toContain('Part 5 · Set 1');
+  expect($('toeic-list').children[1].textContent).toContain('2');
+  expect($('toeic-list').children[1].querySelector('.toeic-cat-badge').textContent).toBe('2 QUESTIONS');
+  expect($('toeic-list').children[2].textContent).toContain('1'); // 1 question in set 2
+  expect($('toeic-list').children[2].querySelector('.toeic-cat-badge').textContent).toBe('1 QUESTION');
 
   // Start set 1 → the questions are shuffled, so "Choose ____" comes first.
-  $('toeic-list').children[0].click();
+  $('toeic-list').children[1].click();
   expect(hidden('toeicgame-screen')).toBe(false);
   expect($('toeic-category').textContent).toBe('Part 5 · Set 1');
   expect($('toeic-question').textContent).toBe('1. Choose ____');
@@ -172,8 +212,8 @@ it('runs a full TOEIC test through the real UI (shuffled order)', async () => {
 
   // CHOOSE TEST → the list gained a MISTAKES set holding the missed question.
   $('toeic-result-tests-btn').click();
-  await waitFor(() => expect($('toeic-list').children.length).toBe(3));
-  const mistakesCard = $('toeic-list').children[0];
+  await waitFor(() => expect($('toeic-list').children.length).toBe(4));
+  const mistakesCard = $('toeic-list').children[1];
   expect(mistakesCard.textContent).toContain('TOEIC MISTAKES');
   expect(mistakesCard.textContent).toContain('1');
 
@@ -194,7 +234,7 @@ it('runs a full TOEIC test through the real UI (shuffled order)', async () => {
   expect(hidden('toeic-result-mistakes-btn')).toBe(true);
   $('toeic-result-retry-btn').click();
   await waitFor(() => expect(hidden('toeic-screen')).toBe(false));
-  expect($('toeic-list').children.length).toBe(2); // no MISTAKES set left
+  expect($('toeic-list').children.length).toBe(3); // no MISTAKES set left, FULL entry stays
   $('toeic-back-btn').click();
   expect(hidden('mode-screen')).toBe(false);
 

@@ -252,6 +252,80 @@
       </div>
     </div>
 
+    <!-- ── FULL TOEIC SCREEN (test selection) ── -->
+    <div id="fulltoeic-screen" class="game-container hidden" role="region" aria-label="Full TOEIC test selection">
+      <button class="back-btn" id="full-toeic-back-btn" role="button" data-i18n="back">BACK</button>
+      <h2 class="screen-title" data-i18n="full_toeic_tests">// FULL TOEIC TESTS //</h2>
+      <div id="full-toeic-list" class="category-grid" role="list"></div>
+    </div>
+
+    <!-- ── FULL TOEIC PART SCREEN (part selection) ── -->
+    <div id="fullpart-screen" class="game-container hidden" role="region" aria-label="Full TOEIC test parts">
+      <button class="back-btn" id="full-part-back-btn" role="button" data-i18n="back">BACK</button>
+      <h2 class="screen-title" id="full-part-title">// SELECT PART //</h2>
+      <div id="full-part-list" class="category-grid" role="list"></div>
+    </div>
+
+    <!-- ── FULL TOEIC GAME SCREEN (part run) ── -->
+    <div id="fulltoeicgame-screen" class="game-container hidden" role="region" aria-label="Full TOEIC part">
+      <header>
+        <div class="stat"><span data-i18n="test_label">TEST:</span>&nbsp;<span id="full-test-name">—</span></div>
+        <div class="header-actions">
+          <div class="stat header-xp"><span data-i18n="xp_label">XP:</span>&nbsp;<span id="full-xp" aria-live="polite">0</span></div>
+          <button class="icon-btn exit-icon-btn" id="exit-full-toeic-btn" role="button" aria-keyshortcuts="Escape" data-i18n-title="exit" title="Exit" aria-label="Exit to part list">✕</button>
+        </div>
+      </header>
+      <div class="round-progress" aria-live="polite">
+        <span class="full-part-title" id="full-category">—</span>
+        <span id="full-progress-text">1 / 100</span>
+        <div class="round-progress-track" aria-hidden="true"><div id="full-progress-fill"></div></div>
+      </div>
+      <div id="full-quiz-box">
+        <div id="full-audio-box" class="full-audio-box hidden">
+          <div class="audio-row">
+            <button class="next-btn" id="full-play-btn" role="button" aria-label="Play audio" data-i18n="play_audio">PLAY</button>
+            <span class="audio-hint" data-i18n="audio_hint">TAP TO HEAR THE TRANSCRIPT</span>
+          </div>
+          <div id="full-transcript" class="full-transcript" aria-live="polite"></div>
+        </div>
+        <div id="full-description-box" class="full-description-box hidden">
+          <div class="desc-header">
+            <span class="desc-label" data-i18n="passage">PASSAGE</span>
+            <button class="next-btn small-btn" id="full-desc-toggle" role="button" hidden>KO</button>
+          </div>
+          <div id="full-description" class="full-description"></div>
+        </div>
+        <div class="question-card toeic-question-card">
+          <button type="button" id="full-question" class="toeic-question" aria-live="polite"></button>
+        </div>
+        <div class="options-grid" id="full-options" role="group" aria-label="Answer options"></div>
+        <div id="full-explanation" class="full-explanation hidden">
+          <div class="exp-label" data-i18n="explanation_label">EXPLANATION</div>
+          <div id="full-explanation-en" class="full-explanation-body"></div>
+          <div id="full-explanation-ko" class="full-explanation-ko"></div>
+        </div>
+        <div class="toeic-nav-actions">
+          <button class="next-btn" id="full-prev-btn" role="button" aria-keyshortcuts="ArrowLeft" data-i18n="prev">PREV</button>
+          <button class="next-btn" id="full-next-btn" role="button" aria-keyshortcuts="ArrowRight" data-i18n="next">NEXT</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FULL TOEIC RESULT MODAL ────────────── -->
+    <div id="fulltoeic-result-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="fulltoeic-result-title">
+      <div class="result-box">
+        <h2 class="modal-title" id="fulltoeic-result-title" data-i18n="full_test_complete">// PART COMPLETE //</h2>
+        <div id="fulltoeic-result-summary" class="result-summary" aria-live="polite"></div>
+        <div id="fulltoeic-result-review" class="toeic-review" aria-live="polite"></div>
+        <div class="result-actions">
+          <button class="option-btn" id="fulltoeic-result-retry-btn" data-i18n="full_retry_part">RETRY PART</button>
+          <button class="option-btn hidden" id="fulltoeic-result-next-btn" data-i18n="full_next_part">NEXT PART</button>
+          <button class="option-btn" id="fulltoeic-result-parts-btn" data-i18n="full_choose_part">CHOOSE PART</button>
+          <button class="option-btn" id="fulltoeic-result-exit-btn" data-i18n="exit_menu">EXIT</button>
+        </div>
+      </div>
+    </div>
+
     <!-- ── GAME SCREEN ────────────────────────── -->
     <div id="game-screen" class="game-container hidden" role="region" aria-label="Game">
       <header>
