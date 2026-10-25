@@ -1258,18 +1258,20 @@ function renderFullQuestion({ playAudio = true } = {}) {
   setTxt($('full-xp'), `${store.getState().xp} XP`);
   setTxt($('full-category'), fullToeic.categoryName);
 
-  // Listening: transcript + play button. The transcript stays visible so
-  // learners can read along while speechSynthesis voices it.
-  const audioBox = $('full-audio-box');
+  // Listening: question card is clickable to play audio. Transcript shows
+  // below the question only when it differs from the question text itself
+  // (part 2 questions ARE the transcript; parts 3-4 have separate dialogues).
   const transcriptEl = $('full-transcript');
   transcriptEl.textContent = '';
-  if (q.audio) {
-    audioBox.classList.remove('hidden');
+  transcriptEl.classList.add('hidden');
+  const questionText = q.question || '';
+  const transcriptDiffers = q.audio && q.audio.trim() !== questionText.trim();
+  if (transcriptDiffers) {
     transcriptEl.textContent = q.audio;
-    setTxt($('full-play-btn'), t('replay_audio') || t('play_audio'));
-  } else {
-    audioBox.classList.add('hidden');
+    transcriptEl.classList.remove('hidden');
   }
+  // Mark question card as clickable for listening parts.
+  $('full-question').classList.toggle('clickable-audio', !!q.audio);
 
   // Reading: passage card (part 6 blanks are wrapped in .toeic-blank spans).
   const descBox = $('full-description-box');
@@ -2256,7 +2258,7 @@ function setupEventListeners() {
   });
   on('full-prev-btn', 'click', () => fullGoPrev());
   on('full-next-btn', 'click', () => fullGoNext());
-  on('full-play-btn', 'click', () => {
+  on('full-question', 'click', () => {
     const q = fullToeic.questions[fullToeic.index];
     if (q?.audio) playFullAudio(q.audio);
   });

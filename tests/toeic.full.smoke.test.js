@@ -167,12 +167,13 @@ it('runs a full TOEIC test through the real UI', async () => {
   expect($('full-part-list').children[0].textContent).toContain('PART 2 · LISTENING');
   expect($('full-part-list').children[1].textContent).toContain('PART 5 · READING');
 
-  // Start part 2 → listening run with the transcript and voiced audio.
+  // Start part 2 → listening run. Question card is clickable for audio;
+  // transcript is hidden because part 2 question text IS the transcript.
   $('full-part-list').children[0].click();
   expect(hidden('fulltoeicgame-screen')).toBe(false);
-  expect($('full-transcript').textContent).toBe('Where is the meeting?');
-  expect($('full-audio-box').classList.contains('hidden')).toBe(false);
+  expect($('full-transcript').classList.contains('hidden')).toBe(true);
   expect($('full-question').textContent).toBe('1. Where is the meeting?');
+  expect($('full-question').classList.contains('clickable-audio')).toBe(true);
   expect($('full-progress-text').textContent).toBe('1 / 1');
   expect(options().length).toBe(3);
   expect($('full-next-btn').textContent).toBe('FINISH');
@@ -201,7 +202,7 @@ it('runs a full TOEIC test through the real UI', async () => {
   expect(hidden('fulltoeicgame-screen')).toBe(false);
   expect($('full-description').innerHTML).toContain('Q3');
   expect($('full-desc-toggle').hidden).toBe(false);
-  expect($('full-audio-box').classList.contains('hidden')).toBe(true);
+  expect($('full-transcript').classList.contains('hidden')).toBe(true);
 
   // The KO toggle swaps the passage between EN and KO.
   $('full-desc-toggle').click();
