@@ -175,7 +175,7 @@ Six visual themes change the atmosphere without changing the learning rules:
 
 Correct, incorrect, navigation, and hover effects are synthesized with the Web Audio API. Sound can be disabled in Settings.
 
-Tap or click the current prompt to hear it through the browser's Speech Synthesis API. English terms in answer explanations and review cards can also be pronounced on demand. Voice availability and quality depend on the browser, operating system, and installed voices.
+Tap or click the current prompt to hear it through the browser's Speech Synthesis API. In TOEIC fill-in questions, an underscore blank is a short pause in the audio; the correct answer is not spoken. English terms in answer explanations and review cards can also be pronounced on demand. Voice availability and quality depend on the browser, operating system, and installed voices.
 
 The interface includes visible keyboard focus, modal focus trapping, a skip link, touch-sized controls, responsive layouts, and reduced-motion handling through `prefers-reduced-motion`.
 
