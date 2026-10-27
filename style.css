@@ -1421,6 +1421,27 @@ body.lang-ko .recall-form input {
   box-shadow: 0 0 14px #00f5ff4d, inset 0 0 14px #00f5ff12;
 }
 
+.toeic-question.clickable-audio {
+  cursor: pointer;
+}
+
+.toeic-question.clickable-audio::after {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 8px;
+  border: 2px solid var(--neon-cyan);
+  border-radius: 50%;
+  vertical-align: middle;
+  animation: audioPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes audioPulse {
+  0%, 100% { box-shadow: 0 0 4px var(--neon-cyan); }
+  50% { box-shadow: 0 0 12px var(--neon-cyan), 0 0 20px var(--neon-cyan-rgb, 0,245,255,.5); }
+}
+
 #toeic-options { align-self: stretch; max-width: 620px; }
 
 .toeic-option {
@@ -1576,6 +1597,194 @@ body.lang-ko .toeic-review-title { font-size: 12px !important; letter-spacing: 1
 @media (max-width: 480px) {
   .toeic-review { max-height: 34vh; }
   .toeic-review-item { font-size: 8px; padding: 8px 10px; }
+}
+
+/* ==================== FULL TOEIC TESTS ==================== */
+
+#fulltoeicgame-screen { padding-top: 60px; }
+
+#full-quiz-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 10px;
+}
+
+.full-part-title {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--neon-purple);
+  margin-bottom: 8px;
+  text-shadow: 0 0 6px rgba(191,95,255,.6);
+}
+
+/* Listening: transcript + play button. */
+/* Audio box removed — question card is now clickable for listening parts. */
+
+.full-transcript {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto 16px;
+  padding: 12px 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-dim);
+  background: #00000050;
+  border: 1px solid rgba(0, 245, 255, .2);
+  border-radius: 4px;
+  max-height: 120px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.full-transcript.hidden { display: none; }
+
+/* Reading: passage card. */
+.full-description-box {
+  width: 100%;
+  max-width: 640px;
+  padding: 14px 16px;
+  border: 1px solid var(--neon-yellow);
+  border-left: 5px solid var(--neon-yellow);
+  background: linear-gradient(135deg, rgba(255,230,0,.07), rgba(255,45,120,.05));
+  box-shadow: 0 0 14px rgba(255,230,0,.15);
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.desc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.desc-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--neon-yellow);
+}
+
+.small-btn { padding: 4px 12px; font-size: 10px; min-width: 0; }
+
+.full-description {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--text-main);
+}
+
+/* Highlight the blank the current question asks about. */
+.toeic-blank {
+  display: inline;
+  padding: 1px 4px;
+  border-bottom: 2px dashed rgba(191,95,255,.5);
+  transition: background .2s, color .2s;
+}
+
+.toeic-blank.active {
+  background: rgba(191,95,255,.35);
+  color: #fff;
+  border-bottom-color: var(--neon-purple);
+  box-shadow: 0 0 8px rgba(191,95,255,.6);
+}
+
+/* Explanation panel after answering. */
+.full-explanation {
+  width: 100%;
+  max-width: 700px;
+  padding: 22px 20px 18px;
+  border: 1px solid var(--neon-cyan);
+  border-left: 5px solid var(--neon-cyan);
+  background: linear-gradient(135deg, rgba(0,245,255,.10), rgba(191,95,255,.08));
+  box-shadow: 0 8px 24px rgba(0,0,0,.28);
+  text-align: left;
+}
+
+.exp-label {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--neon-cyan);
+  opacity: .8;
+  margin-bottom: 16px;
+}
+
+.full-explanation-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.full-explanation-en {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-main);
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(0,245,255,.25);
+}
+
+.full-explanation-en::before {
+  content: 'EN';
+  display: inline-block;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--neon-cyan);
+  opacity: .7;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.full-explanation-ru {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-main);
+  padding: 12px 14px;
+  border-left: 2px solid var(--neon-purple);
+  background: rgba(0,0,0,.24);
+}
+
+.full-explanation-ru::before {
+  content: 'RU';
+  display: inline-block;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--neon-purple);
+  opacity: .7;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.full-explanation-ru:empty { display: none; }
+
+.full-explanation-ko {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+.full-explanation-ko::before {
+  content: 'KO';
+  display: inline-block;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--neon-purple);
+  opacity: .5;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.full-explanation-ko:empty { display: none; }
+
+@media (max-width: 480px) {
+  #fulltoeicgame-screen header .stat:first-child { font-size: 9px; }
+  .full-part-title { font-size: 9px; }
+  .full-transcript, .full-description, .full-explanation-en { font-size: 11px; }
+  .full-explanation-ru { font-size: 11px; }
+  .full-explanation-ko { font-size: 10px; }
+  .toeic-nav-actions .next-btn { min-width: 84px; padding: 10px 14px; font-size: 9px; }
 }
 
 /* Single-answer Word Review card: make the feedback feel like a real card. */

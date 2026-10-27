@@ -239,13 +239,15 @@ it('plays the whole app from the keyboard', async () => {
   // ── TOEIC TESTS: "2" from the mode chooser, arrows walk the test list ──
   press('Enter');
   press('2');
-  await waitFor(() => expect($('toeic-list').children.length).toBe(1));
+  // The list holds the FULL TESTS entry plus the single Part 5 set.
+  await waitFor(() => expect($('toeic-list').children.length).toBe(2));
   expect(hidden('toeic-screen')).toBe(false);
   // Arrows move (and the ring is now visible), but a numbered list also answers
-  // to its digits: "1" starts the first visible test.
+  // to its digits: "2" starts the second visible test (the Part 5 set — the
+  // FULL TESTS entry sits first).
   press('ArrowRight');
   expect(document.activeElement.classList.contains('category-btn')).toBe(true);
-  press('1');
+  press('2');
   expect(hidden('toeicgame-screen')).toBe(false);
 
   await waitFor(() => expect(toeicOptions().length).toBe(4));

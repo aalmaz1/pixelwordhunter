@@ -54,3 +54,16 @@ export function sanitizeToeicData(words) {
   if (!Array.isArray(words)) return [];
   return words.map(sanitizeToeicWord).filter(Boolean);
 }
+
+// Descriptions of the full TOEIC tests carry their own HTML (passages,
+// emails, ads). They come from the maintainer's own data files, but they are
+// still rendered with innerHTML — strip anything executable before that.
+export function sanitizeDescriptionHtml(html) {
+  if (!html) return '';
+  let s = String(html);
+  s = s.replace(/<script[\s\S]*?<\/script>/gi, '');
+  s = s.replace(/<style[\s\S]*?<\/style>/gi, '');
+  s = s.replace(/\son\w+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, '');
+  s = s.replace(/(href|src)\s*=\s*(?:"javascript:[^"]*"|'javascript:[^']*')/gi, '$1="#"');
+  return s;
+}
