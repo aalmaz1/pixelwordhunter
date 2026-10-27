@@ -51,11 +51,18 @@ def strip_tags(s):
 
 
 def clean_transcript(s):
-    """Transcript for speechSynthesis: tags off, speaker labels removed."""
+    """Transcript for speechSynthesis: tags off, speaker labels removed,
+    question-number markers like (32) / (71) stripped so TTS doesn't
+    read them as numbers."""
     s = re.sub(r'<br\s*/?>', ' ', s or '')
     s = TAG_RE.sub('', s)
     s = html.unescape(s)
-    s = s.replace('[M:]', ' ').replace('{W:}', ' ')
+    s = s.replace('[M:]', ' ').replace('{W:}', ' ').replace('[W:]', ' ').replace('{M:}', ' ')
+    # Remove question-number markers like (32), (71), (100) — these are
+    # question anchors, not spoken content.
+    s = re.sub(r'\(\d{1,3}\)', '', s)
+    # Remove ellipsis artifacts that break TTS prosody
+    s = s.replace(' . . . ', ', ')
     return re.sub(r'\s+', ' ', s).strip()
 
 
