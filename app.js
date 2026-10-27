@@ -23,6 +23,7 @@ import {
 } from './ui.js';
 import { sanitizeDescriptionHtml } from './sanitize.js';
 import { getPart5SimplifiedExplanation } from './part5_explanations.js';
+import { createSpeechPlayer } from './speech.js';
 
 // ==================== SMALL HELPERS ====================
 const DEV = import.meta.env.DEV;
@@ -643,6 +644,8 @@ const visibleScreen = () => SCREENS.find((s) => isRendered($(`${s}-screen`))) ||
 const SCREEN_PRIMARY = { mode: 'mode-word-quiz-btn' };
 
 function toggleScreen(screenId) {
+  // Do not let a previous question or a pending gap resume on another screen.
+  Speech.cancel();
   for (const s of SCREENS) {
     const el = $(`${s}-screen`);
     if (!el) continue;
@@ -905,7 +908,7 @@ function renderToeicQuestion() {
   const total = toeic.questions.length;
   const questionEl = $('toeic-question');
   questionEl.textContent = `${toeic.index + 1}. ${q.question}`;
-  questionEl.onclick = () => Speech.speak(q.question, 'en');
+  questionEl.onclick = () => Speech.speak(q.question, 'en', { pauseAtBlanks: true });
   setTxt($('toeic-progress-text'), `${toeic.index + 1} / ${total}`);
   const fill = $('toeic-progress-fill');
   if (fill) fill.style.width = `${((toeic.index + 1) / total) * 100}%`;
@@ -963,6 +966,7 @@ function answerToeicQuestion(opt) {
 
 function toeicGoNext() {
   AudioEngine.playTransition();
+  Speech.cancel();
   if (toeic.index < toeic.questions.length - 1) {
     toeic.index += 1;
     renderToeicQuestion();
@@ -974,6 +978,7 @@ function toeicGoNext() {
 function toeicGoPrev() {
   if (toeic.index <= 0) return;
   AudioEngine.playTransition();
+  Speech.cancel();
   toeic.index -= 1;
   renderToeicQuestion();
 }
@@ -1356,6 +1361,7 @@ function answerFullQuestion(opt) {
 
 function fullGoNext() {
   AudioEngine.playTransition();
+  Speech.cancel();
   if (fullToeic.index < fullToeic.questions.length - 1) {
     fullToeic.index += 1;
     renderFullQuestion();
@@ -1367,13 +1373,14 @@ function fullGoNext() {
 function fullGoPrev() {
   if (fullToeic.index <= 0) return;
   AudioEngine.playTransition();
+  Speech.cancel();
   fullToeic.index -= 1;
   renderFullQuestion();
 }
 
 function showFullPartResult() {
   AudioEngine.playTransition();
-  window.speechSynthesis?.cancel();
+  Speech.cancel();
   const total = fullToeic.questions.length;
   const correct = fullToeic.score;
   const accuracy = total ? Math.round((correct / total) * 100) : 0;
@@ -1433,24 +1440,9 @@ function showFullPartResult() {
   $('fulltoeic-result-retry-btn').focus();
 }
 
-/** Voices a listening transcript with speechSynthesis. Long texts are split
- * into sentence chunks queued one after another — Chrome cuts a single
- * utterance off after ~15 s, so one dialogue must not be one utterance. */
+/** Voices a listening transcript in sentence chunks to avoid browser time limits. */
 function playFullAudio(text, lang = 'en') {
-  if (!Speech.supported || !text) return;
-  try {
-    window.speechSynthesis.cancel();
-    const chunks = text.match(/[^.!?]+[.!?]+|\S[^.!?]*$/g) || [text];
-    const speak = () => {
-      if (!chunks.length) return;
-      const u = new SpeechSynthesisUtterance(chunks.shift());
-      u.lang = lang === 'ko' ? 'ko-KR' : lang === 'ru' ? 'ru-RU' : 'en-US';
-      u.rate = 0.95;
-      u.onend = speak;
-      window.speechSynthesis.speak(u);
-    };
-    speak();
-  } catch { /* speech unavailable — the transcript stays readable */ }
+  Speech.speak(text, lang, { splitSentences: true, pauseAtBlanks: true });
 }
 
 
@@ -1468,21 +1460,11 @@ function updateDailyStreak() {
   store.setState({ dailyStreak: streak });
 }
 
-// ==================== SPEECH SYNTHESIS (on demand only) ====================
-const Speech = {
-  supported: typeof window !== 'undefined' && 'speechSynthesis' in window,
-  speak(text, lang = 'en') {
-    if (!this.supported || !text) return;
-    try {
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = lang === 'ko' ? 'ko-KR' : lang === 'ru' ? 'ru-RU' : 'en-US';
-      u.rate = 0.95;
-      u.pitch = 1;
-      window.speechSynthesis.speak(u);
-    } catch { /* ignore */ }
-  },
-};
+// ==================== SPEECH SYNTHESIS ====================
+const Speech = createSpeechPlayer(
+  typeof window !== 'undefined' ? window.speechSynthesis : null,
+  typeof window !== 'undefined' ? window.SpeechSynthesisUtterance : null,
+);
 
 /** Turns an element into a tap-to-pronounce control. Nothing is spoken automatically. */
 function makeWordSpeakable(element, text, lang = 'en') {
@@ -2266,8 +2248,7 @@ function setupEventListeners() {
   on('full-part-back-btn', 'click', () => { AudioEngine.playTransition(); showFullTestList(); });
   on('exit-full-toeic-btn', 'click', () => {
     AudioEngine.playTransition();
-    window.speechSynthesis?.cancel();
-    showFullPartList();
+    showFullPartList(); // toggleScreen also stops any in-progress speech
   });
   on('full-prev-btn', 'click', () => fullGoPrev());
   on('full-next-btn', 'click', () => fullGoNext());

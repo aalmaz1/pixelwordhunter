@@ -7,6 +7,7 @@
  */
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import fs from 'node:fs';
+import { BLANK_PAUSE_MS } from '../speech.js';
 
 vi.mock('../i18n.js', () => ({
   I18nManager: {
@@ -62,7 +63,7 @@ vi.mock('../toeic.js', () => ({
     ],
     questions: [
       { id: 1, type_id: 1, category: 'Part 5 · Set 1', question: 'Fill the ____', options: ['gap', 'hole', 'space', 'void'], correct: 'gap' },
-      { id: 2, type_id: 1, category: 'Part 5 · Set 1', question: 'Choose ____', options: ['alpha', 'beta', 'gamma', 'delta'], correct: 'beta' },
+      { id: 2, type_id: 1, category: 'Part 5 · Set 1', question: 'Choose ____ today.', options: ['alpha', 'beta', 'gamma', 'delta'], correct: 'beta' },
       { id: 3, type_id: 2, category: 'Part 5 · Set 2', question: 'He ____ home.', options: ['go', 'goes', 'going', 'gone'], correct: 'goes' },
     ],
   },
@@ -124,6 +125,10 @@ beforeAll(() => {
   localStorage.clear();
   const html = fs.readFileSync(process.cwd() + '/index.html', 'utf8');
   document.documentElement.innerHTML = html.replace(/<\/?html[^>]*>/gi, '');
+  window.speechSynthesis = { cancel: vi.fn(), speak: vi.fn() };
+  window.SpeechSynthesisUtterance = class {
+    constructor(text) { this.text = text; }
+  };
 });
 
 it('runs a full TOEIC test through the real UI (shuffled order)', async () => {
@@ -149,14 +154,46 @@ it('runs a full TOEIC test through the real UI (shuffled order)', async () => {
   expect($('toeic-list').children[2].textContent).toContain('1'); // 1 question in set 2
   expect($('toeic-list').children[2].querySelector('.toeic-cat-badge').textContent).toBe('1 QUESTION');
 
-  // Start set 1 → the questions are shuffled, so "Choose ____" comes first.
+  // Start set 1 → the questions are shuffled, so "Choose ____ today." comes first.
   $('toeic-list').children[1].click();
   expect(hidden('toeicgame-screen')).toBe(false);
   expect($('toeic-category').textContent).toBe('Part 5 · Set 1');
-  expect($('toeic-question').textContent).toBe('1. Choose ____');
+  expect($('toeic-question').textContent).toBe('1. Choose ____ today.');
   expect($('toeic-progress-text').textContent).toBe('1 / 2');
   expect(options().length).toBe(4);
   expect($('toeic-prev-btn').style.visibility).toBe('hidden');
+
+  // Tapping a question reads its text with a pause for the blank, while the
+  // displayed question stays intact and the correct option is not spoken.
+  vi.useFakeTimers();
+  $('toeic-question').click();
+  const firstSpeech = window.speechSynthesis.speak.mock.lastCall[0];
+  expect(firstSpeech.text).toBe('Choose');
+  firstSpeech.onend();
+  vi.advanceTimersByTime(BLANK_PAUSE_MS - 1);
+  expect(window.speechSynthesis.speak).toHaveBeenCalledTimes(1);
+  vi.advanceTimersByTime(1);
+  expect(window.speechSynthesis.speak.mock.lastCall[0].text).toBe('today.');
+  expect($('toeic-question').textContent).toBe('1. Choose ____ today.');
+
+  // Replaying and leaving during the gap must not resume the previous question.
+  $('toeic-question').click();
+  const replay = window.speechSynthesis.speak.mock.lastCall[0];
+  replay.onend();
+  const callsBeforeNext = window.speechSynthesis.speak.mock.calls.length;
+  $('toeic-next-btn').click();
+  vi.advanceTimersByTime(BLANK_PAUSE_MS);
+  expect(window.speechSynthesis.speak).toHaveBeenCalledTimes(callsBeforeNext);
+  $('toeic-prev-btn').click();
+  $('toeic-question').click();
+  window.speechSynthesis.speak.mock.lastCall[0].onend();
+  const callsBeforeExit = window.speechSynthesis.speak.mock.calls.length;
+  $('exit-toeic-btn').click();
+  vi.advanceTimersByTime(BLANK_PAUSE_MS);
+  expect(window.speechSynthesis.speak).toHaveBeenCalledTimes(callsBeforeExit);
+  $('toeic-list').children[1].click();
+  vi.useRealTimers();
+  expect($('toeic-question').textContent).toBe('1. Choose ____ today.');
 
   // The options are shuffled too: bank order is alpha/beta/gamma/delta, the
   // rendered order (with Math.random() === 0) is beta/gamma/delta/alpha.
@@ -184,7 +221,7 @@ it('runs a full TOEIC test through the real UI (shuffled order)', async () => {
 
   // PREV returns to the answered Q1 (still locked with the verdict shown).
   $('toeic-prev-btn').click();
-  expect($('toeic-question').textContent).toBe('1. Choose ____');
+  expect($('toeic-question').textContent).toBe('1. Choose ____ today.');
   expect(optionByText('beta').classList.contains('correct')).toBe(true);
   $('toeic-next-btn').click();
 

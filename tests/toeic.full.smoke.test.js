@@ -7,6 +7,7 @@
  */
 import { beforeAll, expect, it, vi } from 'vitest';
 import fs from 'node:fs';
+import { BLANK_PAUSE_MS } from '../speech.js';
 
 vi.mock('../i18n.js', () => ({
   I18nManager: {
@@ -84,9 +85,9 @@ vi.mock('../toeic_full.js', () => ({
           part: 2,
           type: 'listening',
           items: [{
-            audio: 'Where is the meeting?',
+            audio: 'Where is ____ meeting?',
             questions: [{
-              question: 'Where is the meeting?',
+              question: 'Where is ____ meeting?',
               options: ['Room 3', 'Room 5', 'Room 7'],
               correct: 'Room 5',
               explanation: { en: '', ko: '회의는 어디입니까?' },
@@ -172,12 +173,24 @@ it('runs a full TOEIC test through the real UI', async () => {
   $('full-part-list').children[0].click();
   expect(hidden('fulltoeicgame-screen')).toBe(false);
   expect($('full-transcript').classList.contains('hidden')).toBe(true);
-  expect($('full-question').textContent).toBe('1. Where is the meeting?');
+  expect($('full-question').textContent).toBe('1. Where is ____ meeting?');
   expect($('full-question').classList.contains('clickable-audio')).toBe(true);
   expect($('full-progress-text').textContent).toBe('1 / 1');
   expect(options().length).toBe(3);
   expect($('full-next-btn').textContent).toBe('FINISH');
-  expect(window.speechSynthesis.speak).toHaveBeenCalled(); // transcript voiced
+  // Even if a listening transcript contains a blank, autoplay and replay
+  // should pause at it rather than send underscores to the speech engine.
+  expect(window.speechSynthesis.speak.mock.lastCall[0].text).toBe('Where is');
+  vi.useFakeTimers();
+  window.speechSynthesis.speak.mock.lastCall[0].onend();
+  vi.advanceTimersByTime(BLANK_PAUSE_MS);
+  expect(window.speechSynthesis.speak.mock.lastCall[0].text).toBe('meeting?');
+  $('full-question').click();
+  expect(window.speechSynthesis.speak.mock.lastCall[0].text).toBe('Where is');
+  window.speechSynthesis.speak.mock.lastCall[0].onend();
+  vi.advanceTimersByTime(BLANK_PAUSE_MS);
+  expect(window.speechSynthesis.speak.mock.lastCall[0].text).toBe('meeting?');
+  vi.useRealTimers();
 
   // Correct answer → KO explanation shown, audio NOT replayed on answering.
   const speakCalls = window.speechSynthesis.speak.mock.calls.length;
@@ -188,8 +201,16 @@ it('runs a full TOEIC test through the real UI', async () => {
   expect($('full-explanation-ko').textContent).toContain('회의는 어디입니까?');
   expect(window.speechSynthesis.speak.mock.calls.length).toBe(speakCalls);
 
-  // FINISH → result modal: 1 of 1 correct, no review block.
+  // FINISH cancels any pending gap before opening the result modal.
+  vi.useFakeTimers();
+  $('full-question').click();
+  window.speechSynthesis.speak.mock.lastCall[0].onend();
+  const speakCallsBeforeFinish = window.speechSynthesis.speak.mock.calls.length;
   $('full-next-btn').click();
+  vi.advanceTimersByTime(BLANK_PAUSE_MS);
+  expect(window.speechSynthesis.speak).toHaveBeenCalledTimes(speakCallsBeforeFinish);
+  vi.useRealTimers();
+  // Result: 1 of 1 correct, no review block.
   await waitFor(() => expect(hidden('fulltoeic-result-modal')).toBe(false));
   const summary = $('fulltoeic-result-summary').textContent;
   expect(summary).toContain('CORRECT: 1');
