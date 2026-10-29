@@ -101,18 +101,28 @@ full size. The same context is retained in mistake review.
 After answering, the app shows the Korean explanation for a Korean interface
 and the English explanation for other interface languages. If Korean is missing,
 it shows available English with a notice; if the required explanation is
-missing, it says so rather than inventing one. In particular, the supplied
-source has no English explanations for its Part 2–4 questions. This behavior
-also applies to mistake review.
+missing, it says so rather than inventing one. Most listening questions still
+lack an English explanation, although explanations have been added for reviewed
+corrections. This behavior also applies to mistake review.
+
+A manual review of the source passages, questions and keys found incorrect and
+ambiguous items. Clear errors were corrected; where more than one answer is
+supported, each accepted answer is graded correctly. One source question has no
+unique answer and is displayed as **not scored**: it does not affect accuracy,
+mistakes or XP. Localized warnings flag unresolved source contradictions.
+When the bank is first loaded after this update, old mistake counts for items
+whose wording or grading changed are cleared because those records did not
+store the selected answer; other mistake counts remain.
 
 The source and its answer keys have not been independently authenticated as
-official exam material. Two reading items in New Economy 2018 Test 10 (#101
-and #144) have three distinct options because the source repeats a choice; the
-missing distractors are not invented. Image-based graphics have a generic
-accessible label, not a full text equivalent. See
-[`toeic_web_app/FULL_TESTS_AUDIT.md`](toeic_web_app/FULL_TESTS_AUDIT.md) for the
-listening corrections, verification scope, and remaining limitations. Review
-rights to third-party materials before redistribution.
+official exam material, and the review is not a guarantee that every question
+is error-free. Two reading items in New Economy 2018 Test 10 (#101 and #144)
+have three distinct options because the source repeats a choice; the missing
+distractors are not invented. Image-based graphics have a generic accessible
+label, not a full text equivalent. See
+[`toeic_web_app/FULL_TESTS_AUDIT.md`](toeic_web_app/FULL_TESTS_AUDIT.md) for
+examples, the evidence-based revision registry, review scope, and remaining
+limitations. Review rights to third-party materials before redistribution.
 
 To reproduce the generated bank and its listening assets:
 

@@ -4,10 +4,56 @@ This audit concerns `toeic_full_tests.json` and the 12 files in
 `ALL_TOEIC_TESTS/`, not the separate Part 5 practice bank in `BANK_AUDIT.md`.
 The local source files match the copies in the supplied `base.apk`; their
 independent provenance, accuracy and redistribution rights have not been
-verified. The raw sources are unchanged. `build_toeic_full.py` documents every
-localized correction applied when the web bank is generated.
+verified. The raw sources are unchanged. `build_toeic_full.py` and
+`toeic_full_corrections.py` record the guarded changes applied to the generated
+web bank.
 
-## Corrections
+## Semantic review and answer corrections
+
+A manual pass examined the available compact listings of all 12 tests, Parts
+2–7: listening transcripts, reading passages, question stems, choices and
+source keys, together with all 43 image graphics and the HTML graphics. The
+source's original audio and an independent official answer key were not
+available. This is a broad review of the available material, **not independent
+certification that all 2,328 questions, interpretations or translations are
+error-free**. Structural tests and source-key agreement cannot establish that.
+
+The question-specific registry `toeic_full_corrections.py` identifies each
+revision by source file, part and original question number, records the old key
+and explanation/evidence, and describes the supported revision. There are 94
+question-level revisions: some correct source keys, others repair ambiguous or
+unsupported wording, replace a faulty question, or correct the explanation.
+The builder checks the old key and, where used, the exact stem, options and
+supporting source fragments before applying a revision. Six questions whose
+original options could not be graded from the available context were replaced
+with new passage-based questions and distractors; they are adaptations, not
+recovered original exam questions.
+
+Examples (question numbers are the original source numbers; the app shuffles
+groups and choices):
+
+| Source | Issue | Generated behavior |
+| --- | --- | --- |
+| New Economy 2018 Test 06 (`test_21`), Part 2 #17 | The source keys an invitation response to a question about Mary's baby. | Accept the expected-time response, “Sometime next month, I think.” |
+| New Economy 2018 Test 05, Part 4 #87 | A speaker suggests delaying exercise until after the hot water returns at noon. | Accept coming in the afternoon, not avoiding the center altogether. |
+| New Economy 2018 Test 07 (`test_20`), Part 3 #67 | The dialogue explicitly recommends a bus, but the source keys the subway. | Accept “Take a bus.” |
+| New Economy 2018 Test 09, Part 6 #140 | Mandatory submission instructions are keyed as “would be.” | Use “must be.” |
+| New Economy 2018 Test 09, Part 7 #195 | The source keys “CFO” for a person handling a complaint and exchange. | Use the supported customer-service role. |
+| New Economy 2018 Test 04, Part 3 #63 | The woman lacks both barrel nuts and the Allen key, which are separate choices. | Accept either answer and repair the HTML graphic's “Barrel Buts” typo. |
+| New Economy 2018 Test 04, Part 6 #142 | All four sentences can coherently close the reply; the source gives no unique basis for selecting one. | Show the ambiguity before answering and exclude the question from accuracy, mistakes and XP. |
+| New Economy 2018 Test 09, Part 7 #199 | The total cost cannot be calculated without the staff's work duration. | Replace the unsupported question with one asking for the stated $25-per-person budget. |
+
+Eighteen revised questions have multiple supported choices, including the
+one unscored question. For the other 17, each supported choice counts toward
+the score and XP and is highlighted after the response; an incorrect response
+shows all supported choices in the results. For the unscored item, the selected
+choice is shown neutrally, the result counts it separately, and even skipping
+it has no effect. Previously stored mistake counts for the 92 questions whose
+stem, options or grading changed are cleared once when the bank first loads;
+the old records contain only counts, not the selected choices, so they cannot
+be regraded. Explanation-only revisions and unrelated mistake records are kept.
+
+## Listening and source conversion corrections
 
 - Part 2, New Economy 2018 Test 05, #11, #16 and #19: stop at the source's
   `<hr/>`; the Vietnamese translation/vocabulary after it is not an answer
@@ -46,9 +92,14 @@ localized correction applied when the web bank is generated.
   source item: New Economy Test 09 #193 (`93`) and Test 10 #153 (`152`).
   Preserve English explanatory paragraphs even when they contain blank lines.
   New Economy Test 05 #179 now retains the relevant English evidence instead
-  of a Vietnamese vocabulary fragment. Test 02 #196 and #198 had misleading
-  evidence; their English and Korean explanations now refer to sweater sizes
-  and membership tracking respectively, without changing the source keys.
+  of a Vietnamese vocabulary fragment. Test 02 #196 had misleading evidence;
+  #198 is now reworded around the supported sweater-size exchange rather than
+  assuming that a tracking number proves membership.
+- Remove an appended glossary from Hacker Test 02 #50–52 speech and OCR garbage
+  after New Economy Test 04 #92–94; repair locally supported reading defects,
+  such as the broken Hacker museum/rail sentence, reversed email headers and a
+  repeated schedule row in New Economy Test 02, stray numbered markers, and
+  “access the situation” → “assess the situation.”
 
 ## Usability and verification
 
@@ -66,14 +117,14 @@ the question-specific source explanation instead of a generic template. The
 bundled Mulmaru font now includes all modern Hangul syllables: the former subset
 omitted characters in many Korean explanations on devices without fallback fonts.
 
-The source-key regression compares all 2,328 generated answers with the local
-keys (allowing only the documented wording corrections) and verifies that the
-bank can be rebuilt. Tests also check option counts, transcript cleanup, the
-reported Part 2 cases, graphics and byte identity, speaker examples, Korean
-question alignment, speech playback, and ordinary/mistake UI flows. Several
-representative passage–question–answer combinations were reviewed manually;
-structural checks and agreement with the local key **do not prove that all
-2,328 answers are semantically correct**.
+The source-key regression compares all 2,328 generated primary answers with
+the local keys, except for explicitly registered changes. Additional tests
+cover revision evidence and mutation guards, validity of accepted alternatives,
+source warnings, neutral unscored items, score/XP, result highlighting and
+mistake migration. They also check option counts, transcript cleanup, graphics
+and byte identity, speaker examples, Korean question alignment, speech playback
+and ordinary/mistake UI flows. These tests guard the implemented decisions;
+they are not an external answer key or a proof of semantic correctness.
 
 Remaining limitations:
 
@@ -87,9 +138,17 @@ Remaining limitations:
   missing original distractors cannot be recovered from the available files;
   they were not fabricated. These are the only option-count exceptions allowed
   by the bank checks.
-- The source contains no English explanations for all 1,128 Part 2–4
-  questions, two Part 6 questions, and eight Part 7 questions. Many listening
-  Korean blocks are translations of the question and choices rather than reasoning.
-  An availability notice is shown where the selected explanation is absent.
+- The original source contains no English explanations for its 1,128 Part 2–4
+  questions. After adding explanations for reviewed corrections, 1,103
+  listening questions, two Part 6 questions and six Part 7 questions still lack
+  English explanations. Many listening Korean blocks are translations of the
+  question and choices rather than reasoning. An availability notice is shown
+  where the selected explanation is absent.
 - Korean blocks are aligned by question number rather than independently
   translated or semantically verified. Some items have no matching explanation.
+- Localized source notes flag the unresolvable Houston/Denver location, two
+  inconsistent invoice totals, an unreadable delivery-guarantee deadline,
+  conflicting interview dates, the Actual 2026-12 #67 discount arithmetic,
+  nutrient weights exceeding a serving size and two ambiguous time labels in
+  images. The two duplicate-choice cases above are flagged too. The original
+  correct numbers or missing choices were not reconstructed by guesswork.

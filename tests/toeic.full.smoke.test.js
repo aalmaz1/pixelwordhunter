@@ -30,6 +30,12 @@ vi.mock('../i18n.js', () => ({
         ru: 'Корейского нет; показано английское.',
         ko: '한국어 해설이 없어 영어로 표시합니다.',
       }[i18nState.language] || 'Korean unavailable; showing English.',
+      full_unscored_warning: {
+        en: 'No unique answer; no score or XP.',
+        ru: 'Нет единственного ответа; без баллов и XP.',
+        ko: '정답이 하나가 아니므로 점수와 XP에 반영되지 않습니다.',
+      }[i18nState.language],
+      full_unscored_count: 'NOT SCORED',
       all_categories: 'All',
       toeic_mistakes: 'MISTAKES',
       toeic_mistakes_title: 'TOEIC MISTAKES',
@@ -110,10 +116,13 @@ vi.mock('../toeic_full.js', () => ({
           type: 'listening',
           items: [{
             audio: 'Where is ____ meeting?',
+            sourceWarning: { en: 'Source warning.', ru: 'Примечание.', ko: '원본 주의.' },
             questions: [{
               question: 'Where is ____ meeting?',
               options: ['Room 3', 'Room 5', 'Room 7'],
               correct: 'Room 5',
+              acceptedAnswers: ['Room 5', 'Room 7'],
+              answerRevision: 1,
               explanation: { en: '', ko: '회의는 어디입니까?' },
             }],
           }],
@@ -123,6 +132,7 @@ vi.mock('../toeic_full.js', () => ({
           type: 'listening',
           items: [{
             audio: 'Our budget is $50. We need a cake at least ten inches wide.',
+            sourceWarning: { en: 'The diagram is unclear.', ru: 'Диаграмма нечёткая.', ko: '도표가 불명확합니다.' },
             turns: [
               { speaker: 'W', text: 'Our budget is $50.' },
               { speaker: 'M', text: 'We need a cake at least ten inches wide.' },
@@ -177,6 +187,13 @@ vi.mock('../toeic_full.js', () => ({
               options: ['including', 'although', 'where', 'unless'],
               correct: 'including',
               explanation: { en: 'Including introduces examples.', ko: 'Including은 예시를 소개합니다.' },
+            }, {
+              question: '132. ____',
+              options: ['First', 'Second', 'Third', 'Fourth'],
+              correct: 'First',
+              acceptedAnswers: ['First', 'Second', 'Third', 'Fourth'],
+              unscored: true,
+              explanation: { en: 'All four options fit.', ko: '네 답 모두 자연스럽습니다.' },
             }],
           }],
         },
@@ -187,9 +204,10 @@ vi.mock('../toeic_full.js', () => ({
             description: 'Free workshops are held every Saturday.',
             questions: [{
               question: 'What is advertised?',
-              options: ['Free classes', 'A sale', 'A store', 'A contest'],
+              options: ['Free classes', 'Free workshops', 'A store', 'A contest'],
               correct: 'Free classes',
-              explanation: { en: 'The notice advertises free classes.', ko: '안내문은 무료 수업을 광고합니다.' },
+              acceptedAnswers: ['Free classes', 'Free workshops'],
+              explanation: { en: 'Both describe the free workshops.', ko: '두 답 모두 무료 수업을 뜻합니다.' },
             }],
           }],
         },
@@ -233,18 +251,25 @@ it('runs a full TOEIC test through the real UI', async () => {
   // Boot to menu, then HUNT opens the mode chooser.
   await waitFor(() => expect($('category-list').children.length).toBe(2)); // All + Tech
   $('hunt-btn').click();
-  $('mode-toeic-btn').click();
+  // A pre-update mistake on a revised item cannot be trusted: only counts,
+  // not selected answers, were stored. Unrelated records must survive.
+  localStorage.setItem('pixelWordHunter_toeic_full_mistakes_v1', JSON.stringify({
+    'smoke_test:2:0:0': 3,
+    'another_test:2:0:0': 2,
+  }));
+  $('mode-toeic-btn').click(); // preloads the full bank and runs the migration
 
   // TOEIC TESTS → list with the FULL TOEIC TESTS entry (no Part 5 sets here).
   await waitFor(() => expect($('toeic-list').children.length).toBe(1));
   expect($('toeic-list').children[0].textContent).toContain('FULL TOEIC TESTS');
-
-  // → the test list.
   $('toeic-list').children[0].click();
   await waitFor(() => expect($('full-toeic-list').children.length).toBe(1));
+  expect(JSON.parse(localStorage.getItem('pixelWordHunter_toeic_full_mistakes_v1')))
+    .toEqual({ 'another_test:2:0:0': 2 });
+  expect(localStorage.getItem('pixelWordHunter_toeic_full_mistakes_revision')).toBe('1');
   expect(hidden('fulltoeic-screen')).toBe(false);
   expect($('full-toeic-list').children[0].textContent).toContain('Smoke Full Test');
-  expect($('full-toeic-list').children[0].textContent).toContain('8 QUESTIONS');
+  expect($('full-toeic-list').children[0].textContent).toContain('9 QUESTIONS');
 
   // → the part list (parts 2–7).
   $('full-toeic-list').children[0].click();
@@ -265,6 +290,8 @@ it('runs a full TOEIC test through the real UI', async () => {
   expect($('full-question').textContent).toBe('1. Where is ____ meeting?');
   expect($('full-question').classList.contains('clickable-audio')).toBe(true);
   expect($('full-progress-text').textContent).toBe('1 / 1');
+  expect($('full-source-warning').textContent).toBe('Source warning.');
+  expect(hidden('full-source-warning')).toBe(false);
   expect(options().length).toBe(3);
   expect($('full-next-btn').textContent).toBe('FINISH');
   expect(hidden('full-explanation')).toBe(true);
@@ -275,6 +302,7 @@ it('runs a full TOEIC test through the real UI', async () => {
   const cancelsBeforeLanguage = window.speechSynthesis.cancel.mock.calls.length;
   await I18nManager.setLanguage('ko');
   expect(hidden('full-explanation')).toBe(true);
+  expect($('full-source-warning').textContent).toBe('원본 주의.');
   expect(options()[0]).toBe(firstOption);
   expect(window.speechSynthesis.speak).toHaveBeenCalledTimes(callsBeforeLanguage);
   expect(window.speechSynthesis.cancel).toHaveBeenCalledTimes(cancelsBeforeLanguage);
@@ -305,10 +333,12 @@ it('runs a full TOEIC test through the real UI', async () => {
   const speakCalls = window.speechSynthesis.speak.mock.calls.length;
   const cancelsBeforeAnswer = window.speechSynthesis.cancel.mock.calls.length;
   const staleEnd = window.speechSynthesis.speak.mock.lastCall[0].onend;
-  optionByText('Room 5').click();
+  optionByText('Room 7').click(); // a second supported answer is also correct
   expect(window.speechSynthesis.cancel).toHaveBeenCalledTimes(cancelsBeforeAnswer + 1);
   staleEnd(); // a late callback cannot resume the old choices
   expect(optionByText('Room 5').classList.contains('correct')).toBe(true);
+  expect(optionByText('Room 7').classList.contains('correct')).toBe(true);
+  expect(optionByText('Room 7').classList.contains('wrong')).toBe(false);
   expect(options().every((b) => b.disabled)).toBe(true);
   expect(hidden('full-explanation')).toBe(false);
   expect($('full-explanation-note').textContent).toBe('No English explanation in the source.');
@@ -350,6 +380,7 @@ it('runs a full TOEIC test through the real UI', async () => {
   $('fulltoeic-result-next-btn').click();
   expect(hidden('fulltoeicgame-screen')).toBe(false);
   expect($('full-question').textContent).toContain('What is the budget?');
+  expect($('full-source-warning').textContent).toBe('The diagram is unclear.');
   expect(hidden('full-graphic-box')).toBe(false);
   const graphic = $('full-graphic-content');
   expect(graphic.querySelector('img').getAttribute('src')).toBe('full-toeic-graphics/actual_test_2026_10_67.png');
@@ -476,19 +507,63 @@ it('runs a full TOEIC test through the real UI', async () => {
   expect($('full-explanation-en').textContent).toBe('');
   await I18nManager.setLanguage('en');
   $('full-next-btn').click();
+  expect($('full-question').textContent).toContain('132. ____');
+  expect($('full-source-warning').textContent).toBe('No unique answer; no score or XP.');
+  await I18nManager.setLanguage('ru');
+  expect($('full-source-warning').textContent).toBe('Нет единственного ответа; без баллов и XP.');
+  await I18nManager.setLanguage('en');
+  const xpBeforeUnscored = $('full-xp').textContent;
+  optionByText('Second').click();
+  expect($('full-xp').textContent).toBe(xpBeforeUnscored);
+  expect(optionByText('Second').classList.contains('unscored-selected')).toBe(true);
+  expect(options().every((button) => !button.classList.contains('correct') && !button.classList.contains('wrong'))).toBe(true);
+  $('full-next-btn').click();
   await waitFor(() => expect(hidden('fulltoeic-result-modal')).toBe(false));
+  expect($('fulltoeic-result-summary').textContent).toContain('CORRECT: 1');
+  expect($('fulltoeic-result-summary').textContent).toContain('ACCURACY: 100%');
+  expect($('fulltoeic-result-summary').textContent).toContain('XP EARNED: 2');
+  expect($('fulltoeic-result-summary').textContent).toContain('NOT SCORED: 1');
+  expect($('fulltoeic-result-review').textContent).toBe('');
+  expect(JSON.parse(localStorage.getItem('pixelWordHunter_toeic_full_mistakes_v1'))['smoke_test:6:0:1']).toBeUndefined();
+  // Skipping the unscored question is also neutral, not a missed answer.
+  $('fulltoeic-result-retry-btn').click();
+  optionByText('including').click();
+  $('full-next-btn').click();
+  $('full-next-btn').click();
+  await waitFor(() => expect(hidden('fulltoeic-result-modal')).toBe(false));
+  expect($('fulltoeic-result-summary').textContent).toContain('ACCURACY: 100%');
+  expect($('fulltoeic-result-summary').textContent).toContain('NOT SCORED: 1');
+  expect($('fulltoeic-result-review').textContent).toBe('');
   $('fulltoeic-result-next-btn').click();
   expect($('full-question').textContent).toContain('What is advertised?');
-  optionByText('Free classes').click();
+  // An unsupported choice is wrong; both accepted choices are highlighted.
+  optionByText('A contest').click();
+  expect(optionByText('A contest').classList.contains('wrong')).toBe(true);
+  expect(optionByText('Free classes').classList.contains('correct')).toBe(true);
+  expect(optionByText('Free workshops').classList.contains('correct')).toBe(true);
   await I18nManager.setLanguage('ru');
-  expect($('full-explanation-en').textContent).toBe('The notice advertises free classes.');
+  expect($('full-explanation-en').textContent).toBe('Both describe the free workshops.');
   expect($('full-explanation-ko').textContent).toBe('');
   await I18nManager.setLanguage('ko');
-  expect($('full-explanation-ko').textContent).toBe('안내문은 무료 수업을 광고합니다.');
+  expect($('full-explanation-ko').textContent).toBe('두 답 모두 무료 수업을 뜻합니다.');
   expect($('full-explanation-en').textContent).toBe('');
   await I18nManager.setLanguage('en');
   $('full-next-btn').click();
   await waitFor(() => expect(hidden('fulltoeic-result-modal')).toBe(false));
+  expect($('fulltoeic-result-summary').textContent).toContain('CORRECT: 0');
+  expect($('fulltoeic-result-summary').textContent).toContain('XP EARNED: 0');
+  expect($('fulltoeic-result-review').textContent)
+    .toContain('CORRECT ANSWER: Free classes / Free workshops');
+  // Retry, choose the alternative and ensure scoring and mistake cleanup work.
+  $('fulltoeic-result-retry-btn').click();
+  optionByText('Free workshops').click();
+  $('full-next-btn').click();
+  await waitFor(() => expect(hidden('fulltoeic-result-modal')).toBe(false));
+  expect($('fulltoeic-result-summary').textContent).toContain('CORRECT: 1');
+  expect($('fulltoeic-result-summary').textContent).toContain('XP EARNED: 2');
+  expect($('fulltoeic-result-review').textContent).toBe('');
+  expect(JSON.parse(localStorage.getItem('pixelWordHunter_toeic_full_mistakes_v1'))['smoke_test:7:0:0'])
+    .toBeUndefined();
 
   // CHOOSE PART → the part list gained a MISTAKES entry with both errors.
   $('fulltoeic-result-parts-btn').click();
@@ -511,6 +586,7 @@ it('runs a full TOEIC test through the real UI', async () => {
   expect($('full-explanation-ko').textContent).toBe('');
   $('full-next-btn').click();
   expect($('full-question').textContent).toContain('What is the budget?');
+  expect($('full-source-warning').textContent).toBe('Диаграмма нечёткая.');
   expect(hidden('full-graphic-box')).toBe(false);
   expect($('full-graphic-content').querySelector('img').getAttribute('src'))
     .toBe('full-toeic-graphics/actual_test_2026_10_67.png');

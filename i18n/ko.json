@@ -186,6 +186,8 @@
   "full_explanation_missing_en": "원본에 이 문제의 영어 해설이 없습니다.",
   "full_explanation_missing_ko": "원본에 이 문제의 한국어 해설이 없습니다.",
   "full_explanation_ko_fallback": "한국어 해설이 없어 영어 해설을 표시합니다.",
+  "full_unscored_warning": "원문만으로 정답 하나를 정할 수 없습니다. 이 문제는 점수나 XP에 반영되지 않습니다.",
+  "full_unscored_count": "채점 제외",
   "full_test_complete": "// 부분 완료 //",
   "full_retry_part": "부분 다시",
   "full_next_part": "다음 부분",

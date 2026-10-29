@@ -186,6 +186,8 @@
   "full_explanation_missing_en": "No English explanation is available for this question in the source.",
   "full_explanation_missing_ko": "No Korean explanation is available for this question in the source.",
   "full_explanation_ko_fallback": "A Korean explanation is unavailable; showing English instead.",
+  "full_unscored_warning": "The source does not establish a unique answer. This question does not affect your score or XP.",
+  "full_unscored_count": "NOT SCORED",
   "full_test_complete": "// PART COMPLETE //",
   "full_retry_part": "RETRY PART",
   "full_next_part": "NEXT PART",

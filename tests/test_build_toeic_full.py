@@ -140,13 +140,17 @@ class ListeningConversionTests(unittest.TestCase):
                             self.assertNotIn('image', graphic)
                         if source_html:
                             html_count += 1
+                            if (test['id'], part['part'], parsed['itemIndex']) == ('new_economy_2018_test_04', 3, 10):
+                                self.assertIn('3 barrel nuts', parsed['audio'])
+                                source_html = source_html.replace('Barrel Buts', 'Barrel Nuts')
                             self.assertEqual(graphic.get('html'), source_html)
                         else:
                             self.assertNotIn('html', graphic)
         self.assertEqual((image_count, html_count), (43, 25))
 
-    def test_rebuild_is_reproducible_and_keeps_every_source_key(self):
+    def test_rebuild_is_reproducible_and_only_documented_keys_change(self):
         checked = 0
+        seen_revisions = set()
         for test in BANK['tests']:
             source = json.loads((ROOT / 'ALL_TOEIC_TESTS' / f"{test['id']}.json").read_text(encoding='utf-8'))
             rebuilt, warnings = builder.convert_test(source, source_id=test['id'])
@@ -154,23 +158,33 @@ class ListeningConversionTests(unittest.TestCase):
             self.assertEqual(warnings, [])
             self.assertEqual(rebuilt, test)
             for part in test['parts']:
+                part_no = part['part']
                 for parsed in part['items']:
-                    raw = source[f"part{part['part']}"][parsed['itemIndex']]
+                    raw = source[f'part{part_no}'][parsed['itemIndex']]
+                    if part_no in (3, 4, 6, 7):
+                        before = builder.PARSERS[part_no](raw, source_id=test['id'], part_no=part_no,
+                                                          item_index=parsed['itemIndex'])
+                    else:
+                        before = builder.PARSERS[part_no](raw)
                     for index, question in enumerate(parsed['questions']):
-                        raw_options = raw['questions'][index]['options']
-                        keys = [i for i, opt in enumerate(raw_options) if re.match(r'^key:', opt.strip(), re.I)]
-                        self.assertEqual(len(keys), 1)
-                        if part['part'] == 2:
-                            self.assertEqual(question['correct'], question['options'][keys[0]])
+                        original = before['questions'][index]['correct']
+                        number = int(re.match(r'^\s*(\d+)', builder.strip_tags(raw['questions'][index]['question'])).group(1))
+                        revision_key = (test['id'], part_no, number)
+                        rule = builder.QUESTION_REVISIONS.get(revision_key)
+                        if rule:
+                            seen_revisions.add(revision_key)
+                            self.assertEqual(original, rule['old_answer'], revision_key)
+                            grading_changed = any((rule['stem'], rule['replace'], rule['correct'] is not None,
+                                                   rule['accepted'] is not None, rule['options'] is not None))
+                            self.assertEqual(question.get('answerRevision'), 1 if grading_changed else None, revision_key)
+                            self.assertTrue(question['explanation']['en'], revision_key)
+                            self.assertRegex(question['explanation']['ko'], r'[가-힣]', revision_key)
                         else:
-                            key = builder.split_correct(raw_options[keys[0]])
-                            key = re.sub(r'\{([^{}]*)\}', r'\1', key)
-                            source_key = (test['id'], part['part'], parsed['itemIndex'])
-                            for old, new in builder.OPTION_CORRECTIONS.get(source_key, []):
-                                key = key.replace(old, new)
-                            self.assertEqual(question['correct'], key)
+                            self.assertEqual(question['correct'], original, revision_key)
+                            self.assertNotIn('answerRevision', question)
                         checked += 1
         self.assertEqual(checked, 2328)
+        self.assertEqual(seen_revisions, set(builder.QUESTION_REVISIONS))
 
 
 class ReadingExplanationConversionTests(unittest.TestCase):
@@ -263,9 +277,9 @@ class ReadingExplanationConversionTests(unittest.TestCase):
         self.assertEqual(questions[0]['correct'], 'It does not fit')
         self.assertIn('medium-sized', questions[0]['explanation']['en'])
         self.assertIn('스몰', questions[0]['explanation']['ko'])
-        self.assertIn('official members', questions[2]['explanation']['en'])
+        self.assertEqual(questions[2]['correct'], 'She asked to exchange a sweater for a different size.')
         self.assertIn('tracking number', questions[2]['explanation']['en'])
-        self.assertIn('공식 회원', questions[2]['explanation']['ko'])
+        self.assertIn('회원', questions[2]['explanation']['ko'])
 
     def test_language_fields_do_not_put_korean_in_the_english_explanation(self):
         for test in BANK['tests']:
@@ -279,6 +293,135 @@ class ReadingExplanationConversionTests(unittest.TestCase):
                             self.assertNotRegex(ko, r'[{}|]', (test['id'], question['question']))
                         if part['part'] in (6, 7) and ko:
                             self.assertRegex(ko, r'[가-힣]', (test['id'], part['part'], question['question']))
+
+class SemanticRevisionTests(unittest.TestCase):
+    @staticmethod
+    def question(test_id, part, number):
+        offset = {2: 7, 3: 32, 4: 71, 5: 101, 6: 131, 7: 147}[part]
+        questions = [q for group in next(p for p in TESTS[test_id]['parts'] if p['part'] == part)['items']
+                     for q in group['questions']]
+        return questions[number - offset]
+
+    def test_incorrect_listening_and_reading_keys(self):
+        cases = [
+            ('new_economy_2018_test_21', 2, 17, 'Sometime next month, I think.'),
+            ('new_economy_2018_test_05', 4, 87, 'Members of the center should come in the afternoon.'),
+            ('new_economy_2018_test_20', 3, 67, 'Take a bus'),
+            ('new_economy_2018_test_20', 4, 81, 'Take notes on the meeting'),
+            ('new_economy_2018_test_21', 3, 55, 'She will cancel her last meeting.'),
+            ('new_economy_2018_test_21', 3, 62, 'Inspectors in the building next door'),
+            ('new_economy_2018_test_09', 4, 81, 'After-school activities'),
+            ('new_economy_2018_test_09', 6, 140, 'must be'),
+            ('new_economy_2018_test_09', 7, 195, 'Customer service'),
+            ('actual_test_2026_12', 7, 198, 'Her products are sold in sealed jars.'),
+            ('hacker_new_toeic_test_02', 7, 195, 'It launched a marketing campaign in the United States.'),
+        ]
+        for test_id, part, number, expected in cases:
+            with self.subTest(test=test_id, part=part, number=number):
+                q = self.question(test_id, part, number)
+                self.assertEqual(q['correct'], expected)
+                self.assertIn(expected, q['options'])
+                self.assertTrue(q['explanation']['en'])
+                self.assertRegex(q['explanation']['ko'], r'[가-힣]')
+
+    def test_ambiguities_have_all_and_only_supported_choices(self):
+        cases = [
+            ('hacker_new_toeic_test_02', 2, 28, {"Let's relax here a bit longer.", "OK, if you're done swimming."}),
+            ('new_economy_2018_test_02', 5, 118, {'Provided that', 'Seeing that'}),
+            ('actual_test_2026_11', 6, 133, {'Approved amounts will be added to the next scheduled paycheck.',
+                                             'Receipts should be kept for your personal records.'}),
+            ('new_economy_2018_test_04', 3, 63, {'Barrel nuts', 'Allen key'}),
+            ('new_economy_2018_test_04', 6, 140, {'estimate', 'calculate'}),
+            ('new_economy_2018_test_05', 6, 136, {'over', 'around'}),
+            ('new_economy_2018_test_08', 6, 137,
+             {'During this time, your temporary workspace will be the first-floor conference room.',
+              'If it takes longer, we will notify you.'}),
+            ('new_economy_2018_test_10', 3, 70, {'Express-post it to her', 'Deliver it to her'}),
+            ('new_economy_2018_test_08', 7, 188, {'main office', 'base'}),
+            ('new_economy_2018_test_20', 7, 162, {'A fashion company', 'A clothing shop'}),
+            ('new_economy_2018_test_21', 7, 200,
+             {'It was a manufacturing defect.', 'Melisa Perkins included her receipt of sale from an authorized Red Rock Leather Goods store.'}),
+        ]
+        for test_id, part, number, expected in cases:
+            with self.subTest(test=test_id, part=part, number=number):
+                q = self.question(test_id, part, number)
+                self.assertEqual(set(q['acceptedAnswers']), expected)
+                self.assertIn(q['correct'], expected)
+                self.assertTrue(expected.issubset(q['options']))
+                self.assertGreater(len(set(q['options']) - expected), 0)  # rejects at least one
+        all_choices = self.question('new_economy_2018_test_04', 6, 142)
+        self.assertEqual(set(all_choices['acceptedAnswers']), set(all_choices['options']))
+        self.assertTrue(all_choices['unscored'])
+        self.assertIn('not scored', all_choices['explanation']['en'])
+
+    def test_changed_questions_remove_unsupported_assumptions(self):
+        q = self.question('new_economy_2018_test_20', 4, 99)
+        self.assertIn('sign', q['question'])
+        self.assertIn('customer service', q['explanation']['en'].lower())
+        q = self.question('new_economy_2018_test_04', 4, 99)
+        self.assertIn('range of times', q['question'])
+        self.assertIn('does not establish', q['explanation']['en'])
+        q = self.question('new_economy_2018_test_21', 4, 99)
+        self.assertIn('Besides hosting', q['question'])
+        self.assertEqual(q['correct'], 'Constellation guide')
+        q = self.question('new_economy_2018_test_10', 7, 182)
+        self.assertIn('NOT mentioned', q['question'])
+        self.assertEqual(q['correct'], 'Hardwood floor polishing')
+        q = self.question('new_economy_2018_test_09', 7, 199)
+        self.assertEqual(q['correct'], '$25 per person')
+        self.assertIn('not given', q['explanation']['en'])
+
+    def test_editorial_audio_and_known_source_warnings(self):
+        footnote = item('hacker_new_toeic_test_02', 3, 6)
+        self.assertNotIn('*pamphlet', footnote['audio'])
+        self.assertNotIn('*handout', footnote['audio'])
+        self.assertIn('informational pamphlet', footnote['audio'])
+        self.assertEqual(footnote['audio'], ' '.join(turn['text'] for turn in footnote['turns']))
+        bus = item('new_economy_2018_test_04', 4, 7)
+        self.assertNotIn('d to ons', bus['audio'])
+        self.assertIn('Now sit back, relax', bus['audio'])
+        landscaping = item('new_economy_2018_test_05', 6, 1)
+        self.assertIn('assess the situation', landscaping['description'])
+        self.assertNotIn('access the situation', landscaping['description'])
+        self.assertNotIn('131. communication', item('new_economy_2018_test_02', 6, 0)['description'])
+        self.assertNotIn('(139) ------</span>/', item('new_economy_2018_test_04', 6, 2)['description'])
+        self.assertNotIn('as 133. best', item('new_economy_2018_test_09', 6, 0)['description'])
+        self.assertIn("five years'", item('new_economy_2018_test_08', 6, 3)['description'])
+        self.assertIn('before becoming active', item('new_economy_2018_test_10', 6, 2)['description'])
+        cook = item('new_economy_2018_test_20', 6, 1)
+        self.assertIn('This schedule could change', cook['description'])
+        self.assertIn('이 일정은', cook['descriptionKo'])
+        graphic = item('new_economy_2018_test_04', 3, 10)
+        self.assertIn('Barrel Nuts', graphic['graphic']['html'])
+        self.assertNotIn('Barrel Buts', graphic['graphic']['html'])
+        for test_id, part, index in builder.SOURCE_WARNINGS:
+            warning = item(test_id, part, index)['sourceWarning']
+            self.assertEqual(set(warning), {'en', 'ru', 'ko'})
+            self.assertTrue(all(warning.values()))
+
+    def test_revisions_reject_changed_source_data(self):
+        question = {'question': "Isn't Mary having a baby?", 'options': [
+            "Of course. I'd love to.", 'Sometime next month, I think.', 'No, it was a baby toy.'],
+            'correct': 'a different source key', 'explanation': {'en': '', 'ko': ''}}
+        with self.assertRaisesRegex(ValueError, 'Source answer no longer matches'):
+            builder.apply_question_revision({'audio': question['question']}, question,
+                                             ('new_economy_2018_test_21', 2, 17))
+        question['correct'] = "Of course. I'd love to."
+        question['options'].remove('Sometime next month, I think.')
+        with self.assertRaisesRegex(ValueError, 'Invalid revised options'):
+            builder.apply_question_revision({'audio': question['question']}, question,
+                                             ('new_economy_2018_test_21', 2, 17))
+        unsupported = {'question': 'What does the woman suggest?',
+                       'options': ['Take the subway', 'Take a bus'],
+                       'correct': 'Take the subway', 'explanation': {'en': '', 'ko': ''}}
+        with self.assertRaisesRegex(ValueError, 'Revision evidence no longer matches'):
+            builder.apply_question_revision({'audio': 'The transcript has changed.'}, unsupported,
+                                             ('new_economy_2018_test_20', 3, 67))
+        wrong_stem = {'question': 'A different question', 'options': ['It broke this morning.'],
+                      'correct': 'It broke this morning.', 'explanation': {'en': '', 'ko': ''}}
+        with self.assertRaisesRegex(ValueError, 'Question stem no longer matches'):
+            builder.apply_question_revision({'audio': wrong_stem['question']}, wrong_stem,
+                                             ('new_economy_2018_test_10', 2, 11))
 
 
 if __name__ == '__main__':

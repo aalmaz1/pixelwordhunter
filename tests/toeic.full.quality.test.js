@@ -58,6 +58,28 @@ describe('Full TOEIC test bank quality', () => {
     expect(offenders, 'question(s) without exactly one matching key').toEqual([]);
   });
 
+  it('accepts only distinct, visible alternatives and keeps a primary key', () => {
+    let ambiguous = 0;
+    for (const test of bank.tests) {
+      for (const part of test.parts) {
+        for (const item of part.items) {
+          for (const q of item.questions) {
+            if (!q.acceptedAnswers) continue;
+            ambiguous += 1;
+            expect(q.acceptedAnswers.length).toBeGreaterThanOrEqual(2);
+            expect(new Set(q.acceptedAnswers).size).toBe(q.acceptedAnswers.length);
+            expect(q.acceptedAnswers).toContain(q.correct);
+            for (const answer of q.acceptedAnswers) expect(q.options).toContain(answer);
+            expect(Boolean(q.unscored)).toBe(q.acceptedAnswers.length === q.options.length);
+            expect(q.explanation.en).toBeTruthy();
+            expect(q.explanation.ko).toMatch(/[가-힣]/);
+          }
+        }
+      }
+    }
+    expect(ambiguous).toBeGreaterThan(5);
+  });
+
   it('contains no duplicate questions inside a test', () => {
     const offenders = [];
     for (const test of bank.tests) {
@@ -184,7 +206,9 @@ describe('Full TOEIC test bank quality', () => {
           }
           if (raw.description?.trim()) {
             descriptions += 1;
-            expect(item.graphic?.html, test.id).toBe(raw.description.trim());
+            const expected = test.id === 'new_economy_2018_test_04' && part.part === 3 && item.itemIndex === 10
+              ? raw.description.trim().replace('Barrel Buts', 'Barrel Nuts') : raw.description.trim();
+            expect(item.graphic?.html, test.id).toBe(expected);
           } else {
             expect(item.graphic?.html).toBeUndefined();
           }
@@ -226,9 +250,9 @@ describe('Full TOEIC test bank quality', () => {
     // The source has gaps; English-only or answer-only text is not Korean
     // reasoning. Freeze the exact exceptions so new omissions cannot hide.
     const expectedMissingEn = [
-      'new_economy_2018_test_02:7:4:2', 'new_economy_2018_test_02:7:9:3',
+      'new_economy_2018_test_02:7:9:3',
       'new_economy_2018_test_02:7:11:0', 'new_economy_2018_test_02:7:12:0',
-      'new_economy_2018_test_02:7:13:2', 'new_economy_2018_test_02:7:13:4',
+      'new_economy_2018_test_02:7:13:2',
       'new_economy_2018_test_02:7:14:1', 'new_economy_2018_test_05:7:9:3',
       'new_economy_2018_test_08:6:0:3', 'new_economy_2018_test_10:6:0:3',
     ];

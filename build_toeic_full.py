@@ -31,6 +31,8 @@ import re
 import sys
 from pathlib import Path
 
+from toeic_full_corrections import QUESTION_REVISIONS
+
 SOURCE_DIR = Path('ALL_TOEIC_TESTS')
 OUT_PATH = Path('toeic_web_app/toeic_full_tests.json')
 GRAPHICS_DIR = Path('public/full-toeic-graphics')
@@ -64,7 +66,13 @@ WRONG_TRANSCRIPT_MARKERS = {
 # Obvious transcription mistakes, kept separate from the unchanged source JSON.
 # The question about the research center itself confirms "nine months".
 TRANSCRIPT_CORRECTIONS = {
+    ('hacker_new_toeic_test_02', 3, 6): [(
+        '<br/><br/><b>*pamphlet:</b> a thin book with only a few pages that gives information or an opinion about something'
+        '<br/><b>*handout:</b> a document given to students or reporters that contains information about a particular subject',
+        '',
+    )],
     ('hacker_new_toeic_test_02', 4, 1): [('mine months', 'nine months')],
+    ('new_economy_2018_test_04', 4, 7): [("Now d to ons. than e'll to rs ny sit back", 'Now sit back')],
     ('new_economy_2018_test_02', 3, 7): [('on my way to appointment', 'on my way to an appointment')],
     ('new_economy_2018_test_05', 3, 0): [('marketing W department', 'marketing department')],
     ('new_economy_2018_test_05', 3, 6): [("this it month's", "this month's")],
@@ -690,6 +698,191 @@ def parse_part7(item, source_id='', part_no=7, item_index=-1):
 PARSERS = {2: parse_part2, 3: parse_part34, 4: parse_part34, 5: parse_part5, 6: parse_part6, 7: parse_part7}
 
 
+# These source defects cannot be resolved safely from the local material. Show
+# a notice in the exercise itself instead of silently inventing image values.
+SOURCE_WARNINGS = {
+    ('actual_test_2026_12', 3, 11): {
+        'en': 'Source note: the receipt’s recorded discount does not match the stated promotion. The qualifying service is still identifiable.',
+        'ru': 'Примечание: скидка в чеке не совпадает с условиями акции. При этом нужную услугу можно определить.',
+        'ko': '원본 주의: 영수증의 할인액이 안내된 할인 조건과 일치하지 않습니다. 해당 서비스는 확인할 수 있습니다.',
+    },
+    ('new_economy_2018_test_09', 3, 11): {
+        'en': 'Source note: the graphic’s nutrient weights exceed the stated serving size; the original values cannot be verified.',
+        'ru': 'Примечание: сумма веществ на изображении превышает размер порции. Проверить исходные значения невозможно.',
+        'ko': '원본 주의: 그림의 영양소 중량 합계가 1회 제공량보다 큽니다. 원래 수치를 확인할 수 없습니다.',
+    },
+    ('new_economy_2018_test_21', 3, 10): {
+        'en': 'Source note: one time range in the graphic appears to use an inconsistent A.M. label.',
+        'ru': 'Примечание: в одном из интервалов изображения обозначение A.M., вероятно, указано ошибочно.',
+        'ko': '원본 주의: 그림의 한 시간대에 오전 표기가 잘못된 것으로 보입니다.',
+    },
+    ('new_economy_2018_test_21', 4, 9): {
+        'en': 'Source note: the graphic labels midnight as 12:00 P.M.; interpret the timeline with care.',
+        'ru': 'Примечание: на изображении полночь обозначена как 12:00 P.M.; внимательно изучите расписание.',
+        'ko': '원본 주의: 그림은 자정을 12:00 P.M.으로 표기하므로 시간표를 주의해서 확인하세요.',
+    },
+    ('hacker_new_toeic_test_02', 7, 13): {
+        'en': 'Source note: the invoice total does not equal the listed charges. The original figures cannot be verified.',
+        'ru': 'Примечание: итог в счёте не равен сумме указанных услуг. Исходные числа проверить невозможно.',
+        'ko': '원본 주의: 청구서의 합계가 기재된 금액의 합과 다릅니다. 원래 수치를 확인할 수 없습니다.',
+    },
+    ('new_economy_2018_test_02', 6, 1): {
+        'en': 'Source note: the advertisement identifies both Houston and Denver as its location; the intended city cannot be confirmed.',
+        'ru': 'Примечание: в объявлении указаны и Хьюстон, и Денвер; установить нужный город нельзя.',
+        'ko': '원본 주의: 광고에 휴스턴과 덴버가 모두 등장합니다. 어느 도시가 맞는지 확인할 수 없습니다.',
+    },
+    ('new_economy_2018_test_02', 7, 10): {
+        'en': 'Source note: the invoice total conflicts with its itemized charges, and the delivery-guarantee deadline is unreadable.',
+        'ru': 'Примечание: итог счёта расходится с суммой позиций, а срок гарантированной доставки невозможно прочитать.',
+        'ko': '원본 주의: 청구서 합계가 세부 금액의 합과 다르고 배송 보장 기한을 읽기 어렵습니다.',
+    },
+    ('new_economy_2018_test_04', 7, 10): {
+        'en': 'Source note: the email is dated after the stated interview date; the intended date cannot be confirmed.',
+        'ru': 'Примечание: письмо датировано позже указанного собеседования; правильную дату установить нельзя.',
+        'ko': '원본 주의: 이메일 날짜가 명시된 면접일보다 늦습니다. 원래 날짜는 확인할 수 없습니다.',
+    },
+    ('new_economy_2018_test_10', 5, 0): {
+        'en': 'Source note: one answer choice was duplicated in the source; only three distinct choices are available.',
+        'ru': 'Примечание: один вариант в источнике повторяется, поэтому доступны только три разных ответа.',
+        'ko': '원본 주의: 선택지 하나가 중복되어 서로 다른 선택지가 세 개뿐입니다.',
+    },
+    ('new_economy_2018_test_10', 6, 3): {
+        'en': 'Source note: one answer choice in this passage was duplicated; the original missing choice is unavailable.',
+        'ru': 'Примечание: один вариант в этом тексте повторяется; восстановить недостающий вариант нельзя.',
+        'ko': '원본 주의: 이 지문의 선택지 하나가 중복되어 빠진 선택지를 복원할 수 없습니다.',
+    },
+}
+
+
+def replace_once(value, old, new, key):
+    if value.count(old) != 1:
+        raise ValueError(f'Source correction no longer matches {key}: {old!r}')
+    return value.replace(old, new, 1)
+
+
+def correct_source_item(parsed, source_key):
+    """Repair locally supported source defects under explicit guards."""
+    if source_key == ('new_economy_2018_test_05', 6, 1):
+        parsed['description'] = replace_once(
+            parsed['description'], 'stop by and access the situation',
+            'stop by and assess the situation', source_key)
+    if source_key == ('new_economy_2018_test_02', 6, 0):
+        parsed['description'] = replace_once(
+            parsed['description'], 'computer skills, 131. communication strategies',
+            'computer skills, communication strategies', source_key)
+    if source_key == ('new_economy_2018_test_04', 6, 2):
+        parsed['description'] = replace_once(
+            parsed['description'], '(139) ------</span>/', '(139) ------</span>', source_key)
+    if source_key == ('new_economy_2018_test_09', 6, 0):
+        parsed['description'] = replace_once(
+            parsed['description'], 'their customers as 133. best they can',
+            'their customers as best they can', source_key)
+    if source_key == ('new_economy_2018_test_08', 6, 3):
+        parsed['description'] = replace_once(
+            parsed['description'], "five year's", "five years'", source_key)
+    if source_key == ('new_economy_2018_test_10', 6, 2):
+        parsed['description'] = replace_once(
+            parsed['description'], 'before coming active', 'before becoming active', source_key)
+    if source_key == ('new_economy_2018_test_20', 6, 1):
+        # The preceding keyed sentence offers weekday shifts and only asks
+        # applicants to be willing to work weekends; no weekend schedule exists.
+        parsed['description'] = replace_once(
+            parsed['description'], 'This weekend schedule could change',
+            'This schedule could change', source_key)
+        if parsed.get('descriptionKo'):
+            parsed['descriptionKo'] = replace_once(
+                parsed['descriptionKo'], '이 주말 일정은', '이 일정은', source_key)
+    if source_key == ('new_economy_2018_test_04', 3, 10):
+        parsed['graphic']['html'] = replace_once(
+            parsed['graphic']['html'], 'Barrel Buts', 'Barrel Nuts', source_key)
+    if source_key == ('hacker_new_toeic_test_02', 7, 9):
+        parsed['description'] = replace_once(
+            parsed['description'],
+            'The new Sanchez Museum of Iberian Art and its nearby conference facilities to rail services from Valancia to Madrid and Barcelona have reduced travel time significantly.',
+            'The new Sanchez Museum of Iberian Art and its nearby conference facilities are among these factors. Improvements to rail services from Valencia to Madrid and Barcelona have reduced travel time significantly.',
+            source_key,
+        )
+    if source_key == ('new_economy_2018_test_02', 7, 12):
+        description = parsed['description']
+        # The table repeats this exact row verbatim; the reply references the
+        # same media lab, identified as room 202 twice in that table.
+        rows = re.findall(r'<tr>[^<]*<td[^>]*>April 16 5:00 P\.M\.</td>.*?</tr>', description)
+        if len(rows) != 2 or rows[0] != rows[1] or rows[0] + rows[1] not in description:
+            raise ValueError(f'Duplicate schedule row no longer matches {source_key}')
+        description = description.replace(rows[0] + rows[1], rows[0], 1)
+        description = replace_once(description, 'this is room 3A.', 'this is room 202.', source_key)
+        old_header = ("<b>To: </b>Richard White &lt;rwhite@newtonlibrary.edu&gt;<br/>"
+                      "<b>From: </b>Linda Carter &lt;lcarter121 @seprus.com&gt;<br/>"
+                      "<b>Date: </b>April 2")
+        new_header = ("<b>To: </b>Linda Carter &lt;lcarter121 @seprus.com&gt;<br/>"
+                      "<b>From: </b>Richard White &lt;rwhite@newtonlibrary.edu&gt;<br/>"
+                      "<b>Date: </b>April 2")
+        parsed['description'] = replace_once(description, old_header, new_header, source_key)
+    if source_key == ('new_economy_2018_test_02', 7, 14):
+        old_header = ("<b>To: </b>Sally Nelson &lt;snelson@clandon.net&gt;<br/>"
+                      "<b>From: </b>Debra Clarke &lt;debraclarke@fourseasons.com&gt;<br/>"
+                      "<b>Date: </b>May 4")
+        new_header = ("<b>To: </b>Debra Clarke &lt;debraclarke@fourseasons.com&gt;<br/>"
+                      "<b>From: </b>Sally Nelson &lt;snelson@clandon.net&gt;<br/>"
+                      "<b>Date: </b>May 4")
+        parsed['description'] = replace_once(parsed['description'], old_header, new_header, source_key)
+    if source_key in SOURCE_WARNINGS:
+        parsed['sourceWarning'] = SOURCE_WARNINGS[source_key].copy()
+
+
+def apply_question_revision(parsed, question, key):
+    rule = QUESTION_REVISIONS.get(key)
+    if not rule:
+        return
+    if question['correct'] != rule['old_answer']:
+        raise ValueError(f'Source answer no longer matches revision {key}')
+    context = ' '.join([
+        parsed.get('audio', ''), strip_tags(parsed.get('description', '')),
+        strip_tags(parsed.get('graphic', {}).get('html', '')), question['question'],
+    ])
+    for fragment in rule['evidence']:
+        if fragment not in context:
+            raise ValueError(f'Revision evidence no longer matches {key}: {fragment!r}')
+    if rule['stem']:
+        old, new = rule['stem']
+        if question['question'] != old:
+            raise ValueError(f'Question stem no longer matches revision {key}')
+        question['question'] = new
+        if parsed.get('audio') == old:  # Part 2 speaks the question itself.
+            parsed['audio'] = new
+    for old, new in rule['replace'].items():
+        if question['options'].count(old) != 1:
+            raise ValueError(f'Option no longer matches revision {key}: {old!r}')
+        question['options'] = [new if option == old else option for option in question['options']]
+        if question['correct'] == old:
+            question['correct'] = new
+    if rule['options'] is not None:
+        question['options'] = rule['options'][:]
+    if rule['correct'] is not None:
+        question['correct'] = rule['correct']
+    if question['correct'] not in question['options'] or len(set(question['options'])) != len(question['options']):
+        raise ValueError(f'Invalid revised options or primary answer {key}')
+    if rule['accepted'] is not None:
+        accepted = rule['accepted'][:]
+        if (len(accepted) < 2 or len(set(accepted)) != len(accepted)
+                or question['correct'] not in accepted
+                or any(answer not in question['options'] for answer in accepted)):
+            raise ValueError(f'Invalid accepted answers {key}')
+        question['acceptedAnswers'] = accepted
+        # If every option works, there is no meaningful single-answer grade.
+        if len(accepted) == len(question['options']):
+            question['unscored'] = True
+    for lang in ('en', 'ko'):
+        if rule[lang] is not None:
+            question['explanation'][lang] = rule[lang]
+    # Older local mistake records contain only counts, not the selected answer.
+    # Clear them only when the stem, options or grading changed; explanation-only
+    # edits do not invalidate a learner's existing mistake history.
+    if any((rule['stem'], rule['replace'], rule['correct'] is not None,
+            rule['accepted'] is not None, rule['options'] is not None)):
+        question['answerRevision'] = 1
+
+
 def convert_test(data, source_id=''):
     test = {
         'id': source_id or data.get('testName', '').lower().replace(' ', '_').replace('-', '_'),
@@ -713,6 +906,18 @@ def convert_test(data, source_id=''):
             if parsed is None:
                 warnings.append(f'{test["id"]} part {part_no} item {idx}: unparseable')
                 continue
+            source_key = (source_id, part_no, idx)
+            correct_source_item(parsed, source_key)
+            raw_questions = item.get('questions', [])
+            if len(raw_questions) != len(parsed['questions']):
+                raise ValueError(f'Question alignment no longer matches {source_key}')
+            for raw_question, question in zip(raw_questions, parsed['questions']):
+                match = re.match(r'^\s*(\d+)\b', strip_tags(raw_question.get('question', '')))
+                if not match:
+                    raise ValueError(f'Missing source question number in {source_key}')
+                apply_question_revision(parsed, question, (source_id, part_no, int(match.group(1))))
+            if 'hasEnExplanation' in parsed:
+                parsed['hasEnExplanation'] = all(q['explanation']['en'].strip() for q in parsed['questions'])
             parsed['itemIndex'] = idx
             part['items'].append(parsed)
         test['parts'].append(part)
@@ -742,7 +947,16 @@ def validate(test, warnings):
                 if q.get('correct') not in q.get('options', []):
                     warnings.append(f'{test["id"]} p{p["part"]}: correct answer missing from options')
                 if len([o for o in q.get('options', []) if o == q.get('correct')]) != 1:
-                    warnings.append(f'{test["id"]} p{p["part"]}: ambiguous key')
+                    warnings.append(f'{test["id"]} p{p["part"]}: ambiguous primary key')
+                accepted = q.get('acceptedAnswers')
+                if accepted is not None and (
+                    len(accepted) < 2 or len(set(accepted)) != len(accepted)
+                    or q.get('correct') not in accepted
+                    or any(answer not in q.get('options', []) for answer in accepted)
+                ):
+                    warnings.append(f'{test["id"]} p{p["part"]}: invalid accepted answers')
+                if bool(q.get('unscored')) != bool(accepted and set(accepted) == set(q.get('options', []))):
+                    warnings.append(f'{test["id"]} p{p["part"]}: inconsistent unscored question')
     n = count_questions(test)
     if n != EXPECTED_QUESTIONS:
         warnings.append(f'{test["id"]}: {n} questions (expected {EXPECTED_QUESTIONS})')

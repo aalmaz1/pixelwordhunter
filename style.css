@@ -1459,6 +1459,12 @@ body.lang-ko .recall-form input {
   width: 100%;
 }
 
+.toeic-option.unscored-selected:disabled {
+  opacity: 1 !important;
+  border-color: var(--neon-yellow);
+  box-shadow: 0 0 8px rgba(255, 230, 0, .25);
+}
+
 .toeic-option-letter {
   flex-shrink: 0;
   width: 26px;
@@ -1643,6 +1649,20 @@ body.lang-ko .toeic-review-title { font-size: 12px !important; letter-spacing: 1
   color: var(--neon-purple);
   margin-bottom: 8px;
   text-shadow: 0 0 6px rgba(191,95,255,.6);
+}
+
+/* A source defect is surfaced without changing or guessing its original data. */
+.full-source-warning {
+  white-space: pre-line;
+  width: 100%;
+  max-width: 640px;
+  padding: 10px 12px;
+  border-left: 4px solid var(--neon-yellow);
+  background: rgba(255, 230, 0, .08);
+  color: var(--text-dim);
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 /* Listening aids: replay, optional transcript, and the source's visual. */
