@@ -169,10 +169,15 @@ export default defineConfig({
         // Precache them explicitly so a first successful online load guarantees
         // that every interface language remains available offline. The large
         // word-bank JSON keeps its separately versioned entry below.
+        // Listening graphics include both PNG and JPEG; precache both so an
+        // offline full-test question never loses the image needed to solve it.
         globPatterns: [
-          '**/*.{js,css,html,ico,png,svg,woff2}',
+          '**/*.{js,css,html,ico,png,jpg,jpeg,svg,woff2}',
           'assets/i18n/*.json'
         ],
+        // The lazy full-test bank is already close to Workbox's 2 MiB default.
+        // Keep it available offline even as transcripts/graphics metadata grow.
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         // Vite's default /^assets\// rule strips revisions from everything under
         // assets/, which left unhashed files (assets/i18n/*.json, assets/icon-192.png)
         // with revision: null in the precache manifest and prevented Service Worker

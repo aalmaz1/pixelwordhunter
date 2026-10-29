@@ -22,7 +22,6 @@ import {
   trapFocus, isTypingTarget, isActivatableTarget, moveFocusWithin, isRendered
 } from './ui.js';
 import { sanitizeDescriptionHtml } from './sanitize.js';
-import { getPart5SimplifiedExplanation } from './part5_explanations.js';
 import { createSpeechPlayer } from './speech.js';
 
 // ==================== SMALL HELPERS ====================
@@ -1061,6 +1060,7 @@ const fullToeic = {
   answers: {},
   score: 0,
   descLang: 'en',      // passage display language
+  showTranscript: true, // optional reading aid; can be hidden for listening practice
 };
 
 async function ensureFullToeicData() {
@@ -1143,23 +1143,24 @@ function showFullPartList() {
   toggleScreen('fullpart');
 }
 
-// A run shuffles items (passage groups / dialogues) and the options of every
-// question, but keeps each item's questions together — a reading passage must
-// stay with the questions that belong to it.
+// Shuffle dialogue/passage groups and choices, but keep a group's questions
+// in their original order so they follow the conversation or passage.
 function buildFullPartRun(part) {
   const items = shuffleArray(part.items);
   const run = [];
   items.forEach((item) => {
     const origItemIndex = part.items.indexOf(item);
-    const qs = shuffleArray(item.questions);
-    qs.forEach((q) => {
+    item.questions.forEach((q, origQIndex) => {
       run.push({
         ...q,
         audio: item.audio || null,
+        turns: item.turns || null,
+        graphic: item.graphic || null,
         description: item.description || null,
         descriptionKo: item.descriptionKo || null,
         origItemIndex,
-        origQIndex: item.questions.indexOf(q),
+        origQIndex,
+        partNumber: part.part,
       });
     });
   });
@@ -1203,6 +1204,8 @@ function fullToeicMistakesForTest(testId) {
           run.push({
             ...q,
             audio: item.audio || null,
+            turns: item.turns || null,
+            graphic: item.graphic || null,
             description: item.description || null,
             descriptionKo: item.descriptionKo || null,
             origItemIndex: itemIndex,
@@ -1233,6 +1236,7 @@ function startFullPart(part, title, source = 'part', partIndex = -1) {
   fullToeic.descLang = 'en';
   setTxt($('full-test-name'), fullToeic.testName);
   toggleScreen('fulltoeicgame');
+  $('fulltoeicgame-screen').scrollTop = 0;
   renderFullQuestion();
 }
 
@@ -1253,6 +1257,111 @@ function renderFullDescription() {
   if (m) descEl.querySelector(`.toeic-blank[data-blank="${m[1]}"]`)?.classList.add('active');
 }
 
+// The source labels are metadata, not spoken words.  Keep the identities in
+// readable English because some questions ask what the man/woman said.
+function speakerLabel(code) {
+  const match = /^([MW])(\d?)$/.exec(code || '');
+  if (!match) return '';
+  return `${match[1] === 'M' ? 'Man' : 'Woman'}${match[2] ? ` ${match[2]}` : ''}`;
+}
+
+function renderFullTranscript(q) {
+  const transcript = $('full-transcript');
+  const controls = $('full-listening-controls');
+  const toggle = $('full-transcript-toggle');
+  const differs = q.audio && q.audio.trim() !== (q.question || '').trim();
+  controls.classList.toggle('hidden', !q.audio);
+  toggle.classList.toggle('hidden', !differs);
+  transcript.textContent = '';
+  if (differs) {
+    transcript.textContent = q.turns?.length
+      ? q.turns.map((turn) => {
+        const label = speakerLabel(turn.speaker);
+        return label ? `${label}: ${turn.text}` : turn.text;
+      }).join('\n\n')
+      : q.audio;
+  }
+  transcript.classList.toggle('hidden', !differs || !fullToeic.showTranscript);
+  toggle.setAttribute('aria-expanded', String(!!differs && fullToeic.showTranscript));
+  setTxt(toggle, t(fullToeic.showTranscript ? 'hide_transcript' : 'show_transcript'));
+}
+
+function renderFullGraphic(q) {
+  const box = $('full-graphic-box');
+  const content = $('full-graphic-content');
+  content.replaceChildren();
+  const graphic = q.graphic || {};
+  // Only allow the local assets generated from the supplied source graphics.
+  const image = /^full-toeic-graphics\/[A-Za-z0-9_-]+\.(?:png|jpe?g)$/i.test(graphic.image || '')
+    ? graphic.image : '';
+  const html = typeof graphic.html === 'string' ? graphic.html.trim() : '';
+  box.classList.toggle('hidden', !image && !html);
+  if (image) {
+    const link = mk('a', 'full-graphic-link');
+    link.href = image; // relative to the app, including subpath deployments
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.lang = I18nManager.getCurrentLanguage();
+    link.setAttribute('aria-label', t('listening_graphic_open'));
+    link.title = t('listening_graphic_open');
+    const img = document.createElement('img');
+    img.src = image;
+    img.alt = t('listening_graphic');
+    img.loading = 'lazy';
+    link.appendChild(img);
+    // A title/hover hint is invisible on phones; make enlargement discoverable.
+    link.appendChild(mk('span', 'full-graphic-open-label', t('listening_graphic_open')));
+    content.appendChild(link);
+  }
+  if (html) {
+    const description = mk('div', 'full-graphic-html');
+    description.innerHTML = sanitizeDescriptionHtml(html);
+    content.appendChild(description);
+  }
+}
+
+// Only one explanation language is shown at a time.  The source does not
+// include English explanations for listening questions; say so instead of
+// showing Korean to non-Korean users or inventing a reason for the answer.
+function renderFullExplanation(q, answered) {
+  const box = $('full-explanation');
+  const enEl = $('full-explanation-en');
+  const koEl = $('full-explanation-ko');
+  const noteEl = $('full-explanation-note');
+  setTxt(enEl, '');
+  setTxt(koEl, '');
+  setTxt(noteEl, '');
+  box.classList.toggle('hidden', !answered);
+  if (!answered) return;
+
+  const englishText = typeof q.explanation?.en === 'string' ? q.explanation.en.trim() : '';
+  const korean = typeof q.explanation?.ko === 'string' ? q.explanation.ko.trim() : '';
+  const koreanUI = /^ko(?:[-_]|$)/i.test(I18nManager.getCurrentLanguage());
+  const containsHangul = (text) => /[가-힣ㄱ-ㅎㅏ-ㅣ\u1100-\u11ff]/u.test(text);
+  // Reject mislabeled fields instead of leaking Korean in a non-Korean UI.
+  // The bank also contains some fields labeled KO that are English only.
+  const english = containsHangul(englishText) ? '' : englishText;
+  const hasKorean = containsHangul(korean);
+  const notice = (key, fallback) => {
+    const translation = t(key);
+    setTxt(noteEl, translation && translation !== key ? translation : fallback);
+  };
+
+  if (koreanUI && hasKorean) {
+    setTxt(koEl, korean);
+  } else if (english) {
+    // Use the question-specific English explanation, including for Part 5;
+    // a generic grammar template can hide the actual reason for the answer.
+    setTxt(enEl, english);
+    if (koreanUI) notice('full_explanation_ko_fallback',
+      'A Korean explanation is unavailable; showing English instead.');
+  } else if (koreanUI) {
+    notice('full_explanation_missing_ko', 'No Korean explanation is available for this question in the source.');
+  } else {
+    notice('full_explanation_missing_en', 'No English explanation is available for this question in the source.');
+  }
+}
+
 function renderFullQuestion({ playAudio = true } = {}) {
   const q = fullToeic.questions[fullToeic.index];
   if (!q) { showFullPartList(); return; }
@@ -1264,19 +1373,10 @@ function renderFullQuestion({ playAudio = true } = {}) {
   setTxt($('full-xp'), `${store.getState().xp} XP`);
   setTxt($('full-category'), fullToeic.categoryName);
 
-  // Listening: question card is clickable to play audio. Transcript shows
-  // below the question only when it differs from the question text itself
-  // (part 2 questions ARE the transcript; parts 3-4 have separate dialogues).
-  const transcriptEl = $('full-transcript');
-  transcriptEl.textContent = '';
-  transcriptEl.classList.add('hidden');
-  const questionText = q.question || '';
-  const transcriptDiffers = q.audio && q.audio.trim() !== questionText.trim();
-  if (transcriptDiffers) {
-    transcriptEl.textContent = q.audio;
-    transcriptEl.classList.remove('hidden');
-  }
-  // Mark question card as clickable for listening parts.
+  // A transcript is optional for listening practice; the replay control is
+  // always available, including in the mistakes review.
+  renderFullTranscript(q);
+  renderFullGraphic(q);
   $('full-question').classList.toggle('clickable-audio', !!q.audio);
 
   // Reading: passage card (part 6 blanks are wrapped in .toeic-blank spans).
@@ -1304,29 +1404,9 @@ function renderFullQuestion({ playAudio = true } = {}) {
     optionsEl.appendChild(btn);
   });
 
-  // Explanation appears once the question is answered.
-  // Part 5: use simplified plain-language EN + RU translation.
-  // Other parts: show original EN + KO.
-  const expBox = $('full-explanation');
-  const isPart5 = fullToeic.part?.part === 5;
-  if (selected !== undefined) {
-    expBox.classList.remove('hidden');
-    if (isPart5) {
-      const simplified = getPart5SimplifiedExplanation(q.explanation?.en || '');
-      setTxt($('full-explanation-en'), simplified.en);
-      setTxt($('full-explanation-ru'), simplified.ru);
-      setTxt($('full-explanation-ko'), '');
-    } else {
-      setTxt($('full-explanation-en'), q.explanation?.en || '');
-      setTxt($('full-explanation-ru'), '');
-      setTxt($('full-explanation-ko'), q.explanation?.ko || '');
-    }
-  } else {
-    expBox.classList.add('hidden');
-    setTxt($('full-explanation-en'), '');
-    setTxt($('full-explanation-ru'), '');
-    setTxt($('full-explanation-ko'), '');
-  }
+  // Show the appropriate language (or a truthful availability notice) only
+  // after answering; mistake review uses the same rendering path.
+  renderFullExplanation(q, selected !== undefined);
 
   const prevBtn = $('full-prev-btn');
   const atStart = fullToeic.index === 0;
@@ -1339,12 +1419,18 @@ function renderFullQuestion({ playAudio = true } = {}) {
     (firstEnabled || $('full-next-btn'))?.focus({ preventScroll: true });
   }
 
-  // Listening parts voice the transcript automatically on every question.
-  if (playAudio && q.audio) playFullAudio(q.audio);
+  // Play a dialogue once when its question group begins, not three times in
+  // succession.  The explicit replay button and question card remain usable.
+  const previous = fullToeic.questions[fullToeic.index - 1];
+  const firstInGroup = !previous || previous.partNumber !== q.partNumber
+    || previous.origItemIndex !== q.origItemIndex;
+  if (playAudio && q.audio && firstInGroup) playFullAudio(q);
 }
 
 function answerFullQuestion(opt) {
   if (fullToeic.answers[fullToeic.index] !== undefined) return;
+  // Stop any remaining choices once the user answers; replay is still available.
+  Speech.cancel();
   fullToeic.answers[fullToeic.index] = opt;
   const q = fullToeic.questions[fullToeic.index];
   recordFullAnswer(q, opt);
@@ -1364,6 +1450,7 @@ function fullGoNext() {
   Speech.cancel();
   if (fullToeic.index < fullToeic.questions.length - 1) {
     fullToeic.index += 1;
+    $('fulltoeicgame-screen').scrollTop = 0;
     renderFullQuestion();
   } else {
     showFullPartResult();
@@ -1375,6 +1462,7 @@ function fullGoPrev() {
   AudioEngine.playTransition();
   Speech.cancel();
   fullToeic.index -= 1;
+  $('fulltoeicgame-screen').scrollTop = 0;
   renderFullQuestion();
 }
 
@@ -1440,9 +1528,24 @@ function showFullPartResult() {
   $('fulltoeic-result-retry-btn').focus();
 }
 
-/** Voices a listening transcript in sentence chunks to avoid browser time limits. */
-function playFullAudio(text, lang = 'en') {
-  Speech.speak(text, lang, { splitSentences: true, pauseAtBlanks: true });
+/** Voice the dialogue in sentence chunks; name each role when there is more
+ * than one turn because browser TTS may have only a single available voice. */
+function playFullAudio(q) {
+  let text = q.audio;
+  if (q.partNumber === 2) {
+    // Part 2 is a question-response listening task: voice all three choices,
+    // in their displayed (shuffled) order, without identifying the key.
+    const letters = ['A', 'B', 'C'];
+    const endSentence = (value) => /[.!?]\s*$/.test(value) ? value : `${value}.`;
+    text = [endSentence(q.audio),
+      ...q.options.map((option, i) => `Choice ${letters[i]}. ${endSentence(option)}`)].join(' ');
+  } else if (q.turns?.length > 1) {
+    text = q.turns.map((turn) => {
+      const label = speakerLabel(turn.speaker);
+      return label ? `${label}. ${turn.text}` : turn.text;
+    }).join(' ');
+  }
+  Speech.speak(text, 'en', { splitSentences: true, pauseAtBlanks: true });
 }
 
 
@@ -2214,6 +2317,13 @@ function setupEventListeners() {
       // Vocabulary translation follows the UI language (ko → ko, else → ru).
       store.setState({ uiLanguage: lang, translationLanguage: lang === 'ko' ? 'ko' : 'ru' });
     }));
+  window.addEventListener('languageChanged', () => {
+    const question = fullToeic.questions[fullToeic.index];
+    if (question && !$('fulltoeicgame-screen').classList.contains('hidden')) {
+      // Updating only the explanation preserves the answer, focus and audio.
+      renderFullExplanation(question, fullToeic.answers[fullToeic.index] !== undefined);
+    }
+  });
   on('settings-sound-btn', 'click', () => store.toggleAudio());
 
   // Menu actions — HUNT / TRY now open the mode chooser (Word Quiz / TOEIC Tests)
@@ -2252,9 +2362,16 @@ function setupEventListeners() {
   });
   on('full-prev-btn', 'click', () => fullGoPrev());
   on('full-next-btn', 'click', () => fullGoNext());
-  on('full-question', 'click', () => {
+  const replayFullAudio = () => {
     const q = fullToeic.questions[fullToeic.index];
-    if (q?.audio) playFullAudio(q.audio);
+    if (q?.audio) playFullAudio(q);
+  };
+  on('full-question', 'click', replayFullAudio);
+  on('full-replay-btn', 'click', replayFullAudio);
+  on('full-transcript-toggle', 'click', () => {
+    fullToeic.showTranscript = !fullToeic.showTranscript;
+    const q = fullToeic.questions[fullToeic.index];
+    if (q) renderFullTranscript(q);
   });
   on('full-desc-toggle', 'click', () => {
     fullToeic.descLang = fullToeic.descLang === 'ko' ? 'en' : 'ko';

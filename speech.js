@@ -4,15 +4,32 @@
  */
 export const BLANK_PAUSE_MS = 700;
 
+function sentenceChunks(text) {
+  // Split long utterances at sentence boundaries, not inside $25.50, P.M.,
+  // URLs, or initials.  Common titles and time abbreviations stay with the
+  // following words so TTS does not pronounce a stray letter or title alone.
+  const chunks = text.match(/[\s\S]+?[.!?]+["'”’)]*(?=\s|$)|[\s\S]+$/g) || [text];
+  const result = [];
+  let pending = '';
+  for (const chunk of chunks) {
+    pending += chunk;
+    if (/\b(?:Mr|Mrs|Ms|Dr|Prof|Sr|Jr|St|No|vs|[AP]\.M)\.$/i.test(pending.trimEnd())) continue;
+    result.push(pending);
+    pending = '';
+  }
+  if (pending) result.push(pending);
+  return result;
+}
+
 function speechSteps(text, { splitSentences = false, pauseAtBlanks = false } = {}) {
   // Long listening transcripts are split to avoid browser utterance time limits.
-  const chunks = splitSentences
-    ? (text.match(/[^.!?]+[.!?]+|\S[^.!?]*$/g) || [text])
-    : [text];
+  const chunks = splitSentences ? sentenceChunks(text) : [text];
   const steps = [];
   for (const chunk of chunks) {
     if (!pauseAtBlanks || !/_{2,}/.test(chunk)) {
-      steps.push(chunk);
+      // Spaced ellipses (". . .") otherwise become standalone utterances,
+      // which some voices pronounce as "dot" rather than as a pause.
+      if (/[\p{L}\p{N}]/u.test(chunk)) steps.push(chunk);
       continue;
     }
     for (const part of chunk.split(/(_{2,})/)) {

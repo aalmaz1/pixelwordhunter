@@ -4,19 +4,21 @@
 build_toeic_full.py — convert ALL_TOEIC_TESTS/*.json into the app's full-test bank.
 
 Each source file is one full TOEIC test (200 questions, parts 1-7). The bank
-keeps parts 2-7 (part 1 needs the picture files that are not in the repo):
+keeps parts 2-7 (Part 1 picture questions are not implemented in the app):
 
-- listening parts 2-4 keep the transcript (`audio`) so the app can voice it
-  with speechSynthesis;
-- reading parts 5-7 keep the passage (`description`, HTML) and per-question
-  explanations. The source data carries explanations in EN and KO only (no
-  Russian), so the bank keeps those two languages.
+- listening parts 2-4 keep a clean transcript (`audio`) for speechSynthesis,
+  speaker turns when provided, any accompanying graphic or description, and
+  matching Korean question blocks where available;
+- reading parts 5-7 keep the passage (`description`, HTML) and match English
+  and Korean explanation blocks by question number. The source does not supply
+  Russian explanations, and not every question has an EN or KO explanation.
 
 Answer keys are marked in the source as `{...}` (parts 2-4, inside the hints)
 or `key:` (parts 5-7, inside the options arrays); both are resolved to a plain
 `correct` field.
 
 Usage:
+    python3 extract_toeic_graphics.py                        # if assets are missing
     python3 build_toeic_full.py --only actual_test_2026_10   # one test (prototype)
     python3 build_toeic_full.py --all                        # all source files
 
@@ -31,7 +33,8 @@ from pathlib import Path
 
 SOURCE_DIR = Path('ALL_TOEIC_TESTS')
 OUT_PATH = Path('toeic_web_app/toeic_full_tests.json')
-SKIP_PARTS = {1}          # picture questions — no image files in the repo
+GRAPHICS_DIR = Path('public/full-toeic-graphics')
+SKIP_PARTS = {1}          # Part 1 picture questions are not implemented
 EXPECTED_PARTS = [2, 3, 4, 5, 6, 7]
 EXPECTED_QUESTIONS = 194  # 200 minus the 6 picture questions
 
@@ -50,13 +53,144 @@ def strip_tags(s):
     return re.sub(r'\s+', ' ', s).strip()
 
 
-def clean_transcript(s):
-    """Transcript for speechSynthesis: tags off, speaker labels removed."""
-    s = re.sub(r'<br\s*/?>', ' ', s or '')
-    s = TAG_RE.sub('', s)
-    s = html.unescape(s)
-    s = s.replace('[M:]', ' ').replace('{W:}', ' ')
-    return re.sub(r'\s+', ' ', s).strip()
+# Two source annotations have the wrong question number.  They are still
+# editorial references, not words in the dialogue.  Scope exceptions by stable
+# source filename and item index so real spoken numbers are not discarded.
+WRONG_TRANSCRIPT_MARKERS = {
+    ('new_economy_2018_test_05', 3, 6): {60},  # question 50
+    ('new_economy_2018_test_10', 3, 9): {62},  # questions 59-61
+}
+
+# Obvious transcription mistakes, kept separate from the unchanged source JSON.
+# The question about the research center itself confirms "nine months".
+TRANSCRIPT_CORRECTIONS = {
+    ('hacker_new_toeic_test_02', 4, 1): [('mine months', 'nine months')],
+    ('new_economy_2018_test_02', 3, 7): [('on my way to appointment', 'on my way to an appointment')],
+    ('new_economy_2018_test_05', 3, 0): [('marketing W department', 'marketing department')],
+    ('new_economy_2018_test_05', 3, 6): [("this it month's", "this month's")],
+    ('new_economy_2018_test_08', 3, 0): [('training vidoes', 'training videos')],
+    ('new_economy_2018_test_10', 3, 0): [
+        ('Are you Ms. Joyce, right?', 'You are Ms. Joyce, right?'),
+        ('Is is OK', 'Is it OK'),
+    ],
+    ('new_economy_2018_test_10', 3, 1): [('Are you still at the office.', 'Are you still at the office?')],
+}
+
+# A quoted sentence must stay in sync with the transcript correction above.
+QUESTION_CORRECTIONS = {
+    ('new_economy_2018_test_02', 3, 7): [('on my way to appointment', 'on my way to an appointment')],
+    # The original schedule is 5 P.M.; the delayed *expected* arrival is
+    # 6 P.M., which is the source key.  Ask for the latter, not the former.
+    ('new_economy_2018_test_02', 4, 2): [
+        ('What has caused problem?', 'What has caused the problem?'),
+        ('when is the bus scheduled to arrive', 'when is the bus expected to arrive'),
+    ],
+    ('new_economy_2018_test_04', 4, 8): [('goal for monster telecom', 'goal for Monster Telecom')],
+}
+OPTION_CORRECTIONS = {
+    ('hacker_new_toeic_test_02', 3, 10): [('miss event', 'miss the event')],
+    ('new_economy_2018_test_04', 3, 2): [
+        ('product in formation', 'product information'),
+        ('same department as the women', 'same department as the woman'),
+    ],
+    ('new_economy_2018_test_04', 4, 8): [('number customer calls', 'number of customer calls')],
+}
+
+# In Test 05 #70 the shop assistant suggests limiting caffeine.  In Test 08
+# #58 the delivery agent asks for the customer's number.  Both questions name
+# the woman, but the corresponding final turns are mistakenly marked as M.
+SPEAKER_CORRECTIONS = {
+    ('new_economy_2018_test_05', 3, 12): (-1, 'M', 'W', 'Our other products'),
+    ('new_economy_2018_test_08', 3, 8): (-1, 'M', 'W', 'delivery man call you'),
+}
+
+# These two reading questions contain duplicate options in the supplied source.
+# The missing original distractors cannot be recovered; do not invent them.
+# Keep the build usable but only exempt these exact, documented source defects.
+KNOWN_INCOMPLETE_OPTIONS = {
+    ('new_economy_2018_test_10', 5, 0, 0): 3,
+    ('new_economy_2018_test_10', 6, 3, 1): 3,
+}
+
+SPEAKER_RE = re.compile(
+    r'(?im)\[\s*([MW]\d?)\s*:\s*\]'
+    r'|\{\s*([MW]\d?)\s*:\s*\}'
+    r'|\|\s*([MW]\d?)\s*:?\s*-?\s*\|'
+    r'|^\s*([MW]\d?)\s*:\s*'
+)
+BOLD_RE = re.compile(r'(<b\b[^>]*>)(.*?)(</b\s*>)', re.I | re.S)
+
+
+def remove_question_markers(transcript, numbers):
+    """Remove source question references, not dates, prices or room numbers.
+
+    The source marks these references inside bold spans.  Matching both that
+    context and the item's question numbers avoids deleting ordinary numbers.
+    """
+    if not numbers:
+        return transcript
+    pattern = re.compile(r'\(\s*(?:' + '|'.join(map(str, sorted(numbers))) + r')\s*\.?\s*\)')
+    return BOLD_RE.sub(
+        lambda m: m.group(1) + pattern.sub('', m.group(2)) + m.group(3),
+        transcript,
+    )
+
+
+def clean_transcript_segment(text):
+    """Keep highlighted words but discard the source's pronunciation markup."""
+    # A final hyphen inside |...-| marks intonation, not a spoken hyphen.
+    text = re.sub(r'\|([^|]*)\|', lambda m: m.group(1).removesuffix('-').strip(), text)
+    text = re.sub(r'[\[\]{}]', '', text)
+    return re.sub(r'\s+', ' ', text).strip()
+
+
+def parse_transcript(transcript, question_numbers):
+    """Return clean speech and structured speaker turns, without raw markers."""
+    transcript = remove_question_markers(transcript or '', question_numbers)
+    # Braced genre headings describe the recording; they are not spoken lines.
+    transcript = re.sub(
+        r'^\s*\{(?:conversation|telephone message|announcement|excerpt from a meeting|'
+        r'tour guide|speech|introduction|advertisement)\}\s*<br\s*/?>',
+        '', transcript, count=1, flags=re.I,
+    )
+    # Line breaks identify the plain M:/W: labels in some source files.
+    transcript = re.sub(r'<br\s*/?>', '\n', transcript, flags=re.I)
+    transcript = html.unescape(TAG_RE.sub('', transcript))
+    markers = list(SPEAKER_RE.finditer(transcript))
+    if not markers:
+        return clean_transcript_segment(transcript), []
+
+    turns = []
+    prefix = clean_transcript_segment(transcript[:markers[0].start()])
+    if prefix:
+        turns.append({'speaker': None, 'text': prefix})
+    for i, marker in enumerate(markers):
+        speaker = next(group.upper() for group in marker.groups() if group)
+        end = markers[i + 1].start() if i + 1 < len(markers) else len(transcript)
+        text = clean_transcript_segment(transcript[marker.end():end])
+        if text:
+            turns.append({'speaker': speaker, 'text': text})
+    return ' '.join(turn['text'] for turn in turns), turns
+
+
+def listening_graphic(item):
+    """Keep source graphics and fail rather than generating broken image URLs."""
+    graphic = {}
+    name = (item.get('image') or '').strip()
+    if name:
+        if not re.fullmatch(r'[A-Za-z0-9_-]+', name):
+            raise ValueError(f'Unexpected listening graphic name: {name!r}')
+        matches = [GRAPHICS_DIR / f'{name}{ext}' for ext in ('.jpg', '.jpeg', '.png')]
+        matches = [path for path in matches if path.is_file()]
+        if len(matches) != 1:
+            raise FileNotFoundError(
+                f'Expected one listening graphic for {name}; run python3 extract_toeic_graphics.py'
+            )
+        graphic['image'] = f'full-toeic-graphics/{matches[0].name}'
+    description = (item.get('description') or '').strip()
+    if description:
+        graphic['html'] = description
+    return graphic
 
 
 def clean_option(o):
@@ -113,14 +247,6 @@ def parse_question_block(block):
     }
 
 
-def explanation_after_options(block):
-    """EN explanation = text after the options block (`<br/><br/>`)."""
-    idx = block.find('<br/><br/>')
-    if idx == -1:
-        return ''
-    return strip_tags(block[idx + len('<br/><br/>'):])
-
-
 def ko_explanation_block(block):
     """KO explanation: drop the answer header, option lines, and {...} markers."""
     out = []
@@ -130,13 +256,13 @@ def ko_explanation_block(block):
             continue
         if line == '=>' or line == '==':
             continue
-        if LETTER_PREFIX_RE.match(line):
+        # Keep option lines when they also contain the source's reasoning;
+        # dropping the whole line would discard e.g. "(D) ... → most likely".
+        if re.match(r'^\s*(?:\([A-D]\)|[A-D]\.)', line) or re.match(r'^\{.*\}$', line):
+            if re.search(r'→|->|=>', line):
+                out.append(line)
             continue
-        if OPT_PREFIX_RE.match(line):
-            continue
-        if NUM_PREFIX_RE.match(line):
-            continue
-        if re.match(r'^\{.*\}$', line):
+        if re.match(r'^\s*\d{2,3}\s*[.\-]', line):
             continue
         out.append(line)
     return ' '.join(out)
@@ -176,61 +302,127 @@ def split_question_blocks(hint):
     return transcript, question_blocks
 
 
-def split_en_blocks(hint):
-    """Split an EN hint into explanation blocks for parts 6-7.
+# Question headers in reading hints.  A double <br/> may occur *inside* an
+# explanation as well as between questions, so only split at numbered headers.
+READING_HEADER_RE = re.compile(
+    r'(?:^|<hr\s*/?>|(?:<br\s*/?>\s*){2,})\s*'
+    r'(?P<header>(?:<b\b[^>]*>\s*)?(?P<number>\d{2,3})\s*[.\-]\s*)',
+    re.I,
+)
 
-    Canonical: <hr/> separates blocks (each has options + <br/><br/> + explanation).
-    brbr/hacker: <br/><br/> separates blocks (each is one explanation).
+# Two Korean headers have a typo, but their answer text and surrounding
+# questions confirm the intended numbers.  Never infer a correction by position.
+KO_READING_NUMBER_CORRECTIONS = {
+    ('new_economy_2018_test_09', 7, 13): {93: 193},   # 2,500 yards
+    ('new_economy_2018_test_10', 7, 3): {152: 153},  # A business park
+}
+
+# Scoped fixes for a non-English fragment and misleading source snippets.  The
+# replacement texts are grounded in the same passages and do not change keys.
+READING_EXPLANATION_CORRECTIONS = {
+    # The source appends Vietnamese vocabulary after the English evidence.
+    ('new_economy_2018_test_05', 7, 10, 179): {
+        'correct': 'In San Francisco',
+        'evidence': ('Esta Resources in San Francisco', 'we worked in the same department at Esta Resources'),
+        'en': 'Cross worked at Esta Resources in San Francisco, and Dyer says they worked in the same department there.',
+        'ko': '크로스는 샌프란시스코의 Esta Resources에서 근무했고, 다이어는 같은 부서에서 함께 일했다고 말합니다.',
+    },
+    ('new_economy_2018_test_02', 7, 14, 196): {
+        'correct': 'It does not fit',
+        'evidence': ('medium-sized', 'small-sized'),
+        'en': 'She ordered a medium-sized sweater but received a small-sized one.',
+        'ko': '그녀는 미디엄 사이즈 스웨터를 주문했지만 스몰 사이즈를 받았습니다.',
+    },
+    ('new_economy_2018_test_02', 7, 14, 198): {
+        'correct': 'She has a Four Seasons Apprarel Outlet membership.',
+        'evidence': ('Individuals with official memberships', 'Your shipment can be tracked'),
+        'en': 'Shipment tracking is available to official members, and the email provides her with a tracking number.',
+        'ko': '배송 추적 서비스는 공식 회원이 이용할 수 있으며, 이메일은 그녀에게 추적 번호를 제공합니다.',
+    },
+}
+
+
+def numbered_reading_blocks(hint):
+    """Return numbered hint blocks and any separate passage, not positional slices.
+
+    A missing or duplicate number must not shift another question's explanation.
+    Passage text can occur before the first header or after the last <hr/>.
     """
-    if '<hr/>' in hint:
-        return [b.strip() for b in hint.split('<hr/>') if b.strip()]
-    return [b.strip() for b in hint.split('<br/><br/>') if b.strip()]
+    hint = hint or ''
+    matches = list(READING_HEADER_RE.finditer(hint))
+    if not matches:
+        return {}, ''
+    blocks, duplicates = {}, set()
+    passage = strip_tags(hint[:matches[0].start()])
+    for index, match in enumerate(matches):
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(hint)
+        # An unnumbered <hr/> after the block starts a separate passage.
+        separator = re.search(r'<hr\s*/?>', hint[match.end():end], re.I)
+        if separator:
+            split = match.end() + separator.start()
+            passage = passage or strip_tags(hint[split + len(separator.group()):end])
+            end = split
+        number = int(match.group('number'))
+        if number in blocks:
+            blocks.pop(number)
+            duplicates.add(number)
+        elif number not in duplicates:
+            blocks[number] = hint[match.start('header'):end].strip()
+    return blocks, passage
 
 
-def split_ko_blocks(hint_ko, num_questions):
-    """Split a KO hint into (passage, [per_question_blocks]).
+def reading_explanation_blocks(item, source_key):
+    en_blocks, _ = numbered_reading_blocks(item.get('hint', ''))
+    ko_blocks, ko_passage = numbered_reading_blocks(item.get('hintKo', ''))
+    numbers = set()
+    for question in item.get('questions', []):
+        match = re.match(r'^\s*(\d+)\b', strip_tags(question.get('question', '')))
+        if match:
+            numbers.add(int(match.group(1)))
+    for wrong, right in KO_READING_NUMBER_CORRECTIONS.get(source_key, {}).items():
+        if wrong not in ko_blocks or right in ko_blocks or right not in numbers:
+            raise ValueError(f'Korean header correction no longer matches {source_key}: {wrong} -> {right}')
+        ko_blocks[right] = ko_blocks.pop(wrong)
+    # A passage before the questions can itself be English, not a translation.
+    if not re.search(r'[가-힣]', ko_passage):
+        ko_passage = ''
+    return en_blocks, ko_blocks, ko_passage
 
-    Handles passage at start (brbr format) or end (canonical format).
-    KO blocks use single <br/> within, so further <br/><br/> split is safe.
-    """
-    if '<hr/>' in hint_ko:
-        raw_blocks = hint_ko.split('<hr/>')
-    else:
-        raw_blocks = hint_ko.split('<br/><br/>')
-    blocks = []
-    for block in raw_blocks:
-        for sub in block.split('<br/><br/>'):
-            sub = sub.strip()
-            if sub:
-                blocks.append(sub)
-    ko_passage = ''
-    # Passage at start: first block without a question number
-    if blocks and not re.match(r'^\s*\d{3}', strip_tags(blocks[0])):
-        ko_passage = strip_tags(blocks[0])
-        blocks = blocks[1:]
-    # Passage at end: extra blocks after the questions
-    if len(blocks) > num_questions:
-        extra = strip_tags(' '.join(blocks[num_questions:]))
-        ko_passage = ko_passage or extra
-        blocks = blocks[:num_questions]
-    return ko_passage, blocks
+
+def reading_explanations(number, correct, en_blocks, ko_blocks, item, source_key):
+    en = explanation_from_block(en_blocks[number]) if number in en_blocks else ''
+    ko = ko_explanation_from_block(ko_blocks[number]) if number in ko_blocks else ''
+    if not re.search(r'[가-힣]', ko):
+        ko = ''
+    correction = READING_EXPLANATION_CORRECTIONS.get((*source_key, number))
+    if correction:
+        description = strip_tags(item.get('description', ''))
+        if correct != correction['correct'] or not all(s in description for s in correction['evidence']):
+            raise ValueError(f'Reading explanation correction no longer matches {source_key}, question {number}')
+        en, ko = correction['en'], correction['ko']
+    return {'en': en, 'ko': ko}
 
 
 def explanation_from_block(block):
-    """Extract EN explanation from a hint block.
+    """Extract EN text without mistaking an internal paragraph for options.
 
-    Canonical: text after <br/><br/> within the block (separates options from explanation).
-    brbr/hacker: the whole block is the explanation (no <br/><br/> within).
-    new_economy p7: no <br/><br/> — explanation follows the answer on the next line.
+    Some headers are followed by four answer choices before the explanation;
+    others begin explaining immediately and use blank lines within that text.
     """
-    exp = explanation_after_options(block)
-    if exp:
-        return exp
-    # Fallback: take everything after the first <br/> (strips the <b>N. answer</b> header).
-    idx = block.find('<br/>')
-    if idx != -1:
-        return strip_tags(block[idx + len('<br/>'):])
-    return strip_tags(block)
+    first_break = re.search(r'<br\s*/?>', block, re.I)
+    if not first_break:
+        return ''  # A header containing only the answer is not an explanation.
+    body = block[first_break.end():]
+    paragraph_break = re.search(r'(?:<br\s*/?>\s*){2,}', body, re.I)
+    if paragraph_break:
+        first_paragraph = body[:paragraph_break.start()]
+        lines = [strip_tags(line) for line in re.split(r'<br\s*/?>', first_paragraph, flags=re.I)]
+        lines = [line for line in lines if line]
+        marked_choice = any(re.fullmatch(r'(?:[A-D]\.\s*)?\{.*\}', line) for line in lines)
+        lettered_choices = sum(bool(re.match(r'^\s*[A-D]\.\s*', line)) for line in lines)
+        if len(lines) >= 2 and (marked_choice or lettered_choices >= 2):
+            body = body[paragraph_break.end():]
+    return strip_tags(body)
 
 
 def ko_explanation_from_block(block):
@@ -249,7 +441,10 @@ def ko_explanation_from_block(block):
 
 def parse_part2(item):
     hint = item.get('hint', '') or ''
-    lines = [l.strip() for l in hint.split('<br/>') if l.strip()]
+    # The English question and options precede <hr/>.  In three source items
+    # everything after it is Vietnamese translation/vocabulary, not choices.
+    hint = re.split(r'<hr\s*/?>', hint, maxsplit=1, flags=re.I)[0]
+    lines = [line.strip() for line in re.split(r'<br\s*/?>', hint, flags=re.I) if line.strip()]
     if not lines:
         return None
     question = NUM_PREFIX_RE.sub('', strip_tags(lines[0])).strip()
@@ -279,6 +474,7 @@ def parse_part2(item):
     hint_ko = item.get('hintKo', '') or ''
     idx = hint_ko.find('<br/><br/>')
     ko = strip_tags(hint_ko[idx + len('<br/><br/>'):]) if idx != -1 else strip_tags(hint_ko)
+    ko = strip_vocab_markers(ko)
     return {
         'audio': question,
         'questions': [{
@@ -290,10 +486,52 @@ def parse_part2(item):
     }
 
 
-def parse_part34(item):
+def korean_listening_blocks(hint):
+    """Index only Korean question blocks by their own source question number.
+
+    Some hints contain the English questions followed by a Korean transcript;
+    others contain unrelated/misnumbered translations.  Positional assignment
+    can show a different question as the explanation, so omit uncertain blocks.
+    """
+    blocks = re.split(r'<hr\s*/?>|(?:<br\s*/?>\s*){2,}', hint or '', flags=re.I)
+    results = {}
+    for block in blocks:
+        first_line = re.split(r'<br\s*/?>', block, maxsplit=1, flags=re.I)[0]
+        header = strip_tags(first_line)
+        match = re.match(r'^(\d{2,3})\s*[.\-]\s*(.*)', header)
+        if match and re.search(r'[가-힣]', match.group(2)):
+            results.setdefault(int(match.group(1)), strip_vocab_markers(strip_tags(block)))
+    return results
+
+
+def parse_part34(item, source_id='', part_no=0, item_index=-1):
     hint = item.get('hint', '') or ''
     transcript, question_blocks = split_question_blocks(hint)
-    transcript = clean_transcript(transcript)
+    source_key = (source_id, part_no, item_index)
+    for original, replacement in TRANSCRIPT_CORRECTIONS.get(source_key, []):
+        if original not in transcript:
+            raise ValueError(f'Transcript correction no longer matches {source_key}: {original!r}')
+        transcript = transcript.replace(original, replacement)
+    question_numbers = set()
+    for raw_question in item.get('questions', []):
+        match = re.match(r'^\s*(\d+)\.', strip_tags(raw_question.get('question', '')))
+        if match:
+            question_numbers.add(int(match.group(1)))
+    question_numbers.update(WRONG_TRANSCRIPT_MARKERS.get(source_key, set()))
+    transcript, turns = parse_transcript(transcript, question_numbers)
+    if source_key in SPEAKER_CORRECTIONS:
+        index, original, replacement, evidence = SPEAKER_CORRECTIONS[source_key]
+        if not turns or turns[index]['speaker'] != original or evidence not in turns[index]['text']:
+            raise ValueError(f'Speaker correction no longer matches {source_key}')
+        turns[index]['speaker'] = replacement
+        # A correction can turn two adjacent source fragments into one turn.
+        merged = []
+        for turn in turns:
+            if merged and turn['speaker'] and merged[-1]['speaker'] == turn['speaker']:
+                merged[-1]['text'] += ' ' + turn['text']
+            else:
+                merged.append(turn)
+        turns = merged
     questions = []
     for block in question_blocks:
         q = parse_question_block(block)
@@ -321,23 +559,34 @@ def parse_part34(item):
                 'correct': correct[0],
                 'explanation': {'en': '', 'ko': ''},
             })
+    for original, replacement in QUESTION_CORRECTIONS.get(source_key, []):
+        if not any(original in q['question'] for q in questions):
+            raise ValueError(f'Question correction no longer matches {source_key}: {original!r}')
+        for q in questions:
+            q['question'] = q['question'].replace(original, replacement)
+    for original, replacement in OPTION_CORRECTIONS.get(source_key, []):
+        if not any(original in option for q in questions for option in q['options']):
+            raise ValueError(f'Option correction no longer matches {source_key}: {original!r}')
+        for q in questions:
+            q['options'] = [option.replace(original, replacement) for option in q['options']]
+            if q['correct']:
+                q['correct'] = q['correct'].replace(original, replacement)
     if not transcript or not questions:
         return None
-    # KO: split hintKo into blocks and assign per-question KO explanations.
-    hint_ko = item.get('hintKo', '') or ''
-    ko_blocks = hint_ko.split('<hr/>') if '<hr/>' in hint_ko else hint_ko.split('<br/><br/>')
-    ko_blocks = [b.strip() for b in ko_blocks if b.strip()]
-    # Find the first KO question block (contains Hangul and a question number)
-    ko_start = next(
-        (i for i, b in enumerate(ko_blocks)
-         if re.search(r'[가-힣]', b) and re.match(r'^\s*\d{2,3}\s*[-.]', strip_tags(b))),
-        len(ko_blocks),
-    )
-    for i, q in enumerate(questions):
-        ko_idx = ko_start + i
-        if ko_idx < len(ko_blocks):
-            q['explanation']['ko'] = strip_tags(ko_blocks[ko_idx])
-    return {'audio': transcript, 'questions': questions}
+    # Match Korean question blocks by number, never by their position among
+    # English questions and translated transcripts.
+    ko_blocks = korean_listening_blocks(item.get('hintKo', ''))
+    for raw_question, q in zip(item.get('questions', []), questions):
+        match = re.match(r'^\s*(\d+)\.', strip_tags(raw_question.get('question', '')))
+        if match:
+            q['explanation']['ko'] = ko_blocks.get(int(match.group(1)), '')
+    parsed = {'audio': transcript, 'questions': questions}
+    if turns:
+        parsed['turns'] = turns
+    graphic = listening_graphic(item)
+    if graphic:
+        parsed['graphic'] = graphic
+    return parsed
 
 
 def parse_part5(item):
@@ -370,7 +619,7 @@ def parse_part5(item):
 BLANK_SPAN_RE = re.compile(r'\((\d{3})\)[-\s]*-{2,}|-{2,}\(?(\d{3})\.?\)?(-{2,})?|(\d{3})\s*_{2,}')
 
 
-def parse_part6(item):
+def parse_part6(item, source_id='', part_no=6, item_index=-1):
     description = item.get('description', '') or ''
     # Wrap every blank in a span so the app can highlight the current one.
     # Supports both (131) ------ and ---(131.)--- formats.
@@ -379,12 +628,12 @@ def parse_part6(item):
         lambda m: f'<span class="toeic-blank" data-blank="{_g(m)}">({_g(m)}) ------</span>',
         description,
     )
-    hint = item.get('hint', '') or ''
-    hint_ko = item.get('hintKo', '') or ''
-    en_blocks = split_en_blocks(hint)
+    source_key = (source_id, part_no, item_index)
+    en_blocks, ko_blocks, ko_passage = reading_explanation_blocks(item, source_key)
     questions = []
-    for j, q in enumerate(item.get('questions', [])):
+    for q in item.get('questions', []):
         n = q.get('question', '').strip().rstrip('.')
+        number = int(n) if n.isdigit() else None
         options = []
         correct = [None]
         for o in q.get('options', []):
@@ -394,34 +643,28 @@ def parse_part6(item):
             correct[0] = re.sub(r'\{([^{}]*)\}', r'\1', correct[0])
         if not options:
             continue
-        exp_en = ''
-        if j < len(en_blocks):
-            exp_en = explanation_from_block(en_blocks[j])
         questions.append({
             'question': f'{n}. ____',
             'options': options,
             'correct': correct[0],
-            'explanation': {'en': exp_en, 'ko': ''},
+            'explanation': reading_explanations(number, correct[0], en_blocks, ko_blocks, item, source_key),
         })
     if not questions:
         return None
-    # KO: split hintKo and assign per-question KO explanations + KO passage.
-    ko_passage, ko_blocks = split_ko_blocks(hint_ko, len(questions))
-    for j, q in enumerate(questions):
-        if j < len(ko_blocks):
-            q['explanation']['ko'] = ko_explanation_from_block(ko_blocks[j])
     has_en = sum(1 for q in questions if q['explanation']['en'].strip()) == len(questions)
     return {'description': description, 'descriptionKo': ko_passage, 'hasKoPassage': bool(ko_passage), 'hasEnExplanation': has_en, 'questions': questions}
 
 
-def parse_part7(item):
+def parse_part7(item, source_id='', part_no=7, item_index=-1):
     description = item.get('description', '') or ''
-    hint = item.get('hint', '') or ''
-    hint_ko = item.get('hintKo', '') or ''
-    en_blocks = split_en_blocks(hint)
+    source_key = (source_id, part_no, item_index)
+    en_blocks, ko_blocks, ko_passage = reading_explanation_blocks(item, source_key)
     questions = []
-    for j, q in enumerate(item.get('questions', [])):
-        stem = NUM_PREFIX_RE.sub('', strip_tags(q.get('question', ''))).strip()
+    for q in item.get('questions', []):
+        raw_stem = strip_tags(q.get('question', ''))
+        match = re.match(r'^\s*(\d+)\.', raw_stem)
+        number = int(match.group(1)) if match else None
+        stem = NUM_PREFIX_RE.sub('', raw_stem).strip()
         stem = strip_vocab_markers(stem)
         options = []
         correct = [None]
@@ -432,22 +675,14 @@ def parse_part7(item):
             correct[0] = re.sub(r'\{([^{}]*)\}', r'\1', correct[0])
         if not stem or not options:
             continue
-        exp_en = ''
-        if j < len(en_blocks):
-            exp_en = explanation_from_block(en_blocks[j])
         questions.append({
             'question': stem,
             'options': options,
             'correct': correct[0],
-            'explanation': {'en': exp_en, 'ko': ''},
+            'explanation': reading_explanations(number, correct[0], en_blocks, ko_blocks, item, source_key),
         })
     if not questions:
         return None
-    # KO: split hintKo and assign per-question KO explanations + KO passage.
-    ko_passage, ko_blocks = split_ko_blocks(hint_ko, len(questions))
-    for j, q in enumerate(questions):
-        if j < len(ko_blocks):
-            q['explanation']['ko'] = ko_explanation_from_block(ko_blocks[j])
     has_en = sum(1 for q in questions if q['explanation']['en'].strip()) == len(questions)
     return {'description': description, 'descriptionKo': ko_passage, 'hasKoPassage': bool(ko_passage), 'hasEnExplanation': has_en, 'questions': questions}
 
@@ -455,9 +690,9 @@ def parse_part7(item):
 PARSERS = {2: parse_part2, 3: parse_part34, 4: parse_part34, 5: parse_part5, 6: parse_part6, 7: parse_part7}
 
 
-def convert_test(data):
+def convert_test(data, source_id=''):
     test = {
-        'id': data.get('testName', '').lower().replace(' ', '_').replace('-', '_'),
+        'id': source_id or data.get('testName', '').lower().replace(' ', '_').replace('-', '_'),
         'name': data.get('testName', 'Untitled'),
         'targetScore': data.get('targetScore', ''),
         'parts': [],
@@ -471,7 +706,10 @@ def convert_test(data):
             continue
         part = {'part': part_no, 'type': 'listening' if part_no <= 4 else 'reading', 'items': []}
         for idx, item in enumerate(raw_items):
-            parsed = PARSERS[part_no](item)
+            if part_no in (3, 4, 6, 7):
+                parsed = PARSERS[part_no](item, source_id=source_id, part_no=part_no, item_index=idx)
+            else:
+                parsed = PARSERS[part_no](item)
             if parsed is None:
                 warnings.append(f'{test["id"]} part {part_no} item {idx}: unparseable')
                 continue
@@ -488,11 +726,19 @@ def count_questions(test):
 def validate(test, warnings):
     for p in test['parts']:
         for it in p['items']:
-            for q in it.get('questions', []):
+            for q_index, q in enumerate(it.get('questions', [])):
                 if not q.get('question', '').strip():
                     warnings.append(f'{test["id"]} p{p["part"]}: empty question')
                 if not q.get('options'):
                     warnings.append(f'{test["id"]} p{p["part"]}: no options')
+                expected_options = 3 if p['part'] == 2 else 4
+                count = len(q.get('options', []))
+                source_key = (test['id'], p['part'], it['itemIndex'], q_index)
+                if count != expected_options and KNOWN_INCOMPLETE_OPTIONS.get(source_key) != count:
+                    warnings.append(
+                        f'{test["id"]} p{p["part"]} item {it["itemIndex"]}: '
+                        f'{count} options (expected {expected_options})'
+                    )
                 if q.get('correct') not in q.get('options', []):
                     warnings.append(f'{test["id"]} p{p["part"]}: correct answer missing from options')
                 if len([o for o in q.get('options', []) if o == q.get('correct')]) != 1:
@@ -523,9 +769,8 @@ def main():
     for path in files:
         with open(path, encoding='utf-8') as f:
             data = json.load(f)
-        test, warnings = convert_test(data)
+        test, warnings = convert_test(data, source_id=path.stem)
         validate(test, warnings)
-        test['id'] = path.stem  # stable id from the filename
         tests.append(test)
         all_warnings.extend(warnings)
         print(f'{path.name}: {test["name"]} — {count_questions(test)} questions')
