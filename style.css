@@ -1459,6 +1459,12 @@ body.lang-ko .recall-form input {
   width: 100%;
 }
 
+.toeic-option.unscored-selected:disabled {
+  opacity: 1 !important;
+  border-color: var(--neon-yellow);
+  box-shadow: 0 0 8px rgba(255, 230, 0, .25);
+}
+
 .toeic-option-letter {
   flex-shrink: 0;
   width: 26px;
@@ -1601,9 +1607,34 @@ body.lang-ko .toeic-review-title { font-size: 12px !important; letter-spacing: 1
 
 /* ==================== FULL TOEIC TESTS ==================== */
 
-#fulltoeicgame-screen { padding-top: 60px; }
+#fulltoeicgame-screen {
+  justify-content: flex-start;
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 60px 16px calc(24px + env(safe-area-inset-bottom));
+}
+
+#fulltoeicgame-screen header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  min-height: 50px;
+  z-index: 100;
+  flex-wrap: nowrap;
+}
+#fulltoeicgame-screen header .stat:first-child { width: auto; min-width: 0; order: 0; }
+#fulltoeicgame-screen header .header-actions { width: auto; flex-shrink: 0; margin-top: 0; }
 
 #full-quiz-box {
+  width: 100%;
+  max-width: 640px;
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1620,8 +1651,57 @@ body.lang-ko .toeic-review-title { font-size: 12px !important; letter-spacing: 1
   text-shadow: 0 0 6px rgba(191,95,255,.6);
 }
 
-/* Listening: transcript + play button. */
-/* Audio box removed — question card is now clickable for listening parts. */
+/* A source defect is surfaced without changing or guessing its original data. */
+.full-source-warning {
+  white-space: pre-line;
+  width: 100%;
+  max-width: 640px;
+  padding: 10px 12px;
+  border-left: 4px solid var(--neon-yellow);
+  background: rgba(255, 230, 0, .08);
+  color: var(--text-dim);
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Listening aids: replay, optional transcript, and the source's visual. */
+.full-listening-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.full-listening-controls .next-btn { min-height: 44px; }
+
+.full-graphic-box {
+  width: 100%;
+  border: 1px solid var(--neon-yellow);
+  padding: 12px;
+  background: rgba(255, 230, 0, .06);
+}
+
+.full-graphic-content {
+  padding: 10px;
+  overflow-x: auto;
+  color: #111;
+  background: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.full-graphic-link { display: block; color: #164a9a; text-align: center; }
+.full-graphic-link img { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+.full-graphic-open-label { display: block; padding-top: 8px; font-size: 12px; line-height: 1.4; }
+.full-graphic-box .desc-label { line-height: 1.8; }
+
+/* CRT scanlines can obscure the small labels on charts. */
+body:has(#full-graphic-box:not(.hidden))::before { animation: none; opacity: .12; }
 
 .full-transcript {
   width: 100%;
@@ -1634,8 +1714,11 @@ body.lang-ko .toeic-review-title { font-size: 12px !important; letter-spacing: 1
   background: #00000050;
   border: 1px solid rgba(0, 245, 255, .2);
   border-radius: 4px;
-  max-height: 120px;
+  max-height: 180px;
   overflow-y: auto;
+  white-space: pre-wrap;
+  user-select: text;
+  -webkit-user-select: text;
   padding-right: 6px;
 }
 
@@ -1717,13 +1800,22 @@ body.lang-ko .toeic-review-title { font-size: 12px !important; letter-spacing: 1
   gap: 14px;
 }
 
+.full-explanation-note {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-main);
+}
+
+.full-explanation-note:empty { display: none; }
+body.lang-ko .full-explanation-note { line-height: 2.3; }
+
 .full-explanation-en {
   font-size: 14px;
   line-height: 1.7;
   color: var(--text-main);
-  padding-bottom: 14px;
-  border-bottom: 1px solid rgba(0,245,255,.25);
 }
+
+.full-explanation-en:empty { display: none; }
 
 .full-explanation-en::before {
   content: 'EN';
@@ -1736,32 +1828,12 @@ body.lang-ko .toeic-review-title { font-size: 12px !important; letter-spacing: 1
   vertical-align: middle;
 }
 
-.full-explanation-ru {
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--text-main);
-  padding: 12px 14px;
-  border-left: 2px solid var(--neon-purple);
-  background: rgba(0,0,0,.24);
-}
-
-.full-explanation-ru::before {
-  content: 'RU';
-  display: inline-block;
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  color: var(--neon-purple);
-  opacity: .7;
-  margin-right: 8px;
-  vertical-align: middle;
-}
-
-.full-explanation-ru:empty { display: none; }
-
 .full-explanation-ko {
-  font-size: 12px;
-  line-height: 1.7;
-  color: var(--text-dim);
+  font-family: 'Mulmaru', sans-serif !important;
+  font-size: 14px;
+  /* Mulmaru's Korean glyphs extend beyond their line box at smaller heights. */
+  line-height: 2.3;
+  color: var(--text-main);
   margin-top: 4px;
 }
 
@@ -1781,9 +1853,8 @@ body.lang-ko .toeic-review-title { font-size: 12px !important; letter-spacing: 1
 @media (max-width: 480px) {
   #fulltoeicgame-screen header .stat:first-child { font-size: 9px; }
   .full-part-title { font-size: 9px; }
-  .full-transcript, .full-description, .full-explanation-en { font-size: 11px; }
-  .full-explanation-ru { font-size: 11px; }
-  .full-explanation-ko { font-size: 10px; }
+  .full-transcript, .full-description, .full-explanation-en, .full-explanation-note { font-size: 11px; }
+  .full-explanation-ko { font-size: 13px; }
   .toeic-nav-actions .next-btn { min-width: 84px; padding: 10px 14px; font-size: 9px; }
 }
 

@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .js --ignore-pattern 'dist/**'",
     "test": "vitest run",
+    "test:full-bank": "python3 -m unittest discover -s tests -p test_build_toeic_full.py",
     "test:watch": "vitest"
   },
   "keywords": [

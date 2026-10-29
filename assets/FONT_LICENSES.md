@@ -15,8 +15,9 @@ as required by their authors.
 
 ## Mulmaru (물마루)
 
-- File: `Mulmaru.woff2`
-- Copyright (c) mushsooni, with Reserved Font Name "Mulmaru".
+- File: `Mulmaru.woff2` (full version 1.0, covering modern Hangul)
+- Copyright (c) 2025 Mushsooni, with Reserved Font Name "Mulmaru".
+- Source: https://github.com/mushsooni/mulmaru
 - License: SIL Open Font License, Version 1.1 (see full text below)
 
 ---

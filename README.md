@@ -39,6 +39,7 @@ The interface combines CRT scanlines, six neon and monochrome themes, pixel typo
 - a complete **WORD REVIEW** after continuing from every third round;
 - tap-to-pronounce controls powered by the browser's speech engine;
 - a separate **TOEIC TESTS** mode with 9 x 100 TOEIC Part 5 questions loaded lazily from `toeic_web_app/toeic_database.json`, with both the question order and the answer options shuffled on every attempt, plus mistake review and a MISTAKES set built from the questions missed so far;
+- **FULL TOEIC TESTS** practice, with 12 source tests covering Parts 2–7, listening transcripts, visual context and mistake review;
 - responsive play on phone, tablet, and desktop;
 - installable PWA support and offline play after the first successful online load.
 
@@ -83,6 +84,54 @@ correct ?" drills were removed or rewritten as business-context items. See
 [`toeic_web_app/BANK_AUDIT.md`](toeic_web_app/BANK_AUDIT.md) for the audit and
 the status table; `toeic_web_app/rebuild_bank.py` documents and reproduces the
 clean-up from the original file.
+
+### FULL TOEIC TESTS practice
+
+The separate full-test list contains 12 source tests with **194 questions each**
+(Parts 2–7). Part 1 is not implemented, so this is not a complete 200-question
+exam. Listening uses the browser's synthesized speech rather than original
+recordings. Part 2 reads the question and the three displayed choices in their
+shuffled order; Parts 3–4 read the dialogue or talk, while questions and choices
+remain on screen. Dialogue turns are announced as “Man” / “Woman” so roles remain
+clear even when only one browser voice is available. The transcript can be
+hidden for practice, and audio can be replayed. Where a question needs a chart or
+image, the source visual is shown and image-based graphics can be opened at
+full size. The same context is retained in mistake review.
+
+After answering, the app shows the Korean explanation for a Korean interface
+and the English explanation for other interface languages. If Korean is missing,
+it shows available English with a notice; if the required explanation is
+missing, it says so rather than inventing one. Most listening questions still
+lack an English explanation, although explanations have been added for reviewed
+corrections. This behavior also applies to mistake review.
+
+A manual review of the source passages, questions and keys found incorrect and
+ambiguous items. Clear errors were corrected; where more than one answer is
+supported, each accepted answer is graded correctly. One source question has no
+unique answer and is displayed as **not scored**: it does not affect accuracy,
+mistakes or XP. Localized warnings flag unresolved source contradictions.
+When the bank is first loaded after this update, old mistake counts for items
+whose wording or grading changed are cleared because those records did not
+store the selected answer; other mistake counts remain.
+
+The source and its answer keys have not been independently authenticated as
+official exam material, and the review is not a guarantee that every question
+is error-free. Two reading items in New Economy 2018 Test 10 (#101 and #144)
+have three distinct options because the source repeats a choice; the missing
+distractors are not invented. Image-based graphics have a generic accessible
+label, not a full text equivalent. See
+[`toeic_web_app/FULL_TESTS_AUDIT.md`](toeic_web_app/FULL_TESTS_AUDIT.md) for
+examples, the evidence-based revision registry, review scope, and remaining
+limitations. Review rights to third-party materials before redistribution.
+
+To reproduce the generated bank and its listening assets:
+
+```bash
+python3 extract_toeic_graphics.py   # extracts the referenced graphics from the supplied base.apk
+python3 build_toeic_full.py --all
+npm run test:full-bank              # Python source/key and asset checks
+npm test                            # JavaScript bank and user-flow checks
+```
 
 ## 🧠 Adaptive practice and mastery
 

@@ -72,6 +72,31 @@ describe('speech player', () => {
     expect(texts()).toHaveLength(2);
   });
 
+  it('keeps prices, times, titles and URLs intact for speech', () => {
+    const { player, utterances, texts } = setup();
+    player.speak('It costs $25.50. Meet Dr. Lee at 6:00 P.M. today. Visit www.example.com now.', 'en', {
+      splitSentences: true,
+      pauseAtBlanks: true,
+    });
+    expect(texts()).toEqual(['It costs $25.50.']);
+    utterances()[0].onend();
+    expect(texts()[1]).toBe(' Meet Dr. Lee at 6:00 P.M. today.');
+    utterances()[1].onend();
+    expect(texts()[2]).toBe(' Visit www.example.com now.');
+    utterances()[2].onend();
+    expect(texts()).toHaveLength(3);
+  });
+
+  it('does not pronounce standalone punctuation from spaced ellipses', () => {
+    const { player, utterances, texts } = setup();
+    player.speak('Oh, I see . . . Thank you.', 'en', { splitSentences: true, pauseAtBlanks: true });
+    expect(texts()).toEqual(['Oh, I see .']);
+    utterances()[0].onend();
+    expect(texts()).toEqual(['Oh, I see .', ' Thank you.']);
+    utterances()[1].onend();
+    expect(texts()).toHaveLength(2);
+  });
+
   it('cancels pending pauses and ignores late utterance callbacks on replay', () => {
     const { player, synthesis, utterances, texts } = setup();
     player.speak('Old ____ sentence.', 'en', { pauseAtBlanks: true });

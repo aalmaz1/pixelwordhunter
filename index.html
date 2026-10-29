@@ -281,6 +281,7 @@
         <div class="round-progress-track" aria-hidden="true"><div id="full-progress-fill"></div></div>
       </div>
       <div id="full-quiz-box">
+        <div id="full-source-warning" class="full-source-warning hidden" role="note" aria-live="polite"></div>
         <div id="full-description-box" class="full-description-box hidden">
           <div class="desc-header">
             <span class="desc-label" data-i18n="passage">PASSAGE</span>
@@ -288,17 +289,25 @@
           </div>
           <div id="full-description" class="full-description"></div>
         </div>
+        <div id="full-graphic-box" class="full-graphic-box hidden">
+          <div class="desc-header"><span class="desc-label" data-i18n="listening_graphic">LISTENING GRAPHIC</span></div>
+          <div id="full-graphic-content" class="full-graphic-content" lang="en"></div>
+        </div>
         <div class="question-card toeic-question-card">
           <button type="button" id="full-question" class="toeic-question" aria-live="polite"></button>
         </div>
-        <div id="full-transcript" class="full-transcript" aria-live="polite"></div>
+        <div id="full-listening-controls" class="full-listening-controls hidden">
+          <button type="button" id="full-replay-btn" class="next-btn small-btn"><span aria-hidden="true">▶</span> <span data-i18n="replay_audio">REPLAY</span></button>
+          <button type="button" id="full-transcript-toggle" class="next-btn small-btn" aria-controls="full-transcript" aria-expanded="true">HIDE TRANSCRIPT</button>
+        </div>
+        <div id="full-transcript" class="full-transcript hidden" lang="en" aria-live="polite"></div>
         <div class="options-grid" id="full-options" role="group" aria-label="Answer options"></div>
-        <div id="full-explanation" class="full-explanation hidden">
+        <div id="full-explanation" class="full-explanation hidden" aria-live="polite">
           <div class="exp-label" data-i18n="explanation_label">EXPLANATION</div>
           <div class="full-explanation-content">
-            <div id="full-explanation-en" class="full-explanation-en"></div>
-            <div id="full-explanation-ru" class="full-explanation-ru" lang="ru"></div>
-            <div id="full-explanation-ko" class="full-explanation-ko"></div>
+            <div id="full-explanation-note" class="full-explanation-note"></div>
+            <div id="full-explanation-en" class="full-explanation-en lang-en" lang="en"></div>
+            <div id="full-explanation-ko" class="full-explanation-ko" lang="ko"></div>
           </div>
         </div>
         <div class="toeic-nav-actions">
