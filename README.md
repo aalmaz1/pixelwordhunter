@@ -164,7 +164,7 @@ A card is considered **hard** when either:
 - it has more incorrect answers than correct answers; or
 - it has been seen and still has mastery below level 2.
 
-The HARD WORDS button displays the current number of eligible cards and selects up to ten of the hardest cards. It remains disabled until at least one card meets those rules.
+The HARD WORDS entry in the category list (shown only while at least one card meets those rules) displays the current number of eligible cards and starts a round of up to ten of the hardest.
 
 Typed recall is introduced only after a card has been seen once. Matching ignores capitalization and punctuation. When a translated definition contains several comma-, semicolon-, slash-, or pipe-separated glosses, entering any one complete gloss is accepted.
 
@@ -331,9 +331,9 @@ picks it.
 
 ### Requirements
 
-- Node.js **20.19+ within the 20.x line, or 22.12+** (matching Vite 8);
+- Node.js **24.21+** (matching `.node-version` and `engines` in `package.json`);
 - npm;
-- Python 3 only when rebuilding the dictionary;
+- Python 3 only for the FULL TOEIC bank regression checks and regeneration (`npm run test:full-bank`, `build_toeic_full.py`) — editing the dictionary needs no Python;
 - optional Firebase CLI access for deploying Firestore rules;
 - optional Wrangler access for deploying the Cloudflare static app.
 
@@ -356,7 +356,7 @@ npm test
 npm run build
 ```
 
-The current suite checks dictionary size and required data, usable Korean content, contextual word IDs, option fairness, SRS selection and long-term levels, hard-word selection, sanitization, the TOEIC bank (no duplicates, no repeated or empty options, no glued blanks, honest part names, JSON/JS in sync) and its mistake-review flow (missed items listed, pool cleared by a correct answer, empty pool handled), i18n key parity and coverage (every key used in the markup or scripts exists in all three languages), runtime language loading in both the dev and production layouts, storage validation and migration, progress merging, final local saves, state-update batching, and the keyboard flow (focus lands inside each new screen, digits and arrows drive a round, `Esc` steps back, and `Enter` never fires a focused button twice).
+The current suite checks dictionary size and required data, usable Korean content, contextual word IDs, option fairness, SRS selection and long-term levels, hard-word selection, sanitization, the TOEIC bank (no duplicates, no repeated or empty options, no glued blanks, honest part names) and its mistake-review flow (missed items listed, pool cleared by a correct answer, empty pool handled), i18n key parity and coverage (every key used in the markup or scripts exists in all three languages), runtime language loading in both the dev and production layouts, storage validation and migration, progress merging, final local saves, state-update batching, and the keyboard flow (focus lands inside each new screen, digits and arrows drive a round, `Esc` steps back, and `Enter` never fires a focused button twice).
 
 The automated suite does not currently perform live Firebase network tests or a full browser installation/offline integration test. A successful production build still verifies that Vite and Workbox can generate the deployable PWA assets.
 
@@ -374,7 +374,7 @@ The automated suite does not currently perform live Firebase network tests or a 
 
 ### The dictionary
 
-The canonical dictionary is `public/words_optimized.json`. It ships in a compact single-letter key format to keep it small (`i`=id, `c`=category, `e`=eng, `r`=rus, `E`=exampleEng, `R`=exampleRus, `k`=kor, `K`=exampleKor). `sanitize.js` reads both this format and the long key names, so hand-written long-key data keeps working. Edit the JSON directly — `npm test` enforces exactly 50 known categories, 12 cards per category, six localized fields per card, non-empty translations, and unique contextual IDs.
+The canonical dictionary is `public/words_optimized.json`. It ships in a compact single-letter key format to keep it small (`i`=id, `c`=category, `e`=eng, `r`=rus, `E`=exampleEng, `R`=exampleRus, `k`=kor, `K`=exampleKor). `sanitize.js` reads both this format and the long key names, so hand-written long-key data keeps working. Edit the JSON directly — `npm test` enforces 600 cards with unique contextual IDs and non-empty English/Russian/Korean translations, and Korean examples. Keep the 600-card / 50-category × 12-cards structure when editing (see Contributing); only the ID/field checks run automatically today.
 
 ### Project map
 
@@ -398,9 +398,10 @@ i18n/                         English, Russian, and Korean interface strings
 toeic.js                      lazy bridge to the TOEIC question bank
 toeic_full.js                 lazy bridge to the FULL TOEIC TESTS bank
 toeic_web_app/                TOEIC banks (JSON) and audit reports
-assets/                       fonts, licenses, logo, icons, and favicon
+assets/                       fonts, licenses, and PWA icons (icon-192/512/512-maskable)
+public/favicon.ico, favicon-32.png, apple-touch-icon.png  browser tab and touch icons
 ALL_TOEIC_TESTS/              raw full-test sources used by the regeneration pipeline
-tests/                        Vitest/jsdom unit and data-integrity tests
+tests/                        Vitest/jsdom unit and data-integrity tests, plus the Python FULL-bank regression suite (test_build_toeic_full.py)
 eslint.config.js              ESLint configuration
 vitest.config.js              Vitest/jsdom configuration
 package.json / package-lock.json  npm scripts and pinned dependency tree
