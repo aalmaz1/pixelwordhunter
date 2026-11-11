@@ -5,7 +5,7 @@ import { UNCONFIRMED_MARKER } from '../sanitize.js';
 
 const dictionaryPath = 'public/words_optimized.json';
 
-// The shipped dictionary uses compact single-letter keys (see build_words.py);
+// The shipped dictionary uses compact single-letter keys (see the shipped public/words_optimized.json);
 // map them back to the long names so tests read like the app does.
 const SHORT_KEYS = { i: 'id', c: 'category', e: 'eng', r: 'rus', E: 'exampleEng', R: 'exampleRus', k: 'kor', K: 'exampleKor' };
 

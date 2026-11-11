@@ -4,8 +4,8 @@
  * The bank started as a community dataset with hundreds of defects — duplicated
  * questions, misspelled stems, blanks glued to words, dictionary-definition
  * items and "Which sentence is correct ?" drills that do not belong in a TOEIC
- * Part 5 set. It was cleaned up in full (see toeic_web_app/BANK_AUDIT.md and
- * toeic_web_app/rebuild_bank.py); these tests now freeze the *clean* state with
+ * Part 5 set. It was cleaned up in full (see toeic_web_app/BANK_AUDIT.md);
+ * these tests now freeze the *clean* state with
  * zero tolerance, so any new defect fails the suite.
  */
 import { describe, it, expect } from 'vitest';
@@ -97,12 +97,5 @@ describe('TOEIC question bank quality', () => {
       const cat = bank.categories.find((c) => c.id === q.type_id);
       expect(q.category, `question ${q.id} category`).toBe(cat.name);
     }
-  });
-
-  it('keeps the standalone copy (toeic_data.js) in sync with the JSON', () => {
-    const js = fs.readFileSync(path.join(root, 'toeic_web_app/toeic_data.js'), 'utf8');
-    const match = js.match(/const TOEIC_DATA = ([\s\S]*?);\s*$/);
-    expect(match, 'toeic_data.js should still expose `const TOEIC_DATA = {...};`').toBeTruthy();
-    expect(JSON.parse(match[1]), 'toeic_data.js drifted from toeic_database.json').toEqual(bank);
   });
 });

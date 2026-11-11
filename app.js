@@ -1074,10 +1074,53 @@ async function ensureFullToeicData() {
   return fullToeic.data;
 }
 
+// Prefetch the listening/reading graphics (~1.8 MB) in the background once the
+// user enters the mode, so every visual question works offline after one online
+// open — not only the ones they happened to view. Scheduled during idle time,
+// throttled to a few parallel requests; skipped on data-saver connections.
+// The service worker caches each fetch via its runtime route.
+let fullToeicGraphicsPrefetched = false;
+function prefetchFullToeicGraphics() {
+  if (fullToeicGraphicsPrefetched || !fullToeic.data) return;
+  const connection = typeof navigator !== 'undefined' ? navigator.connection : null;
+  if (connection?.saveData) return; // metered connection — keep on-demand loading
+  fullToeicGraphicsPrefetched = true; // once per session; retried on the next one
+  const urls = new Set();
+  for (const test of fullToeic.data.tests || []) {
+    for (const part of test.parts || []) {
+      for (const item of part.items || []) {
+        const image = item?.graphic?.image;
+        // Only the local assets generated from the source graphics — same
+        // whitelist as renderFullGraphic().
+        if (typeof image === 'string'
+          && /^full-toeic-graphics\/[A-Za-z0-9_-]+\.(?:png|jpe?g)$/i.test(image)) {
+          urls.add(image);
+        }
+      }
+    }
+  }
+  const queue = [...urls];
+  if (!queue.length) return;
+  const worker = async () => {
+    while (queue.length) {
+      const url = queue.shift();
+      try {
+        // The SW runtime route (full-toeic-graphics, StaleWhileRevalidate)
+        // stores the response; at render time the browser gets it instantly.
+        await fetch(url, { credentials: 'same-origin' });
+      } catch { /* offline or failed — the question view retries on demand */ }
+    }
+  };
+  scheduleIdle(() => {
+    const lanes = Math.min(4, queue.length);
+    for (let i = 0; i < lanes; i += 1) worker();
+  }, { timeout: 4000 });
+}
+
 function openFullToeicTests() {
   AudioEngine.playTransition();
   ensureFullToeicData()
-    .then(() => showFullTestList())
+    .then(() => { prefetchFullToeicGraphics(); showFullTestList(); })
     .catch((err) => {
       console.error('[Full TOEIC] Failed to load the test bank:', err);
       showNotification(t('toeic_load_error') || 'Failed to load TOEIC tests');
@@ -1345,6 +1388,7 @@ function renderFullGraphic(q) {
     img.src = image;
     img.alt = t('listening_graphic');
     img.loading = 'lazy';
+    img.decoding = 'async';
     link.appendChild(img);
     // A title/hover hint is invisible on phones; make enlargement discoverable.
     link.appendChild(mk('span', 'full-graphic-open-label', t('listening_graphic_open')));

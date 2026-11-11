@@ -4,3 +4,8 @@ __pycache__/
 *.py[cod]
 .DS_Store
 *.log
+
+# Third-party APKs are not committed (see README); supply base.apk locally to
+# re-extract graphics or re-run the byte-for-byte asset check.
+base.apk
+*.apks
