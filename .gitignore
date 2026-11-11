@@ -5,7 +5,8 @@ __pycache__/
 .DS_Store
 *.log
 
-# Third-party APKs are not committed (see README); supply base.apk locally to
-# re-extract graphics or re-run the byte-for-byte asset check.
+# Third-party APKs are not committed (see README). The full-test listening
+# graphics are committed to the repository; their presence and uniqueness are
+# enforced by tests/toeic.full.quality.test.js.
 base.apk
 *.apks
