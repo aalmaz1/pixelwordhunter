@@ -18,7 +18,6 @@ or `key:` (parts 5-7, inside the options arrays); both are resolved to a plain
 `correct` field.
 
 Usage:
-    python3 extract_toeic_graphics.py                        # if assets are missing
     python3 build_toeic_full.py --only actual_test_2026_10   # one test (prototype)
     python3 build_toeic_full.py --all                        # all source files
 
@@ -192,7 +191,9 @@ def listening_graphic(item):
         matches = [path for path in matches if path.is_file()]
         if len(matches) != 1:
             raise FileNotFoundError(
-                f'Expected one listening graphic for {name}; run python3 extract_toeic_graphics.py'
+                f'Expected one listening graphic for {name} in {GRAPHICS_DIR}/ '
+                f'(.jpg/.jpeg/.png), found {len(matches)}. The committed graphics '
+                f'are the source of truth — restore the missing file from the repository.'
             )
         graphic['image'] = f'full-toeic-graphics/{matches[0].name}'
     description = (item.get('description') or '').strip()

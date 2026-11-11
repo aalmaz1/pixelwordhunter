@@ -23,6 +23,6 @@ updates:
           - "minor"
           - "patch"
     ignore:
-      # Держим firebase на 11.x, пока tree-shaking в 12.x не починят
+      # firebase уже на 12.x; мажорные апгрейды не принимаем без ручной проверки
       - dependency-name: "firebase"
         update-types: ["version-update:semver-major"]

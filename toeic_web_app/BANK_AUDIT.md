@@ -13,10 +13,11 @@ Date: 2026-09-28.
 
 The findings below were reviewed and then fixed in full (the plan was approved
 by the maintainer): 509 of the 900 items were rewritten, the rest were repaired
-in place. The bank is regenerated from the original file by
-`toeic_web_app/rebuild_bank.py` (which imports the replacement items from
-`rebuild_items.py` / `rebuild_items_b.py` / `rebuild_items_c.py`); the cleaned data is committed as
-`toeic_database.json` + `toeic_data.js`.
+in place. The bank was regenerated from the original file by one-off clean-up
+tools (removed from the repository after their single use); the cleaned data is
+committed as `toeic_database.json`, which the app imports directly — the
+`toeic_data.js` mirror no longer exists (the standalone page that needed it was
+removed).
 
 | check | before | now |
 |---|---|---|
@@ -34,7 +35,7 @@ in place. The bank is regenerated from the original file by
 
 Covered by `tests/toeic.bank.quality.test.js` (zero-tolerance guards: no
 repeated option, no duplicated key, no duplicate question, no glued blank, no
-stray space, every item a blank sentence, honest part names, JSON/JS in sync)
+stray space, every item a blank sentence, honest part names)
 and by `tests/toeic.smoke.test.js` (deterministic shuffle test).
 
 ### What was rewritten
@@ -77,7 +78,7 @@ survived from the original bank. It found:
   "the company's" twice), #607 ("power-point"), #725 (a statement ending in
   "?"), #29 ("6.00 PM"), #114 (a stray period inside an option).
 
-All of them are repaired in `rebuild_items_c.py`. After this pass: no option
+All of them were repaired by the one-off clean-up tools (since removed). After this pass: no option
 set is reused outside normal grammar families (prepositions, pronouns, modals),
 the key is never the longest option more often than chance (17 % of items), the
 stem length stays between 19 and 171 characters, and every option is a real
