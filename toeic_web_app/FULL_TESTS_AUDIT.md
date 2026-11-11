@@ -2,7 +2,8 @@
 
 This audit concerns `toeic_full_tests.json` and the 12 files in
 `ALL_TOEIC_TESTS/`, not the separate Part 5 practice bank in `BANK_AUDIT.md`.
-The local source files match the copies in the supplied `base.apk`; their
+The source files were cross-checked at authoring time against the app package
+they were taken from; that package is not committed to this repository. Their
 independent provenance, accuracy and redistribution rights have not been
 verified. The raw sources are unchanged. `build_toeic_full.py` and
 `toeic_full_corrections.py` record the guarded changes applied to the generated
@@ -80,8 +81,9 @@ be regraded. Explanation-only revisions and unrelated mistake records are kept.
   the expected arrival, making the passage and preserved key consistent.
 - Restore all 43 referenced image files and 25 HTML graphics/descriptions to
   their listening items. The 43 images are byte-for-byte copies of the
-  corresponding drawables in `base.apk`. Graphics are available in regular and
-  mistake-review runs and are precached for offline use.
+  corresponding drawables in the source package (not committed to this
+  repository). Graphics are available in regular and
+  mistake-review runs and are cached for offline use after the mode is opened online.
 - Strip source vocabulary/key markers from Part 2 Korean text. Match listening
   Korean question blocks by their actual source question number and a Korean
   question header; do not attach a different question's translation merely

@@ -1345,6 +1345,7 @@ function renderFullGraphic(q) {
     img.src = image;
     img.alt = t('listening_graphic');
     img.loading = 'lazy';
+    img.decoding = 'async';
     link.appendChild(img);
     // A title/hover hint is invisible on phones; make enlargement discoverable.
     link.appendChild(mk('span', 'full-graphic-open-label', t('listening_graphic_open')));

@@ -169,15 +169,17 @@ export default defineConfig({
         // Precache them explicitly so a first successful online load guarantees
         // that every interface language remains available offline. The large
         // word-bank JSON keeps its separately versioned entry below.
-        // Listening graphics include both PNG and JPEG; precache both so an
-        // offline full-test question never loses the image needed to solve it.
+        // The FULL TOEIC bank chunk and its graphics are deliberately NOT
+        // precached: together they add ~4 MB to every first install, even for
+        // players who never open FULL TOEIC TESTS. They are cached by the
+        // runtime caches below on first online use and work offline from then
+        // on; nothing about the on-screen UI changes either way.
         globPatterns: [
           '**/*.{js,css,html,ico,png,jpg,jpeg,svg,woff2}',
           'assets/i18n/*.json'
         ],
-        // The lazy full-test bank is already close to Workbox's 2 MiB default.
-        // Keep it available offline even as transcripts/graphics metadata grow.
-        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+        // Workbox's 2 MiB default is back in effect for the precache: nothing
+        // precached may exceed it, so large future assets must opt in explicitly.
         // Vite's default /^assets\// rule strips revisions from everything under
         // assets/, which left unhashed files (assets/i18n/*.json, assets/icon-192.png)
         // with revision: null in the precache manifest and prevented Service Worker
@@ -187,13 +189,22 @@ export default defineConfig({
         // Keep the first Service Worker install small without changing the
         // on-screen UI:
         // - firebase-sdk is only fetched at login (needs the network anyway)
+        // - toeic_full (~2 MB) and the full-toeic graphics (~1.8 MB) are served by
+        //   the runtime caches below, cached on first online use (see there)
         // - 512px PWA icons are used at install time, not during play
-        globIgnores: ['**/firebase-sdk-*.js', '**/node_modules/**/*'],
+        globIgnores: [
+          '**/firebase-sdk-*.js',
+          '**/toeic_full-*.js',
+          'full-toeic-graphics/**',
+          '**/node_modules/**/*'
+        ],
         manifestTransforms: [
           async (entries) => ({
             manifest: entries.filter((entry) => {
               const url = entry.url.replace(/\\/g, '/');
               return !url.includes('firebase-sdk-')
+                && !url.includes('toeic_full-')
+                && !url.includes('full-toeic-graphics/')
                 && !url.endsWith('icon-512.png')
                 && !url.endsWith('icon-512-maskable.png');
             })
@@ -227,6 +238,43 @@ export default defineConfig({
               expiration: {
                 maxEntries: 2,
                 maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          },
+          {
+            // FULL TOEIC bank chunk (~2 MB), fetched on demand via dynamic import()
+            // when the user opens FULL TOEIC TESTS. The filename embeds a content
+            // hash assigned at build time, so CacheFirst can never serve a stale
+            // version — a deploy emits a new filename. After one online open the
+            // mode works offline; until then it shows the existing load-error notice.
+            urlPattern: /assets\/toeic_full-[A-Za-z0-9_-]+\.js$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'full-toeic-bank',
+              expiration: {
+                maxEntries: 2, // current + previous build
+                maxAgeSeconds: 60 * 60 * 24 * 180 // 180 days
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          },
+          {
+            // Full-test listening/reading graphics are stable assets, but their
+            // filenames are NOT content-hashed, so prefer the network and keep the
+            // last copy for offline use. A re-extracted graphic with the same name
+            // is picked up on the next view after it lands (or on refetch).
+            urlPattern: /full-toeic-graphics\/[A-Za-z0-9_-]+\.(?:png|jpe?g)$/i,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'full-toeic-graphics',
+              expiration: {
+                maxEntries: 120, // more than the 47 source graphics, allows headroom
+                maxAgeSeconds: 60 * 60 * 24 * 180 // 180 days
               },
               cacheableResponse: {
                 statuses: [0, 200]

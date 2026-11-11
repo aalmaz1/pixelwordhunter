@@ -5,3 +5,24 @@
 /*
   X-Frame-Options: DENY
   Content-Security-Policy: frame-ancestors 'none'
+
+# Vite emits content-hashed bundles under /assets/ (main-<hash>.js,
+# <name>-<hash>.css/.woff2); the 8-character hash in the filename changes
+# whenever the bytes do, so they can be cached forever. Un-hashed files under
+# /assets/ (i18n/*.json, icon-*.png) deliberately do NOT match the patterns
+# below and keep the platform default (must-revalidate).
+/assets/*.js
+  Cache-Control: public, max-age=31536000, immutable
+/assets/*.css
+  Cache-Control: public, max-age=31536000, immutable
+/assets/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+# Entry points must revalidate so service-worker updates (autoUpdate) and the
+# HTML/asset manifest never serve a stale shell.
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+/manifest.webmanifest
+  Cache-Control: public, max-age=0, must-revalidate

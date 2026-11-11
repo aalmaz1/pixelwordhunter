@@ -1,5 +1,10 @@
 # TOEIC question bank — audit and clean-up
 
+> Historical document. The `rebuild_*.py` scripts it mentions were one-off
+> clean-up tools and have been removed from the repository after their single
+> use; the cleaned state described here is what `tests/toeic.bank.quality.test.js`
+> now protects. Date: 2026-09-28.
+
 Audit of `toeic_web_app/toeic_database.json` — the 900 questions played in the
 **TOEIC TESTS** mode of the app (9 sets x 100).
 Date: 2026-09-28.

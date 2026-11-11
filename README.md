@@ -41,7 +41,7 @@ The interface combines CRT scanlines, six neon and monochrome themes, pixel typo
 - a separate **TOEIC TESTS** mode with 9 x 100 TOEIC Part 5 questions loaded lazily from `toeic_web_app/toeic_database.json`, with both the question order and the answer options shuffled on every attempt, plus mistake review and a MISTAKES set built from the questions missed so far;
 - **FULL TOEIC TESTS** practice, with 12 source tests covering Parts 2–7, listening transcripts, visual context and mistake review;
 - responsive play on phone, tablet, and desktop;
-- installable PWA support and offline play after the first successful online load.
+- installable PWA support and offline play after the first successful online load (the FULL TOEIC TESTS bank and graphics are cached the first time the mode is opened online).
 
 Standard category and mixed hunts contain ten prompts. A hard-word round or a mistake-review round can contain fewer when fewer eligible cards are available.
 
@@ -82,8 +82,7 @@ community dataset and was cleaned up in full — duplicates, misspellings, glued
 blanks, empty options, dictionary-definition quizzes and "Which sentence is
 correct ?" drills were removed or rewritten as business-context items. See
 [`toeic_web_app/BANK_AUDIT.md`](toeic_web_app/BANK_AUDIT.md) for the audit and
-the status table; `toeic_web_app/rebuild_bank.py` documents and reproduces the
-clean-up from the original file.
+the status table.
 
 ### FULL TOEIC TESTS practice
 
@@ -124,14 +123,15 @@ label, not a full text equivalent. See
 examples, the evidence-based revision registry, review scope, and remaining
 limitations. Review rights to third-party materials before redistribution.
 
-To reproduce the generated bank and its listening assets:
+The bank and its listening graphics are committed. The raw source tests live in `ALL_TOEIC_TESTS/`; to regenerate the bank from them:
 
 ```bash
-python3 extract_toeic_graphics.py   # extracts the referenced graphics from the supplied base.apk
 python3 build_toeic_full.py --all
 npm run test:full-bank              # Python source/key and asset checks
 npm test                            # JavaScript bank and user-flow checks
 ```
+
+(The listening graphics were extracted once from third-party material that is not committed; they are static assets now.)
 
 ## 🧠 Adaptive practice and mastery
 
@@ -265,9 +265,9 @@ The included Firestore rules restrict each `users/{uid}` document to the matchin
 
 Pixel Word Hunter is a Progressive Web App. Open it in a supported browser and use **Install** or **Add to Home Screen** when offered.
 
-After one successful production load and Service Worker installation, the application shell, fonts, icons, all three interface language files, and the versioned word bank are precached. The word bank also uses a network-first runtime cache so a deployed dictionary update can replace the previous offline copy.
+After one successful production load and Service Worker installation, the application shell, fonts, icons, all three interface language files, the versioned word bank, and the Part 5 TOEIC bank are precached. The word bank also uses a network-first runtime cache so a deployed dictionary update can replace the previous offline copy. The much larger FULL TOEIC TESTS bank and its graphics are deliberately not precached — they would add ~4 MB to every first install. Instead the service worker caches them the first time the mode is opened online, and they work offline from then on (graphics are refreshed in the background).
 
-A completely new browser profile still needs one online visit before offline mode can work. Authentication, cloud synchronization, password recovery, and downloading a missing system speech voice can still require a connection.
+A completely new browser profile still needs one online visit before offline mode can work. FULL TOEIC TESTS additionally needs the mode itself to be opened online once — then the bank and its graphics are served from the service worker. Authentication, cloud synchronization, password recovery, and downloading a missing system speech voice can still require a connection.
 
 On platforms that expose PWA shortcuts, the installed app provides:
 
@@ -370,21 +370,11 @@ The automated suite does not currently perform live Firebase network tests or a 
 | `npm run lint` | Run ESLint |
 | `npm test` | Run the Vitest suite once |
 | `npm run test:watch` | Run Vitest in watch mode |
-| `python3 build_words.py` | Validate source rows and rebuild the canonical dictionary |
+| `npm run test:full-bank` | Python regression checks for the full TOEIC bank |
 
-### Rebuild the dictionary
+### The dictionary
 
-Dictionary source rows live in `build_data_a.py` through `build_data_d.py`. Edit those source files rather than editing generated JSON alone, then rebuild and verify:
-
-```bash
-python3 build_words.py
-npm test
-npm run build
-```
-
-The builder requires exactly 50 known categories, 12 rows per category, six localized fields per row, 600 total cards, non-empty translations, and unique contextual IDs. It overwrites `public/words_optimized.json`.
-
-The generated file ships in a compact single-letter key format to keep it small (`i`=id, `c`=category, `e`=eng, `r`=rus, `E`=exampleEng, `R`=exampleRus, `k`=kor, `K`=exampleKor). `sanitize.js` reads both this format and the long key names, so hand-written long-key data keeps working.
+The canonical dictionary is `public/words_optimized.json`. It ships in a compact single-letter key format to keep it small (`i`=id, `c`=category, `e`=eng, `r`=rus, `E`=exampleEng, `R`=exampleRus, `k`=kor, `K`=exampleKor). `sanitize.js` reads both this format and the long key names, so hand-written long-key data keeps working. Edit the JSON directly — `npm test` enforces exactly 50 known categories, 12 cards per category, six localized fields per card, non-empty translations, and unique contextual IDs.
 
 ### Project map
 
@@ -402,14 +392,14 @@ style.css                     responsive UI, fonts, motion rules, and six themes
 firebase-config.js            lazy Firebase initialization and auth bridge
 firestore.rules               per-user Firestore security rules
 firebase.json                 Firebase CLI rules configuration
-public/words_optimized.json   canonical generated 600-card dictionary
-public/_headers               deployed anti-framing security headers
+public/words_optimized.json   canonical 600-card dictionary
+public/_headers               cache headers and anti-framing security headers
 i18n/                         English, Russian, and Korean interface strings
 toeic.js                      lazy bridge to the TOEIC question bank
-toeic_web_app/                TOEIC bank (JSON/JS), standalone page, audit report, and the clean-up script
+toeic_full.js                 lazy bridge to the FULL TOEIC TESTS bank
+toeic_web_app/                TOEIC banks (JSON) and audit reports
 assets/                       fonts, licenses, logo, icons, and favicon
-build_words.py                dictionary validator and generator
-build_data_[a-d].py           editable localized dictionary source rows
+ALL_TOEIC_TESTS/              raw full-test sources used by the regeneration pipeline
 tests/                        Vitest/jsdom unit and data-integrity tests
 eslint.config.js              ESLint configuration
 vitest.config.js              Vitest/jsdom configuration
@@ -452,7 +442,7 @@ Translation corrections, accessibility improvements, scheduler tests, themes, an
 1. Fork the repository.
 2. Create a focused branch.
 3. Make the change.
-4. For dictionary edits, update `build_data_*.py` and run `python3 build_words.py`.
+4. For dictionary edits, update `public/words_optimized.json` and run `npm test`.
 5. Run `npm run lint`, `npm test`, and `npm run build`.
 6. Open a pull request with a short description and testing notes.
 
